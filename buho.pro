@@ -19,3 +19,18 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+linux:unix:!android {
+
+    message(Building for Linux KDE)
+
+} else:android {
+
+    message(Building helpers for Android)
+    include($$PWD/3rdparty/kirigami/kirigami.pri)
+
+    DEFINES += STATIC_KIRIGAMI
+
+} else {
+    message("Unknown configuration")
+}

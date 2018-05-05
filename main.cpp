@@ -1,12 +1,32 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+
+#ifdef STATIC_KIRIGAMI
+#include "3rdparty/kirigami/src/kirigamiplugin.h"
+#endif
+
+#ifdef Q_OS_ANDROID
+#include <QGuiApplication>
+#include <QIcon>
+#else
+#include <QApplication>
+#endif
+
 #include "mauikit/src/mauikit.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
+#ifdef Q_OS_ANDROID
     QGuiApplication app(argc, argv);
+#else
+    QApplication app(argc, argv);
+#endif
+
+#ifdef STATIC_KIRIGAMI
+    KirigamiPlugin::getInstance().registerTypes();
+#endif
 
 #ifdef MAUI_APP
     MauiKit::getInstance().registerTypes();
