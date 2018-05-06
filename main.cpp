@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickStyle>
 
 #ifdef STATIC_KIRIGAMI
 #include "3rdparty/kirigami/src/kirigamiplugin.h"
@@ -20,6 +21,9 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_ANDROID
     QGuiApplication app(argc, argv);
+    QIcon::setThemeName("Luv");
+    QQuickStyle::setStyle("material");
+
 #else
     QApplication app(argc, argv);
 #endif

@@ -1,4 +1,9 @@
+QT += qml
 QT += quick
+QT += sql
+QT += widgets
+QT += quickcontrols2
+
 CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -7,7 +12,8 @@ include(mauikit/mauikit.pri)
 SOURCES += \
         main.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+    icons.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -28,9 +34,10 @@ linux:unix:!android {
 
     message(Building helpers for Android)
     include($$PWD/3rdparty/kirigami/kirigami.pri)
-
+    include($$PWD/android/android.pri)
     DEFINES += STATIC_KIRIGAMI
 
 } else {
     message("Unknown configuration")
 }
+
