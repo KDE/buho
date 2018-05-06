@@ -13,3 +13,6 @@ DISTFILES += \
 
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD
+
+RESOURCES += \
+    $$PWD/../icons.qrc
