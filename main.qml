@@ -8,23 +8,24 @@ Maui.ApplicationWindow
     id: root
     title: qsTr("Buho")
 
-    headBar.middleContent: [
+    headBar.middleContent: Row
+    {
+        anchors.centerIn: parent
+        spacing: space.medium
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
 
             iconName: "draw-text"
             text: qsTr("Notes")
-        },
-
+        }
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
 
             iconName: "link"
             text: qsTr("Links")
-        },
-
+        }
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
@@ -32,12 +33,13 @@ Maui.ApplicationWindow
             iconName: "document-new"
             text: qsTr("Books")
         }
-    ]
+    }
 
     footBar.middleContent: Maui.PieButton
     {
         id: addButton
         iconName: "list-add"
+        anchors.centerIn: parent
 
         model: ListModel
         {
@@ -45,7 +47,7 @@ Maui.ApplicationWindow
             ListElement {iconName: "link"}
             ListElement {iconName: "draw-text"}
             ListElement {iconName: "link"}
-            ListElement {iconName: "details-view"}
+            ListElement {iconName: "view-list-details"}
 
         }
     }
