@@ -94,5 +94,6 @@
         <file>icons/Luv/actions/22/visibility.svg</file>
         <file>icons/Luv/actions/22/window-close.svg</file>
         <file>icons/Luv/actions/22/handle-left.svg</file>
+        <file>icons/Luv/actions/22/link.svg</file>
     </qresource>
 </RCC>
