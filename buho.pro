@@ -10,9 +10,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 include(mauikit/mauikit.pri)
 
 SOURCES += \
-        main.cpp
+    main.cpp \
+    src/db/db.cpp \
+    src/db/dbactions.cpp \
+    src/buho.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += \
+    qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -39,4 +43,14 @@ linux:unix:!android {
 } else {
     message("Unknown configuration")
 }
+
+DISTFILES += \
+    src/db/script.sql \
+    src/utils/owl.js
+
+HEADERS += \
+    src/db/db.h \
+    src/db/dbactions.h \
+    src/buho.h \
+    src/utils/owl.h
 

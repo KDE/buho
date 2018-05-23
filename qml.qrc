@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>src/db/script.sql</file>
+        <file>src/widgets/NewNoteDialog.qml</file>
     </qresource>
 </RCC>

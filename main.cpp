@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
+#include <QQmlContext>
+
 
 #ifdef STATIC_KIRIGAMI
 #include "3rdparty/kirigami/src/kirigamiplugin.h"
@@ -14,6 +16,7 @@
 #endif
 
 #include "mauikit/src/mauikit.h"
+#include "src/buho.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,7 +26,6 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QIcon::setThemeName("Luv");
     QQuickStyle::setStyle("material");
-
 #else
     QApplication app(argc, argv);
 #endif
@@ -36,7 +38,12 @@ int main(int argc, char *argv[])
     MauiKit::getInstance().registerTypes();
 #endif
 
+    Buho owl;
+
     QQmlApplicationEngine engine;
+    auto context = engine.rootContext();
+    context->setContextProperty("owl", &owl);
+
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

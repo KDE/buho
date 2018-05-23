@@ -3,6 +3,8 @@ import QtQuick.Controls 2.2
 import org.kde.kirigami 2.0 as Kirigami
 import org.kde.maui 1.0 as Maui
 
+import "src/widgets"
+
 Maui.ApplicationWindow
 {
     id: root
@@ -10,7 +12,6 @@ Maui.ApplicationWindow
 
     headBar.middleContent: Row
     {
-        anchors.centerIn: parent
         spacing: space.medium
         Maui.ToolButton
         {
@@ -39,16 +40,19 @@ Maui.ApplicationWindow
     {
         id: addButton
         iconName: "list-add"
-        anchors.centerIn: parent
 
         model: ListModel
         {
-            ListElement {iconName: "document-new"}
-            ListElement {iconName: "link"}
-            ListElement {iconName: "draw-text"}
-            ListElement {iconName: "link"}
-            ListElement {iconName: "view-list-details"}
+            ListElement {iconName: "document-new"; mid: "page"}
+            ListElement {iconName: "link"; mid: "link"}
+            ListElement {iconName: "draw-text"; mid: "note"}
+            ListElement {iconName: "view-list-details"; mid: "todo"}
+        }
 
+        onItemClicked:
+        {
+            if(item.mid === "note")
+                newNoteDialog.open()
         }
     }
 
@@ -61,5 +65,13 @@ Maui.ApplicationWindow
     {
         iconName: "archive-remove"
     }
+
+    /***** COMPONENTS *****/
+
+    NewNoteDialog
+    {
+        id: newNoteDialog
+    }
+
 
 }
