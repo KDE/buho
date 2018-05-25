@@ -4,11 +4,21 @@ import org.kde.kirigami 2.0 as Kirigami
 import org.kde.maui 1.0 as Maui
 
 import "src/widgets"
+import "src/views/notes"
 
 Maui.ApplicationWindow
 {
     id: root
     title: qsTr("Buho")
+
+    /***** PROPS *****/
+
+    property var views : ({
+                              notes: 0,
+                              links: 1,
+                              books: 2
+
+                          })
 
     headBar.middleContent: Row
     {
@@ -73,5 +83,19 @@ Maui.ApplicationWindow
         id: newNoteDialog
     }
 
+
+    /***** VIEWS *****/
+
+    SwipeView
+    {
+        anchors.fill: parent
+        currentIndex: views.notes
+
+        NotesView
+        {
+            id: notesView
+
+        }
+    }
 
 }

@@ -102,7 +102,7 @@ bool DBActions::insertNote(const QString &title, const QString &body, const QStr
 
     if(!tags.isEmpty())
     {
-        for(auto tag :  tags.split(","))
+        for(auto tag : tags.split(","))
         {
             this->insert(OWL::TABLEMAP[OWL::TABLE::TAGS], {{OWL::KEYMAP[OWL::KEY::TAG], tag}});
             this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES_TAGS],

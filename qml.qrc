@@ -3,5 +3,8 @@
         <file>main.qml</file>
         <file>src/db/script.sql</file>
         <file>src/widgets/NewNoteDialog.qml</file>
+        <file>src/widgets/CardsView.qml</file>
+        <file>src/views/notes/NotesView.qml</file>
+        <file>src/widgets/CardDelegate.qml</file>
     </qresource>
 </RCC>
