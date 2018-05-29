@@ -9,6 +9,8 @@ Popup
     height: parent.height * (isMobile ?  0.8 : 0.7)
     width: parent.width * (isMobile ?  0.9 : 0.7)
 
+    property string selectedColor : "#ffffe6"
+
     x: (parent.width / 2) - (width / 2)
     y: (parent.height /2 ) - (height / 2)
 
@@ -17,7 +19,7 @@ Popup
     Rectangle
     {
         id: bg
-        color: "#ffffe6"
+        color: selectedColor
         z: -1
         anchors.fill: parent
     }
@@ -53,11 +55,95 @@ Popup
 
             ]
 
-            rightContent: Maui.ToolButton
+            rightContent: Row
             {
-                iconName: "overflow-menu"
-            }
+                spacing: space.medium
+                Rectangle
+                {
+                    color:"#ffded4"
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: iconSizes.medium
+                    width: height
+                    radius: Math.max(height, width)
+                    border.color: borderColor
 
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked: selectedColor = parent.color
+                    }
+                }
+
+                Rectangle
+                {
+                    color:"#d3ffda"
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: iconSizes.medium
+                    width: height
+                    radius: Math.max(height, width)
+                    border.color: borderColor
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked: selectedColor = parent.color
+                    }
+                }
+
+                Rectangle
+                {
+                    color:"#caf3ff"
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: iconSizes.medium
+                    width: height
+                    radius: Math.max(height, width)
+                    border.color: borderColor
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked: selectedColor = parent.color
+                    }
+                }
+
+                Rectangle
+                {
+                    color:"#ccc1ff"
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: iconSizes.medium
+                    width: height
+                    radius: Math.max(height, width)
+                    border.color: borderColor
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked: selectedColor = parent.color
+                    }
+                }
+
+                Rectangle
+                {
+                    color:"#ffcdf4"
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: iconSizes.medium
+                    width: height
+                    radius: Math.max(height, width)
+                    border.color: borderColor
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked: selectedColor = parent.color
+                    }
+                }
+
+                Maui.ToolButton
+
+                {
+                    iconName: "overflow-menu"
+                }
+            }
         }
 
         TextField
@@ -122,6 +208,8 @@ Popup
                     close()
                 }
             }
+
+
         }
     }
     onOpened: clearNote()

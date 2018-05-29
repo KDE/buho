@@ -56,7 +56,6 @@ Maui.ApplicationWindow
             ListElement {iconName: "document-new"; mid: "page"}
             ListElement {iconName: "link"; mid: "link"}
             ListElement {iconName: "draw-text"; mid: "note"}
-            ListElement {iconName: "view-list-details"; mid: "todo"}
         }
 
         onItemClicked:

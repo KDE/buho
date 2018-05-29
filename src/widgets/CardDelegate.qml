@@ -20,7 +20,6 @@ ItemDelegate
 
     }
 
-
     DropShadow
     {
         anchors.fill: card
@@ -47,9 +46,10 @@ ItemDelegate
     ColumnLayout
     {
         anchors.fill: parent
-
+        spacing: 0
         Label
         {
+            Layout.margins: space.medium
             Layout.fillWidth: true
             text: title
             font.weight: Font.Bold
@@ -58,6 +58,7 @@ ItemDelegate
 
         TextArea
         {
+            Layout.margins: space.medium
             Layout.fillHeight: true
             Layout.fillWidth: true
             enabled: false
