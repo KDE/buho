@@ -93,8 +93,12 @@ Maui.ApplicationWindow
         NotesView
         {
             id: notesView
-
         }
+
     }
 
+    Component.onCompleted:
+    {
+        notesView.populate()
+    }
 }

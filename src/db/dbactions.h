@@ -35,6 +35,7 @@ public:
 
     /*main actions*/
     Q_INVOKABLE bool insertNote(const QString &title, const QString &body, const QString &color = QString(), const QString &tags = QString());
+    Q_INVOKABLE QVariantList getNotes();
 
 protected:
     OWL::DB_LIST getDBData(const QString &queryTxt);
