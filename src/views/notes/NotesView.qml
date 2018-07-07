@@ -15,6 +15,11 @@ Maui.Page
     {
         var data =  owl.getNotes()
         for(var i in data)
-            cardsView.model.append(data[i])
+            append(data[i])
+    }
+
+    function append(item)
+    {
+        cardsView.model.append(item)
     }
 }

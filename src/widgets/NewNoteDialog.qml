@@ -10,7 +10,7 @@ Popup
     width: parent.width * (isMobile ?  0.9 : 0.7)
 
     property string selectedColor : "#ffffe6"
-
+    signal noteSaved(string title, string body, string color, string tags)
     x: (parent.width / 2) - (width / 2)
     y: (parent.height /2 ) - (height / 2)
 
@@ -193,8 +193,8 @@ Popup
                 text: qsTr("Save")
                 onClicked:
                 {
-                    if(owl.insertNote(title.text, body.text))
-                        close()
+                    close()
+                    noteSaved(title.text, body.text, selectedColor, "")
                 }
             }
 

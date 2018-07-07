@@ -80,6 +80,16 @@ Maui.ApplicationWindow
     NewNoteDialog
     {
         id: newNoteDialog
+        onNoteSaved:
+        {
+            if(owl.insertNote(title, body, color, tags))
+                notesView.append({
+                                     title : title,
+                                     body: body,
+                                     color: color,
+                                     tags: tags
+                                 })
+        }
     }
 
 

@@ -1,6 +1,8 @@
 
 CREATE TABLE IF NOT EXISTS NOTES (
-url TEXT PRIMARY KEY,
+id TEXT PRIMARY KEY,
+title TEXT,
+body TEXT,
 color TEXT,
 addDate DATE
 );
