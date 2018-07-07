@@ -82,7 +82,6 @@ QVariantList DBActions::get(const QString &queryTxt)
 
 bool DBActions::insertNote(const QString &title, const QString &body, const QString &color, const QString &tags)
 {
-
     QVariantMap json_note =
     {
         {OWL::SLANG[OWL::W::TITLE], title},
@@ -114,6 +113,23 @@ bool DBActions::insertNote(const QString &title, const QString &body, const QStr
     }
 
     return this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map);
+}
+
+QVariantList DBActions::getNotes()
+{
+    QVariantList res;
+    auto data = this->getDBData("select * from notes");
+
+    for(auto note : data)
+    {
+        auto map = OWL::openJson(note[OWL::KEY::URL]);
+        map.insert(OWL::SLANG[OWL::W::ADD_DATE], note[OWL::KEY::ADD_DATE]);
+        map.insert(OWL::SLANG[OWL::W::COLOR], note[OWL::KEY::COLOR]);
+
+        res << map;
+    }
+
+    return res;
 }
 
 bool DBActions::execQuery(const QString &queryTxt)
