@@ -172,6 +172,9 @@ Popup
                 id: body
 
                 placeholderText: qsTr("Body")
+                selectByKeyboard :!isMobile
+                selectByMouse : !isMobile
+                textFormat : TextEdit.RichText
 
                 background: Rectangle
                 {
@@ -231,7 +234,13 @@ Popup
     {
         title.text = note.title
         body.text = note.body
+        selectedColor =  note.color
 
         open()
+    }
+
+    function bold()
+    {
+//        body.sele
     }
 }

@@ -22,14 +22,7 @@ GridView
         message: "<h3>No notes!</h3><p>You can create new notes from the add button</p>"
     }
 
-    model: ListModel
-    {
-        ListElement {title: "Hteu"; body: "lalajsjsjdjdjdjd djdjdjdj sjsjsjsj"}
-        ListElement {title: "Hteu"; body: "lalajsjsjdjdjdjd djdjdjdj sjsjsjsj"}
-        ListElement {title: "Hteu"; body: "lalajsjsjdjdjdjd djdjdjdj sjsjsjsj"}
-        ListElement {title: "Hteu"; body: "lalajsjsjdjdjdjd djdjdjdj sjsjsjsj"}
-
-    }
+    model: ListModel { }
 
     delegate: CardDelegate
     {

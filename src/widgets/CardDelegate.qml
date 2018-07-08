@@ -8,16 +8,16 @@ import org.kde.kirigami 2.2 as Kirigami
 ItemDelegate
 {
     id: control
+    property string noteColor : color ? color : "pink"
     property int cardWidth: Kirigami.Units.devicePixelRatio*200
     property int cardHeight: Kirigami.Units.devicePixelRatio*120
 
     width: cardWidth
-    height: cardHeight
+    height: cardHeight    
 
     background: Rectangle
     {
         color: "transparent"
-
     }
 
     DropShadow
@@ -39,7 +39,7 @@ ItemDelegate
         anchors.centerIn: control
         anchors.fill: control
 
-        color: model.color || viewBackgroundColor
+        color: noteColor
         radius: Kirigami.Units.devicePixelRatio*3
     }
 
@@ -47,22 +47,29 @@ ItemDelegate
     {
         anchors.fill: parent
         spacing: 0
+
         Label
         {
-            Layout.margins: space.medium
+            Layout.leftMargin: space.medium
+            Layout.topMargin: space.medium
+            Layout.rightMargin: space.medium
             Layout.fillWidth: true
-            text: title
+            text: model.title
             font.weight: Font.Bold
             font.bold: true
         }
 
         TextArea
         {
-            Layout.margins: space.medium
+            Layout.leftMargin: space.medium
+            Layout.bottomMargin: space.medium
+            Layout.rightMargin: space.medium
+
             Layout.fillHeight: true
             Layout.fillWidth: true
             enabled: false
-            text: body
+            text: model.body
+            textFormat: TextEdit.RichText
 
             background: Rectangle
             {

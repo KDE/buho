@@ -19,7 +19,10 @@ Maui.Page
     {
         var data =  owl.getNotes()
         for(var i in data)
+        {
+            console.log("OCLOR", data[i].color)
             append(data[i])
+        }
     }
 
     function append(note)

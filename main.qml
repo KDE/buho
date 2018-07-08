@@ -91,7 +91,6 @@ Maui.ApplicationWindow
         id: editNote
         onNoteSaved:
         {
-            console.log("BAHABHABH", notesView.currentNote.id)
             owl.updateNote(notesView.currentNote.id, note.title, note.body, note.color, note.tags)
         }
     }
