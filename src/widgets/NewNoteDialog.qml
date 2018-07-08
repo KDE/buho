@@ -10,7 +10,7 @@ Popup
     width: parent.width * (isMobile ?  0.9 : 0.7)
 
     property string selectedColor : "#ffffe6"
-    signal noteSaved(string title, string body, string color, string tags)
+    signal noteSaved(var note)
     x: (parent.width / 2) - (width / 2)
     y: (parent.height /2 ) - (height / 2)
 
@@ -194,7 +194,14 @@ Popup
                 onClicked:
                 {
                     close()
-                    noteSaved(title.text, body.text, selectedColor, "")
+                    clearNote()
+                    noteSaved({
+
+                                  title: title.text,
+                                  body: body.text,
+                                  color: selectedColor,
+                                  tags: ""
+                              })
                 }
             }
 
@@ -206,18 +213,26 @@ Popup
                 {
                     clearNote()
                     close()
+                    clearNote()
                 }
             }
 
 
         }
     }
-    onOpened: clearNote()
 
 
     function clearNote()
     {
         title.clear()
         body.clear()
+    }
+
+    function fill(note)
+    {
+        title.text = note.title
+        body.text = note.body
+
+        open()
     }
 }

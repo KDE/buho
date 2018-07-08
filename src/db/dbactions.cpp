@@ -90,23 +90,37 @@ bool DBActions::insertNote(const QString &title, const QString &body, const QStr
         {OWL::KEYMAP[OWL::KEY::TITLE], title},
         {OWL::KEYMAP[OWL::KEY::BODY], body},
         {OWL::KEYMAP[OWL::KEY::COLOR], color},
+        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime()},
         {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime()}
     };
 
-//    if(!tags.isEmpty())
-//    {
-//        for(auto tag : tags.split(","))
-//        {
-//            this->insert(OWL::TABLEMAP[OWL::TABLE::TAGS], {{OWL::KEYMAP[OWL::KEY::TAG], tag}});
-//            this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES_TAGS],
-//            {
-//                {OWL::KEYMAP[OWL::KEY::TAG], tag},
-//                {OWL::KEYMAP[OWL::KEY::URL], note_url}
-//            });
-//        }
-//    }
+    //    if(!tags.isEmpty())
+    //    {
+    //        for(auto tag : tags.split(","))
+    //        {
+    //            this->insert(OWL::TABLEMAP[OWL::TABLE::TAGS], {{OWL::KEYMAP[OWL::KEY::TAG], tag}});
+    //            this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES_TAGS],
+    //            {
+    //                {OWL::KEYMAP[OWL::KEY::TAG], tag},
+    //                {OWL::KEYMAP[OWL::KEY::URL], note_url}
+    //            });
+    //        }
+    //    }
 
     return this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map);
+}
+
+bool DBActions::updateNote(const QString &id, const QString &title, const QString &body, const QString &color, const QString &tags)
+{
+    OWL::DB note =
+    {
+        {OWL::KEY::TITLE, title},
+        {OWL::KEY::BODY, body},
+        {OWL::KEY::COLOR, color},
+        {OWL::KEY::UPDATED, QDateTime::currentDateTime().toString()}
+    };
+
+    return this->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note, {{OWL::KEYMAP[OWL::KEY::ID], id}} );
 }
 
 QVariantList DBActions::getNotes()

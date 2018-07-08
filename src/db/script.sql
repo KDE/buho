@@ -4,7 +4,8 @@ id TEXT PRIMARY KEY,
 title TEXT,
 body TEXT,
 color TEXT,
-addDate DATE
+addDate DATE,
+updated DATE
 );
 
 CREATE TABLE IF NOT EXISTS BOOKS (
