@@ -17,7 +17,6 @@ Maui.ApplicationWindow
                               notes: 0,
                               links: 1,
                               books: 2
-
                           })
 
     headBar.middleContent: Row
@@ -80,6 +79,21 @@ Maui.ApplicationWindow
     NewNoteDialog
     {
         id: newNoteDialog
+        onNoteSaved:
+        {
+            if(owl.insertNote(note.title, note.body, note.color, note.tags))
+                notesView.append(note)
+        }
+    }
+
+    NewNoteDialog
+    {
+        id: editNote
+        onNoteSaved:
+        {
+            console.log("BAHABHABH", notesView.currentNote.id)
+            owl.updateNote(notesView.currentNote.id, note.title, note.body, note.color, note.tags)
+        }
     }
 
 
@@ -93,6 +107,8 @@ Maui.ApplicationWindow
         NotesView
         {
             id: notesView
+            onNoteClicked: setNote(note)
+
         }
 
     }
@@ -100,5 +116,11 @@ Maui.ApplicationWindow
     Component.onCompleted:
     {
         notesView.populate()
+    }
+
+    function setNote(note)
+    {
+        notesView.currentNote = note
+        editNote.fill(note)
     }
 }

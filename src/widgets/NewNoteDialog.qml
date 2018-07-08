@@ -10,7 +10,7 @@ Popup
     width: parent.width * (isMobile ?  0.9 : 0.7)
 
     property string selectedColor : "#ffffe6"
-
+    signal noteSaved(var note)
     x: (parent.width / 2) - (width / 2)
     y: (parent.height /2 ) - (height / 2)
 
@@ -193,8 +193,15 @@ Popup
                 text: qsTr("Save")
                 onClicked:
                 {
-                    if(owl.insertNote(title.text, body.text))
-                        close()
+                    close()
+                    noteSaved({
+                                  title: title.text,
+                                  body: body.text,
+                                  color: selectedColor,
+                                  tags: ""
+                              })
+                    clearNote()
+
                 }
             }
 
@@ -204,20 +211,27 @@ Popup
                 text: qsTr("Discard")
                 onClicked:
                 {
-                    clearNote()
                     close()
+                    clearNote()
                 }
             }
 
 
         }
     }
-    onOpened: clearNote()
 
 
     function clearNote()
     {
         title.clear()
         body.clear()
+    }
+
+    function fill(note)
+    {
+        title.text = note.title
+        body.text = note.body
+
+        open()
     }
 }

@@ -7,8 +7,10 @@ GridView
 {
     property alias holder : holder
     property int itemWidth : Kirigami.Units.devicePixelRatio * 200
-   property int itemHeight: Kirigami.Units.devicePixelRatio * 120
+    property int itemHeight: Kirigami.Units.devicePixelRatio * 120
     property int itemSpacing: space.huge
+
+    signal itemClicked(int index)
 
     cellWidth: itemWidth + itemSpacing
     cellHeight: itemHeight + itemSpacing
@@ -34,7 +36,10 @@ GridView
         id: delegate
         cardWidth: itemWidth
         cardHeight: itemHeight
+
+        onClicked: itemClicked(index)
     }
+
     onWidthChanged: adaptGrid()
 
     function adaptGrid()

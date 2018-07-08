@@ -81,6 +81,10 @@ static const QMap<TABLE,QString> TABLEMAP =
 enum class KEY :uint8_t
 {
     URL,
+    UPDATED,
+    ID,
+    TITLE,
+    BODY,
     FAV,
     COLOR,
     ADD_DATE,
@@ -93,6 +97,10 @@ typedef QList<DB> DB_LIST;
 
 static const DB KEYMAP =
 {
+    {KEY::ID, "id"},
+    {KEY::BODY, "body"},
+    {KEY::UPDATED, "updated"},
+    {KEY::TITLE, "title"},
     {KEY::URL, "url"},
     {KEY::FAV, "fav"},
     {KEY::COLOR, "color"},

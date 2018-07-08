@@ -82,54 +82,50 @@ QVariantList DBActions::get(const QString &queryTxt)
 
 bool DBActions::insertNote(const QString &title, const QString &body, const QString &color, const QString &tags)
 {
-    QVariantMap json_note =
-    {
-        {OWL::SLANG[OWL::W::TITLE], title},
-        {OWL::SLANG[OWL::W::BODY], body}
-    };
-
-    auto json = QJsonDocument::fromVariant(json_note);
-    auto note_url = OWL::NotesPath+title+QUuid::createUuid().toString();
-    OWL::saveJson(json, note_url);
+    auto id = QUuid::createUuid().toString();
 
     QVariantMap note_map =
     {
-        {OWL::KEYMAP[OWL::KEY::URL], note_url},
+        {OWL::KEYMAP[OWL::KEY::ID], id},
+        {OWL::KEYMAP[OWL::KEY::TITLE], title},
+        {OWL::KEYMAP[OWL::KEY::BODY], body},
         {OWL::KEYMAP[OWL::KEY::COLOR], color},
+        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime()},
         {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime()}
     };
 
-    if(!tags.isEmpty())
-    {
-        for(auto tag : tags.split(","))
-        {
-            this->insert(OWL::TABLEMAP[OWL::TABLE::TAGS], {{OWL::KEYMAP[OWL::KEY::TAG], tag}});
-            this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES_TAGS],
-            {
-                {OWL::KEYMAP[OWL::KEY::TAG], tag},
-                {OWL::KEYMAP[OWL::KEY::URL], note_url}
-            });
-        }
-    }
+    //    if(!tags.isEmpty())
+    //    {
+    //        for(auto tag : tags.split(","))
+    //        {
+    //            this->insert(OWL::TABLEMAP[OWL::TABLE::TAGS], {{OWL::KEYMAP[OWL::KEY::TAG], tag}});
+    //            this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES_TAGS],
+    //            {
+    //                {OWL::KEYMAP[OWL::KEY::TAG], tag},
+    //                {OWL::KEYMAP[OWL::KEY::URL], note_url}
+    //            });
+    //        }
+    //    }
 
     return this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map);
 }
 
+bool DBActions::updateNote(const QString &id, const QString &title, const QString &body, const QString &color, const QString &tags)
+{
+    OWL::DB note =
+    {
+        {OWL::KEY::TITLE, title},
+        {OWL::KEY::BODY, body},
+        {OWL::KEY::COLOR, color},
+        {OWL::KEY::UPDATED, QDateTime::currentDateTime().toString()}
+    };
+
+    return this->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note, {{OWL::KEYMAP[OWL::KEY::ID], id}} );
+}
+
 QVariantList DBActions::getNotes()
 {
-    QVariantList res;
-    auto data = this->getDBData("select * from notes");
-
-    for(auto note : data)
-    {
-        auto map = OWL::openJson(note[OWL::KEY::URL]);
-        map.insert(OWL::SLANG[OWL::W::ADD_DATE], note[OWL::KEY::ADD_DATE]);
-        map.insert(OWL::SLANG[OWL::W::COLOR], note[OWL::KEY::COLOR]);
-
-        res << map;
-    }
-
-    return res;
+    return this->get("select * from notes");
 }
 
 bool DBActions::execQuery(const QString &queryTxt)
