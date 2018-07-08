@@ -17,6 +17,8 @@
 
 #include "mauikit/src/mauikit.h"
 #include "src/buho.h"
+#include "src/documenthandler.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -43,6 +45,8 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     auto context = engine.rootContext();
     context->setContextProperty("owl", &owl);
+
+    qmlRegisterType<DocumentHandler>("org.buho.editor", 1, 0, "DocumentHandler");
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

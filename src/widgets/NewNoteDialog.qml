@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import org.kde.maui 1.0 as Maui
+import org.buho.editor 1.0
 
 Popup
 {
@@ -36,6 +37,10 @@ Popup
                 Maui.ToolButton
                 {
                     iconName: "format-text-bold"
+                    focusPolicy: Qt.TabFocus
+                    checkable: true
+                    checked: document.bold
+                    onClicked: document.bold = !document.bold
                 },
 
                 Maui.ToolButton
@@ -161,6 +166,23 @@ Popup
             }
         }
 
+        DocumentHandler
+        {
+            id: document
+            document: body.textDocument
+            cursorPosition: body.cursorPosition
+            selectionStart: body.selectionStart
+            selectionEnd: body.selectionEnd
+            // textColor: TODO
+//            onLoaded: {
+//                body.text = text
+//            }
+            onError: {
+                body.text = message
+                body.visible = true
+            }
+        }
+
         ScrollView
         {
             Layout.fillHeight: true
@@ -232,6 +254,7 @@ Popup
 
     function fill(note)
     {
+        document.load("qrc:/texteditor.html")
         title.text = note.title
         body.text = note.body
         selectedColor =  note.color
