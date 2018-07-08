@@ -194,14 +194,14 @@ Popup
                 onClicked:
                 {
                     close()
-                    clearNote()
                     noteSaved({
-
                                   title: title.text,
                                   body: body.text,
                                   color: selectedColor,
                                   tags: ""
                               })
+                    clearNote()
+
                 }
             }
 
@@ -211,7 +211,6 @@ Popup
                 text: qsTr("Discard")
                 onClicked:
                 {
-                    clearNote()
                     close()
                     clearNote()
                 }
