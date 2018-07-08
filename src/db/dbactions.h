@@ -44,7 +44,8 @@ protected:
 
 
 signals:
-    void tagAdded(QString tag);
+    void noteInserted(QVariantMap note);
+
 };
 
 #endif // DBACTIONS_H

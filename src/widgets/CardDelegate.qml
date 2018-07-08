@@ -38,6 +38,7 @@ ItemDelegate
         z: -999
         anchors.centerIn: control
         anchors.fill: control
+        border.color: Qt.darker(noteColor, 1.2)
 
         color: noteColor
         radius: Kirigami.Units.devicePixelRatio*3
@@ -50,6 +51,9 @@ ItemDelegate
 
         Label
         {
+            id: title
+
+            visible: title.text.length > 0
             Layout.leftMargin: space.medium
             Layout.topMargin: space.medium
             Layout.rightMargin: space.medium
@@ -57,26 +61,46 @@ ItemDelegate
             text: model.title
             font.weight: Font.Bold
             font.bold: true
+            font.pointSize: fontSizes.large
         }
 
         TextArea
         {
+            id: body
+
             Layout.leftMargin: space.medium
             Layout.bottomMargin: space.medium
             Layout.rightMargin: space.medium
+            Layout.topMargin: title.visible ? 0 : space.medium
 
             Layout.fillHeight: true
             Layout.fillWidth: true
             enabled: false
             text: model.body
             textFormat: TextEdit.RichText
+            font.pointSize: fontSizes.big
 
             background: Rectangle
             {
                 color: "transparent"
             }
         }
+
+        Item
+        {
+            id: preview
+
+            Image
+            {
+                id: img
+            }
+        }
     }
 
-
+    function update(note)
+    {
+        title.text = note.title
+        body.text = note.body
+        noteColor = note.color
+    }
 }

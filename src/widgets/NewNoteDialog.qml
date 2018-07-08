@@ -38,6 +38,7 @@ Popup
                 {
                     iconName: "format-text-bold"
                     focusPolicy: Qt.TabFocus
+                    iconColor: checked ? highlightColor : textColor
                     checkable: true
                     checked: document.bold
                     onClicked: document.bold = !document.bold
@@ -46,6 +47,11 @@ Popup
                 Maui.ToolButton
                 {
                     iconName: "format-text-italic-symbolic"
+                    iconColor: checked ? highlightColor : textColor
+                    focusPolicy: Qt.TabFocus
+                    checkable: true
+                    checked: document.italic
+                    onClicked: document.italic = !document.italic
                 },
 
                 Maui.ToolButton
@@ -196,7 +202,7 @@ Popup
                 placeholderText: qsTr("Body")
                 selectByKeyboard :!isMobile
                 selectByMouse : !isMobile
-                textFormat : TextEdit.RichText
+                textFormat : TextEdit.AutoText
 
                 background: Rectangle
                 {

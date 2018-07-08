@@ -107,7 +107,13 @@ bool DBActions::insertNote(const QString &title, const QString &body, const QStr
     //        }
     //    }
 
-    return this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map);
+    if(this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map))
+    {
+        this->noteInserted(note_map);
+        return true;
+    }
+
+    return false;
 }
 
 bool DBActions::updateNote(const QString &id, const QString &title, const QString &body, const QString &color, const QString &tags)

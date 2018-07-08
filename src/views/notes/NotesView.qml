@@ -4,6 +4,7 @@ import org.kde.maui 1.0 as Maui
 
 Maui.Page
 {
+    property alias cardsView : cardsView
     property var currentNote : ({})
     signal noteClicked(var note)
 

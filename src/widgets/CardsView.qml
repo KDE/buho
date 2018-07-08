@@ -19,7 +19,7 @@ GridView
     {
         id: holder
         visible: count < 1
-        message: "<h3>No notes!</h3><p>You can create new notes from the add button</p>"
+        message: "<h3>No notes!</h3><p>You can create new notes<br>links and books</p>"
     }
 
     model: ListModel { }
@@ -30,7 +30,12 @@ GridView
         cardWidth: itemWidth
         cardHeight: itemHeight
 
-        onClicked: itemClicked(index)
+        onClicked:
+        {
+            currentIndex = index
+            itemClicked(index)
+
+        }
     }
 
     onWidthChanged: adaptGrid()

@@ -29,6 +29,7 @@ Maui.ApplicationWindow
             iconName: "draw-text"
             text: qsTr("Notes")
         }
+
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
@@ -36,6 +37,7 @@ Maui.ApplicationWindow
             iconName: "link"
             text: qsTr("Links")
         }
+
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
@@ -76,14 +78,16 @@ Maui.ApplicationWindow
 
     /***** COMPONENTS *****/
 
+    Connections
+    {
+        target: owl
+        onNoteInserted: notesView.append(note)
+    }
+
     NewNoteDialog
     {
         id: newNoteDialog
-        onNoteSaved:
-        {
-            if(owl.insertNote(note.title, note.body, note.color, note.tags))
-                notesView.append(note)
-        }
+        onNoteSaved: owl.insertNote(note.title, note.body, note.color, note.tags)
     }
 
     NewNoteDialog
@@ -91,7 +95,8 @@ Maui.ApplicationWindow
         id: editNote
         onNoteSaved:
         {
-            owl.updateNote(notesView.currentNote.id, note.title, note.body, note.color, note.tags)
+            if(owl.updateNote(notesView.currentNote.id, note.title, note.body, note.color, note.tags))
+                notesView.cardsView.currentItem.update(note)
         }
     }
 
