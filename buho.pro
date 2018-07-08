@@ -12,7 +12,8 @@ SOURCES += \
     main.cpp \
     src/db/db.cpp \
     src/db/dbactions.cpp \
-    src/buho.cpp
+    src/buho.cpp \
+    src/documenthandler.cpp
 
 RESOURCES += \
     qml.qrc
@@ -54,5 +55,6 @@ HEADERS += \
     src/db/db.h \
     src/db/dbactions.h \
     src/buho.h \
-    src/utils/owl.h
+    src/utils/owl.h \
+    src/documenthandler.h
 
