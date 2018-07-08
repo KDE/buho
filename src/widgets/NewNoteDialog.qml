@@ -27,6 +27,7 @@ Popup
 
     ColumnLayout
     {
+        id: content
         anchors.fill: parent
 
         Maui.ToolBar
@@ -246,7 +247,6 @@ Popup
                     clearNote()
                 }
             }
-
 
         }
     }

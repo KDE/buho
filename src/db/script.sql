@@ -14,3 +14,11 @@ title TEXT NOT NULL,
 fav INTEGER NOT NULL,
 addDate DATE
 );
+
+CREATE TABLE IF NOT EXISTS LINKS (
+url TEXT PRIMARY KEY,
+title TEXT,
+body TEXT,
+preview TEXT,
+addDate DATE
+);

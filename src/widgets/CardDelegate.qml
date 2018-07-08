@@ -89,10 +89,20 @@ ItemDelegate
         Item
         {
             id: preview
-
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumHeight: control.height * 0.3
             Image
             {
                 id: img
+                visible: model.preview
+                asynchronous: true
+                height: parent.height
+                width: parent.width
+                sourceSize.height: height
+                sourceSize.width: width
+                fillMode: Image.PreserveAspectCrop
+                source: model.preview
             }
         }
     }
