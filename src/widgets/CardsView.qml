@@ -6,7 +6,8 @@ import org.kde.maui 1.0 as Maui
 GridView
 {
     property alias holder : holder
-    property int itemWidth : Kirigami.Units.devicePixelRatio * 200
+    readonly property  int defaultSize : Kirigami.Units.devicePixelRatio * 200
+    property int itemWidth : !isMobile ? Kirigami.Units.devicePixelRatio * 200 : parent.width
     property int itemHeight: Kirigami.Units.devicePixelRatio * 120
     property int itemSpacing: space.huge
 
@@ -34,11 +35,10 @@ GridView
         {
             currentIndex = index
             itemClicked(index)
-
         }
     }
 
-    onWidthChanged: adaptGrid()
+    onWidthChanged: if(!isMobile) adaptGrid()
 
     function adaptGrid()
     {

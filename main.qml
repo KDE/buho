@@ -5,6 +5,7 @@ import org.kde.maui 1.0 as Maui
 
 import "src/widgets"
 import "src/views/notes"
+import "src/views/links"
 
 Maui.ApplicationWindow
 {
@@ -63,6 +64,8 @@ Maui.ApplicationWindow
         {
             if(item.mid === "note")
                 newNoteDialog.open()
+            else if(item.mid === "link")
+                newLinkDialog.open()
         }
     }
 
@@ -101,6 +104,11 @@ Maui.ApplicationWindow
     }
 
 
+    NewLinkDialog
+    {
+        id: newLinkDialog
+    }
+
     /***** VIEWS *****/
 
     SwipeView
@@ -112,7 +120,11 @@ Maui.ApplicationWindow
         {
             id: notesView
             onNoteClicked: setNote(note)
+        }
 
+        LinksView
+        {
+            id: linksView
         }
 
     }

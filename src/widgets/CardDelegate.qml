@@ -11,9 +11,8 @@ ItemDelegate
     property string noteColor : color ? color : "pink"
     property int cardWidth: Kirigami.Units.devicePixelRatio*200
     property int cardHeight: Kirigami.Units.devicePixelRatio*120
-
     width: cardWidth
-    height: cardHeight    
+    height: cardHeight
 
     background: Rectangle
     {
@@ -48,6 +47,7 @@ ItemDelegate
     {
         anchors.fill: parent
         spacing: 0
+        clip: true
 
         Label
         {
@@ -59,6 +59,8 @@ ItemDelegate
             Layout.rightMargin: space.medium
             Layout.fillWidth: true
             text: model.title
+            color: Qt.darker(model.color, 3)
+
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: fontSizes.large
@@ -77,6 +79,8 @@ ItemDelegate
             Layout.fillWidth: true
             enabled: false
             text: model.body
+            color: Qt.darker(model.color, 3)
+
             textFormat: TextEdit.RichText
             font.pointSize: fontSizes.big
 
@@ -102,7 +106,7 @@ ItemDelegate
                 sourceSize.height: height
                 sourceSize.width: width
                 fillMode: Image.PreserveAspectCrop
-                source: model.preview
+                source: model.preview || ""
             }
         }
     }

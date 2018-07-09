@@ -32,6 +32,8 @@ Popup
 
         Maui.ToolBar
         {
+            position: ToolBar.Header
+            z: 999
             Layout.fillWidth: true
 
             leftContent: [
@@ -167,6 +169,7 @@ Popup
             placeholderText: qsTr("Title")
             font.weight: Font.Bold
             font.bold: true
+            color: Qt.darker(selectedColor, 2.5)
             background: Rectangle
             {
                 color: "transparent"
@@ -181,9 +184,9 @@ Popup
             selectionStart: body.selectionStart
             selectionEnd: body.selectionEnd
             // textColor: TODO
-//            onLoaded: {
-//                body.text = text
-//            }
+            //            onLoaded: {
+            //                body.text = text
+            //            }
             onError: {
                 body.text = message
                 body.visible = true
@@ -204,6 +207,7 @@ Popup
                 selectByKeyboard :!isMobile
                 selectByMouse : !isMobile
                 textFormat : TextEdit.AutoText
+                color: Qt.darker(selectedColor, 2.5)
 
                 background: Rectangle
                 {
@@ -225,15 +229,15 @@ Popup
                 text: qsTr("Save")
                 onClicked:
                 {
-                    close()
-                    noteSaved({
-                                  title: title.text,
-                                  body: body.text,
-                                  color: selectedColor,
-                                  tags: ""
-                              })
+                    if(body.text.length > 0)
+                        noteSaved({
+                                      title: title.text,
+                                      body: body.text,
+                                      color: selectedColor,
+                                      tags: ""
+                                  })
                     clearNote()
-
+                    close()
                 }
             }
 
@@ -251,6 +255,8 @@ Popup
         }
     }
 
+    onOpened: body.forceActiveFocus()
+
 
     function clearNote()
     {
@@ -266,10 +272,5 @@ Popup
         selectedColor =  note.color
 
         open()
-    }
-
-    function bold()
-    {
-//        body.sele
     }
 }

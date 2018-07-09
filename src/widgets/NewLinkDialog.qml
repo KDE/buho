@@ -7,7 +7,8 @@ import org.buho.editor 1.0
 Popup
 {
     parent: ApplicationWindow.overlay
-    height: parent.height * (isMobile ?  0.8 : 0.7)
+    height: previewReady ? parent.height * (isMobile ?  0.8 : 0.7) :
+                            toolBarHeight
     width: parent.width * (isMobile ?  0.9 : 0.7)
 
     signal linkSaved(var note)
@@ -21,7 +22,7 @@ Popup
     Rectangle
     {
         id: bg
-        color: selectedColor
+        color: "transparent"
         z: -1
         anchors.fill: parent
     }
@@ -34,6 +35,25 @@ Popup
         TextField
         {
             id: link
+            Layout.fillWidth: true
+            Layout.margins: space.medium
+            height: 24
+            placeholderText: qsTr("URL")
+            font.weight: Font.Bold
+            font.bold: true
+            font.pointSize: fontSizes.large
+            background: Rectangle
+            {
+                color: "transparent"
+            }
+
+            onAccepted: linker.extract(link.text)
+        }
+
+        TextField
+        {
+            id: title
+            visible: previewReady
             Layout.fillWidth: true
             Layout.margins: space.medium
             height: 24
@@ -51,7 +71,7 @@ Popup
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.margins: space.medium
-
+            visible: previewReady
             TextArea
             {
                 id: body
@@ -74,43 +94,35 @@ Popup
             Layout.margins: space.medium
             Layout.alignment: Qt.AlignRight
             spacing: space.medium
+            visible: previewReady
             Button
             {
                 id: save
                 text: qsTr("Save")
                 onClicked:
                 {
-                    close()
-                    noteSaved({
-                                  title: title.text,
-                                  body: body.text,
-                                  color: selectedColor,
-                                  tags: ""
-                              })
-                    clearNote()
-
+                    linker.extract(link.text)
+                    clear()
                 }
+
             }
 
             Button
             {
                 id: discard
                 text: qsTr("Discard")
-                onClicked:
-                {
-                    close()
-                    clearNote()
-                }
+                onClicked:  clear()
             }
-
         }
     }
 
 
-    function clearNote()
+    function clear()
     {
         title.clear()
         body.clear()
+        close()
+
     }
 
     function fill(note)

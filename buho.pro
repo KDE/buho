@@ -14,7 +14,8 @@ SOURCES += \
     src/db/dbactions.cpp \
     src/buho.cpp \
     src/documenthandler.cpp \
-    src/linker.cpp
+    src/linker.cpp \
+    src/utils/htmlparser.cpp
 
 RESOURCES += \
     qml.qrc
@@ -50,7 +51,14 @@ linux:unix:!android {
 
 DISTFILES += \
     src/db/script.sql \
-    src/utils/owl.js
+    src/utils/owl.js \
+    android/AndroidManifest.xml \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradlew \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew.bat
 
 HEADERS += \
     src/db/db.h \
@@ -58,5 +66,9 @@ HEADERS += \
     src/buho.h \
     src/utils/owl.h \
     src/documenthandler.h \
-    src/linker.h
+    src/linker.h \
+    src/utils/htmlparser.h
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
 

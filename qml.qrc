@@ -7,5 +7,6 @@
         <file>src/views/notes/NotesView.qml</file>
         <file>src/widgets/CardDelegate.qml</file>
         <file>src/widgets/NewLinkDialog.qml</file>
+        <file>src/views/links/LinksView.qml</file>
     </qresource>
 </RCC>

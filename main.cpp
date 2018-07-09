@@ -18,7 +18,7 @@
 #include "mauikit/src/mauikit.h"
 #include "src/buho.h"
 #include "src/documenthandler.h"
-
+#include "src/linker.h"
 
 int main(int argc, char *argv[])
 {
@@ -46,6 +46,9 @@ int main(int argc, char *argv[])
     auto context = engine.rootContext();
     context->setContextProperty("owl", &owl);
 
+    Linker linker;
+
+    context->setContextProperty("linker", &linker);
     qmlRegisterType<DocumentHandler>("org.buho.editor", 1, 0, "DocumentHandler");
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
