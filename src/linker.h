@@ -5,8 +5,6 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QUrl>
-#include <QWebPage>
-#include <QWebElementCollection>
 
 typedef QVariantMap LINK;
 
