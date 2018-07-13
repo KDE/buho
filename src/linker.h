@@ -18,14 +18,12 @@ public:
 
 private:
     QByteArray getUrl(const QString &url);
-    void query(QByteArray &array, QString qq);
-    QWebElement doc;
+    QString query(const QByteArray &array, const QString &qq);
 
 signals:
     void previewReady(LINK data);
 
 public slots:
-    void parsingWork(QString query);
 
 };
 

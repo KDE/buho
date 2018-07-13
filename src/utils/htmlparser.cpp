@@ -21,7 +21,6 @@ QString htmlParser::extractProp(const QString &tag,const QString &prop)
     auto url = result.first().replace(prop,"").replace('\"',"");
 //    qDebug()<<url;
     return url;
-
 }
 
 QStringList htmlParser::parseTag(const QString &tagRef, const QString &attribute)

@@ -31,8 +31,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-
-include(mauikit/mauikit.pri)
+include($$PWD/mauikit/mauikit.pri)
+include($$PWD/QGumboParser/QGumboParser.pri)
 
 linux:unix:!android {
 
@@ -43,6 +43,7 @@ linux:unix:!android {
     message(Building helpers for Android)
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/android/android.pri)
+    include($$PWD/android/openssl/openssl.pri)
     DEFINES += STATIC_KIRIGAMI
 
 } else {
@@ -52,6 +53,13 @@ linux:unix:!android {
 DISTFILES += \
     src/db/script.sql \
     src/utils/owl.js \
+    android/AndroidManifest.xml \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradlew \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew.bat \
     android/AndroidManifest.xml \
     android/gradle/wrapper/gradle-wrapper.jar \
     android/gradlew \
@@ -70,5 +78,4 @@ HEADERS += \
     src/utils/htmlparser.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-
 

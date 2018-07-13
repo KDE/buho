@@ -1,7 +1,8 @@
 #include "linker.h"
 #include <QEventLoop>
-#include <QWebFrame>
 
+#include "qgumbodocument.h"
+#include "qgumbonode.h"
 #include "utils/htmlparser.h"
 
 Linker::Linker(QObject *parent) : QObject(parent)
@@ -13,10 +14,7 @@ Linker::Linker(QObject *parent) : QObject(parent)
 void Linker::extract(const QString &url)
 {
     auto data = this->getUrl(url);
-    htmlParser parser;
-    parser.setHtml(data);
-    qDebug()<<data;
-    query(data, "title");
+    qDebug()<< query(data, "title");
 }
 
 QByteArray Linker::getUrl(const QString &url)
@@ -51,38 +49,13 @@ QByteArray Linker::getUrl(const QString &url)
     return QByteArray();
 }
 
-void Linker::query(QByteArray &array, QString qq)
+QString Linker::query(const QByteArray &array,const HtmlTag &tag)
 {
-    auto frame = new QWebPage(this);
+    auto doc = QGumboDocument::parse(array);
+    auto root = doc.rootNode();
+    auto nodes = root.getElementsByTagName(tag);
+    Q_ASSERT(nodes.size() == 1);
 
-    QWebSettings::setObjectCacheCapacities(0,0,0);
-    frame->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls,false);
-    frame->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,false);
-
-    connect(frame->mainFrame(), &QWebFrame::loadFinished, [qq, this](bool ok)
-    {
-       this->parsingWork(qq);
-    });
-
-
-    qDebug() << "Count Chars :: " << array.count();
-    frame->mainFrame()->setHtml(array);
-
-    doc = frame->mainFrame()->documentElement();
-
-}
-
-void Linker::parsingWork(QString query)
-{
-    qDebug() << "Start parsing content .....";
-
-    QWebElementCollection linkCollection = doc.findAll(query);
-    qDebug() << "Found " << linkCollection.count() << " links";
-
-    foreach (QWebElement link, linkCollection)
-    {
-        qDebug() << "found link " << link.toPlainText();
-    }
-
-    qDebug() << "stop parsing content .....";
+    auto title = nodes.front();
+    return title.innerText();
 }

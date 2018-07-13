@@ -8,5 +8,6 @@
         <file>src/widgets/CardDelegate.qml</file>
         <file>src/widgets/NewLinkDialog.qml</file>
         <file>src/views/links/LinksView.qml</file>
+        <file>utils.js</file>
     </qresource>
 </RCC>
