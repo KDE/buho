@@ -5,9 +5,11 @@ import org.kde.maui 1.0 as Maui
 
 GridView
 {
+    property bool gridView : true
+
     property alias holder : holder
     readonly property  int defaultSize : Kirigami.Units.devicePixelRatio * 200
-    property int itemWidth : !isMobile ? Kirigami.Units.devicePixelRatio * 200 : parent.width
+    property int itemWidth : !gridView ?  parent.width : Kirigami.Units.devicePixelRatio * 200
     property int itemHeight: Kirigami.Units.devicePixelRatio * 120
     property int itemSpacing: space.huge
 
@@ -23,7 +25,7 @@ GridView
         message: "<h3>No notes!</h3><p>You can create new notes<br>links and books</p>"
     }
 
-    model: ListModel { }
+    model: ListModel { id: cardsModel}
 
     delegate: CardDelegate
     {
@@ -38,7 +40,7 @@ GridView
         }
     }
 
-    onWidthChanged: if(!isMobile) adaptGrid()
+//    onWidthChanged: if(!isMobile && gridView) adaptGrid()
 
     function adaptGrid()
     {
@@ -50,4 +52,10 @@ GridView
 
         cellWidth = size
     }
+
+    function refresh()
+    {
+        model = cardsModel
+    }
+
 }

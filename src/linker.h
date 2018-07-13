@@ -6,6 +6,9 @@
 #include <QNetworkReply>
 #include <QUrl>
 
+#include "qgumbodocument.h"
+#include "qgumbonode.h"
+
 typedef QVariantMap LINK;
 
 class Linker : public QObject
@@ -18,10 +21,12 @@ public:
 
 private:
     QByteArray getUrl(const QString &url);
-    QString query(const QByteArray &array, const QString &qq);
+    QStringList query(const QByteArray &array, const HtmlTag &tag, const QString &attribute = QString());
+
+    QGumboNodes nodes;
 
 signals:
-    void previewReady(LINK data);
+    void previewReady(QVariantMap link);
 
 public slots:
 

@@ -8,6 +8,7 @@ Maui.Page
     property var currentNote : ({})
     signal noteClicked(var note)
 
+
     headBarVisible: false
     CardsView
     {
@@ -19,11 +20,9 @@ Maui.Page
     function populate()
     {
         var data =  owl.getNotes()
-        for(var i in data)
-        {
-            console.log("OCLOR", data[i].color)
+        for(var i in data)        
             append(data[i])
-        }
+
     }
 
     function append(note)

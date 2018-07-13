@@ -90,6 +90,7 @@ enum class KEY :uint8_t
     ADD_DATE,
     TAG,
     PREVIEW,
+    IMAGE,
     NONE
 };
 
@@ -107,7 +108,8 @@ static const DB KEYMAP =
     {KEY::COLOR, "color"},
     {KEY::ADD_DATE, "addDate"},
     {KEY::TAG, "tag"},
-    {KEY::PREVIEW, "preview"}
+    {KEY::PREVIEW, "preview"},
+    {KEY::IMAGE, "image"}
 };
 
 const QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/";

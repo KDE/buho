@@ -71,7 +71,18 @@ Maui.ApplicationWindow
 
     footBar.leftContent: Maui.ToolButton
     {
-        iconName: "document-share"
+        iconName:  swipeView.currentItem.cardsView.gridView ? "view-list-icons" : "view-list-details"
+        onClicked:
+        {
+            switch(swipeView.currentIndex)
+            {
+            case views.notes:
+                notesView.cardsView.gridView = !notesView.cardsView.gridView
+                notesView.cardsView.refresh()
+                break
+            }
+
+        }
     }
 
     footBar.rightContent: Maui.ToolButton
@@ -113,6 +124,7 @@ Maui.ApplicationWindow
 
     SwipeView
     {
+        id: swipeView
         anchors.fill: parent
         currentIndex: views.notes
 

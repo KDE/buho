@@ -1,9 +1,7 @@
 #include "linker.h"
 #include <QEventLoop>
+#include "owl.h"
 
-#include "qgumbodocument.h"
-#include "qgumbonode.h"
-#include "utils/htmlparser.h"
 
 Linker::Linker(QObject *parent) : QObject(parent)
 {
@@ -14,7 +12,33 @@ Linker::Linker(QObject *parent) : QObject(parent)
 void Linker::extract(const QString &url)
 {
     auto data = this->getUrl(url);
-    qDebug()<< query(data, "title");
+
+    auto titles = query(data, HtmlTag::TITLE);
+    QStringList imgs ;
+
+    for(auto img : query(data, HtmlTag::IMG, "src"))
+    {
+        if(imgs.contains(img) || img.isEmpty()) continue;
+
+
+        if(url.at(url.length()-1) == "/")
+        {
+            if(img.startsWith("http"))
+                imgs << img;
+            else
+                imgs << url+img;
+        }else
+        {
+            if(img.startsWith("http"))
+                imgs << img;
+            else
+                imgs << url+"/"+img;
+        }
+    }
+    LINK link_data {{OWL::KEYMAP[OWL::KEY::TITLE], titles},
+                    {OWL::KEYMAP[OWL::KEY::BODY], data},
+                    {OWL::KEYMAP[OWL::KEY::IMAGE], imgs}};
+    emit previewReady(link_data);
 }
 
 QByteArray Linker::getUrl(const QString &url)
@@ -49,13 +73,21 @@ QByteArray Linker::getUrl(const QString &url)
     return QByteArray();
 }
 
-QString Linker::query(const QByteArray &array,const HtmlTag &tag)
+QStringList Linker::query(const QByteArray &array, const HtmlTag &tag, const QString &attribute)
 {
+    QStringList res;
     auto doc = QGumboDocument::parse(array);
     auto root = doc.rootNode();
-    auto nodes = root.getElementsByTagName(tag);
-    Q_ASSERT(nodes.size() == 1);
 
-    auto title = nodes.front();
-    return title.innerText();
+    auto node = root.getElementsByTagName(tag);
+
+
+    for(const auto &i : node)
+    {
+        if(attribute.isEmpty())
+            res << i.innerText();
+        else res << i.getAttribute(attribute);
+    }
+
+    return res;
 }
