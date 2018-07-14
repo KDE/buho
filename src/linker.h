@@ -5,7 +5,6 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QUrl>
-
 #include "qgumbodocument.h"
 #include "qgumbonode.h"
 
@@ -22,8 +21,6 @@ public:
 private:
     QByteArray getUrl(const QString &url);
     QStringList query(const QByteArray &array, const HtmlTag &tag, const QString &attribute = QString());
-
-    QGumboNodes nodes;
 
 signals:
     void previewReady(QVariantMap link);
