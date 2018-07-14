@@ -223,6 +223,8 @@ Popup
             Layout.margins: space.medium
             Layout.alignment: Qt.AlignRight
             spacing: space.medium
+            layoutDirection: Qt.RightToLeft
+
             Button
             {
                 id: save
