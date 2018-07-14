@@ -38,6 +38,8 @@ public:
     Q_INVOKABLE bool updateNote(const QString &id, const QString &title, const QString &body, const QString &color = QString(), const QString &tags = QString());
     Q_INVOKABLE QVariantList getNotes();
 
+    Q_INVOKABLE bool insertLink(const QString &link, const QString &title, const QString &preview, const QString &color = QString(), const QString &tags = QString());
+
 protected:
     OWL::DB_LIST getDBData(const QString &queryTxt);
     bool execQuery(const QString &queryTxt);

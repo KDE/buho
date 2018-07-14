@@ -16,7 +16,8 @@ addDate DATE
 );
 
 CREATE TABLE IF NOT EXISTS LINKS (
-url TEXT PRIMARY KEY,
+link TEXT PRIMARY KEY,
+url TEXT,
 title TEXT,
 body TEXT,
 preview TEXT,
