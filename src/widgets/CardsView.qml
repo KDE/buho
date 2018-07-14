@@ -9,9 +9,10 @@ GridView
 
     property alias holder : holder
     readonly property  int defaultSize : Kirigami.Units.devicePixelRatio * 200
-    property int itemWidth : !gridView ?  parent.width : Kirigami.Units.devicePixelRatio * 200
+    property int itemWidth : !gridView ?  parent.width :
+                                         isMobile? (width-itemSpacing) * 0.42 : Kirigami.Units.devicePixelRatio * 200
     property int itemHeight: Kirigami.Units.devicePixelRatio * 120
-    property int itemSpacing: space.huge
+    property int itemSpacing:  space.huge
 
     signal itemClicked(int index)
 

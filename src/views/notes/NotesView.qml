@@ -7,7 +7,7 @@ Maui.Page
     property alias cardsView : cardsView
     property var currentNote : ({})
     signal noteClicked(var note)
-
+    margins: isMobile ? space.big : space.enormus
 
     headBarVisible: false
     CardsView

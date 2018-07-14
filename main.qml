@@ -13,7 +13,10 @@ Maui.ApplicationWindow
     title: qsTr("Buho")
 
     /***** PROPS *****/
+    floatingBar: true
+    property string accentColor : highlightColor
 
+    property int currentView : views.notes
     property var views : ({
                               notes: 0,
                               links: 1,
@@ -26,7 +29,8 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
-
+            onClicked: currentView = views.notes
+            iconColor: currentView === views.notes? accentColor : textColor
             iconName: "draw-text"
             text: qsTr("Notes")
         }
@@ -34,7 +38,8 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
-
+            onClicked: currentView = views.links
+            iconColor: currentView === views.links? accentColor : textColor
             iconName: "link"
             text: qsTr("Links")
         }
@@ -42,53 +47,63 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
-
+            iconColor: currentView === views.books? accentColor : textColor
             iconName: "document-new"
             text: qsTr("Books")
         }
     }
 
-    footBar.middleContent: Maui.PieButton
-    {
-        id: addButton
-        iconName: "list-add"
+    footBar.middleContent: [
 
-        model: ListModel
+        Maui.ToolButton
         {
-            ListElement {iconName: "document-new"; mid: "page"}
-            ListElement {iconName: "link"; mid: "link"}
-            ListElement {iconName: "draw-text"; mid: "note"}
-        }
-
-        onItemClicked:
-        {
-            if(item.mid === "note")
-                newNoteDialog.open()
-            else if(item.mid === "link")
-                newLinkDialog.open()
-        }
-    }
-
-    footBar.leftContent: Maui.ToolButton
-    {
-        iconName:  swipeView.currentItem.cardsView.gridView ? "view-list-icons" : "view-list-details"
-        onClicked:
-        {
-            switch(swipeView.currentIndex)
+            iconName:  swipeView.currentItem.cardsView.gridView ? "view-list-icons" : "view-list-details"
+            onClicked:
             {
-            case views.notes:
-                notesView.cardsView.gridView = !notesView.cardsView.gridView
-                notesView.cardsView.refresh()
-                break
+                switch(currentView)
+                {
+                    case views.notes:
+                    notesView.cardsView.gridView = !notesView.cardsView.gridView
+                    notesView.cardsView.refresh()
+                    break
+
+                    case views.links:
+                    linksView.cardsView.gridView = !linksView.cardsView.gridView
+                    linksView.cardsView.refresh()
+                    break
+                }
+
+            }
+        },
+
+        Maui.PieButton
+        {
+            id: addButton
+            iconName: "list-add"
+
+            model: ListModel
+            {
+                ListElement {iconName: "document-new"; mid: "page"}
+                ListElement {iconName: "link"; mid: "link"}
+                ListElement {iconName: "draw-text"; mid: "note"}
             }
 
+            onItemClicked:
+            {
+                if(item.mid === "note")
+                {
+                    currentView = views.notes
+                    newNoteDialog.open()
+                }
+                else if(item.mid === "link")
+                {
+                    currentView = views.links
+                    newLinkDialog.open()
+                }
+            }
         }
-    }
 
-    footBar.rightContent: Maui.ToolButton
-    {
-        iconName: "archive-remove"
-    }
+    ]
 
     /***** COMPONENTS *****/
 
@@ -96,12 +111,13 @@ Maui.ApplicationWindow
     {
         target: owl
         onNoteInserted: notesView.append(note)
+        onLinkInserted: linksView.append(link)
     }
 
     NewNoteDialog
     {
         id: newNoteDialog
-        onNoteSaved: owl.insertNote(note.title, note.body, note.color, note.tags)
+        onNoteSaved: owl.insertNote(note.title.trim(), note.body, note.color, note.tags)
     }
 
     NewNoteDialog
@@ -109,7 +125,7 @@ Maui.ApplicationWindow
         id: editNote
         onNoteSaved:
         {
-            if(owl.updateNote(notesView.currentNote.id, note.title, note.body, note.color, note.tags))
+            if(owl.updateNote(notesView.currentNote.id, note.title.trim(), note.body, note.color, note.tags))
                 notesView.cardsView.currentItem.update(note)
         }
     }
@@ -118,6 +134,7 @@ Maui.ApplicationWindow
     NewLinkDialog
     {
         id: newLinkDialog
+        onLinkSaved: owl.insertLink(note.link, note.title.trim(), note.preview, note.color, note.tags)
     }
 
     /***** VIEWS *****/
@@ -126,7 +143,9 @@ Maui.ApplicationWindow
     {
         id: swipeView
         anchors.fill: parent
-        currentIndex: views.notes
+        currentIndex: currentView
+        onCurrentIndexChanged: currentView = currentIndex
+
 
         NotesView
         {
@@ -144,6 +163,7 @@ Maui.ApplicationWindow
     Component.onCompleted:
     {
         notesView.populate()
+        linksView.populate()
     }
 
     function setNote(note)

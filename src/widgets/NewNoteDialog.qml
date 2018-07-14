@@ -11,11 +11,14 @@ Popup
     width: parent.width * (isMobile ?  0.9 : 0.7)
 
     property string selectedColor : "#ffffe6"
+    property string fgColor: Qt.darker(selectedColor, 2.5)
+
     signal noteSaved(var note)
     x: (parent.width / 2) - (width / 2)
     y: (parent.height /2 ) - (height / 2)
 
     padding: 1
+    modal: true
 
     Rectangle
     {
@@ -169,7 +172,9 @@ Popup
             placeholderText: qsTr("Title")
             font.weight: Font.Bold
             font.bold: true
-            color: Qt.darker(selectedColor, 2.5)
+            font.pointSize: fontSizes.large
+
+            color: fgColor
             background: Rectangle
             {
                 color: "transparent"
@@ -187,7 +192,8 @@ Popup
             //            onLoaded: {
             //                body.text = text
             //            }
-            onError: {
+            onError:
+            {
                 body.text = message
                 body.visible = true
             }
@@ -202,12 +208,16 @@ Popup
             TextArea
             {
                 id: body
-
+                width: parent.width
+                height: parent.height
                 placeholderText: qsTr("Body")
                 selectByKeyboard :!isMobile
                 selectByMouse : !isMobile
                 textFormat : TextEdit.AutoText
-                color: Qt.darker(selectedColor, 2.5)
+                color: fgColor
+                font.pointSize: fontSizes.large
+                wrapMode: TextEdit.WrapAnywhere
+
 
                 background: Rectangle
                 {

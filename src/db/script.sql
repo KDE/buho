@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS LINKS (
 link TEXT PRIMARY KEY,
 url TEXT,
 title TEXT,
-body TEXT,
 preview TEXT,
+color TEXT,
 addDate DATE
 );

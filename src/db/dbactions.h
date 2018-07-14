@@ -39,6 +39,7 @@ public:
     Q_INVOKABLE QVariantList getNotes();
 
     Q_INVOKABLE bool insertLink(const QString &link, const QString &title, const QString &preview, const QString &color = QString(), const QString &tags = QString());
+    Q_INVOKABLE QVariantList getLinks();
 
 protected:
     OWL::DB_LIST getDBData(const QString &queryTxt);
@@ -47,7 +48,7 @@ protected:
 
 signals:
     void noteInserted(QVariantMap note);
-
+    void linkInserted(QVariantMap link);
 };
 
 #endif // DBACTIONS_H

@@ -134,6 +134,32 @@ QVariantList DBActions::getNotes()
     return this->get("select * from notes");
 }
 
+bool DBActions::insertLink(const QString &link, const QString &title, const QString &preview, const QString &color, const QString &tags)
+{
+    QVariantMap link_map =
+    {
+        {OWL::KEYMAP[OWL::KEY::LINK], link},
+        {OWL::KEYMAP[OWL::KEY::TITLE], title},
+        {OWL::KEYMAP[OWL::KEY::PREVIEW], preview},
+        {OWL::KEYMAP[OWL::KEY::COLOR], color},
+        {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime()}
+    };
+
+    qDebug()<< link_map;
+    if(this->insert(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map))
+    {
+        this->linkInserted(link_map);
+        return true;
+    }
+
+    return false;
+}
+
+QVariantList DBActions::getLinks()
+{
+    return this->get("select * from links");
+}
+
 bool DBActions::execQuery(const QString &queryTxt)
 {
     auto query = this->getQuery(queryTxt);

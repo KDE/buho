@@ -9,15 +9,17 @@ Popup
 {
     parent: ApplicationWindow.overlay
     height: previewReady ? parent.height * (isMobile ?  0.8 : 0.7) :
-                           toolBarHeight
+                           content.implicitHeight
     width: parent.width * (isMobile ?  0.9 : 0.7)
 
     signal linkSaved(var note)
+    property string selectedColor : "#ffffe6"
+    property string fgColor: Qt.darker(selectedColor, 2.5)
 
     property bool previewReady : false
     x: (parent.width / 2) - (width / 2)
     y: (parent.height /2 ) - (height / 2)
-
+    modal: true
     padding: 1
 
     Connections
@@ -30,10 +32,11 @@ Popup
         }
     }
 
+
     Rectangle
     {
         id: bg
-        color: "transparent"
+        color: selectedColor
         z: -1
         anchors.fill: parent
     }
@@ -42,6 +45,96 @@ Popup
     {
         id: content
         anchors.fill: parent
+
+        Maui.ToolBar
+        {
+            position: ToolBar.Header
+            Layout.fillWidth: true
+            visible: previewReady
+            middleContent: Row
+            {
+                spacing: space.medium
+                Rectangle
+                {
+                    color:"#ffded4"
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: iconSizes.medium
+                    width: height
+                    radius: Math.max(height, width)
+                    border.color: borderColor
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked: selectedColor = parent.color
+                    }
+                }
+
+                Rectangle
+                {
+                    color:"#d3ffda"
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: iconSizes.medium
+                    width: height
+                    radius: Math.max(height, width)
+                    border.color: borderColor
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked: selectedColor = parent.color
+                    }
+                }
+
+                Rectangle
+                {
+                    color:"#caf3ff"
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: iconSizes.medium
+                    width: height
+                    radius: Math.max(height, width)
+                    border.color: borderColor
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked: selectedColor = parent.color
+                    }
+                }
+
+                Rectangle
+                {
+                    color:"#ccc1ff"
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: iconSizes.medium
+                    width: height
+                    radius: Math.max(height, width)
+                    border.color: borderColor
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked: selectedColor = parent.color
+                    }
+                }
+
+                Rectangle
+                {
+                    color:"#ffcdf4"
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: iconSizes.medium
+                    width: height
+                    radius: Math.max(height, width)
+                    border.color: borderColor
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked: selectedColor = parent.color
+                    }
+                }
+            }
+        }
 
         TextField
         {
@@ -53,6 +146,8 @@ Popup
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: fontSizes.large
+            color: fgColor
+
             background: Rectangle
             {
                 color: "transparent"
@@ -72,6 +167,7 @@ Popup
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: fontSizes.large
+            color: fgColor
 
             background: Rectangle
             {
@@ -93,7 +189,13 @@ Popup
                 snapMode: ListView.SnapOneItem
                 orientation: ListView.Horizontal
                 interactive: count > 1
+                highlightFollowsCurrentItem: true
                 model: ListModel{}
+                onMovementEnded:
+                {
+                    var index = indexAt(contentX, contentY)
+                    currentIndex = index
+                }
                 delegate: ItemDelegate
                 {
                     height: previewList.height
@@ -135,10 +237,15 @@ Popup
                 text: qsTr("Save")
                 onClicked:
                 {
-                    linker.extract(link.text)
+                    var data = ({
+                                    link : link.text,
+                                    title: title.text,
+                                    preview: previewList.model.get(previewList.currentIndex).url,
+                                    color: selectedColor
+                                })
+                    linkSaved(data)
                     clear()
                 }
-
             }
 
             Button
@@ -154,7 +261,9 @@ Popup
     function clear()
     {
         title.clear()
-        body.clear()
+        link.clear()
+        previewList.model.clear()
+        previewReady = false
         close()
 
     }
@@ -170,8 +279,6 @@ Popup
     function populatePreviews(imgs)
     {
         for(var i in imgs)
-        {
-            console.log("IMAGE:", imgs[i])
-            previewList.model.append({url : imgs[i]})}
+            previewList.model.append({url : imgs[i]})
     }
 }

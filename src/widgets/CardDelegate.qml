@@ -11,9 +11,10 @@ ItemDelegate
     property string noteColor : color ? color : "pink"
     property int cardWidth: Kirigami.Units.devicePixelRatio*200
     property int cardHeight: Kirigami.Units.devicePixelRatio*120
+    property int cardRadius: Kirigami.Units.devicePixelRatio*4
     width: cardWidth
     height: cardHeight
-
+    hoverEnabled: !isMobile
     background: Rectangle
     {
         color: "transparent"
@@ -40,7 +41,15 @@ ItemDelegate
         border.color: Qt.darker(noteColor, 1.2)
 
         color: noteColor
-        radius: Kirigami.Units.devicePixelRatio*3
+        radius: cardRadius
+    }
+
+    Rectangle
+    {
+        anchors.fill: parent
+        color: hovered? "#333" :  "transparent"
+        z: 999
+        opacity: 0.3
     }
 
     ColumnLayout
@@ -60,6 +69,7 @@ ItemDelegate
             Layout.fillWidth: true
             text: model.title
             color: Qt.darker(model.color, 3)
+            elide: Qt.ElideRight
 
             font.weight: Font.Bold
             font.bold: true
@@ -69,14 +79,14 @@ ItemDelegate
         TextArea
         {
             id: body
-
-            Layout.leftMargin: space.medium
-            Layout.bottomMargin: space.medium
-            Layout.rightMargin: space.medium
+            visible: typeof model.body !== 'undefined'
+            Layout.leftMargin: visible ? space.medium : 0
+            Layout.bottomMargin: visible ? space.medium : 0
+            Layout.rightMargin: visible ? space.medium : 0
             Layout.topMargin: title.visible ? 0 : space.medium
 
-            Layout.fillHeight: true
-            Layout.fillWidth: true
+            Layout.fillHeight: visible
+            Layout.fillWidth: visible
             enabled: false
             text: model.body
             color: Qt.darker(model.color, 3)
@@ -95,18 +105,42 @@ ItemDelegate
             id: preview
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.maximumHeight: control.height * 0.3
+            clip: true
+            Layout.topMargin: space.medium
+
             Image
             {
                 id: img
-                visible: model.preview
+                visible: status === Image.Ready
                 asynchronous: true
+                anchors.centerIn: parent
+
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
                 height: parent.height
                 width: parent.width
                 sourceSize.height: height
                 sourceSize.width: width
                 fillMode: Image.PreserveAspectCrop
                 source: model.preview || ""
+
+                layer.enabled: img.visible
+                layer.effect: OpacityMask
+                {
+                    maskSource: Item
+                    {
+                        width: img.width
+                        height: img.height
+                        Rectangle
+                        {
+                            anchors.centerIn: parent
+                            width: img.width
+                            height: img.height
+                            radius: cardRadius
+                            //                    radius: Math.min(width, height)
+                        }
+                    }
+                }
             }
         }
     }
