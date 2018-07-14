@@ -147,6 +147,7 @@ Popup
             font.bold: true
             font.pointSize: fontSizes.large
             color: fgColor
+            Layout.alignment: Qt.AlignCenter
 
             background: Rectangle
             {

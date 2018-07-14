@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QVariantMap>
 #include <QUuid>
 #include <QDateTime>
-
+#include "linker.h"
 
 DBActions::DBActions(QObject *parent) : DB(parent)
 {
@@ -136,11 +136,13 @@ QVariantList DBActions::getNotes()
 
 bool DBActions::insertLink(const QString &link, const QString &title, const QString &preview, const QString &color, const QString &tags)
 {
+    auto image_path = OWL::saveImage(Linker::getUrl(preview), OWL::LinksPath+QUuid::createUuid().toString());
+
     QVariantMap link_map =
     {
         {OWL::KEYMAP[OWL::KEY::LINK], link},
         {OWL::KEYMAP[OWL::KEY::TITLE], title},
-        {OWL::KEYMAP[OWL::KEY::PREVIEW], preview},
+        {OWL::KEYMAP[OWL::KEY::PREVIEW], image_path},
         {OWL::KEYMAP[OWL::KEY::COLOR], color},
         {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime()}
     };

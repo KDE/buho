@@ -2,11 +2,10 @@
 #define LINKER_H
 
 #include <QObject>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QUrl>
+
 #include "qgumbodocument.h"
 #include "qgumbonode.h"
+#include <QVariantMap>
 
 typedef QVariantMap LINK;
 
@@ -15,11 +14,11 @@ class Linker : public QObject
     Q_OBJECT
 public:
     explicit Linker(QObject *parent = nullptr);
+    static QByteArray getUrl(const QString &url);
 
     Q_INVOKABLE void extract(const QString &url);
 
 private:
-    QByteArray getUrl(const QString &url);
     QStringList query(const QByteArray &array, const HtmlTag &tag, const QString &attribute = QString());
 
 signals:

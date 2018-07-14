@@ -1,45 +1,14 @@
 #include "linker.h"
-#include <QEventLoop>
 #include "owl.h"
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QUrl>
+#include <QEventLoop>
 
 Linker::Linker(QObject *parent) : QObject(parent)
 {
 
 }
-
-/* extract needs to extract from a url the title, the body and a preview image*/
-void Linker::extract(const QString &url)
-{
-    auto data = this->getUrl(url);
-
-    auto titles = query(data, HtmlTag::TITLE);
-    QStringList imgs ;
-
-    for(auto img : query(data, HtmlTag::IMG, "src"))
-    {
-        if(imgs.contains(img) || img.isEmpty()) continue;
-
-
-        if(url.at(url.length()-1) == "/")
-        {
-            if(img.startsWith("http"))
-                imgs << img;
-            else
-                imgs << url+img;
-        }else
-        {
-            if(img.startsWith("http"))
-                imgs << img;
-            else
-                imgs << url+"/"+img;
-        }
-    }
-    LINK link_data {{OWL::KEYMAP[OWL::KEY::TITLE], titles},
-                    {OWL::KEYMAP[OWL::KEY::BODY], data},
-                    {OWL::KEYMAP[OWL::KEY::IMAGE], imgs}};
-    emit previewReady(link_data);
-}
-
 QByteArray Linker::getUrl(const QString &url)
 {
     QUrl mURL(url);
@@ -71,6 +40,40 @@ QByteArray Linker::getUrl(const QString &url)
 
     return QByteArray();
 }
+/* extract needs to extract from a url the title, the body and a preview image*/
+void Linker::extract(const QString &url)
+{
+    auto data = getUrl(url);
+
+    auto titles = query(data, HtmlTag::TITLE);
+    QStringList imgs ;
+
+    for(auto img : query(data, HtmlTag::IMG, "src"))
+    {
+        if(imgs.contains(img) || img.isEmpty()) continue;
+
+
+        if(url.at(url.length()-1) == "/")
+        {
+            if(img.startsWith("http"))
+                imgs << img;
+            else
+                imgs << url+img;
+        }else
+        {
+            if(img.startsWith("http"))
+                imgs << img;
+            else
+                imgs << url+"/"+img;
+        }
+    }
+    LINK link_data {{OWL::KEYMAP[OWL::KEY::TITLE], titles},
+                    {OWL::KEYMAP[OWL::KEY::BODY], data},
+                    {OWL::KEYMAP[OWL::KEY::IMAGE], imgs}};
+    emit previewReady(link_data);
+}
+
+
 
 QStringList Linker::query(const QByteArray &array, const HtmlTag &tag, const QString &attribute)
 {
