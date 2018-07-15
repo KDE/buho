@@ -254,7 +254,8 @@ Popup
             Maui.ToolButton
             {
                 iconName: "document-share"
-
+                onClicked: isAndroid ? Maui.Android.shareText(body.text) :
+                                       shareDialog.show(body.text)
             },
 
             Maui.ToolButton

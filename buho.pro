@@ -5,6 +5,33 @@ QT += widgets
 QT += quickcontrols2
 
 CONFIG += c++11
+CONFIG += ordered
+
+TARGET = buho
+TEMPLATE = app
+
+DESTDIR = $$OUT_PWD/../
+
+linux:unix:!android {
+
+    message(Building for Linux KDE)
+    QT += webengine
+
+} else:android {
+
+    message(Building helpers for Android)
+    include($$PWD/3rdparty/kirigami/kirigami.pri)
+    include($$PWD/android/android.pri)
+    include($$PWD/android/openssl/openssl.pri)
+    DEFINES += STATIC_KIRIGAMI
+
+} else {
+    message("Unknown configuration")
+}
+
+
+include($$PWD/mauikit/mauikit.pri)
+include($$PWD/QGumboParser/QGumboParser.pri)
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
@@ -31,44 +58,10 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-include($$PWD/mauikit/mauikit.pri)
-include($$PWD/QGumboParser/QGumboParser.pri)
-
-linux:unix:!android {
-
-    message(Building for Linux KDE)
-    QT += webengine
-
-
-} else:android {
-
-    message(Building helpers for Android)
-    include($$PWD/3rdparty/kirigami/kirigami.pri)
-    include($$PWD/android/android.pri)
-    include($$PWD/android/openssl/openssl.pri)
-    DEFINES += STATIC_KIRIGAMI
-
-} else {
-    message("Unknown configuration")
-}
 
 DISTFILES += \
     src/db/script.sql \
     src/utils/owl.js \
-    android/AndroidManifest.xml \
-    android/gradle/wrapper/gradle-wrapper.jar \
-    android/gradlew \
-    android/res/values/libs.xml \
-    android/build.gradle \
-    android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat \
-    android/AndroidManifest.xml \
-    android/gradle/wrapper/gradle-wrapper.jar \
-    android/gradlew \
-    android/res/values/libs.xml \
-    android/build.gradle \
-    android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat
 
 HEADERS += \
     src/db/db.h \
@@ -82,7 +75,4 @@ HEADERS += \
 INCLUDEPATH += \
     src/utils/ \
     src/
-
-
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

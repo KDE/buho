@@ -23,6 +23,13 @@ Popup
         padding: 0
 
         onExit: close()
+        headBar.leftContent: Maui.ToolButton
+        {
+
+            iconName: "document-share"
+            onClicked: isAndroid ? Maui.Android.shareLink(webView.url) :
+                                   shareDialog.show(webView.url)
+        }
 
         headBar.rightContent: [
             Maui.ToolButton
@@ -41,6 +48,7 @@ Popup
                 onClicked: owl.openLink(webView.url)
             }
         ]
+
         headBar.middleContent: Label
         {
             clip: true
