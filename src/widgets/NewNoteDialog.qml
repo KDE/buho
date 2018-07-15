@@ -259,6 +259,11 @@ Popup
 
             Maui.ToolButton
             {
+                iconName: "document-export"
+            },
+
+            Maui.ToolButton
+            {
                 iconName: "entry-delete"
             }
         ]

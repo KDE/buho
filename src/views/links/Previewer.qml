@@ -38,19 +38,19 @@ Popup
             Maui.ToolButton
             {
                 iconName: "view-fullscreen"
+                onClicked: owl.openLink(webView.url)
             }
         ]
-
         headBar.middleContent: Label
         {
             clip: true
             text: webView.title
-
+            width: headBar.width * 0.5
             horizontalAlignment: Qt.AlignHCenter
             font.bold: true
             font.pointSize: fontSizes.big
             font.weight: Font.Bold
-            wrapMode: Label.WrapAnywhere
+            elide: Label.ElideRight
         }
 
         ColumnLayout
@@ -69,8 +69,6 @@ Popup
                 onVisibleChanged:
                 {
                     if(!visible) webView.url = "about:blank"
-
-                    console.log(webView.url, visible)
                 }
             }
 
