@@ -37,6 +37,8 @@ include($$PWD/QGumboParser/QGumboParser.pri)
 linux:unix:!android {
 
     message(Building for Linux KDE)
+    QT += webengine
+
 
 } else:android {
 

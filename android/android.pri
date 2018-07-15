@@ -1,3 +1,5 @@
+QT += androidextras webview
+
 DISTFILES += \
     $$PWD/qtquickcontrols2.conf
 

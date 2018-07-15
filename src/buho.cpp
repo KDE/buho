@@ -5,6 +5,11 @@ Buho::Buho(QObject *parent) : DBActions(parent)
     this->setFolders();
 }
 
+Tagging *Buho::getTagging()
+{
+    return this->tag;
+}
+
 void Buho::setFolders()
 {
     QDir notes_path(OWL::NotesPath);

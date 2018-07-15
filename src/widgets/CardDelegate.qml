@@ -105,8 +105,10 @@ ItemDelegate
             id: preview
             Layout.fillHeight: true
             Layout.fillWidth: true
+            Layout.margins: unit
             clip: true
             Layout.topMargin: space.medium
+            visible: img.status === Image.Ready
 
             Image
             {

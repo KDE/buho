@@ -6,6 +6,7 @@ import org.kde.maui 1.0 as Maui
 import "src/widgets"
 import "src/views/notes"
 import "src/views/links"
+import "src/views/books"
 
 Maui.ApplicationWindow
 {
@@ -20,12 +21,12 @@ Maui.ApplicationWindow
     property var views : ({
                               notes: 0,
                               links: 1,
-                              books: 2
+                              books: 2,
+                              tags: 3,
+                              search: 4
                           })
 
-    headBar.middleContent: Row
-    {
-        spacing: space.medium
+    headBar.middleContent: [
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
@@ -33,7 +34,7 @@ Maui.ApplicationWindow
             iconColor: currentView === views.notes? accentColor : textColor
             iconName: "draw-text"
             text: qsTr("Notes")
-        }
+        },
 
         Maui.ToolButton
         {
@@ -42,7 +43,7 @@ Maui.ApplicationWindow
             iconColor: currentView === views.links? accentColor : textColor
             iconName: "link"
             text: qsTr("Links")
-        }
+        },
 
         Maui.ToolButton
         {
@@ -50,8 +51,16 @@ Maui.ApplicationWindow
             iconColor: currentView === views.books? accentColor : textColor
             iconName: "document-new"
             text: qsTr("Books")
+        },
+
+        Maui.ToolButton
+        {
+            display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
+            iconColor: currentView === views.tags? accentColor : textColor
+            iconName: "tag"
+            text: qsTr("Tags")
         }
-    }
+    ]
 
     footBar.middleContent: [
 
@@ -102,7 +111,6 @@ Maui.ApplicationWindow
                 }
             }
         }
-
     ]
 
     /***** COMPONENTS *****/
@@ -146,7 +154,6 @@ Maui.ApplicationWindow
         currentIndex: currentView
         onCurrentIndexChanged: currentView = currentIndex
 
-
         NotesView
         {
             id: notesView
@@ -156,6 +163,13 @@ Maui.ApplicationWindow
         LinksView
         {
             id: linksView
+            onLinkClicked: previewLink(link)
+        }
+
+        BooksView
+        {
+            id: booksView
+
         }
 
     }
@@ -168,7 +182,16 @@ Maui.ApplicationWindow
 
     function setNote(note)
     {
+        var tags = owl.getNoteTags(note.id)
+        note.tags = tags
         notesView.currentNote = note
         editNote.fill(note)
+    }
+
+    function previewLink(link)
+    {
+        var tags = owl.getLinkTags(link.link)
+        link.tags = tags
+        linksView.previewer.show(link)
     }
 }

@@ -30,6 +30,8 @@ DBActions::DBActions(QObject *parent) : DB(parent)
     qDebug() << "Getting collectionDB info from: " << OWL::CollectionDBPath;
 
     qDebug()<< "Starting DBActions";
+    this->tag =  Tagging::getInstance(OWL::App, OWL::version, "org.kde.buho", OWL::comment);
+
 }
 
 DBActions::~DBActions() {}
@@ -80,8 +82,10 @@ QVariantList DBActions::get(const QString &queryTxt)
     return mapList;
 }
 
-bool DBActions::insertNote(const QString &title, const QString &body, const QString &color, const QString &tags)
+bool DBActions::insertNote(const QString &title, const QString &body, const QString &color, const QStringList &tags)
 {
+    qDebug()<<"TAGS"<< tags;
+
     auto id = QUuid::createUuid().toString();
 
     QVariantMap note_map =
@@ -94,21 +98,11 @@ bool DBActions::insertNote(const QString &title, const QString &body, const QStr
         {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime()}
     };
 
-    //    if(!tags.isEmpty())
-    //    {
-    //        for(auto tag : tags.split(","))
-    //        {
-    //            this->insert(OWL::TABLEMAP[OWL::TABLE::TAGS], {{OWL::KEYMAP[OWL::KEY::TAG], tag}});
-    //            this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES_TAGS],
-    //            {
-    //                {OWL::KEYMAP[OWL::KEY::TAG], tag},
-    //                {OWL::KEYMAP[OWL::KEY::URL], note_url}
-    //            });
-    //        }
-    //    }
-
     if(this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map))
     {
+        for(auto tg : tags)
+            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
+
         this->noteInserted(note_map);
         return true;
     }
@@ -116,7 +110,7 @@ bool DBActions::insertNote(const QString &title, const QString &body, const QStr
     return false;
 }
 
-bool DBActions::updateNote(const QString &id, const QString &title, const QString &body, const QString &color, const QString &tags)
+bool DBActions::updateNote(const QString &id, const QString &title, const QString &body, const QString &color, const QStringList &tags)
 {
     OWL::DB note =
     {
@@ -126,6 +120,9 @@ bool DBActions::updateNote(const QString &id, const QString &title, const QStrin
         {OWL::KEY::UPDATED, QDateTime::currentDateTime().toString()}
     };
 
+    for(auto tg : tags)
+        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
+
     return this->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note, {{OWL::KEYMAP[OWL::KEY::ID], id}} );
 }
 
@@ -134,7 +131,12 @@ QVariantList DBActions::getNotes()
     return this->get("select * from notes");
 }
 
-bool DBActions::insertLink(const QString &link, const QString &title, const QString &preview, const QString &color, const QString &tags)
+QVariantList DBActions::getNoteTags(const QString &id)
+{
+    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::NOTES], id);
+}
+
+bool DBActions::insertLink(const QString &link, const QString &title, const QString &preview, const QString &color, const QStringList &tags)
 {
     auto image_path = OWL::saveImage(Linker::getUrl(preview), OWL::LinksPath+QUuid::createUuid().toString());
 
@@ -147,9 +149,11 @@ bool DBActions::insertLink(const QString &link, const QString &title, const QStr
         {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime()}
     };
 
-    qDebug()<< link_map;
     if(this->insert(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map))
     {
+        for(auto tg : tags)
+            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], link, color);
+
         this->linkInserted(link_map);
         return true;
     }
@@ -160,6 +164,11 @@ bool DBActions::insertLink(const QString &link, const QString &title, const QStr
 QVariantList DBActions::getLinks()
 {
     return this->get("select * from links");
+}
+
+QVariantList DBActions::getLinkTags(const QString &link)
+{
+    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
 }
 
 bool DBActions::execQuery(const QString &queryTxt)

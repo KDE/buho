@@ -47,8 +47,10 @@ int main(int argc, char *argv[])
     context->setContextProperty("owl", &owl);
 
     Linker linker;
+    auto tag = owl.getTagging();
 
     context->setContextProperty("linker", &linker);
+    context->setContextProperty("tag", tag);
     qmlRegisterType<DocumentHandler>("org.buho.editor", 1, 0, "DocumentHandler");
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

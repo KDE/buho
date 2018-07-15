@@ -3,12 +3,14 @@
 
 #include <QObject>
 #include "db/dbactions.h"
+#include "tagging.h"
 
 class Buho : public DBActions
 {
     Q_OBJECT
 public:
     explicit Buho(QObject *parent = nullptr);
+    Tagging* getTagging();
 
 private:
     void setFolders();

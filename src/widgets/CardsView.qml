@@ -8,13 +8,14 @@ GridView
     property bool gridView : true
 
     property alias holder : holder
-    readonly property  int defaultSize : Kirigami.Units.devicePixelRatio * 200
+    readonly property  int defaultSize : unit * 200
     property int itemWidth : !gridView ?  parent.width :
-                                         isMobile? (width-itemSpacing) * 0.42 : Kirigami.Units.devicePixelRatio * 200
-    property int itemHeight: Kirigami.Units.devicePixelRatio * 120
+                                         isMobile? (width-itemSpacing) * 0.42 : unit * 200
+    property int itemHeight: unit * 120
     property int itemSpacing:  space.huge
 
     signal itemClicked(int index)
+    boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
 
     cellWidth: itemWidth + itemSpacing
     cellHeight: itemHeight + itemSpacing

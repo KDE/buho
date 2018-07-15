@@ -9,5 +9,9 @@
         <file>src/widgets/NewLinkDialog.qml</file>
         <file>src/views/links/LinksView.qml</file>
         <file>utils.js</file>
+        <file>src/views/links/WebViewAndroid.qml</file>
+        <file>src/views/links/WebViewLinux.qml</file>
+        <file>src/views/links/Previewer.qml</file>
+        <file>src/views/books/BooksView.qml</file>
     </qresource>
 </RCC>

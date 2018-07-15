@@ -7,11 +7,17 @@ Maui.Page
     id: control
 
     property alias cardsView : cardsView
+    property alias previewer : previewer
     property var currentLink : ({})
-    signal linkClicked(var note)
+    signal linkClicked(var link)
 
     headBarVisible: false
     margins: isMobile ? space.big : space.enormus
+
+    Previewer
+    {
+        id: previewer
+    }
 
     CardsView
     {

@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QObject>
 #include "db.h"
+#include "tagging.h"
 
 class DBActions : public DB
 {
@@ -34,17 +35,19 @@ public:
     Q_INVOKABLE QVariantList get(const QString &queryTxt);
 
     /*main actions*/
-    Q_INVOKABLE bool insertNote(const QString &title, const QString &body, const QString &color = QString(), const QString &tags = QString());
-    Q_INVOKABLE bool updateNote(const QString &id, const QString &title, const QString &body, const QString &color = QString(), const QString &tags = QString());
+    Q_INVOKABLE bool insertNote(const QString &title, const QString &body, const QString &color = QString(), const QStringList &tags = QStringList());
+    Q_INVOKABLE bool updateNote(const QString &id, const QString &title, const QString &body, const QString &color = QString(), const QStringList &tags = QStringList());
     Q_INVOKABLE QVariantList getNotes();
+    Q_INVOKABLE QVariantList getNoteTags(const QString &id);
 
-    Q_INVOKABLE bool insertLink(const QString &link, const QString &title, const QString &preview, const QString &color = QString(), const QString &tags = QString());
+    Q_INVOKABLE bool insertLink(const QString &link, const QString &title, const QString &preview, const QString &color = QString(), const QStringList &tags = QStringList());
     Q_INVOKABLE QVariantList getLinks();
+    Q_INVOKABLE QVariantList getLinkTags(const QString &link);
 
 protected:
     OWL::DB_LIST getDBData(const QString &queryTxt);
     bool execQuery(const QString &queryTxt);
-
+    Tagging *tag;
 
 signals:
     void noteInserted(QVariantMap note);

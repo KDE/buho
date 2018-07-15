@@ -9,7 +9,7 @@ Popup
 {
     parent: ApplicationWindow.overlay
     height: previewReady ? parent.height * (isMobile ?  0.8 : 0.7) :
-                           content.implicitHeight
+                           contentLayout.implicitHeight
     width: parent.width * (isMobile ?  0.9 : 0.7)
 
     signal linkSaved(var note)
@@ -20,7 +20,7 @@ Popup
     x: (parent.width / 2) - (width / 2)
     y: (parent.height /2 ) - (height / 2)
     modal: true
-    padding: 1
+    padding: isAndroid ? 1 : "undefined"
 
     Connections
     {
@@ -33,205 +33,217 @@ Popup
     }
 
 
-    Rectangle
-    {
-        id: bg
-        color: selectedColor
-        z: -1
-        anchors.fill: parent
-    }
-
-    ColumnLayout
+    Maui.Page
     {
         id: content
+        margins: 0
         anchors.fill: parent
-
-        Maui.ToolBar
+        Rectangle
         {
-            position: ToolBar.Header
-            Layout.fillWidth: true
-            visible: previewReady
-            middleContent: Row
-            {
-                spacing: space.medium
-                Rectangle
-                {
-                    color:"#ffded4"
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: iconSizes.medium
-                    width: height
-                    radius: Math.max(height, width)
-                    border.color: borderColor
-
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        onClicked: selectedColor = parent.color
-                    }
-                }
-
-                Rectangle
-                {
-                    color:"#d3ffda"
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: iconSizes.medium
-                    width: height
-                    radius: Math.max(height, width)
-                    border.color: borderColor
-
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        onClicked: selectedColor = parent.color
-                    }
-                }
-
-                Rectangle
-                {
-                    color:"#caf3ff"
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: iconSizes.medium
-                    width: height
-                    radius: Math.max(height, width)
-                    border.color: borderColor
-
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        onClicked: selectedColor = parent.color
-                    }
-                }
-
-                Rectangle
-                {
-                    color:"#ccc1ff"
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: iconSizes.medium
-                    width: height
-                    radius: Math.max(height, width)
-                    border.color: borderColor
-
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        onClicked: selectedColor = parent.color
-                    }
-                }
-
-                Rectangle
-                {
-                    color:"#ffcdf4"
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: iconSizes.medium
-                    width: height
-                    radius: Math.max(height, width)
-                    border.color: borderColor
-
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        onClicked: selectedColor = parent.color
-                    }
-                }
-            }
+            id: bg
+            color: selectedColor
+            z: -1
+            anchors.fill: parent
         }
 
-        TextField
+        onExit: clear()
+        headBarVisible: previewReady
+        footBarVisible: previewReady
+        headBar.rightContent: Row
         {
-            id: link
-            Layout.fillWidth: true
-            Layout.margins: space.medium
-            height: 24
-            placeholderText: qsTr("URL")
-            font.weight: Font.Bold
-            font.bold: true
-            font.pointSize: fontSizes.large
-            color: fgColor
-            Layout.alignment: Qt.AlignCenter
-
-            background: Rectangle
-            {
-                color: "transparent"
-            }
-
-            onAccepted: linker.extract(link.text)
-        }
-
-        TextField
-        {
-            id: title
-            visible: previewReady
-            Layout.fillWidth: true
-            Layout.margins: space.medium
-            height: 24
-            placeholderText: qsTr("Title")
-            font.weight: Font.Bold
-            font.bold: true
-            font.pointSize: fontSizes.large
-            color: fgColor
-
-            background: Rectangle
-            {
-                color: "transparent"
-            }
-        }
-
-        Item
-        {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            visible: previewReady
-            ListView
-            {
-                id: previewList
-                anchors.fill: parent
-                anchors.centerIn: parent
-                clip: true
-                snapMode: ListView.SnapOneItem
-                orientation: ListView.Horizontal
-                interactive: count > 1
-                highlightFollowsCurrentItem: true
-                model: ListModel{}
-                onMovementEnded:
-                {
-                    var index = indexAt(contentX, contentY)
-                    currentIndex = index
-                }
-                delegate: ItemDelegate
-                {
-                    height: previewList.height
-                    width: previewList.width
-
-                    background: Rectangle
-                    {
-                        color: "transparent"
-                    }
-
-                    Image
-                    {
-                        id: img
-                        source: model.url
-                        fillMode: Image.PreserveAspectFit
-                        asynchronous: true
-                        width: parent.width
-                        height: parent.height
-                        sourceSize.height: height
-                        horizontalAlignment: Qt.AlignHCenter
-                        verticalAlignment: Qt.AlignVCenter
-                    }
-                }
-            }
-        }
-
-        Row
-        {
-            Layout.fillWidth: true
-            width: parent.width
-            Layout.margins: space.medium
-            Layout.alignment: Qt.AlignRight
             spacing: space.medium
-            visible: previewReady
-            layoutDirection: Qt.RightToLeft
+            Rectangle
+            {
+                color:"#ffded4"
+                anchors.verticalCenter: parent.verticalCenter
+                height: iconSizes.medium
+                width: height
+                radius: Math.max(height, width)
+                border.color: borderColor
+
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked: selectedColor = parent.color
+                }
+            }
+
+            Rectangle
+            {
+                color:"#d3ffda"
+                anchors.verticalCenter: parent.verticalCenter
+                height: iconSizes.medium
+                width: height
+                radius: Math.max(height, width)
+                border.color: borderColor
+
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked: selectedColor = parent.color
+                }
+            }
+
+            Rectangle
+            {
+                color:"#caf3ff"
+                anchors.verticalCenter: parent.verticalCenter
+                height: iconSizes.medium
+                width: height
+                radius: Math.max(height, width)
+                border.color: borderColor
+
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked: selectedColor = parent.color
+                }
+            }
+
+            Rectangle
+            {
+                color:"#ccc1ff"
+                anchors.verticalCenter: parent.verticalCenter
+                height: iconSizes.medium
+                width: height
+                radius: Math.max(height, width)
+                border.color: borderColor
+
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked: selectedColor = parent.color
+                }
+            }
+
+            Rectangle
+            {
+                color:"#ffcdf4"
+                anchors.verticalCenter: parent.verticalCenter
+                height: iconSizes.medium
+                width: height
+                radius: Math.max(height, width)
+                border.color: borderColor
+
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked: selectedColor = parent.color
+                }
+            }
+        }
+
+        ColumnLayout
+        {
+            id: contentLayout
+            anchors.fill: parent
+
+            TextField
+            {
+                id: link
+                Layout.fillWidth: true
+                Layout.margins: space.medium
+                height: rowHeight
+                verticalAlignment: Qt.AlignVCenter
+                placeholderText: qsTr("URL")
+                font.weight: Font.Bold
+                font.bold: true
+                font.pointSize: fontSizes.large
+                color: fgColor
+                Layout.alignment: Qt.AlignCenter
+
+                background: Rectangle
+                {
+                    color: "transparent"
+                }
+
+                onAccepted: linker.extract(link.text)
+            }
+
+            TextField
+            {
+                id: title
+                visible: previewReady
+                Layout.fillWidth: true
+                Layout.margins: space.medium
+                height: 24
+                placeholderText: qsTr("Title")
+                font.weight: Font.Bold
+                font.bold: true
+                font.pointSize: fontSizes.large
+                color: fgColor
+
+                background: Rectangle
+                {
+                    color: "transparent"
+                }
+            }
+
+            Item
+            {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                visible: previewReady
+
+                ListView
+                {
+                    id: previewList
+                    anchors.fill: parent
+                    anchors.centerIn: parent
+                    clip: true
+                    snapMode: ListView.SnapOneItem
+                    orientation: ListView.Horizontal
+                    interactive: count > 1
+                    highlightFollowsCurrentItem: true
+                    model: ListModel{}
+                    onMovementEnded:
+                    {
+                        var index = indexAt(contentX, contentY)
+                        currentIndex = index
+                    }
+                    delegate: ItemDelegate
+                    {
+                        height: previewList.height
+                        width: previewList.width
+
+                        background: Rectangle
+                        {
+                            color: "transparent"
+                        }
+
+                        Image
+                        {
+                            id: img
+                            source: model.url
+                            fillMode: Image.PreserveAspectFit
+                            asynchronous: true
+                            width: parent.width
+                            height: parent.height
+                            sourceSize.height: height
+                            horizontalAlignment: Qt.AlignHCenter
+                            verticalAlignment: Qt.AlignVCenter
+                        }
+                    }
+                }
+            }
+
+            Maui.TagsBar
+            {
+                id: tagBar
+                visible: previewReady
+                Layout.fillWidth: true
+                allowEditMode: true
+
+                onTagsEdited:
+                {
+                    for(var i in tags)
+                        append({tag : tags[i]})
+                }
+            }
+        }
+
+
+        footBar.rightContent: [
             Button
             {
                 id: save
@@ -242,12 +254,13 @@ Popup
                                     link : link.text,
                                     title: title.text,
                                     preview: previewList.model.get(previewList.currentIndex).url,
-                                    color: selectedColor
+                                    color: selectedColor,
+                                    tags: tagBar.getTags()
                                 })
                     linkSaved(data)
                     clear()
                 }
-            }
+            },
 
             Button
             {
@@ -255,7 +268,7 @@ Popup
                 text: qsTr("Discard")
                 onClicked:  clear()
             }
-        }
+        ]
     }
 
 

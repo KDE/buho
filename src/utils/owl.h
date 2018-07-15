@@ -123,6 +123,7 @@ namespace OWL
     const QString LinksPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/links/";
     const QString App = "Buho";
     const QString version = "1.0";
+    const QString comment = "Notes taking and link collector manager";
     const QString DBName = "collection.db";
 
     inline bool fileExists(const QString &url)
@@ -166,7 +167,7 @@ namespace OWL
             name.replace("&", "-");
             QString format = "JPEG";
             if (img.save(path+".jpg", format.toLatin1(), 100))
-                return path;
+                return path+".jpg";
             else  qDebug() << "couldn't save artwork";
         }else qDebug()<<"array is empty";
 
