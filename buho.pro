@@ -10,7 +10,7 @@ CONFIG += ordered
 TARGET = buho
 TEMPLATE = app
 
-DESTDIR = $$OUT_PWD/../
+DESTDIR = $$OUT_PWD/
 
 linux:unix:!android {
 

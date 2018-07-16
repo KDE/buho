@@ -49,28 +49,38 @@ Popup
             }
         ]
 
-        headBar.middleContent: Label
-        {
-            clip: true
-            text: webView.title
-            width: headBar.width * 0.5
-            horizontalAlignment: Qt.AlignHCenter
-            font.bold: true
-            font.pointSize: fontSizes.big
-            font.weight: Font.Bold
-            elide: Label.ElideRight
-        }
+
 
         ColumnLayout
         {
             anchors.fill: parent
 
+//            Item
+//            {
+//                Layout.fillWidth: true
+//                height: rowHeightAlt
+
+//                Label
+//                {
+//                    clip: true
+//                    text: webView.title
+//                    width: parent.width
+//                    height: parent.height
+//                    horizontalAlignment: Qt.AlignHCenter
+//                    verticalAlignment: Qt.AlignVCenter
+//                    font.bold: true
+//                    font.pointSize: fontSizes.big
+//                    font.weight: Font.Bold
+//                    elide: Label.ElideRight
+//                }
+//            }
 
             Loader
             {
                 id: webViewer
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                Layout.margins: 0
                 source: isAndroid ? "qrc:/src/views/links/WebViewAndroid.qml" :
                                     "qrc:/src/views/links/WebViewLinux.qml"
 
@@ -78,6 +88,7 @@ Popup
                 {
                     if(!visible) webView.url = "about:blank"
                 }
+
             }
 
             Maui.TagsBar

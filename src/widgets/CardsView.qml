@@ -42,7 +42,7 @@ GridView
         }
     }
 
-//    onWidthChanged: if(!isMobile && gridView) adaptGrid()
+    //    onWidthChanged: if(!isMobile && gridView) adaptGrid()
 
     function adaptGrid()
     {
@@ -53,6 +53,7 @@ GridView
         size = size > itemWidth + itemSpacing ? size : itemWidth + itemSpacing
 
         cellWidth = size
+
     }
 
     function refresh()
