@@ -9,7 +9,7 @@ GridView
 
     property alias holder : holder
     readonly property  int defaultSize : unit * 200
-    property int itemWidth : !gridView ?  parent.width :
+    property int itemWidth : !gridView ?  parent.width * 0.9 :
                                          isMobile? (width-itemSpacing) * 0.42 : unit * 200
     property int itemHeight: unit * 120
     property int itemSpacing:  space.huge
@@ -19,12 +19,12 @@ GridView
 
     cellWidth: itemWidth + itemSpacing
     cellHeight: itemHeight + itemSpacing
-
+    clip : true
     Maui.Holder
     {
         id: holder
         visible: count < 1
-        message: "<h3>No notes!</h3><p>You can create new notes<br>links and books</p>"
+        message: "<h3>Nohing here!</h3><p>You can create new notes<br>links and books</p>"
     }
 
     model: ListModel { id: cardsModel}

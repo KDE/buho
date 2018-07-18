@@ -94,6 +94,7 @@ namespace OWL
         PREVIEW,
         IMAGE,
         LINK,
+        PIN,
         NONE
     };
 
@@ -108,6 +109,7 @@ namespace OWL
         {KEY::TITLE, "title"},
         {KEY::URL, "url"},
         {KEY::FAV, "fav"},
+        {KEY::PIN, "pin"},
         {KEY::COLOR, "color"},
         {KEY::ADD_DATE, "addDate"},
         {KEY::TAG, "tag"},

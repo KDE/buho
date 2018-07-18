@@ -11,8 +11,51 @@ Maui.Page
     property var currentLink : ({})
     signal linkClicked(var link)
 
-    headBarVisible: false
     margins: isMobile ? space.big : space.enormus
+    headBarExit: false
+    headBar.leftContent: [
+        Maui.ToolButton
+        {
+            iconName: cardsView.gridView ? "view-list-icons" : "view-list-details"
+            onClicked:
+            {
+                cardsView.gridView = !cardsView.gridView
+                cardsView.refresh()
+            }
+        },
+        Maui.ToolButton
+        {
+            iconName: "view-sort-ascending"
+
+        },
+
+        Maui.ToolButton
+        {
+            iconName: "view-sort-descending"
+
+        }
+    ]
+
+    headBar.rightContent: [
+        Maui.ToolButton
+        {
+            iconName: "tag-recents"
+
+        },
+
+        Maui.ToolButton
+        {
+            iconName: "window-pin"
+
+        },
+
+        Maui.ToolButton
+        {
+            iconName: "view-calendar-day"
+
+        }
+    ]
+
 
     Previewer
     {

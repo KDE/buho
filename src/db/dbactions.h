@@ -35,8 +35,8 @@ public:
     Q_INVOKABLE QVariantList get(const QString &queryTxt);
 
     /*main actions*/
-    Q_INVOKABLE bool insertNote(const QString &title, const QString &body, const QString &color = QString(), const QStringList &tags = QStringList());
-    Q_INVOKABLE bool updateNote(const QString &id, const QString &title, const QString &body, const QString &color = QString(), const QStringList &tags = QStringList());
+    Q_INVOKABLE bool insertNote(const QVariantMap &note);
+    Q_INVOKABLE bool updateNote(const QVariantMap &note);
     Q_INVOKABLE QVariantList getNotes();
     Q_INVOKABLE QVariantList getNoteTags(const QString &id);
 

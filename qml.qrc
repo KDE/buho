@@ -13,5 +13,7 @@
         <file>src/views/links/WebViewLinux.qml</file>
         <file>src/views/links/Previewer.qml</file>
         <file>src/views/books/BooksView.qml</file>
+        <file>src/widgets/ColorsBar.qml</file>
+        <file>src/widgets/CardsList.qml</file>
     </qresource>
 </RCC>

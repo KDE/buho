@@ -15,7 +15,7 @@ Maui.ApplicationWindow
 
     /***** PROPS *****/
     floatingBar: true
-    property string accentColor : highlightColor
+    accentColor : "#8981d8"
 
     property int currentView : views.notes
     property var views : ({
@@ -27,11 +27,12 @@ Maui.ApplicationWindow
                           })
 
     headBar.middleContent: [
+
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
             onClicked: currentView = views.notes
-            iconColor: currentView === views.notes? accentColor : textColor
+            iconColor: currentView === views.notes? highlightColor : textColor
             iconName: "draw-text"
             text: qsTr("Notes")
         },
@@ -40,7 +41,7 @@ Maui.ApplicationWindow
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
             onClicked: currentView = views.links
-            iconColor: currentView === views.links? accentColor : textColor
+            iconColor: currentView === views.links? highlightColor : textColor
             iconName: "link"
             text: qsTr("Links")
         },
@@ -48,7 +49,7 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
-            iconColor: currentView === views.books? accentColor : textColor
+            iconColor: currentView === views.books? highlightColor : textColor
             iconName: "document-new"
             text: qsTr("Books")
         },
@@ -56,39 +57,20 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
-            iconColor: currentView === views.tags? accentColor : textColor
+            iconColor: currentView === views.tags? highlightColor : textColor
             iconName: "tag"
             text: qsTr("Tags")
         }
     ]
 
+    footBarAligment: Qt.AlignRight
     footBar.middleContent: [
-
-        Maui.ToolButton
-        {
-            iconName:  swipeView.currentItem.cardsView.gridView ? "view-list-icons" : "view-list-details"
-            onClicked:
-            {
-                switch(currentView)
-                {
-                    case views.notes:
-                    notesView.cardsView.gridView = !notesView.cardsView.gridView
-                    notesView.cardsView.refresh()
-                    break
-
-                    case views.links:
-                    linksView.cardsView.gridView = !linksView.cardsView.gridView
-                    linksView.cardsView.refresh()
-                    break
-                }
-
-            }
-        },
 
         Maui.PieButton
         {
             id: addButton
             iconName: "list-add"
+            iconColor: "white"
 
             model: ListModel
             {
@@ -100,15 +82,9 @@ Maui.ApplicationWindow
             onItemClicked:
             {
                 if(item.mid === "note")
-                {
-                    currentView = views.notes
-                    newNoteDialog.open()
-                }
+                newNote()
                 else if(item.mid === "link")
-                {
-                    currentView = views.links
-                    newLinkDialog.open()
-                }
+                newLink()
             }
         }
     ]
@@ -125,7 +101,7 @@ Maui.ApplicationWindow
     NewNoteDialog
     {
         id: newNoteDialog
-        onNoteSaved: owl.insertNote(note.title.trim(), note.body, note.color, note.tags)
+        onNoteSaved: owl.insertNote(note)
     }
 
     NewNoteDialog
@@ -133,7 +109,7 @@ Maui.ApplicationWindow
         id: editNote
         onNoteSaved:
         {
-            if(owl.updateNote(notesView.currentNote.id, note.title.trim(), note.body, note.color, note.tags))
+            if(owl.updateNote(note))
                 notesView.cardsView.currentItem.update(note)
         }
     }
@@ -169,7 +145,6 @@ Maui.ApplicationWindow
         BooksView
         {
             id: booksView
-
         }
 
     }
@@ -178,6 +153,19 @@ Maui.ApplicationWindow
     {
         notesView.populate()
         linksView.populate()
+    }
+
+
+    function newNote()
+    {
+        currentView = views.notes
+        newNoteDialog.open()
+    }
+
+    function newLink()
+    {
+        currentView = views.links
+        newLinkDialog.open()
     }
 
     function setNote(note)

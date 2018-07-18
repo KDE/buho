@@ -169,7 +169,7 @@ bool DB::insert(const QString &tableName, const QVariantMap &insertData)
     return query.exec();
 }
 
-bool DB::update(const QString &tableName, const OWL::DB &updateData, const QVariantMap &where)
+bool DB::update(const QString &tableName, const QVariantMap &updateData, const QVariantMap &where)
 {
     if (tableName.isEmpty())
     {
@@ -182,16 +182,23 @@ bool DB::update(const QString &tableName, const OWL::DB &updateData, const QVari
     }
 
     QStringList set;
+
     for (auto key : updateData.keys())
-        set.append(OWL::KEYMAP[key]+" = '"+updateData[key]+"'");
+        set.append(key+" = ?");
 
     QStringList condition;
     for (auto key : where.keys())
         condition.append(key+" = '"+where[key].toString()+"'");
 
-    QString sqlQueryString = "UPDATE " + tableName + " SET " + QString(set.join(",")) + " WHERE " + QString(condition.join(",")) ;
+    QString sqlQueryString = "UPDATE " + tableName + " SET " + QString(set.join(",")) + " WHERE " + QString(condition.join(","));
     auto query = this->getQuery(sqlQueryString);
-    qDebug()<<sqlQueryString;
+
+    QVariantList values = updateData.values();
+    int k = 0;
+    foreach (const QVariant &value, values)
+        query.bindValue(k++, value);
+
+    qDebug()<<query.lastQuery();
     return query.exec();
 }
 

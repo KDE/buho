@@ -48,6 +48,8 @@ void Linker::extract(const QString &url)
     auto titles = query(data, HtmlTag::TITLE);
     QStringList imgs ;
 
+//    auto tags = query(data, HtmlTag::META);
+
     for(auto img : query(data, HtmlTag::IMG, "src"))
     {
         if(imgs.contains(img) || img.isEmpty()) continue;

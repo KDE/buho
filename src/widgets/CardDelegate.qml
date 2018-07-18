@@ -8,10 +8,13 @@ import org.kde.kirigami 2.2 as Kirigami
 ItemDelegate
 {
     id: control
-    property string noteColor : color ? color : "pink"
-    property int cardWidth: Kirigami.Units.devicePixelRatio*200
-    property int cardHeight: Kirigami.Units.devicePixelRatio*120
-    property int cardRadius: Kirigami.Units.devicePixelRatio*4
+    property string noteColor : color ? color : viewBackgroundColor
+    property int cardWidth: visible ? unit * 200 : 0
+    property int cardHeight: visible ? unit * 120 : 0
+    property int cardRadius: unit * 4
+
+    property bool condition : true
+
     width: cardWidth
     height: cardHeight
     hoverEnabled: !isMobile
@@ -19,6 +22,8 @@ ItemDelegate
     {
         color: "transparent"
     }
+
+    visible: condition
 
     DropShadow
     {
@@ -28,7 +33,7 @@ ItemDelegate
         verticalOffset: 3
         radius: 8.0
         samples: 17
-        color: "#80000000"
+        color: Qt.darker(noteColor, 1.5)
         source: card
     }
 
@@ -50,11 +55,14 @@ ItemDelegate
         color: hovered? "#333" :  "transparent"
         z: 999
         opacity: 0.3
+        radius: cardRadius
     }
 
     ColumnLayout
     {
-        anchors.fill: parent
+        height: parent.height * 0.9
+        width: parent.width * 0.9
+        anchors.centerIn: parent
         spacing: 0
         clip: true
 
@@ -66,6 +74,8 @@ ItemDelegate
             Layout.leftMargin: space.medium
             Layout.topMargin: space.medium
             Layout.rightMargin: space.medium
+            Layout.alignment: Qt.AlignLeft
+
             Layout.fillWidth: true
             text: model.title
             color: Qt.darker(model.color, 3)
@@ -74,17 +84,19 @@ ItemDelegate
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: fontSizes.large
+
         }
 
         TextArea
         {
             id: body
+            padding: 0
             visible: typeof model.body !== 'undefined'
             Layout.leftMargin: visible ? space.medium : 0
             Layout.bottomMargin: visible ? space.medium : 0
             Layout.rightMargin: visible ? space.medium : 0
             Layout.topMargin: title.visible ? 0 : space.medium
-
+            Layout.alignment: Qt.AlignLeft
             Layout.fillHeight: visible
             Layout.fillWidth: visible
             enabled: false
@@ -149,8 +161,11 @@ ItemDelegate
 
     function update(note)
     {
-        title.text = note.title
-        body.text = note.body
-        noteColor = note.color
+        console.log("UPDATE NOTES", note.pin)
+        model.title = note.title
+        model.body = note.body
+        model.color = note.color
+        model.pin = note.pin ? 1 : 0
+        model.fav = note.fav ? 1 : 0
     }
 }

@@ -82,9 +82,16 @@ QVariantList DBActions::get(const QString &queryTxt)
     return mapList;
 }
 
-bool DBActions::insertNote(const QString &title, const QString &body, const QString &color, const QStringList &tags)
+bool DBActions::insertNote(const QVariantMap &note)
 {
-    qDebug()<<"TAGS"<< tags;
+    qDebug()<<"TAGS"<< note[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
+
+    auto title = note[OWL::KEYMAP[OWL::KEY::TITLE]].toString();
+    auto body = note[OWL::KEYMAP[OWL::KEY::BODY]].toString();
+    auto color = note[OWL::KEYMAP[OWL::KEY::COLOR]].toString();
+    auto pin = note[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
+    auto fav = note[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
+    auto tags = note[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
 
     auto id = QUuid::createUuid().toString();
 
@@ -94,6 +101,8 @@ bool DBActions::insertNote(const QString &title, const QString &body, const QStr
         {OWL::KEYMAP[OWL::KEY::TITLE], title},
         {OWL::KEYMAP[OWL::KEY::BODY], body},
         {OWL::KEYMAP[OWL::KEY::COLOR], color},
+        {OWL::KEYMAP[OWL::KEY::PIN], pin},
+        {OWL::KEYMAP[OWL::KEY::FAV], fav},
         {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime()},
         {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime()}
     };
@@ -110,20 +119,30 @@ bool DBActions::insertNote(const QString &title, const QString &body, const QStr
     return false;
 }
 
-bool DBActions::updateNote(const QString &id, const QString &title, const QString &body, const QString &color, const QStringList &tags)
+bool DBActions::updateNote(const QVariantMap &note)
 {
-    OWL::DB note =
+    auto id = note[OWL::KEYMAP[OWL::KEY::ID]].toString();
+    auto title = note[OWL::KEYMAP[OWL::KEY::TITLE]].toString();
+    auto body = note[OWL::KEYMAP[OWL::KEY::BODY]].toString();
+    auto color = note[OWL::KEYMAP[OWL::KEY::COLOR]].toString();
+    auto pin = note[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
+    auto fav = note[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
+    auto tags = note[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
+
+    QVariantMap note_map =
     {
-        {OWL::KEY::TITLE, title},
-        {OWL::KEY::BODY, body},
-        {OWL::KEY::COLOR, color},
-        {OWL::KEY::UPDATED, QDateTime::currentDateTime().toString()}
+        {OWL::KEYMAP[OWL::KEY::TITLE], title},
+        {OWL::KEYMAP[OWL::KEY::BODY], body},
+        {OWL::KEYMAP[OWL::KEY::COLOR], color},
+        {OWL::KEYMAP[OWL::KEY::PIN], pin},
+        {OWL::KEYMAP[OWL::KEY::FAV], fav},
+        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime().toString()}
     };
 
     for(auto tg : tags)
         this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
 
-    return this->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note, {{OWL::KEYMAP[OWL::KEY::ID], id}} );
+    return this->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map, {{OWL::KEYMAP[OWL::KEY::ID], id}} );
 }
 
 QVariantList DBActions::getNotes()

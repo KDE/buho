@@ -4,6 +4,8 @@ id TEXT PRIMARY KEY,
 title TEXT,
 body TEXT,
 color TEXT,
+fav INT,
+pin INT,
 addDate DATE,
 updated DATE
 );

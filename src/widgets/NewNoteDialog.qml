@@ -28,6 +28,8 @@ Popup
         anchors.fill: parent
         margins: 0
         onExit: clear()
+
+
         Rectangle
         {
             id: bg
@@ -77,90 +79,18 @@ Popup
         headBar.rightContent: Row
         {
             spacing: space.medium
-            Rectangle
+            ColorsBar
             {
-                color:"#ffded4"
-                anchors.verticalCenter: parent.verticalCenter
-                height: iconSizes.medium
-                width: height
-                radius: Math.max(height, width)
-                border.color: borderColor
-
-                MouseArea
-                {
-                    anchors.fill: parent
-                    onClicked: selectedColor = parent.color
-                }
-            }
-
-            Rectangle
-            {
-                color:"#d3ffda"
-                anchors.verticalCenter: parent.verticalCenter
-                height: iconSizes.medium
-                width: height
-                radius: Math.max(height, width)
-                border.color: borderColor
-
-                MouseArea
-                {
-                    anchors.fill: parent
-                    onClicked: selectedColor = parent.color
-                }
-            }
-
-            Rectangle
-            {
-                color:"#caf3ff"
-                anchors.verticalCenter: parent.verticalCenter
-                height: iconSizes.medium
-                width: height
-                radius: Math.max(height, width)
-                border.color: borderColor
-
-                MouseArea
-                {
-                    anchors.fill: parent
-                    onClicked: selectedColor = parent.color
-                }
-            }
-
-            Rectangle
-            {
-                color:"#ccc1ff"
-                anchors.verticalCenter: parent.verticalCenter
-                height: iconSizes.medium
-                width: height
-                radius: Math.max(height, width)
-                border.color: borderColor
-
-                MouseArea
-                {
-                    anchors.fill: parent
-                    onClicked: selectedColor = parent.color
-                }
-            }
-
-            Rectangle
-            {
-                color:"#ffcdf4"
-                anchors.verticalCenter: parent.verticalCenter
-                height: iconSizes.medium
-                width: height
-                radius: Math.max(height, width)
-                border.color: borderColor
-
-                MouseArea
-                {
-                    anchors.fill: parent
-                    onClicked: selectedColor = parent.color
-                }
+                onColorPicked: selectedColor = color
             }
 
             Maui.ToolButton
-
             {
-                iconName: "overflow-menu"
+                id: pinButton
+                iconName: "window-pin"
+                checkable: true
+                iconColor: checked ? highlightColor : textColor
+//                onClicked: checked = !checked
             }
         }
 
@@ -248,7 +178,10 @@ Popup
 
             Maui.ToolButton
             {
+                id: favButton
                 iconName: "love"
+                checkable: true
+                iconColor: checked ? "#ff007f" : textColor
             },
 
             Maui.ToolButton
@@ -279,12 +212,7 @@ Popup
                 onClicked:
                 {
                     if(body.text.length > 0)
-                        noteSaved({
-                                      title: title.text,
-                                      body: body.text,
-                                      color: selectedColor,
-                                      tags: tagBar.getTags()
-                                  })
+                        packNote()
                     clear()
                 }
             },
@@ -312,12 +240,26 @@ Popup
 
     function fill(note)
     {
-        document.load("qrc:/texteditor.html")
         title.text = note.title
         body.text = note.body
         selectedColor =  note.color
+        pinButton.checked = note.pin == 1
+        favButton.checked = note.fav == 1
         tagBar.populate(note.tags)
 
         open()
+    }
+
+    function packNote()
+    {
+        noteSaved({
+                      id: notesView.currentNote.id,
+                      title: title.text.trim(),
+                      body: body.text,
+                      color: selectedColor,
+                      tag: tagBar.getTags(),
+                      pin: pinButton.checked,
+                      fav: favButton.checked
+                  })
     }
 }
