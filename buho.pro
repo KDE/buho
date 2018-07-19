@@ -45,7 +45,8 @@ SOURCES += \
     src/utils/htmlparser.cpp
 
 RESOURCES += \
-    qml.qrc
+    qml.qrc \
+    assets/assets.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

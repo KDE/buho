@@ -17,8 +17,11 @@ Maui.Page
         id: cardsView
         anchors.fill: parent
 //        onItemClicked: linkClicked(cardsView.model.get(index))
-        holder.message: "<h3>No Books!</h3><p>You can create new notes<br>links and books</p>"
-
+        holder.emoji: "qrc:/E-reading.png"
+        holder.isMask: false
+        holder.title : "No Books!"
+        holder.body: "Click here to save a new link"
+        holder.emojiSize: iconSizes.huge
     }
 
 }

@@ -13,6 +13,7 @@ Maui.Page
     margins: 0
 
     headBarExit : false
+    headBarVisible: !cardsView.holder.visible
 
     headBar.leftContent: [
         Maui.ToolButton
@@ -91,7 +92,11 @@ Maui.Page
             Layout.fillWidth: true
             Layout.margins: isMobile ? space.big : space.enormus
             onItemClicked: noteClicked(cardsView.model.get(index))
-            holder.message : "<h3>No notes!</h3><p>Click here to create a new note</p>"
+            holder.emoji: "qrc:/Type.png"
+            holder.emojiSize: iconSizes.huge
+            holder.isMask: false
+            holder.title : "No notes!"
+            holder.body: "Click here to create a new note"
 
             Connections
             {

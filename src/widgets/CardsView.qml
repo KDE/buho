@@ -20,11 +20,11 @@ GridView
     cellWidth: itemWidth + itemSpacing
     cellHeight: itemHeight + itemSpacing
     clip : true
+
     Maui.Holder
     {
         id: holder
-        visible: count < 1
-        message: "<h3>Nohing here!</h3><p>You can create new notes<br>links and books</p>"
+        visible: count < 1     
     }
 
     model: ListModel { id: cardsModel}
