@@ -10,9 +10,11 @@
 
 #ifdef Q_OS_ANDROID
 #include <QGuiApplication>
+#include <QtWebView/QtWebView>
 #include <QIcon>
 #else
 #include <QApplication>
+#include <QtWebEngine>
 #endif
 
 #include "mauikit/src/mauikit.h"
@@ -27,9 +29,10 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_ANDROID
     QGuiApplication app(argc, argv);
     QIcon::setThemeName("Luv");
-    QQuickStyle::setStyle("material");
+    QtWebView::initialize();
 #else
     QApplication app(argc, argv);
+    QtWebEngine::initialize();
 #endif
 
 #ifdef STATIC_KIRIGAMI
