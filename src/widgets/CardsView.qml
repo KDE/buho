@@ -8,8 +8,9 @@ GridView
     property bool gridView : true
 
     property alias holder : holder
+    property alias menu : cardMenu
     readonly property  int defaultSize : unit * 200
-    property int itemWidth : !gridView ?  parent.width * 0.9 :
+    property int itemWidth : !gridView ?  width :
                                          isMobile? (width-itemSpacing) * 0.42 : unit * 200
     property int itemHeight: unit * 120
     property int itemSpacing:  space.huge
@@ -24,7 +25,12 @@ GridView
     Maui.Holder
     {
         id: holder
-        visible: count < 1     
+        visible: count < 1
+    }
+
+    CardMenu
+    {
+        id: cardMenu
     }
 
     model: ListModel { id: cardsModel}
@@ -39,6 +45,18 @@ GridView
         {
             currentIndex = index
             itemClicked(index)
+        }
+
+        onRightClicked:
+        {
+            currentIndex = index
+            cardMenu.popup()
+        }
+
+        onPressAndHold:
+        {
+            currentIndex = index
+            cardMenu.popup()
         }
     }
 

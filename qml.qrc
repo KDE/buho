@@ -15,5 +15,7 @@
         <file>src/views/books/BooksView.qml</file>
         <file>src/widgets/ColorsBar.qml</file>
         <file>src/widgets/CardsList.qml</file>
+        <file>src/widgets/CardMenu.qml</file>
+        <file>src/utils/owl.js</file>
     </qresource>
 </RCC>

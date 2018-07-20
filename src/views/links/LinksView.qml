@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import "../../widgets"
 import org.kde.maui 1.0 as Maui
+import "../../utils/owl.js" as O
 
 Maui.Page
 {
@@ -14,6 +15,7 @@ Maui.Page
 
     margins: isMobile ? space.big : space.enormus
     headBarExit: false
+    headBarTitle : cardsView.count + " links"
     headBar.leftContent: [
         Maui.ToolButton
         {
@@ -57,10 +59,11 @@ Maui.Page
         }
     ]
 
-
     Previewer
     {
         id: previewer
+        onLinkSaved: if(owl.updateLink(link))
+                         cardsView.currentItem.update(link)
     }
 
     CardsView
@@ -73,10 +76,18 @@ Maui.Page
         holder.title : "No Links!"
         holder.body: "Click here to save a new link"
         holder.emojiSize: iconSizes.huge
+
         Connections
         {
             target: cardsView.holder
             onActionTriggered: newLink()
+        }
+
+        Connections
+        {
+            target: cardsView.menu
+            onDeleteClicked: if(O.removeLink(cardsView.model.get(cardsView.currentIndex)))
+                                 cardsView.model.remove(cardsView.currentIndex)
         }
     }
 

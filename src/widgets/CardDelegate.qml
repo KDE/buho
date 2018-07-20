@@ -15,6 +15,10 @@ ItemDelegate
 
     property bool condition : true
 
+    signal rightClicked();
+
+    visible: condition
+
     width: cardWidth
     height: cardHeight
     hoverEnabled: !isMobile
@@ -23,7 +27,16 @@ ItemDelegate
         color: "transparent"
     }
 
-    visible: condition
+    MouseArea
+    {
+        anchors.fill: parent
+        acceptedButtons:  Qt.RightButton
+        onClicked:
+        {
+            if(!isMobile && mouse.button === Qt.RightButton)
+                rightClicked()
+        }
+    }
 
     DropShadow
     {
@@ -69,7 +82,7 @@ ItemDelegate
         Label
         {
             id: title
-
+            padding: 0
             visible: title.text.length > 0
             Layout.leftMargin: space.medium
             Layout.topMargin: space.medium
@@ -159,13 +172,13 @@ ItemDelegate
         }
     }
 
-    function update(note)
+    function update(item)
     {
-        console.log("UPDATE NOTES", note.pin)
-        model.title = note.title
-        model.body = note.body
-        model.color = note.color
-        model.pin = note.pin ? 1 : 0
-        model.fav = note.fav ? 1 : 0
+        console.log("update link color", item.color)
+        model.title = item.title
+        model.body = item.body
+        model.color = item.color
+        model.pin = item.pin ? 1 : 0
+        model.fav = item.fav ? 1 : 0
     }
 }

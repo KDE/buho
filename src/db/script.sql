@@ -23,5 +23,8 @@ url TEXT,
 title TEXT,
 preview TEXT,
 color TEXT,
-addDate DATE
+fav INT,
+pin INT,
+addDate DATE,
+updated DATE
 );

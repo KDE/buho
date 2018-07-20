@@ -182,7 +182,6 @@ bool DB::update(const QString &tableName, const QVariantMap &updateData, const Q
     }
 
     QStringList set;
-
     for (auto key : updateData.keys())
         set.append(key+" = ?");
 
@@ -209,7 +208,7 @@ bool DB::update(const QString &table, const QString &column, const QVariant &new
     return query.exec();
 }
 
-bool DB::remove(const QString &tableName, const OWL::DB &removeData)
+bool DB::remove(const QString &tableName, const QVariantMap &removeData)
 {
     if (tableName.isEmpty())
     {
@@ -222,19 +221,21 @@ bool DB::remove(const QString &tableName, const OWL::DB &removeData)
         return false;
     }
 
-    QString strValues;
-        auto i = 0;
+
+    QStringList set;
     for (auto key : removeData.keys())
-    {
-        strValues.append(QString("%1 = \"%2\"").arg(OWL::KEYMAP[key], removeData[key]));
-        i++;
+        set.append(key+" = ?");
 
-        if(removeData.keys().size() > 1 && i<removeData.keys().size())
-            strValues.append(" AND ");
-    }
-
-    QString sqlQueryString = "DELETE FROM " + tableName + " WHERE " + strValues;
+    QString sqlQueryString = "DELETE FROM " + tableName + " WHERE " + QString(set.join(" AND "));
     qDebug()<< sqlQueryString;
 
-    return this->getQuery(sqlQueryString).exec();
+    auto query = this->getQuery(sqlQueryString);
+
+    QVariantList values = removeData.values();
+
+    int k = 0;
+    foreach (const QVariant &value, values)
+        query.bindValue(k++, value);
+
+    return query.exec();
 }

@@ -37,10 +37,14 @@ public:
     /*main actions*/
     Q_INVOKABLE bool insertNote(const QVariantMap &note);
     Q_INVOKABLE bool updateNote(const QVariantMap &note);
+    Q_INVOKABLE bool removeNote(const QVariantMap &note);
+
     Q_INVOKABLE QVariantList getNotes();
     Q_INVOKABLE QVariantList getNoteTags(const QString &id);
 
-    Q_INVOKABLE bool insertLink(const QString &link, const QString &title, const QString &preview, const QString &color = QString(), const QStringList &tags = QStringList());
+    Q_INVOKABLE bool insertLink(const QVariantMap &link);
+    Q_INVOKABLE bool updateLink(const QVariantMap &link);
+    Q_INVOKABLE bool removeLink(const QVariantMap &link);
     Q_INVOKABLE QVariantList getLinks();
     Q_INVOKABLE QVariantList getLinkTags(const QString &link);
 
@@ -48,6 +52,8 @@ protected:
     OWL::DB_LIST getDBData(const QString &queryTxt);
     bool execQuery(const QString &queryTxt);
     Tagging *tag;
+
+    void removeAbtractTags(const QString &key, const QString &lot);
 
 signals:
     void noteInserted(QVariantMap note);

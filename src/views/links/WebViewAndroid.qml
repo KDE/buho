@@ -4,7 +4,6 @@ import QtWebView 1.1
 WebView
 {
     id: webView
-
     clip: true
     onLoadingChanged:
     {

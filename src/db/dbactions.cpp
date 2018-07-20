@@ -103,8 +103,8 @@ bool DBActions::insertNote(const QVariantMap &note)
         {OWL::KEYMAP[OWL::KEY::COLOR], color},
         {OWL::KEYMAP[OWL::KEY::PIN], pin},
         {OWL::KEYMAP[OWL::KEY::FAV], fav},
-        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime()},
-        {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime()}
+        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime().toString()},
+        {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime().toString()}
     };
 
     if(this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map))
@@ -145,6 +145,12 @@ bool DBActions::updateNote(const QVariantMap &note)
     return this->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map, {{OWL::KEYMAP[OWL::KEY::ID], id}} );
 }
 
+bool DBActions::removeNote(const QVariantMap &note)
+{
+    qDebug()<<note;
+    return this->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], note);
+}
+
 QVariantList DBActions::getNotes()
 {
     return this->get("select * from notes");
@@ -155,29 +161,69 @@ QVariantList DBActions::getNoteTags(const QString &id)
     return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::NOTES], id);
 }
 
-bool DBActions::insertLink(const QString &link, const QString &title, const QString &preview, const QString &color, const QStringList &tags)
+bool DBActions::insertLink(const QVariantMap &link)
 {
+    auto url = link[OWL::KEYMAP[OWL::KEY::LINK]].toString();
+    auto color = link[OWL::KEYMAP[OWL::KEY::COLOR]].toString();
+    auto pin = link[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
+    auto fav = link[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
+    auto tags = link[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
+    auto preview = link[OWL::KEYMAP[OWL::KEY::PREVIEW]].toString();
+    auto title = link[OWL::KEYMAP[OWL::KEY::TITLE]].toString();
+
     auto image_path = OWL::saveImage(Linker::getUrl(preview), OWL::LinksPath+QUuid::createUuid().toString());
 
     QVariantMap link_map =
     {
-        {OWL::KEYMAP[OWL::KEY::LINK], link},
+        {OWL::KEYMAP[OWL::KEY::LINK], url},
         {OWL::KEYMAP[OWL::KEY::TITLE], title},
+        {OWL::KEYMAP[OWL::KEY::PIN], pin},
+        {OWL::KEYMAP[OWL::KEY::FAV], fav},
         {OWL::KEYMAP[OWL::KEY::PREVIEW], image_path},
         {OWL::KEYMAP[OWL::KEY::COLOR], color},
-        {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime()}
+        {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime().toString()},
+        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime().toString()}
+
     };
 
     if(this->insert(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map))
     {
         for(auto tg : tags)
-            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], link, color);
+            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
 
         this->linkInserted(link_map);
         return true;
     }
 
     return false;
+}
+
+bool DBActions::updateLink(const QVariantMap &link)
+{
+    auto url = link[OWL::KEYMAP[OWL::KEY::LINK]].toString();
+    auto color = link[OWL::KEYMAP[OWL::KEY::COLOR]].toString();
+    auto pin = link[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
+    auto fav = link[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
+    auto tags = link[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
+
+    QVariantMap link_map =
+    {
+        {OWL::KEYMAP[OWL::KEY::COLOR], color},
+        {OWL::KEYMAP[OWL::KEY::PIN], pin},
+        {OWL::KEYMAP[OWL::KEY::FAV], fav},
+        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime().toString()},
+    };
+
+    for(auto tg : tags)
+        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
+
+    return this->update(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map, {{OWL::KEYMAP[OWL::KEY::LINK], url}} );
+
+}
+
+bool DBActions::removeLink(const QVariantMap &link)
+{
+    return this->remove(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
 }
 
 QVariantList DBActions::getLinks()
@@ -194,5 +240,10 @@ bool DBActions::execQuery(const QString &queryTxt)
 {
     auto query = this->getQuery(queryTxt);
     return query.exec();
+}
+
+void DBActions::removeAbtractTags(const QString &key, const QString &lot)
+{
+
 }
 

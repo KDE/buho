@@ -12,7 +12,7 @@ Popup
                            contentLayout.implicitHeight
     width: parent.width * (isMobile ?  0.9 : 0.7)
 
-    signal linkSaved(var note)
+    signal linkSaved(var link)
     property string selectedColor : "#ffffe6"
     property string fgColor: Qt.darker(selectedColor, 2.5)
 
@@ -46,9 +46,19 @@ Popup
             anchors.fill: parent
         }
 
-        onExit: clear()
+        headBarExit: false
         headBarVisible: previewReady
         footBarVisible: previewReady
+
+        headBar.leftContent: Maui.ToolButton
+        {
+            id: pinButton
+            iconName: "window-pin"
+            checkable: true
+            iconColor: checked ? highlightColor : textColor
+            //                onClicked: checked = !checked
+        }
+
         headBar.rightContent: ColorsBar
         {
             onColorPicked: selectedColor = color
@@ -163,25 +173,32 @@ Popup
             }
         }
 
+        footBar.leftContent: [
 
-        footBar.rightContent: [
-            Button
+            Maui.ToolButton
             {
-                id: save
-                text: qsTr("Save")
-                onClicked:
-                {
-                    var data = ({
-                                    link : link.text,
-                                    title: title.text,
-                                    preview: previewList.model.get(previewList.currentIndex).url,
-                                    color: selectedColor,
-                                    tags: tagBar.getTags()
-                                })
-                    linkSaved(data)
-                    clear()
-                }
+                id: favButton
+                iconName: "love"
+                checkable: true
+                iconColor: checked ? "#ff007f" : textColor
             },
+
+            Maui.ToolButton
+            {
+                iconName: "document-share"
+                onClicked: isAndroid ? Maui.Android.shareText(link.text) :
+                                       shareDialog.show(link.text)
+            },
+
+            Maui.ToolButton
+            {
+                iconName: "document-export"
+            }
+        ]
+
+        footBar.rightContent: Row
+        {
+            spacing: space.medium
 
             Button
             {
@@ -189,7 +206,18 @@ Popup
                 text: qsTr("Discard")
                 onClicked:  clear()
             }
-        ]
+
+            Button
+            {
+                id: save
+                text: qsTr("Save")
+                onClicked:
+                {
+                    packLink()
+                    clear()
+                }
+            }
+        }
     }
 
 
@@ -198,6 +226,7 @@ Popup
         title.clear()
         link.clear()
         previewList.model.clear()
+        tagBar.clear()
         previewReady = false
         close()
 
@@ -215,5 +244,19 @@ Popup
     {
         for(var i in imgs)
             previewList.model.append({url : imgs[i]})
+    }
+
+    function packLink()
+    {
+        var data = ({
+                        link : link.text,
+                        title: title.text.trim(),
+                        preview: previewList.model.get(previewList.currentIndex).url,
+                        color: selectedColor,
+                        tag: tagBar.getTags(),
+                        pin: pinButton.checked,
+                        fav: favButton.checked
+                    })
+        linkSaved(data)
     }
 }

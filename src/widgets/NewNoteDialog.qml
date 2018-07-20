@@ -28,7 +28,7 @@ Popup
         anchors.fill: parent
         margins: 0
         onExit: clear()
-
+        headBarExit: false
 
         Rectangle
         {
@@ -39,6 +39,15 @@ Popup
         }
 
         headBar.leftContent: [
+
+            Maui.ToolButton
+            {
+                id: pinButton
+                iconName: "window-pin"
+                checkable: true
+                iconColor: checked ? highlightColor : textColor
+                //                onClicked: checked = !checked
+            },
 
             Maui.ToolButton
             {
@@ -76,23 +85,12 @@ Popup
             }
         ]
 
-        headBar.rightContent: Row
-        {
-            spacing: space.medium
+        headBar.rightContent:
             ColorsBar
-            {
-                onColorPicked: selectedColor = color
-            }
-
-            Maui.ToolButton
-            {
-                id: pinButton
-                iconName: "window-pin"
-                checkable: true
-                iconColor: checked ? highlightColor : textColor
-//                onClicked: checked = !checked
-            }
+        {
+            onColorPicked: selectedColor = color
         }
+
 
         ColumnLayout
         {
@@ -203,7 +201,17 @@ Popup
         ]
 
 
-        footBar.rightContent: [
+        footBar.rightContent: Row
+        {
+            spacing: space.medium
+
+            Button
+            {
+                id: discard
+                text: qsTr("Discard")
+                onClicked: clear()
+
+            }
 
             Button
             {
@@ -215,17 +223,8 @@ Popup
                         packNote()
                     clear()
                 }
-            },
-
-            Button
-            {
-                id: discard
-                text: qsTr("Discard")
-                onClicked: clear()
-
             }
-
-        ]
+        }
     }
 
     onOpened: body.forceActiveFocus()

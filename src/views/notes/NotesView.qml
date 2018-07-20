@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.3
 import "../../widgets"
 import org.kde.maui 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
+import "../../utils/owl.js" as O
 
 
 Maui.Page
@@ -14,6 +15,7 @@ Maui.Page
 
     headBarExit : false
     headBarVisible: !cardsView.holder.visible
+    headBarTitle : cardsView.count + " notes"
 
     headBar.leftContent: [
         Maui.ToolButton
@@ -64,6 +66,7 @@ Maui.Page
     {
         anchors.fill: parent
         spacing: 0
+
         CardsList
         {
             id: pinnedList
@@ -90,6 +93,7 @@ Maui.Page
             id: cardsView
             Layout.fillHeight: true
             Layout.fillWidth: true
+            width: parent.width
             Layout.margins: isMobile ? space.big : space.enormus
             onItemClicked: noteClicked(cardsView.model.get(index))
             holder.emoji: "qrc:/Type.png"
@@ -102,6 +106,13 @@ Maui.Page
             {
                 target: cardsView.holder
                 onActionTriggered: newNote()
+            }
+
+            Connections
+            {
+                target: cardsView.menu
+                onDeleteClicked: if(O.removeNote(cardsView.model.get(cardsView.currentIndex)))
+                                     cardsView.model.remove(cardsView.currentIndex)
             }
         }
     }

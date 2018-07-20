@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import org.kde.maui 1.0 as Maui
-
+import "../../widgets"
 
 Popup
 {
@@ -16,25 +16,23 @@ Popup
     padding: isAndroid ? 2 : "undefined"
     property alias webView: webViewer.item
 
+    signal linkSaved(var link)
+
     Maui.Page
     {
         anchors.fill: parent
         margins: 0
         padding: 0
 
-        onExit: close()
-        headBar.leftContent: Maui.ToolButton
-        {
-
-            iconName: "document-share"
-            onClicked: isAndroid ? Maui.Android.shareLink(webView.url) :
-                                   shareDialog.show(webView.url)
-        }
-
-        headBar.rightContent: [
+        headBarExit: false
+        headBar.leftContent: [
             Maui.ToolButton
             {
-                iconName: "entry-delete"
+                id: pinButton
+                iconName: "window-pin"
+                checkable: true
+                iconColor: checked ? highlightColor : textColor
+                //                onClicked: checked = !checked
             },
 
             Maui.ToolButton
@@ -49,31 +47,88 @@ Popup
             }
         ]
 
+        headBar.rightContent: ColorsBar
+        {
+            id: colorBar
+        }
 
+        footBar.leftContent: [
+
+            Maui.ToolButton
+            {
+                id: favButton
+                iconName: "love"
+                checkable: true
+                iconColor: checked ? "#ff007f" : textColor
+            },
+
+            Maui.ToolButton
+            {
+                iconName: "document-share"
+                onClicked: isAndroid ? Maui.Android.shareLink(webView.url) :
+                                       shareDialog.show(webView.url)
+            },
+
+            Maui.ToolButton
+            {
+                iconName: "document-export"
+            },
+
+            Maui.ToolButton
+            {
+                iconName: "entry-delete"
+            }
+        ]
+
+
+        footBar.rightContent: Row
+        {
+            spacing: space.medium
+
+            Button
+            {
+                id: discard
+                text: qsTr("Discard")
+                onClicked: close()
+
+            }
+
+            Button
+            {
+                id: save
+                text: qsTr("Save")
+                onClicked:
+                {
+                    packLink()
+                    close()
+                }
+            }
+
+        }
 
         ColumnLayout
         {
             anchors.fill: parent
 
-//            Item
-//            {
-//                Layout.fillWidth: true
-//                height: rowHeightAlt
+            //            Item
+            //            {
+            //                Layout.fillWidth: true
+            //                height: rowHeightAlt
 
-//                Label
-//                {
-//                    clip: true
-//                    text: webView.title
-//                    width: parent.width
-//                    height: parent.height
-//                    horizontalAlignment: Qt.AlignHCenter
-//                    verticalAlignment: Qt.AlignVCenter
-//                    font.bold: true
-//                    font.pointSize: fontSizes.big
-//                    font.weight: Font.Bold
-//                    elide: Label.ElideRight
-//                }
-//            }
+            //                Label
+            //                {
+            //                    clip: true
+            //                    text: webView.title
+            //                    width: parent.width
+            //                    height: parent.height
+            //                    horizontalAlignment: Qt.AlignHCenter
+            //                    verticalAlignment: Qt.AlignVCenter
+            //                    font.bold: true
+            //                    font.pointSize: fontSizes.big
+            //                    font.weight: Font.Bold
+            //                    elide: Label.ElideRight
+            //                }
+            //            }
 
             Loader
             {
@@ -110,6 +165,19 @@ Popup
     {
         webView.url = link.link
         tagBar.populate(link.tags)
+        pinButton.checked = link.pin == 1
+        favButton.checked = link.fav == 1
         open()
+    }
+
+    function packLink()
+    {
+        linkSaved({
+                      link: webView.url,
+                      color: colorBar.currentColor,
+                      tag: tagBar.getTags(),
+                      pin: pinButton.checked,
+                      fav: favButton.checked
+                  })
     }
 }

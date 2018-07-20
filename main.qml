@@ -15,8 +15,10 @@ Maui.ApplicationWindow
 
     /***** PROPS *****/
     floatingBar: true
-    accentColor : "#8981d8"
+    footBarOverlap: true
 
+    accentColor : "#8981d8"
+    menuDrawer.bannerImageSource: "qrc:/Faq.png"
     property int currentView : views.notes
     property var views : ({
                               notes: 0,
@@ -63,6 +65,7 @@ Maui.ApplicationWindow
         }
     ]
 
+    footBarMargins: space.huge
     footBarAligment: Qt.AlignRight
     footBar.middleContent: [
 
@@ -114,11 +117,10 @@ Maui.ApplicationWindow
         }
     }
 
-
     NewLinkDialog
     {
         id: newLinkDialog
-        onLinkSaved: owl.insertLink(note.link, note.title.trim(), note.preview, note.color, note.tags)
+        onLinkSaved: owl.insertLink(link)
     }
 
     /***** VIEWS *****/
@@ -180,6 +182,7 @@ Maui.ApplicationWindow
     {
         var tags = owl.getLinkTags(link.link)
         link.tags = tags
+
         linksView.previewer.show(link)
     }
 }

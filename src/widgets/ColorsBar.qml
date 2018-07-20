@@ -6,20 +6,26 @@ Row
     signal colorPicked(color color)
     anchors.verticalCenter: parent.verticalCenter
     spacing: space.medium
+    property string currentColor
+    property int size : iconSizes.medium
 
     Rectangle
     {
         color:"#ffded4"
         anchors.verticalCenter: parent.verticalCenter
-        height: iconSizes.medium
+        height: size
         width: height
         radius: Math.max(height, width)
-        border.color: borderColor
+        border.color: Qt.darker(color, 1.7)
 
         MouseArea
         {
             anchors.fill: parent
-            onClicked: colorPicked(parent.color)
+            onClicked:
+            {
+                currentColor = parent.color
+                colorPicked(currentColor)
+            }
         }
     }
 
@@ -27,15 +33,19 @@ Row
     {
         color:"#d3ffda"
         anchors.verticalCenter: parent.verticalCenter
-        height: iconSizes.medium
+        height: size
         width: height
         radius: Math.max(height, width)
-        border.color: borderColor
+        border.color: Qt.darker(color, 1.7)
 
         MouseArea
         {
             anchors.fill: parent
-            onClicked: colorPicked(parent.color)
+            onClicked:
+            {
+                currentColor = parent.color
+                colorPicked(currentColor)
+            }
         }
     }
 
@@ -43,15 +53,19 @@ Row
     {
         color:"#caf3ff"
         anchors.verticalCenter: parent.verticalCenter
-        height: iconSizes.medium
+        height: size
         width: height
         radius: Math.max(height, width)
-        border.color: borderColor
+        border.color: Qt.darker(color, 1.7)
 
         MouseArea
         {
             anchors.fill: parent
-            onClicked: colorPicked(parent.color)
+            onClicked:
+            {
+                currentColor = parent.color
+                colorPicked(currentColor)
+            }
         }
     }
 
@@ -59,15 +73,19 @@ Row
     {
         color:"#dbd8ff"
         anchors.verticalCenter: parent.verticalCenter
-        height: iconSizes.medium
+        height: size
         width: height
         radius: Math.max(height, width)
-        border.color: borderColor
+        border.color: Qt.darker(color, 1.7)
 
         MouseArea
         {
             anchors.fill: parent
-            onClicked: colorPicked(parent.color)
+            onClicked:
+            {
+                currentColor = parent.color
+                colorPicked(currentColor)
+            }
         }
     }
 
@@ -75,15 +93,19 @@ Row
     {
         color:"#ffcdf4"
         anchors.verticalCenter: parent.verticalCenter
-        height: iconSizes.medium
+        height: size
         width: height
         radius: Math.max(height, width)
-        border.color: borderColor
+        border.color: Qt.darker(color, 1.7)
 
         MouseArea
         {
             anchors.fill: parent
-            onClicked: colorPicked(parent.color)
+            onClicked:
+            {
+                currentColor = parent.color
+                colorPicked(currentColor)
+            }
         }
     }
 
@@ -91,15 +113,19 @@ Row
     {
         color: viewBackgroundColor
         anchors.verticalCenter: parent.verticalCenter
-        height: iconSizes.medium
+        height: size
         width: height
         radius: Math.max(height, width)
-        border.color: borderColor
+        border.color: Qt.darker(color, 1.7)
 
         MouseArea
         {
             anchors.fill: parent
-            onClicked: colorPicked(parent.color)
+            onClicked:
+            {
+                currentColor = parent.color
+                colorPicked(currentColor)
+            }
         }
     }
 }

@@ -63,7 +63,7 @@ protected:
     bool insert(const QString &tableName, const QVariantMap &insertData);
     bool update(const QString &tableName, const QVariantMap &updateData, const QVariantMap &where);
     bool update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id);
-    bool remove(const QString &tableName, const OWL::DB &removeData);
+    bool remove(const QString &tableName, const QVariantMap &removeData);
 
 signals:
 
