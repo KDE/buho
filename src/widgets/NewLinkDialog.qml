@@ -121,6 +121,7 @@ Popup
                     id: previewList
                     anchors.fill: parent
                     anchors.centerIn: parent
+                    visible: count > 0
                     clip: true
                     snapMode: ListView.SnapOneItem
                     orientation: ListView.Horizontal
@@ -232,10 +233,10 @@ Popup
 
     }
 
-    function fill(note)
+    function fill(link)
     {
-        title.text = note.title[0]
-        populatePreviews(note.image)
+        title.text = link.title[0]
+        populatePreviews(link.image)
 
         open()
     }
@@ -243,7 +244,10 @@ Popup
     function populatePreviews(imgs)
     {
         for(var i in imgs)
+        {
+            console.log("PREVIEW:", imgs[i])
             previewList.model.append({url : imgs[i]})
+        }
     }
 
     function packLink()
@@ -251,7 +255,7 @@ Popup
         var data = ({
                         link : link.text,
                         title: title.text.trim(),
-                        preview: previewList.model.get(previewList.currentIndex).url,
+                        preview: previewList.count > 0 ?  previewList.model.get(previewList.currentIndex).url :  "",
                         color: selectedColor,
                         tag: tagBar.getTags(),
                         pin: pinButton.checked,

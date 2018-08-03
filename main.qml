@@ -16,6 +16,7 @@ Maui.ApplicationWindow
     /***** PROPS *****/
     floatingBar: true
     footBarOverlap: true
+    allowRiseContent: false
 
     accentColor : "#8981d8"
     menuDrawer.bannerImageSource: "qrc:/Faq.png"
@@ -131,6 +132,7 @@ Maui.ApplicationWindow
         anchors.fill: parent
         currentIndex: currentView
         onCurrentIndexChanged: currentView = currentIndex
+        interactive: isMobile
 
         NotesView
         {

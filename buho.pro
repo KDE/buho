@@ -77,3 +77,4 @@ INCLUDEPATH += \
     src/utils/ \
     src/
 
+include($$PWD/install.pri)

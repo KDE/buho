@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Buho
+Comment=Note taking app
+TryExec=buho
+Exec=buho %U
+Terminal=false
+Type=Application
+Categories=Qt;Utility;KDE;
+StartupNotify=true
+Icon=buho
+
+GenericName=Note Taker

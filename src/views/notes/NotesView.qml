@@ -71,7 +71,7 @@ Maui.Page
         {
             id: pinnedList
             visible: pinButton.checked
-            Layout.margins: isMobile ? space.big : space.enormus
+            Layout.margins: isMobile ? space.big : space.enormous
             Layout.alignment: Qt.AlignVCenter
             Layout.fillWidth: true
             height: cardsView.itemHeight
@@ -94,7 +94,7 @@ Maui.Page
             Layout.fillHeight: true
             Layout.fillWidth: true
             width: parent.width
-            Layout.margins: isMobile ? space.big : space.enormus
+            Layout.margins: isMobile ? space.big : space.enormous
             onItemClicked: noteClicked(cardsView.model.get(index))
             holder.emoji: "qrc:/Type.png"
             holder.emojiSize: iconSizes.huge

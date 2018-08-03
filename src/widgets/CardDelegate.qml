@@ -90,9 +90,12 @@ ItemDelegate
             Layout.alignment: Qt.AlignLeft
 
             Layout.fillWidth: true
+            Layout.fillHeight: true
             text: model.title
             color: Qt.darker(model.color, 3)
             elide: Qt.ElideRight
+            wrapMode: TextEdit.WrapAnywhere
+
 
             font.weight: Font.Bold
             font.bold: true
@@ -115,6 +118,7 @@ ItemDelegate
             enabled: false
             text: model.body
             color: Qt.darker(model.color, 3)
+            wrapMode: TextEdit.WrapAnywhere
 
             textFormat: TextEdit.RichText
             font.pointSize: fontSizes.big
@@ -125,51 +129,48 @@ ItemDelegate
             }
         }
 
-        Item
+
+        Image
         {
-            id: preview
+            id: img
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.margins: unit
+            Layout.alignment: Qt.AlignCenter
             clip: true
             Layout.topMargin: space.medium
-            visible: img.status === Image.Ready
 
-            Image
+            visible: status === Image.Ready && typeof model.preview !== 'undefined'
+            asynchronous: true
+
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignVCenter
+            height: parent.height
+            width: parent.width
+            sourceSize.height: height
+            sourceSize.width: width
+            fillMode: Image.PreserveAspectCrop
+            source: "file://"+encodeURIComponent( model.preview ) || ""
+
+            layer.enabled: img.visible
+            layer.effect: OpacityMask
             {
-                id: img
-                visible: status === Image.Ready
-                asynchronous: true
-                anchors.centerIn: parent
-
-                horizontalAlignment: Qt.AlignHCenter
-                verticalAlignment: Qt.AlignVCenter
-                height: parent.height
-                width: parent.width
-                sourceSize.height: height
-                sourceSize.width: width
-                fillMode: Image.PreserveAspectCrop
-                source: "file://"+encodeURIComponent( model.preview ) || ""
-
-                layer.enabled: img.visible
-                layer.effect: OpacityMask
+                maskSource: Item
                 {
-                    maskSource: Item
+                    width: img.width
+                    height: img.height
+                    Rectangle
                     {
+                        anchors.centerIn: parent
                         width: img.width
                         height: img.height
-                        Rectangle
-                        {
-                            anchors.centerIn: parent
-                            width: img.width
-                            height: img.height
-                            radius: cardRadius
-                            //                    radius: Math.min(width, height)
-                        }
+                        radius: cardRadius
+                        //                    radius: Math.min(width, height)
                     }
                 }
             }
         }
+
     }
 
     function update(item)

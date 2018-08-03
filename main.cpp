@@ -35,6 +35,11 @@ int main(int argc, char *argv[])
     QtWebEngine::initialize();
 #endif
 
+    app.setApplicationName(OWL::App);
+    app.setApplicationVersion(OWL::version);
+    app.setApplicationDisplayName(OWL::App);
+    app.setWindowIcon(QIcon(":/buho.png"));
+
 #ifdef STATIC_KIRIGAMI
     KirigamiPlugin::getInstance().registerTypes();
 #endif
