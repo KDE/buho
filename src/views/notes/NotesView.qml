@@ -97,7 +97,7 @@ Maui.Page
             Layout.margins: isMobile ? space.big : space.enormous
             onItemClicked: noteClicked(cardsView.model.get(index))
             holder.emoji: "qrc:/Type.png"
-            holder.emojiSize: iconSizes.huge
+            holder.emojiSize: 500
             holder.isMask: false
             holder.title : "No notes!"
             holder.body: "Click here to create a new note"

@@ -20,9 +20,10 @@ linux:unix:!android {
 } else:android {
 
     message(Building helpers for Android)
-    include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/android/android.pri)
     include($$PWD/android/openssl/openssl.pri)
+    include($$PWD/3rdparty/kirigami/kirigami.pri)
+
     DEFINES += STATIC_KIRIGAMI
 
 } else {

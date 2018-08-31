@@ -26,7 +26,9 @@ GridView
     {
         id: holder
         visible: count < 1
+        z: 999
     }
+
 
     CardMenu
     {

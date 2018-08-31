@@ -14,6 +14,7 @@ Maui.ApplicationWindow
     title: qsTr("Buho")
 
     /***** PROPS *****/
+    altToolBars: true
     floatingBar: true
     footBarOverlap: true
     allowRiseContent: false
@@ -126,13 +127,14 @@ Maui.ApplicationWindow
 
     /***** VIEWS *****/
 
-    SwipeView
+  SwipeView
     {
         id: swipeView
         anchors.fill: parent
         currentIndex: currentView
         onCurrentIndexChanged: currentView = currentIndex
         interactive: isMobile
+
 
         NotesView
         {
