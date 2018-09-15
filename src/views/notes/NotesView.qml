@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import "../../widgets"
-import org.kde.maui 1.0 as Maui
+import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
 import "../../utils/owl.js" as O
 
@@ -97,7 +97,7 @@ Maui.Page
             Layout.margins: isMobile ? space.big : space.enormous
             onItemClicked: noteClicked(cardsView.model.get(index))
             holder.emoji: "qrc:/Type.png"
-            holder.emojiSize: 500
+            holder.emojiSize: iconSizes.huge
             holder.isMask: false
             holder.title : "No notes!"
             holder.body: "Click here to create a new note"

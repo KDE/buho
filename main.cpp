@@ -8,6 +8,10 @@
 #include "3rdparty/kirigami/src/kirigamiplugin.h"
 #endif
 
+#ifdef STATIC_MAUIKIT
+#include "./mauikit/src/mauikit.h"
+#endif
+
 #ifdef Q_OS_ANDROID
 #include <QGuiApplication>
 #include <QtWebView/QtWebView>
@@ -17,7 +21,6 @@
 #include <QtWebEngine>
 #endif
 
-#include "mauikit/src/mauikit.h"
 #include "src/buho.h"
 #include "src/documenthandler.h"
 #include "src/linker.h"
@@ -44,7 +47,7 @@ int main(int argc, char *argv[])
     KirigamiPlugin::getInstance().registerTypes();
 #endif
 
-#ifdef MAUI_APP
+#ifdef STATIC_MAUIKIT
     MauiKit::getInstance().registerTypes();
 #endif
 

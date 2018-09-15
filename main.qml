@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import org.kde.kirigami 2.0 as Kirigami
-import org.kde.maui 1.0 as Maui
+import org.kde.mauikit 1.0 as Maui
 
 import "src/widgets"
 import "src/views/notes"
@@ -14,13 +14,18 @@ Maui.ApplicationWindow
     title: qsTr("Buho")
 
     /***** PROPS *****/
-    altToolBars: true
     floatingBar: true
     footBarOverlap: true
     allowRiseContent: false
+    altToolBars: false
 
+    /**** BRANDING COLORS ****/
+    colorSchemeName: "buho"
+    headBarBGColor: accentColor
+    headBarFGColor: altColorText
     accentColor : "#8981d8"
-    menuDrawer.bannerImageSource: "qrc:/Faq.png"
+    altColorText : Qt.darker(accentColor, 3)
+
     property int currentView : views.notes
     property var views : ({
                               notes: 0,
@@ -36,7 +41,7 @@ Maui.ApplicationWindow
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
             onClicked: currentView = views.notes
-            iconColor: currentView === views.notes? highlightColor : textColor
+            iconColor: currentView === views.notes? highlightColor : altColorText
             iconName: "draw-text"
             text: qsTr("Notes")
         },
@@ -45,7 +50,7 @@ Maui.ApplicationWindow
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
             onClicked: currentView = views.links
-            iconColor: currentView === views.links? highlightColor : textColor
+            iconColor: currentView === views.links? highlightColor : altColorText
             iconName: "link"
             text: qsTr("Links")
         },
@@ -53,7 +58,7 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
-            iconColor: currentView === views.books? highlightColor : textColor
+            iconColor: currentView === views.books? highlightColor : altColorText
             iconName: "document-new"
             text: qsTr("Books")
         },
@@ -61,7 +66,7 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
-            iconColor: currentView === views.tags? highlightColor : textColor
+            iconColor: currentView === views.tags? highlightColor : altColorText
             iconName: "tag"
             text: qsTr("Tags")
         }
@@ -127,12 +132,22 @@ Maui.ApplicationWindow
 
     /***** VIEWS *****/
 
-  SwipeView
+    SwipeView
     {
         id: swipeView
         anchors.fill: parent
         currentIndex: currentView
-        onCurrentIndexChanged: currentView = currentIndex
+        onCurrentIndexChanged:
+        {
+
+            currentView = currentIndex
+
+            if(currentView === views.notes)
+                accentColor = "#ffe355"
+            else if(currentView === views.links)
+                accentColor = "#8981d8"
+        }
+
         interactive: isMobile
 
 
@@ -159,6 +174,9 @@ Maui.ApplicationWindow
     {
         notesView.populate()
         linksView.populate()
+
+        if(!isAndroid)
+            Maui.KDE.setColorScheme("buho", accentColor, altColorText)
     }
 
 

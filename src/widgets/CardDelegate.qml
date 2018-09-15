@@ -150,7 +150,7 @@ ItemDelegate
             sourceSize.height: height
             sourceSize.width: width
             fillMode: Image.PreserveAspectCrop
-            source: "file://"+encodeURIComponent( model.preview ) || ""
+            source: model.preview ? "file://"+encodeURIComponent( model.preview ) : ''
 
             layer.enabled: img.visible
             layer.effect: OpacityMask

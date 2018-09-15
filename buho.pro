@@ -16,6 +16,7 @@ linux:unix:!android {
 
     message(Building for Linux KDE)
     QT += webengine
+unix:!macx: LIBS += -lMauiKit
 
 } else:android {
 
@@ -23,6 +24,7 @@ linux:unix:!android {
     include($$PWD/android/android.pri)
     include($$PWD/android/openssl/openssl.pri)
     include($$PWD/3rdparty/kirigami/kirigami.pri)
+    include($$PWD/mauikit/mauikit.pri)
 
     DEFINES += STATIC_KIRIGAMI
 
@@ -31,7 +33,6 @@ linux:unix:!android {
 }
 
 
-include($$PWD/mauikit/mauikit.pri)
 include($$PWD/QGumboParser/QGumboParser.pri)
 
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -79,3 +80,4 @@ INCLUDEPATH += \
     src/
 
 include($$PWD/install.pri)
+

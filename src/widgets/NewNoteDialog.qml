@@ -1,14 +1,14 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
-import org.kde.maui 1.0 as Maui
+import org.kde.mauikit 1.0 as Maui
 import org.buho.editor 1.0
 
 Popup
 {
     parent: ApplicationWindow.overlay
-    height: parent.height * (isMobile ?  0.8 : 0.7)
-    width: parent.width * (isMobile ?  0.9 : 0.7)
+    height: parent.height * 0.8
+    width: parent.width * 0.9
 
     property string selectedColor : "#ffffe6"
     property string fgColor: Qt.darker(selectedColor, 2.5)
@@ -29,6 +29,7 @@ Popup
         margins: 0
         onExit: clear()
         headBarExit: false
+
 
         Rectangle
         {
@@ -85,8 +86,7 @@ Popup
             }
         ]
 
-        headBar.rightContent:
-            ColorsBar
+        headBar.rightContent: ColorsBar
         {
             onColorPicked: selectedColor = color
         }

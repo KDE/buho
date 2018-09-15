@@ -3,8 +3,12 @@
 
 #include <QObject>
 #include "db/dbactions.h"
-#include "tagging.h"
 
+#ifdef STATIC_MAUIKIT
+#include "tagging.h"
+#else
+#include <MauiKit/tagging.h>
+#endif
 class Buho : public DBActions
 {
     Q_OBJECT
