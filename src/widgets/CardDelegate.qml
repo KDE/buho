@@ -130,17 +130,31 @@ ItemDelegate
         }
 
 
-        Image
+        Loader
         {
-            id: img
+            id: imgLoader
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.margins: unit
             Layout.alignment: Qt.AlignCenter
             clip: true
             Layout.topMargin: space.medium
+            sourceComponent:  typeof model.preview !== 'undefined' ? imgComponent : ""
+        }
 
-            visible: status === Image.Ready && typeof model.preview !== 'undefined'
+
+    }
+
+
+    Component
+    {
+        id: imgComponent
+
+        Image
+        {
+            id: img
+
+            visible: status === Image.Ready
             asynchronous: true
 
             horizontalAlignment: Qt.AlignHCenter
