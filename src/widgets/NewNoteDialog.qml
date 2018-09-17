@@ -30,7 +30,6 @@ Popup
         onExit: clear()
         headBarExit: false
 
-
         Rectangle
         {
             id: bg
@@ -62,7 +61,7 @@ Popup
 
             Maui.ToolButton
             {
-                iconName: "format-text-italic-symbolic"
+                iconName: "format-text-italic"
                 iconColor: checked ? highlightColor : textColor
                 focusPolicy: Qt.TabFocus
                 checkable: true
@@ -72,7 +71,7 @@ Popup
 
             Maui.ToolButton
             {
-                iconName: "format-text-underline-symbolic"
+                iconName: "format-text-underline"
             },
 
             Maui.ToolButton
@@ -199,7 +198,6 @@ Popup
                 iconName: "entry-delete"
             }
         ]
-
 
         footBar.rightContent: Row
         {

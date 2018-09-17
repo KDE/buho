@@ -31,12 +31,6 @@ Maui.Page
         {
             iconName: "view-sort-ascending"
 
-        },
-
-        Maui.ToolButton
-        {
-            iconName: "view-sort-descending"
-
         }
     ]
 
@@ -62,7 +56,7 @@ Maui.Page
         }
     ]
 
-    ColumnLayout
+     ColumnLayout
     {
         anchors.fill: parent
         spacing: 0
@@ -94,7 +88,7 @@ Maui.Page
             Layout.fillHeight: true
             Layout.fillWidth: true
             width: parent.width
-            Layout.margins: isMobile ? space.big : space.enormous
+            Layout.margins: space.big
             onItemClicked: noteClicked(cardsView.model.get(index))
             holder.emoji: "qrc:/Type.png"
             holder.emojiSize: iconSizes.huge

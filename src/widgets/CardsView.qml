@@ -29,7 +29,6 @@ GridView
         z: 999
     }
 
-
     CardMenu
     {
         id: cardMenu
@@ -62,7 +61,7 @@ GridView
         }
     }
 
-    //    onWidthChanged: if(!isMobile && gridView) adaptGrid()
+        onWidthChanged: if(!isMobile && gridView) adaptGrid()
 
     function adaptGrid()
     {

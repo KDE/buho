@@ -42,7 +42,7 @@ Popup
 
             Maui.ToolButton
             {
-                iconName: "view-fullscreen"
+                iconName: "document-launch"
                 onClicked: owl.openLink(webView.url)
             }
         ]

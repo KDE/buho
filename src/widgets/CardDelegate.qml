@@ -141,8 +141,6 @@ ItemDelegate
             Layout.topMargin: space.medium
             sourceComponent:  typeof model.preview !== 'undefined' ? imgComponent : ""
         }
-
-
     }
 
 

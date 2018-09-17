@@ -23,8 +23,9 @@ Maui.ApplicationWindow
     colorSchemeName: "buho"
     headBarBGColor: accentColor
     headBarFGColor: altColorText
-    accentColor : "#ffe355"
-    altColorText : Qt.darker(accentColor, 2.5)
+    accentColor : "#ff9494"
+    property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
+//    altColorText : Qt.darker(accentColor, 2.5)
 
     property int currentView : views.notes
     property var views : ({
@@ -39,34 +40,31 @@ Maui.ApplicationWindow
 
         Maui.ToolButton
         {
-            display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
             onClicked: currentView = views.notes
-            iconColor: currentView === views.notes? highlightColor : headBarFGColor
+            iconColor: currentView === views.notes? altColorText : headBarTint
             iconName: "draw-text"
             text: qsTr("Notes")
         },
 
         Maui.ToolButton
         {
-            display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
             onClicked: currentView = views.links
-            iconColor: currentView === views.links? highlightColor : headBarFGColor
+            iconColor: currentView === views.links? altColorText : headBarTint
             iconName: "link"
             text: qsTr("Links")
         },
 
         Maui.ToolButton
         {
-            display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
-            iconColor: currentView === views.books? highlightColor : headBarFGColor
+            onClicked: currentView = views.books
+            iconColor: currentView === views.books? altColorText : headBarTint
             iconName: "document-new"
             text: qsTr("Books")
         },
 
         Maui.ToolButton
         {
-            display: root.isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
-            iconColor: currentView === views.tags? highlightColor : headBarFGColor
+            iconColor: currentView === views.tags? altColorText : headBarTint
             iconName: "tag"
             text: qsTr("Tags")
         }
@@ -80,7 +78,7 @@ Maui.ApplicationWindow
         {
             id: addButton
             iconName: "list-add"
-            iconColor: "white"
+            iconColor: altColorText
 
             model: ListModel
             {
@@ -89,13 +87,13 @@ Maui.ApplicationWindow
                 ListElement {iconName: "draw-text"; mid: "note"}
             }
 
-//            onItemClicked:
-//            {
-//                if(item.mid === "note")
-//                newNote()
-//                else if(item.mid === "link")
-//                newLink()
-//            }
+            onItemClicked:
+            {
+                if(item.mid === "note")
+                newNote()
+                else if(item.mid === "link")
+                newLink()
+            }
         }
     ]
 
@@ -142,9 +140,11 @@ Maui.ApplicationWindow
             currentView = currentIndex
 
             if(currentView === views.notes)
-                accentColor = "#ffe355"
+                accentColor = "#ff9494"
             else if(currentView === views.links)
-                accentColor = "#d3cff5"
+                accentColor = "#25affb"
+            else if(currentView === views.books)
+                accentColor = "#6bc5a5"
         }
 
         interactive: isMobile
@@ -161,10 +161,10 @@ Maui.ApplicationWindow
             onLinkClicked: previewLink(link)
         }
 
-//        BooksView
-//        {
-//            id: booksView
-//        }
+        BooksView
+        {
+            id: booksView
+        }
 
     }
 
