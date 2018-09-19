@@ -29,7 +29,7 @@ Maui.Page
         },
         Maui.ToolButton
         {
-            iconName: "view-sort-ascending"
+            iconName: "view-sort"
 
         }
     ]
@@ -43,7 +43,7 @@ Maui.Page
         Maui.ToolButton
         {
             id: pinButton
-            iconName: "window-pin"
+            iconName: "edit-pin"
             checkable: true
             iconColor: checked ? highlightColor : textColor
 
@@ -51,7 +51,7 @@ Maui.Page
 
         Maui.ToolButton
         {
-            iconName: "view-calendar-day"
+            iconName: "view-calendar"
 
         }
     ]

@@ -25,7 +25,7 @@ Maui.ApplicationWindow
     headBarFGColor: altColorText
     accentColor : "#ff9494"
     property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
-//    altColorText : Qt.darker(accentColor, 2.5)
+    altColorText : "white"/*Qt.darker(accentColor, 2.5)*/
 
     property int currentView : views.notes
     property var views : ({
@@ -42,7 +42,7 @@ Maui.ApplicationWindow
         {
             onClicked: currentView = views.notes
             iconColor: currentView === views.notes? altColorText : headBarTint
-            iconName: "draw-text"
+            iconName: "view-notes"
             text: qsTr("Notes")
         },
 
@@ -50,7 +50,7 @@ Maui.ApplicationWindow
         {
             onClicked: currentView = views.links
             iconColor: currentView === views.links? altColorText : headBarTint
-            iconName: "link"
+            iconName: "view-links"
             text: qsTr("Links")
         },
 
@@ -58,7 +58,7 @@ Maui.ApplicationWindow
         {
             onClicked: currentView = views.books
             iconColor: currentView === views.books? altColorText : headBarTint
-            iconName: "document-new"
+            iconName: "view-books"
             text: qsTr("Books")
         },
 

@@ -21,8 +21,9 @@ linux:unix:!android {
 } else:android {
 
     message(Building helpers for Android)
-    include($$PWD/android/android.pri)
-    include($$PWD/android/openssl/openssl.pri)
+    QT += androidextras webview
+
+    include($$PWD/3rdparty/openssl/openssl.pri)
     include($$PWD/mauikit/mauikit.pri)
     include($$PWD/3rdparty/kirigami/kirigami.pri)
 

@@ -28,13 +28,7 @@ Maui.Page
         },
         Maui.ToolButton
         {
-            iconName: "view-sort-ascending"
-
-        },
-
-        Maui.ToolButton
-        {
-            iconName: "view-sort-descending"
+            iconName: "view-sort"
 
         }
     ]
@@ -48,13 +42,13 @@ Maui.Page
 
         Maui.ToolButton
         {
-            iconName: "window-pin"
+            iconName: "edit-pin"
 
         },
 
         Maui.ToolButton
         {
-            iconName: "view-calendar-day"
+            iconName: "view-calendar"
 
         }
     ]

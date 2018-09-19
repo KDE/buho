@@ -3,7 +3,6 @@
 #include <QQuickStyle>
 #include <QQmlContext>
 
-
 #ifdef STATIC_KIRIGAMI
 #include "3rdparty/kirigami/src/kirigamiplugin.h"
 #endif
@@ -31,7 +30,6 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_ANDROID
     QGuiApplication app(argc, argv);
-    QIcon::setThemeName("Luv");
     QtWebView::initialize();
 #else
     QApplication app(argc, argv);

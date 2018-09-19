@@ -43,7 +43,7 @@ Popup
             Maui.ToolButton
             {
                 id: pinButton
-                iconName: "window-pin"
+                iconName: "edit-pin"
                 checkable: true
                 iconColor: checked ? highlightColor : textColor
                 //                onClicked: checked = !checked
