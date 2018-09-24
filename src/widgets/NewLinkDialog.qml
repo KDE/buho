@@ -5,12 +5,13 @@ import org.kde.mauikit 1.0 as Maui
 import org.buho.editor 1.0
 import org.kde.kirigami 2.2 as Kirigami
 
-Popup
+Maui.Popup
 {
-    parent: ApplicationWindow.overlay
-    height: previewReady ? parent.height * (isMobile ?  0.8 : 0.7) :
-                           contentLayout.implicitHeight
-    width: parent.width * (isMobile ?  0.9 : 0.7)
+    parent: parent
+    heightHint: 0.95
+    widthHint: 0.95
+    maxHeight: previewReady ? unit * 800 : contentLayout.implicitHeight
+    maxWidth: unit *700
 
     signal linkSaved(var link)
     property string selectedColor : "#ffffe6"
@@ -31,7 +32,6 @@ Popup
             fill(link)
         }
     }
-
 
     Maui.Page
     {
@@ -201,14 +201,14 @@ Popup
         {
             spacing: space.medium
 
-            Button
+            Maui.Button
             {
                 id: discard
                 text: qsTr("Discard")
                 onClicked:  clear()
             }
 
-            Button
+            Maui.Button
             {
                 id: save
                 text: qsTr("Save")

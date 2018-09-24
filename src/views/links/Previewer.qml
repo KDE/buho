@@ -4,16 +4,14 @@ import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
 import "../../widgets"
 
-Popup
+Maui.Popup
 {
-    parent: ApplicationWindow.overlay
-    height: parent.height *  0.9
-    width: parent.width * (isMobile ?  0.9 : 0.7)
-    x: (parent.width / 2) - (width / 2)
-    y: (parent.height /2 ) - (height / 2)
-    modal: true
-    clip: true
-    padding: isAndroid ? 2 : "undefined"
+    parent: parent
+    heightHint: 0.95
+    widthHint: 0.95
+    maxWidth: 800*unit
+    maxHeight: maxWidth
+
     property alias webView: webViewer.item
 
     signal linkSaved(var link)
@@ -43,7 +41,7 @@ Popup
             Maui.ToolButton
             {
                 iconName: "document-launch"
-                onClicked: owl.openLink(webView.url)
+                onClicked: Maui.FM.openUrl(webView.url)
             }
         ]
 
@@ -85,7 +83,7 @@ Popup
         {
             spacing: space.medium
 
-            Button
+            Maui.Button
             {
                 id: discard
                 text: qsTr("Discard")
@@ -93,7 +91,7 @@ Popup
 
             }
 
-            Button
+            Maui.Button
             {
                 id: save
                 text: qsTr("Save")

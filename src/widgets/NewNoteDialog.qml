@@ -4,23 +4,19 @@ import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
 import org.buho.editor 1.0
 
-Popup
+Maui.Popup
 {
-    parent: ApplicationWindow.overlay
-    height: parent.height * 0.8
-    width: parent.width * 0.9
+    parent: parent
+    heightHint: 0.95
+    widthHint: 0.95
+    maxWidth: 500*unit
+    maxHeight: maxWidth
 
     property string selectedColor : "#ffffe6"
     property string fgColor: Qt.darker(selectedColor, 2.5)
     property bool showEditActions : false
 
     signal noteSaved(var note)
-    x: (parent.width / 2) - (width / 2)
-    y: (parent.height /2 ) - (height / 2)
-
-    modal: true
-
-    padding: isAndroid ? 1 : "undefined"
 
     Maui.Page
     {
@@ -203,7 +199,7 @@ Popup
         {
             spacing: space.medium
 
-            Button
+            Maui.Button
             {
                 id: discard
                 text: qsTr("Discard")
@@ -211,7 +207,7 @@ Popup
 
             }
 
-            Button
+            Maui.Button
             {
                 id: save
                 text: qsTr("Save")

@@ -1,5 +1,4 @@
 #include "buho.h"
-#include <QDesktopServices>
 
 Buho::Buho(QObject *parent) : DBActions(parent)
 {
@@ -9,11 +8,6 @@ Buho::Buho(QObject *parent) : DBActions(parent)
 Tagging *Buho::getTagging()
 {
     return this->tag;
-}
-
-bool Buho::openLink(const QString &url)
-{
-    return QDesktopServices::openUrl(QUrl::fromUserInput(url));
 }
 
 void Buho::setFolders()

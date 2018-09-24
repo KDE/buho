@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.4 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 import "src/widgets"
@@ -27,6 +27,8 @@ Maui.ApplicationWindow
     property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
     altColorText : "white"/*Qt.darker(accentColor, 2.5)*/
 
+    about.appDescription: qsTr("Buho allows you to take quick notes, collect links and take long notes organized by chapters.")
+    about.appIcon: "qrc:/buho.svg"
     property int currentView : views.notes
     property var views : ({
                               notes: 0,
@@ -70,6 +72,7 @@ Maui.ApplicationWindow
         }
     ]
 
+
     footBarMargins: space.huge
     footBarAligment: Qt.AlignRight
     footBar.middleContent: [
@@ -82,9 +85,9 @@ Maui.ApplicationWindow
 
             model: ListModel
             {
-                ListElement {iconName: "document-new"; mid: "page"}
-                ListElement {iconName: "link"; mid: "link"}
-                ListElement {iconName: "draw-text"; mid: "note"}
+                ListElement {iconName: "view-notes"; mid: "note"}
+                ListElement {iconName: "view-links"; mid: "link"}
+                ListElement {iconName: "view-books"; mid: "page"}
             }
 
             onItemClicked:
@@ -96,6 +99,7 @@ Maui.ApplicationWindow
             }
         }
     ]
+
 
 //    /***** COMPONENTS *****/
 

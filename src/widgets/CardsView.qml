@@ -5,21 +5,23 @@ import org.kde.mauikit 1.0 as Maui
 
 GridView
 {
+    id: control
     property bool gridView : true
 
     property alias holder : holder
     property alias menu : cardMenu
     readonly property  int defaultSize : unit * 200
     property int itemWidth : !gridView ?  width :
-                                         isMobile? (width-itemSpacing) * 0.42 : unit * 200
+                                         unit * 300
     property int itemHeight: unit * 120
     property int itemSpacing:  space.huge
 
     signal itemClicked(int index)
     boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
 
-    cellWidth: itemWidth + itemSpacing
+    cellWidth: width > itemWidth ? width/2 : width
     cellHeight: itemHeight + itemSpacing
+    topMargin: Kirigami.Units.largeSpacing * 2
     clip : true
 
     Maui.Holder
@@ -39,8 +41,11 @@ GridView
     delegate: CardDelegate
     {
         id: delegate
-        cardWidth: itemWidth
+        cardWidth: Math.min(control.cellWidth, control.itemWidth) - Kirigami.Units.largeSpacing * 2
         cardHeight: itemHeight
+        anchors.left: parent.left
+        anchors.leftMargin: control.width <= control.itemWidth ? 0 : (index % 2 === 0 ? Math.max(0, control.cellWidth - control.itemWidth) :
+                                                                                     control.cellWidth)
 
         onClicked:
         {
@@ -61,7 +66,7 @@ GridView
         }
     }
 
-        onWidthChanged: if(!isMobile && gridView) adaptGrid()
+//    onWidthChanged: if(!isMobile && gridView) adaptGrid()
 
     function adaptGrid()
     {

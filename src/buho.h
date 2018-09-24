@@ -15,7 +15,6 @@ class Buho : public DBActions
 public:
     explicit Buho(QObject *parent = nullptr);
     Tagging* getTagging();
-    Q_INVOKABLE bool openLink(const QString &url);
 
 private:
     void setFolders();
