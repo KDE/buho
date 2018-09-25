@@ -101,7 +101,6 @@ Maui.Popup
                     close()
                 }
             }
-
         }
 
         ColumnLayout

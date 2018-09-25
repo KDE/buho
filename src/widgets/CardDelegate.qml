@@ -11,7 +11,7 @@ ItemDelegate
     property string noteColor : color ? color : viewBackgroundColor
     property int cardWidth: visible ? unit * 200 : 0
     property int cardHeight: visible ? unit * 120 : 0
-    property int cardRadius: unit * 4
+    property int cardRadius: radiusV
 
     property bool condition : true
 
@@ -25,6 +25,19 @@ ItemDelegate
     background: Rectangle
     {
         color: "transparent"
+
+        layer.enabled: isMobile
+        layer.effect:  DropShadow
+        {
+            anchors.fill: card
+            visible: card.visible
+            horizontalOffset: 0
+            verticalOffset: 3
+            radius: 8.0
+            samples: 17
+            color: Qt.darker(noteColor, 1.5)
+            source: card
+        }
     }
 
     MouseArea
@@ -38,17 +51,7 @@ ItemDelegate
         }
     }
 
-    DropShadow
-    {
-        anchors.fill: card
-        visible: card.visible
-        horizontalOffset: 0
-        verticalOffset: 3
-        radius: 8.0
-        samples: 17
-        color: Qt.darker(noteColor, 1.5)
-        source: card
-    }
+
 
     Rectangle
     {

@@ -12,7 +12,7 @@ GridView
     property alias menu : cardMenu
     readonly property  int defaultSize : unit * 200
     property int itemWidth : !gridView ?  width :
-                                         unit * 300
+                                        (isMobile? width * 0.5 : unit * 400)
     property int itemHeight: unit * 120
     property int itemSpacing:  space.huge
 
