@@ -72,7 +72,9 @@ Maui.ApplicationWindow
         }
     ]
 
-
+    headBar.colorScheme.borderColor: Qt.darker(accentColor, 1.4)
+    footBar.colorScheme.backgroundColor: accentColor
+    footBar.colorScheme.borderColor: Qt.darker(accentColor, 1.4)
     footBarMargins: space.huge
     footBarAligment: Qt.AlignRight
     footBar.middleContent: [

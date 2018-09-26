@@ -13,7 +13,7 @@ GridView
     readonly property  int defaultSize : unit * 200
     property int itemWidth : !gridView ?  width :
                                         (isMobile? width * 0.5 : unit * 400)
-    property int itemHeight: unit * 120
+    property int itemHeight: unit * 180
     property int itemSpacing:  space.huge
 
     signal itemClicked(int index)
@@ -65,6 +65,8 @@ GridView
             cardMenu.popup()
         }
     }
+
+    ScrollBar.vertical: ScrollBar{ id:scrollBar; visible: !isMobile}
 
 //    onWidthChanged: if(!isMobile && gridView) adaptGrid()
 

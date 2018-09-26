@@ -17,6 +17,5 @@
         <file>src/widgets/CardsList.qml</file>
         <file>src/widgets/CardMenu.qml</file>
         <file>src/utils/owl.js</file>
-        <file>src/widgets/CardsViewK.qml</file>
     </qresource>
 </RCC>

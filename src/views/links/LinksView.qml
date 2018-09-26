@@ -70,7 +70,7 @@ Maui.Page
         holder.title : "No Links!"
         holder.body: "Click here to save a new link"
         holder.emojiSize: iconSizes.huge
-
+        itemHeight: unit * 250
         Connections
         {
             target: cardsView.holder

@@ -25,19 +25,6 @@ ItemDelegate
     background: Rectangle
     {
         color: "transparent"
-
-        layer.enabled: isMobile
-        layer.effect:  DropShadow
-        {
-            anchors.fill: card
-            visible: card.visible
-            horizontalOffset: 0
-            verticalOffset: 3
-            radius: 8.0
-            samples: 17
-            color: Qt.darker(noteColor, 1.5)
-            source: card
-        }
     }
 
     MouseArea
@@ -50,8 +37,6 @@ ItemDelegate
                 rightClicked()
         }
     }
-
-
 
     Rectangle
     {
@@ -84,11 +69,31 @@ ItemDelegate
 
         Label
         {
+            id: date
+            padding: 0
+            visible: date.text.length > 0
+            Layout.leftMargin: space.medium
+            Layout.topMargin: space.medium
+            Layout.rightMargin: space.medium
+            Layout.alignment: Qt.AlignLeft
+
+            Layout.fillWidth: true
+            text: Qt.formatDateTime(new Date(model.addDate), "d MMM h:mm")
+            color: Qt.darker(model.color)
+            elide: Qt.ElideRight
+            wrapMode: TextEdit.WrapAnywhere
+            font.weight: Font.Bold
+            font.bold: true
+            font.pointSize: fontSizes.small
+        }
+
+        Label
+        {
             id: title
             padding: 0
             visible: title.text.length > 0
             Layout.leftMargin: space.medium
-            Layout.topMargin: space.medium
+            Layout.bottomMargin: space.medium
             Layout.rightMargin: space.medium
             Layout.alignment: Qt.AlignLeft
 
@@ -98,12 +103,9 @@ ItemDelegate
             color: Qt.darker(model.color, 3)
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
-
-
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: fontSizes.large
-
         }
 
         TextArea
@@ -142,7 +144,7 @@ ItemDelegate
             Layout.alignment: Qt.AlignCenter
             clip: true
             Layout.topMargin: space.medium
-            sourceComponent:  typeof model.preview !== 'undefined' ? imgComponent : ""
+            sourceComponent:  typeof model.preview !== 'undefined' ? imgComponent : undefined
         }
     }
 
