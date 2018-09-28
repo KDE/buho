@@ -84,26 +84,29 @@ Maui.ApplicationWindow
             id: addButton
             iconName: "list-add"
             iconColor: altColorText
+            barHeight: footBar.height
 
-            model: ListModel
-            {
-                ListElement {iconName: "view-notes"; mid: "note"}
-                ListElement {iconName: "view-links"; mid: "link"}
-                ListElement {iconName: "view-books"; mid: "page"}
-            }
-
-            onItemClicked:
-            {
-                if(item.mid === "note")
-                newNote()
-                else if(item.mid === "link")
-                newLink()
-            }
+            content: [
+                Maui.ToolButton
+                {
+                    iconName: "view-notes"
+                    onClicked: newNote()
+                },
+                Maui.ToolButton
+                {
+                    iconName: "view-links"
+                    onClicked: newLink()
+                },
+                Maui.ToolButton
+                {
+                    iconName: "view-books"
+                }
+            ]
         }
     ]
 
 
-//    /***** COMPONENTS *****/
+    //    /***** COMPONENTS *****/
 
     Connections
     {
@@ -134,7 +137,7 @@ Maui.ApplicationWindow
         onLinkSaved: owl.insertLink(link)
     }
 
-//    /***** VIEWS *****/
+    //    /***** VIEWS *****/
 
     SwipeView
     {
