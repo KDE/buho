@@ -20,6 +20,8 @@ Maui.ApplicationWindow
     altToolBars: false
 
     /**** BRANDING COLORS ****/
+    menuButton.colorScheme.highlightColor: altColorText
+    searchButton.colorScheme.highlightColor: altColorText
     colorSchemeName: "buho"
     headBarBGColor: accentColor
     headBarFGColor: altColorText
@@ -44,6 +46,7 @@ Maui.ApplicationWindow
         {
             onClicked: currentView = views.notes
             iconColor: currentView === views.notes? altColorText : headBarTint
+            colorScheme.highlightColor: altColorText
             iconName: "view-notes"
             text: qsTr("Notes")
         },
@@ -52,6 +55,7 @@ Maui.ApplicationWindow
         {
             onClicked: currentView = views.links
             iconColor: currentView === views.links? altColorText : headBarTint
+            colorScheme.highlightColor: altColorText
             iconName: "view-links"
             text: qsTr("Links")
         },
@@ -60,6 +64,7 @@ Maui.ApplicationWindow
         {
             onClicked: currentView = views.books
             iconColor: currentView === views.books? altColorText : headBarTint
+            colorScheme.highlightColor: altColorText
             iconName: "view-books"
             text: qsTr("Books")
         },
@@ -67,6 +72,7 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             iconColor: currentView === views.tags? altColorText : headBarTint
+            colorScheme.highlightColor: altColorText
             iconName: "tag"
             text: qsTr("Tags")
         }

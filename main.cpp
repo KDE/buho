@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     QtWebView::initialize();
 #else
     QApplication app(argc, argv);
-    QtWebEngine::initialize();
+//    QtWebEngine::initialize();
 #endif
 
     app.setApplicationName(OWL::App);
