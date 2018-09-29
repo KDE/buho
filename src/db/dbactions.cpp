@@ -153,7 +153,7 @@ bool DBActions::removeNote(const QVariantMap &note)
 
 QVariantList DBActions::getNotes()
 {
-    return this->get("select * from notes");
+    return this->get("select * from notes order by updated asc");
 }
 
 QVariantList DBActions::getNoteTags(const QString &id)

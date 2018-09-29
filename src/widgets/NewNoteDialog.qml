@@ -252,7 +252,8 @@ Maui.Popup
                       color: selectedColor,
                       tag: tagBar.getTags(),
                       pin: pinButton.checked,
-                      fav: favButton.checked
+                      fav: favButton.checked,
+                      updated: new Date()
                   })
     }
 }

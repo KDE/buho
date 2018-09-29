@@ -78,7 +78,7 @@ ItemDelegate
             Layout.alignment: Qt.AlignLeft
 
             Layout.fillWidth: true
-            text: Qt.formatDateTime(new Date(model.addDate), "d MMM h:mm")
+            text: Qt.formatDateTime(new Date(model.updated), "d MMM h:mm")
             color: Qt.darker(model.color)
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
@@ -198,5 +198,6 @@ ItemDelegate
         model.color = item.color
         model.pin = item.pin ? 1 : 0
         model.fav = item.fav ? 1 : 0
+        model.updated = item.updated
     }
 }
