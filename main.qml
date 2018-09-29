@@ -140,7 +140,9 @@ Maui.ApplicationWindow
     NewLinkDialog
     {
         id: newLinkDialog
-        onLinkSaved: owl.insertLink(link)
+        onLinkSaved: if(owl.insertLink(link))
+                         linksView.cardsView.currentItem.update(note)
+
     }
 
     //    /***** VIEWS *****/

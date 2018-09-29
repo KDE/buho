@@ -128,6 +128,7 @@ bool DBActions::updateNote(const QVariantMap &note)
     auto pin = note[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
     auto fav = note[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
     auto tags = note[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
+    auto updated = note[OWL::KEYMAP[OWL::KEY::UPDATED]].toString();
 
     QVariantMap note_map =
     {
@@ -136,7 +137,7 @@ bool DBActions::updateNote(const QVariantMap &note)
         {OWL::KEYMAP[OWL::KEY::COLOR], color},
         {OWL::KEYMAP[OWL::KEY::PIN], pin},
         {OWL::KEYMAP[OWL::KEY::FAV], fav},
-        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime().toString()}
+        {OWL::KEYMAP[OWL::KEY::UPDATED], updated}
     };
 
     for(auto tg : tags)
@@ -153,7 +154,7 @@ bool DBActions::removeNote(const QVariantMap &note)
 
 QVariantList DBActions::getNotes()
 {
-    return this->get("select * from notes order by updated asc");
+    return this->get("select * from notes ORDER BY updated ASC");
 }
 
 QVariantList DBActions::getNoteTags(const QString &id)
@@ -205,13 +206,14 @@ bool DBActions::updateLink(const QVariantMap &link)
     auto pin = link[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
     auto fav = link[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
     auto tags = link[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
+    auto updated = link[OWL::KEYMAP[OWL::KEY::UPDATED]].toString();
 
     QVariantMap link_map =
     {
         {OWL::KEYMAP[OWL::KEY::COLOR], color},
         {OWL::KEYMAP[OWL::KEY::PIN], pin},
         {OWL::KEYMAP[OWL::KEY::FAV], fav},
-        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime().toString()},
+        {OWL::KEYMAP[OWL::KEY::UPDATED], updated},
     };
 
     for(auto tg : tags)
@@ -228,7 +230,7 @@ bool DBActions::removeLink(const QVariantMap &link)
 
 QVariantList DBActions::getLinks()
 {
-    return this->get("select * from links");
+    return this->get("select * from links ORDER BY updated ASC");
 }
 
 QVariantList DBActions::getLinkTags(const QString &link)
