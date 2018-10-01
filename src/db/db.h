@@ -55,7 +55,7 @@ public:
 
     /* utils*/
     Q_INVOKABLE bool checkExistance(const QString &tableName, const QString &searchId, const QString &search);
-
+    OWL::DB_LIST getDBData(const QString &queryTxt);
 
 protected:
     QSqlQuery getQuery(const QString &queryTxt);

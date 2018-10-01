@@ -25,6 +25,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDateTime>
 #include "linker.h"
 
+#ifdef STATIC_MAUIKIT
+#include "tagging.h"
+#else
+#include <MauiKit/tagging.h>
+#endif
+
 DBActions::DBActions(QObject *parent) : DB(parent)
 {
     qDebug() << "Getting collectionDB info from: " << OWL::CollectionDBPath;
@@ -35,29 +41,6 @@ DBActions::DBActions(QObject *parent) : DB(parent)
 }
 
 DBActions::~DBActions() {}
-
-OWL::DB_LIST DBActions::getDBData(const QString &queryTxt)
-{
-    OWL::DB_LIST mapList;
-
-    auto query = this->getQuery(queryTxt);
-
-    if(query.exec())
-    {
-        while(query.next())
-        {
-            OWL::DB data;
-            for(auto key : OWL::KEYMAP.keys())
-                if(query.record().indexOf(OWL::KEYMAP[key])>-1)
-                    data.insert(key, query.value(OWL::KEYMAP[key]).toString());
-
-            mapList<< data;
-        }
-
-    }else qDebug()<< query.lastError()<< query.lastQuery();
-
-    return mapList;
-}
 
 QVariantList DBActions::get(const QString &queryTxt)
 {
@@ -82,85 +65,7 @@ QVariantList DBActions::get(const QString &queryTxt)
     return mapList;
 }
 
-bool DBActions::insertNote(const QVariantMap &note)
-{
-    qDebug()<<"TAGS"<< note[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
 
-    auto title = note[OWL::KEYMAP[OWL::KEY::TITLE]].toString();
-    auto body = note[OWL::KEYMAP[OWL::KEY::BODY]].toString();
-    auto color = note[OWL::KEYMAP[OWL::KEY::COLOR]].toString();
-    auto pin = note[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
-    auto fav = note[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
-    auto tags = note[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
-
-    auto id = QUuid::createUuid().toString();
-
-    QVariantMap note_map =
-    {
-        {OWL::KEYMAP[OWL::KEY::ID], id},
-        {OWL::KEYMAP[OWL::KEY::TITLE], title},
-        {OWL::KEYMAP[OWL::KEY::BODY], body},
-        {OWL::KEYMAP[OWL::KEY::COLOR], color},
-        {OWL::KEYMAP[OWL::KEY::PIN], pin},
-        {OWL::KEYMAP[OWL::KEY::FAV], fav},
-        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime().toString()},
-        {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime().toString()}
-    };
-
-    if(this->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map))
-    {
-        for(auto tg : tags)
-            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
-
-        this->noteInserted(note_map);
-        return true;
-    }
-
-    return false;
-}
-
-bool DBActions::updateNote(const QVariantMap &note)
-{
-    auto id = note[OWL::KEYMAP[OWL::KEY::ID]].toString();
-    auto title = note[OWL::KEYMAP[OWL::KEY::TITLE]].toString();
-    auto body = note[OWL::KEYMAP[OWL::KEY::BODY]].toString();
-    auto color = note[OWL::KEYMAP[OWL::KEY::COLOR]].toString();
-    auto pin = note[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
-    auto fav = note[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
-    auto tags = note[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
-    auto updated = note[OWL::KEYMAP[OWL::KEY::UPDATED]].toString();
-
-    QVariantMap note_map =
-    {
-        {OWL::KEYMAP[OWL::KEY::TITLE], title},
-        {OWL::KEYMAP[OWL::KEY::BODY], body},
-        {OWL::KEYMAP[OWL::KEY::COLOR], color},
-        {OWL::KEYMAP[OWL::KEY::PIN], pin},
-        {OWL::KEYMAP[OWL::KEY::FAV], fav},
-        {OWL::KEYMAP[OWL::KEY::UPDATED], updated}
-    };
-
-    for(auto tg : tags)
-        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
-
-    return this->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map, {{OWL::KEYMAP[OWL::KEY::ID], id}} );
-}
-
-bool DBActions::removeNote(const QVariantMap &note)
-{
-    qDebug()<<note;
-    return this->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], note);
-}
-
-QVariantList DBActions::getNotes()
-{
-    return this->get("select * from notes ORDER BY updated ASC");
-}
-
-QVariantList DBActions::getNoteTags(const QString &id)
-{
-    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::NOTES], id);
-}
 
 bool DBActions::insertLink(const QVariantMap &link)
 {

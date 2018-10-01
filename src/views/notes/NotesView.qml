@@ -4,7 +4,7 @@ import "../../widgets"
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
 import "../../utils/owl.js" as O
-
+import Notes 1.0
 
 Maui.Page
 {
@@ -89,12 +89,17 @@ Maui.Page
             Layout.fillWidth: true
             width: parent.width
             Layout.margins: space.big
-            onItemClicked: noteClicked(cardsView.model.get(index))
+            onItemClicked: noteClicked(notesModel.get(index))
             holder.emoji: "qrc:/Type.png"
             holder.emojiSize: iconSizes.huge
             holder.isMask: false
             holder.title : "No notes!"
             holder.body: "Click here to create a new note"
+
+            model: NotesModel
+            {
+                id: notesModel
+            }
 
             Connections
             {
@@ -113,9 +118,9 @@ Maui.Page
 
     function populate()
     {
-        var data =  owl.getNotes()
-        for(var i in data)
-            append(data[i])
+//        var data =  owl.getNotes()
+//        for(var i in data)
+//            append(data[i])
 
     }
 

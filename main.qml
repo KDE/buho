@@ -132,8 +132,7 @@ Maui.ApplicationWindow
         id: editNote
         onNoteSaved:
         {
-            if(owl.updateNote(note))
-                notesView.cardsView.currentItem.update(note)
+            notesView.cardsView.currentItem.update(note)
         }
     }
 
@@ -206,8 +205,8 @@ Maui.ApplicationWindow
 
     function setNote(note)
     {
-        var tags = owl.getNoteTags(note.id)
-        note.tags = tags
+        //        var tags = owl.getNoteTags(note.id)
+        //        note.tags = tags
         notesView.currentNote = note
         editNote.fill(note)
     }

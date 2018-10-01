@@ -24,6 +24,8 @@
 #include "src/documenthandler.h"
 #include "src/linker.h"
 
+#include "models/notesmodel.h"
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -33,7 +35,7 @@ int main(int argc, char *argv[])
     QtWebView::initialize();
 #else
     QApplication app(argc, argv);
-//    QtWebEngine::initialize();
+    //    QtWebEngine::initialize();
 #endif
 
     app.setApplicationName(OWL::App);
@@ -61,7 +63,7 @@ int main(int argc, char *argv[])
     context->setContextProperty("linker", &linker);
     context->setContextProperty("tag", tag);
     qmlRegisterType<DocumentHandler>("org.buho.editor", 1, 0, "DocumentHandler");
-
+    qmlRegisterType<NotesModel>("Notes", 1, 0, "NotesModel");
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

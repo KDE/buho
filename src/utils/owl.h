@@ -80,7 +80,7 @@ namespace OWL
         {TABLE::LINKS_TAGS,"links_tags"}
     };
 
-    enum class KEY :uint8_t
+    enum KEY :uint8_t
     {
         URL,
         UPDATED,

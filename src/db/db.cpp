@@ -132,6 +132,29 @@ bool DB::checkExistance(const QString &tableName, const QString &searchId, const
     return false;
 }
 
+OWL::DB_LIST DB::getDBData(const QString &queryTxt)
+{
+        OWL::DB_LIST mapList;
+
+        auto query = this->getQuery(queryTxt);
+
+        if(query.exec())
+        {
+            while(query.next())
+            {
+                OWL::DB data;
+                for(auto key : OWL::KEYMAP.keys())
+                    if(query.record().indexOf(OWL::KEYMAP[key])>-1)
+                        data.insert(key, query.value(OWL::KEYMAP[key]).toString());
+
+                mapList<< data;
+            }
+
+        }else qDebug()<< query.lastError()<< query.lastQuery();
+
+        return mapList;
+}
+
 QSqlQuery DB::getQuery(const QString &queryTxt)
 {
     QSqlQuery query(queryTxt, this->m_db);

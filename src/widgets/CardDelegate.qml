@@ -8,7 +8,7 @@ import org.kde.kirigami 2.2 as Kirigami
 ItemDelegate
 {
     id: control
-    property string noteColor : color ? color : viewBackgroundColor
+    property string noteColor : model.color ? model.color : viewBackgroundColor
     property int cardWidth: visible ? unit * 200 : 0
     property int cardHeight: visible ? unit * 120 : 0
     property int cardRadius: radiusV
