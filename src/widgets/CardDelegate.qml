@@ -207,12 +207,13 @@ ItemDelegate
 
     function update(item)
     {
-        console.log("update link color", item.color)
+        console.log("update link color", item.color, item.tag)
         model.title = item.title
         model.body = item.body
         model.color = item.color
         model.pin = item.pin ? 1 : 0
         model.fav = item.fav ? 1 : 0
         model.updated = item.updated
+        model.tag = item.tag.join(",")
     }
 }

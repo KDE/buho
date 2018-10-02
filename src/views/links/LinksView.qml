@@ -15,6 +15,7 @@ Maui.Page
     property alias cardsView : cardsView
     property alias previewer : previewer
     property alias model : linksModel
+    property alias currentIndex : cardsView.currentIndex
 
     property var currentLink : ({})
 

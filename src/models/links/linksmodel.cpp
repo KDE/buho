@@ -48,6 +48,11 @@ bool LinksModel::insert(const QVariantMap &link)
     return false;
 }
 
+QVariantList LinksModel::getTags(const int &index)
+{
+    return this->mLinks->getLinkTags(this->mLinks->items().at(index)[OWL::KEY::LINK]);
+}
+
 bool LinksModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (!mLinks)

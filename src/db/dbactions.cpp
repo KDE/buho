@@ -38,8 +38,6 @@ DBActions::DBActions(QObject *parent) : QObject(parent)
 
     qDebug()<< "Starting DBActions";
     this->db = DB::getInstance();
-    this->tag =  Tagging::getInstance(OWL::App, OWL::version, "org.kde.buho", OWL::comment);
-
 }
 
 DBActions::~DBActions() {}

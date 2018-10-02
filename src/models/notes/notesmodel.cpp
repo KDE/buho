@@ -48,6 +48,12 @@ bool NotesModel::insert(const QVariantMap &note)
     return false;
 }
 
+QVariantList NotesModel::getTags(const int &index)
+{
+    qDebug()<< "CURRENT INDEX FOR "<< index;
+    return this->mNotes->getNoteTags(this->mNotes->items().at(index)[OWL::KEY::ID]);
+}
+
 bool NotesModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (!mNotes)

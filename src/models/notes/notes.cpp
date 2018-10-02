@@ -12,6 +12,7 @@
 Notes::Notes(QObject *parent) : QObject(parent)
 {
     this->db = DB::getInstance();
+    this->tag =  Tagging::getInstance(OWL::App, OWL::version, "org.kde.buho", OWL::comment);
     this->sortBy(OWL::KEY::UPDATED, "DESC");
 }
 
@@ -112,6 +113,8 @@ bool Notes::updateNote(const OWL::DB &note)
         {OWL::KEYMAP[OWL::KEY::UPDATED], updated}
     };
 
+
+    qDebug()<< "TRYING TO UPDATE TAGS"<< tags;
     for(auto tg : tags)
         this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
 

@@ -23,7 +23,7 @@ public:
     bool updateLink(const OWL::DB &link);
     Q_INVOKABLE bool removeLink(const QVariantMap &link);
 
-    Q_INVOKABLE QVariantList getLinkTags(const QString &link);
+    QVariantList getLinkTags(const QString &link);
 private:
     Tagging *tag;
     DB *db;

@@ -194,16 +194,16 @@ Maui.ApplicationWindow
 
     function setNote(note)
     {
-        //        var tags = owl.getNoteTags(note.id)
-        //        note.tags = tags
+        var tags = notesView.model.getTags(notesView.currentIndex)
+        note.tags = tags
         notesView.currentNote = note
         editNote.fill(note)
     }
 
     function previewLink(link)
     {
-//        var tags = linksView.model.getLinkTags(link.link)
-//        link.tags = tags
+        var tags = linksView.model.getTags(linksView.currentIndex)
+        link.tags = tags
 
         linksView.previewer.show(link)
     }

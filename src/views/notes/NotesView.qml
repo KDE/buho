@@ -15,6 +15,7 @@ Maui.Page
 
     property alias cardsView : cardsView
     property alias model : notesModel
+    property alias currentIndex : cardsView.currentIndex
 
     signal noteClicked(var note)
 
@@ -116,7 +117,6 @@ Maui.Page
             itemHeight: cardsView.itemHeight * 0.9
             itemWidth: itemHeight
             onItemClicked: noteClicked(cardsView.model.get(index))
-
         }
 
         Kirigami.Separator
