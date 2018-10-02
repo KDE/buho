@@ -2,6 +2,7 @@
 #include <QUuid>
 
 #include "db/db.h"
+#include "linker.h"
 
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
@@ -17,50 +18,50 @@ Links::Links(QObject *parent) : QObject(parent)
 
 void Links::sortBy(const OWL::KEY &key, const QString &order)
 {
-    this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(OWL::KEYMAP[key], order));
+    this->links = this->db->getDBData(QString("select * from links ORDER BY %1 %2").arg(OWL::KEYMAP[key], order));
 }
 
 OWL::DB_LIST Links::items() const
 {
-    return this->notes;
+    return this->links;
 }
 
-bool Links::insertNote(const QVariantMap &note)
+bool Links::insertLink(const QVariantMap &link)
 {
-    qDebug()<<"TAGS"<< note[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
+    auto url = link[OWL::KEYMAP[OWL::KEY::LINK]].toString();
+    auto color = link[OWL::KEYMAP[OWL::KEY::COLOR]].toString();
+    auto pin = link[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
+    auto fav = link[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
+    auto tags = link[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
+    auto preview = link[OWL::KEYMAP[OWL::KEY::PREVIEW]].toString();
+    auto title = link[OWL::KEYMAP[OWL::KEY::TITLE]].toString();
 
-    auto title = note[OWL::KEYMAP[OWL::KEY::TITLE]].toString();
-    auto body = note[OWL::KEYMAP[OWL::KEY::BODY]].toString();
-    auto color = note[OWL::KEYMAP[OWL::KEY::COLOR]].toString();
-    auto pin = note[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
-    auto fav = note[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
-    auto tags = note[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
+    auto image_path = OWL::saveImage(Linker::getUrl(preview), OWL::LinksPath+QUuid::createUuid().toString());
 
-    auto id = QUuid::createUuid().toString();
-
-    QVariantMap note_map =
+    QVariantMap link_map =
     {
-        {OWL::KEYMAP[OWL::KEY::ID], id},
+        {OWL::KEYMAP[OWL::KEY::LINK], url},
         {OWL::KEYMAP[OWL::KEY::TITLE], title},
-        {OWL::KEYMAP[OWL::KEY::BODY], body},
-        {OWL::KEYMAP[OWL::KEY::COLOR], color},
         {OWL::KEYMAP[OWL::KEY::PIN], pin},
         {OWL::KEYMAP[OWL::KEY::FAV], fav},
-        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime().toString()},
-        {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime().toString()}
+        {OWL::KEYMAP[OWL::KEY::PREVIEW], image_path},
+        {OWL::KEYMAP[OWL::KEY::COLOR], color},
+        {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime().toString()},
+        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime().toString()}
+
     };
 
-    if(this->db->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map))
+    if(this->db->insert(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map))
     {
         for(auto tg : tags)
-            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
+            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
 
-        this->notes << OWL::DB
+        this->links << OWL::DB
                        ({
-                            {OWL::KEY::ID, id},
+                            {OWL::KEY::LINK, url},
                             {OWL::KEY::TITLE, title},
-                            {OWL::KEY::BODY, body},
                             {OWL::KEY::COLOR, color},
+                            {OWL::KEY::PREVIEW, preview},
                             {OWL::KEY::PIN, QString::number(pin)},
                             {OWL::KEY::FAV, QString::number(fav)},
                             {OWL::KEY::UPDATED, QDateTime::currentDateTime().toString()},
@@ -73,39 +74,37 @@ bool Links::insertNote(const QVariantMap &note)
     return false;
 }
 
-bool Links::updateNote(const int &index, const QVariant &value, const int &role)
+bool Links::updateLink(const int &index, const QVariant &value, const int &role)
 {
-    if(index < 0 || index >= notes.size())
+    if(index < 0 || index >= links.size())
         return false;
 
-    const auto oldValue = this->notes[index][static_cast<OWL::KEY>(role)];
+    const auto oldValue = this->links[index][static_cast<OWL::KEY>(role)];
 
     if(oldValue == value.toString())
         return false;
 
-    this->notes[index].insert(static_cast<OWL::KEY>(role), value.toString());
+    qDebug()<< "VALUE TO UPDATE"<<  OWL::KEYMAP[static_cast<OWL::KEY>(role)] << oldValue;
 
-    this->updateNote(this->notes[index]);
+    this->links[index].insert(static_cast<OWL::KEY>(role), value.toString());
+
+    this->updateLink(this->links[index]);
 
     return true;
 }
 
 
-bool Links::updateNote(const OWL::DB &note)
+bool Links::updateLink(const OWL::DB &link)
 {
-    auto id = note[OWL::KEY::ID];
-    auto title = note[OWL::KEY::TITLE];
-    auto body = note[OWL::KEY::BODY];
-    auto color = note[OWL::KEY::COLOR];
-    auto pin = note[OWL::KEY::PIN].toInt();
-    auto fav = note[OWL::KEY::FAV].toInt();
-    auto tags = note[OWL::KEY::TAG].split(",", QString::SkipEmptyParts);
-    auto updated =note[OWL::KEY::UPDATED];
+    auto url = link[OWL::KEY::LINK];
+    auto color = link[OWL::KEY::COLOR];
+    auto pin = link[OWL::KEY::PIN].toInt();
+    auto fav = link[OWL::KEY::FAV].toInt();
+    auto tags = link[OWL::KEY::TAG].split(",", QString::SkipEmptyParts);
+    auto updated = link[OWL::KEY::UPDATED];
 
-    QVariantMap note_map =
+    QVariantMap link_map =
     {
-        {OWL::KEYMAP[OWL::KEY::TITLE], title},
-        {OWL::KEYMAP[OWL::KEY::BODY], body},
         {OWL::KEYMAP[OWL::KEY::COLOR], color},
         {OWL::KEYMAP[OWL::KEY::PIN], pin},
         {OWL::KEYMAP[OWL::KEY::FAV], fav},
@@ -113,18 +112,18 @@ bool Links::updateNote(const OWL::DB &note)
     };
 
     for(auto tg : tags)
-        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
+        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
 
-    return this->db->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map, {{OWL::KEYMAP[OWL::KEY::ID], id}} );
+    return this->db->update(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map, {{OWL::KEYMAP[OWL::KEY::LINK], url}} );
 }
 
-bool Links::removeNote(const QVariantMap &note)
+bool Links::removeLink(const QVariantMap &link)
 {
-    qDebug()<<note;
-    return this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], note);
+    qDebug()<<link;
+    return this->db->remove(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
 }
 
-QVariantList Links::getNoteTags(const QString &id)
+QVariantList Links::getLinkTags(const QString &link)
 {
-    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::NOTES], id);
+    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
 }

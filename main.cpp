@@ -25,6 +25,7 @@
 #include "src/linker.h"
 
 #include "models/notes/notesmodel.h"
+#include "models/links/linksmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -62,10 +63,14 @@ int main(int argc, char *argv[])
 
     context->setContextProperty("linker", &linker);
     context->setContextProperty("tag", tag);
+
     qmlRegisterType<DocumentHandler>("org.buho.editor", 1, 0, "DocumentHandler");
 
     qmlRegisterUncreatableMetaObject(OWL::staticMetaObject, "Owl", 1, 0, "KEY", "Error");
+
     qmlRegisterType<NotesModel>("Notes", 1, 0, "NotesModel");
+    qmlRegisterType<LinksModel>("Links", 1, 0, "LinksModel");
+
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

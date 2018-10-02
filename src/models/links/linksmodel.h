@@ -1,5 +1,5 @@
-#ifndef NOTESMODEL_H
-#define NOTESMODEL_H
+#ifndef LINKSMODEL_H
+#define LINKSMODEL_H
 
 #include <QAbstractListModel>
 #include <QList>
@@ -24,7 +24,7 @@ public:
 
     Q_INVOKABLE QVariantMap get(const int &index);
     Q_INVOKABLE void sortBy(const int &index, const QString &order);
-    Q_INVOKABLE bool insert(const QVariantMap &note);
+    Q_INVOKABLE bool insert(const QVariantMap &link);
 
     // Editable:
     bool setData(const QModelIndex &index, const QVariant &value,
@@ -34,13 +34,8 @@ public:
 
     virtual QHash<int, QByteArray> roleNames() const override;
 
-    friend bool operator<(const OWL::DB & m1, const OWL::DB & m2)
-    {
-        return m1[OWL::KEY::TITLE] < m2[OWL::KEY::TITLE];
-    }
-
 private:
-    Links *mNotes;
+    Links *mLinks;
 };
 
 #endif // NOTESMODEL_H

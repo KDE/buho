@@ -4,29 +4,29 @@
 LinksModel::LinksModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    this->mNotes = new Links(this);
+    this->mLinks = new Links(this);
 }
 
 int LinksModel::rowCount(const QModelIndex &parent) const
 {
-    if (parent.isValid() || !mNotes)
+    if (parent.isValid() || !mLinks)
         return 0;
 
-    return mNotes->items().size();
+    return mLinks->items().size();
 }
 
 QVariant LinksModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || !mNotes)
+    if (!index.isValid() || !mLinks)
         return QVariant();
 
-    return mNotes->items().at(index.row())[static_cast<OWL::KEY>(role)];
+    return mLinks->items().at(index.row())[static_cast<OWL::KEY>(role)];
 }
 
 QVariantMap LinksModel::get(const int &index)
 {
     QVariantMap res;
-    const auto note = mNotes->items().at(index);
+    const auto note = mLinks->items().at(index);
     for(auto key : note.keys())
         res.insert(OWL::KEYMAP[key], note[key]);
     return res;
@@ -35,25 +35,25 @@ QVariantMap LinksModel::get(const int &index)
 void LinksModel::sortBy(const int &index, const QString &order)
 {
     beginResetModel();
-    mNotes->sortBy(static_cast<OWL::KEY>(index), order);
+    mLinks->sortBy(static_cast<OWL::KEY>(index), order);
     endResetModel();
 }
 
-bool LinksModel::insert(const QVariantMap &note)
+bool LinksModel::insert(const QVariantMap &link)
 {
-    const int index = mNotes->items().size();
+    const int index = mLinks->items().size();
     beginInsertRows(QModelIndex(), index, index);
-    this->mNotes->insertNote(note);
+    this->mLinks->insertLink(link);
     endInsertRows();
     return false;
 }
 
 bool LinksModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (!mNotes)
+    if (!mLinks)
         return false;
 
-    if (mNotes->updateNote(index.row(), value, role))
+    if (mLinks->updateLink(index.row(), value, role))
     {
         emit dataChanged(index, index, QVector<int>() << role);
         return true;
@@ -92,36 +92,36 @@ QHash<int, QByteArray> LinksModel::roleNames() const
 
 //Notes *NotesModel::notes() const
 //{
-//    return mNotes;
+//    return mLinks;
 //}
 
 //void NotesModel::setNotes(Notes *value)
 //{
 //    beginResetModel();
 
-//    if(mNotes)
-//        mNotes->disconnect(this);
-//    mNotes = value;
+//    if(mLinks)
+//        mLinks->disconnect(this);
+//    mLinks = value;
 
-////    if(mNotes)
+////    if(mLinks)
 ////    {
-////        connect(mNotes, &Notes::preItemAppended, this, [=]()
+////        connect(mLinks, &Notes::preItemAppended, this, [=]()
 ////        {
-////            const int index = mNotes->items().size();
+////            const int index = mLinks->items().size();
 ////            beginInsertRows(QModelIndex(), index, index);
 ////        });
 
-////        connect(mNotes, &Notes::postItemAppended, this, [=]()
+////        connect(mLinks, &Notes::postItemAppended, this, [=]()
 ////        {
 ////            endInsertRows();
 ////        });
 
-////        connect(mNotes, &Notes::preItemRemoved, this, [=](int index)
+////        connect(mLinks, &Notes::preItemRemoved, this, [=](int index)
 ////        {
 ////            beginInsertRows(QModelIndex(), index, index);
 ////        });
 
-////        connect(mNotes, &Notes::preItemRemoved, this, [=]()
+////        connect(mLinks, &Notes::preItemRemoved, this, [=]()
 ////        {
 ////            endRemoveRows();
 ////        });

@@ -180,13 +180,6 @@ Maui.ApplicationWindow
 
     }
 
-    Component.onCompleted:
-    {
-        notesView.populate()
-        linksView.populate()
-    }
-
-
     function newNote()
     {
         currentView = views.notes
@@ -209,8 +202,8 @@ Maui.ApplicationWindow
 
     function previewLink(link)
     {
-        var tags = owl.getLinkTags(link.link)
-        link.tags = tags
+//        var tags = linksView.model.getLinkTags(link.link)
+//        link.tags = tags
 
         linksView.previewer.show(link)
     }

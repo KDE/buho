@@ -18,19 +18,16 @@ public:
 
     void sortBy(const OWL::KEY &key, const QString &order = "DESC");
 
+    Q_INVOKABLE bool insertLink(const QVariantMap &link);
+    bool updateLink(const int &index, const QVariant &value, const int &role);
+    bool updateLink(const OWL::DB &link);
+    Q_INVOKABLE bool removeLink(const QVariantMap &link);
 
-    bool insertNote(const QVariantMap &note);
-
-    bool updateNote(const int &index, const QVariant &value, const int &role);
-    bool updateNote(const OWL::DB &note);
-
-    bool removeNote(const QVariantMap &note);
-    QVariantList getNoteTags(const QString &id);
-
+    Q_INVOKABLE QVariantList getLinkTags(const QString &link);
 private:
     Tagging *tag;
     DB *db;
-    OWL::DB_LIST notes;
+    OWL::DB_LIST links;
 
 signals:
 

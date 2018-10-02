@@ -36,11 +36,6 @@ public:
     Q_INVOKABLE QVariantList get(const QString &queryTxt);
 
     /*main actions*/
-    Q_INVOKABLE bool insertLink(const QVariantMap &link);
-    Q_INVOKABLE bool updateLink(const QVariantMap &link);
-    Q_INVOKABLE bool removeLink(const QVariantMap &link);
-    Q_INVOKABLE QVariantList getLinks();
-    Q_INVOKABLE QVariantList getLinkTags(const QString &link);
 
 protected:
     OWL::DB_LIST getDBData(const QString &queryTxt);

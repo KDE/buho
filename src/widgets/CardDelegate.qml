@@ -95,7 +95,8 @@ ItemDelegate
             Layout.leftMargin: space.medium
             Layout.bottomMargin: space.medium
             Layout.rightMargin: space.medium
-            Layout.alignment: Qt.AlignLeft
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            Layout.preferredHeight: model.preview ? parent.height * 0.4 : undefined
 
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -106,32 +107,22 @@ ItemDelegate
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: fontSizes.large
+            clip: true
         }
 
-        TextArea
+
+        Loader
         {
-            id: body
-            padding: 0
-            visible: typeof model.body !== 'undefined'
-            Layout.leftMargin: visible ? space.medium : 0
-            Layout.bottomMargin: visible ? space.medium : 0
-            Layout.rightMargin: visible ? space.medium : 0
+            id: bodyLoader
+            Layout.leftMargin: space.medium
+            Layout.bottomMargin: space.medium
+            Layout.rightMargin: space.medium
             Layout.topMargin: title.visible ? 0 : space.medium
             Layout.alignment: Qt.AlignLeft
-            Layout.fillHeight: visible
-            Layout.fillWidth: visible
-            enabled: false
-            text: model.body ? model.body : ""
-            color: model.color ? Qt.darker(model.color, 3) : textColor
-            wrapMode: TextEdit.WrapAnywhere
+            Layout.fillHeight: true
+            Layout.fillWidth: true
 
-            textFormat: TextEdit.RichText
-            font.pointSize: fontSizes.big
-
-            background: Rectangle
-            {
-                color: "transparent"
-            }
+            sourceComponent: typeof model.body !== 'undefined' ? bodyComponent : undefined
         }
 
 
@@ -148,6 +139,30 @@ ItemDelegate
         }
     }
 
+    Component
+    {
+        id: bodyComponent
+
+        TextArea
+        {
+            id: body
+            padding: 0
+            visible: typeof model.body !== 'undefined'
+
+            enabled: false
+            text: model.body ? model.body : ""
+            color: model.color ? Qt.darker(model.color, 3) : textColor
+            wrapMode: TextEdit.WrapAnywhere
+
+            textFormat: TextEdit.RichText
+            font.pointSize: fontSizes.big
+
+            background: Rectangle
+            {
+                color: "transparent"
+            }
+        }
+    }
 
     Component
     {

@@ -21,7 +21,7 @@ Maui.Popup
         anchors.fill: parent
         margins: 0
         padding: 0
-
+        headBarTitle: webView.title
         headBarExit: false
         headBar.leftContent: [
             Maui.ToolButton
@@ -170,6 +170,7 @@ Maui.Popup
     function packLink()
     {
         linkSaved({
+                      title: webView.title,
                       link: webView.url,
                       color: colorBar.currentColor,
                       tag: tagBar.getTags(),

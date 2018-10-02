@@ -5,6 +5,7 @@ import "../../widgets"
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
 import "../../utils/owl.js" as O
+
 import Notes 1.0
 import Owl 1.0
 
@@ -44,6 +45,12 @@ Maui.Page
                 {
                     text: qsTr("Title")
                     onTriggered: notesModel.sortBy(KEY.TITLE, "ASC")
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Color")
+                    onTriggered: notesModel.sortBy(KEY.COLOR, "ASC")
                 }
 
                 MenuItem
@@ -147,18 +154,5 @@ Maui.Page
                                      cardsView.model.remove(cardsView.currentIndex)
             }
         }
-    }
-
-    function populate()
-    {
-        //        var data =  owl.getNotes()
-        //        for(var i in data)
-        //            append(data[i])
-
-    }
-
-    function append(note)
-    {
-        cardsView.model.append(note)
     }
 }

@@ -36,8 +36,6 @@ GridView
         id: cardMenu
     }
 
-    model: ListModel { id: cardsModel}
-
     delegate: CardDelegate
     {
         id: delegate
@@ -67,24 +65,4 @@ GridView
     }
 
     ScrollBar.vertical: ScrollBar{ id:scrollBar; visible: !isMobile}
-
-//    onWidthChanged: if(!isMobile && gridView) adaptGrid()
-
-    function adaptGrid()
-    {
-        var amount = parseInt(width/(itemWidth + itemSpacing),10)
-        var leftSpace = parseInt(width-(amount*(itemWidth + itemSpacing)), 10)
-        var size = parseInt((itemWidth + itemSpacing)+(parseInt(leftSpace/amount, 10)), 10)
-
-        size = size > itemWidth + itemSpacing ? size : itemWidth + itemSpacing
-
-        cellWidth = size
-
-    }
-
-    function refresh()
-    {
-        model = cardsModel
-    }
-
 }

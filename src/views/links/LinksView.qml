@@ -1,7 +1,12 @@
 import QtQuick 2.9
-import "../../widgets"
+import QtQuick.Controls 2.4
 import org.kde.mauikit 1.0 as Maui
+
+import "../../widgets"
 import "../../utils/owl.js" as O
+
+import Links 1.0
+import Owl 1.0
 
 Maui.Page
 {
@@ -9,8 +14,12 @@ Maui.Page
 
     property alias cardsView : cardsView
     property alias previewer : previewer
+    property alias model : linksModel
+
     property var currentLink : ({})
+
     signal linkClicked(var link)
+
     headBarVisible: !cardsView.holder.visible
 
     margins: space.big
@@ -20,15 +29,46 @@ Maui.Page
         Maui.ToolButton
         {
             iconName: cardsView.gridView ? "view-list-icons" : "view-list-details"
-            onClicked:
-            {
-                cardsView.gridView = !cardsView.gridView
-                cardsView.refresh()
-            }
+            onClicked: cardsView.gridView = !cardsView.gridView
+
         },
         Maui.ToolButton
         {
             iconName: "view-sort"
+            onClicked: sortMenu.open();
+
+            Menu
+            {
+                 id: sortMenu
+                MenuItem
+                {
+                    text: qsTr("Title")
+                    onTriggered: linksModel.sortBy(KEY.TITLE, "ASC")
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Color")
+                    onTriggered: linksModel.sortBy(KEY.COLOR, "ASC")
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Add date")
+                    onTriggered: linksModel.sortBy(KEY.ADD_DATE, "DESC")
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Updated")
+                    onTriggered: linksModel.sortBy(KEY.UPDATED, "DESC")
+                }
+                MenuItem
+                {
+                    text: qsTr("Fav")
+                    onTriggered: linksModel.sortBy(KEY.FAV, "DESC")
+                }
+            }
 
         }
     ]
@@ -56,8 +96,12 @@ Maui.Page
     Previewer
     {
         id: previewer
-        onLinkSaved: if(owl.updateLink(link))
-                         cardsView.currentItem.update(link)
+        onLinkSaved: cardsView.currentItem.update(link)
+    }
+
+    LinksModel
+    {
+        id: linksModel
     }
 
     CardsView
@@ -71,6 +115,8 @@ Maui.Page
         holder.body: "Click here to save a new link"
         holder.emojiSize: iconSizes.huge
         itemHeight: unit * 250
+        model: linksModel
+
         Connections
         {
             target: cardsView.holder
@@ -83,21 +129,5 @@ Maui.Page
             onDeleteClicked: if(O.removeLink(cardsView.model.get(cardsView.currentIndex)))
                                  cardsView.model.remove(cardsView.currentIndex)
         }
-    }
-
-    function populate()
-    {
-        var data =  owl.getLinks()
-        for(var i in data)
-        {
-            console.log("PREVIEW", data[i].preview)
-            append(data[i])
-        }
-
-    }
-
-    function append(link)
-    {
-        cardsView.model.append(link)
     }
 }
