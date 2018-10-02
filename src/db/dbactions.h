@@ -22,10 +22,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DBACTIONS_H
 
 #include <QObject>
-#include "db.h"
+#include "owl.h"
 
+class DB;
 class Tagging;
-class DBActions : public DB
+class DBActions : public QObject
 {
     Q_OBJECT
 public:
@@ -45,7 +46,7 @@ protected:
     OWL::DB_LIST getDBData(const QString &queryTxt);
     bool execQuery(const QString &queryTxt);
     Tagging *tag;
-
+    DB *db;
     void removeAbtractTags(const QString &key, const QString &lot);
 
 signals:

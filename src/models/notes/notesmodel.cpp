@@ -1,5 +1,4 @@
 #include "notesmodel.h"
-#include "owl.h"
 #include "notes.h"
 
 NotesModel::NotesModel(QObject *parent)
@@ -24,13 +23,29 @@ QVariant NotesModel::data(const QModelIndex &index, int role) const
     return mNotes->items().at(index.row())[static_cast<OWL::KEY>(role)];
 }
 
-QVariantMap NotesModel::get(const int index)
+QVariantMap NotesModel::get(const int &index)
 {
     QVariantMap res;
     const auto note = mNotes->items().at(index);
     for(auto key : note.keys())
         res.insert(OWL::KEYMAP[key], note[key]);
     return res;
+}
+
+void NotesModel::sortBy(const int &index, const QString &order)
+{
+    beginResetModel();
+    mNotes->sortBy(static_cast<OWL::KEY>(index), order);
+    endResetModel();
+}
+
+bool NotesModel::insert(const QVariantMap &note)
+{
+    const int index = mNotes->items().size();
+    beginInsertRows(QModelIndex(), index, index);
+    this->mNotes->insertNote(note);
+    endInsertRows();
+    return false;
 }
 
 bool NotesModel::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -75,42 +90,42 @@ QHash<int, QByteArray> NotesModel::roleNames() const
     return names;
 }
 
-Notes *NotesModel::notes() const
-{
-    return mNotes;
-}
+//Notes *NotesModel::notes() const
+//{
+//    return mNotes;
+//}
 
-void NotesModel::setNotes(Notes *value)
-{
-    beginResetModel();
+//void NotesModel::setNotes(Notes *value)
+//{
+//    beginResetModel();
 
-    if(mNotes)
-        mNotes->disconnect(this);
-    mNotes = value;
+//    if(mNotes)
+//        mNotes->disconnect(this);
+//    mNotes = value;
 
-    if(mNotes)
-    {
-        connect(mNotes, &Notes::preItemAppended, this, [=]()
-        {
-            const int index = mNotes->items().size();
-            beginInsertRows(QModelIndex(), index, index);
-        });
+////    if(mNotes)
+////    {
+////        connect(mNotes, &Notes::preItemAppended, this, [=]()
+////        {
+////            const int index = mNotes->items().size();
+////            beginInsertRows(QModelIndex(), index, index);
+////        });
 
-        connect(mNotes, &Notes::postItemAppended, this, [=]()
-        {
-            endInsertRows();
-        });
+////        connect(mNotes, &Notes::postItemAppended, this, [=]()
+////        {
+////            endInsertRows();
+////        });
 
-        connect(mNotes, &Notes::preItemRemoved, this, [=](int index)
-        {
-            beginInsertRows(QModelIndex(), index, index);
-        });
+////        connect(mNotes, &Notes::preItemRemoved, this, [=](int index)
+////        {
+////            beginInsertRows(QModelIndex(), index, index);
+////        });
 
-        connect(mNotes, &Notes::preItemRemoved, this, [=]()
-        {
-            endRemoveRows();
-        });
-    }
+////        connect(mNotes, &Notes::preItemRemoved, this, [=]()
+////        {
+////            endRemoveRows();
+////        });
+////    }
 
-    endResetModel();
-}
+//    endResetModel();
+//}

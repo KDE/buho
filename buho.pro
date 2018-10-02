@@ -46,8 +46,10 @@ SOURCES += \
     src/documenthandler.cpp \
     src/linker.cpp \
     src/utils/htmlparser.cpp \
-    src/models/notesmodel.cpp \
-    src/models/notes.cpp
+    src/models/notes/notesmodel.cpp \
+    src/models/notes/notes.cpp \
+    src/models/links/linksmodel.cpp \
+    src/models/links/links.cpp
 
 RESOURCES += \
     qml.qrc \
@@ -77,8 +79,10 @@ HEADERS += \
     src/documenthandler.h \
     src/linker.h \
     src/utils/htmlparser.h \
-    src/models/notesmodel.h \
-    src/models/notes.h
+    src/models/notes/notesmodel.h \
+    src/models/notes/notes.h \
+    src/models/links/linksmodel.h \
+    src/models/links/links.h
 
 INCLUDEPATH += \
     src/utils/ \

@@ -26,6 +26,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 DB::DB(QObject *parent) : QObject(parent)
 {
+   init();
+}
+
+DB::~DB()
+{
+    this->m_db.close();
+}
+
+void DB::init()
+{
     QDir collectionDBPath_dir(OWL::CollectionDBPath);
     if (!collectionDBPath_dir.exists())
         collectionDBPath_dir.mkpath(".");
@@ -39,9 +49,20 @@ DB::DB(QObject *parent) : QObject(parent)
     }else this->openDB(this->name);
 }
 
-DB::~DB()
+DB *DB::instance = nullptr;
+DB *DB::getInstance()
 {
-    this->m_db.close();
+    if(!instance)
+    {
+        instance = new DB();
+        qDebug() << "getInstance(): First DB instance\n";
+        instance->init();
+        return instance;
+    } else
+    {
+        qDebug()<< "getInstance(): previous DB instance\n";
+        return instance;
+    }
 }
 
 void DB::openDB(const QString &name)

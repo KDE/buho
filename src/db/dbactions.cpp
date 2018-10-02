@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QUuid>
 #include <QDateTime>
 #include "linker.h"
+#include "db.h"
 
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
@@ -31,11 +32,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <MauiKit/tagging.h>
 #endif
 
-DBActions::DBActions(QObject *parent) : DB(parent)
+DBActions::DBActions(QObject *parent) : QObject(parent)
 {
     qDebug() << "Getting collectionDB info from: " << OWL::CollectionDBPath;
 
     qDebug()<< "Starting DBActions";
+    this->db = DB::getInstance();
     this->tag =  Tagging::getInstance(OWL::App, OWL::version, "org.kde.buho", OWL::comment);
 
 }
@@ -46,7 +48,7 @@ QVariantList DBActions::get(const QString &queryTxt)
 {
     QVariantList mapList;
 
-    auto query = this->getQuery(queryTxt);
+    auto query = this->db->getQuery(queryTxt);
 
     if(query.exec())
     {
@@ -92,7 +94,7 @@ bool DBActions::insertLink(const QVariantMap &link)
 
     };
 
-    if(this->insert(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map))
+    if(this->db->insert(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map))
     {
         for(auto tg : tags)
             this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
@@ -124,13 +126,13 @@ bool DBActions::updateLink(const QVariantMap &link)
     for(auto tg : tags)
         this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
 
-    return this->update(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map, {{OWL::KEYMAP[OWL::KEY::LINK], url}} );
+    return this->db->update(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map, {{OWL::KEYMAP[OWL::KEY::LINK], url}} );
 
 }
 
 bool DBActions::removeLink(const QVariantMap &link)
 {
-    return this->remove(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
+    return this->db->remove(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
 }
 
 QVariantList DBActions::getLinks()
@@ -145,7 +147,7 @@ QVariantList DBActions::getLinkTags(const QString &link)
 
 bool DBActions::execQuery(const QString &queryTxt)
 {
-    auto query = this->getQuery(queryTxt);
+    auto query = this->db->getQuery(queryTxt);
     return query.exec();
 }
 

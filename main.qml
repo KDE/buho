@@ -117,23 +117,19 @@ Maui.ApplicationWindow
     Connections
     {
         target: owl
-        onNoteInserted: notesView.append(note)
         onLinkInserted: linksView.append(link)
     }
 
     NewNoteDialog
     {
         id: newNoteDialog
-        onNoteSaved: owl.insertNote(note)
+        onNoteSaved: notesView.model.insert(note)
     }
 
     NewNoteDialog
     {
         id: editNote
-        onNoteSaved:
-        {
-            notesView.cardsView.currentItem.update(note)
-        }
+        onNoteSaved: notesView.cardsView.currentItem.update(note)
     }
 
     NewLinkDialog

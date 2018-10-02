@@ -18,8 +18,6 @@
 namespace OWL
 {
     Q_NAMESPACE
-
-
     enum class W : uint8_t
     {
         TITLE,
@@ -96,9 +94,9 @@ namespace OWL
         LINK,
         PIN,
         NONE
-    };
+    }; Q_ENUM_NS(KEY);
 
-    typedef QMap<OWL::KEY, QString> DB;
+    typedef QHash<OWL::KEY, QString> DB;
     typedef QList<DB> DB_LIST;
 
     static const DB KEYMAP =
@@ -154,8 +152,6 @@ namespace OWL
         QJsonObject obj = d.object();
         return obj.toVariantMap();
     }
-
-
 
     inline QString saveImage(QByteArray array, const QString &path)
     {

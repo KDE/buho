@@ -1,16 +1,22 @@
 import QtQuick 2.9
+import QtQuick.Controls 2.4
 import QtQuick.Layouts 1.3
 import "../../widgets"
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
 import "../../utils/owl.js" as O
 import Notes 1.0
+import Owl 1.0
 
 Maui.Page
 {
-    property alias cardsView : cardsView
     property var currentNote : ({})
+
+    property alias cardsView : cardsView
+    property alias model : notesModel
+
     signal noteClicked(var note)
+
     margins: 0
 
     headBarExit : false
@@ -24,13 +30,39 @@ Maui.Page
             onClicked:
             {
                 cardsView.gridView = !cardsView.gridView
-                cardsView.refresh()
             }
         },
         Maui.ToolButton
         {
             iconName: "view-sort"
+            onClicked: sortMenu.open();
 
+            Menu
+            {
+                 id: sortMenu
+                MenuItem
+                {
+                    text: qsTr("Title")
+                    onTriggered: notesModel.sortBy(KEY.TITLE, "ASC")
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Add date")
+                    onTriggered: notesModel.sortBy(KEY.ADD_DATE, "DESC")
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Updated")
+                    onTriggered: notesModel.sortBy(KEY.UPDATED, "DESC")
+                }
+                MenuItem
+                {
+                    text: qsTr("Fav")
+                    onTriggered: notesModel.sortBy(KEY.FAV, "DESC")
+                }
+            }
         }
     ]
 
@@ -56,7 +88,12 @@ Maui.Page
         }
     ]
 
-     ColumnLayout
+    NotesModel
+    {
+        id: notesModel
+    }
+
+    ColumnLayout
     {
         anchors.fill: parent
         spacing: 0
@@ -96,11 +133,7 @@ Maui.Page
             holder.title : "No notes!"
             holder.body: "Click here to create a new note"
 
-            model: NotesModel
-            {
-                id: notesModel
-            }
-
+            model: notesModel
             Connections
             {
                 target: cardsView.holder
@@ -118,9 +151,9 @@ Maui.Page
 
     function populate()
     {
-//        var data =  owl.getNotes()
-//        for(var i in data)
-//            append(data[i])
+        //        var data =  owl.getNotes()
+        //        for(var i in data)
+        //            append(data[i])
 
     }
 

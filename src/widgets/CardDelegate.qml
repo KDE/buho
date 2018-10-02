@@ -55,7 +55,7 @@ ItemDelegate
         anchors.fill: parent
         color: hovered? "#333" :  "transparent"
         z: 999
-        opacity: 0.3
+        opacity: 0.2
         radius: cardRadius
     }
 
@@ -79,7 +79,7 @@ ItemDelegate
 
             Layout.fillWidth: true
             text: Qt.formatDateTime(new Date(model.updated), "d MMM h:mm")
-            color: Qt.darker(model.color)
+            color: model.color ? Qt.darker(model.color) : textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
             font.weight: Font.Bold
@@ -99,8 +99,8 @@ ItemDelegate
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            text: model.title
-            color: Qt.darker(model.color, 3)
+            text: model.title ? model.title : ""
+            color: model.color ? Qt.darker(model.color, 3) : textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
             font.weight: Font.Bold
@@ -121,8 +121,8 @@ ItemDelegate
             Layout.fillHeight: visible
             Layout.fillWidth: visible
             enabled: false
-            text: model.body
-            color: Qt.darker(model.color, 3)
+            text: model.body ? model.body : ""
+            color: model.color ? Qt.darker(model.color, 3) : textColor
             wrapMode: TextEdit.WrapAnywhere
 
             textFormat: TextEdit.RichText
