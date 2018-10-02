@@ -1,9 +1,13 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.4
+import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
-import "../../widgets"
+
+import QtQml.Models 2.1
+
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
+
+import "../../widgets"
 import "../../utils/owl.js" as O
 
 import Notes 1.0
@@ -19,7 +23,7 @@ Maui.Page
 
     signal noteClicked(var note)
 
-    margins: 0
+    margins: space.big
 
     headBarExit : false
     headBarVisible: !cardsView.holder.visible
@@ -41,7 +45,7 @@ Maui.Page
 
             Menu
             {
-                 id: sortMenu
+                id: sortMenu
                 MenuItem
                 {
                     text: qsTr("Title")
@@ -101,30 +105,39 @@ Maui.Page
         id: notesModel
     }
 
+
+
+
     ColumnLayout
     {
         anchors.fill: parent
         spacing: 0
 
-        CardsList
+        Rectangle
         {
-            id: pinnedList
             visible: pinButton.checked
-            Layout.margins: isMobile ? space.big : space.enormous
             Layout.alignment: Qt.AlignVCenter
             Layout.fillWidth: true
             height: cardsView.itemHeight
-            itemHeight: cardsView.itemHeight * 0.9
-            itemWidth: itemHeight
-            onItemClicked: noteClicked(cardsView.model.get(index))
+
+            CardsList
+            {
+                id: pinnedList
+
+                height: parent.height *0.9
+                width: parent.width * 0.9
+                anchors.centerIn: parent
+                itemHeight: cardsView.itemHeight * 0.9
+                itemWidth: itemHeight * 1.5
+                onItemClicked: noteClicked(cardsView.model.get(index))
+            }
+
+            color: altColor
+            radius: radiusV
+
+            border.color: Qt.darker(altColor, 1.4)
         }
 
-        Kirigami.Separator
-        {
-            visible: pinnedList.visible
-            Layout.fillWidth: true
-            height: unit
-        }
 
         CardsView
         {
@@ -132,7 +145,6 @@ Maui.Page
             Layout.fillHeight: true
             Layout.fillWidth: true
             width: parent.width
-            Layout.margins: space.big
             onItemClicked: noteClicked(notesModel.get(index))
             holder.emoji: "qrc:/Type.png"
             holder.emojiSize: iconSizes.huge

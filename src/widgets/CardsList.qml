@@ -6,12 +6,14 @@ ListView
     id: control
     clip: true
 
-    property int itemWidth: unit * 200
+    property int itemWidth: unit * 300
     property int itemHeight: unit * 200
     signal itemClicked(int index)
+
     boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
     orientation: ListView.Horizontal
-    spacing: space.large
+    spacing: 0
+
     Maui.Holder
     {
         id: holder
@@ -19,17 +21,25 @@ ListView
         message: "<h3>No pinned notes!</h3><p>You can pin your notes to see them here</p>"
     }
 
-    model: notesView.cardsView.model
-    delegate: CardDelegate
+    model: notesView.model
+    delegate: Item
     {
-        cardWidth: model.pin == 1 ? itemWidth : 0
-        cardHeight:  model.pin == 1 ? itemHeight : 0
-        condition: model.pin == 1
+        width: model.pin == 1 ? itemWidth : 0
+        height:  model.pin == 1 ? itemHeight : 0
+        visible: model.pin == 1
 
-        onClicked:
+        CardDelegate
         {
-            currentIndex = index
-            itemClicked(index)
+            cardWidth: parent.width * 0.8
+            cardHeight:  parent.height
+
+            anchors.centerIn: parent
+
+            onClicked:
+            {
+                currentIndex = index
+                itemClicked(index)
+            }
         }
     }
 
