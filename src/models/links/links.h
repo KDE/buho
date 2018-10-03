@@ -21,7 +21,7 @@ public:
     Q_INVOKABLE bool insertLink(const QVariantMap &link);
     bool updateLink(const int &index, const QVariant &value, const int &role);
     bool updateLink(const OWL::DB &link);
-    Q_INVOKABLE bool removeLink(const QVariantMap &link);
+    Q_INVOKABLE bool removeLink(const int &index);
 
     QVariantList getLinkTags(const QString &link);
 private:

@@ -25,6 +25,7 @@ public:
     Q_INVOKABLE QVariantMap get(const int &index);
     Q_INVOKABLE void sortBy(const int &index, const QString &order);
     Q_INVOKABLE bool insert(const QVariantMap &link);
+    Q_INVOKABLE bool remove(const int &index);
     Q_INVOKABLE QVariantList getTags(const int &index);
 
     // Editable:

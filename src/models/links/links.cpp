@@ -119,10 +119,18 @@ bool Links::updateLink(const OWL::DB &link)
     return this->db->update(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map, {{OWL::KEYMAP[OWL::KEY::LINK], url}} );
 }
 
-bool Links::removeLink(const QVariantMap &link)
+bool Links::removeLink(const int &index)
 {
-    qDebug()<<link;
-    return this->db->remove(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
+    auto linkUrl = this->links.at(index)[OWL::KEY::LINK];
+    QVariantMap link = {{OWL::KEYMAP[OWL::KEY::LINK], linkUrl}};
+
+    if(this->db->remove(OWL::TABLEMAP[OWL::TABLE::LINKS], link))
+    {
+        this->links.removeAt(index);
+        return true;
+    }
+
+    return false;
 }
 
 QVariantList Links::getLinkTags(const QString &link)

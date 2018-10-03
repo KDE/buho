@@ -45,9 +45,22 @@ bool LinksModel::insert(const QVariantMap &link)
     if( this->mLinks->insertLink(link))
     {
         beginInsertRows(QModelIndex(), index, index);
-
         endInsertRows();
+        return true;
     }
+
+    return false;
+}
+
+bool LinksModel::remove(const int &index)
+{
+    if(this->mLinks->removeLink(index))
+    {
+        beginResetModel();
+        endResetModel();
+        return true;
+    }
+
     return false;
 }
 
