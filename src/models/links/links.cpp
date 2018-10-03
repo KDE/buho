@@ -57,12 +57,13 @@ bool Links::insertLink(const QVariantMap &link)
         for(auto tg : tags)
             this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
 
+
         this->links << OWL::DB
                        ({
                             {OWL::KEY::LINK, url},
                             {OWL::KEY::TITLE, title},
                             {OWL::KEY::COLOR, color},
-                            {OWL::KEY::PREVIEW, preview},
+                            {OWL::KEY::PREVIEW, image_path},
                             {OWL::KEY::PIN, QString::number(pin)},
                             {OWL::KEY::FAV, QString::number(fav)},
                             {OWL::KEY::UPDATED, QDateTime::currentDateTime().toString()},
@@ -70,7 +71,7 @@ bool Links::insertLink(const QVariantMap &link)
 
                         });
         return true;
-    }
+    } else qDebug()<< "LINK COULD NTO BE INSTED";
 
     return false;
 }

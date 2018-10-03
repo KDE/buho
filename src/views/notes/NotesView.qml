@@ -145,7 +145,6 @@ Maui.Page
             Layout.fillHeight: true
             Layout.fillWidth: true
             width: parent.width
-            onItemClicked: noteClicked(notesModel.get(index))
             holder.emoji: "qrc:/Type.png"
             holder.emojiSize: iconSizes.huge
             holder.isMask: false
@@ -153,6 +152,34 @@ Maui.Page
             holder.body: "Click here to create a new note"
 
             model: notesModel
+            delegate: CardDelegate
+            {
+                id: delegate
+                cardWidth: Math.min(cardsView.cellWidth, cardsView.itemWidth) - Kirigami.Units.largeSpacing * 2
+                cardHeight: cardsView.itemHeight
+                anchors.left: parent.left
+                anchors.leftMargin: cardsView.width <= cardsView.itemWidth ? 0 : (index % 2 === 0 ? Math.max(0, cardsView.cellWidth - cardsView.itemWidth) :
+                                                                                             cardsView.cellWidth)
+
+                onClicked:
+                {
+                    currentIndex = index
+                    noteClicked(notesModel.get(index))
+                }
+
+                onRightClicked:
+                {
+                    currentIndex = index
+                    cardsView.menu.popup()
+                }
+
+                onPressAndHold:
+                {
+                    currentIndex = index
+                    cardsView.menu.popup()
+                }
+            }
+
             Connections
             {
                 target: cardsView.holder

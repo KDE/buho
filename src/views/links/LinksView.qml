@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.3
 import org.kde.mauikit 1.0 as Maui
+import org.kde.kirigami 2.2 as Kirigami
 
 import "../../widgets"
 import "../../utils/owl.js" as O
@@ -40,7 +41,7 @@ Maui.Page
 
             Menu
             {
-                 id: sortMenu
+                id: sortMenu
                 MenuItem
                 {
                     text: qsTr("Title")
@@ -109,7 +110,6 @@ Maui.Page
     {
         id: cardsView
         anchors.fill: parent
-        onItemClicked: linkClicked(cardsView.model.get(index))
         holder.emoji: "qrc:/Astronaut.png"
         holder.isMask: false
         holder.title : "No Links!"
@@ -117,6 +117,33 @@ Maui.Page
         holder.emojiSize: iconSizes.huge
         itemHeight: unit * 250
         model: linksModel
+        delegate: LinkCardDelegate
+        {
+            id: delegate
+            cardWidth: Math.min(cardsView.cellWidth, cardsView.itemWidth) - Kirigami.Units.largeSpacing * 2
+            cardHeight: cardsView.itemHeight
+            anchors.left: parent.left
+            anchors.leftMargin: cardsView.width <= cardsView.itemWidth ? 0 : (index % 2 === 0 ? Math.max(0, cardsView.cellWidth - cardsView.itemWidth) :
+                                                                                                cardsView.cellWidth)
+
+            onClicked:
+            {
+                currentIndex = index
+                linkClicked(cardsView.model.get(index))
+            }
+
+            onRightClicked:
+            {
+                currentIndex = index
+                cardsView.menu.popup()
+            }
+
+            onPressAndHold:
+            {
+                currentIndex = index
+                cardsView.menu.popup()
+            }
+        }
 
         Connections
         {

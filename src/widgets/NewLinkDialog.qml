@@ -235,7 +235,7 @@ Maui.Popup
 
     function fill(link)
     {
-        title.text = link.title[0]
+        title.text = link.title
         populatePreviews(link.image)
 
         open()
@@ -254,8 +254,8 @@ Maui.Popup
     {
         var data = ({
                         link : link.text,
-                        title: title.text.trim(),
-                        preview: previewList.count > 0 ?  previewList.model.get(previewList.currentIndex).url :  "",
+                        title: title.text,
+                        preview: previewList.count > 0 ? previewList.model.get(previewList.currentIndex).url :  "",
                         color: selectedColor,
                         tag: tagBar.getTags(),
                         pin: pinButton.checked,

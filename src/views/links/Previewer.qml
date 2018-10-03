@@ -7,8 +7,8 @@ import "../../widgets"
 Maui.Popup
 {
     parent: parent
-    heightHint: 0.95
-    widthHint: 0.95
+    heightHint: 0.97
+    widthHint: 0.97
     maxWidth: 800*unit
     maxHeight: maxWidth
 

@@ -36,33 +36,5 @@ GridView
         id: cardMenu
     }
 
-    delegate: CardDelegate
-    {
-        id: delegate
-        cardWidth: Math.min(control.cellWidth, control.itemWidth) - Kirigami.Units.largeSpacing * 2
-        cardHeight: itemHeight
-        anchors.left: parent.left
-        anchors.leftMargin: control.width <= control.itemWidth ? 0 : (index % 2 === 0 ? Math.max(0, control.cellWidth - control.itemWidth) :
-                                                                                     control.cellWidth)
-
-        onClicked:
-        {
-            currentIndex = index
-            itemClicked(index)
-        }
-
-        onRightClicked:
-        {
-            currentIndex = index
-            cardMenu.popup()
-        }
-
-        onPressAndHold:
-        {
-            currentIndex = index
-            cardMenu.popup()
-        }
-    }
-
     ScrollBar.vertical: ScrollBar{ id:scrollBar; visible: !isMobile}
 }

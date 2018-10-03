@@ -42,9 +42,12 @@ void LinksModel::sortBy(const int &index, const QString &order)
 bool LinksModel::insert(const QVariantMap &link)
 {
     const int index = mLinks->items().size();
-    beginInsertRows(QModelIndex(), index, index);
-    this->mLinks->insertLink(link);
-    endInsertRows();
+    if( this->mLinks->insertLink(link))
+    {
+        beginInsertRows(QModelIndex(), index, index);
+
+        endInsertRows();
+    }
     return false;
 }
 
