@@ -121,10 +121,18 @@ bool Notes::updateNote(const OWL::DB &note)
     return this->db->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map, {{OWL::KEYMAP[OWL::KEY::ID], id}} );
 }
 
-bool Notes::removeNote(const QVariantMap &note)
+bool Notes::removeNote(const int &index)
 {
-    qDebug()<<note;
-    return this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], note);
+    auto id = this->notes.at(index)[OWL::KEY::ID];
+    QVariantMap note = {{OWL::KEYMAP[OWL::KEY::ID], id}};
+
+    if(this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], note))
+    {
+        this->notes.removeAt(index);
+        return true;
+    }
+
+        return false;
 }
 
 QVariantList Notes::getNoteTags(const QString &id)

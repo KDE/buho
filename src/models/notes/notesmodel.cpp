@@ -42,9 +42,24 @@ void NotesModel::sortBy(const int &index, const QString &order)
 bool NotesModel::insert(const QVariantMap &note)
 {
     const int index = mNotes->items().size();
-    beginInsertRows(QModelIndex(), index, index);
-    this->mNotes->insertNote(note);
-    endInsertRows();
+    if(this->mNotes->insertNote(note))
+    {
+        beginInsertRows(QModelIndex(), index, index);
+        endInsertRows();
+        return true;
+    }
+    return false;
+}
+
+bool NotesModel::remove(const int &index)
+{
+    if(mNotes->removeNote(index))
+    {
+        beginResetModel();
+        endResetModel();
+        return true;
+    }
+
     return false;
 }
 

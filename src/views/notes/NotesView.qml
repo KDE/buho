@@ -8,7 +8,6 @@ import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
 
 import "../../widgets"
-import "../../utils/owl.js" as O
 
 import Notes 1.0
 import Owl 1.0
@@ -189,8 +188,7 @@ Maui.Page
             Connections
             {
                 target: cardsView.menu
-                onDeleteClicked: if(O.removeNote(cardsView.model.get(cardsView.currentIndex)))
-                                     cardsView.model.remove(cardsView.currentIndex)
+                onDeleteClicked: notesModel.remove(cardsView.currentIndex)
             }
         }
     }

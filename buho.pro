@@ -69,7 +69,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     src/db/script.sql \
-    src/utils/owl.js \
 
 HEADERS += \
     src/db/db.h \

@@ -18,6 +18,7 @@ ItemDelegate
     signal rightClicked();
 
     visible: condition
+    clip: true
 
     width: cardWidth
     height: cardHeight
@@ -75,6 +76,7 @@ ItemDelegate
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.margins: unit
+        clip: true
 
         ColumnLayout
         {
@@ -97,6 +99,7 @@ ItemDelegate
                 font.weight: Font.Bold
                 font.bold: true
                 font.pointSize: fontSizes.small
+                clip: true
             }
 
             Label

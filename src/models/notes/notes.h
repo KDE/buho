@@ -24,7 +24,8 @@ public:
     bool updateNote(const int &index, const QVariant &value, const int &role);
     bool updateNote(const OWL::DB &note);
 
-    bool removeNote(const QVariantMap &note);
+    bool removeNote(const int &index);
+
     QVariantList getNoteTags(const QString &id);
 
 private:

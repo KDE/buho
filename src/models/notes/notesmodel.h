@@ -22,9 +22,12 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    Q_INVOKABLE QVariantMap get(const int &index);
     Q_INVOKABLE void sortBy(const int &index, const QString &order);
+
+    Q_INVOKABLE QVariantMap get(const int &index);
     Q_INVOKABLE bool insert(const QVariantMap &note);
+    Q_INVOKABLE bool remove(const int &index);
+
     Q_INVOKABLE QVariantList getTags(const int &index);
 
     // Editable:

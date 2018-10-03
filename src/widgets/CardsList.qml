@@ -14,12 +14,18 @@ ListView
     orientation: ListView.Horizontal
     spacing: 0
 
-    Maui.Holder
-    {
-        id: holder
-        visible: count < 1
-        message: "<h3>No pinned notes!</h3><p>You can pin your notes to see them here</p>"
-    }
+//    Maui.Holder
+//    {
+//        id: holder
+//        visible: control.count > 0
+//        emoji: "qrc:/Type.png"
+//        emojiSize: iconSizes.big
+//        isMask: false
+//        title : "No pinned notes!"
+//        body: "You can pin your notes to see them here"
+//        z: 999
+//         colorScheme.textColor: altColorText
+//   }
 
     model: notesView.model
     delegate: Item
