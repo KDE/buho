@@ -2,31 +2,19 @@
 #define NOTES_H
 
 #include <QObject>
-#include "owl.h"
+#include "./../baselist.h"
 
 class DB;
 class Tagging;
 
-class Notes : public QObject
+class Notes : public BaseList
 {
     Q_OBJECT
 
 public:
 
     explicit Notes(QObject *parent = nullptr);
-    OWL::DB_LIST items() const;
-
-    void sortBy(const OWL::KEY &key, const QString &order = "DESC");
-
-
-    bool insertNote(const QVariantMap &note);
-
-    bool updateNote(const int &index, const QVariant &value, const int &role);
-    bool updateNote(const OWL::DB &note);
-
-    bool removeNote(const int &index);
-
-    QVariantList getNoteTags(const QString &id);
+    OWL::DB_LIST items() const override;
 
 private:
     Tagging *tag;
@@ -36,6 +24,16 @@ private:
 signals:
 
 public slots:
+    QVariantList getTags(const int &index);
+
+    QVariantMap get(const int &index) const override;
+    void sortBy(const int &role, const QString &order = "DESC") override;
+    bool insert(const QVariantMap &note) override;
+    bool update(const int &index, const QVariant &value, const int &role) override; //deprecrated
+    bool update(const QVariantMap &data, const int &index) override;
+    bool update(const OWL::DB &note) override;
+    bool remove(const int &index) override;
+
 
 };
 

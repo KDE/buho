@@ -1,13 +1,9 @@
 #include "buho.h"
+#include "owl.h"
 
-Buho::Buho(QObject *parent) : DBActions(parent)
+Buho::Buho(QObject *parent) : QObject(parent)
 {
     this->setFolders();
-}
-
-Tagging *Buho::getTagging()
-{
-    return this->tag;
 }
 
 void Buho::setFolders()

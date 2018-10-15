@@ -154,7 +154,7 @@ ItemDelegate
             color: model.color ? Qt.darker(model.color, 3) : textColor
             wrapMode: TextEdit.WrapAnywhere
 
-            textFormat: TextEdit.RichText
+            textFormat : TextEdit.AutoText
             font.pointSize: fontSizes.big
 
             background: Rectangle

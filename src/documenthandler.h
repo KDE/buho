@@ -75,6 +75,7 @@ class DocumentHandler : public QObject
     Q_PROPERTY(Qt::Alignment alignment READ alignment WRITE setAlignment NOTIFY alignmentChanged)
 
     Q_PROPERTY(bool bold READ bold WRITE setBold NOTIFY boldChanged)
+    Q_PROPERTY(bool uppercase READ uppercase WRITE setUppercase NOTIFY uppercaseChanged)
     Q_PROPERTY(bool italic READ italic WRITE setItalic NOTIFY italicChanged)
     Q_PROPERTY(bool underline READ underline WRITE setUnderline NOTIFY underlineChanged)
 
@@ -111,6 +112,9 @@ public:
     bool bold() const;
     void setBold(bool bold);
 
+    bool uppercase() const;
+    void setUppercase(bool uppercase);
+
     bool italic() const;
     void setItalic(bool italic);
 
@@ -139,6 +143,7 @@ Q_SIGNALS:
     void alignmentChanged();
 
     void boldChanged();
+    void uppercaseChanged();
     void italicChanged();
     void underlineChanged();
 

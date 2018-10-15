@@ -10,16 +10,33 @@
 #include <MauiKit/tagging.h>
 #endif
 
-Links::Links(QObject *parent) : QObject(parent)
+Links::Links(QObject *parent) : BaseList(parent)
 {
     this->db = DB::getInstance();
     this->tag =  Tagging::getInstance(OWL::App, OWL::version, "org.kde.buho", OWL::comment);
     this->sortBy(OWL::KEY::UPDATED, "DESC");
 }
 
-void Links::sortBy(const OWL::KEY &key, const QString &order)
+void Links::sortBy(const int &role, const QString &order)
 {
-    this->links = this->db->getDBData(QString("select * from links ORDER BY %1 %2").arg(OWL::KEYMAP[key], order));
+    emit this->preListChanged();
+    this->links = this->db->getDBData(QString("select * from links ORDER BY %1 %2").arg(OWL::KEYMAP[static_cast<OWL::KEY>(role)], order));
+    emit this->postListChanged();
+
+}
+
+QVariantMap Links::get(const int &index) const
+{
+    if(index >= this->links.size() || index < 0)
+        return QVariantMap();
+
+    QVariantMap res;
+    const auto note = this->links.at(index);
+
+    for(auto key : note.keys())
+        res.insert(OWL::KEYMAP[key], note[key]);
+
+    return res;
 }
 
 OWL::DB_LIST Links::items() const
@@ -27,8 +44,10 @@ OWL::DB_LIST Links::items() const
     return this->links;
 }
 
-bool Links::insertLink(const QVariantMap &link)
+bool Links::insert(const QVariantMap &link)
 {
+    emit this->preItemAppended();
+
     auto url = link[OWL::KEYMAP[OWL::KEY::LINK]].toString();
     auto color = link[OWL::KEYMAP[OWL::KEY::COLOR]].toString();
     auto pin = link[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
@@ -70,13 +89,16 @@ bool Links::insertLink(const QVariantMap &link)
                             {OWL::KEY::ADD_DATE, QDateTime::currentDateTime().toString()}
 
                         });
+
+        emit postItemAppended();
+
         return true;
-    } else qDebug()<< "LINK COULD NTO BE INSTED";
+    } else qDebug()<< "LINK COULD NOT BE INSTED";
 
     return false;
 }
 
-bool Links::updateLink(const int &index, const QVariant &value, const int &role)
+bool Links::update(const int &index, const QVariant &value, const int &role)
 {
     if(index < 0 || index >= links.size())
         return false;
@@ -90,13 +112,38 @@ bool Links::updateLink(const int &index, const QVariant &value, const int &role)
 
     this->links[index].insert(static_cast<OWL::KEY>(role), value.toString());
 
-    this->updateLink(this->links[index]);
+    this->update(this->links[index]);
 
     return true;
 }
 
+bool Links::update(const QVariantMap &data, const int &index)
+{
+    if(index < 0 || index >= this->links.size())
+        return false;
 
-bool Links::updateLink(const OWL::DB &link)
+    auto newData = this->links[index];
+    QVector<int> roles;
+
+    for(auto key : data.keys())
+        if(newData[OWL::MAPKEY[key]] != data[key].toString())
+        {
+            newData.insert(OWL::MAPKEY[key], data[key].toString());
+            roles << OWL::MAPKEY[key];
+        }
+
+    this->links[index] = newData;
+
+    if(this->update(newData))
+    {
+        emit this->updateModel(index, roles);
+        return true;
+    }
+
+    return false;
+}
+
+bool Links::update(const OWL::DB &link)
 {
     auto url = link[OWL::KEY::LINK];
     auto color = link[OWL::KEY::COLOR];
@@ -119,21 +166,29 @@ bool Links::updateLink(const OWL::DB &link)
     return this->db->update(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map, {{OWL::KEYMAP[OWL::KEY::LINK], url}} );
 }
 
-bool Links::removeLink(const int &index)
+bool Links::remove(const int &index)
 {
+    emit this->preItemRemoved(index);
+
     auto linkUrl = this->links.at(index)[OWL::KEY::LINK];
     QVariantMap link = {{OWL::KEYMAP[OWL::KEY::LINK], linkUrl}};
 
     if(this->db->remove(OWL::TABLEMAP[OWL::TABLE::LINKS], link))
     {
-        this->links.removeAt(index);
+        this->links.removeAt(index);        
+        emit this->postItemRemoved();
         return true;
     }
 
     return false;
 }
 
-QVariantList Links::getLinkTags(const QString &link)
+QVariantList Links::getTags(const int &index)
 {
+    if(index < 0 || index >= this->links.size())
+        return QVariantList();
+
+    auto link = this->links.at(index)[OWL::KEY::LINK];
+
     return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
 }

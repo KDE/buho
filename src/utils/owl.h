@@ -13,8 +13,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-
-
 namespace OWL
 {
     Q_NAMESPACE
@@ -115,6 +113,23 @@ namespace OWL
         {KEY::IMAGE, "image"},
         {KEY::LINK, "link"}
 
+    };
+
+    static const QHash<QString, OWL::KEY> MAPKEY =
+    {
+        {KEYMAP[KEY::ID], KEY::ID},
+        {KEYMAP[KEY::BODY], KEY::BODY},
+        {KEYMAP[KEY::UPDATED], KEY::UPDATED},
+        {KEYMAP[KEY::TITLE], KEY::TITLE},
+        {KEYMAP[KEY::URL], KEY::URL},
+        {KEYMAP[KEY::FAV], KEY::FAV},
+        {KEYMAP[KEY::PIN], KEY::PIN},
+        {KEYMAP[KEY::COLOR], KEY::COLOR},
+        {KEYMAP[KEY::ADD_DATE], KEY::ADD_DATE},
+        {KEYMAP[KEY::TAG], KEY::TAG},
+        {KEYMAP[KEY::PREVIEW], KEY::PREVIEW},
+        {KEYMAP[KEY::IMAGE], KEY::IMAGE},
+        {KEYMAP[KEY::LINK], KEY::LINK}
     };
 
     const QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/";

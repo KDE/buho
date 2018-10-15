@@ -1,12 +1,14 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.3
+
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
 
-import "../../widgets"
-
-import Links 1.0
 import Owl 1.0
+import BuhoModel 1.0
+import Links 1.0
+
+import "../../widgets"
 
 Maui.Page
 {
@@ -15,6 +17,7 @@ Maui.Page
     property alias cardsView : cardsView
     property alias previewer : previewer
     property alias model : linksModel
+    property alias list : linksList
     property alias currentIndex : cardsView.currentIndex
 
     property var currentLink : ({})
@@ -44,30 +47,30 @@ Maui.Page
                 MenuItem
                 {
                     text: qsTr("Title")
-                    onTriggered: linksModel.sortBy(KEY.TITLE, "ASC")
+                    onTriggered: linksList.sortBy(KEY.TITLE, "ASC")
                 }
 
                 MenuItem
                 {
                     text: qsTr("Color")
-                    onTriggered: linksModel.sortBy(KEY.COLOR, "ASC")
+                    onTriggered: linksList.sortBy(KEY.COLOR, "ASC")
                 }
 
                 MenuItem
                 {
                     text: qsTr("Add date")
-                    onTriggered: linksModel.sortBy(KEY.ADD_DATE, "DESC")
+                    onTriggered: linksList.sortBy(KEY.ADD_DATE, "DESC")
                 }
 
                 MenuItem
                 {
                     text: qsTr("Updated")
-                    onTriggered: linksModel.sortBy(KEY.UPDATED, "DESC")
+                    onTriggered: linksList.sortBy(KEY.UPDATED, "DESC")
                 }
                 MenuItem
                 {
                     text: qsTr("Fav")
-                    onTriggered: linksModel.sortBy(KEY.FAV, "DESC")
+                    onTriggered: linksList.sortBy(KEY.FAV, "DESC")
                 }
             }
 
@@ -78,31 +81,34 @@ Maui.Page
         Maui.ToolButton
         {
             iconName: "tag-recents"
-
         },
 
         Maui.ToolButton
         {
             iconName: "edit-pin"
-
         },
 
         Maui.ToolButton
         {
             iconName: "view-calendar"
-
         }
     ]
 
     Previewer
     {
         id: previewer
-        onLinkSaved: cardsView.currentItem.update(link)
+        onLinkSaved: linksList.update(link)
     }
 
-    LinksModel
+    Links
+    {
+        id: linksList
+    }
+
+    BuhoModel
     {
         id: linksModel
+        list: linksList
     }
 
     CardsView
@@ -115,7 +121,9 @@ Maui.Page
         holder.body: "Click here to save a new link"
         holder.emojiSize: iconSizes.huge
         itemHeight: unit * 250
+
         model: linksModel
+
         delegate: LinkCardDelegate
         {
             id: delegate
@@ -128,18 +136,21 @@ Maui.Page
             onClicked:
             {
                 currentIndex = index
-                linkClicked(cardsView.model.get(index))
+                currentLink = linksList.get(index)
+                linkClicked(linksList.get(index))
             }
 
             onRightClicked:
             {
                 currentIndex = index
+                currentLink = linksList.get(index)
                 cardsView.menu.popup()
             }
 
             onPressAndHold:
             {
                 currentIndex = index
+                currentLink = linksList.get(index)
                 cardsView.menu.popup()
             }
         }
@@ -153,7 +164,31 @@ Maui.Page
         Connections
         {
             target: cardsView.menu
-            onDeleteClicked: linksModel.remove(cardsView.currentIndex)
+            onDeleteClicked: linksList.remove(cardsView.currentIndex)
+            onOpened:
+            {
+                cardsView.menu.isFav = currentLink.fav == 1 ? true : false
+                cardsView.menu.isPin = currentLink.pin == 1 ? true : false
+            }
+            onColorClicked:
+            {
+                linksList.update(({"color": color}), cardsView.currentIndex)
+            }
+
+            onFavClicked:
+            {
+                linksList.update(({"fav": fav}), cardsView.currentIndex)
+            }
+
+            onPinClicked:
+            {
+                linksList.update(({"pin": pin}), cardsView.currentIndex)
+            }
+
+            onCopyClicked:
+            {
+                Maui.Handy.copyToClipboard(currentLink.title+"\n"+currentLink.link)
+            }
         }
     }
 }

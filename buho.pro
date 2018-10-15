@@ -41,15 +41,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     src/db/db.cpp \
-    src/db/dbactions.cpp \
     src/buho.cpp \
     src/documenthandler.cpp \
     src/linker.cpp \
     src/utils/htmlparser.cpp \
-    src/models/notes/notesmodel.cpp \
     src/models/notes/notes.cpp \
-    src/models/links/linksmodel.cpp \
-    src/models/links/links.cpp
+    src/models/links/links.cpp \
+    src/models/basemodel.cpp \
+    src/models/baselist.cpp
 
 RESOURCES += \
     qml.qrc \
@@ -72,16 +71,15 @@ DISTFILES += \
 
 HEADERS += \
     src/db/db.h \
-    src/db/dbactions.h \
     src/buho.h \
     src/utils/owl.h \
     src/documenthandler.h \
     src/linker.h \
     src/utils/htmlparser.h \
-    src/models/notes/notesmodel.h \
     src/models/notes/notes.h \
-    src/models/links/linksmodel.h \
-    src/models/links/links.h
+    src/models/links/links.h \
+    src/models/basemodel.h \
+    src/models/baselist.h
 
 INCLUDEPATH += \
     src/utils/ \

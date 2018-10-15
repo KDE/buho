@@ -1,57 +1,41 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.3
+import org.kde.mauikit 1.0 as Maui
 
-Menu
+Maui.Menu
 {
-    x: parent.width / 2 - width / 2
-    y: parent.height / 2 - height / 2
-    modal: true
-    focus: true
-    parent: ApplicationWindow.overlay
 
-    margins: 1
-    padding: 2
+    width: colorBar.implicitWidth + space.medium
+    property bool isFav : false
+    property bool isPin: false
 
     signal deleteClicked()
-    signal colorClicked()
+    signal colorClicked(color color)
+    signal favClicked(int fav)
+    signal pinClicked(int pin)
+    signal copyClicked()
 
-    MenuItem
+    Maui.MenuItem
     {
-        text: qsTr("Fav")
+        text: qsTr(isFav? "UnFav" : "Fav")
         onTriggered:
         {
+            favClicked(!isFav)
             close()
         }
     }
 
-    MenuItem
+    Maui.MenuItem
     {
-        text: qsTr("Pin")
+        text: qsTr(isPin? "UnPin" : "Pin")
         onTriggered:
         {
+            pinClicked(!isPin)
             close()
         }
     }
 
-    MenuItem
-    {
-        text: qsTr("Share")
-        onTriggered:
-        {
-            close()
-        }
-    }
-
-    MenuItem
-    {
-        text: qsTr("Edit")
-        onTriggered:
-        {
-            close()
-        }
-    }
-
-    MenuItem
+      Maui.MenuItem
     {
         text: qsTr("Export")
         onTriggered:
@@ -60,7 +44,17 @@ Menu
         }
     }
 
-    MenuItem
+    Maui.MenuItem
+    {
+        text: qsTr("Copy")
+        onTriggered:
+        {
+            copyClicked()
+            close()
+        }
+    }
+
+    Maui.MenuItem
     {
         text: qsTr("Delete")
         onTriggered:
@@ -70,18 +64,25 @@ Menu
         }
     }
 
-    MenuItem
+    MenuSeparator
+    {
+
+    }
+
+    Maui.MenuItem
     {
         width: parent.width
+        height: iconSizes.big + space.medium
 
         ColorsBar
         {
-            width: parent.width
-            size:  iconSizes.small
-            onColorPicked: colorClicked(color)
+            id: colorBar
+            anchors.centerIn: parent
+            onColorPicked:
+            {
+                colorClicked(color)
+                close()
+            }
         }
     }
-
-
-
 }

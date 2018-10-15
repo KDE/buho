@@ -5,7 +5,7 @@ import org.kde.mauikit 1.0 as Maui
 import org.buho.editor 1.0
 import org.kde.kirigami 2.2 as Kirigami
 
-Maui.Popup
+Maui.Dialog
 {
     parent: parent
     heightHint: 0.95
@@ -32,194 +32,166 @@ Maui.Popup
             fill(link)
         }
     }
+    headBar.visible: previewReady
+    footBar.visible: previewReady
 
-    Maui.Page
+    headBar.leftContent: Maui.ToolButton
     {
-        id: content
-        margins: 0
-        anchors.fill: parent
-        Rectangle
-        {
-            id: bg
-            color: selectedColor
-            z: -1
-            anchors.fill: parent
-        }
+        id: pinButton
+        iconName: "window-pin"
+        checkable: true
+        iconColor: checked ? highlightColor : textColor
+        //                onClicked: checked = !checked
+    }
 
-        headBarExit: false
-        headBarVisible: previewReady
-        footBarVisible: previewReady
+    headBar.rightContent: ColorsBar
+    {
+        onColorPicked: selectedColor = color
+    }
 
-        headBar.leftContent: Maui.ToolButton
+    footBar.leftContent: [
+
+        Maui.ToolButton
         {
-            id: pinButton
-            iconName: "window-pin"
+            id: favButton
+            iconName: "love"
             checkable: true
-            iconColor: checked ? highlightColor : textColor
-            //                onClicked: checked = !checked
-        }
+            iconColor: checked ? "#ff007f" : textColor
+        },
 
-        headBar.rightContent: ColorsBar
+        Maui.ToolButton
         {
-            onColorPicked: selectedColor = color
-        }
+            iconName: "document-share"
+            onClicked: isAndroid ? Maui.Android.shareText(link.text) :
+                                   shareDialog.show(link.text)
+        },
 
-        ColumnLayout
+        Maui.ToolButton
         {
-            id: contentLayout
-            anchors.fill: parent
+            iconName: "document-export"
+        }
+    ]
 
-            TextField
+    acceptText: qsTr("Save")
+    rejectText:  qsTr("Discard")
+
+    onAccepted:
+    {
+        packLink()
+        clear()
+    }
+    onRejected:  clear()
+
+    ColumnLayout
+    {
+        id: contentLayout
+        anchors.fill: parent
+
+        TextField
+        {
+            id: link
+            Layout.fillWidth: true
+            Layout.margins: space.medium
+            height: rowHeight
+            verticalAlignment: Qt.AlignVCenter
+            placeholderText: qsTr("URL")
+            font.weight: Font.Bold
+            font.bold: true
+            font.pointSize: fontSizes.large
+            color: fgColor
+            Layout.alignment: Qt.AlignCenter
+
+            background: Rectangle
             {
-                id: link
-                Layout.fillWidth: true
-                Layout.margins: space.medium
-                height: rowHeight
-                verticalAlignment: Qt.AlignVCenter
-                placeholderText: qsTr("URL")
-                font.weight: Font.Bold
-                font.bold: true
-                font.pointSize: fontSizes.large
-                color: fgColor
-                Layout.alignment: Qt.AlignCenter
-
-                background: Rectangle
-                {
-                    color: "transparent"
-                }
-
-                onAccepted: linker.extract(link.text)
+                color: "transparent"
             }
 
-            TextField
-            {
-                id: title
-                visible: previewReady
-                Layout.fillWidth: true
-                Layout.margins: space.medium
-                height: 24
-                placeholderText: qsTr("Title")
-                font.weight: Font.Bold
-                font.bold: true
-                font.pointSize: fontSizes.large
-                color: fgColor
+            onAccepted: linker.extract(link.text)
+        }
 
-                background: Rectangle
-                {
-                    color: "transparent"
-                }
+        TextField
+        {
+            id: title
+            visible: previewReady
+            Layout.fillWidth: true
+            Layout.margins: space.medium
+            height: 24
+            placeholderText: qsTr("Title")
+            font.weight: Font.Bold
+            font.bold: true
+            font.pointSize: fontSizes.large
+            color: fgColor
+
+            background: Rectangle
+            {
+                color: "transparent"
             }
+        }
 
-            Item
+        Item
+        {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            visible: previewReady
+
+            ListView
             {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                visible: previewReady
-
-                ListView
+                id: previewList
+                anchors.fill: parent
+                anchors.centerIn: parent
+                visible: count > 0
+                clip: true
+                snapMode: ListView.SnapOneItem
+                orientation: ListView.Horizontal
+                interactive: count > 1
+                highlightFollowsCurrentItem: true
+                model: ListModel{}
+                onMovementEnded:
                 {
-                    id: previewList
-                    anchors.fill: parent
-                    anchors.centerIn: parent
-                    visible: count > 0
-                    clip: true
-                    snapMode: ListView.SnapOneItem
-                    orientation: ListView.Horizontal
-                    interactive: count > 1
-                    highlightFollowsCurrentItem: true
-                    model: ListModel{}
-                    onMovementEnded:
+                    var index = indexAt(contentX, contentY)
+                    currentIndex = index
+                }
+                delegate: ItemDelegate
+                {
+                    height: previewList.height
+                    width: previewList.width
+
+                    background: Rectangle
                     {
-                        var index = indexAt(contentX, contentY)
-                        currentIndex = index
+                        color: "transparent"
                     }
-                    delegate: ItemDelegate
+
+                    Image
                     {
-                        height: previewList.height
-                        width: previewList.width
-
-                        background: Rectangle
-                        {
-                            color: "transparent"
-                        }
-
-                        Image
-                        {
-                            id: img
-                            source: model.url
-                            fillMode: Image.PreserveAspectFit
-                            asynchronous: true
-                            width: parent.width
-                            height: parent.height
-                            sourceSize.height: height
-                            horizontalAlignment: Qt.AlignHCenter
-                            verticalAlignment: Qt.AlignVCenter
-                        }
+                        id: img
+                        source: model.url
+                        fillMode: Image.PreserveAspectFit
+                        asynchronous: true
+                        width: parent.width
+                        height: parent.height
+                        sourceSize.height: height
+                        horizontalAlignment: Qt.AlignHCenter
+                        verticalAlignment: Qt.AlignVCenter
                     }
-                }
-            }
-
-            Maui.TagsBar
-            {
-                id: tagBar
-                visible: previewReady
-                Layout.fillWidth: true
-                allowEditMode: true
-
-                onTagsEdited:
-                {
-                    for(var i in tags)
-                        append({tag : tags[i]})
                 }
             }
         }
 
-        footBar.leftContent: [
-
-            Maui.ToolButton
-            {
-                id: favButton
-                iconName: "love"
-                checkable: true
-                iconColor: checked ? "#ff007f" : textColor
-            },
-
-            Maui.ToolButton
-            {
-                iconName: "document-share"
-                onClicked: isAndroid ? Maui.Android.shareText(link.text) :
-                                       shareDialog.show(link.text)
-            },
-
-            Maui.ToolButton
-            {
-                iconName: "document-export"
-            }
-        ]
-
-        footBar.rightContent: Row
+        Maui.TagsBar
         {
-            spacing: space.medium
+            id: tagBar
+            visible: previewReady
+            Layout.fillWidth: true
+            allowEditMode: true
 
-            Maui.Button
+            onTagsEdited:
             {
-                id: discard
-                text: qsTr("Discard")
-                onClicked:  clear()
-            }
-
-            Maui.Button
-            {
-                id: save
-                text: qsTr("Save")
-                onClicked:
-                {
-                    packLink()
-                    clear()
-                }
+                for(var i in tags)
+                    append({tag : tags[i]})
             }
         }
     }
+
 
 
     function clear()
@@ -256,10 +228,10 @@ Maui.Popup
                         link : link.text,
                         title: title.text,
                         preview: previewList.count > 0 ? previewList.model.get(previewList.currentIndex).url :  "",
-                        color: selectedColor,
-                        tag: tagBar.getTags(),
-                        pin: pinButton.checked,
-                        fav: favButton.checked
+                                                         color: selectedColor,
+                                                         tag: tagBar.getTags(),
+                                                         pin: pinButton.checked,
+                                                         fav: favButton.checked
                     })
         linkSaved(data)
     }

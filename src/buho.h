@@ -2,20 +2,18 @@
 #define BUHO_H
 
 #include <QObject>
-#include "db/dbactions.h"
 
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
 #else
 #include <MauiKit/tagging.h>
 #endif
-class Buho : public DBActions
+
+class Buho : public QObject
 {
     Q_OBJECT
 public:
     explicit Buho(QObject *parent = nullptr);
-    Tagging* getTagging();
-
 private:
     void setFolders();
 

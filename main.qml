@@ -26,11 +26,12 @@ Maui.ApplicationWindow
     headBarBGColor: accentColor
     headBarFGColor: altColorText
     accentColor : "#ff9494"
-    property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
+
     altColorText : "white"/*Qt.darker(accentColor, 2.5)*/
 
     about.appDescription: qsTr("Buho allows you to take quick notes, collect links and take long notes organized by chapters.")
     about.appIcon: "qrc:/buho.svg"
+
     property int currentView : views.notes
     property var views : ({
                               notes: 0,
@@ -39,9 +40,9 @@ Maui.ApplicationWindow
                               tags: 3,
                               search: 4
                           })
+    property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
 
     headBar.middleContent: [
-
         Maui.ToolButton
         {
             onClicked: currentView = views.notes
@@ -91,7 +92,7 @@ Maui.ApplicationWindow
             iconName: "list-add"
             iconColor: altColorText
             barHeight: footBar.height
-
+            alignment: Qt.AlignLeft
             content: [
                 Maui.ToolButton
                 {
@@ -112,31 +113,38 @@ Maui.ApplicationWindow
     ]
 
 
-    //    /***** COMPONENTS *****/
-
-    Connections
+    Maui.SyncDialog
     {
-        target: owl
-        onLinkInserted: linksView.append(link)
+        id: syncDialog
+
     }
+
+    mainMenu: [
+        Maui.MenuItem
+        {
+            text: qsTr("Syncing")
+            onTriggered: syncDialog.open()
+        }
+    ]
+
+    //    /***** COMPONENTS *****/
 
     NewNoteDialog
     {
         id: newNoteDialog
-        onNoteSaved: notesView.model.insert(note)
+        onNoteSaved: notesView.list.insert(note)
     }
 
     NewNoteDialog
     {
         id: editNote
-        onNoteSaved: notesView.cardsView.currentItem.update(note)
+        onNoteSaved: notesView.list.update(note, notesView.currentIndex)
     }
 
     NewLinkDialog
     {
         id: newLinkDialog
-        onLinkSaved: linksView.model.insert(link)
-
+        onLinkSaved: linksView.list.insert(link)
     }
 
     //    /***** VIEWS *****/
@@ -193,7 +201,7 @@ Maui.ApplicationWindow
 
     function setNote(note)
     {
-        var tags = notesView.model.getTags(notesView.currentIndex)
+        var tags = notesView.list.getTags(notesView.currentIndex)
         note.tags = tags
         notesView.currentNote = note
         editNote.fill(note)
@@ -201,7 +209,7 @@ Maui.ApplicationWindow
 
     function previewLink(link)
     {
-        var tags = linksView.model.getTags(linksView.currentIndex)
+        var tags = linksView.list.getTags(linksView.currentIndex)
         link.tags = tags
 
         linksView.previewer.show(link)

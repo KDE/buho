@@ -194,6 +194,22 @@ void DocumentHandler::setBold(bool bold)
     emit boldChanged();
 }
 
+bool DocumentHandler::uppercase() const
+{
+    QTextCursor cursor = textCursor();
+    if (cursor.isNull())
+        return false;
+    return textCursor().charFormat().fontCapitalization() == QFont::AllUppercase;
+}
+
+void DocumentHandler::setUppercase(bool uppercase)
+{
+    QTextCharFormat format;
+    format.setFontCapitalization(uppercase ? QFont::AllUppercase : QFont::AllLowercase);
+    mergeFormatOnWordOrSelection(format);
+    emit uppercaseChanged();
+}
+
 bool DocumentHandler::italic() const
 {
     QTextCursor cursor = textCursor();

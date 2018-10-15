@@ -2,15 +2,14 @@ import QtQuick 2.9
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
-import QtQml.Models 2.1
-
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
 
-import "../../widgets"
-
+import BuhoModel 1.0
 import Notes 1.0
 import Owl 1.0
+
+import "../../widgets"
 
 Maui.Page
 {
@@ -18,6 +17,7 @@ Maui.Page
 
     property alias cardsView : cardsView
     property alias model : notesModel
+    property alias list : notesList
     property alias currentIndex : cardsView.currentIndex
 
     signal noteClicked(var note)
@@ -42,36 +42,37 @@ Maui.Page
             iconName: "view-sort"
             onClicked: sortMenu.open();
 
-            Menu
+            Maui.Menu
             {
                 id: sortMenu
+                parent: parent
                 MenuItem
                 {
                     text: qsTr("Title")
-                    onTriggered: notesModel.sortBy(KEY.TITLE, "ASC")
+                    onTriggered: notesList.sortBy(KEY.TITLE, "ASC")
                 }
 
                 MenuItem
                 {
                     text: qsTr("Color")
-                    onTriggered: notesModel.sortBy(KEY.COLOR, "ASC")
+                    onTriggered: notesList.sortBy(KEY.COLOR, "ASC")
                 }
 
                 MenuItem
                 {
                     text: qsTr("Add date")
-                    onTriggered: notesModel.sortBy(KEY.ADD_DATE, "DESC")
+                    onTriggered: notesList.sortBy(KEY.ADD_DATE, "DESC")
                 }
 
                 MenuItem
                 {
                     text: qsTr("Updated")
-                    onTriggered: notesModel.sortBy(KEY.UPDATED, "DESC")
+                    onTriggered: notesList.sortBy(KEY.UPDATED, "DESC")
                 }
                 MenuItem
                 {
                     text: qsTr("Fav")
-                    onTriggered: notesModel.sortBy(KEY.FAV, "DESC")
+                    onTriggered: notesList.sortBy(KEY.FAV, "DESC")
                 }
             }
         }
@@ -99,13 +100,16 @@ Maui.Page
         }
     ]
 
-    NotesModel
+    Notes
     {
-        id: notesModel
+        id: notesList
     }
 
-
-
+    BuhoModel
+    {
+        id: notesModel
+        list: notesList
+    }
 
     ColumnLayout
     {
@@ -158,23 +162,26 @@ Maui.Page
                 cardHeight: cardsView.itemHeight
                 anchors.left: parent.left
                 anchors.leftMargin: cardsView.width <= cardsView.itemWidth ? 0 : (index % 2 === 0 ? Math.max(0, cardsView.cellWidth - cardsView.itemWidth) :
-                                                                                             cardsView.cellWidth)
+                                                                                                    cardsView.cellWidth)
 
                 onClicked:
                 {
                     currentIndex = index
-                    noteClicked(notesModel.get(index))
+                    currentNote = notesList.get(index)
+                    noteClicked(currentNote)
                 }
 
                 onRightClicked:
                 {
                     currentIndex = index
+                    currentNote = notesList.get(index)
                     cardsView.menu.popup()
                 }
 
                 onPressAndHold:
                 {
                     currentIndex = index
+                    currentNote = notesList.get(index)
                     cardsView.menu.popup()
                 }
             }
@@ -188,7 +195,32 @@ Maui.Page
             Connections
             {
                 target: cardsView.menu
-                onDeleteClicked: notesModel.remove(cardsView.currentIndex)
+                onOpened:
+                {
+                    cardsView.menu.isFav = currentNote.fav == 1 ? true : false
+                    cardsView.menu.isPin = currentNote.pin == 1 ? true : false
+                }
+
+                onDeleteClicked: notesList.remove(cardsView.currentIndex)
+                onColorClicked:
+                {
+                    notesList.update(({"color": color}), cardsView.currentIndex)
+                }
+
+                onFavClicked:
+                {
+                    notesList.update(({"fav": fav}), cardsView.currentIndex)
+                }
+
+                onPinClicked:
+                {
+                    notesList.update(({"pin": pin}), cardsView.currentIndex)
+                }
+
+                onCopyClicked:
+                {
+                    Maui.Handy.copyToClipboard(currentNote.title+"\n"+currentNote.body)
+                }
             }
         }
     }

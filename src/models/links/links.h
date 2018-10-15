@@ -1,29 +1,20 @@
-#ifndef NOTES_H
-#define NOTES_H
+#ifndef LINKS_H
+#define LINKS_H
 
 #include <QObject>
-#include "owl.h"
+#include "./../baselist.h"
 
 class DB;
 class Tagging;
 
-class Links : public QObject
+class Links : public BaseList
 {
     Q_OBJECT
 
 public:
-
     explicit Links(QObject *parent = nullptr);
-    OWL::DB_LIST items() const;
+    OWL::DB_LIST items() const override;
 
-    void sortBy(const OWL::KEY &key, const QString &order = "DESC");
-
-    Q_INVOKABLE bool insertLink(const QVariantMap &link);
-    bool updateLink(const int &index, const QVariant &value, const int &role);
-    bool updateLink(const OWL::DB &link);
-    Q_INVOKABLE bool removeLink(const int &index);
-
-    QVariantList getLinkTags(const QString &link);
 private:
     Tagging *tag;
     DB *db;
@@ -32,6 +23,15 @@ private:
 signals:
 
 public slots:
+    void sortBy(const int &role, const QString &order = "DESC") override;
+    QVariantMap get(const int &index) const override;
+    bool insert(const QVariantMap &link) override;
+    bool update(const int &index, const QVariant &value, const int &role) override; //deprecrated
+    bool update(const QVariantMap &data, const int &index);
+    bool update(const OWL::DB &link) override;
+    bool remove(const int &index) override;
+
+    QVariantList getTags(const int &index);
 
 };
 
