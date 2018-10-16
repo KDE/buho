@@ -16,6 +16,7 @@ Maui.Dialog
     property string fgColor: Qt.darker(selectedColor, 2.5)
     property bool showEditActions : false
 
+    rejectButton.visible: false
     signal noteSaved(var note)
     page.margins: 0
 
