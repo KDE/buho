@@ -47,22 +47,9 @@ Qt::ItemFlags BaseModel::flags(const QModelIndex &index) const
 
 QHash<int, QByteArray> BaseModel::roleNames() const
 {
-    QHash<int, QByteArray> names;
-    names[OWL::KEY::TITLE] = QString(OWL::KEYMAP[OWL::KEY::TITLE]).toUtf8();
-    names[OWL::KEY::BODY] = QString(OWL::KEYMAP[OWL::KEY::BODY]).toUtf8();
-    names[OWL::KEY::UPDATED] = QString(OWL::KEYMAP[OWL::KEY::UPDATED]).toUtf8();
-    names[OWL::KEY::FAV] = QString(OWL::KEYMAP[OWL::KEY::FAV]).toUtf8();
-    names[OWL::KEY::PIN] = QString(OWL::KEYMAP[OWL::KEY::PIN]).toUtf8();
-    names[OWL::KEY::COLOR] = QString(OWL::KEYMAP[OWL::KEY::COLOR]).toUtf8();
-    names[OWL::KEY::ID] = QString(OWL::KEYMAP[OWL::KEY::ID]).toUtf8();
-    names[OWL::KEY::IMAGE] = QString(OWL::KEYMAP[OWL::KEY::IMAGE]).toUtf8();
-    names[OWL::KEY::LINK] = QString(OWL::KEYMAP[OWL::KEY::LINK]).toUtf8();
-    names[OWL::KEY::PREVIEW] = QString(OWL::KEYMAP[OWL::KEY::PREVIEW]).toUtf8();
-    names[OWL::KEY::TAG] = QString(OWL::KEYMAP[OWL::KEY::TAG]).toUtf8();
-    names[OWL::KEY::URL] = QString(OWL::KEYMAP[OWL::KEY::URL]).toUtf8();
-    names[OWL::KEY::ADD_DATE] = QString(OWL::KEYMAP[OWL::KEY::ADD_DATE]).toUtf8();
-    names[OWL::KEY::URL] = QString(OWL::KEYMAP[OWL::KEY::ADD_DATE]).toUtf8();
-
+    QHash<int, QByteArray> names;    
+    for(auto key : OWL::KEYMAP.keys())
+            names[key] = QString(OWL::KEYMAP[key]).toUtf8();
     return names;
 }
 

@@ -4,8 +4,7 @@ import org.kde.mauikit 1.0 as Maui
 
 Maui.Menu
 {
-
-    width: colorBar.implicitWidth + space.medium
+    implicitWidth: colorBar.implicitWidth + space.medium
     property bool isFav : false
     property bool isPin: false
 
@@ -72,7 +71,7 @@ Maui.Menu
     Maui.MenuItem
     {
         width: parent.width
-        height: iconSizes.big + space.medium
+        height: rowHeight
 
         ColorsBar
         {

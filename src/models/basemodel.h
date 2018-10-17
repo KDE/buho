@@ -1,5 +1,5 @@
-#ifndef NOTESMODEL_H
-#define NOTESMODEL_H
+#ifndef BASEMODEL_H
+#define BASEMODEL_H
 
 #include <QAbstractListModel>
 #include <QList>

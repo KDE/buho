@@ -15,7 +15,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: Math.max(height, width)
+        radius: radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea
@@ -35,7 +35,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: Math.max(height, width)
+        radius: radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea
@@ -55,7 +55,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: Math.max(height, width)
+        radius: radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea
@@ -75,7 +75,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: Math.max(height, width)
+        radius: radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea
@@ -95,7 +95,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: Math.max(height, width)
+        radius: radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea
@@ -115,7 +115,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: Math.max(height, width)
+        radius: radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea
