@@ -19,11 +19,11 @@ private:
     Tagging *tag;
     DB *db;
     OWL::DB_LIST links;
+    void sortList();
 
 signals:
 
 public slots:
-    void sortBy(const int &role, const QString &order = "DESC") override;
     QVariantMap get(const int &index) const override;
     bool insert(const QVariantMap &link) override;
     bool update(const int &index, const QVariant &value, const int &role) override; //deprecrated

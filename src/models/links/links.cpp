@@ -14,15 +14,19 @@ Links::Links(QObject *parent) : BaseList(parent)
 {
     this->db = DB::getInstance();
     this->tag =  Tagging::getInstance(OWL::App, OWL::version, "org.kde.buho", OWL::comment);
-    this->sortBy(OWL::KEY::UPDATED, "DESC");
+    this->sortList();
+
+    connect(this, &Links::sortByChanged, this, &Links::sortList);
+    connect(this, &Links::orderChanged, this, &Links::sortList);
 }
 
-void Links::sortBy(const int &role, const QString &order)
+void Links::sortList()
 {
     emit this->preListChanged();
-    this->links = this->db->getDBData(QString("select * from links ORDER BY %1 %2").arg(OWL::KEYMAP[static_cast<OWL::KEY>(role)], order));
+    this->links = this->db->getDBData(QString("select * from links ORDER BY %1 %2").arg(
+                                          OWL::KEYMAP[this->sort],
+                                      this->order == ORDER::ASC ? "asc" : "desc"));
     emit this->postListChanged();
-
 }
 
 QVariantMap Links::get(const int &index) const
@@ -175,7 +179,7 @@ bool Links::remove(const int &index)
 
     if(this->db->remove(OWL::TABLEMAP[OWL::TABLE::LINKS], link))
     {
-        this->links.removeAt(index);        
+        this->links.removeAt(index);
         emit this->postItemRemoved();
         return true;
     }

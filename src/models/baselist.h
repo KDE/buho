@@ -7,15 +7,59 @@
 class BaseList : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(OWL::KEY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
+    Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
+
 public:
     explicit BaseList(QObject *parent = nullptr);
+    enum ORDER : uint8_t
+    {
+        DESC,
+        ASC
+    };
+    Q_ENUM(ORDER)
+    Q_ENUM(OWL::KEY)
 
     //* To be overrided *//
     virtual OWL::DB_LIST items() const {return OWL::DB_LIST({{}});}
 
+    virtual void setSortBy(const OWL::KEY &sort)
+    {
+        if(this->sort == sort)
+            return;
+
+        this->sort = sort;
+        emit this->sortByChanged();
+    }
+
+    virtual OWL::KEY getSortBy() const
+    {
+        return this->sort;
+    }
+
+    virtual void setOrder(const ORDER &order)
+    {
+        if(this->order == order)
+            return;
+
+        this->order = order;
+        emit this->orderChanged();
+    }
+
+    virtual ORDER getOrder() const
+    {
+        return this->order;
+    }
+
 protected:
+    OWL::KEY sort = OWL::KEY::UPDATED;
+    ORDER order = ORDER::DESC;
 
 signals:
+    void orderChanged();
+    void sortByChanged();
+
     void preItemAppended();
     void postItemAppended();
     void preItemRemoved(int index);
@@ -62,12 +106,6 @@ public slots:
     {
         Q_UNUSED(index);
         return false;
-    }
-
-    virtual void sortBy(const int &role, const QString &order)
-    {
-        Q_UNUSED(role);
-        Q_UNUSED(order);
     }
 };
 

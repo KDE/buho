@@ -76,7 +76,7 @@ namespace OWL
         {TABLE::LINKS_TAGS,"links_tags"}
     };
 
-    enum KEY :uint8_t
+    enum KEY : uint8_t
     {
         URL,
         UPDATED,
@@ -112,7 +112,6 @@ namespace OWL
         {KEY::PREVIEW, "preview"},
         {KEY::IMAGE, "image"},
         {KEY::LINK, "link"}
-
     };
 
     static const QHash<QString, OWL::KEY> MAPKEY =

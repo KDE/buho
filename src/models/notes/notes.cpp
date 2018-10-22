@@ -14,13 +14,19 @@ Notes::Notes(QObject *parent) : BaseList(parent)
     qDebug()<< "CREATING NOTES LIST";
     this->db = DB::getInstance();
     this->tag =  Tagging::getInstance(OWL::App, OWL::version, "org.kde.buho", OWL::comment);
-    this->sortBy(OWL::KEY::UPDATED, "DESC");
+    this->sortList();
+
+    connect(this, &Notes::sortByChanged, this, &Notes::sortList);
+    connect(this, &Notes::orderChanged, this, &Notes::sortList);
+
 }
 
-void Notes::sortBy(const int &role, const QString &order)
+void Notes::sortList()
 {
     emit this->preListChanged();
-    this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(OWL::KEYMAP[static_cast<OWL::KEY>(role)], order));
+    this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(
+                                          OWL::KEYMAP[this->sort],
+                                      this->order == ORDER::ASC ? "asc" : "desc"));
     emit this->postListChanged();
 }
 

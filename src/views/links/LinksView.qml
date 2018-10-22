@@ -4,9 +4,9 @@ import QtQuick.Controls 2.3
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
 
-import Owl 1.0
 import BuhoModel 1.0
 import Links 1.0
+import OWL 1.0
 
 import "../../widgets"
 
@@ -44,36 +44,56 @@ Maui.Page
             Menu
             {
                 id: sortMenu
-                MenuItem
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Ascedent")
+                    checkable: true
+                    checked: linksList.order === Links.ASC
+                    onTriggered: linksList.order = Links.ASC
+                }
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Descendent")
+                    checkable: true
+                    checked: linksList.order === Links.DESC
+                    onTriggered: linksList.order = Links.DESC
+                }
+
+                MenuSeparator{}
+
+                Maui.MenuItem
                 {
                     text: qsTr("Title")
-                    onTriggered: linksList.sortBy(KEY.TITLE, "ASC")
+                    onTriggered: KEY.TITLE
                 }
 
-                MenuItem
+                Maui.MenuItem
+
                 {
                     text: qsTr("Color")
-                    onTriggered: linksList.sortBy(KEY.COLOR, "ASC")
+                    onTriggered: linksList.sortBy = KEY.COLOR
                 }
 
-                MenuItem
+                Maui.MenuItem
                 {
                     text: qsTr("Add date")
-                    onTriggered: linksList.sortBy(KEY.ADD_DATE, "DESC")
+                    onTriggered: linksList.sortBy = KEY.ADD_DATE
                 }
 
-                MenuItem
+                Maui.MenuItem
                 {
                     text: qsTr("Updated")
-                    onTriggered: linksList.sortBy(KEY.UPDATED, "DESC")
+                    onTriggered: linksList.sortBy = KEY.UPDATED
                 }
-                MenuItem
+
+                Maui.MenuItem
                 {
                     text: qsTr("Fav")
-                    onTriggered: linksList.sortBy(KEY.FAV, "DESC")
+                    onTriggered: linksList.sortBy = KEY.FAV
                 }
             }
-
         }
     ]
 

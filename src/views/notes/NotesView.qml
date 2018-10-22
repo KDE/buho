@@ -7,7 +7,7 @@ import org.kde.kirigami 2.2 as Kirigami
 
 import BuhoModel 1.0
 import Notes 1.0
-import Owl 1.0
+import OWL 1.0 //To get the enums
 
 import "../../widgets"
 
@@ -46,33 +46,53 @@ Maui.Page
             {
                 id: sortMenu
                 parent: parent
-                MenuItem
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Ascedent")
+                    checkable: true
+                    checked: notesList.order === Notes.ASC
+                    onTriggered: notesList.order = Notes.ASC
+                }
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Descendent")
+                    checkable: true
+                    checked: notesList.order === Notes.DESC
+                    onTriggered: notesList.order = Notes.DESC
+                }
+
+                MenuSeparator{}
+
+                Maui.MenuItem
                 {
                     text: qsTr("Title")
-                    onTriggered: notesList.sortBy(KEY.TITLE, "ASC")
+                    onTriggered: notesList.sortBy = KEY.TITLE
                 }
 
-                MenuItem
+                Maui.MenuItem
                 {
                     text: qsTr("Color")
-                    onTriggered: notesList.sortBy(KEY.COLOR, "ASC")
+                    onTriggered: notesList.sortBy = KEY.COLOR
                 }
 
-                MenuItem
+                Maui.MenuItem
                 {
                     text: qsTr("Add date")
-                    onTriggered: notesList.sortBy(KEY.ADD_DATE, "DESC")
+                    onTriggered: notesList.sortBy = KEY.ADD_DATE
                 }
 
-                MenuItem
+                Maui.MenuItem
                 {
                     text: qsTr("Updated")
-                    onTriggered: notesList.sortBy(KEY.UPDATED, "DESC")
+                    onTriggered: notesList.sortBy = KEY.UPDATED
                 }
-                MenuItem
+
+                Maui.MenuItem
                 {
                     text: qsTr("Fav")
-                    onTriggered: notesList.sortBy(KEY.FAV, "DESC")
+                    onTriggered: notesList.sortBy = KEY.FAV
                 }
             }
         }

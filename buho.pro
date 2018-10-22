@@ -42,7 +42,6 @@ SOURCES += \
     main.cpp \
     src/db/db.cpp \
     src/buho.cpp \
-    src/documenthandler.cpp \
     src/linker.cpp \
     src/utils/htmlparser.cpp \
     src/models/notes/notes.cpp \
@@ -73,7 +72,6 @@ HEADERS += \
     src/db/db.h \
     src/buho.h \
     src/utils/owl.h \
-    src/documenthandler.h \
     src/linker.h \
     src/utils/htmlparser.h \
     src/models/notes/notes.h \

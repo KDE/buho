@@ -2,7 +2,6 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
-import org.buho.editor 1.0
 
 Maui.Dialog
 {
@@ -19,23 +18,14 @@ Maui.Dialog
     rejectButton.visible: false
     signal noteSaved(var note)
     page.margins: 0
-
+    colorScheme.backgroundColor: selectedColor
     headBar.leftContent: [
 
         Maui.ToolButton
         {
-            id: pinButton
-            iconName: "edit-pin"
-            checkable: true
-            iconColor: checked ? highlightColor : textColor
-            //                onClicked: checked = !checked
-        },
-
-        Maui.ToolButton
-        {
             iconName: "edit-undo"
-            enabled: body.canUndo
-            onClicked: body.undo()
+            enabled: editor.body.canUndo
+            onClicked: editor.body.undo()
             opacity: enabled ? 1 : 0.5
 
         },
@@ -43,8 +33,8 @@ Maui.Dialog
         Maui.ToolButton
         {
             iconName: "edit-redo"
-            enabled: body.canRedo
-            onClicked: body.redo()
+            enabled: editor.body.canRedo
+            onClicked: editor.body.redo()
             opacity: enabled ? 1 : 0.5
         },
 
@@ -54,8 +44,8 @@ Maui.Dialog
             focusPolicy: Qt.TabFocus
             iconColor: checked ? highlightColor : textColor
             checkable: true
-            checked: document.bold
-            onClicked: document.bold = !document.bold
+            checked: editor.document.bold
+            onClicked: editor.document.bold = !editor.document.bold
         },
 
         Maui.ToolButton
@@ -64,8 +54,8 @@ Maui.Dialog
             iconColor: checked ? highlightColor : textColor
             focusPolicy: Qt.TabFocus
             checkable: true
-            checked: document.italic
-            onClicked: document.italic = !document.italic
+            checked: editor.document.italic
+            onClicked: editor.document.italic = !editor.document.italic
         },
 
         Maui.ToolButton
@@ -74,8 +64,8 @@ Maui.Dialog
             iconColor: checked ? highlightColor : textColor
             focusPolicy: Qt.TabFocus
             checkable: true
-            checked: document.underline
-            onClicked: document.underline = !document.underline
+            checked: editor.document.underline
+            onClicked: editor.document.underline = !editor.document.underline
         },
 
         Maui.ToolButton
@@ -84,17 +74,14 @@ Maui.Dialog
             iconColor: checked ? highlightColor : textColor
             focusPolicy: Qt.TabFocus
             checkable: true
-            checked: document.uppercase
-            onClicked: document.uppercase = !document.uppercase
+            checked: editor.document.uppercase
+            onClicked: editor.document.uppercase = !editor.document.uppercase
         },
-
         Maui.ToolButton
         {
             iconName: "image"
         }
     ]
-
-    colorScheme.backgroundColor: selectedColor
 
     headBar.rightContent: ColorsBar
     {
@@ -102,6 +89,14 @@ Maui.Dialog
     }
 
     footBar.leftContent: [
+        Maui.ToolButton
+        {
+            id: pinButton
+            iconName: "edit-pin"
+            checkable: true
+            iconColor: checked ? highlightColor : textColor
+            //                onClicked: checked = !checked
+        },
 
         Maui.ToolButton
         {
@@ -114,8 +109,8 @@ Maui.Dialog
         Maui.ToolButton
         {
             iconName: "document-share"
-            onClicked: isAndroid ? Maui.Android.shareText(body.text) :
-                                   shareDialog.show(body.text)
+            onClicked: isAndroid ? Maui.Android.shareText(editor.body.text) :
+                                   shareDialog.show(editor.body.text)
         },
 
         Maui.ToolButton
@@ -133,7 +128,7 @@ Maui.Dialog
     rejectText:  qsTr("Discard")
     onAccepted:
     {
-        if(body.text.length > 0)
+        if(editor.body.text.length > 0)
             packNote()
         clear()
     }
@@ -162,119 +157,14 @@ Maui.Dialog
             }
         }
 
-        DocumentHandler
+        Maui.Editor
         {
-            id: document
-            document: body.textDocument
-            cursorPosition: body.cursorPosition
-            selectionStart: body.selectionStart
-            selectionEnd: body.selectionEnd
-            // textColor: TODO
-            //            onLoaded: {
-            //                body.text = text
-            //            }
-            onError:
-            {
-                body.text = message
-                body.visible = true
-            }
-
-
-        }
-
-        ScrollView
-        {
+            id: editor
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.margins: space.medium
+            colorScheme.backgroundColor: selectedColor
+            headBar.visible: false
 
-            TextArea
-            {
-                id: body
-                width: parent.width
-                height: parent.height
-                placeholderText: qsTr("Body")
-                selectByKeyboard :!isMobile
-                selectByMouse : !isMobile
-                textFormat : TextEdit.AutoText
-                color: fgColor
-                font.pointSize: fontSizes.large
-                wrapMode: TextEdit.WrapAnywhere
-                activeFocusOnPress: true
-                activeFocusOnTab: true
-                persistentSelection: true
-                background: Rectangle
-                {
-                    color: "transparent"
-                }
-
-                onPressAndHold: documentMenu.popup()
-                onPressed:
-                {
-                    if(!isMobile && event.button === Qt.RightButton)
-                        documentMenu.popup()
-                }
-
-                Row
-                {
-                    anchors
-                    {
-                        right: parent.right
-                        bottom: parent.bottom
-                    }
-
-                    width: implicitWidth
-                    height: implicitHeight
-
-                    Label
-                    {
-                        text: body.length + " / " + body.lineCount
-                        color: Qt.darker(selectedColor,1.5)
-                        opacity: 0.5
-                        font.pointSize: fontSizes.medium
-                    }
-
-                }
-
-                Maui.Menu
-                {
-                    id: documentMenu
-                    z: 999
-
-                    Maui.MenuItem
-                    {
-                        text: qsTr("Copy")
-                        onTriggered: Maui.Handy.copyToClipboard(body.selectedText)
-                    }
-
-                    Maui.MenuItem
-                    {
-                        text: qsTr("Cut")
-                    }
-
-                    Maui.MenuItem
-                    {
-                        text: qsTr("Paste")
-                        onTriggered:
-                        {
-                            var text = Maui.Handy.getClipboard()
-                            body.insert(body.cursorPosition,text)
-                        }
-                    }
-
-                    Maui.MenuItem
-                    {
-                        text: qsTr("Select all")
-                        onTriggered: body.selectAll()
-                    }
-
-                    Maui.MenuItem
-                    {
-                        text: qsTr("Web search")
-                        onTriggered: Maui.FM.openUrl("https://www.google.com/search?q="+body.selectedText)
-                    }
-                }
-            }
         }
 
         Maui.TagsBar
@@ -291,20 +181,20 @@ Maui.Dialog
         }
     }
 
-    onOpened: if(isMobile) body.forceActiveFocus()
+    onOpened: if(isMobile) editor.body.forceActiveFocus()
 
 
     function clear()
     {
         title.clear()
-        body.clear()
+        editor.body.clear()
         close()
     }
 
     function fill(note)
     {
         title.text = note.title
-        body.text = note.body
+        editor.body.text = note.body
         selectedColor =  note.color
         pinButton.checked = note.pin == 1
         favButton.checked = note.fav == 1
@@ -318,7 +208,7 @@ Maui.Dialog
         noteSaved({
                       id: notesView.currentNote.id,
                       title: title.text.trim(),
-                      body: body.text,
+                      body: editor.body.text,
                       color: selectedColor,
                       tag: tagBar.getTags(),
                       pin: pinButton.checked,

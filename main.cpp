@@ -21,7 +21,6 @@
 #endif
 
 #include "src/buho.h"
-#include "src/documenthandler.h"
 #include "src/linker.h"
 
 #include "models/basemodel.h"
@@ -65,8 +64,7 @@ int main(int argc, char *argv[])
     Linker linker;
     context->setContextProperty("linker", &linker);
 
-    qmlRegisterUncreatableMetaObject(OWL::staticMetaObject, "Owl", 1, 0, "KEY", "Error");
-    qmlRegisterType<DocumentHandler>("org.buho.editor", 1, 0, "DocumentHandler");
+    qmlRegisterUncreatableMetaObject(OWL::staticMetaObject, "OWL", 1, 0, "KEY", "Error");
     qmlRegisterUncreatableType<BaseList>("BaseList", 1, 0, "BaseList", QStringLiteral("BaseList should not be created in QML"));
 
     qmlRegisterType<BaseModel>("BuhoModel", 1, 0, "BuhoModel");
