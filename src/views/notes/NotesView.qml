@@ -217,8 +217,8 @@ Maui.Page
                 target: cardsView.menu
                 onOpened:
                 {
-                    cardsView.menu.isFav = currentNote.fav == 1 ? true : false
-                    cardsView.menu.isPin = currentNote.pin == 1 ? true : false
+                    cardsView.menu.isFav = currentNote.fav == 1
+                    cardsView.menu.isPin = currentNote.pin == 1
                 }
 
                 onDeleteClicked: notesList.remove(cardsView.currentIndex)

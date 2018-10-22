@@ -117,7 +117,7 @@ Maui.Page
     Previewer
     {
         id: previewer
-        onLinkSaved: linksList.update(link)
+        onLinkSaved: linksList.update(link, linksView.currentIndex)
     }
 
     Links

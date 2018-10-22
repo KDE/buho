@@ -27,7 +27,7 @@ public slots:
     QVariantMap get(const int &index) const override;
     bool insert(const QVariantMap &link) override;
     bool update(const int &index, const QVariant &value, const int &role) override; //deprecrated
-    bool update(const QVariantMap &data, const int &index);
+    bool update(const QVariantMap &data, const int &index) override;
     bool update(const OWL::DB &link) override;
     bool remove(const int &index) override;
 

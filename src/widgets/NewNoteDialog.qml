@@ -211,8 +211,8 @@ Maui.Dialog
                       body: editor.body.text,
                       color: selectedColor,
                       tag: tagBar.getTags(),
-                      pin: pinButton.checked,
-                      fav: favButton.checked,
+                      pin: pinButton.checked ? 1 : 0,
+                      fav: favButton.checked ? 1 : 0,
                       updated: new Date()
                   })
     }

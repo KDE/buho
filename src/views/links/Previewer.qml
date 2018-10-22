@@ -141,6 +141,7 @@ Maui.Dialog
 
     function show(link)
     {
+        console.log("STATE:" , link.fav)
         webView.url = link.link
         tagBar.populate(link.tags)
         pinButton.checked = link.pin == 1
@@ -151,13 +152,14 @@ Maui.Dialog
 
     function packLink()
     {
+        console.log(favButton.checked)
         linkSaved({
                       title: webView.title,
                       link: webView.url,
-                      color: colorBar.currentColor,
+                      color: selectedColor,
                       tag: tagBar.getTags(),
-                      pin: pinButton.checked,
-                      fav: favButton.checked,
+                      pin: pinButton.checked ? 1 : 0,
+                      fav: favButton.checked ? 1 : 0,
                       updated: new Date()
                   })
     }

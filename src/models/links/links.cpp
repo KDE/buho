@@ -140,6 +140,8 @@ bool Links::update(const QVariantMap &data, const int &index)
 
     if(this->update(newData))
     {
+        qDebug() << "update link" << newData;
+
         emit this->updateModel(index, roles);
         return true;
     }
