@@ -16,7 +16,7 @@ linux:unix:!android {
 
     message(Building for Linux KDE)
     QT += webengine
-    unix:!macx: LIBS += -lMauiKit
+    LIBS += -lMauiKit
 
 } else:android {
 
@@ -32,8 +32,6 @@ linux:unix:!android {
 } else {
     message("Unknown configuration")
 }
-
-
 include($$PWD/QGumboParser/QGumboParser.pri)
 
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -63,7 +61,6 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
 
 DISTFILES += \
     src/db/script.sql \
