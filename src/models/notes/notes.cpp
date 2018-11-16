@@ -1,6 +1,5 @@
 #include "notes.h"
 #include <QUuid>
-
 #include "db/db.h"
 
 #ifdef STATIC_MAUIKIT
@@ -18,7 +17,6 @@ Notes::Notes(QObject *parent) : BaseList(parent)
 
     connect(this, &Notes::sortByChanged, this, &Notes::sortList);
     connect(this, &Notes::orderChanged, this, &Notes::sortList);
-
 }
 
 void Notes::sortList()

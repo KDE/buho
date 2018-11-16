@@ -20,7 +20,6 @@ QVariant BaseModel::data(const QModelIndex &index, int role) const
     if (!index.isValid() || !mList)
         return QVariant();
 
-
     return mList->items().at(index.row())[static_cast<OWL::KEY>(role)];
 }
 
