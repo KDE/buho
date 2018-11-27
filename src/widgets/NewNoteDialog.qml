@@ -172,12 +172,9 @@ Maui.Dialog
             id: tagBar
             Layout.fillWidth: true
             allowEditMode: true
-
-            onTagsEdited:
-            {
-                for(var i in tags)
-                    append({tag : tags[i]})
-            }
+            list.abstract: true
+            list.key: "notes"
+            onTagsEdited: list.updateToAbstract(tags)
         }
     }
 
@@ -198,7 +195,8 @@ Maui.Dialog
         selectedColor =  note.color
         pinButton.checked = note.pin == 1
         favButton.checked = note.fav == 1
-        tagBar.populate(note.tags)
+
+        tagBar.list.lot= note.id
 
         open()
     }

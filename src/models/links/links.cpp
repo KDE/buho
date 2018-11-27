@@ -13,7 +13,7 @@
 Links::Links(QObject *parent) : BaseList(parent)
 {
     this->db = DB::getInstance();
-    this->tag =  Tagging::getInstance(OWL::App, OWL::version, "org.kde.buho", OWL::comment);
+    this->tag =  Tagging::getInstance();
     this->sortList();
 
     connect(this, &Links::sortByChanged, this, &Links::sortList);
