@@ -175,6 +175,7 @@ Maui.Dialog
             list.abstract: true
             list.key: "notes"
             onTagsEdited: list.updateToAbstract(tags)
+            onTagRemovedClicked: list.removeFromAbstract(index)
         }
     }
 

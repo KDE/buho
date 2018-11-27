@@ -132,6 +132,7 @@ Maui.Dialog
             list.abstract: true
             list.key: "links"
             onTagsEdited: list.updateToAbstract(tags)
+            onTagRemovedClicked: list.removeFromAbstract(index)
         }
     }
 
