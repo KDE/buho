@@ -1,0 +1,5 @@
+buho (1.0.0) nxos; urgency=medium
+
+  * Initial version.
+
+-- Uri Herrera <uri_herrera@nxos.org> Fri, 29 Nov 2018 15:56:00 -0500
