@@ -1,14 +1,15 @@
 Source: buho
 Section: unknown
 Priority: optional
-Maintainer: Alexis Lopez Zubieta <azubieta90@gmail.com>
-Build-Depends: debhelper (>=9), cmake (>= 2.8), extra-cmake-modules,kio-dev,libkf5activities-dev,libkf5dbusaddons-dev,libkf5declarative-dev,libkf5i18n-dev,libkf5kdelibs4support-dev,libkf5notifications-dev,libkf5people-dev,libkf5runner-dev,libkf5solid-dev,libkf5windowsystem-dev,libqt5x11extras5-dev,plasma-framework-dev,plasma-workspace-dev,qtbase5-dev,qtdeclarative5-dev
-Standards-Version: 3.9.6
-Homepage: https://github.com/mauikit/buho
-Vcs-Git: https://github.com/mauikit/buho.git
+Maintainer: Bruno Queiros <bqueiros@gmail.com>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.1.2
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Git: https://anonscm.debian.org/git/collab-maint/buho.git
+#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/buho.git
 
 Package: buho
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Maui Note Taking App
- Buho allows you to save links, write quick notes and organize pages as books. Buho works on desktops, Android and Plasma Mobile.
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

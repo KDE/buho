@@ -1,5 +1,5 @@
-buho (1.0.0) nxos; urgency=medium
+buho (1.0-1) unstable; urgency=medium
 
-  * Initial version.
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
 
--- Uri Herrera <uri_herrera@nxos.org> Fri, 29 Nov 2018 15:56:00 -0500
+ -- Bruno Queiros <bqueiros@gmail.com>  Sat, 01 Dec 2018 16:08:24 +0000
