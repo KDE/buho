@@ -25,7 +25,7 @@ Maui.Page
     margins: space.big
 
     headBarExit : false
-    headBarVisible: !cardsView.holder.visible
+    headBar.visible: !cardsView.holder.visible
     headBarTitle : cardsView.count + " notes"
 
     headBar.leftContent: [

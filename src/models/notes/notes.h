@@ -7,7 +7,6 @@
 
 class DB;
 class Tagging;
-
 class Notes : public BaseList
 {
     Q_OBJECT
