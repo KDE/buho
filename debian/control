@@ -11,4 +11,4 @@ Package: buho
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Maui Note Taking App
-Buho allows you to save links, write quick notes and organize pages as books. Buho works on desktops, Android and Plasma Mobile.
+ Buho allows you to save links, write quick notes and organize pages as books. Buho works on desktops, Android and Plasma Mobile.
