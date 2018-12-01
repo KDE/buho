@@ -129,12 +129,10 @@ Maui.Dialog
             id: tagBar
             Layout.fillWidth: true
             allowEditMode: true
-
-            onTagsEdited:
-            {
-                for(var i in tags)
-                    append({tag : tags[i]})
-            }
+            list.abstract: true
+            list.key: "links"
+            onTagsEdited: list.updateToAbstract(tags)
+            onTagRemovedClicked: list.removeFromAbstract(index)
         }
     }
 
@@ -143,7 +141,7 @@ Maui.Dialog
     {
         console.log("STATE:" , link.fav)
         webView.url = link.link
-        tagBar.populate(link.tags)
+        tagBar.list.lot = link.link
         pinButton.checked = link.pin == 1
         favButton.checked = link.fav == 1
         selectedColor = link.color

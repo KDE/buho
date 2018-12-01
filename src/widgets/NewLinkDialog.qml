@@ -182,12 +182,10 @@ Maui.Dialog
             visible: previewReady
             Layout.fillWidth: true
             allowEditMode: true
-
-            onTagsEdited:
-            {
-                for(var i in tags)
-                    append({tag : tags[i]})
-            }
+            list.abstract: true
+            list.key: "links"
+            onTagsEdited: list.updateToAbstract(tags)
+            onTagRemovedClicked: list.removeFromAbstract(index)
         }
     }
 
@@ -206,6 +204,7 @@ Maui.Dialog
     {
         title.text = link.title
         populatePreviews(link.image)
+        tagBar.list.lot= link.url
 
         open()
     }

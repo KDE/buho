@@ -20,14 +20,14 @@
 #include <QtWebEngine>
 #endif
 
-#include "src/buho.h"
-#include "src/linker.h"
+#include "./src/buho.h"
+#include "./src/linker.h"
 
-#include "models/basemodel.h"
-#include "models/baselist.h"
+#include "./src/models/basemodel.h"
+#include "./src/models/baselist.h"
 
-#include "models/notes/notes.h"
-#include "models/links/links.h"
+#include "./src/models/notes/notes.h"
+#include "./src/models/links/links.h"
 
 int main(int argc, char *argv[])
 {
