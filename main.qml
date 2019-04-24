@@ -17,15 +17,15 @@ Maui.ApplicationWindow
     floatingBar: true
     footBarOverlap: true
     allowRiseContent: false
-    altToolBars: false
+//    altToolBars: false
 
     /**** BRANDING COLORS ****/
-    menuButton.colorScheme.highlightColor: altColorText
-    searchButton.colorScheme.highlightColor: altColorText
-    colorSchemeName: "buho"
-    headBarBGColor: accentColor
-    headBarFGColor: altColorText
+    menuButton.colorScheme.highlightColor: accentColor
+    searchButton.colorScheme.highlightColor: accentColor
+    headBarBGColor: viewBackgroundColor
+    headBarFGColor: textColor
     accentColor : "#ff9494"
+    //    highlightColor: accentColor
 
     altColorText : "white"/*Qt.darker(accentColor, 2.5)*/
 
@@ -33,21 +33,21 @@ Maui.ApplicationWindow
     about.appIcon: "qrc:/buho.svg"
 
     property int currentView : views.notes
-    property var views : ({
-                              notes: 0,
-                              links: 1,
-                              books: 2,
-                              tags: 3,
-                              search: 4
-                          })
+    readonly property var views : ({
+                                       notes: 0,
+                                       links: 1,
+                                       books: 2,
+                                       tags: 3,
+                                       search: 4
+                                   })
     property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
 
     headBar.middleContent: [
         Maui.ToolButton
         {
             onClicked: currentView = views.notes
-            iconColor: currentView === views.notes? altColorText : headBarTint
-            colorScheme.highlightColor: altColorText
+            iconColor: currentView === views.notes? accentColor : textColor
+            colorScheme.highlightColor: accentColor
             iconName: "view-notes"
             text: qsTr("Notes")
         },
@@ -55,8 +55,8 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             onClicked: currentView = views.links
-            iconColor: currentView === views.links? altColorText : headBarTint
-            colorScheme.highlightColor: altColorText
+            iconColor: currentView === views.links? accentColor : textColor
+            colorScheme.highlightColor: accentColor
             iconName: "view-links"
             text: qsTr("Links")
         },
@@ -64,22 +64,24 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             onClicked: currentView = views.books
-            iconColor: currentView === views.books? altColorText : headBarTint
-            colorScheme.highlightColor: altColorText
+            iconColor: currentView === views.books?  accentColor : textColor
+            colorScheme.highlightColor: accentColor
             iconName: "view-books"
             text: qsTr("Books")
         },
 
         Maui.ToolButton
         {
-            iconColor: currentView === views.tags? altColorText : headBarTint
-            colorScheme.highlightColor: altColorText
+            iconColor: currentView === views.tags? accentColor : textColor
+            colorScheme.highlightColor: accentColor
             iconName: "tag"
             text: qsTr("Tags")
         }
     ]
 
-    headBar.colorScheme.borderColor: Qt.darker(accentColor, 1.4)
+    //    headBar.colorScheme.borderColor: Qt.darker(accentColor, 1.4)
+    headBar.drawBorder: false
+    headBar.implicitHeight: toolBarHeight * 1.5
     footBar.colorScheme.backgroundColor: accentColor
     footBar.colorScheme.borderColor: Qt.darker(accentColor, 1.4)
     footBarMargins: space.huge
@@ -186,6 +188,7 @@ Maui.ApplicationWindow
         }
 
     }
+
 
     function newNote()
     {

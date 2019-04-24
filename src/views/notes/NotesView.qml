@@ -25,18 +25,22 @@ Maui.Page
     margins: space.big
 
     headBarExit : false
+    headBar.drawBorder: false
     headBar.visible: !cardsView.holder.visible
     headBarTitle : cardsView.count + " notes"
 
     headBar.leftContent: [
         Maui.ToolButton
         {
-            iconName:  cardsView.gridView ? "view-list-icons" : "view-list-details"
+            iconName:  cardsView.gridView ? "view-list-details" : "view-list-icons"
             onClicked:
             {
                 cardsView.gridView = !cardsView.gridView
             }
-        },
+        }
+    ]
+
+    headBar.rightContent: [
         Maui.ToolButton
         {
             iconName: "view-sort"
@@ -68,41 +72,43 @@ Maui.Page
                 Maui.MenuItem
                 {
                     text: qsTr("Title")
+                    checkable: true
+                    checked: notesList.sortBy === KEY.TITLE
                     onTriggered: notesList.sortBy = KEY.TITLE
                 }
 
                 Maui.MenuItem
                 {
                     text: qsTr("Color")
+                    checkable: true
+                    checked: notesList.sortBy === KEY.COLOR
                     onTriggered: notesList.sortBy = KEY.COLOR
                 }
 
                 Maui.MenuItem
                 {
                     text: qsTr("Add date")
+                    checkable: true
+                    checked: notesList.sortBy === KEY.ADD_DATE
                     onTriggered: notesList.sortBy = KEY.ADD_DATE
                 }
 
                 Maui.MenuItem
                 {
                     text: qsTr("Updated")
+                    checkable: true
+                    checked: notesList.sortBy === KEY.UPDATED
                     onTriggered: notesList.sortBy = KEY.UPDATED
                 }
 
                 Maui.MenuItem
                 {
                     text: qsTr("Fav")
+                    checkable: true
+                    checked: notesList.sortBy === KEY.FAV
                     onTriggered: notesList.sortBy = KEY.FAV
                 }
             }
-        }
-    ]
-
-    headBar.rightContent: [
-        Maui.ToolButton
-        {
-            iconName: "tag-recents"
-
         },
         Maui.ToolButton
         {
@@ -110,12 +116,6 @@ Maui.Page
             iconName: "edit-pin"
             checkable: true
             iconColor: checked ? highlightColor : textColor
-
-        },
-
-        Maui.ToolButton
-        {
-            iconName: "view-calendar"
 
         }
     ]
