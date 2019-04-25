@@ -82,7 +82,7 @@ Maui.Dialog
 
     acceptText: qsTr("Save")
     rejectText:  qsTr("Discard")
-    colorScheme.backgroundColor: selectedColor
+//    colorScheme.backgroundColor: selectedColor
 
     ColumnLayout
     {

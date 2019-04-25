@@ -5,6 +5,7 @@ import org.kde.mauikit 1.0 as Maui
 
 Maui.Dialog
 {
+    id: control
     parent: parent
     heightHint: 0.95
     widthHint: 0.95
@@ -12,13 +13,14 @@ Maui.Dialog
     maxHeight: maxWidth
 
     property string selectedColor : "#ffffe6"
-    property string fgColor: Qt.darker(selectedColor, 2.5)
+    property string fgColor: Qt.darker(selectedColor, 3)
     property bool showEditActions : false
 
     rejectButton.visible: false
     signal noteSaved(var note)
     page.margins: 0
     colorScheme.backgroundColor: selectedColor
+    colorScheme.textColor: fgColor
     headBar.leftContent: [
 
         Maui.ToolButton
@@ -27,7 +29,7 @@ Maui.Dialog
             enabled: editor.body.canUndo
             onClicked: editor.body.undo()
             opacity: enabled ? 1 : 0.5
-
+            iconColor: control.colorScheme.textColor
         },
 
         Maui.ToolButton
@@ -36,13 +38,14 @@ Maui.Dialog
             enabled: editor.body.canRedo
             onClicked: editor.body.redo()
             opacity: enabled ? 1 : 0.5
+            iconColor: control.colorScheme.textColor
         },
 
         Maui.ToolButton
         {
             iconName: "format-text-bold"
             focusPolicy: Qt.TabFocus
-            iconColor: checked ? highlightColor : textColor
+            iconColor: checked ? highlightColor :  control.colorScheme.textColor
             checkable: true
             checked: editor.document.bold
             onClicked: editor.document.bold = !editor.document.bold
@@ -51,7 +54,7 @@ Maui.Dialog
         Maui.ToolButton
         {
             iconName: "format-text-italic"
-            iconColor: checked ? highlightColor : textColor
+            iconColor: checked ? highlightColor : control.colorScheme.textColor
             focusPolicy: Qt.TabFocus
             checkable: true
             checked: editor.document.italic
@@ -61,7 +64,7 @@ Maui.Dialog
         Maui.ToolButton
         {
             iconName: "format-text-underline"
-            iconColor: checked ? highlightColor : textColor
+            iconColor: checked ? highlightColor : control.colorScheme.textColor
             focusPolicy: Qt.TabFocus
             checkable: true
             checked: editor.document.underline
@@ -71,7 +74,7 @@ Maui.Dialog
         Maui.ToolButton
         {
             iconName: "format-text-uppercase"
-            iconColor: checked ? highlightColor : textColor
+            iconColor: checked ? highlightColor : control.colorScheme.textColor
             focusPolicy: Qt.TabFocus
             checkable: true
             checked: editor.document.uppercase
@@ -80,6 +83,7 @@ Maui.Dialog
         Maui.ToolButton
         {
             iconName: "image"
+            iconColor: control.colorScheme.textColor
         }
     ]
 
@@ -94,7 +98,7 @@ Maui.Dialog
             id: pinButton
             iconName: "edit-pin"
             checkable: true
-            iconColor: checked ? highlightColor : textColor
+            iconColor: checked ? highlightColor : control.colorScheme.textColor
             //                onClicked: checked = !checked
         },
 
@@ -103,7 +107,7 @@ Maui.Dialog
             id: favButton
             iconName: "love"
             checkable: true
-            iconColor: checked ? "#ff007f" : textColor
+            iconColor: checked ? "#ff007f" : control.colorScheme.textColor
         },
 
         Maui.ToolButton
@@ -111,16 +115,22 @@ Maui.Dialog
             iconName: "document-share"
             onClicked: isAndroid ? Maui.Android.shareText(editor.body.text) :
                                    shareDialog.show(editor.body.text)
+            iconColor: control.colorScheme.textColor
+
         },
 
         Maui.ToolButton
         {
             iconName: "document-export"
+            iconColor: control.colorScheme.textColor
+
         },
 
         Maui.ToolButton
         {
             iconName: "entry-delete"
+            iconColor: control.colorScheme.textColor
+
         }
     ]
 
@@ -164,6 +174,7 @@ Maui.Dialog
             Layout.fillWidth: true
             colorScheme.backgroundColor: selectedColor
             headBar.visible: false
+            colorScheme.textColor: control.colorScheme.textColor
 
         }
 
@@ -176,6 +187,8 @@ Maui.Dialog
             list.key: "notes"
             onTagsEdited: list.updateToAbstract(tags)
             onTagRemovedClicked: list.removeFromAbstract(index)
+            colorScheme.backgroundColor: "transparent"
+            colorScheme.textColor: control.colorScheme.textColor
         }
     }
 

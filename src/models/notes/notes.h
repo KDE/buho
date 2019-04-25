@@ -31,8 +31,6 @@ public slots:
     bool update(const QVariantMap &data, const int &index) override;
     bool update(const OWL::DB &note) override;
     bool remove(const int &index) override;
-
-
 };
 
 #endif // NOTES_H
