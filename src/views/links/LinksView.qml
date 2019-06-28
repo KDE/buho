@@ -25,7 +25,7 @@ Maui.Page
     signal linkClicked(var link)
 
     headBar.visible: !cardsView.holder.visible
-
+    headBar.drawBorder: false
     margins: space.big
     headBarExit: false
     headBarTitle : cardsView.count + " links"

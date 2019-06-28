@@ -46,54 +46,73 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             onClicked: currentView = views.notes
-            iconColor: currentView === views.notes? accentColor : textColor
+            iconColor: active ? accentColor : textColor
             colorScheme.highlightColor: accentColor
             iconName: "view-notes"
             text: qsTr("Notes")
+            active: currentView === views.notes
+            showIndicator: true
         },
 
         Maui.ToolButton
         {
             onClicked: currentView = views.links
-            iconColor: currentView === views.links? accentColor : textColor
+            iconColor: active ? accentColor : textColor
             colorScheme.highlightColor: accentColor
             iconName: "view-links"
             text: qsTr("Links")
+            active: currentView === views.links
+            showIndicator: true
         },
 
         Maui.ToolButton
         {
             onClicked: currentView = views.books
-            iconColor: currentView === views.books?  accentColor : textColor
+            iconColor: active?  accentColor : textColor
             colorScheme.highlightColor: accentColor
             iconName: "view-books"
             text: qsTr("Books")
+            active: currentView === views.books
+            showIndicator: true
         },
 
         Maui.ToolButton
         {
-            iconColor: currentView === views.tags? accentColor : textColor
+            iconColor: active ? accentColor : textColor
             colorScheme.highlightColor: accentColor
             iconName: "tag"
             text: qsTr("Tags")
+            active: currentView === views.tags
+            showIndicator: true
         }
     ]
 
     //    headBar.colorScheme.borderColor: Qt.darker(accentColor, 1.4)
     headBar.drawBorder: false
     headBar.implicitHeight: toolBarHeight * 1.5
-    footBar.colorScheme.backgroundColor: accentColor
-    footBar.colorScheme.borderColor: Qt.darker(accentColor, 1.4)
-    footBarMargins: space.huge
-    footBarAligment: Qt.AlignRight
-    footBar.middleContent: [
+
+
+    Rectangle
+    {
+        z: 999
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: space.medium
+        anchors.bottomMargin: toolBarHeight
+        height: toolBarHeight
+        width: height
+
+        color: accentColor
+        radius: radiusV
+
 
         Maui.PieButton
         {
             id: addButton
+            anchors.fill : parent
             iconName: "list-add"
             iconColor: altColorText
-            barHeight: footBar.height
+            barHeight: parent.height
             alignment: Qt.AlignLeft
             content: [
                 Maui.ToolButton
@@ -112,8 +131,7 @@ Maui.ApplicationWindow
                 }
             ]
         }
-    ]
-
+    }
 
     Maui.SyncDialog
     {
@@ -174,12 +192,14 @@ Maui.ApplicationWindow
         {
             id: notesView
             onNoteClicked: setNote(note)
+            altToolBars: !isMobile
         }
 
         LinksView
         {
             id: linksView
             onLinkClicked: previewLink(link)
+            altToolBars: !isMobile
         }
 
         BooksView
