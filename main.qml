@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import org.kde.kirigami 2.4 as Kirigami
+import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 import "src/widgets"
@@ -17,11 +17,11 @@ Maui.ApplicationWindow
     floatingBar: true
     footBarOverlap: true
     allowRiseContent: false
-//    altToolBars: false
+    //    altToolBars: false
 
     /**** BRANDING COLORS ****/
-    menuButton.colorScheme.highlightColor: accentColor
-    searchButton.colorScheme.highlightColor: accentColor
+    //    menuButton.colorScheme.highlightColor: accentColor
+    //    searchButton.colorScheme.highlightColor: accentColor
     headBarBGColor: viewBackgroundColor
     headBarFGColor: textColor
     accentColor : "#ff9494"
@@ -42,50 +42,50 @@ Maui.ApplicationWindow
                                    })
     property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
 
-    headBar.middleContent: [
-        Maui.ToolButton
-        {
-            onClicked: currentView = views.notes
-            iconColor: active ? accentColor : textColor
-            colorScheme.highlightColor: accentColor
-            iconName: "view-notes"
-            text: qsTr("Notes")
-            active: currentView === views.notes
-            showIndicator: true
-        },
+    headBar.middleContent: Kirigami.ActionToolBar
+    {
+        actions: [
+            Kirigami.Action
+            {
+                onTriggered: currentView = views.notes
+                icon.color: checked ? accentColor : textColor
+                Kirigami.Theme.highlightColor: accentColor
+                Kirigami.Theme.textColor: accentColor
+                icon.name: "view-notes"
+                text: qsTr("Notes")
+                checked: currentView === views.notes
+            },
 
-        Maui.ToolButton
-        {
-            onClicked: currentView = views.links
-            iconColor: active ? accentColor : textColor
-            colorScheme.highlightColor: accentColor
-            iconName: "view-links"
-            text: qsTr("Links")
-            active: currentView === views.links
-            showIndicator: true
-        },
+            Kirigami.Action
+            {
+                onTriggered: currentView = views.links
+                icon.color: checked ? accentColor : textColor
+                Kirigami.Theme.highlightColor: accentColor
+                icon.name: "view-links"
+                text: qsTr("Links")
+                checked: currentView === views.links
+            },
 
-        Maui.ToolButton
-        {
-            onClicked: currentView = views.books
-            iconColor: active?  accentColor : textColor
-            colorScheme.highlightColor: accentColor
-            iconName: "view-books"
-            text: qsTr("Books")
-            active: currentView === views.books
-            showIndicator: true
-        },
+            Kirigami.Action
+            {
+                onTriggered: currentView = views.books
+                icon.color: checked?  accentColor : textColor
+                Kirigami.Theme.highlightColor: accentColor
+                icon.name: "view-books"
+                text: qsTr("Books")
+                checked: currentView === views.books
+            },
 
-        Maui.ToolButton
-        {
-            iconColor: active ? accentColor : textColor
-            colorScheme.highlightColor: accentColor
-            iconName: "tag"
-            text: qsTr("Tags")
-            active: currentView === views.tags
-            showIndicator: true
-        }
-    ]
+            Kirigami.Action
+            {
+                icon.color: checked ? accentColor : textColor
+                Kirigami.Theme.highlightColor: accentColor
+                icon.name: "tag"
+                text: qsTr("Tags")
+                checked: currentView === views.tags
+            }
+        ]
+    }
 
     //    headBar.colorScheme.borderColor: Qt.darker(accentColor, 1.4)
     headBar.drawBorder: false

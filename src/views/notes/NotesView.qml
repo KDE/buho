@@ -41,43 +41,43 @@ Maui.Page
     ]
 
     headBar.rightContent: [
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "view-sort"
+            icon.name: "view-sort"
             onClicked: sortMenu.open();
 
-            Maui.Menu
+            Menu
             {
                 id: sortMenu
                 parent: parent
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Ascedent")
-                    checkable: true
+                    checkable: false
                     checked: notesList.order === Notes.ASC
                     onTriggered: notesList.order = Notes.ASC
                 }
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Descendent")
-                    checkable: true
+                    checkable: false
                     checked: notesList.order === Notes.DESC
                     onTriggered: notesList.order = Notes.DESC
                 }
 
                 MenuSeparator{}
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Title")
-                    checkable: true
+                    checkable: false
                     checked: notesList.sortBy === KEY.TITLE
                     onTriggered: notesList.sortBy = KEY.TITLE
                 }
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Color")
                     checkable: true
@@ -85,37 +85,37 @@ Maui.Page
                     onTriggered: notesList.sortBy = KEY.COLOR
                 }
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Add date")
-                    checkable: true
+                    checkable: false
                     checked: notesList.sortBy === KEY.ADD_DATE
                     onTriggered: notesList.sortBy = KEY.ADD_DATE
                 }
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Updated")
-                    checkable: true
+                    checkable: false
                     checked: notesList.sortBy === KEY.UPDATED
                     onTriggered: notesList.sortBy = KEY.UPDATED
                 }
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Fav")
-                    checkable: true
+                    checkable: false
                     checked: notesList.sortBy === KEY.FAV
                     onTriggered: notesList.sortBy = KEY.FAV
                 }
             }
         },
-        Maui.ToolButton
+        ToolButton
         {
             id: pinButton
-            iconName: "edit-pin"
+            icon.name: "edit-pin"
             checkable: true
-            iconColor: checked ? highlightColor : textColor
+            icon.color: checked ? highlightColor : textColor
 
         }
     ]
