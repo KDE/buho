@@ -43,6 +43,8 @@ Maui.ApplicationWindow
 
     headBar.middleContent: Kirigami.ActionToolBar
     {
+        position: ToolBar.Header
+        Layout.fillWidth: false
         actions: [
             Kirigami.Action
             {
