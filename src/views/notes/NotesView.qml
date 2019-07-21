@@ -53,7 +53,7 @@ Maui.Page
                 MenuItem
                 {
                     text: qsTr("Ascedent")
-                    checkable: true
+                    checkable: false
                     checked: notesList.order === Notes.ASC
                     onTriggered: notesList.order = Notes.ASC
                 }
@@ -61,7 +61,7 @@ Maui.Page
                 MenuItem
                 {
                     text: qsTr("Descendent")
-                    checkable: true
+                    checkable: false
                     checked: notesList.order === Notes.DESC
                     onTriggered: notesList.order = Notes.DESC
                 }
@@ -71,7 +71,7 @@ Maui.Page
                 MenuItem
                 {
                     text: qsTr("Title")
-                    checkable: true
+                    checkable: false
                     checked: notesList.sortBy === KEY.TITLE
                     onTriggered: notesList.sortBy = KEY.TITLE
                 }
@@ -87,7 +87,7 @@ Maui.Page
                 MenuItem
                 {
                     text: qsTr("Add date")
-                    checkable: true
+                    checkable: false
                     checked: notesList.sortBy === KEY.ADD_DATE
                     onTriggered: notesList.sortBy = KEY.ADD_DATE
                 }
@@ -95,7 +95,7 @@ Maui.Page
                 MenuItem
                 {
                     text: qsTr("Updated")
-                    checkable: true
+                    checkable: false
                     checked: notesList.sortBy === KEY.UPDATED
                     onTriggered: notesList.sortBy = KEY.UPDATED
                 }
@@ -103,7 +103,7 @@ Maui.Page
                 MenuItem
                 {
                     text: qsTr("Fav")
-                    checkable: true
+                    checkable: false
                     checked: notesList.sortBy === KEY.FAV
                     onTriggered: notesList.sortBy = KEY.FAV
                 }

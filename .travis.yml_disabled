@@ -1,0 +1,37 @@
+sudo: required
+services:
+- docker
+addons:
+  apt:
+    packages:
+    - realpath
+install:
+- docker pull ubuntu:bionic
+- wget https://raw.githubusercontent.com/nomad-desktop/nxos-repository-util/master/nxos-repository-util.sh
+  -O nxos-repository-util.sh
+- chmod +x nxos-repository-util.sh
+script:
+- docker run --rm -v $(pwd)/:/build/ -w /build/ ubuntu:bionic /bin/bash travis-build.sh
+branches:
+  only:
+  - master
+  - development
+deploy:
+- provider: script
+  script: "./source/nxos-repository-util.sh upload testing *.deb"
+  skip_cleanup: true
+  on:
+    branch: master
+- provider: script
+  script: "./source/nxos-repository-util.sh upload development *.deb"
+  skip_cleanup: true
+  on:
+    branch: development
+notifications:
+  email: false
+  slack:
+    secure: VqgBtVbk5BI3WjC2PSheCKALkiiLTxakxbVN+V4U9nm91ZP4fXxCd1Oyv+Xh9z/e1hX1PS+dMlhGsBdZr+L+QFjzqFnVTrEpxeQ/CBeMriWvpyNKlHLzxgxvT2rFZWEBEU5VKQQF/DIXvKK459MjIZEixnNlmy4gRGOJTjsq3R04kihz09yFV4vnToSmjFpoRG0ju1wDx94JMY4WllQ3+7Q6dUBWsByl0GBpa9O7ze4i2IL7TByCK/sfXcAckNHU1V3BblRA3NTdJHkLUGK8ftIcPahvwqDb6AcfcMs/4N6N6MlamtxJoSoBobGnwSaShEvJE8h2hTMfbOmBZk0Ajr4SMqmLG7RTEZELWbg3TsaROXpVRmrkMnqYcJPlwB679Outbon64vr2fMOJj6ojCEjzPRF+pZ2XdZsYBKkVx2+Pxs5bHpoB1snn2CYnG0Gpbg75U09nQKTcNrOgkDCKAo2j5ibyeJgWcBASiDRATTx9pttoKe/4bzqj90qC5zCho6GQd3rxWcs8P6lTN7M7fnt4MwomAnFlaM4VtoYFH5gC8jurFlX0ctkP6jFAjas39ztLZp/8cvsMNzQQhFeVAYDHwdxE/bdjz88SC0ntTi+ckKaYWmCXRAYAfI836/kQmRbsJtHqQ73vyZjbAWV5FH1m7yI1NgSy2IF7oHw8p6M=
+env:
+  global:
+  - secure: WiUg/WtCjSUfyWV1vWMwQT8YIS2sI0e+0Cp0hc+nIHVey/ztF1N1zuHUZOES7HddzfX5dN3uGzhE5SnbPs87WJYd41sPHcOcndgCItKl1r10vLHYvcnJZq5ItOTAIZE3f81DYO3RRfrXJLbEPzTnK4SjD/0xv8ZTA+A0dyVOejy0LqUUpIoI6W4q9wjd+Nq8EwTaT7PcKsW0Z4p4XCOXkZ3iQdiGnRuvtistkJw7Jh8Y+cISDymHEk+vXicpxXUkw9KVSXw02YfL1K5HS52/+ZrrPj4CloupgaYngtNHGvcwsuAh3KFnYkZW9QOHk1a3KCi+Nlbb2ppvFth0MGSXA4UyCLEXls2P3dCSx1PsghXDnRVqDciezVDbZPB1i4beULTJBPmJRtgZepjZsdr9EphMSmJ2PFZ5hg53dTvdbYJZdLyVvI/MlTxbepcXPftL9tfLCjJSbOhKWD4Ol9iavxnCyUcmAji9UDeWhV8PHekkjTiQgixxaIeXhAfhZh6JwPV2Gd5N5bUeGyheBgViqd0WsHaBOfPI7Uv1xfXCAnEc0ft4HkAc5EiZbJdat7GSgHcpmLverGwLi33lkKeiCFQNkMcD3fjh4H+SXXsoK4RwbZt+zpCWK6t9s/9n7Xspj6j/NOjdUkiPfwKXraAICr1r5+eDPW9kM7ABwG3/dqg=
+  - secure: rGXwNt1KVvCmk9cHEmUuDYQlxesC65XD9gzSSbMRNAMKxGs4WTFT6Hm6vN3EWKjhXxsGOBw9vk4rjlGF/FNAUW3ZJvGne16mzJfDN6/nwvRmHer7sTS37L44VpXVSQJaR5+LbKunY2XgttpJz0UHx2SU8RniLIw8N+i2DP2FqASW59P68DpyDP65HSWnHlFMZziW/eddY2Aye16zaPD8OrAA/0z6t/6rDy3//GE1NSs/0GQuTlP+xusbxhtIG/OqI1UiZ2Hhodr+Kgvqt+saA48CQhDjWxvLUHev32fRTSMHvu74dp8DuqyqlMGJ3zkjCbTaU2ppS3tdgQJwdltMvr+CvHnV91V2WKU+VVGwjhwQpa9WbWvUI2oQEwaFynH4Bp/OivDI7wzd5Cm2rTS2JzhcNS9ZTAjtWpSdgmU34XIIO4+qBdzcwY5V2MZQciUAD/YTJujKUNQ0meau+rgCUzMEVKtiClFjQUzg2aFca+HBbeyfbHeIFNfXNUI3mt8NH4O7h9vw1BRP5NU1R/A/VP+SkDEJEyXqHdRgSc/MkxzYICw2SlAdjxDiny/uBoTHgGauNA6UWbMsy/GyFbg9W9uq9DcESTNjUxMa//A2RxykhAaeCu7mt4o+lHGL9UeME6n2xQC7fo1kEcKp3e2zyKPPLhxbMG9tdxrEgaMXpi4=

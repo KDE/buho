@@ -190,6 +190,7 @@ Maui.Dialog
             onTagRemovedClicked: list.removeFromAbstract(index)
              Kirigami.Theme.backgroundColor: "transparent"
              Kirigami.Theme.textColor: control.colorScheme.textColor
+
         }
     }
 
