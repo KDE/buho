@@ -26,26 +26,25 @@ Maui.Page
 
     headBar.visible: !cardsView.holder.visible
     headBar.drawBorder: false
-    margins: space.big
-    headBarExit: false
-    headBarTitle : cardsView.count + " links"
+    padding: space.big
+    title : cardsView.count + " links"
     headBar.leftContent: [
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: cardsView.gridView ? "view-list-icons" : "view-list-details"
+            icon.name: cardsView.gridView ? "view-list-icons" : "view-list-details"
             onClicked: cardsView.gridView = !cardsView.gridView
 
         },
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "view-sort"
+            icon.name: "view-sort"
             onClicked: sortMenu.open();
 
             Menu
             {
                 id: sortMenu
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Ascedent")
                     checkable: true
@@ -53,7 +52,7 @@ Maui.Page
                     onTriggered: linksList.order = Links.ASC
                 }
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Descendent")
                     checkable: true
@@ -63,32 +62,32 @@ Maui.Page
 
                 MenuSeparator{}
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Title")
                     onTriggered: KEY.TITLE
                 }
 
-                Maui.MenuItem
+                MenuItem
 
                 {
                     text: qsTr("Color")
                     onTriggered: linksList.sortBy = KEY.COLOR
                 }
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Add date")
                     onTriggered: linksList.sortBy = KEY.ADD_DATE
                 }
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Updated")
                     onTriggered: linksList.sortBy = KEY.UPDATED
                 }
 
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Fav")
                     onTriggered: linksList.sortBy = KEY.FAV
@@ -98,19 +97,19 @@ Maui.Page
     ]
 
     headBar.rightContent: [
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "tag-recents"
+            icon.name: "tag-recents"
         },
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "edit-pin"
+            icon.name: "edit-pin"
         },
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "view-calendar"
+            icon.name: "view-calendar"
         }
     ]
 

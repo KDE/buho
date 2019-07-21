@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import org.kde.kirigami 2.4 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 import "src/widgets"
@@ -14,14 +14,11 @@ Maui.ApplicationWindow
     title: qsTr("Buho")
 
     /***** PROPS *****/
-    floatingBar: true
-    footBarOverlap: true
-    allowRiseContent: false
 //    altToolBars: false
 
     /**** BRANDING COLORS ****/
-    menuButton.colorScheme.highlightColor: accentColor
-    searchButton.colorScheme.highlightColor: accentColor
+//    menuButton.colorScheme.highlightColor: accentColor
+//    searchButton.colorScheme.highlightColor: accentColor
     headBarBGColor: viewBackgroundColor
     headBarFGColor: textColor
     accentColor : "#ff9494"
@@ -43,54 +40,49 @@ Maui.ApplicationWindow
     property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
 
     headBar.middleContent: [
-        Maui.ToolButton
+        ToolButton
         {
             onClicked: currentView = views.notes
-            iconColor: active ? accentColor : textColor
-            colorScheme.highlightColor: accentColor
-            iconName: "view-notes"
+            icon.color: active ? accentColor : textColor
+            Kirigami.Theme.highlightColor: accentColor
+            icon.name: "view-notes"
             text: qsTr("Notes")
-            active: currentView === views.notes
-            showIndicator: true
+            checked: currentView === views.notes
         },
 
-        Maui.ToolButton
+        ToolButton
         {
             onClicked: currentView = views.links
-            iconColor: active ? accentColor : textColor
-            colorScheme.highlightColor: accentColor
-            iconName: "view-links"
+            icon.color: active ? accentColor : textColor
+            Kirigami.Theme.highlightColor: accentColor
+            icon.name: "view-links"
             text: qsTr("Links")
-            active: currentView === views.links
-            showIndicator: true
+            checked: currentView === views.links
         },
 
-        Maui.ToolButton
+        ToolButton
         {
             onClicked: currentView = views.books
-            iconColor: active?  accentColor : textColor
-            colorScheme.highlightColor: accentColor
-            iconName: "view-books"
+            icon.color: active?  accentColor : textColor
+            Kirigami.Theme.highlightColor: accentColor
+            icon.name: "view-books"
             text: qsTr("Books")
-            active: currentView === views.books
-            showIndicator: true
+            checked: currentView === views.books
         },
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconColor: active ? accentColor : textColor
-            colorScheme.highlightColor: accentColor
-            iconName: "tag"
+            icon.color: active ? accentColor : textColor
+            Kirigami.Theme.highlightColor: accentColor
+            icon.name: "tag"
             text: qsTr("Tags")
-            active: currentView === views.tags
-            showIndicator: true
+            checked: currentView === views.tags
         }
     ]
 
     //    headBar.colorScheme.borderColor: Qt.darker(accentColor, 1.4)
     headBar.drawBorder: false
     headBar.implicitHeight: toolBarHeight * 1.5
-
 
     Rectangle
     {
@@ -110,24 +102,24 @@ Maui.ApplicationWindow
         {
             id: addButton
             anchors.fill : parent
-            iconName: "list-add"
-            iconColor: altColorText
+            icon.name: "list-add"
+            icon.color: altColorText
             barHeight: parent.height
             alignment: Qt.AlignLeft
             content: [
-                Maui.ToolButton
+                ToolButton
                 {
-                    iconName: "view-notes"
+                    icon.name: "view-notes"
                     onClicked: newNote()
                 },
-                Maui.ToolButton
+                ToolButton
                 {
-                    iconName: "view-links"
+                    icon.name: "view-links"
                     onClicked: newLink()
                 },
-                Maui.ToolButton
+                ToolButton
                 {
-                    iconName: "view-books"
+                    icon.name: "view-books"
                 }
             ]
         }
@@ -140,7 +132,7 @@ Maui.ApplicationWindow
     }
 
     mainMenu: [
-        Maui.MenuItem
+        MenuItem
         {
             text: qsTr("Syncing")
             onTriggered: syncDialog.open()
@@ -192,14 +184,12 @@ Maui.ApplicationWindow
         {
             id: notesView
             onNoteClicked: setNote(note)
-            altToolBars: !isMobile
         }
 
         LinksView
         {
             id: linksView
             onLinkClicked: previewLink(link)
-            altToolBars: !isMobile
         }
 
         BooksView

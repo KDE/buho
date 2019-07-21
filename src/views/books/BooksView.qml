@@ -9,7 +9,7 @@ Maui.Page
     property alias cardsView : cardsView
 
     headBar.visible: false
-    margins: isMobile ? space.big : space.enormous
+    padding: isMobile ? space.big : space.enormous
 
 
     CardsView

@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.3
 import org.kde.mauikit 1.0 as Maui
 
-Maui.Menu
+Menu
 {
     implicitWidth: colorBar.implicitWidth + space.medium
     property bool isFav : false
@@ -14,7 +14,7 @@ Maui.Menu
     signal pinClicked(int pin)
     signal copyClicked()
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr(isFav? "UnFav" : "Fav")
         onTriggered:
@@ -24,7 +24,7 @@ Maui.Menu
         }
     }
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr(isPin? "UnPin" : "Pin")
         onTriggered:
@@ -34,7 +34,7 @@ Maui.Menu
         }
     }
 
-      Maui.MenuItem
+      MenuItem
     {
         text: qsTr("Export")
         onTriggered:
@@ -43,7 +43,7 @@ Maui.Menu
         }
     }
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Copy")
         onTriggered:
@@ -53,7 +53,7 @@ Maui.Menu
         }
     }
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Delete")
         onTriggered:
@@ -68,7 +68,7 @@ Maui.Menu
 
     }
 
-    Maui.MenuItem
+    MenuItem
     {
         width: parent.width
         height: rowHeight

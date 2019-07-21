@@ -34,12 +34,12 @@ Maui.Dialog
     headBar.visible: previewReady
     footBar.visible: previewReady
 
-    headBar.leftContent: Maui.ToolButton
+    headBar.leftContent: ToolButton
     {
         id: pinButton
-        iconName: "window-pin"
+        icon.name: "window-pin"
         checkable: true
-        iconColor: checked ? highlightColor : textColor
+        icon.color: checked ? highlightColor : textColor
         //                onClicked: checked = !checked
     }
 
@@ -50,24 +50,24 @@ Maui.Dialog
 
     footBar.leftContent: [
 
-        Maui.ToolButton
+        ToolButton
         {
             id: favButton
-            iconName: "love"
+            icon.name: "love"
             checkable: true
-            iconColor: checked ? "#ff007f" : textColor
+            icon.color: checked ? "#ff007f" : textColor
         },
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "document-share"
+            icon.name: "document-share"
             onClicked: isAndroid ? Maui.Android.shareText(link.text) :
                                    shareDialog.show(link.text)
         },
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "document-export"
+            icon.name: "document-export"
         }
     ]
 

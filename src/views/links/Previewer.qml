@@ -11,29 +11,29 @@ Maui.Dialog
     widthHint: 0.97
     maxWidth: 800*unit
     maxHeight: maxWidth
-    page.margins: 0
+    page.padding: 0
     property color selectedColor : "transparent"
     property alias webView: webViewer.item
 
     signal linkSaved(var link)
     headBar.leftContent: [
-        Maui.ToolButton
+        ToolButton
         {
             id: pinButton
-            iconName: "edit-pin"
+            icon.name: "edit-pin"
             checkable: true
-            iconColor: checked ? highlightColor : textColor
+            icon.color: checked ? highlightColor : textColor
             //                onClicked: checked = !checked
         },
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "document-save"
+            icon.name: "document-save"
         },
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "document-launch"
+            icon.name: "document-launch"
             onClicked: Maui.FM.openUrl(webView.url)
         }
     ]
@@ -46,29 +46,29 @@ Maui.Dialog
 
     footBar.leftContent: [
 
-        Maui.ToolButton
+        ToolButton
         {
             id: favButton
-            iconName: "love"
+            icon.name: "love"
             checkable: true
-            iconColor: checked ? "#ff007f" : textColor
+            icon.color: checked ? "#ff007f" : textColor
         },
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "document-share"
+            icon.name: "document-share"
             onClicked: isAndroid ? Maui.Android.shareLink(webView.url) :
                                    shareDialog.show(webView.url)
         },
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "document-export"
+            icon.name: "document-export"
         },
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "entry-delete"
+            icon.name: "entry-delete"
         }
     ]
 
