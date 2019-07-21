@@ -1,7 +1,8 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.3
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import QtQuick.Layouts 1.3
 
 import "src/widgets"
 import "src/views/notes"
@@ -20,7 +21,7 @@ Maui.ApplicationWindow
 //    menuButton.colorScheme.highlightColor: accentColor
 //    searchButton.colorScheme.highlightColor: accentColor
 
-    headBarBGColor: viewBackgroundColor
+//    headBarBGColor: viewBackgroundColor
     headBarFGColor: textColor
     accentColor : "#ff9494"
     //    highlightColor: accentColor
@@ -39,7 +40,6 @@ Maui.ApplicationWindow
                                        search: 4
                                    })
     property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
-
 
     headBar.middleContent: Kirigami.ActionToolBar
     {
@@ -105,7 +105,6 @@ Maui.ApplicationWindow
         color: accentColor
         radius: radiusV
 
-
         Maui.PieButton
         {
             id: addButton
@@ -136,7 +135,6 @@ Maui.ApplicationWindow
     Maui.SyncDialog
     {
         id: syncDialog
-
     }
 
     mainMenu: [
@@ -204,9 +202,7 @@ Maui.ApplicationWindow
         {
             id: booksView
         }
-
     }
-
 
     function newNote()
     {
