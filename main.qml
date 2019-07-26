@@ -43,11 +43,12 @@ Maui.ApplicationWindow
 
     headBar.middleContent: Kirigami.ActionToolBar
     {
+        display: isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
         actions: [
             Kirigami.Action
             {
                 onTriggered: currentView = views.notes
-                icon.color: checked ? accentColor : textColor
+//                icon.color: checked ? accentColor : textColor
                 Kirigami.Theme.highlightColor: accentColor
                 Kirigami.Theme.textColor: accentColor
                 icon.name: "view-notes"
