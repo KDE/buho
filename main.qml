@@ -22,11 +22,11 @@ Maui.ApplicationWindow
     //    searchButton.colorScheme.highlightColor: accentColor
 
     //    headBarBGColor: viewBackgroundColor
-    headBarFGColor: textColor
-    accentColor : "#ff9494"
+//    headBarFGColor: textColor
+//    accentColor : "#ff9494"
     //    highlightColor: accentColor
 
-    altColorText : "white"/*Qt.darker(accentColor, 2.5)*/
+//    altColorText : "white"/*Qt.darker(accentColor, 2.5)*/
 
     about.appDescription: qsTr("Buho allows you to take quick notes, collect links and take long notes organized by chapters.")
     about.appIcon: "qrc:/buho.svg"
@@ -40,6 +40,7 @@ Maui.ApplicationWindow
                                        search: 4
                                    })
     property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
+//    headBarFGColor: "red"
 
     headBar.middleContent: Kirigami.ActionToolBar
     {
@@ -52,8 +53,8 @@ Maui.ApplicationWindow
             {
                 onTriggered: currentView = views.notes
                 //                icon.color: checked ? accentColor : textColor
-                Kirigami.Theme.highlightColor: accentColor
-                Kirigami.Theme.textColor: accentColor
+//                Kirigami.Theme.highlightColor: accentColor
+//                Kirigami.Theme.textColor: accentColor
                 icon.name: "view-notes"
                 text: qsTr("Notes")
                 checked: currentView === views.notes
@@ -62,8 +63,8 @@ Maui.ApplicationWindow
             Kirigami.Action
             {
                 onTriggered: currentView = views.links
-                icon.color: checked ? accentColor : textColor
-                Kirigami.Theme.highlightColor: accentColor
+//                icon.color: checked ? accentColor : textColor
+//                Kirigami.Theme.highlightColor: accentColor
                 icon.name: "view-links"
                 text: qsTr("Links")
                 checked: currentView === views.links
@@ -72,8 +73,8 @@ Maui.ApplicationWindow
             Kirigami.Action
             {
                 onTriggered: currentView = views.books
-                icon.color: checked?  accentColor : textColor
-                Kirigami.Theme.highlightColor: accentColor
+//                icon.color: checked?  accentColor : textColor
+//                Kirigami.Theme.highlightColor: accentColor
                 icon.name: "view-books"
                 text: qsTr("Books")
                 checked: currentView === views.books
@@ -81,8 +82,8 @@ Maui.ApplicationWindow
 
             Kirigami.Action
             {
-                icon.color: checked ? accentColor : textColor
-                Kirigami.Theme.highlightColor: accentColor
+//                icon.color: checked ? accentColor : textColor
+//                Kirigami.Theme.highlightColor: accentColor
                 icon.name: "tag"
                 text: qsTr("Tags")
                 checked: currentView === views.tags
@@ -178,12 +179,12 @@ Maui.ApplicationWindow
         {
             currentView = currentIndex
 
-            if(currentView === views.notes)
-                accentColor = "#ff9494"
-            else if(currentView === views.links)
-                accentColor = "#25affb"
-            else if(currentView === views.books)
-                accentColor = "#6bc5a5"
+//            if(currentView === views.notes)
+//                accentColor = "#ff9494"
+//            else if(currentView === views.links)
+//                accentColor = "#25affb"
+//            else if(currentView === views.books)
+//                accentColor = "#6bc5a5"
         }
 
         interactive: isMobile

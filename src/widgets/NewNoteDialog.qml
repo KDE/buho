@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
-import org.kde.kirigami 2.6 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 
 Maui.Dialog
 {
@@ -20,8 +20,8 @@ Maui.Dialog
     rejectButton.visible: false
     signal noteSaved(var note)
     page.padding: 0
-    colorScheme.backgroundColor: selectedColor
-    colorScheme.textColor: fgColor
+    Kirigami.Theme.backgroundColor: selectedColor
+     Kirigami.Theme.textColor: fgColor
     headBar.leftContent: [
 
         ToolButton
@@ -30,7 +30,7 @@ Maui.Dialog
             enabled: editor.body.canUndo
             onClicked: editor.body.undo()
             opacity: enabled ? 1 : 0.5
-            icon.color: control.colorScheme.textColor
+            icon.color: Kirigami.Theme.textColor
         },
 
         ToolButton
@@ -39,14 +39,14 @@ Maui.Dialog
             enabled: editor.body.canRedo
             onClicked: editor.body.redo()
             opacity: enabled ? 1 : 0.5
-            icon.color: control.colorScheme.textColor
+            icon.color: Kirigami.Theme.textColor
         },
 
         ToolButton
         {
             icon.name: "format-text-bold"
             focusPolicy: Qt.TabFocus
-            icon.color: checked ? highlightColor :  control.colorScheme.textColor
+            icon.color: checked ? Kirigami.Theme.highlightColor :  Kirigami.Theme.textColor
             checkable: true
             checked: editor.document.bold
             onClicked: editor.document.bold = !editor.document.bold
@@ -55,7 +55,7 @@ Maui.Dialog
         ToolButton
         {
             icon.name: "format-text-italic"
-            icon.color: checked ? highlightColor : control.colorScheme.textColor
+            icon.color: checked ? Kirigami.Theme.highlightColor :  Kirigami.Theme.textColor
             focusPolicy: Qt.TabFocus
             checkable: true
             checked: editor.document.italic
@@ -65,7 +65,7 @@ Maui.Dialog
         ToolButton
         {
             icon.name: "format-text-underline"
-            icon.color: checked ? highlightColor : control.colorScheme.textColor
+            icon.color: checked ? Kirigami.Theme.highlightColor :  Kirigami.Theme.textColor
             focusPolicy: Qt.TabFocus
             checkable: true
             checked: editor.document.underline
@@ -75,7 +75,7 @@ Maui.Dialog
         ToolButton
         {
             icon.name: "format-text-uppercase"
-            icon.color: checked ? highlightColor : control.colorScheme.textColor
+            icon.color: checked ? Kirigami.Theme.highlightColor :  Kirigami.Theme.textColor
             focusPolicy: Qt.TabFocus
             checkable: true
             checked: editor.document.uppercase
@@ -84,7 +84,7 @@ Maui.Dialog
         ToolButton
         {
             icon.name: "image"
-            icon.color: control.colorScheme.textColor
+            icon.color: control.Kirigami.Theme.textColor
         }
     ]
 
@@ -99,7 +99,7 @@ Maui.Dialog
             id: pinButton
             icon.name: "edit-pin"
             checkable: true
-            icon.color: checked ? highlightColor : control.colorScheme.textColor
+            icon.color: checked ? highlightColor : Kirigami.Theme.textColor
             //                onClicked: checked = !checked
         },
 
@@ -108,7 +108,7 @@ Maui.Dialog
             id: favButton
             icon.name: "love"
             checkable: true
-            icon.color: checked ? "#ff007f" : control.colorScheme.textColor
+            icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
         },
 
         ToolButton
@@ -116,21 +116,21 @@ Maui.Dialog
             icon.name: "document-share"
             onClicked: isAndroid ? Maui.Android.shareText(editor.body.text) :
                                    shareDialog.show(editor.body.text)
-            icon.color: control.colorScheme.textColor
+            icon.color: Kirigami.Theme.textColor
 
         },
 
         ToolButton
         {
             icon.name: "document-export"
-            icon.color: control.colorScheme.textColor
+            icon.color: Kirigami.Theme.textColor
 
         },
 
         ToolButton
         {
             icon.name: "entry-delete"
-            icon.color: control.colorScheme.textColor
+            icon.color: Kirigami.Theme.textColor
 
         }
     ]
@@ -160,8 +160,9 @@ Maui.Dialog
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: fontSizes.large
-
-            color: fgColor
+//            Kirigami.Theme.backgroundColor: selectedColor
+//            Kirigami.Theme.textColor: Qt.darker(selectedColor, 2.5)
+//            color: fgColor
             background: Rectangle
             {
                 color: "transparent"
@@ -174,7 +175,7 @@ Maui.Dialog
             Layout.fillHeight: true
             Layout.fillWidth: true
             Kirigami.Theme.backgroundColor: selectedColor
-            Kirigami.Theme.textColor: control.colorScheme.textColor
+            Kirigami.Theme.textColor: Qt.darker(selectedColor, 2.5)
             headBar.visible: false
 
         }
@@ -189,7 +190,7 @@ Maui.Dialog
             onTagsEdited: list.updateToAbstract(tags)
             onTagRemovedClicked: list.removeFromAbstract(index)
              Kirigami.Theme.backgroundColor: "transparent"
-             Kirigami.Theme.textColor: control.colorScheme.textColor
+             Kirigami.Theme.textColor: Kirigami.Theme.textColor
 
         }
     }
