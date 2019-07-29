@@ -5,7 +5,7 @@ TryExec=buho
 Exec=buho %U
 Terminal=false
 Type=Application
-Categories=Qt;Utility;KDE;
+Categories=Qt;KDE;Utility;TextTools;X-KDE-Utilities-Desktop;
 StartupNotify=true
 Icon=buho
 
