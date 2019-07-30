@@ -112,7 +112,7 @@ Maui.Page
         ToolButton
         {
             id: pinButton
-            icon.name: "edit-pin"
+            icon.name: "pin"
             checkable: true
             icon.color: checked ? highlightColor : textColor
 

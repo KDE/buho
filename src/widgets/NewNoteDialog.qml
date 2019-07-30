@@ -97,7 +97,7 @@ Maui.Dialog
         ToolButton
         {
             id: pinButton
-            icon.name: "edit-pin"
+            icon.name: "pin"
             checkable: true
             icon.color: checked ? highlightColor : Kirigami.Theme.textColor
             //                onClicked: checked = !checked

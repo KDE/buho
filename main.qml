@@ -55,7 +55,7 @@ Maui.ApplicationWindow
                 //                icon.color: checked ? accentColor : textColor
 //                Kirigami.Theme.highlightColor: accentColor
 //                Kirigami.Theme.textColor: accentColor
-                icon.name: "view-notes"
+                icon.name: "view-pim-notes"
                 text: qsTr("Notes")
                 checked: currentView === views.notes
             },
@@ -65,7 +65,7 @@ Maui.ApplicationWindow
                 onTriggered: currentView = views.links
 //                icon.color: checked ? accentColor : textColor
 //                Kirigami.Theme.highlightColor: accentColor
-                icon.name: "view-links"
+                icon.name: "view-pim-news"
                 text: qsTr("Links")
                 checked: currentView === views.links
             },
@@ -75,7 +75,7 @@ Maui.ApplicationWindow
                 onTriggered: currentView = views.books
 //                icon.color: checked?  accentColor : textColor
 //                Kirigami.Theme.highlightColor: accentColor
-                icon.name: "view-books"
+                icon.name: "view-pim-journal"
                 text: qsTr("Books")
                 checked: currentView === views.books
             },
@@ -100,12 +100,12 @@ Maui.ApplicationWindow
         z: 999
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: space.medium
+        anchors.margins: toolBarHeight
         anchors.bottomMargin: toolBarHeight
         height: toolBarHeight
         width: height
 
-        color: accentColor
+        color: Kirigami.Theme.highlightColor
         radius: radiusV
 
         Maui.PieButton
@@ -113,23 +113,23 @@ Maui.ApplicationWindow
             id: addButton
             anchors.fill : parent
             icon.name: "list-add"
-            icon.color: altColorText
+            icon.color: Kirigami.Theme.highlightedTextColor
             barHeight: parent.height
             alignment: Qt.AlignLeft
             content: [
                 ToolButton
                 {
-                    icon.name: "view-notes"
+                    icon.name: "view-pim-notes"
                     onClicked: newNote()
                 },
                 ToolButton
                 {
-                    icon.name: "view-links"
+                    icon.name: "view-pim-news"
                     onClicked: newLink()
                 },
                 ToolButton
                 {
-                    icon.name: "view-books"
+                    icon.name: "view-pim-journal"
                 }
             ]
         }
