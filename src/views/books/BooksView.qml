@@ -17,11 +17,11 @@ Maui.Page
         id: cardsView
         anchors.fill: parent
 //        onItemClicked: linkClicked(cardsView.model.get(index))
-        holder.emoji: "qrc:/E-reading.png"
-        holder.isMask: false
-        holder.title : "No Books!"
-        holder.body: "Click here to save a new link"
-        holder.emojiSize: iconSizes.huge
+//        holder.emoji: "qrc:/E-reading.png"
+//        holder.isMask: false
+//        holder.title : "No Books!"
+//        holder.body: "Click here to save a new link"
+//        holder.emojiSize: iconSizes.huge
     }
 
 }

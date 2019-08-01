@@ -111,19 +111,19 @@ ItemDelegate
         }
 
 
-        Loader
-        {
-            id: bodyLoader
-            Layout.leftMargin: space.medium
-            Layout.bottomMargin: space.medium
-            Layout.rightMargin: space.medium
-            Layout.topMargin: title.visible ? 0 : space.medium
-            Layout.alignment: Qt.AlignLeft
-            Layout.fillHeight: true
-            Layout.fillWidth: true
+            Loader
+            {
+                id: bodyLoader
+                Layout.leftMargin: space.medium
+                Layout.bottomMargin: space.medium
+                Layout.rightMargin: space.medium
+                Layout.topMargin: title.visible ? 0 : space.medium
+                Layout.alignment: Qt.AlignLeft
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                sourceComponent: typeof model.body !== 'undefined' ? bodyComponent : undefined
+            }
 
-            sourceComponent: typeof model.body !== 'undefined' ? bodyComponent : undefined
-        }
 
 
         Loader
@@ -148,7 +148,6 @@ ItemDelegate
             id: body
             padding: 0
             visible: typeof model.body !== 'undefined'
-
             enabled: false
             text: model.body ? model.body : ""
             color: model.color ? Qt.darker(model.color, 3) : textColor
@@ -156,7 +155,6 @@ ItemDelegate
 
             textFormat : TextEdit.AutoText
             font.pointSize: fontSizes.big
-
             background: Rectangle
             {
                 color: "transparent"
