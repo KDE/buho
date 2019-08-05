@@ -19,5 +19,4 @@ void Buho::setFolders()
     QDir books_path(OWL::BooksPath);
     if (!books_path.exists())
         books_path.mkpath(".");
-
 }

@@ -7,6 +7,7 @@
 
 class DB;
 class Tagging;
+class AbstractNotesSyncer;
 class Notes : public BaseList
 {
     Q_OBJECT
@@ -15,10 +16,13 @@ public:
     OWL::DB_LIST items() const override;
 
 private:
-    Tagging *tag;
     DB *db;
+    Tagging *tag;
+    AbstractNotesSyncer *syncer;
+
     OWL::DB_LIST notes;
     void sortList();
+
 
 signals:
 

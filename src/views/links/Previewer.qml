@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
+import org.kde.kirigami 2.7 as Kirigami
 import "../../widgets"
 
 Maui.Dialog
@@ -22,7 +23,7 @@ Maui.Dialog
             id: pinButton
             icon.name: "pin"
             checkable: true
-            icon.color: checked ? highlightColor : textColor
+            icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
             //                onClicked: checked = !checked
         },
 
@@ -51,7 +52,7 @@ Maui.Dialog
             id: favButton
             icon.name: "love"
             checkable: true
-            icon.color: checked ? "#ff007f" : textColor
+            icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
         },
 
         ToolButton

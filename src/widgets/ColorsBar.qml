@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import org.kde.kirigami 2.7 as Kirigami
 
 Row
 {
@@ -111,7 +112,7 @@ Row
 
     Rectangle
     {
-        color: viewBackgroundColor
+        color: Kirigami.Theme.backgroundColor
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height

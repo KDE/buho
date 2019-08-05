@@ -14,7 +14,10 @@ include(FeatureSummary)
 include(ECMAddAppIcon)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_definitions( -Wall -O2 -fexceptions -std=c99)
 
 include_directories(
@@ -26,6 +29,9 @@ include_directories(
 
     ${CMAKE_CURRENT_SOURCE_DIR}/src/utils
     ${CMAKE_CURRENT_BINARY_DIR}/src/utils
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/syncing
+    ${CMAKE_CURRENT_BINARY_DIR}/src/syncing
     )
 
 set(buho_SRCS
@@ -38,6 +44,7 @@ set(buho_SRCS
     src/models/links/links.cpp
     src/models/basemodel.cpp
     src/models/baselist.cpp
+    src/syncing/nextnote.cpp
     )
 
 set(buho_HDRS
@@ -50,6 +57,8 @@ set(buho_HDRS
     src/models/links/links.h
     src/models/basemodel.h
     src/models/baselist.h
+    src/syncing/nextnote.h
+    src/syncing/abstractnotessyncer.h
     )
 
 set(buho_ASSETS

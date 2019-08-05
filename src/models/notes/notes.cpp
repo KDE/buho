@@ -1,6 +1,7 @@
 #include "notes.h"
 #include <QUuid>
 #include "db/db.h"
+#include "nextnote.h"
 
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
@@ -8,11 +9,13 @@
 #include <MauiKit/tagging.h>
 #endif
 
-Notes::Notes(QObject *parent) : BaseList(parent)
+
+Notes::Notes(QObject *parent) : BaseList(parent),
+    db(DB::getInstance()),
+    tag(Tagging::getInstance()),
+    syncer(new NextNote(this))
 {
     qDebug()<< "CREATING NOTES LIST";
-    this->db = DB::getInstance();
-    this->tag =  Tagging::getInstance();
     this->sortList();
 
     connect(this, &Notes::sortByChanged, this, &Notes::sortList);
@@ -22,9 +25,12 @@ Notes::Notes(QObject *parent) : BaseList(parent)
 void Notes::sortList()
 {
     emit this->preListChanged();
-    this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(
-                                          OWL::KEYMAP[this->sort],
-                                      this->order == ORDER::ASC ? "asc" : "desc"));
+
+    syncer->setCredentials("milo.h@aol.com", "Corazon1corazon", "free01.thegood.cloud");
+    syncer->getNotes();
+//    this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(
+//                                          OWL::KEYMAP[this->sort],
+//                                      this->order == ORDER::ASC ? "asc" : "desc"));
     emit this->postListChanged();
 }
 

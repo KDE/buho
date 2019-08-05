@@ -3,7 +3,7 @@ import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
 import org.kde.mauikit 1.0 as Maui
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 
 import BuhoModel 1.0
 import Notes 1.0
@@ -114,7 +114,7 @@ Maui.Page
             id: pinButton
             icon.name: "pin"
             checkable: true
-            icon.color: checked ? highlightColor : textColor
+            icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
 
         }
     ]
@@ -154,10 +154,10 @@ Maui.Page
                 onItemClicked: noteClicked(cardsView.model.get(index))
             }
 
-            color: altColor
+            color: Kirigami.Theme.backgroundColor
             radius: radiusV
 
-            border.color: Qt.darker(altColor, 1.4)
+            border.color: Qt.darker(Kirigami.Theme.backgroundColor, 1.4)
         }
 
 
