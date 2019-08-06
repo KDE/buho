@@ -96,11 +96,12 @@ void NextNote::insertNote(const FMH::MODEL &note)
     QNetworkReply *reply = restclient->post(request,payload);
 
     connect(reply, &QNetworkReply::finished, [=]()
-            {
-                qDebug() << "Note insertyion finished?";
-                qDebug() << reply->readAll();
-            });
-
+    {
+        qDebug() << "Note insertyion finished?";
+        const auto notes = this->parseNotes(reply->readAll());
+        emit this->noteInserted(notes.isEmpty() ? FMH::MODEL() : notes.first());
+        reply->deleteLater();
+    });
 }
 
 void NextNote::updateNote(const QString &id, const FMH::MODEL &note)
