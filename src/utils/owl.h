@@ -76,60 +76,60 @@ namespace OWL
         {TABLE::LINKS_TAGS,"links_tags"}
     };
 
-    enum KEY : uint8_t
-    {
-        URL,
-        UPDATED,
-        ID,
-        TITLE,
-        BODY,
-        FAV,
-        COLOR,
-        ADD_DATE,
-        TAG,
-        PREVIEW,
-        IMAGE,
-        LINK,
-        PIN,
-        NONE
-    }; Q_ENUM_NS(KEY);
+//    enum KEY : uint8_t
+//    {
+//        URL,
+//        UPDATED,
+//        ID,
+//        TITLE,
+//        BODY,
+//        FAV,
+//        COLOR,
+//        ADD_DATE,
+//        TAG,
+//        PREVIEW,
+//        IMAGE,
+//        LINK,
+//        PIN,
+//        NONE
+//    }; Q_ENUM_NS(KEY);
 
-    typedef QHash<OWL::KEY, QString> DB;
-    typedef QList<DB> DB_LIST;
+//    typedef QHash<OWL::KEY, QString> DB;
+//    typedef QList<DB> DB_LIST;
 
-    static const DB KEYMAP =
-    {
-        {KEY::ID, "id"},
-        {KEY::BODY, "body"},
-        {KEY::UPDATED, "updated"},
-        {KEY::TITLE, "title"},
-        {KEY::URL, "url"},
-        {KEY::FAV, "fav"},
-        {KEY::PIN, "pin"},
-        {KEY::COLOR, "color"},
-        {KEY::ADD_DATE, "addDate"},
-        {KEY::TAG, "tag"},
-        {KEY::PREVIEW, "preview"},
-        {KEY::IMAGE, "image"},
-        {KEY::LINK, "link"}
-    };
+//    static const DB KEYMAP =
+//    {
+//        {KEY::ID, "id"},
+//        {KEY::BODY, "body"},
+//        {KEY::UPDATED, "updated"},
+//        {KEY::TITLE, "title"},
+//        {KEY::URL, "url"},
+//        {KEY::FAV, "fav"},
+//        {KEY::PIN, "pin"},
+//        {KEY::COLOR, "color"},
+//        {KEY::ADD_DATE, "addDate"},
+//        {KEY::TAG, "tag"},
+//        {KEY::PREVIEW, "preview"},
+//        {KEY::IMAGE, "image"},
+//        {KEY::LINK, "link"}
+//    };
 
-    static const QHash<QString, OWL::KEY> MAPKEY =
-    {
-        {KEYMAP[KEY::ID], KEY::ID},
-        {KEYMAP[KEY::BODY], KEY::BODY},
-        {KEYMAP[KEY::UPDATED], KEY::UPDATED},
-        {KEYMAP[KEY::TITLE], KEY::TITLE},
-        {KEYMAP[KEY::URL], KEY::URL},
-        {KEYMAP[KEY::FAV], KEY::FAV},
-        {KEYMAP[KEY::PIN], KEY::PIN},
-        {KEYMAP[KEY::COLOR], KEY::COLOR},
-        {KEYMAP[KEY::ADD_DATE], KEY::ADD_DATE},
-        {KEYMAP[KEY::TAG], KEY::TAG},
-        {KEYMAP[KEY::PREVIEW], KEY::PREVIEW},
-        {KEYMAP[KEY::IMAGE], KEY::IMAGE},
-        {KEYMAP[KEY::LINK], KEY::LINK}
-    };
+//    static const QHash<QString, OWL::KEY> MAPKEY =
+//    {
+//        {KEYMAP[KEY::ID], KEY::ID},
+//        {KEYMAP[KEY::BODY], KEY::BODY},
+//        {KEYMAP[KEY::UPDATED], KEY::UPDATED},
+//        {KEYMAP[KEY::TITLE], KEY::TITLE},
+//        {KEYMAP[KEY::URL], KEY::URL},
+//        {KEYMAP[KEY::FAV], KEY::FAV},
+//        {KEYMAP[KEY::PIN], KEY::PIN},
+//        {KEYMAP[KEY::COLOR], KEY::COLOR},
+//        {KEYMAP[KEY::ADD_DATE], KEY::ADD_DATE},
+//        {KEYMAP[KEY::TAG], KEY::TAG},
+//        {KEYMAP[KEY::PREVIEW], KEY::PREVIEW},
+//        {KEYMAP[KEY::IMAGE], KEY::IMAGE},
+//        {KEYMAP[KEY::LINK], KEY::LINK}
+//    };
 
     const QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/";
     const QString NotesPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/notes/";

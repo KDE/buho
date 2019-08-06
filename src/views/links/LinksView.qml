@@ -3,10 +3,7 @@ import QtQuick.Controls 2.3
 
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
-
-import BuhoModel 1.0
 import Links 1.0
-import OWL 1.0
 
 import "../../widgets"
 
@@ -65,32 +62,32 @@ Maui.Page
                 MenuItem
                 {
                     text: qsTr("Title")
-                    onTriggered: KEY.TITLE
+                    onTriggered: Links.TITLE
                 }
 
                 MenuItem
 
                 {
                     text: qsTr("Color")
-                    onTriggered: linksList.sortBy = KEY.COLOR
+                    onTriggered: linksList.sortBy = Links.COLOR
                 }
 
                 MenuItem
                 {
                     text: qsTr("Add date")
-                    onTriggered: linksList.sortBy = KEY.ADD_DATE
+                    onTriggered: linksList.sortBy = Links.ADD_DATE
                 }
 
                 MenuItem
                 {
                     text: qsTr("Updated")
-                    onTriggered: linksList.sortBy = KEY.UPDATED
+                    onTriggered: linksList.sortBy = Links.MODIFIED
                 }
 
                 MenuItem
                 {
                     text: qsTr("Fav")
-                    onTriggered: linksList.sortBy = KEY.FAV
+                    onTriggered: linksList.sortBy = Links.FAVORITE
                 }
             }
         }
@@ -124,7 +121,7 @@ Maui.Page
         id: linksList
     }
 
-    BuhoModel
+    Maui.BaseModel
     {
         id: linksModel
         list: linksList

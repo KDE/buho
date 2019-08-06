@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QString>
 #include "abstractnotessyncer.h"
-
+#include<functional>
 /**
  * @brief The NextNote class follows the NextCloud API specification
  *  for syncing notes.
@@ -25,11 +25,16 @@ public:
 private:
     static QString API;
     static QString formatUrl(const QString &user, const QString &password, const QString &provider);
+    static FMH::MODEL_LIST parseNotes(const QByteArray &array);
 
+//    template<typename T>
+//    void request(const QString &url, const QMap<QString, QString> &header, T cb);
+//    void request(const QString &url, const QMap<QString, QString> &header,  std::function<void (QByteArray)>cb);
 
 signals:
 
 public slots:
+    void sendNotes(QByteArray array);
 };
 
 #endif // NEXTNOTE_H

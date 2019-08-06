@@ -1,9 +1,16 @@
 #include "linker.h"
-#include "owl.h"
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QUrl>
 #include <QEventLoop>
+
+#include <QObject>
+
+#ifdef STATIC_MAUIKIT
+#include "fmh.h"
+#else
+#include <MauiKit/fmh.h>
+#endif
 
 Linker::Linker(QObject *parent) : QObject(parent)
 {
@@ -72,13 +79,11 @@ void Linker::extract(const QString &url)
         else continue;
     }
 
-    LINK link_data {{OWL::KEYMAP[OWL::KEY::TITLE], title.trimmed()},
-                    {OWL::KEYMAP[OWL::KEY::BODY], data},
-                    {OWL::KEYMAP[OWL::KEY::IMAGE], imgs}};
+    LINK link_data {{FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title.trimmed()},
+                    {FMH::MODEL_NAME[FMH::MODEL_KEY::CONTENT], data},
+                    {FMH::MODEL_NAME[FMH::MODEL_KEY::IMG], imgs}};
     emit previewReady(link_data);
 }
-
-
 
 QStringList Linker::query(const QByteArray &array, const HtmlTag &tag, const QString &attribute)
 {

@@ -41,7 +41,7 @@ void DB::init()
         collectionDBPath_dir.mkpath(".");
 
     this->name = QUuid::createUuid().toString();
-    if(!OWL::fileExists(OWL::CollectionDBPath + OWL::DBName))
+    if(!FMH::fileExists(OWL::CollectionDBPath + OWL::DBName))
     {
         this->openDB(this->name);
         qDebug()<<"Collection doesn't exists, trying to create it" << OWL::CollectionDBPath + OWL::DBName;
@@ -153,9 +153,9 @@ bool DB::checkExistance(const QString &tableName, const QString &searchId, const
     return false;
 }
 
-OWL::DB_LIST DB::getDBData(const QString &queryTxt)
+FMH::MODEL_LIST DB::getDBData(const QString &queryTxt)
 {
-        OWL::DB_LIST mapList;
+        FMH::MODEL_LIST mapList;
 
         auto query = this->getQuery(queryTxt);
 
@@ -163,10 +163,10 @@ OWL::DB_LIST DB::getDBData(const QString &queryTxt)
         {
             while(query.next())
             {
-                OWL::DB data;
-                for(auto key : OWL::KEYMAP.keys())
-                    if(query.record().indexOf(OWL::KEYMAP[key])>-1)
-                        data.insert(key, query.value(OWL::KEYMAP[key]).toString());
+                FMH::MODEL data;
+                for(auto key : FMH::MODEL_NAME.keys())
+                    if(query.record().indexOf(FMH::MODEL_NAME[key])>-1)
+                        data.insert(key, query.value(FMH::MODEL_NAME[key]).toString());
 
                 mapList<< data;
             }

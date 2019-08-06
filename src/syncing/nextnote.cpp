@@ -1,4 +1,15 @@
 #include "nextnote.h"
+#include <QUrl>
+#include <QDomDocument>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QVariantMap>
+
+#ifdef STATIC_MAUIKIT
+#include "fm.h"
+#else
+#include <MauiKit/fm.h>
+#endif
 
 QString NextNote::API = "https://PROVIDER/index.php/apps/notes/api/v0.2/";
 
@@ -15,6 +26,11 @@ void NextNote::getNote(const QString &id) const
 {
 }
 
+void NextNote::sendNotes(QByteArray array)
+{
+//    emit this->notesReady(notes);
+}
+
 void NextNote::getNotes()
 {
     //https://milo.h@aol.com:Corazon1corazon@free01.thegood.cloud/index.php/apps/notes/api/v0.2/notes
@@ -26,11 +42,14 @@ void NextNote::getNotes()
 
     QMap<QString, QString> header {{"Authorization", headerData.toLocal8Bit()}};
 
-    this->request(url, header, [](QByteArray array)
+    auto downloader = new FMH::Downloader;
+    connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
     {
-        qDebug()<< "GOT TEH NOTES" << array;
+        emit this->notesReady(this->parseNotes(array));
+        downloader->deleteLater();
     });
-    //    request.setRawHeader("Authorization", headerData.toLocal8Bit());
+
+    downloader->getArray(url, header);
 }
 
 void NextNote::insertNote(const FMH::MODEL &note) const
@@ -53,3 +72,27 @@ QString NextNote::formatUrl(const QString &user, const QString &password, const 
     url.replace("PROVIDER", provider);
     return url;
 }
+
+FMH::MODEL_LIST NextNote::parseNotes(const QByteArray &array)
+{
+    FMH::MODEL_LIST res;
+    qDebug()<< "trying to parse notes" << array;
+    QJsonParseError jsonParseError;
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(static_cast<QString>(array).toUtf8(), &jsonParseError);
+
+    if (jsonParseError.error != QJsonParseError::NoError)
+    {
+        qDebug()<< "ERROR PARSING";
+        return res;
+    }
+
+    auto notes = jsonResponse.toVariant();
+    for(const auto &map : notes.toList())
+    {
+        res << FM::toModel(map.toMap());
+    }
+
+    return res;
+}
+
+

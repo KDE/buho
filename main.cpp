@@ -23,9 +23,6 @@
 #include "./src/buho.h"
 #include "./src/linker.h"
 
-#include "./src/models/basemodel.h"
-#include "./src/models/baselist.h"
-
 #include "./src/models/notes/notes.h"
 #include "./src/models/links/links.h"
 
@@ -62,15 +59,9 @@ int main(int argc, char *argv[])
     context->setContextProperty("owl", &owl);
 
     Linker linker;
-    context->setContextProperty("linker", &linker);
-
-    qmlRegisterUncreatableMetaObject(OWL::staticMetaObject, "OWL", 1, 0, "KEY", "Error");
-    qmlRegisterUncreatableType<BaseList>("BaseList", 1, 0, "BaseList", QStringLiteral("BaseList should not be created in QML"));
-
-    qmlRegisterType<BaseModel>("BuhoModel", 1, 0, "BuhoModel");
+    context->setContextProperty("linker", &linker);  
     qmlRegisterType<Notes>("Notes", 1, 0, "Notes");
     qmlRegisterType<Links>("Links", 1, 0, "Links");
-
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

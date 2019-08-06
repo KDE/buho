@@ -36,6 +36,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QVariantMap>
 
 #include "../utils/owl.h"
+#ifdef STATIC_MAUIKIT
+#include "fmh.h"
+#else
+#include <MauiKit/fmh.h>
+#endif
+
 
 class DB : public QObject
 {
@@ -53,7 +59,7 @@ public:
     static DB *getInstance();
     /* utils*/
     bool checkExistance(const QString &tableName, const QString &searchId, const QString &search);
-    OWL::DB_LIST getDBData(const QString &queryTxt);
+    FMH::MODEL_LIST getDBData(const QString &queryTxt);
     QSqlQuery getQuery(const QString &queryTxt);
 
     bool insert(const QString &tableName, const QVariantMap &insertData);

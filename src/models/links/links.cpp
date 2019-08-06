@@ -10,7 +10,7 @@
 #include <MauiKit/tagging.h>
 #endif
 
-Links::Links(QObject *parent) : BaseList(parent)
+Links::Links(QObject *parent) : MauiList(parent)
 {
     this->db = DB::getInstance();
     this->tag =  Tagging::getInstance();
@@ -24,7 +24,7 @@ void Links::sortList()
 {
     emit this->preListChanged();
     this->links = this->db->getDBData(QString("select * from links ORDER BY %1 %2").arg(
-                                          OWL::KEYMAP[this->sort],
+                                          FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->sort)],
                                       this->order == ORDER::ASC ? "asc" : "desc"));
     emit this->postListChanged();
 }
@@ -38,40 +38,68 @@ QVariantMap Links::get(const int &index) const
     const auto note = this->links.at(index);
 
     for(auto key : note.keys())
-        res.insert(OWL::KEYMAP[key], note[key]);
+        res.insert(FMH::MODEL_NAME[key], note[key]);
 
     return res;
 }
 
-OWL::DB_LIST Links::items() const
+FMH::MODEL_LIST Links::items() const
 {
     return this->links;
+}
+
+void Links::setSortBy(const Links::SORTBY &sort)
+{
+    if(this->sort == sort)
+        return;
+
+    this->sort = sort;
+    emit this->sortByChanged();
+}
+
+Links::SORTBY Links::getSortBy() const
+{
+    return this->sort;
+}
+
+void Links::setOrder(const Links::ORDER &order)
+{
+    if(this->order == order)
+        return;
+
+    this->order = order;
+    emit this->orderChanged();
+}
+
+Links::ORDER Links::getOrder() const
+{
+    return this->order;
 }
 
 bool Links::insert(const QVariantMap &link)
 {
     emit this->preItemAppended();
 
-    auto url = link[OWL::KEYMAP[OWL::KEY::LINK]].toString();
-    auto color = link[OWL::KEYMAP[OWL::KEY::COLOR]].toString();
-    auto pin = link[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
-    auto fav = link[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
-    auto tags = link[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
-    auto preview = link[OWL::KEYMAP[OWL::KEY::PREVIEW]].toString();
-    auto title = link[OWL::KEYMAP[OWL::KEY::TITLE]].toString();
+    auto url = link[FMH::MODEL_NAME[FMH::MODEL_KEY::LINK]].toString();
+    auto color = link[FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR]].toString();
+    auto pin = link[FMH::MODEL_NAME[FMH::MODEL_KEY::PIN]].toInt();
+    auto fav = link[FMH::MODEL_NAME[FMH::MODEL_KEY::FAV]].toInt();
+    auto tags = link[FMH::MODEL_NAME[FMH::MODEL_KEY::TAG]].toStringList();
+    auto preview = link[FMH::MODEL_NAME[FMH::MODEL_KEY::PREVIEW]].toString();
+    auto title = link[FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE]].toString();
 
     auto image_path = OWL::saveImage(Linker::getUrl(preview), OWL::LinksPath+QUuid::createUuid().toString());
 
     QVariantMap link_map =
     {
-        {OWL::KEYMAP[OWL::KEY::LINK], url},
-        {OWL::KEYMAP[OWL::KEY::TITLE], title},
-        {OWL::KEYMAP[OWL::KEY::PIN], pin},
-        {OWL::KEYMAP[OWL::KEY::FAV], fav},
-        {OWL::KEYMAP[OWL::KEY::PREVIEW], image_path},
-        {OWL::KEYMAP[OWL::KEY::COLOR], color},
-        {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime().toString()},
-        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime().toString()}
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::LINK], url},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::PIN], pin},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::FAV], fav},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::PREVIEW], image_path},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], color},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE], QDateTime::currentDateTime().toString()},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::MODIFIED], QDateTime::currentDateTime().toString()}
 
     };
 
@@ -81,16 +109,16 @@ bool Links::insert(const QVariantMap &link)
             this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
 
 
-        this->links << OWL::DB
+        this->links << FMH::MODEL
                        ({
-                            {OWL::KEY::LINK, url},
-                            {OWL::KEY::TITLE, title},
-                            {OWL::KEY::COLOR, color},
-                            {OWL::KEY::PREVIEW, image_path},
-                            {OWL::KEY::PIN, QString::number(pin)},
-                            {OWL::KEY::FAV, QString::number(fav)},
-                            {OWL::KEY::UPDATED, QDateTime::currentDateTime().toString()},
-                            {OWL::KEY::ADD_DATE, QDateTime::currentDateTime().toString()}
+                            {FMH::MODEL_KEY::LINK, url},
+                            {FMH::MODEL_KEY::TITLE, title},
+                            {FMH::MODEL_KEY::COLOR, color},
+                            {FMH::MODEL_KEY::PREVIEW, image_path},
+                            {FMH::MODEL_KEY::PIN, QString::number(pin)},
+                            {FMH::MODEL_KEY::FAV, QString::number(fav)},
+                            {FMH::MODEL_KEY::MODIFIED, QDateTime::currentDateTime().toString()},
+                            {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString()}
 
                         });
 
@@ -107,14 +135,14 @@ bool Links::update(const int &index, const QVariant &value, const int &role)
     if(index < 0 || index >= links.size())
         return false;
 
-    const auto oldValue = this->links[index][static_cast<OWL::KEY>(role)];
+    const auto oldValue = this->links[index][static_cast<FMH::MODEL_KEY>(role)];
 
     if(oldValue == value.toString())
         return false;
 
-    qDebug()<< "VALUE TO UPDATE"<<  OWL::KEYMAP[static_cast<OWL::KEY>(role)] << oldValue;
+    qDebug()<< "VALUE TO UPDATE"<<  FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(role)] << oldValue;
 
-    this->links[index].insert(static_cast<OWL::KEY>(role), value.toString());
+    this->links[index].insert(static_cast<FMH::MODEL_KEY>(role), value.toString());
 
     this->update(this->links[index]);
 
@@ -130,10 +158,10 @@ bool Links::update(const QVariantMap &data, const int &index)
     QVector<int> roles;
 
     for(auto key : data.keys())
-        if(newData[OWL::MAPKEY[key]] != data[key].toString())
+        if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
         {
-            newData.insert(OWL::MAPKEY[key], data[key].toString());
-            roles << OWL::MAPKEY[key];
+            newData.insert(FMH::MODEL_NAME_KEY[key], data[key].toString());
+            roles << FMH::MODEL_NAME_KEY[key];
         }
 
     this->links[index] = newData;
@@ -149,35 +177,35 @@ bool Links::update(const QVariantMap &data, const int &index)
     return false;
 }
 
-bool Links::update(const OWL::DB &link)
+bool Links::update(const FMH::MODEL &link)
 {
-    auto url = link[OWL::KEY::LINK];
-    auto color = link[OWL::KEY::COLOR];
-    auto pin = link[OWL::KEY::PIN].toInt();
-    auto fav = link[OWL::KEY::FAV].toInt();
-    auto tags = link[OWL::KEY::TAG].split(",", QString::SkipEmptyParts);
-    auto updated = link[OWL::KEY::UPDATED];
+    auto url = link[FMH::MODEL_KEY::LINK];
+    auto color = link[FMH::MODEL_KEY::COLOR];
+    auto pin = link[FMH::MODEL_KEY::PIN].toInt();
+    auto fav = link[FMH::MODEL_KEY::FAV].toInt();
+    auto tags = link[FMH::MODEL_KEY::TAG].split(",", QString::SkipEmptyParts);
+    auto updated = link[FMH::MODEL_KEY::MODIFIED];
 
     QVariantMap link_map =
     {
-        {OWL::KEYMAP[OWL::KEY::COLOR], color},
-        {OWL::KEYMAP[OWL::KEY::PIN], pin},
-        {OWL::KEYMAP[OWL::KEY::FAV], fav},
-        {OWL::KEYMAP[OWL::KEY::UPDATED], updated}
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], color},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::PIN], pin},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::FAV], fav},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::MODIFIED], updated}
     };
 
     for(auto tg : tags)
         this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
 
-    return this->db->update(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map, {{OWL::KEYMAP[OWL::KEY::LINK], url}} );
+    return this->db->update(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map, {{FMH::MODEL_NAME[FMH::MODEL_KEY::LINK], url}} );
 }
 
 bool Links::remove(const int &index)
 {
     emit this->preItemRemoved(index);
 
-    auto linkUrl = this->links.at(index)[OWL::KEY::LINK];
-    QVariantMap link = {{OWL::KEYMAP[OWL::KEY::LINK], linkUrl}};
+    auto linkUrl = this->links.at(index)[FMH::MODEL_KEY::LINK];
+    QVariantMap link = {{FMH::MODEL_NAME[FMH::MODEL_KEY::LINK], linkUrl}};
 
     if(this->db->remove(OWL::TABLEMAP[OWL::TABLE::LINKS], link))
     {
@@ -194,7 +222,7 @@ QVariantList Links::getTags(const int &index)
     if(index < 0 || index >= this->links.size())
         return QVariantList();
 
-    auto link = this->links.at(index)[OWL::KEY::LINK];
+    auto link = this->links.at(index)[FMH::MODEL_KEY::LINK];
 
     return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
 }

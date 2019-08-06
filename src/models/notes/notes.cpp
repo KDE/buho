@@ -9,8 +9,7 @@
 #include <MauiKit/tagging.h>
 #endif
 
-
-Notes::Notes(QObject *parent) : BaseList(parent),
+Notes::Notes(QObject *parent) : MauiList(parent),
     db(DB::getInstance()),
     tag(Tagging::getInstance()),
     syncer(new NextNote(this))
@@ -20,6 +19,12 @@ Notes::Notes(QObject *parent) : BaseList(parent),
 
     connect(this, &Notes::sortByChanged, this, &Notes::sortList);
     connect(this, &Notes::orderChanged, this, &Notes::sortList);
+    connect(syncer, &NextNote::notesReady, [&](FMH::MODEL_LIST notes)
+    {
+        emit this->preListChanged();
+        this->notes << notes;
+        emit this->postListChanged();
+    });
 }
 
 void Notes::sortList()
@@ -28,42 +33,70 @@ void Notes::sortList()
 
     syncer->setCredentials("milo.h@aol.com", "Corazon1corazon", "free01.thegood.cloud");
     syncer->getNotes();
-//    this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(
-//                                          OWL::KEYMAP[this->sort],
-//                                      this->order == ORDER::ASC ? "asc" : "desc"));
+    this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(
+                                          FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->sort)],
+                                      this->order == ORDER::ASC ? "asc" : "desc"));
     emit this->postListChanged();
 }
 
-OWL::DB_LIST Notes::items() const
+FMH::MODEL_LIST Notes::items() const
 {
     return this->notes;
 }
 
+void Notes::setSortBy(const Notes::SORTBY &sort)
+{
+    if(this->sort == sort)
+        return;
+
+    this->sort = sort;
+    emit this->sortByChanged();
+}
+
+Notes::SORTBY Notes::getSortBy() const
+{
+    return this->sort;
+}
+
+void Notes::setOrder(const Notes::ORDER &order)
+{
+    if(this->order == order)
+        return;
+
+    this->order = order;
+    emit this->orderChanged();
+}
+
+Notes::ORDER Notes::getOrder() const
+{
+    return this->order;
+}
+
 bool Notes::insert(const QVariantMap &note)
 {
-    qDebug()<<"TAGS"<< note[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
+    qDebug()<<"TAGS"<< note[FMH::MODEL_NAME[FMH::MODEL_KEY::TAG]].toStringList();
 
     emit this->preItemAppended();
 
-    auto title = note[OWL::KEYMAP[OWL::KEY::TITLE]].toString();
-    auto body = note[OWL::KEYMAP[OWL::KEY::BODY]].toString();
-    auto color = note[OWL::KEYMAP[OWL::KEY::COLOR]].toString();
-    auto pin = note[OWL::KEYMAP[OWL::KEY::PIN]].toInt();
-    auto fav = note[OWL::KEYMAP[OWL::KEY::FAV]].toInt();
-    auto tags = note[OWL::KEYMAP[OWL::KEY::TAG]].toStringList();
+    auto title = note[FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE]].toString();
+    auto content = note[FMH::MODEL_NAME[FMH::MODEL_KEY::CONTENT]].toString();
+    auto color = note[FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR]].toString();
+    auto pin = note[FMH::MODEL_NAME[FMH::MODEL_KEY::PIN]].toInt();
+    auto fav = note[FMH::MODEL_NAME[FMH::MODEL_KEY::FAVORITE]].toInt();
+    auto tags = note[FMH::MODEL_NAME[FMH::MODEL_KEY::TAG]].toStringList();
 
     auto id = QUuid::createUuid().toString();
 
     QVariantMap note_map =
     {
-        {OWL::KEYMAP[OWL::KEY::ID], id},
-        {OWL::KEYMAP[OWL::KEY::TITLE], title},
-        {OWL::KEYMAP[OWL::KEY::BODY], body},
-        {OWL::KEYMAP[OWL::KEY::COLOR], color},
-        {OWL::KEYMAP[OWL::KEY::PIN], pin},
-        {OWL::KEYMAP[OWL::KEY::FAV], fav},
-        {OWL::KEYMAP[OWL::KEY::UPDATED], QDateTime::currentDateTime().toString()},
-        {OWL::KEYMAP[OWL::KEY::ADD_DATE], QDateTime::currentDateTime().toString()}
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::CONTENT], content},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], color},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::PIN], pin},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::FAVORITE], fav},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::MODIFIED], QDateTime::currentDateTime().toString()},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE], QDateTime::currentDateTime().toString()}
     };
 
     if(this->db->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map))
@@ -71,16 +104,16 @@ bool Notes::insert(const QVariantMap &note)
         for(auto tg : tags)
             this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
 
-        this->notes << OWL::DB
+        this->notes << FMH::MODEL
                        ({
-                            {OWL::KEY::ID, id},
-                            {OWL::KEY::TITLE, title},
-                            {OWL::KEY::BODY, body},
-                            {OWL::KEY::COLOR, color},
-                            {OWL::KEY::PIN, QString::number(pin)},
-                            {OWL::KEY::FAV, QString::number(fav)},
-                            {OWL::KEY::UPDATED, QDateTime::currentDateTime().toString()},
-                            {OWL::KEY::ADD_DATE, QDateTime::currentDateTime().toString()}
+                            {FMH::MODEL_KEY::ID, id},
+                            {FMH::MODEL_KEY::TITLE, title},
+                            {FMH::MODEL_KEY::CONTENT, content},
+                            {FMH::MODEL_KEY::COLOR, color},
+                            {FMH::MODEL_KEY::PIN, QString::number(pin)},
+                            {FMH::MODEL_KEY::FAVORITE, QString::number(fav)},
+                            {FMH::MODEL_KEY::MODIFIED, QDateTime::currentDateTime().toString()},
+                            {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString()}
 
                         });
 
@@ -97,12 +130,12 @@ bool Notes::update(const int &index, const QVariant &value, const int &role)
     if(index < 0 || index >= notes.size())
         return false;
 
-    const auto oldValue = this->notes[index][static_cast<OWL::KEY>(role)];
+    const auto oldValue = this->notes[index][static_cast<FMH::MODEL_KEY>(role)];
 
     if(oldValue == value.toString())
         return false;
 
-    this->notes[index].insert(static_cast<OWL::KEY>(role), value.toString());
+    this->notes[index].insert(static_cast<FMH::MODEL_KEY>(role), value.toString());
 
     this->update(this->notes[index]);
 
@@ -118,10 +151,10 @@ bool Notes::update(const QVariantMap &data, const int &index)
     QVector<int> roles;
 
     for(auto key : data.keys())
-        if(newData[OWL::MAPKEY[key]] != data[key].toString())
+        if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
         {
-            newData.insert(OWL::MAPKEY[key], data[key].toString());
-            roles << OWL::MAPKEY[key];
+            newData.insert(FMH::MODEL_NAME_KEY[key], data[key].toString());
+            roles << FMH::MODEL_NAME_KEY[key];
         }
 
     this->notes[index] = newData;
@@ -135,38 +168,38 @@ bool Notes::update(const QVariantMap &data, const int &index)
     return false;
 }
 
-bool Notes::update(const OWL::DB &note)
+bool Notes::update(const FMH::MODEL &note)
 {
-    auto id = note[OWL::KEY::ID];
-    auto title = note[OWL::KEY::TITLE];
-    auto body = note[OWL::KEY::BODY];
-    auto color = note[OWL::KEY::COLOR];
-    auto pin = note[OWL::KEY::PIN].toInt();
-    auto fav = note[OWL::KEY::FAV].toInt();
-    auto tags = note[OWL::KEY::TAG].split(",", QString::SkipEmptyParts);
-    auto updated =note[OWL::KEY::UPDATED];
+    auto id = note[FMH::MODEL_KEY::ID];
+    auto title = note[FMH::MODEL_KEY::TITLE];
+    auto content = note[FMH::MODEL_KEY::CONTENT];
+    auto color = note[FMH::MODEL_KEY::COLOR];
+    auto pin = note[FMH::MODEL_KEY::PIN].toInt();
+    auto favorite = note[FMH::MODEL_KEY::FAVORITE].toInt();
+    auto tags = note[FMH::MODEL_KEY::TAG].split(",", QString::SkipEmptyParts);
+    auto modified =note[FMH::MODEL_KEY::MODIFIED];
 
     QVariantMap note_map =
     {
-        {OWL::KEYMAP[OWL::KEY::TITLE], title},
-        {OWL::KEYMAP[OWL::KEY::BODY], body},
-        {OWL::KEYMAP[OWL::KEY::COLOR], color},
-        {OWL::KEYMAP[OWL::KEY::PIN], pin},
-        {OWL::KEYMAP[OWL::KEY::FAV], fav},
-        {OWL::KEYMAP[OWL::KEY::UPDATED], updated}
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::CONTENT], content},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], color},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::PIN], pin},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::FAVORITE], favorite},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::MODIFIED], modified}
     };
 
     for(auto tg : tags)
         this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
 
-    return this->db->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map, {{OWL::KEYMAP[OWL::KEY::ID], id}} );
+    return this->db->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map, {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}} );
 }
 
 bool Notes::remove(const int &index)
 {
     emit this->preItemRemoved(index);
-    auto id = this->notes.at(index)[OWL::KEY::ID];
-    QVariantMap note = {{OWL::KEYMAP[OWL::KEY::ID], id}};
+    auto id = this->notes.at(index)[FMH::MODEL_KEY::ID];
+    QVariantMap note = {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}};
 
     if(this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], note))
     {
@@ -183,7 +216,7 @@ QVariantList Notes::getTags(const int &index)
     if(index < 0 || index >= this->notes.size())
         return QVariantList();
 
-    auto id = this->notes.at(index)[OWL::KEY::ID];
+    auto id = this->notes.at(index)[FMH::MODEL_KEY::ID];
     return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::NOTES], id);
 }
 
@@ -196,7 +229,7 @@ QVariantMap Notes::get(const int &index) const
     const auto note = this->notes.at(index);
 
     for(auto key : note.keys())
-        res.insert(OWL::KEYMAP[key], note[key]);
+        res.insert(FMH::MODEL_NAME[key], note[key]);
 
     return res;
 }

@@ -2,19 +2,19 @@
 CREATE TABLE IF NOT EXISTS NOTES (
 id TEXT PRIMARY KEY,
 title TEXT,
-body TEXT,
+content TEXT,
 color TEXT,
-fav INT,
+favorite INT,
 pin INT,
-addDate DATE,
-updated DATE
+adddate DATE,
+modified DATE
 );
 
 CREATE TABLE IF NOT EXISTS BOOKS (
 url TEXT PRIMARY KEY,
 title TEXT NOT NULL,
-fav INTEGER NOT NULL,
-addDate DATE
+favorite INTEGER NOT NULL,
+adddate DATE
 );
 
 CREATE TABLE IF NOT EXISTS LINKS (
@@ -23,8 +23,8 @@ url TEXT,
 title TEXT,
 preview TEXT,
 color TEXT,
-fav INT,
+favorite INT,
 pin INT,
-addDate DATE,
-updated DATE
+adddate DATE,
+modified DATE
 );

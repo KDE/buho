@@ -2,39 +2,77 @@
 #define NOTES_H
 
 #include <QObject>
-#include "./../baselist.h"
 #include "owl.h"
+
+#ifdef STATIC_MAUIKIT
+#include "fmh.h"
+#include "mauimodel.h"
+#else
+#include <MauiKit/fmh.h>
+#include <MauiKit/mauilist.h>
+#endif
+
 
 class DB;
 class Tagging;
 class AbstractNotesSyncer;
-class Notes : public BaseList
+class Notes : public MauiList
 {
     Q_OBJECT
-public:
+    Q_PROPERTY(SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
+    Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
+
+public:    
+    enum ORDER : uint8_t
+    {
+        DESC,
+        ASC
+    };
+    Q_ENUM(ORDER)
+
+    enum SORTBY : uint8_t
+    {
+        TITLE = FMH::MODEL_KEY::TITLE,
+        ADDDATE = FMH::MODEL_KEY::ADDDATE,
+        MODIFIED = FMH::MODEL_KEY::MODIFIED,
+        COLOR = FMH::MODEL_KEY::COLOR,
+        FAVORITE = FMH::MODEL_KEY::FAVORITE,
+        PIN = FMH::MODEL_KEY::PIN
+    };
+    Q_ENUM(SORTBY)
+
     explicit Notes(QObject *parent = nullptr);
-    OWL::DB_LIST items() const override;
+    FMH::MODEL_LIST items() const override final;
+
+    void setSortBy(const SORTBY &sort);
+    SORTBY getSortBy() const;
+    void setOrder(const ORDER &order);
+    ORDER getOrder() const;
 
 private:
     DB *db;
     Tagging *tag;
     AbstractNotesSyncer *syncer;
 
-    OWL::DB_LIST notes;
+    FMH::MODEL_LIST notes;
     void sortList();
 
+    SORTBY sort = SORTBY::MODIFIED;
+    ORDER order = ORDER::DESC;
 
 signals:
+    void orderChanged();
+    void sortByChanged();
 
 public slots:
     QVariantList getTags(const int &index);
 
-    QVariantMap get(const int &index) const override;
-    bool insert(const QVariantMap &note) override;
-    bool update(const int &index, const QVariant &value, const int &role) override; //deprecrated
-    bool update(const QVariantMap &data, const int &index) override;
-    bool update(const OWL::DB &note) override;
-    bool remove(const int &index) override;
+    QVariantMap get(const int &index) const;
+    bool insert(const QVariantMap &note);
+    bool update(const int &index, const QVariant &value, const int &role); //deprecrated
+    bool update(const QVariantMap &data, const int &index);
+    bool update(const FMH::MODEL &note);
+    bool remove(const int &index);
 };
 
 #endif // NOTES_H

@@ -147,10 +147,10 @@ Maui.Dialog
     function fill(note)
     {
         title.text = note.title
-        editor.body.text = note.body
-        selectedColor =  note.color
+        editor.body.text = note.content
+        selectedColor =  note.color ? note.color : Kirigami.Theme.backgroundColor
         pinButton.checked = note.pin == 1
-        favButton.checked = note.fav == 1
+        favButton.checked = note.favorite == 1
 
         tagBar.list.lot= note.id
 
@@ -162,12 +162,12 @@ Maui.Dialog
         noteSaved({
                       id: notesView.currentNote.id,
                       title: title.text.trim(),
-                      body: editor.body.text,
+                      content: editor.body.text,
                       color: selectedColor,
                       tag: tagBar.getTags(),
                       pin: pinButton.checked ? 1 : 0,
-                      fav: favButton.checked ? 1 : 0,
-                      updated: new Date()
+                      favorite: favButton.checked ? 1 : 0,
+                      modified: new Date()
                   })
     }
 }

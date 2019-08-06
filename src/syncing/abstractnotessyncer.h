@@ -2,7 +2,7 @@
 #define ABSTRACTNOTESYNCER_H
 
 #include <QObject>
-
+#include <functional>
 #ifdef STATIC_MAUIKIT
 #include "fmh.h"
 #else
@@ -44,7 +44,7 @@ public:
      *  When the process is done it shoudl emit the notesReady(FMH::MODEL_LIST) signal
      */
     virtual void getNotes() {}
-    virtual void getNotes() const {}
+//    virtual void getNotes() const {}
 //    virtual FMH::MODEL_LIST getNotes(const QString &query = QString()) = 0;
 //    virtual FMH::MODEL_LIST getNotes(const QString &query = QString()) const = 0;
 
@@ -87,12 +87,13 @@ protected:
     QString m_provider = "";
 
     template<typename T>
-    inline void request(const QString &url, const QMap<QString, QString> &header, T cb)
+     void request(const QString &url, const QMap<QString, QString> &header, T cb)
+//    inline void request(const QString &url, const QMap<QString, QString> &header, std::function<void (QByteArray)>cb)
     {
         auto downloader = new FMH::Downloader;
         connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](const QByteArray &array)
         {
-            if(cb)
+//            if(cb != nullptr)
                 cb(array);
             downloader->deleteLater();
         });
@@ -101,11 +102,11 @@ protected:
     }
 
 signals:
-    void noteReady(FMH::MODEL);
-    void notesReady(FMH::MODEL_LIST);
-    void noteInserted(FMH::MODEL);
-    void noteUpdated(FMH::MODEL);
-    void noteRemoved(FMH::MODEL);
+    void noteReady(FMH::MODEL note);
+    void notesReady(FMH::MODEL_LIST notes);
+    void noteInserted(FMH::MODEL note);
+    void noteUpdated(FMH::MODEL note);
+    void noteRemoved(FMH::MODEL note);
 
     /**
      * @brief responseReady

@@ -1,13 +1,9 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
-
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
-
-import BuhoModel 1.0
 import Notes 1.0
-import OWL 1.0 //To get the enums
 
 import "../../widgets"
 
@@ -72,40 +68,40 @@ Maui.Page
                 {
                     text: qsTr("Title")
                     checkable: false
-                    checked: notesList.sortBy === KEY.TITLE
-                    onTriggered: notesList.sortBy = KEY.TITLE
+                    checked: notesList.sortBy === Notes.TITLE
+                    onTriggered: notesList.sortBy = Notes.TITLE
                 }
 
                 MenuItem
                 {
                     text: qsTr("Color")
                     checkable: true
-                    checked: notesList.sortBy === KEY.COLOR
-                    onTriggered: notesList.sortBy = KEY.COLOR
+                    checked: notesList.sortBy === Notes.COLOR
+                    onTriggered: notesList.sortBy = Notes.COLOR
                 }
 
                 MenuItem
                 {
                     text: qsTr("Add date")
                     checkable: false
-                    checked: notesList.sortBy === KEY.ADD_DATE
-                    onTriggered: notesList.sortBy = KEY.ADD_DATE
+                    checked: notesList.sortBy === Notes.ADDDATE
+                    onTriggered: notesList.sortBy = Notes.ADDDATE
                 }
 
                 MenuItem
                 {
                     text: qsTr("Updated")
                     checkable: false
-                    checked: notesList.sortBy === KEY.UPDATED
-                    onTriggered: notesList.sortBy = KEY.UPDATED
+                    checked: notesList.sortBy === Notes.Modified
+                    onTriggered: notesList.sortBy = Notes.Modified
                 }
 
                 MenuItem
                 {
                     text: qsTr("Fav")
                     checkable: false
-                    checked: notesList.sortBy === KEY.FAV
-                    onTriggered: notesList.sortBy = KEY.FAV
+                    checked: notesList.sortBy === Notes.FAVORITE
+                    onTriggered: notesList.sortBy = Notes.FAVORITE
                 }
             }
         },
@@ -115,7 +111,6 @@ Maui.Page
             icon.name: "pin"
             checkable: true
             icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-
         }
     ]
 
@@ -124,7 +119,7 @@ Maui.Page
         id: notesList
     }
 
-    BuhoModel
+    Maui.BaseModel
     {
         id: notesModel
         list: notesList

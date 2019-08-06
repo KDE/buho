@@ -8,7 +8,7 @@ import org.kde.kirigami 2.2 as Kirigami
 ItemDelegate
 {
     id: control
-    property string noteColor : model.color ? model.color : viewBackgroundColor
+    property string noteColor : model.color ? model.color : Kirigami.Theme.backgroundColor
     property int cardWidth: visible ? unit * 200 : 0
     property int cardHeight: visible ? unit * 120 : 0
     property int cardRadius: radiusV
@@ -79,7 +79,7 @@ ItemDelegate
 
             Layout.fillWidth: true
             text: Qt.formatDateTime(new Date(model.updated), "d MMM h:mm")
-            color: model.color ? Qt.darker(model.color) : textColor
+            color: model.color ? Qt.darker(model.color) : Kirigami.Theme.textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
             font.weight: Font.Bold
@@ -101,7 +101,7 @@ ItemDelegate
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: model.title ? model.title : ""
-            color: model.color ? Qt.darker(model.color, 3) : textColor
+            color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
             font.weight: Font.Bold
@@ -121,7 +121,7 @@ ItemDelegate
                 Layout.alignment: Qt.AlignLeft
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                sourceComponent: typeof model.body !== 'undefined' ? bodyComponent : undefined
+                sourceComponent: typeof model.content !== 'undefined' ? bodyComponent : undefined
             }
 
 
@@ -147,10 +147,10 @@ ItemDelegate
         {
             id: body
             padding: 0
-            visible: typeof model.body !== 'undefined'
+            visible: typeof model.content !== 'undefined'
             enabled: false
-            text: model.body ? model.body : ""
-            color: model.color ? Qt.darker(model.color, 3) : textColor
+            text: model.content ? model.content : ""
+            color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
             wrapMode: TextEdit.WrapAnywhere
 
             textFormat : TextEdit.AutoText
@@ -207,11 +207,11 @@ ItemDelegate
     {
         console.log("update link color", item.color, item.tag)
         model.title = item.title
-        model.body = item.body
+        model.content = item.content
         model.color = item.color
         model.pin = item.pin ? 1 : 0
-        model.fav = item.fav ? 1 : 0
-        model.updated = item.updated
+        model.favorite = item.favorite ? 1 : 0
+        model.modified = item.modified
         model.tag = item.tag.join(",")
     }
 }
