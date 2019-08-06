@@ -5,8 +5,10 @@
 
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
+#include "fm.h"
 #else
 #include <MauiKit/tagging.h>
+#include <MauiKit/fm.h>
 #endif
 
 Notes::Notes(QObject *parent) : MauiList(parent),
@@ -118,6 +120,8 @@ bool Notes::insert(const QVariantMap &note)
                         });
 
         emit postItemAppended();
+
+        this->syncer->insertNote(FM::toModel(note_map));
 
         return true;
     } else qDebug()<< "NOTE COULD NOT BE INSTED";

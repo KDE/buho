@@ -36,14 +36,14 @@ public:
      * When the process is done it shoudl emit the noteReady(FMH::MODEL) signal
      */
 //    virtual FMH::MODEL getNote(const QString &id) = 0;
-    virtual void getNote(const QString &id) const = 0;
+    virtual void getNote(const QString &id) = 0;
 
     /**
      * @brief getNotes
      * returns all the notes or queried notes
      *  When the process is done it shoudl emit the notesReady(FMH::MODEL_LIST) signal
      */
-    virtual void getNotes() {}
+    virtual void getNotes() = 0;
 //    virtual void getNotes() const {}
 //    virtual FMH::MODEL_LIST getNotes(const QString &query = QString()) = 0;
 //    virtual FMH::MODEL_LIST getNotes(const QString &query = QString()) const = 0;
@@ -57,7 +57,7 @@ public:
      * When the process is done it shoudl emit the noteInserted(FMH::MODEL) signal
      */
 //    virtual bool insertNote(const FMH::MODEL &note) = 0;
-    virtual void insertNote(const FMH::MODEL &note) const = 0;
+    virtual void insertNote(const FMH::MODEL &note) = 0;
 
     /**
      * @brief updateNote
@@ -69,7 +69,7 @@ public:
      * When the process is done it shoudl emit the noteUpdated(FMH::MODEL) signal
      */
 //    virtual bool updateNote(const QString &id, const FMH::MODEL &note) = 0;
-    virtual void updateNote(const QString &id, const FMH::MODEL &note) const = 0;
+    virtual void updateNote(const QString &id, const FMH::MODEL &note) = 0;
 
     /**
      * @brief removeNote
@@ -79,7 +79,7 @@ public:
      * When the process is done it shoudl emit the noteRemoved(FMH::MODEL) signal
      */
 //    virtual bool removeNote(const QString &id) = 0;
-    virtual void removeNote(const QString &id) const = 0;
+    virtual void removeNote(const QString &id) = 0;
 
 protected:
     QString m_user = "";

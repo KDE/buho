@@ -16,14 +16,14 @@ class NextNote : public AbstractNotesSyncer
 public:
     explicit NextNote(QObject *parent = nullptr);
     ~NextNote();
-    void getNote(const QString &id) const override final;
+    void getNote(const QString &id) override final;
     void getNotes() override final;
-    void insertNote(const FMH::MODEL &note) const override final;
-    void updateNote(const QString &id, const FMH::MODEL &note) const override final;
-    void removeNote(const QString &id) const override final;
+    void insertNote(const FMH::MODEL &note) override final;
+    void updateNote(const QString &id, const FMH::MODEL &note) override final;
+    void removeNote(const QString &id) override final;
 
 private:
-    static QString API;
+    const static QString API;
     static QString formatUrl(const QString &user, const QString &password, const QString &provider);
     static FMH::MODEL_LIST parseNotes(const QByteArray &array);
 

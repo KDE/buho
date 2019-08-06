@@ -11,7 +11,7 @@
 #include <MauiKit/fm.h>
 #endif
 
-QString NextNote::API = "https://PROVIDER/index.php/apps/notes/api/v0.2/";
+const QString NextNote::API = "https://PROVIDER/index.php/apps/notes/api/v0.2/";
 
 NextNote::NextNote(QObject *parent) : AbstractNotesSyncer(parent)
 {
@@ -22,13 +22,30 @@ NextNote::~NextNote()
 {
 }
 
-void NextNote::getNote(const QString &id) const
+void NextNote::getNote(const QString &id)
 {
+    auto url = QString(NextNote::API+"%1, %2").replace("PROVIDER", this->m_provider).arg("notes/", id);
+
+    QString concatenated = this->m_user + ":" + this->m_password;
+    QByteArray data = concatenated.toLocal8Bit().toBase64();
+    QString headerData = "Basic " + data;
+
+    QMap<QString, QString> header {{"Authorization", headerData.toLocal8Bit()}};
+
+    auto downloader = new FMH::Downloader;
+    connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
+    {
+        const auto notes = this->parseNotes(array);
+        emit this->noteReady(notes.isEmpty() ? FMH::MODEL() : notes.first());
+        downloader->deleteLater();
+    });
+
+    downloader->getArray(url, header);
 }
 
 void NextNote::sendNotes(QByteArray array)
 {
-//    emit this->notesReady(notes);
+    //    emit this->notesReady(notes);
 }
 
 void NextNote::getNotes()
@@ -52,15 +69,45 @@ void NextNote::getNotes()
     downloader->getArray(url, header);
 }
 
-void NextNote::insertNote(const FMH::MODEL &note) const
+void NextNote::insertNote(const FMH::MODEL &note)
+{
+    QByteArray payload=QJsonDocument::fromVariant(FM::toMap(note)).toJson();
+    qDebug() << "UPLOADING NEW NOT" << QVariant(payload).toString();
+
+    auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
+
+    QString concatenated = this->m_user + ":" + this->m_password;
+    QByteArray data = concatenated.toLocal8Bit().toBase64();
+    QString headerData = "Basic " + data;
+
+    QVariantMap headers
+    {
+        {"Authorization", headerData.toLocal8Bit()},
+        {QString::number(QNetworkRequest::ContentTypeHeader),"application/json"}
+    };
+
+    QNetworkRequest request;
+    request.setUrl(QUrl(url));
+    request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+    request.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
+
+    QNetworkAccessManager *restclient; //in class
+    restclient = new QNetworkAccessManager(this); //constructor
+    QNetworkReply *reply = restclient->post(request,payload);
+
+    connect(reply, &QNetworkReply::finished, [=]()
+            {
+                qDebug() << "Note insertyion finished?";
+                qDebug() << reply->readAll();
+            });
+
+}
+
+void NextNote::updateNote(const QString &id, const FMH::MODEL &note)
 {
 }
 
-void NextNote::updateNote(const QString &id, const FMH::MODEL &note) const
-{
-}
-
-void NextNote::removeNote(const QString &id) const
+void NextNote::removeNote(const QString &id)
 {
 }
 
