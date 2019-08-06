@@ -117,6 +117,7 @@ Maui.Page
     Notes
     {
         id: notesList
+        account: root.currentAccount
     }
 
     Maui.BaseModel

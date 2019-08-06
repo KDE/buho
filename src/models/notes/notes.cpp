@@ -31,10 +31,7 @@ Notes::Notes(QObject *parent) : MauiList(parent),
 
 void Notes::sortList()
 {
-    emit this->preListChanged();
-
-    syncer->setCredentials("milo.h@aol.com", "Corazon1corazon", "free01.thegood.cloud");
-    syncer->getNotes();
+    emit this->preListChanged();  
     this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(
                                           FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->sort)],
                                       this->order == ORDER::ASC ? "asc" : "desc"));
@@ -213,6 +210,20 @@ bool Notes::remove(const int &index)
     }
 
     return false;
+}
+
+void Notes::setAccount(const QVariantMap &account)
+{
+    this->m_account = account;
+    const auto data = FM::toModel(this->m_account);
+    syncer->setCredentials(data[FMH::MODEL_KEY::USER], data[FMH::MODEL_KEY::PASSWORD], QUrl(data[FMH::MODEL_KEY::SERVER]).host());
+    syncer->getNotes();
+    emit accountChanged();
+}
+
+QVariantMap Notes::getAccount() const
+{
+    return this->m_account;
 }
 
 QVariantList Notes::getTags(const int &index)
