@@ -41,6 +41,7 @@ SOURCES += \
     src/db/db.cpp \
     src/buho.cpp \
     src/linker.cpp \
+    src/syncing/syncer.cpp \
     src/utils/htmlparser.cpp \
     src/models/notes/notes.cpp \
     src/models/links/links.cpp \
@@ -68,6 +69,7 @@ DISTFILES += \
 HEADERS += \
     src/db/db.h \
     src/buho.h \
+    src/syncing/syncer.h \
     src/utils/owl.h \
     src/linker.h \
     src/utils/htmlparser.h \

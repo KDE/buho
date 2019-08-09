@@ -43,6 +43,7 @@ set(buho_SRCS
     src/models/notes/notes.cpp
     src/models/links/links.cpp
     src/syncing/nextnote.cpp
+    src/syncing/syncer.cpp
     )
 
 set(buho_HDRS
@@ -55,6 +56,7 @@ set(buho_HDRS
     src/models/links/links.h
     src/syncing/nextnote.h
     src/syncing/abstractnotessyncer.h
+    src/syncing/syncer.h
     )
 
 set(buho_ASSETS
