@@ -41,7 +41,7 @@ void DB::init()
         collectionDBPath_dir.mkpath(".");
 
     this->name = QUuid::createUuid().toString();
-    if(!FMH::fileExists(OWL::CollectionDBPath + OWL::DBName))
+    if(!FMH::fileExists(QUrl::fromLocalFile(OWL::CollectionDBPath + OWL::DBName)))
     {
         this->openDB(this->name);
         qDebug()<<"Collection doesn't exists, trying to create it" << OWL::CollectionDBPath + OWL::DBName;
