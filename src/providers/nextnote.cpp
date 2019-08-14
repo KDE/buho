@@ -13,7 +13,7 @@
 
 const QString NextNote::API = "https://PROVIDER/index.php/apps/notes/api/v0.2/";
 
-NextNote::NextNote(QObject *parent) : AbstractNotesSyncer(parent)
+NextNote::NextNote(QObject *parent) : AbstractNotesProvider(parent)
 {
 
 }
@@ -74,7 +74,7 @@ void NextNote::insertNote(const FMH::MODEL &note)
     QByteArray payload=QJsonDocument::fromVariant(FM::toMap(note)).toJson();
     qDebug() << "UPLOADING NEW NOT" << QVariant(payload).toString();
 
-    auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
+    const auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
 
     QString concatenated = this->m_user + ":" + this->m_password;
     QByteArray data = concatenated.toLocal8Bit().toBase64();

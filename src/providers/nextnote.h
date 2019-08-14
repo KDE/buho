@@ -3,19 +3,19 @@
 
 #include <QObject>
 #include <QString>
-#include "abstractnotessyncer.h"
+#include "abstractnotesprovider.h"
 #include<functional>
 /**
  * @brief The NextNote class follows the NextCloud API specification
  *  for syncing notes.
  */
 
-class NextNote : public AbstractNotesSyncer
+class NextNote : public AbstractNotesProvider
 {
     Q_OBJECT
 public:
     explicit NextNote(QObject *parent = nullptr);
-    ~NextNote();
+    ~NextNote() override final;
     void getNote(const QString &id) override final;
     void getNotes() override final;
     void insertNote(const FMH::MODEL &note) override final;

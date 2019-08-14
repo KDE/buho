@@ -68,7 +68,6 @@ public:
     bool remove(const QString &tableName, const QVariantMap &removeData);
 
 protected:
-    void init();
     void openDB(const QString &name);
     void prepareCollectionDB() const;
 

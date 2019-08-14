@@ -32,6 +32,9 @@ include_directories(
 
     ${CMAKE_CURRENT_SOURCE_DIR}/src/syncing
     ${CMAKE_CURRENT_BINARY_DIR}/src/syncing
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/providers
+    ${CMAKE_CURRENT_BINARY_DIR}/src/providers
     )
 
 set(buho_SRCS
@@ -42,7 +45,7 @@ set(buho_SRCS
     src/utils/htmlparser.cpp
     src/models/notes/notes.cpp
     src/models/links/links.cpp
-    src/syncing/nextnote.cpp
+    src/providers/nextnote.cpp
     src/syncing/syncer.cpp
     )
 
@@ -54,8 +57,8 @@ set(buho_HDRS
     src/utils/htmlparser.h
     src/models/notes/notes.h
     src/models/links/links.h
-    src/syncing/nextnote.h
-    src/syncing/abstractnotessyncer.h
+    src/providers/nextnote.h
+    src/providers/abstractnotesprovider.h
     src/syncing/syncer.h
     )
 

@@ -1,7 +1,5 @@
 #include "notes.h"
-#include <QUuid>
-#include "db/db.h"
-#include "nextnote.h"
+#include "syncer.h"
 
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
@@ -12,29 +10,21 @@
 #endif
 
 Notes::Notes(QObject *parent) : MauiList(parent),
-    db(DB::getInstance()),
-    tag(Tagging::getInstance()),
-    syncer(new NextNote(this))
+    syncer(new Syncer(this))
 {
     qDebug()<< "CREATING NOTES LIST";
     this->sortList();
 
     connect(this, &Notes::sortByChanged, this, &Notes::sortList);
     connect(this, &Notes::orderChanged, this, &Notes::sortList);
-    connect(syncer, &NextNote::notesReady, [&](FMH::MODEL_LIST notes)
-    {
-        emit this->preListChanged();
-        this->notes << notes;
-        emit this->postListChanged();
-    });
 }
 
 void Notes::sortList()
 {
     emit this->preListChanged();  
-    this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(
-                                          FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->sort)],
-                                      this->order == ORDER::ASC ? "asc" : "desc"));
+//    this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(
+//                                          FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->sort)],
+//                                      this->order == ORDER::ASC ? "asc" : "desc"));
     emit this->postListChanged();
 }
 
@@ -73,57 +63,18 @@ Notes::ORDER Notes::getOrder() const
 
 bool Notes::insert(const QVariantMap &note)
 {
-    qDebug()<<"TAGS"<< note[FMH::MODEL_NAME[FMH::MODEL_KEY::TAG]].toStringList();
-
     emit this->preItemAppended();
 
-    auto title = note[FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE]].toString();
-    auto content = note[FMH::MODEL_NAME[FMH::MODEL_KEY::CONTENT]].toString();
-    auto color = note[FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR]].toString();
-    auto pin = note[FMH::MODEL_NAME[FMH::MODEL_KEY::PIN]].toInt();
-    auto fav = note[FMH::MODEL_NAME[FMH::MODEL_KEY::FAVORITE]].toInt();
-    auto tags = note[FMH::MODEL_NAME[FMH::MODEL_KEY::TAG]].toStringList();
+    auto __note = FM::toModel(note);
+    __note[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
+    __note[FMH::MODEL_KEY::ADDDATE] = QDateTime::currentDateTime().toString(Qt::TextDate);
 
-    auto id = QUuid::createUuid().toString();
+    this->syncer->insertNote(__note);
 
-    QVariantMap note_map =
-    {
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::CONTENT], content},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], color},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::PIN], pin},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::FAVORITE], fav},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::MODIFIED], QDateTime::currentDateTime().toString()},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE], QDateTime::currentDateTime().toString()}
-    };
+    this->notes << __note;
 
-    if(this->db->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map))
-    {
-        for(auto tg : tags)
-            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
-
-        this->notes << FMH::MODEL
-                       ({
-                            {FMH::MODEL_KEY::ID, id},
-                            {FMH::MODEL_KEY::TITLE, title},
-                            {FMH::MODEL_KEY::CONTENT, content},
-                            {FMH::MODEL_KEY::COLOR, color},
-                            {FMH::MODEL_KEY::PIN, QString::number(pin)},
-                            {FMH::MODEL_KEY::FAVORITE, QString::number(fav)},
-                            {FMH::MODEL_KEY::MODIFIED, QDateTime::currentDateTime().toString()},
-                            {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString()}
-
-                        });
-
-        emit postItemAppended();
-
-        this->syncer->insertNote(FM::toModel(note_map));
-
-        return true;
-    } else qDebug()<< "NOTE COULD NOT BE INSTED";
-
-    return false;
+    emit this->postItemAppended();
+    return true;
 }
 
 bool Notes::update(const int &index, const QVariant &value, const int &role)
@@ -190,10 +141,11 @@ bool Notes::update(const FMH::MODEL &note)
         {FMH::MODEL_NAME[FMH::MODEL_KEY::MODIFIED], modified}
     };
 
-    for(auto tg : tags)
-        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
+//    for(auto tg : tags)
+//        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
 
-    return this->db->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map, {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}} );
+//    return this->db->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map, {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}} );
+    return false;
 }
 
 bool Notes::remove(const int &index)
@@ -202,23 +154,23 @@ bool Notes::remove(const int &index)
     auto id = this->notes.at(index)[FMH::MODEL_KEY::ID];
     QVariantMap note = {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}};
 
-    if(this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], note))
-    {
-        this->notes.removeAt(index);
-        emit this->postItemRemoved();
-        return true;
-    }
+//    if(this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], note))
+//    {
+//        this->notes.removeAt(index);
+//        emit this->postItemRemoved();
+//        return true;
+//    }
 
     return false;
 }
 
 void Notes::setAccount(const QVariantMap &account)
 {
-    this->m_account = account;
-    const auto data = FM::toModel(this->m_account);
-    syncer->setCredentials(data[FMH::MODEL_KEY::USER], data[FMH::MODEL_KEY::PASSWORD], QUrl(data[FMH::MODEL_KEY::SERVER]).host());
-    syncer->getNotes();
-    emit accountChanged();
+//    this->m_account = account;
+//    const auto data = FM::toModel(this->m_account);
+//    syncer->setCredentials(data[FMH::MODEL_KEY::USER], data[FMH::MODEL_KEY::PASSWORD], QUrl(data[FMH::MODEL_KEY::SERVER]).host());
+//    syncer->getNotes();
+//    emit accountChanged();
 }
 
 QVariantMap Notes::getAccount() const
@@ -228,11 +180,12 @@ QVariantMap Notes::getAccount() const
 
 QVariantList Notes::getTags(const int &index)
 {
-    if(index < 0 || index >= this->notes.size())
-        return QVariantList();
+//    if(index < 0 || index >= this->notes.size())
+//        return QVariantList();
 
-    auto id = this->notes.at(index)[FMH::MODEL_KEY::ID];
-    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::NOTES], id);
+//    auto id = this->notes.at(index)[FMH::MODEL_KEY::ID];
+//    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::NOTES], id);
+    return QVariantList();
 }
 
 QVariantMap Notes::get(const int &index) const

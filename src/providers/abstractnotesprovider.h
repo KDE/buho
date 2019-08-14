@@ -1,5 +1,5 @@
-#ifndef ABSTRACTNOTESYNCER_H
-#define ABSTRACTNOTESYNCER_H
+#ifndef ABSTRACTNOTESPROVIDER_H
+#define ABSTRACTNOTESPROVIDER_H
 
 #include <QObject>
 #include <functional>
@@ -14,13 +14,13 @@
  * Different services to be added to Buho are expected to derived from this.
  */
 
-class AbstractNotesSyncer : public QObject
+class AbstractNotesProvider : public QObject
 {
     Q_OBJECT
 
 public:
-    AbstractNotesSyncer(QObject *parent) : QObject(parent) {};
-    virtual ~AbstractNotesSyncer() {};
+    AbstractNotesProvider(QObject *parent) : QObject(parent) {}
+    virtual ~AbstractNotesProvider() {}
 
     virtual void setCredentials(const QString &user, const QString &password, const QString &provider) final
     {
@@ -124,6 +124,6 @@ signals:
 };
 
 
-#endif // ABSTRACTNOTESYNCER_H
+#endif // ABSTRACTNOTESPROVIDER_H
 
 

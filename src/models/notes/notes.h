@@ -13,9 +13,7 @@
 #endif
 
 
-class DB;
-class Tagging;
-class AbstractNotesSyncer;
+class Syncer;
 class Notes : public MauiList
 {
     Q_OBJECT
@@ -54,9 +52,8 @@ public:
     QVariantMap getAccount() const;
 
 private:
-    DB *db;
-    Tagging *tag;
-    AbstractNotesSyncer *syncer;
+
+    Syncer *syncer;
 
     FMH::MODEL_LIST notes;
     void sortList();

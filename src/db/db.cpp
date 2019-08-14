@@ -23,18 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QString>
 #include <QStringList>
 #include <QSqlQuery>
+#include <QCoreApplication>
 
 DB::DB(QObject *parent) : QObject(parent)
-{
-   init();
-}
-
-DB::~DB()
-{
-    this->m_db.close();
-}
-
-void DB::init()
 {
     QDir collectionDBPath_dir(OWL::CollectionDBPath);
     if (!collectionDBPath_dir.exists())
@@ -47,6 +38,14 @@ void DB::init()
         qDebug()<<"Collection doesn't exists, trying to create it" << OWL::CollectionDBPath + OWL::DBName;
         this->prepareCollectionDB();
     }else this->openDB(this->name);
+
+    //make sure the instances are deleted when the app exists
+    connect(qApp, &QCoreApplication::aboutToQuit, instance, &DB::deleteLater);
+}
+
+DB::~DB()
+{
+    this->m_db.close();
 }
 
 DB *DB::instance = nullptr;
@@ -56,7 +55,6 @@ DB *DB::getInstance()
     {
         instance = new DB();
         qDebug() << "getInstance(): First DB instance\n";
-        instance->init();
         return instance;
     } else
     {
@@ -184,6 +182,8 @@ QSqlQuery DB::getQuery(const QString &queryTxt)
 
 bool DB::insert(const QString &tableName, const QVariantMap &insertData)
 {
+
+    qDebug() << "TRY TO ISNERT NOTE TO DB" << insertData;
     if (tableName.isEmpty())
     {
         qDebug()<<QStringLiteral("Fatal error on insert! The table name is empty!");
