@@ -15,8 +15,18 @@ Notes::Notes(QObject *parent) : MauiList(parent),
     qDebug()<< "CREATING NOTES LIST";
     this->sortList();
 
+    connect(this, &Notes::accountChanged, syncer, &Syncer::getNotes);
     connect(this, &Notes::sortByChanged, this, &Notes::sortList);
     connect(this, &Notes::orderChanged, this, &Notes::sortList);
+
+    connect(syncer, &Syncer::notesReady, [&](FMH::MODEL_LIST data)
+    {
+        emit this->preListChanged();
+        this->notes = data;
+        emit this->postListChanged();
+    });
+
+    this->syncer->getNotes();
 }
 
 void Notes::sortList()
@@ -166,11 +176,9 @@ bool Notes::remove(const int &index)
 
 void Notes::setAccount(const QVariantMap &account)
 {
-//    this->m_account = account;
-//    const auto data = FM::toModel(this->m_account);
-//    syncer->setCredentials(data[FMH::MODEL_KEY::USER], data[FMH::MODEL_KEY::PASSWORD], QUrl(data[FMH::MODEL_KEY::SERVER]).host());
-//    syncer->getNotes();
-//    emit accountChanged();
+    this->m_account = account;
+    syncer->setAccount(FM::toModel(this->m_account));
+    emit accountChanged();
 }
 
 QVariantMap Notes::getAccount() const

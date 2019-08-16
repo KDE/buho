@@ -22,11 +22,34 @@ public:
     AbstractNotesProvider(QObject *parent) : QObject(parent) {}
     virtual ~AbstractNotesProvider() {}
 
-    virtual void setCredentials(const QString &user, const QString &password, const QString &provider) final
+    /**
+     * @brief setCredentials
+     * sets the credential to authenticate to the provider server
+     * @param account
+     * the account data is represented by FMH::MODEL
+     */
+    virtual void setCredentials(const FMH::MODEL &account) final
     {
-        this->m_user = user;
-        this->m_password = password;
-        this->m_provider = provider;
+        this->m_user = account[FMH::MODEL_KEY::USER];
+        this->m_password = account[FMH::MODEL_KEY::PASSWORD];
+        this->m_provider = QUrl(account[FMH::MODEL_KEY::SERVER]).host();
+    }
+
+    virtual QString user() final { return this->m_user; }
+    virtual QString provider() final { return this->m_provider; }
+
+    /**
+     * @brief isValid
+     * check if the account acredentials are valid
+     * by checking they are not empty or null
+     * @return
+     * true if the credentials are all set or false is somethign is missing
+     */
+    virtual bool isValid()
+    {
+        return !(this->m_user.isEmpty() || this->m_user.isNull()
+                 || this->m_provider.isEmpty() || this->m_provider.isNull()
+                 || this->m_password.isEmpty() || this->m_password.isNull());
     }
 
     /**

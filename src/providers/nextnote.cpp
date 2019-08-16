@@ -71,7 +71,7 @@ void NextNote::getNotes()
 
 void NextNote::insertNote(const FMH::MODEL &note)
 {
-    QByteArray payload=QJsonDocument::fromVariant(FM::toMap(note)).toJson();
+    QByteArray payload = QJsonDocument::fromVariant(FM::toMap(note)).toJson();
     qDebug() << "UPLOADING NEW NOT" << QVariant(payload).toString();
 
     const auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
@@ -91,16 +91,29 @@ void NextNote::insertNote(const FMH::MODEL &note)
     request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
     request.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
 
-    QNetworkAccessManager *restclient; //in class
-    restclient = new QNetworkAccessManager(this); //constructor
+    auto restclient = new QNetworkAccessManager; //constructor
     QNetworkReply *reply = restclient->post(request,payload);
 
-    connect(reply, &QNetworkReply::finished, [=]()
+    qDebug() << "AUTH >> " << concatenated << headerData;
+
+    connect(reply, &QNetworkReply::finished, [=, __note = note]()
     {
         qDebug() << "Note insertyion finished?";
         const auto notes = this->parseNotes(reply->readAll());
-        emit this->noteInserted(notes.isEmpty() ? FMH::MODEL() : notes.first());
-        reply->deleteLater();
+        emit this->noteInserted([&]() -> FMH::MODEL {
+                                    FMH::MODEL note;
+                                    if(!notes.isEmpty())
+                                    {
+                                        note = notes.first();
+                                        note[FMH::MODEL_KEY::STAMP] = note[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
+                                        note[FMH::MODEL_KEY::ID] = __note[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
+                                        note[FMH::MODEL_KEY::SERVER] = this->m_provider; //adds the provider server address
+                                        note[FMH::MODEL_KEY::USER] = this->m_user; //adds the user name
+                                    }
+                                    return note;
+                                }());
+
+        restclient->deleteLater();
     });
 }
 
@@ -134,11 +147,18 @@ FMH::MODEL_LIST NextNote::parseNotes(const QByteArray &array)
         return res;
     }
 
-    auto notes = jsonResponse.toVariant();
-    for(const auto &map : notes.toList())
+    const auto data = jsonResponse.toVariant();
+
+    if(data.isNull() || !data.isValid())
+        return res;
+
+    if(!data.toList().isEmpty())
     {
-        res << FM::toModel(map.toMap());
+        for(const auto &map : data.toList())
+            res << FM::toModel(map.toMap());
     }
+    else
+        res << FM::toModel(data.toMap());
 
     return res;
 }

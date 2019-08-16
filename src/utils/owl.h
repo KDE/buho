@@ -15,43 +15,12 @@
 
 namespace OWL
 {
-    Q_NAMESPACE
-    enum class W : uint8_t
-    {
-        TITLE,
-        BODY,
-        IMAGE,
-        VIDEO,
-        LINK,
-        TAG,
-        AUTHOR,
-        DATE,
-        NOTE,
-        TAGS,
-        ADD_DATE,
-        COLOR
-    };
-
-    static const QMap<W, QString> SLANG =
-    {
-        {W::TITLE, "title"},
-        {W::BODY, "body"},
-        {W::IMAGE, "image"},
-        {W::VIDEO, "video"},
-        {W::LINK, "link"},
-        {W::TAG, "tag"},
-        {W::AUTHOR, "author"},
-        {W::DATE, "date"},
-        {W::NOTE, "note"},
-        {W::TAGS, "tags"},
-        {W::ADD_DATE, "addDate"},
-        {W::COLOR, "color"}
-    };
-
+    Q_NAMESPACE  
     enum class TABLE : uint8_t
     {
         NOTES,
         NOTES_TAGS,
+        NOTES_SYNC,
         TAGS,
         BOOKS,
         PAGES,
@@ -66,6 +35,7 @@ namespace OWL
     {
         {TABLE::NOTES,"notes"},
         {TABLE::NOTES_TAGS,"notes_tags"},
+        {TABLE::NOTES_SYNC,"notes_sync"},
         {TABLE::TAGS,"tags"},
         {TABLE::BOOKS,"books"},
         {TABLE::PAGES,"pages"},
@@ -140,18 +110,12 @@ namespace OWL
     const QString comment = "Notes taking and link collector manager";
     const QString DBName = "collection.db";
 
-    inline bool fileExists(const QString &url)
-    {
-        QFileInfo path(url);
-        if (path.exists()) return true;
-        else return false;
-    }
-
     inline void saveJson(QJsonDocument document, QString fileName)
     {
         QFile jsonFile(fileName);
         jsonFile.open(QFile::WriteOnly);
         jsonFile.write(document.toJson());
+        jsonFile.close();
     }
 
     inline QVariantMap openJson(const QString &url)
@@ -169,7 +133,6 @@ namespace OWL
 
     inline QString saveImage(QByteArray array, const QString &path)
     {
-
         if(!array.isNull()&&!array.isEmpty())
         {
             QImage img;

@@ -20,12 +20,19 @@ struct STATE
 {
     enum TYPE : uint
     {
+        LOCAL,
+        REMOTE
+    };
+
+    enum STATUS : uint
+    {
         OK,
         ERROR
     };
 
     TYPE type;
-    QString msg;
+    STATUS status;
+    QString msg = QString();
 };
 
 class DB;
@@ -38,6 +45,19 @@ class Syncer: public QObject
 
 public:
     explicit Syncer(QObject *parent = nullptr);
+
+    /**
+     * @brief setProviderAccount
+     * sets the credentials to the current account
+     * for the provider being used
+     * @param account
+     * the account data represented by FMH::MODEL
+     * where the valid keys are:
+     * FMH::MODEL_KEY::USER user name
+     * FMH::MODEL_KEY::PASSWORD users password
+     * FMH::MODEL_KEY::PROVIDER the url to the provider server
+     */
+    void setAccount(const FMH::MODEL &account);
 
     /**
      * @brief insertNote
@@ -88,15 +108,15 @@ public:
     void getNotes();
 
 private:
-    /**
-     * @brief currentAccount
-     * The current account to store the notes online.
-     * The account data is represented by FMH::MODEL, using the keys:
-     * FMH::MODEL_KEY::USER representing the username
-     * FMH::MODEL_KEY::PASSWORD representing the user password
-     * FMH::MODEL_KEY::PROVIDER representing the address to the provider server
-     */
-    FMH::MODEL currentAccount;
+//    /**
+//     * @brief currentAccount
+//     * The current account to store the notes online.
+//     * The account data is represented by FMH::MODEL, using the keys:
+//     * FMH::MODEL_KEY::USER representing the username
+//     * FMH::MODEL_KEY::PASSWORD representing the user password
+//     * FMH::MODEL_KEY::PROVIDER representing the address to the provider server
+//     */
+//    FMH::MODEL currentAccount; //no such good idea to have this here, it adds mroe complexity and confusion
 
     /**
      * @brief tag
@@ -141,7 +161,30 @@ private:
      * @param note
      * @return
      */
-    static FMH::MODEL packNote(const FMH::MODEL &note);
+    static FMH::MODEL filterNote(const FMH::MODEL &note, const QVector<FMH::MODEL_KEY> &keys);
+
+protected:
+    /**
+     * @brief insertLocal
+     * performs the insertion of a new note in the local storage
+     * @param note
+     * note to be inserted
+     * @return bool
+     * true if the note was inserted sucessfully in the local storage
+     */
+    bool insertLocal(FMH::MODEL &note);
+
+    /**
+     * @brief insertRemote
+     * perfroms the insertion of a new note in the remote provider server
+     * @param note
+     * the note to be inserted
+     */
+    void insertRemote(FMH::MODEL &note);
+
+
+    void updateLocal(const QString &id, const FMH::MODEL &note);
+    void updateRemote(const QString &id, const FMH::MODEL &note);
 
 signals:
     void noteInserted(FMH::MODEL note, STATE state);
@@ -149,9 +192,6 @@ signals:
     void noteRemoved(FMH::MODEL note, STATE state);
     void noteReady(FMH::MODEL note);
     void notesReady(FMH::MODEL_LIST notes);
-
-    void accountChanged(FMH::MODEL account);
-
 
 public slots:
 };

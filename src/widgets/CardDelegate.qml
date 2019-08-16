@@ -96,7 +96,7 @@ ItemDelegate
             Layout.bottomMargin: space.medium
             Layout.rightMargin: space.medium
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-            Layout.preferredHeight: model.preview ? parent.height * 0.4 : undefined
+            Layout.preferredHeight: if(model.preview) parent.height * 0.4
 
             Layout.fillWidth: true
             Layout.fillHeight: true

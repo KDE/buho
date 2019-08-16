@@ -52,15 +52,15 @@ public:
     QVariantMap getAccount() const;
 
 private:
-
     Syncer *syncer;
 
     FMH::MODEL_LIST notes;
+    QVariantMap m_account;
+
     void sortList();
 
     SORTBY sort = SORTBY::MODIFIED;
     ORDER order = ORDER::DESC;
-    QVariantMap m_account;
 
 signals:
     void orderChanged();
