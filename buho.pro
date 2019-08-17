@@ -4,8 +4,9 @@ QT += sql
 QT += widgets
 QT += quickcontrols2
 
-CONFIG += c++11
 CONFIG += ordered
+CONFIG += c++17
+QMAKE_LINK += -nostdlib++
 
 TARGET = buho
 TEMPLATE = app
@@ -22,10 +23,10 @@ linux:unix:!android {
 
     message(Building helpers for Android)
     QT += androidextras webview
+#    include($$PWD/3rdparty/openssl/openssl.pri)
 
-    include($$PWD/3rdparty/openssl/openssl.pri)
-    include($$PWD/mauikit/mauikit.pri)
     include($$PWD/3rdparty/kirigami/kirigami.pri)
+    include($$PWD/3rdparty/mauikit/mauikit.pri)
 
     DEFINES += STATIC_KIRIGAMI
 
@@ -45,12 +46,29 @@ SOURCES += \
     src/utils/htmlparser.cpp \
     src/models/notes/notes.cpp \
     src/models/links/links.cpp \
-    src/models/basemodel.cpp \
-    src/models/baselist.cpp
+    src/providers/nextnote.cpp \
 
 RESOURCES += \
     qml.qrc \
     assets/assets.qrc
+
+HEADERS += \
+    src/db/db.h \
+    src/buho.h \
+    src/syncing/syncer.h \
+    src/utils/owl.h \
+    src/linker.h \
+    src/utils/htmlparser.h \
+    src/models/notes/notes.h \
+    src/models/links/links.h \
+    src/providers/nextnote.h \
+    src/providers/abstractnotesprovider.h
+
+INCLUDEPATH += \
+    src/utils/ \
+    src/providers/ \
+    src/syncing/ \
+    src/
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -64,23 +82,19 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    3rdparty/mauikit/src/android/AndroidManifest.xml \
+    3rdparty/mauikit/src/android/build.gradle \
+    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.jar \
+    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.properties \
+    3rdparty/mauikit/src/android/gradlew \
+    3rdparty/mauikit/src/android/gradlew.bat \
+    3rdparty/mauikit/src/android/res/values/libs.xml \
     src/db/script.sql \
 
-HEADERS += \
-    src/db/db.h \
-    src/buho.h \
-    src/syncing/syncer.h \
-    src/utils/owl.h \
-    src/linker.h \
-    src/utils/htmlparser.h \
-    src/models/notes/notes.h \
-    src/models/links/links.h \
-    src/models/basemodel.h \
-    src/models/baselist.h
-
-INCLUDEPATH += \
-    src/utils/ \
-    src/
-
 include($$PWD/install.pri)
+
+contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/3rdparty/mauikit/src/android
+}
 

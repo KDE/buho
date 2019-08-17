@@ -6,7 +6,7 @@
 
 #ifdef STATIC_MAUIKIT
 #include "fmh.h"
-#include "mauimodel.h"
+#include "mauilist.h"
 #else
 #include <MauiKit/fmh.h>
 #include <MauiKit/mauilist.h>

@@ -8,7 +8,7 @@
 #endif
 
 #ifdef STATIC_MAUIKIT
-#include "./mauikit/src/mauikit.h"
+#include "3rdparty/mauikit/src/mauikit.h"
 #endif
 
 #ifdef Q_OS_ANDROID
