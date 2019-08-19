@@ -11,7 +11,30 @@
 #include <MauiKit/fm.h>
 #endif
 
-const QString NextNote::API = "https://PROVIDER/index.php/apps/notes/api/v0.2/";
+const QString NextNote::API = QStringLiteral("https://PROVIDER/index.php/apps/notes/api/v0.2/");
+
+static const inline QNetworkRequest formRequest(const QUrl &url, const  QString &user, const QString &password)
+{
+    if(!url.isValid() && !user.isEmpty() && !password.isEmpty())
+        return QNetworkRequest();
+
+    const QString concatenated = user + ":" + password;
+    const QByteArray data = concatenated.toLocal8Bit().toBase64();
+    const QString headerData = "Basic " + data;
+
+    //    QVariantMap headers
+    //    {
+    //        {"Authorization", headerData.toLocal8Bit()},
+    //        {QString::number(QNetworkRequest::ContentTypeHeader),"application/json"}
+    //    };
+
+    QNetworkRequest request;
+    request.setUrl(QUrl(url));
+    request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
+    request.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
+
+    return request;
+}
 
 NextNote::NextNote(QObject *parent) : AbstractNotesProvider(parent)
 {
@@ -24,7 +47,7 @@ NextNote::~NextNote()
 
 void NextNote::getNote(const QString &id)
 {
-    auto url = QString(NextNote::API+"%1, %2").replace("PROVIDER", this->m_provider).arg("notes/", id);
+    auto url = QString(NextNote::API+"%1%2").replace("PROVIDER", this->m_provider).arg("notes/", id);
 
     QString concatenated = this->m_user + ":" + this->m_password;
     QByteArray data = concatenated.toLocal8Bit().toBase64();
@@ -50,7 +73,6 @@ void NextNote::sendNotes(QByteArray array)
 
 void NextNote::getNotes()
 {
-    //https://milo.h@aol.com:Corazon1corazon@free01.thegood.cloud/index.php/apps/notes/api/v0.2/notes
     auto url = NextNote::formatUrl(this->m_user, this->m_password, this->m_provider)+"notes";
 
     QString concatenated = this->m_user + ":" + this->m_password;
@@ -59,7 +81,7 @@ void NextNote::getNotes()
 
     QMap<QString, QString> header {{"Authorization", headerData.toLocal8Bit()}};
 
-    auto downloader = new FMH::Downloader;
+    const auto downloader = new FMH::Downloader;
     connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
     {
         emit this->notesReady(this->parseNotes(array));
@@ -76,26 +98,10 @@ void NextNote::insertNote(const FMH::MODEL &note)
 
     const auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
 
-    QString concatenated = this->m_user + ":" + this->m_password;
-    QByteArray data = concatenated.toLocal8Bit().toBase64();
-    QString headerData = "Basic " + data;
-
-    QVariantMap headers
-    {
-        {"Authorization", headerData.toLocal8Bit()},
-        {QString::number(QNetworkRequest::ContentTypeHeader),"application/json"}
-    };
-
-    QNetworkRequest request;
-    request.setUrl(QUrl(url));
-    request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
-    request.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
+    const auto request = formRequest(url, this->m_user, this->m_password);
 
     auto restclient = new QNetworkAccessManager; //constructor
     QNetworkReply *reply = restclient->post(request,payload);
-
-    qDebug() << "AUTH >> " << concatenated << headerData;
-
     connect(reply, &QNetworkReply::finished, [=, __note = note]()
     {
         qDebug() << "Note insertyion finished?";
@@ -119,13 +125,52 @@ void NextNote::insertNote(const FMH::MODEL &note)
 
 void NextNote::updateNote(const QString &id, const FMH::MODEL &note)
 {
+    if(id.isEmpty() || note.isEmpty())
+    {
+        qWarning()<< "The id or note are empty. Can not proceed. NextNote::update";
+        return;
+    }
+
+    QByteArray payload = QJsonDocument::fromVariant(FM::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::CONTENT,
+                                                                                      FMH::MODEL_KEY::FAVORITE,
+                                                                                      FMH::MODEL_KEY::MODIFIED,
+                                                                                      FMH::MODEL_KEY::CATEGORY}))).toJson();
+    qDebug() << "UPDATING NOTE" << QVariant(payload).toString();
+
+    const auto url = QString(NextNote::API+"%1%2").replace("PROVIDER", this->m_provider).arg("notes/", id);
+
+    qDebug()<< "tryiong to update note" << url;
+    const auto request = formRequest(url, this->m_user, this->m_password);
+
+    auto restclient = new QNetworkAccessManager; //constructor
+    QNetworkReply *reply = restclient->put(request, payload);
+    connect(reply, &QNetworkReply::finished, [=, __note = note]()
+    {
+        qDebug() << "Note update finished?" << reply->errorString();
+        const auto notes = this->parseNotes(reply->readAll());
+        emit this->noteUpdated([&]() -> FMH::MODEL {
+                                   FMH::MODEL note;
+                                   if(notes.isEmpty())
+                                   return note;
+
+                                   note = notes.first();
+                                   note[FMH::MODEL_KEY::STAMP] = note[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
+                                   note[FMH::MODEL_KEY::ID] = __note[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
+                                   note[FMH::MODEL_KEY::SERVER] = this->m_provider; //adds the provider server address
+                                   note[FMH::MODEL_KEY::USER] = this->m_user; //adds the user name
+
+                                   return note;
+                               }());
+
+        restclient->deleteLater();
+    });
 }
 
 void NextNote::removeNote(const QString &id)
 {
 }
 
-QString NextNote::formatUrl(const QString &user, const QString &password, const QString &provider)
+const QString NextNote::formatUrl(const QString &user, const QString &password, const QString &provider)
 {
     auto url = NextNote::API;
     url.replace("USER", user);
@@ -134,7 +179,7 @@ QString NextNote::formatUrl(const QString &user, const QString &password, const 
     return url;
 }
 
-FMH::MODEL_LIST NextNote::parseNotes(const QByteArray &array)
+const FMH::MODEL_LIST NextNote::parseNotes(const QByteArray &array)
 {
     FMH::MODEL_LIST res;
     qDebug()<< "trying to parse notes" << array;

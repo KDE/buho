@@ -31,10 +31,10 @@ Notes::Notes(QObject *parent) : MauiList(parent),
 
 void Notes::sortList()
 {
-    emit this->preListChanged();  
-//    this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(
-//                                          FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->sort)],
-//                                      this->order == ORDER::ASC ? "asc" : "desc"));
+    emit this->preListChanged();
+    //    this->notes = this->db->getDBData(QString("select * from notes ORDER BY %1 %2").arg(
+    //                                          FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->sort)],
+    //                                      this->order == ORDER::ASC ? "asc" : "desc"));
     emit this->postListChanged();
 }
 
@@ -87,22 +87,6 @@ bool Notes::insert(const QVariantMap &note)
     return true;
 }
 
-bool Notes::update(const int &index, const QVariant &value, const int &role)
-{
-    if(index < 0 || index >= notes.size())
-        return false;
-
-    const auto oldValue = this->notes[index][static_cast<FMH::MODEL_KEY>(role)];
-
-    if(oldValue == value.toString())
-        return false;
-
-    this->notes[index].insert(static_cast<FMH::MODEL_KEY>(role), value.toString());
-
-    this->update(this->notes[index]);
-
-    return true;
-}
 
 bool Notes::update(const QVariantMap &data, const int &index)
 {
@@ -112,50 +96,19 @@ bool Notes::update(const QVariantMap &data, const int &index)
     auto newData = this->notes[index];
     QVector<int> roles;
 
-    for(auto key : data.keys())
+    for(const auto &key : data.keys())
         if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
         {
-            newData.insert(FMH::MODEL_NAME_KEY[key], data[key].toString());
+            newData[FMH::MODEL_NAME_KEY[key]] = data[key].toString();
             roles << FMH::MODEL_NAME_KEY[key];
         }
 
     this->notes[index] = newData;
 
-    if(this->update(newData))
-    {
-        emit this->updateModel(index, roles);
-        return true;
-    }
+    this->syncer->updateNote(newData[FMH::MODEL_KEY::ID], newData);
 
-    return false;
-}
-
-bool Notes::update(const FMH::MODEL &note)
-{
-    auto id = note[FMH::MODEL_KEY::ID];
-    auto title = note[FMH::MODEL_KEY::TITLE];
-    auto content = note[FMH::MODEL_KEY::CONTENT];
-    auto color = note[FMH::MODEL_KEY::COLOR];
-    auto pin = note[FMH::MODEL_KEY::PIN].toInt();
-    auto favorite = note[FMH::MODEL_KEY::FAVORITE].toInt();
-    auto tags = note[FMH::MODEL_KEY::TAG].split(",", QString::SkipEmptyParts);
-    auto modified =note[FMH::MODEL_KEY::MODIFIED];
-
-    QVariantMap note_map =
-    {
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::CONTENT], content},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], color},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::PIN], pin},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::FAVORITE], favorite},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::MODIFIED], modified}
-    };
-
-//    for(auto tg : tags)
-//        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id, color);
-
-//    return this->db->update(OWL::TABLEMAP[OWL::TABLE::NOTES], note_map, {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}} );
-    return false;
+    emit this->updateModel(index, roles);
+    return true;
 }
 
 bool Notes::remove(const int &index)
@@ -164,12 +117,12 @@ bool Notes::remove(const int &index)
     auto id = this->notes.at(index)[FMH::MODEL_KEY::ID];
     QVariantMap note = {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}};
 
-//    if(this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], note))
-//    {
-//        this->notes.removeAt(index);
-//        emit this->postItemRemoved();
-//        return true;
-//    }
+    //    if(this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], note))
+    //    {
+    //        this->notes.removeAt(index);
+    //        emit this->postItemRemoved();
+    //        return true;
+    //    }
 
     return false;
 }
@@ -188,11 +141,11 @@ QVariantMap Notes::getAccount() const
 
 QVariantList Notes::getTags(const int &index)
 {
-//    if(index < 0 || index >= this->notes.size())
-//        return QVariantList();
+    //    if(index < 0 || index >= this->notes.size())
+    //        return QVariantList();
 
-//    auto id = this->notes.at(index)[FMH::MODEL_KEY::ID];
-//    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::NOTES], id);
+    //    auto id = this->notes.at(index)[FMH::MODEL_KEY::ID];
+    //    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::NOTES], id);
     return QVariantList();
 }
 

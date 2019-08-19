@@ -42,7 +42,6 @@ class Syncer: public QObject
 {
     Q_OBJECT
 
-
 public:
     explicit Syncer(QObject *parent = nullptr);
 
@@ -154,14 +153,7 @@ private:
      */
     static void stampNote(FMH::MODEL &note);
 
-    /**
-     * @brief packNote
-     * packs the note to what is expected by the internal database,
-     * by only using the needed fields
-     * @param note
-     * @return
-     */
-    static FMH::MODEL filterNote(const FMH::MODEL &note, const QVector<FMH::MODEL_KEY> &keys);
+    static const QString idFromStamp(DB *db, const QString &provider, const QString &stamp) ;
 
 protected:
     /**
@@ -183,7 +175,7 @@ protected:
     void insertRemote(FMH::MODEL &note);
 
 
-    void updateLocal(const QString &id, const FMH::MODEL &note);
+    bool updateLocal(const QString &id, const FMH::MODEL &note);
     void updateRemote(const QString &id, const FMH::MODEL &note);
 
 signals:

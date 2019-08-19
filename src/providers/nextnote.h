@@ -24,8 +24,8 @@ public:
 
 private:
     const static QString API;
-    static QString formatUrl(const QString &user, const QString &password, const QString &provider);
-    static FMH::MODEL_LIST parseNotes(const QByteArray &array);
+    static const QString formatUrl(const QString &user, const QString &password, const QString &provider);
+    static const FMH::MODEL_LIST parseNotes(const QByteArray &array);
 
 //    template<typename T>
 //    void request(const QString &url, const QMap<QString, QString> &header, T cb);

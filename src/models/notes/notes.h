@@ -72,9 +72,7 @@ public slots:
 
     QVariantMap get(const int &index) const;
     bool insert(const QVariantMap &note);
-    bool update(const int &index, const QVariant &value, const int &role); //deprecrated
     bool update(const QVariantMap &data, const int &index);
-    bool update(const FMH::MODEL &note);
     bool remove(const int &index);
 
 };
