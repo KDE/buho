@@ -176,7 +176,7 @@ void NextNote::removeNote(const QString &id)
 
     const auto url = QString(NextNote::API+"%1%2").replace("PROVIDER", this->m_provider).arg("notes/", id);
     const auto request = formRequest(url, this->m_user, this->m_password);
-
+    qDebug()<< "trying to remove nextnote <<" << url;
     auto restclient = new QNetworkAccessManager; //constructor
     QNetworkReply *reply = restclient->deleteResource(request);
     connect(reply, &QNetworkReply::finished, [=]()

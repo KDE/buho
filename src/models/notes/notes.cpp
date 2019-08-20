@@ -9,12 +9,14 @@
 #include <MauiKit/fm.h>
 #endif
 
+#include "nextnote.h"
+
 Notes::Notes(QObject *parent) : MauiList(parent),
     syncer(new Syncer(this))
 {
     qDebug()<< "CREATING NOTES LIST";
-    this->sortList();
 
+    this->syncer->setProvider(new NextNote);
     connect(this, &Notes::accountChanged, syncer, &Syncer::getNotes);
     connect(this, &Notes::sortByChanged, this, &Notes::sortList);
     connect(this, &Notes::orderChanged, this, &Notes::sortList);

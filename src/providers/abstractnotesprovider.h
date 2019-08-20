@@ -45,7 +45,7 @@ public:
      * @return
      * true if the credentials are all set or false is somethign is missing
      */
-    virtual bool isValid()
+    virtual bool isValid() final
     {
         return !(this->m_user.isEmpty() || this->m_user.isNull()
                  || this->m_provider.isEmpty() || this->m_provider.isNull()

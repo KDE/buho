@@ -48,7 +48,7 @@ public:
     /**
      * @brief setProviderAccount
      * sets the credentials to the current account
-     * for the provider being used
+     * for the current provider being used
      * @param account
      * the account data represented by FMH::MODEL
      * where the valid keys are:
@@ -58,6 +58,15 @@ public:
      */
     void setAccount(const FMH::MODEL &account);
 
+    /**
+     * @brief setProvider
+     * sets the provider interface
+     * this allows to change the provider source
+     * @param provider
+     * the provider must inherit the asbtract class AbstractNotesProvider.
+     * The value passed is then moved to this class private property Syncer::provider
+     */
+    void setProvider(AbstractNotesProvider *provider);
     /**
      * @brief insertNote
      * saves a new note online and offline
@@ -107,16 +116,6 @@ public:
     void getNotes();
 
 private:
-//    /**
-//     * @brief currentAccount
-//     * The current account to store the notes online.
-//     * The account data is represented by FMH::MODEL, using the keys:
-//     * FMH::MODEL_KEY::USER representing the username
-//     * FMH::MODEL_KEY::PASSWORD representing the user password
-//     * FMH::MODEL_KEY::PROVIDER representing the address to the provider server
-//     */
-//    FMH::MODEL currentAccount; //no such good idea to have this here, it adds mroe complexity and confusion
-
     /**
      * @brief tag
      * Instance of the Maui project tag-ger. It adds tags to the abtract notes
@@ -153,7 +152,10 @@ private:
      */
     static void stampNote(FMH::MODEL &note);
 
-    static const QString idFromStamp(DB *db, const QString &provider, const QString &stamp) ;
+    static const QString idFromStamp(DB *_db, const QString &provider, const QString &stamp) ;
+    static const QString stampFromId(DB *_db, const QString &id) ;
+
+    void setConections();
 
 protected:
     /**
@@ -190,5 +192,6 @@ signals:
 
 public slots:
 };
+
 
 #endif // SYNCER_H
