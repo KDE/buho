@@ -21,6 +21,7 @@ Maui.Dialog
     y: (parent.height /2 ) - (height / 2)
     modal: true
     padding: isAndroid ? 1 : undefined
+    page.padding: 0
 
     Connections
     {
@@ -34,14 +35,35 @@ Maui.Dialog
     headBar.visible: previewReady
     footBar.visible: previewReady
 
-    headBar.leftContent: ToolButton
-    {
-        id: pinButton
-        icon.name: "window-pin"
-        checkable: true
-        icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-        //                onClicked: checked = !checked
-    }
+    headBar.leftContent: [
+        ToolButton
+        {
+            id: pinButton
+            icon.name: "window-pin"
+            checkable: true
+            icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+            //                onClicked: checked = !checked
+        },
+
+        TextField
+        {
+            id: title
+            visible: previewReady
+            Layout.fillWidth: true
+            Layout.margins: space.medium
+            height: 24
+            placeholderText: qsTr("Title")
+            font.weight: Font.Bold
+            font.bold: true
+            font.pointSize: fontSizes.large
+            color: fgColor
+
+            background: Rectangle
+            {
+                color: "transparent"
+            }
+        }
+    ]
 
     headBar.rightContent: ColorsBar
     {
@@ -108,30 +130,12 @@ Maui.Dialog
             onAccepted: linker.extract(link.text)
         }
 
-        TextField
-        {
-            id: title
-            visible: previewReady
-            Layout.fillWidth: true
-            Layout.margins: space.medium
-            height: 24
-            placeholderText: qsTr("Title")
-            font.weight: Font.Bold
-            font.bold: true
-            font.pointSize: fontSizes.large
-            color: fgColor
-
-            background: Rectangle
-            {
-                color: "transparent"
-            }
-        }
-
         Item
         {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
             visible: previewReady
+
+            Layout.fillWidth: previewReady
+            Layout.fillHeight: previewReady
 
             ListView
             {
@@ -180,7 +184,7 @@ Maui.Dialog
         {
             id: tagBar
             visible: previewReady
-            Layout.fillWidth: true
+            Layout.fillWidth: visible
             allowEditMode: true
             list.abstract: true
             list.key: "links"
@@ -203,7 +207,7 @@ Maui.Dialog
     function fill(link)
     {
         title.text = link.title
-        populatePreviews(link.image)
+        populatePreviews(link.img)
         tagBar.list.lot= link.url
 
         open()
@@ -221,13 +225,13 @@ Maui.Dialog
     function packLink()
     {
         var data = ({
-                        link : link.text,
+                        url : link.text,
                         title: title.text,
                         preview: previewList.count > 0 ? previewList.model.get(previewList.currentIndex).url :  "",
-                                                         color: selectedColor,
-                                                         tag: tagBar.getTags(),
-                                                         pin: pinButton.checked,
-                                                         fav: favButton.checked
+                        color: selectedColor,
+                        tag: tagBar.getTags(),
+                        pin: pinButton.checked,
+                        favorite: favButton.checked
                     })
         linkSaved(data)
     }

@@ -79,8 +79,10 @@ void Linker::extract(const QString &url)
         else continue;
     }
 
+    qDebug() << imgs;
     LINK link_data {{FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title.trimmed()},
                     {FMH::MODEL_NAME[FMH::MODEL_KEY::CONTENT], data},
+                    {FMH::MODEL_NAME[FMH::MODEL_KEY::URL], data},
                     {FMH::MODEL_NAME[FMH::MODEL_KEY::IMG], imgs}};
     emit previewReady(link_data);
 }

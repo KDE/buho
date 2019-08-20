@@ -80,50 +80,28 @@ bool Links::insert(const QVariantMap &link)
 {
     emit this->preItemAppended();
 
-    auto url = link[FMH::MODEL_NAME[FMH::MODEL_KEY::LINK]].toString();
-    auto color = link[FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR]].toString();
-    auto pin = link[FMH::MODEL_NAME[FMH::MODEL_KEY::PIN]].toInt();
-    auto fav = link[FMH::MODEL_NAME[FMH::MODEL_KEY::FAV]].toInt();
-    auto tags = link[FMH::MODEL_NAME[FMH::MODEL_KEY::TAG]].toStringList();
-    auto preview = link[FMH::MODEL_NAME[FMH::MODEL_KEY::PREVIEW]].toString();
-    auto title = link[FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE]].toString();
+    auto __model = FMH::toModel(link);
+    __model[FMH::MODEL_KEY::ADDDATE] =  QDateTime::currentDateTime().toString();
+    __model[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString();
+    __model[FMH::MODEL_KEY::PREVIEW] =  OWL::saveImage(Linker::getUrl(__model[FMH::MODEL_KEY::PREVIEW]), OWL::LinksPath+QUuid::createUuid().toString());
 
-    auto image_path = OWL::saveImage(Linker::getUrl(preview), OWL::LinksPath+QUuid::createUuid().toString());
 
-    QVariantMap link_map =
+    __model = FMH::filterModel(__model, {FMH::MODEL_KEY::URL,
+                                         FMH::MODEL_KEY::TITLE,
+                                         FMH::MODEL_KEY::PREVIEW,
+                                         FMH::MODEL_KEY::COLOR,
+                                         FMH::MODEL_KEY::FAVORITE,
+                                         FMH::MODEL_KEY::PIN,
+                                         FMH::MODEL_KEY::MODIFIED,
+                                         FMH::MODEL_KEY::ADDDATE});
+
+    if(this->db->insert(OWL::TABLEMAP[OWL::TABLE::LINKS], FMH::toMap(__model)))
     {
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::LINK], url},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::PIN], pin},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::FAV], fav},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::PREVIEW], image_path},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], color},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE], QDateTime::currentDateTime().toString()},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::MODIFIED], QDateTime::currentDateTime().toString()}
-
-    };
-
-    if(this->db->insert(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map))
-    {
-        for(auto tg : tags)
-            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
-
-
-        this->links << FMH::MODEL
-                       ({
-                            {FMH::MODEL_KEY::LINK, url},
-                            {FMH::MODEL_KEY::TITLE, title},
-                            {FMH::MODEL_KEY::COLOR, color},
-                            {FMH::MODEL_KEY::PREVIEW, image_path},
-                            {FMH::MODEL_KEY::PIN, QString::number(pin)},
-                            {FMH::MODEL_KEY::FAV, QString::number(fav)},
-                            {FMH::MODEL_KEY::MODIFIED, QDateTime::currentDateTime().toString()},
-                            {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString()}
-
-                        });
+        for(auto tg : __model[FMH::MODEL_KEY::TAG].split(","))
+            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], __model[FMH::MODEL_KEY::URL]);
+        this->links << __model;
 
         emit postItemAppended();
-
         return true;
     } else qDebug()<< "LINK COULD NOT BE INSTED";
 
