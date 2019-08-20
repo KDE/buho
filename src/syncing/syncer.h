@@ -183,6 +183,11 @@ protected:
     bool removeLocal(const QString &id);
     void removeRemote(const QString &id);
 
+    const FMH::MODEL_LIST collectAllNotes();
+
+    static inline const QUrl saveNoteFile(const FMH::MODEL &note);
+    static inline const QString noteFileContent(const QUrl &path);
+
 signals:
     void noteInserted(FMH::MODEL note, STATE state);
     void noteUpdated(FMH::MODEL note, STATE state);

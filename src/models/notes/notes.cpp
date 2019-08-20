@@ -165,6 +165,7 @@ bool Notes::update(const QVariantMap &data, const int &index)
 
     this->notes[index] = newData;
 
+    newData[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
     this->syncer->updateNote(newData[FMH::MODEL_KEY::ID], newData);
 
     emit this->updateModel(index, roles);

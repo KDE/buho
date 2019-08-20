@@ -1,6 +1,6 @@
 #include "syncer.h"
 #include "db/db.h"
-#include "nextnote.h"
+#include "abstractnotesprovider.h"
 
 #include <QUuid>
 
@@ -56,7 +56,7 @@ void Syncer::updateNote(const QString &id, const FMH::MODEL &note)
     }
 
     //to update remote note we need to pass the stamp as the id
-    const auto stamp = note[FMH::MODEL_KEY::STAMP];
+    const auto stamp = Syncer::stampFromId(this->db, id);
     if(!stamp.isEmpty())
         this->updateRemote(stamp, note);
 
@@ -85,14 +85,13 @@ void Syncer::removeNote(const QString &id)
 
 void Syncer::getNotes()
 {
-    const auto notes = this->db->getDBData("select n.*, ns.server, ns.user, ns.stamp from notes n inner join notes_sync ns on n.id = ns.id ");
-
+    const auto notes = this->collectAllNotes();
 
     if(this->provider && this->provider->isValid())
         this->provider->getNotes();
-    else {
-        qWarning()<< "Credentials are missing to get notes";
-    }
+    else
+        qWarning()<< "Credentials are missing to get notes or the provider has not been set";
+
 
     emit this->notesReady(notes);
 }
@@ -190,7 +189,7 @@ void Syncer::setConections()
             }
         }
 
-        emit this->notesReady(this->db->getDBData("select n.*, ns.server, ns.user, ns.stamp from notes n inner join notes_sync ns on n.id = ns.id "));
+        emit this->notesReady(this->collectAllNotes());
     });
 
     connect(this->provider, &AbstractNotesProvider::noteUpdated, [&](FMH::MODEL note)
@@ -212,14 +211,21 @@ bool Syncer::insertLocal(FMH::MODEL &note)
     qDebug()<<"TAGS"<< note[FMH::MODEL_KEY::TAG];
 
     Syncer::stampNote(note); //adds a local id to the note
-    const auto __noteMap = FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::ID,
-                                                              FMH::MODEL_KEY::TITLE,
-                                                              FMH::MODEL_KEY::CONTENT,
-                                                              FMH::MODEL_KEY::COLOR,
-                                                              FMH::MODEL_KEY::PIN,
-                                                              FMH::MODEL_KEY::FAVORITE,
-                                                              FMH::MODEL_KEY::MODIFIED,
-                                                              FMH::MODEL_KEY::ADDDATE}));
+
+    // create a file for the note
+    const auto __notePath = Syncer::saveNoteFile(note);
+    note[FMH::MODEL_KEY::URL] = __notePath.toString();
+    qDebug()<< "note saved to <<" << __notePath;
+
+    auto __noteMap = FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::ID,
+                                                        FMH::MODEL_KEY::TITLE,
+                                                        FMH::MODEL_KEY::COLOR,
+                                                        FMH::MODEL_KEY::URL,
+                                                        FMH::MODEL_KEY::PIN,
+                                                        FMH::MODEL_KEY::FAVORITE,
+                                                        FMH::MODEL_KEY::MODIFIED,
+                                                        FMH::MODEL_KEY::ADDDATE}));
+
 
     if(this->db->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], __noteMap))
     {
@@ -243,9 +249,10 @@ bool Syncer::updateLocal(const QString &id, const FMH::MODEL &note)
     for(const auto &tg : note[FMH::MODEL_KEY::TAG])
         this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id);
 
+    this->saveNoteFile(note);
+
     return this->db->update(OWL::TABLEMAP[OWL::TABLE::NOTES],
             FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::TITLE,
-                                               FMH::MODEL_KEY::CONTENT,
                                                FMH::MODEL_KEY::COLOR,
                                                FMH::MODEL_KEY::PIN,
                                                FMH::MODEL_KEY::MODIFIED,
@@ -268,4 +275,44 @@ void Syncer::removeRemote(const QString &id)
 {
     if(this->provider && this->provider->isValid())
         this->provider->removeNote(id);
+}
+
+const FMH::MODEL_LIST Syncer::collectAllNotes()
+{
+    FMH::MODEL_LIST __notes = this->db->getDBData("select * from notes");
+    for(auto &note : __notes)
+        note[FMH::MODEL_KEY::CONTENT] = this->noteFileContent(note[FMH::MODEL_KEY::URL]);
+
+    return __notes;
+}
+
+const QUrl Syncer::saveNoteFile(const FMH::MODEL &note)
+{
+    if(note.isEmpty() || !note.contains(FMH::MODEL_KEY::CONTENT))
+    {
+        qWarning() << "the note is empty, therefore it could not be saved into a file";
+        return QUrl();
+    }
+
+    QFile file(OWL::NotesPath+note[FMH::MODEL_KEY::ID]+QStringLiteral(".txt"));
+    file.open(QFile::WriteOnly);
+    file.write(note[FMH::MODEL_KEY::CONTENT].toUtf8());
+    file.close();
+
+    return QUrl::fromLocalFile(file.fileName());
+}
+
+const QString Syncer::noteFileContent(const QUrl &path)
+{
+    if(!path.isLocalFile())
+    {
+        qWarning()<< "Can not open note file, the url is not a local path";
+        return QString();
+    }
+    QFile file(path.toLocalFile());
+    file.open(QFile::ReadOnly);
+    const auto content = file.readAll();
+    file.close();
+
+    return QString(content);
 }

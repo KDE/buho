@@ -2,7 +2,7 @@
 CREATE TABLE IF NOT EXISTS NOTES (
 id TEXT PRIMARY KEY,
 title TEXT,
-content TEXT,
+url TEXT,
 color TEXT,
 favorite INT,
 pin INT,
