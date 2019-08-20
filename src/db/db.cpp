@@ -267,7 +267,7 @@ bool DB::remove(const QString &tableName, const QVariantMap &removeData)
 
 
     QStringList set;
-    for (auto key : removeData.keys())
+    for (const auto &key : removeData.keys())
         set.append(key+" = ?");
 
     QString sqlQueryString = "DELETE FROM " + tableName + " WHERE " + QString(set.join(" AND "));

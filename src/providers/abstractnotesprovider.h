@@ -129,7 +129,7 @@ signals:
     void notesReady(FMH::MODEL_LIST notes);
     void noteInserted(FMH::MODEL note);
     void noteUpdated(FMH::MODEL note);
-    void noteRemoved(FMH::MODEL note);
+    void noteRemoved();
 
     /**
      * @brief responseReady

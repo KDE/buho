@@ -134,6 +134,18 @@ void Syncer::updateNote(const QString &id, const FMH::MODEL &note)
     emit this->noteUpdated(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note updated on the DB locally"});
 }
 
+void Syncer::removeNote(const QString &id)
+{
+    if(!this->removeLocal(id))
+    {
+        qWarning()<< "The note could not be inserted locally, "
+                     "therefore it was not attempted to insert it to the remote provider server, "
+                     "even if it existed.";
+        return;
+    }
+        this->removeRemote(id);
+}
+
 void Syncer::getNotes()
 {
     const auto notes = this->db->getDBData("select n.*, ns.server, ns.user, ns.stamp from notes n inner join notes_sync ns on n.id = ns.id ");
@@ -211,4 +223,16 @@ void Syncer::updateRemote(const QString &id, const FMH::MODEL &note)
 {
     if(this->provider->isValid())
         this->provider->updateNote(id, note);
+}
+
+bool Syncer::removeLocal(const QString &id)
+{
+    this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES_SYNC], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
+    return this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
+}
+
+void Syncer::removeRemote(const QString &id)
+{
+    if(this->provider->isValid())
+        this->provider->removeNote(id);
 }

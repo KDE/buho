@@ -168,6 +168,23 @@ void NextNote::updateNote(const QString &id, const FMH::MODEL &note)
 
 void NextNote::removeNote(const QString &id)
 {
+    if(id.isEmpty())
+    {
+        qWarning()<< "The id is empty. Can not proceed. NextNote::remove";
+        return;
+    }
+
+    const auto url = QString(NextNote::API+"%1%2").replace("PROVIDER", this->m_provider).arg("notes/", id);
+    const auto request = formRequest(url, this->m_user, this->m_password);
+
+    auto restclient = new QNetworkAccessManager; //constructor
+    QNetworkReply *reply = restclient->deleteResource(request);
+    connect(reply, &QNetworkReply::finished, [=]()
+    {
+        qDebug() << "Note remove finished?" << reply->errorString();
+        emit this->noteRemoved();
+        restclient->deleteLater();
+    });
 }
 
 const QString NextNote::formatUrl(const QString &user, const QString &password, const QString &provider)

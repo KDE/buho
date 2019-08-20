@@ -178,6 +178,9 @@ protected:
     bool updateLocal(const QString &id, const FMH::MODEL &note);
     void updateRemote(const QString &id, const FMH::MODEL &note);
 
+    bool removeLocal(const QString &id);
+    void removeRemote(const QString &id);
+
 signals:
     void noteInserted(FMH::MODEL note, STATE state);
     void noteUpdated(FMH::MODEL note, STATE state);

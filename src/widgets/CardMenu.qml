@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.3
 import org.kde.mauikit 1.0 as Maui
+import org.kde.kirigami 2.7 as Kirigami
 
 Menu
 {
@@ -55,7 +56,8 @@ Menu
 
     MenuItem
     {
-        text: qsTr("Delete")
+        text: qsTr("Remove")
+        Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
         onTriggered:
         {
             deleteClicked()
