@@ -17,5 +17,7 @@
         <file>src/widgets/CardsList.qml</file>
         <file>src/widgets/CardMenu.qml</file>
         <file>src/widgets/LinkCardDelegate.qml</file>
+        <file>src/views/books/NewBookDialog.qml</file>
+        <file>src/views/books/BookletPage.qml</file>
     </qresource>
 </RCC>

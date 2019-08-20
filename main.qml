@@ -130,6 +130,7 @@ Maui.ApplicationWindow
                 ToolButton
                 {
                     icon.name: "view-pim-journal"
+                    onClicked: newBook()
                 }
             ]
         }
@@ -166,6 +167,12 @@ Maui.ApplicationWindow
     {
         id: newLinkDialog
         onLinkSaved: linksView.list.insert(link)
+    }
+
+    NewBookDialog
+    {
+        id: newBookDialog
+        onBookSaved: console.log("saving new vbook", title)
     }
 
     //    /***** VIEWS *****/
@@ -217,6 +224,12 @@ Maui.ApplicationWindow
     {
         currentView = views.links
         newLinkDialog.open()
+    }
+
+    function newBook()
+    {
+        currentView = views.books
+        newBookDialog.open()
     }
 
     function setNote(note)
