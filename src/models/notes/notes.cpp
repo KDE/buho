@@ -1,5 +1,6 @@
 #include "notes.h"
 #include "syncer.h"
+#include "nextnote.h"
 
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
@@ -9,14 +10,13 @@
 #include <MauiKit/fm.h>
 #endif
 
-#include "nextnote.h"
-
 Notes::Notes(QObject *parent) : MauiList(parent),
     syncer(new Syncer(this))
 {
     qDebug()<< "CREATING NOTES LIST";
 
     this->syncer->setProvider(new NextNote);
+
     connect(this, &Notes::accountChanged, syncer, &Syncer::getNotes);
     connect(this, &Notes::sortByChanged, this, &Notes::sortList);
     connect(this, &Notes::orderChanged, this, &Notes::sortList);
@@ -155,7 +155,6 @@ bool Notes::update(const QVariantMap &data, const int &index)
 
     auto newData = this->notes[index];
     QVector<int> roles;
-
     for(const auto &key : data.keys())
         if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
         {

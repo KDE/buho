@@ -98,7 +98,7 @@ void Syncer::getNotes()
 
 void Syncer::getBooks()
 {
-    const auto books = this->collectAllNotes();
+    const auto books = this->collectAllBooks();
 
     // this service is still missing
 //    if(this->provider && this->provider->isValid())
@@ -108,6 +108,14 @@ void Syncer::getBooks()
 
 
     emit this->booksReady(books);
+}
+
+void Syncer::insertBook(const FMH::MODEL &book)
+{
+    if(!this->db->insert(OWL::TABLEMAP[OWL::TABLE::BOOKS], FMH::toMap(book)))
+    {
+        qWarning()<< "Could not insert Book, Syncer::insertBook";
+    }
 }
 
 void Syncer::stampNote(FMH::MODEL &note)
