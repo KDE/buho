@@ -56,7 +56,7 @@ void Syncer::updateNote(const QString &id, const FMH::MODEL &note)
     }
 
     //to update remote note we need to pass the stamp as the id
-    const auto stamp = Syncer::stampFromId(this->db, id);
+    const auto stamp = Syncer::noteStampFromId(this->db, id);
     if(!stamp.isEmpty())
         this->updateRemote(stamp, note);
 
@@ -68,7 +68,7 @@ void Syncer::removeNote(const QString &id)
     //to remove the remote note we need to pass the stamp as the id,
     //and before removing the note locally we need to retireved first
 
-    const auto stamp = Syncer::stampFromId(this->db, id);
+    const auto stamp = Syncer::noteStampFromId(this->db, id);
     if(!this->removeLocal(id))
     {
         qWarning()<< "The note could not be inserted locally, "
@@ -96,6 +96,20 @@ void Syncer::getNotes()
     emit this->notesReady(notes);
 }
 
+void Syncer::getBooks()
+{
+    const auto books = this->collectAllNotes();
+
+    // this service is still missing
+//    if(this->provider && this->provider->isValid())
+//        this->provider->getNotes();
+//    else
+//        qWarning()<< "Credentials are missing to get notes or the provider has not been set";
+
+
+    emit this->booksReady(books);
+}
+
 void Syncer::stampNote(FMH::MODEL &note)
 {
     const auto id = QUuid::createUuid().toString();
@@ -103,7 +117,7 @@ void Syncer::stampNote(FMH::MODEL &note)
 }
 
 
-const QString Syncer::idFromStamp(DB *_db, const QString &provider, const QString &stamp)
+const QString Syncer::noteIdFromStamp(DB *_db, const QString &provider, const QString &stamp)
 {
     return [&]() -> QString {
         const auto data = _db->getDBData(QString("select id from notes_sync where server = '%1' AND stamp = '%2'").arg(provider, stamp));
@@ -111,7 +125,7 @@ const QString Syncer::idFromStamp(DB *_db, const QString &provider, const QStrin
     }();
 }
 
-const QString Syncer::stampFromId(DB *_db, const QString &id)
+const QString Syncer::noteStampFromId(DB *_db, const QString &id)
 {
     return [&]() -> QString {
         const auto data = _db->getDBData(QString("select stamp from notes_sync where id = '%1'").arg(id));
@@ -145,7 +159,7 @@ void Syncer::setConections()
         // the note does not exists locally, so it needs to be inserted into the db
         for(const auto &note : notes)
         {
-            const auto id = Syncer::idFromStamp(this->db, this->provider->provider(), note[FMH::MODEL_KEY::ID]);
+            const auto id = Syncer::noteIdFromStamp(this->db, this->provider->provider(), note[FMH::MODEL_KEY::ID]);
 
             // if the id is empty then the note does nto exists, so ithe note is inserted into the local db
             if(id.isEmpty())
@@ -194,7 +208,7 @@ void Syncer::setConections()
 
     connect(this->provider, &AbstractNotesProvider::noteUpdated, [&](FMH::MODEL note)
     {
-        const auto id = Syncer::idFromStamp(this->db, this->provider->provider(), note[FMH::MODEL_KEY::ID]);
+        const auto id = Syncer::noteIdFromStamp(this->db, this->provider->provider(), note[FMH::MODEL_KEY::ID]);
         if(!note.isEmpty())
             this->updateLocal(id, FMH::filterModel(note, {FMH::MODEL_KEY::TITLE}));
         emit this->noteUpdated(note, {STATE::TYPE::REMOTE, STATE::STATUS::OK, "Note updated on server provider"});
@@ -284,6 +298,11 @@ const FMH::MODEL_LIST Syncer::collectAllNotes()
         note[FMH::MODEL_KEY::CONTENT] = this->noteFileContent(note[FMH::MODEL_KEY::URL]);
 
     return __notes;
+}
+
+const FMH::MODEL_LIST Syncer::collectAllBooks()
+{
+    return this->db->getDBData("select * from books");
 }
 
 const QUrl Syncer::saveNoteFile(const FMH::MODEL &note)

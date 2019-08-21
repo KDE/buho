@@ -46,6 +46,7 @@ set(buho_SRCS
     src/models/notes/notes.cpp
     src/models/links/links.cpp
     src/models/books/books.cpp
+    src/models/books/booklet.cpp
     src/providers/nextnote.cpp
     src/syncing/syncer.cpp
     )
@@ -59,6 +60,7 @@ set(buho_HDRS
     src/models/notes/notes.h
     src/models/links/links.h
     src/models/books/books.h
+    src/models/books/booklet.h
     src/providers/nextnote.h
     src/providers/abstractnotesprovider.h
     src/syncing/syncer.h

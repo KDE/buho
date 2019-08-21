@@ -1,7 +1,5 @@
-#ifndef BOOKS_H
-#define BOOKS_H
-
-#include <QObject>
+#ifndef BOOKLET_H
+#define BOOKLET_H
 #include "owl.h"
 
 #ifdef STATIC_MAUIKIT
@@ -12,8 +10,7 @@
 #include <MauiKit/mauilist.h>
 #endif
 
-class Syncer;
-class Books : public MauiList
+class Booklet : public MauiList
 {
     Q_OBJECT
 
@@ -21,6 +18,8 @@ class Books : public MauiList
     Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
 
 public:
+    Booklet(QObject *parent = nullptr);
+
     enum ORDER : uint8_t
     {
         DESC,
@@ -39,8 +38,6 @@ public:
     };
     Q_ENUM(SORTBY)
 
-    Books(QObject *parent = nullptr);
-
     FMH::MODEL_LIST items() const override final;
 
     void setSortBy(const SORTBY &sort);
@@ -49,8 +46,6 @@ public:
     ORDER getOrder() const;
 
 private:
-    Syncer *syncer;
-
     FMH::MODEL_LIST m_list;
 
     void sortList();
@@ -61,19 +56,6 @@ private:
 signals:
     void sortByChanged();
     void orderChanged();
-
-public slots:
-    QVariantMap get(const int &index) const;
-
-    /**
-     * @brief insert
-     * insertes a new book by using the syncer interface
-     * @param note
-     * @return
-     */
-    bool insert(const QVariantMap &note);
-    bool update(const QVariantMap &data, const int &index);
-    bool remove(const int &index);
 };
 
-#endif // BOOKS_H
+#endif // BOOKLET_H

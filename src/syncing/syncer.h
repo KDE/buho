@@ -67,10 +67,15 @@ public:
      * The value passed is then moved to this class private property Syncer::provider
      */
     void setProvider(AbstractNotesProvider *provider);
+
+
+    //// NOTES INTERFACES
+    /// interfaces with the the notes from both, local and remote
+
     /**
      * @brief insertNote
      * saves a new note online and offline
-     * The signal noteInserted(FMH::MODEL, STATE) is emitted,
+     * The signal Syncer::noteInserted(FMH::MODEL, STATE) is emitted,
      * indicating the created note and the transaction resulting state
      * @param note
      * the note to be stored represented by FMH::MODEL
@@ -80,7 +85,7 @@ public:
     /**
      * @brief updateNote
      * Update online and offline an existing note.
-     * The signal noteUpdated(FMH::MODEL, STATE) is emitted,
+     * The signal Syncer::noteUpdated(FMH::MODEL, STATE) is emitted,
      * indicating the updated note and the transaction resulting state
      * @param id
      * ID of the existing note
@@ -92,7 +97,7 @@ public:
     /**
      * @brief removeNote
      * remove a note from online and offline storage
-     * The signal noteRemoved(FMH::MODEL, STATE) is emitted,
+     * The signal Syncer::noteRemoved(FMH::MODEL, STATE) is emitted,
      * indicating the removed note and the transaction resulting state
      * @param id
      * ID of the exisiting  note
@@ -102,7 +107,7 @@ public:
     /**
      * @brief getNote
      * Retrieves an existing note, whether the note is located offline or online.
-     * When the note is ready the signal noteReady(FMH::MODEL) is emitted
+     * When the note is ready the signal Syncer::noteReady(FMH::MODEL) is emitted
      * @param id
      * ID of the exisiting  note
      */
@@ -111,9 +116,71 @@ public:
     /**
      * @brief getNotes
      * Retrieves all the notes, online and offline notes.
-     * When the notes are ready the signal notesReady(FMH::MODEL_LIST) is emitted.
+     * When the notes are ready the signal Syncer::notesReady(FMH::MODEL_LIST) is emitted.
      */
     void getNotes();
+
+    ////BOOKS & BOOKLET INTERFACES
+    /// interfaces with the the books and booklets from both, local and remote
+
+    /**
+     * @brief getBooks
+     * Retrieves all the books, online and offline.
+     * When the books are ready the signal Syncer::booksReady(FMH::MODEL_LIST) is emitted
+     */
+    void getBooks();
+
+    /**
+     * @brief getBook
+     * @param id
+     */
+    void getBook(const QString &id);
+
+    /**
+     * @brief insertBook
+     * @param book
+     */
+    void insertBook(const FMH::MODEL &book);
+
+    /**
+     * @brief updateBook
+     * @param id
+     * @param book
+     */
+    void updateBook(const QString &id, const FMH::MODEL &book);
+
+    /**
+     * @brief removeBook
+     * @param id
+     */
+    void removeBook(const QString &id);
+
+    //BOOKLETS INTERFACES
+
+    /**
+     * @brief getBooklet
+     * @param id
+     */
+    void getBooklet(const QString &id);
+
+    /**
+     * @brief updateBooklet
+     * @param id
+     * @param booklet
+     */
+    void updateBooklet(const QString &id, FMH::MODEL &booklet);
+
+    /**
+     * @brief insertBooklet
+     * @param booklet
+     */
+    void insertBooklet(const FMH::MODEL &booklet);
+
+    /**
+     * @brief removeBooklet
+     * @param id
+     */
+    void removeBooklet(const QString &id);
 
 private:
     /**
@@ -152,8 +219,8 @@ private:
      */
     static void stampNote(FMH::MODEL &note);
 
-    static const QString idFromStamp(DB *_db, const QString &provider, const QString &stamp) ;
-    static const QString stampFromId(DB *_db, const QString &id) ;
+    static const QString noteIdFromStamp(DB *_db, const QString &provider, const QString &stamp) ;
+    static const QString noteStampFromId(DB *_db, const QString &id) ;
 
     void setConections();
 
@@ -184,16 +251,26 @@ protected:
     void removeRemote(const QString &id);
 
     const FMH::MODEL_LIST collectAllNotes();
+    const FMH::MODEL_LIST collectAllBooks();
 
     static inline const QUrl saveNoteFile(const FMH::MODEL &note);
     static inline const QString noteFileContent(const QUrl &path);
 
 signals:
+    //FOR NOTES
     void noteInserted(FMH::MODEL note, STATE state);
     void noteUpdated(FMH::MODEL note, STATE state);
     void noteRemoved(FMH::MODEL note, STATE state);
     void noteReady(FMH::MODEL note);
     void notesReady(FMH::MODEL_LIST notes);
+
+    //FOR BOOKS
+    void bookInserted(FMH::MODEL book, STATE state);
+    void bookUpdated(FMH::MODEL book, STATE state);
+    void bookRemoved(FMH::MODEL book, STATE state);
+    void bookReady(FMH::MODEL book);
+    void booksReady(FMH::MODEL_LIST books);
+
 
 public slots:
 };
