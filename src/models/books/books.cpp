@@ -7,6 +7,14 @@ Books::Books(QObject *parent) : MauiList(parent),
 {
     this->syncer->setProvider(new NextNote);
 
+    connect(syncer, &Syncer::booksReady, [&](FMH::MODEL_LIST books)
+    {
+        emit this->preListChanged();
+        this->m_list = books;
+        qDebug()<< "ALL THE BOOKS ARE < "<< this->m_list;
+        emit this->postListChanged();
+    });
+
     this->syncer->getBooks();
 }
 
@@ -53,13 +61,16 @@ bool Books::insert(const QVariantMap &book)
     emit this->preItemAppended();
 
     auto __book = FMH::toModel(book);
+    __book[FMH::MODEL_KEY::THUMBNAIL] = "qrc:/booklet.svg";
+    __book[FMH::MODEL_KEY::LABEL] =__book[FMH::MODEL_KEY::TITLE];
     __book[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
     __book[FMH::MODEL_KEY::ADDDATE] = QDateTime::currentDateTime().toString(Qt::TextDate);
 
-    this->syncer->insertNote(__book);
+    this->syncer->insertBook(__book);
 
     this->m_list << __book;
 
+    qDebug() << m_list;
     emit this->postItemAppended();
     return true;
 }

@@ -24,6 +24,7 @@
 #include "./src/linker.h"
 
 #include "./src/models/notes/notes.h"
+#include "./src/models/books/books.h"
 #include "./src/models/links/links.h"
 
 int main(int argc, char *argv[])
@@ -61,6 +62,7 @@ int main(int argc, char *argv[])
     Linker linker;
     context->setContextProperty("linker", &linker);  
     qmlRegisterType<Notes>("Notes", 1, 0, "Notes");
+    qmlRegisterType<Books>("Books", 1, 0, "Books");
     qmlRegisterType<Links>("Links", 1, 0, "Links");
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

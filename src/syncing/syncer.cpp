@@ -33,7 +33,7 @@ void Syncer::setProvider(AbstractNotesProvider *provider)
 
 void Syncer::insertNote(FMH::MODEL &note)
 {
-    if(!this->insertLocal(note))
+    if(!this->insertNoteLocal(note))
     {
         qWarning()<< "The note could not be inserted locally, "
                      "therefore it was not attempted to insert it to the remote provider server, "
@@ -41,13 +41,13 @@ void Syncer::insertNote(FMH::MODEL &note)
         return;
     }
 
-    this->insertRemote(note);
+    this->insertNoteRemote(note);
     emit this->noteInserted(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note inserted on the DB locally"});
 }
 
 void Syncer::updateNote(const QString &id, const FMH::MODEL &note)
 {
-    if(!this->updateLocal(id, note))
+    if(!this->updateNoteLocal(id, note))
     {
         qWarning()<< "The note could not be updated locally, "
                      "therefore it was not attempted to update it on the remote server provider, "
@@ -58,7 +58,7 @@ void Syncer::updateNote(const QString &id, const FMH::MODEL &note)
     //to update remote note we need to pass the stamp as the id
     const auto stamp = Syncer::noteStampFromId(this->db, id);
     if(!stamp.isEmpty())
-        this->updateRemote(stamp, note);
+        this->updateNoteRemote(stamp, note);
 
     emit this->noteUpdated(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note updated on the DB locally"});
 }
@@ -69,7 +69,7 @@ void Syncer::removeNote(const QString &id)
     //and before removing the note locally we need to retireved first
 
     const auto stamp = Syncer::noteStampFromId(this->db, id);
-    if(!this->removeLocal(id))
+    if(!this->removeNoteLocal(id))
     {
         qWarning()<< "The note could not be inserted locally, "
                      "therefore it was not attempted to insert it to the remote provider server, "
@@ -78,7 +78,7 @@ void Syncer::removeNote(const QString &id)
     }
 
     if(!stamp.isEmpty())
-        this->removeRemote(stamp);
+        this->removeNoteRemote(stamp);
 
     emit this->noteRemoved(FMH::MODEL(), {STATE::TYPE::LOCAL, STATE::STATUS::OK, "The note has been removed from the local DB"});
 }
@@ -101,27 +101,30 @@ void Syncer::getBooks()
     const auto books = this->collectAllBooks();
 
     // this service is still missing
-//    if(this->provider && this->provider->isValid())
-//        this->provider->getNotes();
-//    else
-//        qWarning()<< "Credentials are missing to get notes or the provider has not been set";
+    //    if(this->provider && this->provider->isValid())
+    //        this->provider->getNotes();
+    //    else
+    //        qWarning()<< "Credentials are missing to get notes or the provider has not been set";
 
 
     emit this->booksReady(books);
 }
 
-void Syncer::insertBook(const FMH::MODEL &book)
+void Syncer::insertBook(FMH::MODEL &book)
 {
-    if(!this->db->insert(OWL::TABLEMAP[OWL::TABLE::BOOKS], FMH::toMap(book)))
+    if(!this->insertBookLocal(book))
     {
         qWarning()<< "Could not insert Book, Syncer::insertBook";
+        return;
     }
+
+    emit this->bookInserted(book, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Book inserted locally sucessfully"});
 }
 
-void Syncer::stampNote(FMH::MODEL &note)
+void Syncer::addId(FMH::MODEL &model)
 {
     const auto id = QUuid::createUuid().toString();
-    note[FMH::MODEL_KEY::ID] = id;
+    model[FMH::MODEL_KEY::ID] = id;
 }
 
 
@@ -182,7 +185,7 @@ void Syncer::setConections()
                 __note[FMH::MODEL_KEY::MODIFIED] = QDateTime::fromSecsSinceEpoch(note[FMH::MODEL_KEY::MODIFIED].toInt()).toString(Qt::TextDate);
                 __note[FMH::MODEL_KEY::ADDDATE] = __note[FMH::MODEL_KEY::MODIFIED];
 
-                if(!this->insertLocal(__note))
+                if(!this->insertNoteLocal(__note))
                 {
                     qWarning()<< "Remote note could not be inserted to the local storage";
                     continue;
@@ -206,7 +209,7 @@ void Syncer::setConections()
                                                       FMH::MODEL_KEY::MODIFIED,
                                                       FMH::MODEL_KEY::FAVORITE});
                 __note[FMH::MODEL_KEY::MODIFIED] = QDateTime::fromSecsSinceEpoch(note[FMH::MODEL_KEY::MODIFIED].toInt()).toString(Qt::TextDate);
-                this->updateLocal(id, __note);
+                this->updateNoteLocal(id, __note);
                 emit this->noteInserted(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note inserted on local db, from the server provider"});
             }
         }
@@ -218,7 +221,7 @@ void Syncer::setConections()
     {
         const auto id = Syncer::noteIdFromStamp(this->db, this->provider->provider(), note[FMH::MODEL_KEY::ID]);
         if(!note.isEmpty())
-            this->updateLocal(id, FMH::filterModel(note, {FMH::MODEL_KEY::TITLE}));
+            this->updateNoteLocal(id, FMH::filterModel(note, {FMH::MODEL_KEY::TITLE}));
         emit this->noteUpdated(note, {STATE::TYPE::REMOTE, STATE::STATUS::OK, "Note updated on server provider"});
     });
 
@@ -228,11 +231,11 @@ void Syncer::setConections()
     });
 }
 
-bool Syncer::insertLocal(FMH::MODEL &note)
+bool Syncer::insertNoteLocal(FMH::MODEL &note)
 {
     qDebug()<<"TAGS"<< note[FMH::MODEL_KEY::TAG];
 
-    Syncer::stampNote(note); //adds a local id to the note
+    Syncer::addId(note); //adds a local id to the note
 
     // create a file for the note
     const auto __notePath = Syncer::saveNoteFile(note);
@@ -260,13 +263,13 @@ bool Syncer::insertLocal(FMH::MODEL &note)
     return false;
 }
 
-void Syncer::insertRemote(FMH::MODEL &note)
+void Syncer::insertNoteRemote(FMH::MODEL &note)
 {
     if(this->provider && this->provider->isValid())
         this->provider->insertNote(note);
 }
 
-bool Syncer::updateLocal(const QString &id, const FMH::MODEL &note)
+bool Syncer::updateNoteLocal(const QString &id, const FMH::MODEL &note)
 {
     for(const auto &tg : note[FMH::MODEL_KEY::TAG])
         this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id);
@@ -281,22 +284,105 @@ bool Syncer::updateLocal(const QString &id, const FMH::MODEL &note)
                                                FMH::MODEL_KEY::FAVORITE})), QVariantMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
 }
 
-void Syncer::updateRemote(const QString &id, const FMH::MODEL &note)
+void Syncer::updateNoteRemote(const QString &id, const FMH::MODEL &note)
 {
     if(this->provider && this->provider->isValid())
         this->provider->updateNote(id, note);
 }
 
-bool Syncer::removeLocal(const QString &id)
+bool Syncer::removeNoteLocal(const QString &id)
 {
     this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES_SYNC], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
     return this->db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
 }
 
-void Syncer::removeRemote(const QString &id)
+void Syncer::removeNoteRemote(const QString &id)
 {
     if(this->provider && this->provider->isValid())
         this->provider->removeNote(id);
+}
+
+bool Syncer::insertBookLocal(FMH::MODEL &book)
+{
+    const auto __path = QUrl::fromLocalFile(OWL::BooksPath+book[FMH::MODEL_KEY::TITLE]);
+    if(FMH::fileExists(__path))
+    {
+        qWarning()<< "The directory for the book already exists. Syncer::insertBookLocal" << book[FMH::MODEL_KEY::TITLE];
+        return false;
+
+    }
+
+    if(!FM::createDir(QUrl::fromLocalFile(OWL::BooksPath), book[FMH::MODEL_KEY::TITLE]))
+    {
+        qWarning() << "Could not create directory for the given book name. Syncer::insertBookLocal" << book[FMH::MODEL_KEY::TITLE];
+        return false;
+    }
+
+    Syncer::addId(book);
+    book[FMH::MODEL_KEY::URL] = __path.toString();
+
+    return(this->db->insert(OWL::TABLEMAP[OWL::TABLE::BOOKS], FMH::toMap(FMH::filterModel(book,{FMH::MODEL_KEY::ID,
+                                                                                                FMH::MODEL_KEY::URL,
+                                                                                                FMH::MODEL_KEY::TITLE,
+                                                                                                FMH::MODEL_KEY::FAVORITE,
+                                                                                                FMH::MODEL_KEY::ADDDATE,
+                                                                                                FMH::MODEL_KEY::MODIFIED}
+                                                                                          ))));
+}
+
+void Syncer::insertBookRemote(FMH::MODEL &book)
+{
+
+}
+
+bool Syncer::updateBookLocal(const QString &id, const FMH::MODEL &book)
+{
+    return false;
+}
+
+void Syncer::updateBookRemote(const QString &id, const FMH::MODEL &book)
+{
+
+}
+
+bool Syncer::removeBookLocal(const QString &id)
+{
+    return false;
+}
+
+void Syncer::removeBookRemote(const QString &id)
+{
+
+}
+
+bool Syncer::insertBookletLocal(FMH::MODEL &booklet)
+{
+    return false;
+}
+
+void Syncer::insertBookletRemote(FMH::MODEL &booklet)
+{
+
+}
+
+bool Syncer::updateBookletLocal(const QString &id, const FMH::MODEL &booklet)
+{
+    return false;
+}
+
+void Syncer::updateBookletRemote(const QString &id, const FMH::MODEL &booklet)
+{
+
+}
+
+bool Syncer::removeBookletLocal(const QString &id)
+{
+    return false;
+}
+
+void Syncer::removeBookletRemote(const QString &id)
+{
+
 }
 
 const FMH::MODEL_LIST Syncer::collectAllNotes()

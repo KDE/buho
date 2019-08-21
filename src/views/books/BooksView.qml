@@ -1,17 +1,19 @@
 import QtQuick 2.9
 import "../../widgets"
 import QtQuick.Controls 2.3
-
+import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
+
+import Books 1.0
 
 StackView
 {
     id: control
 
+    property alias list : _booksList
     property alias cardsView : cardsView
     property bool showDetails: false
-
 
     StackView
     {
@@ -31,6 +33,16 @@ StackView
     }
 
 
+    Maui.BaseModel
+    {
+        id: _booksModel
+        list: _booksList
+    }
+
+    Books
+    {
+        id: _booksList
+    }
 
     Maui.Page
     {
@@ -64,36 +76,64 @@ StackView
             adaptContent: !showDetails
             itemSize: showDetails ? iconSizes.big : iconSizes.huge
             //        centerContent: true
-            spacing: space.big
+            spacing: space.huge
 
             cellWidth: showDetails ?  parent.width : itemSize * 1.5
             cellHeight: itemSize * 1.5
 
-            model: ListModel
-            {
-                ListElement {label: "test"; thumbnail:"qrc:/booklet.svg"; mime: "image"; count: 0}
-                ListElement {label: "test"; thumbnail:"qrc:/booklet.svg"; mime: "image"; count: 3}
-                ListElement {label: "test"; thumbnail:"qrc:/booklet.svg"; mime: "image"; count: 10}
-                ListElement {label: "test"; thumbnail:"qrc:/booklet.svg"; mime: "image"; count: 2}
-                ListElement {label: "test"; thumbnail:"qrc:/booklet.svg"; mime: "image"; count: 9}
-                ListElement {label: "test"; thumbnail:"qrc:/booklet.svg"; mime: "image"; count: 2}
-                ListElement {label: "test"; thumbnail:"qrc:/booklet.svg"; mime: "image"; count: 3}
-                ListElement {label: "test"; thumbnail:"qrc:/booklet.svg"; mime: "image"; count: 1}
-                ListElement {label: "test"; thumbnail:"qrc:/booklet.svg"; mime: "image"; count: 0}
+            model: _booksModel
 
-
-            }
-
-            delegate: Maui.IconDelegate
+            delegate: ItemDelegate
             {
                 id: _delegate
 
-                isDetails: control.showDetails
-                folderSize: cardsView.itemSize
-                showThumbnails: true
-                showEmblem: false
-                width: cardsView.cellWidth
-                height: cardsView.cellHeight * 0.9
+                width: cardsView.cellWidth * 0.9
+                height: cardsView.cellHeight
+
+                hoverEnabled: !isMobile
+                background: Rectangle
+                {
+                    color: "transparent"
+                }
+
+                ColumnLayout
+                {
+                    anchors.fill : parent
+
+                    Item
+                    {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: cardsView.itemSize
+
+                        Image
+                        {
+                            id: _img
+                            anchors.centerIn: parent
+                            source: "qrc:/booklet.svg"
+                            sourceSize.width: cardsView.itemSize
+                            sourceSize.height: cardsView.itemSize
+                        }
+                    }
+
+                    Rectangle
+                    {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+
+                        color: hovered ? Kirigami.Theme.highlightColor : "transparent"
+                        radius: radiusV
+                        Label
+                        {
+                            width: parent.width
+                            height: parent.height
+                            color: hovered ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+                            text: model.title
+                            horizontalAlignment: Qt.AlignHCenter
+
+                        }
+                    }
+
+                }
 
                 Maui.Badge
                 {

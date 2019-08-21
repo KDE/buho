@@ -172,7 +172,11 @@ Maui.ApplicationWindow
     NewBookDialog
     {
         id: newBookDialog
-        onBookSaved: console.log("saving new vbook", title)
+        onBookSaved:
+        {
+            if(title && title.length)
+                booksView.list.insert({title: title})
+        }
     }
 
     //    /***** VIEWS *****/

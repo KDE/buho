@@ -140,7 +140,7 @@ public:
      * @brief insertBook
      * @param book
      */
-    void insertBook(const FMH::MODEL &book);
+    void insertBook(FMH::MODEL &book);
 
     /**
      * @brief updateBook
@@ -217,7 +217,7 @@ private:
      * @param note
      * the note model is passed by ref and a STAMP key value is inserted
      */
-    static void stampNote(FMH::MODEL &note);
+    static void addId(FMH::MODEL &model);
 
     static const QString noteIdFromStamp(DB *_db, const QString &provider, const QString &stamp) ;
     static const QString noteStampFromId(DB *_db, const QString &id) ;
@@ -233,7 +233,7 @@ protected:
      * @return bool
      * true if the note was inserted sucessfully in the local storage
      */
-    bool insertLocal(FMH::MODEL &note);
+    bool insertNoteLocal(FMH::MODEL &note);
 
     /**
      * @brief insertRemote
@@ -241,14 +241,25 @@ protected:
      * @param note
      * the note to be inserted
      */
-    void insertRemote(FMH::MODEL &note);
+    void insertNoteRemote(FMH::MODEL &note);
+    bool updateNoteLocal(const QString &id, const FMH::MODEL &note);
+    void updateNoteRemote(const QString &id, const FMH::MODEL &note);
+    bool removeNoteLocal(const QString &id);
+    void removeNoteRemote(const QString &id);
 
+    bool insertBookLocal(FMH::MODEL &book);
+    void insertBookRemote(FMH::MODEL &book);
+    bool updateBookLocal(const QString &id, const FMH::MODEL &book);
+    void updateBookRemote(const QString &id, const FMH::MODEL &book);
+    bool removeBookLocal(const QString &id);
+    void removeBookRemote(const QString &id);
 
-    bool updateLocal(const QString &id, const FMH::MODEL &note);
-    void updateRemote(const QString &id, const FMH::MODEL &note);
-
-    bool removeLocal(const QString &id);
-    void removeRemote(const QString &id);
+    bool insertBookletLocal(FMH::MODEL &booklet);
+    void insertBookletRemote(FMH::MODEL &booklet);
+    bool updateBookletLocal(const QString &id, const FMH::MODEL &booklet);
+    void updateBookletRemote(const QString &id, const FMH::MODEL &booklet);
+    bool removeBookletLocal(const QString &id);
+    void removeBookletRemote(const QString &id);
 
     const FMH::MODEL_LIST collectAllNotes();
     const FMH::MODEL_LIST collectAllBooks();
