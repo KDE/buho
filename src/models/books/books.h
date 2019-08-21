@@ -71,7 +71,7 @@ public slots:
      * @param note
      * @return
      */
-    bool insert(const QVariantMap &note);
+    bool insert(const QVariantMap &book);
     bool update(const QVariantMap &data, const int &index);
     bool remove(const int &index);
 };

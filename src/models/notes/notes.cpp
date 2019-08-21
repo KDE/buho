@@ -135,7 +135,7 @@ bool Notes::insert(const QVariantMap &note)
 {
     emit this->preItemAppended();
 
-    auto __note = FM::toModel(note);
+    auto __note = FMH::toModel(note);
     __note[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
     __note[FMH::MODEL_KEY::ADDDATE] = QDateTime::currentDateTime().toString(Qt::TextDate);
 
@@ -209,12 +209,5 @@ QVariantMap Notes::get(const int &index) const
 {
     if(index >= this->notes.size() || index < 0)
         return QVariantMap();
-
-    QVariantMap res;
-    const auto note = this->notes.at(index);
-
-    for(auto key : note.keys())
-        res.insert(FMH::MODEL_NAME[key], note[key]);
-
-    return res;
+    return FMH::toMap(this->notes.at(index));
 }

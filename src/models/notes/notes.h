@@ -12,7 +12,6 @@
 #include <MauiKit/mauilist.h>
 #endif
 
-
 class Syncer;
 class Notes : public MauiList
 {

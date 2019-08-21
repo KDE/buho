@@ -15,6 +15,39 @@ FMH::MODEL_LIST Books::items() const
     return this->m_list;
 }
 
+void Books::setSortBy(const Books::SORTBY &sort)
+{
+
+}
+
+Books::SORTBY Books::getSortBy() const
+{
+    return this->sort;
+}
+
+void Books::setOrder(const Books::ORDER &order)
+{
+
+}
+
+Books::ORDER Books::getOrder() const
+{
+    return this->order;
+}
+
+void Books::sortList()
+{
+
+}
+
+QVariantMap Books::get(const int &index) const
+{
+    if(index >= this->m_list.size() || index < 0)
+        return QVariantMap();
+
+    return FMH::toMap(this->m_list.at(index));
+}
+
 bool Books::insert(const QVariantMap &book)
 {
     emit this->preItemAppended();
@@ -29,4 +62,14 @@ bool Books::insert(const QVariantMap &book)
 
     emit this->postItemAppended();
     return true;
+}
+
+bool Books::update(const QVariantMap &data, const int &index)
+{
+return false;
+}
+
+bool Books::remove(const int &index)
+{
+return false;
 }
