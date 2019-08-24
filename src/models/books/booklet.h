@@ -17,10 +17,10 @@ class Booklet : public MauiList
 
     Q_PROPERTY(SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
-    Q_PROPERTY(QString book READ getBook WRITE setBook NOTIFY bookChanged)
+    Q_PROPERTY(QString book READ getBook NOTIFY bookChanged)
 
 public:
-    Booklet(Syncer *syncer = nullptr, QObject *parent = nullptr);
+    Booklet(Syncer *_syncer = nullptr, QObject *parent = nullptr);
 
     enum ORDER : uint8_t
     {
@@ -47,21 +47,10 @@ public:
     void setOrder(const ORDER &order);
     ORDER getOrder() const;
 
-    QString getBook() const
-    {
-        return m_book;
-    }
+    QString getBook() const;
+    void setBook(const QString &book);
 
 public slots:
-    void setBook(QString book)
-    {
-        if (m_book == book)
-            return;
-
-        m_book = book;
-        emit bookChanged(m_book);
-    }
-
     void insert(const QVariantMap &data);
     void update(const QVariantMap &data, const int &index);
     void remove(const int &index);

@@ -121,9 +121,9 @@ void Syncer::insertBook(FMH::MODEL &book)
     emit this->bookInserted(book, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Book inserted locally sucessfully"});
 }
 
-void Syncer::insertBooklet(const FMH::MODEL &booklet)
+void Syncer::insertBooklet(FMH::MODEL &booklet)
 {
-
+    this->insertBookletLocal(booklet);
 }
 
 void Syncer::addId(FMH::MODEL &model)
@@ -362,6 +362,7 @@ void Syncer::removeBookRemote(const QString &id)
 
 bool Syncer::insertBookletLocal(FMH::MODEL &booklet)
 {
+    qDebug()<< "trying to insert booklet" << booklet;
     return false;
 }
 

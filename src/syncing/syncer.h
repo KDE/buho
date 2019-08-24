@@ -174,7 +174,7 @@ public:
      * @brief insertBooklet
      * @param booklet
      */
-    void insertBooklet(const FMH::MODEL &booklet);
+    void insertBooklet(FMH::MODEL &booklet);
 
     /**
      * @brief removeBooklet

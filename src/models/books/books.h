@@ -12,6 +12,7 @@
 #include <MauiKit/mauilist.h>
 #endif
 
+class Booklet;
 class Syncer;
 class Books : public MauiList
 {
@@ -19,6 +20,7 @@ class Books : public MauiList
 
     Q_PROPERTY(SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
+    Q_PROPERTY(Booklet *booklet READ getBooklet NOTIFY bookletChanged)
 
 public:
     enum ORDER : uint8_t
@@ -48,8 +50,14 @@ public:
     void setOrder(const ORDER &order);
     ORDER getOrder() const;
 
+    Booklet * getBooklet() const
+    {
+        return m_booklet;
+    }
+
 private:
     Syncer *syncer;
+    Booklet * m_booklet;
 
     FMH::MODEL_LIST m_list;
 
@@ -61,6 +69,8 @@ private:
 signals:
     void sortByChanged();
     void orderChanged();
+
+    void bookletChanged(Booklet * booklet);
 
 public slots:
     QVariantMap get(const int &index) const;
@@ -74,6 +84,8 @@ public slots:
     bool insert(const QVariantMap &book);
     bool update(const QVariantMap &data, const int &index);
     bool remove(const int &index);
+
+    void openBook(const int &index);
 };
 
 #endif // BOOKS_H

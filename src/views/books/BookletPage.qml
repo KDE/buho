@@ -10,6 +10,12 @@ Item
 
     signal exit()
 
+    Maui.BaseModel
+    {
+        id: _bookletModel
+        list: _booksList.booklet
+    }
+
     Maui.Page
     {
         id: _page
@@ -55,6 +61,11 @@ Item
             title: qsTr("New Chapter")
             message: qsTr("Create a new chapter for your current book. Give it a title")
             entryField: true
+
+            onAccepted:
+            {
+                _booksList.booklet.insert({title: textEntry.text})
+            }
         }
 
         Kirigami.OverlayDrawer
@@ -65,6 +76,18 @@ Item
             height: parent.height - headBar.height
             y: headBar.height
             modal: !isWide
+
+
+            ListView
+            {
+                anchors.fill: parent
+                model: _bookletModel
+
+                delegate: Maui.LabelDelegate
+                {
+                    label: model.title
+                }
+            }
 
             Rectangle
             {

@@ -1,9 +1,10 @@
 #include "books.h"
 #include "syncer.h"
 #include "nextnote.h"
+#include "booklet.h"
 
 Books::Books(QObject *parent) : MauiList(parent),
-    syncer(new Syncer(this))
+    syncer(new Syncer(this)), m_booklet(new Booklet(syncer, this))
 {
     this->syncer->setProvider(new NextNote);
 
@@ -82,5 +83,12 @@ return false;
 
 bool Books::remove(const int &index)
 {
-return false;
+    return false;
+}
+
+void Books::openBook(const int &index)
+{
+    if(index >= this->m_list.size() || index < 0)
+        return;
+    this->m_booklet->setBook(this->m_list.at(index)[FMH::MODEL_KEY::ID]);
 }

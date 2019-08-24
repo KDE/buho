@@ -32,6 +32,20 @@ Booklet::ORDER Booklet::getOrder() const
     return this->order;
 }
 
+QString Booklet::getBook() const
+{
+    return m_book;
+}
+
+void Booklet::setBook(const QString &book)
+{
+    if (m_book == book)
+        return;
+
+    m_book = book;
+    emit bookChanged(m_book);
+}
+
 void Booklet::insert(const QVariantMap &data)
 {
     emit this->preItemAppended();
