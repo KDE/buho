@@ -16,6 +16,7 @@ class Booklet : public MauiList
 
     Q_PROPERTY(SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
+    Q_PROPERTY(QString book READ getBook WRITE setBook NOTIFY bookChanged)
 
 public:
     Booklet(QObject *parent = nullptr);
@@ -45,6 +46,21 @@ public:
     void setOrder(const ORDER &order);
     ORDER getOrder() const;
 
+    QString getBook() const
+    {
+        return m_book;
+    }
+
+public slots:
+    void setBook(QString book)
+    {
+        if (m_book == book)
+            return;
+
+        m_book = book;
+        emit bookChanged(m_book);
+    }
+
 private:
     FMH::MODEL_LIST m_list;
 
@@ -53,9 +69,12 @@ private:
     SORTBY sort = SORTBY::MODIFIED;
     ORDER order = ORDER::DESC;
 
+    QString m_book;
+
 signals:
     void sortByChanged();
     void orderChanged();
+    void bookChanged(QString book);
 };
 
 #endif // BOOKLET_H
