@@ -121,6 +121,11 @@ void Syncer::insertBook(FMH::MODEL &book)
     emit this->bookInserted(book, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Book inserted locally sucessfully"});
 }
 
+void Syncer::insertBooklet(const FMH::MODEL &booklet)
+{
+
+}
+
 void Syncer::addId(FMH::MODEL &model)
 {
     const auto id = QUuid::createUuid().toString();
