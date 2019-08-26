@@ -44,6 +44,16 @@ Books::ORDER Books::getOrder() const
     return this->order;
 }
 
+Booklet *Books::getBooklet() const
+{
+    return m_booklet;
+}
+
+int Books::getCurrentBook() const
+{
+    return m_currentBook;
+}
+
 void Books::sortList()
 {
 
@@ -91,4 +101,14 @@ void Books::openBook(const int &index)
     if(index >= this->m_list.size() || index < 0)
         return;
     this->m_booklet->setBook(this->m_list.at(index)[FMH::MODEL_KEY::ID]);
+}
+
+void Books::setCurrentBook(int currentBook)
+{
+    if (m_currentBook == currentBook)
+        return;
+
+    m_currentBook = currentBook;
+    this->openBook(m_currentBook);
+    emit currentBookChanged(m_currentBook);
 }

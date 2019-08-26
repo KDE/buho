@@ -54,7 +54,7 @@ void Booklet::insert(const QVariantMap &data)
     __booklet[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
     __booklet[FMH::MODEL_KEY::ADDDATE] = QDateTime::currentDateTime().toString(Qt::TextDate);
 
-    this->syncer->insertBooklet(__booklet);
+    this->syncer->insertBooklet(this->m_book, __booklet);
 
     this->m_list << __booklet;
 

@@ -121,9 +121,15 @@ void Syncer::insertBook(FMH::MODEL &book)
     emit this->bookInserted(book, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Book inserted locally sucessfully"});
 }
 
-void Syncer::insertBooklet(FMH::MODEL &booklet)
+void Syncer::insertBooklet(const QString &bookId, FMH::MODEL &booklet)
 {
-    this->insertBookletLocal(booklet);
+    if(!this->insertBookletLocal(bookId, booklet))
+    {
+        qWarning()<< "Could not insert Booklet, Syncer::insertBooklet";
+        return;
+    }
+
+    emit this->bookletInserted(booklet, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Booklet inserted locally sucessfully"});
 }
 
 void Syncer::addId(FMH::MODEL &model)
@@ -237,13 +243,24 @@ void Syncer::setConections()
 }
 
 bool Syncer::insertNoteLocal(FMH::MODEL &note)
-{
-    qDebug()<<"TAGS"<< note[FMH::MODEL_KEY::TAG];
+{    
+    if(note.isEmpty())
+    {
+        qWarning()<< "Could not insert note locally. The note is empty";
+        return false;
+    }
 
     Syncer::addId(note); //adds a local id to the note
 
     // create a file for the note
-    const auto __notePath = Syncer::saveNoteFile(note);
+    const auto __notePath = Syncer::saveNoteFile(OWL::NotesPath, note);
+
+    if(__notePath.isEmpty())
+    {
+        qWarning()<< "File could not be saved. Syncer::insertNoteLocal.";
+        return false;
+    }
+
     note[FMH::MODEL_KEY::URL] = __notePath.toString();
     qDebug()<< "note saved to <<" << __notePath;
 
@@ -279,7 +296,7 @@ bool Syncer::updateNoteLocal(const QString &id, const FMH::MODEL &note)
     for(const auto &tg : note[FMH::MODEL_KEY::TAG])
         this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id);
 
-    this->saveNoteFile(note);
+    this->saveNoteFile(OWL::NotesPath, note);
 
     return this->db->update(OWL::TABLEMAP[OWL::TABLE::NOTES],
             FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::TITLE,
@@ -360,13 +377,60 @@ void Syncer::removeBookRemote(const QString &id)
 
 }
 
-bool Syncer::insertBookletLocal(FMH::MODEL &booklet)
+bool Syncer::insertBookletLocal(const QString &bookId, FMH::MODEL &booklet)
 {
     qDebug()<< "trying to insert booklet" << booklet;
+    if(bookId.isEmpty() || booklet.isEmpty())
+    {
+        qWarning()<< "Could not insert booklet. Reference to book id or booklet are empty";
+        return false;
+    }
+
+    Syncer::addId(booklet); //adds a local id to the booklet
+
+    // create a file for the note
+    const auto __bookTitle = [&]() -> QString {
+            const auto data = this->db->getDBData(QString("select title from books where id = '%1'").arg(bookId));
+            return data.isEmpty() ? QString() : data.first()[FMH::MODEL_KEY::TITLE]; } ();
+
+    if(__bookTitle.isEmpty() || !FMH::fileExists(QUrl::fromLocalFile(OWL::BooksPath+__bookTitle)))
+    {
+        qWarning()<< "The book does not exists in the db or the directory is missing. Syncer::insertBookletLocal";
+        return false;
+    }
+
+    const auto __bookletPath = Syncer::saveNoteFile(OWL::BooksPath+__bookTitle+"/", booklet);
+
+    if(__bookletPath.isEmpty())
+    {
+        qWarning()<< "File could not be saved. Syncer::insertBookletLocal";
+        return false;
+    }
+
+    booklet[FMH::MODEL_KEY::URL] = __bookletPath.toString();
+    booklet[FMH::MODEL_KEY::BOOK] = bookId;
+    qDebug()<< "booklet saved to <<" << __bookletPath;
+
+    auto __bookletMap = FMH::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::ID,
+                                                              FMH::MODEL_KEY::BOOK,
+                                                              FMH::MODEL_KEY::TITLE,
+                                                              FMH::MODEL_KEY::URL,
+                                                              FMH::MODEL_KEY::MODIFIED,
+                                                              FMH::MODEL_KEY::ADDDATE}));
+
+
+    if(this->db->insert(OWL::TABLEMAP[OWL::TABLE::BOOKLETS], __bookletMap))
+    {
+        //        for(const auto &tg : booklet[FMH::MODEL_KEY::TAG].split(",", QString::SplitBehavior::SkipEmptyParts))
+        //            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], booklet[FMH::MODEL_KEY::ID], booklet[FMH::MODEL_KEY::COLOR]);
+
+        return true;
+    }
+
     return false;
 }
 
-void Syncer::insertBookletRemote(FMH::MODEL &booklet)
+void Syncer::insertBookletRemote(const QString &bookId, FMH::MODEL &booklet)
 {
 
 }
@@ -405,17 +469,17 @@ const FMH::MODEL_LIST Syncer::collectAllBooks()
     return this->db->getDBData("select * from books");
 }
 
-const QUrl Syncer::saveNoteFile(const FMH::MODEL &note)
+const QUrl Syncer::saveNoteFile(const QString &dir, const FMH::MODEL &data)
 {
-    if(note.isEmpty() || !note.contains(FMH::MODEL_KEY::CONTENT))
+    if(data.isEmpty() /*|| !data.contains(FMH::MODEL_KEY::CONTENT)*/)
     {
         qWarning() << "the note is empty, therefore it could not be saved into a file";
         return QUrl();
     }
 
-    QFile file(OWL::NotesPath+note[FMH::MODEL_KEY::ID]+QStringLiteral(".txt"));
+    QFile file(dir+data[FMH::MODEL_KEY::ID]+QStringLiteral(".txt"));
     file.open(QFile::WriteOnly);
-    file.write(note[FMH::MODEL_KEY::CONTENT].toUtf8());
+    file.write(data[FMH::MODEL_KEY::CONTENT].toUtf8());
     file.close();
 
     return QUrl::fromLocalFile(file.fileName());

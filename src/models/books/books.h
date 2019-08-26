@@ -21,6 +21,8 @@ class Books : public MauiList
     Q_PROPERTY(SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
     Q_PROPERTY(Booklet *booklet READ getBooklet NOTIFY bookletChanged)
+    Q_PROPERTY(int currentBook READ getCurrentBook WRITE setCurrentBook NOTIFY currentBookChanged)
+
 
 public:
     enum ORDER : uint8_t
@@ -50,10 +52,9 @@ public:
     void setOrder(const ORDER &order);
     ORDER getOrder() const;
 
-    Booklet * getBooklet() const
-    {
-        return m_booklet;
-    }
+    Booklet * getBooklet() const;
+
+    int getCurrentBook() const;
 
 private:
     Syncer *syncer;
@@ -62,15 +63,20 @@ private:
     FMH::MODEL_LIST m_list;
 
     void sortList();
+    void openBook(const int &index);
 
     SORTBY sort = SORTBY::MODIFIED;
     ORDER order = ORDER::DESC;
+
+    int m_currentBook;
 
 signals:
     void sortByChanged();
     void orderChanged();
 
     void bookletChanged(Booklet * booklet);
+
+    void currentBookChanged(int currentBook);
 
 public slots:
     QVariantMap get(const int &index) const;
@@ -85,7 +91,7 @@ public slots:
     bool update(const QVariantMap &data, const int &index);
     bool remove(const int &index);
 
-    void openBook(const int &index);
+    void setCurrentBook(int currentBook);
 };
 
 #endif // BOOKS_H

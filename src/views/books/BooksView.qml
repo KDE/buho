@@ -42,6 +42,7 @@ StackView
     Books
     {
         id: _booksList
+        currentBook: cardsView.currentIndex
     }
 
     Maui.Page
@@ -157,6 +158,7 @@ StackView
                     onClicked:
                     {
                         console.log("BOOKLET CLICKED", index)
+                        cardsView.currentIndex = index
                         _stackView.push(_bookletComponent)
                     }
                 }

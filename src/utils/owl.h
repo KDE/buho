@@ -19,31 +19,20 @@ namespace OWL
     enum class TABLE : uint8_t
     {
         NOTES,
-        NOTES_TAGS,
         NOTES_SYNC,
-        TAGS,
         BOOKS,
-        PAGES,
-        BOOKS_PAGES,
+        BOOKLETS,
         LINKS,
-        LINKS_TAGS,
-        PAGES_TAGS,
         NONE
     };
 
     static const QMap<TABLE,QString> TABLEMAP =
     {
         {TABLE::NOTES,"notes"},
-        {TABLE::NOTES_TAGS,"notes_tags"},
         {TABLE::NOTES_SYNC,"notes_sync"},
-        {TABLE::TAGS,"tags"},
         {TABLE::BOOKS,"books"},
-        {TABLE::PAGES,"pages"},
-        {TABLE::BOOKS_PAGES,"books_pages"},
+        {TABLE::BOOKLETS,"booklets"},
         {TABLE::LINKS,"links"},
-        {TABLE::LINKS_TAGS,"links_tags"},
-        {TABLE::PAGES_TAGS,"pages_tags"},
-        {TABLE::LINKS_TAGS,"links_tags"}
     };
 
 //    enum KEY : uint8_t

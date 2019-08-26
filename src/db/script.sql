@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS NOTES (
 id TEXT PRIMARY KEY,
 title TEXT,
@@ -15,7 +14,7 @@ id TEXT,
 server TEXT,
 user TEXT,
 stamp TEXT,
-PRIMARY KEY(server, stamp)
+PRIMARY KEY(server, stamp),
 FOREIGN KEY(id) REFERENCES NOTES(id)
 );
 
@@ -34,11 +33,10 @@ book TEXT,
 url TEXT,
 title TEXT NOT NULL,
 adddate DATE,
-modified DATE
-PRIMARY KEY(id, book)
+modified DATE,
+PRIMARY KEY(id, book),
 FOREIGN KEY(book) REFERENCES BOOKS(id)
 );
-
 
 CREATE TABLE IF NOT EXISTS LINKS (
 url TEXT PRIMARY KEY,

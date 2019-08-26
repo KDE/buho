@@ -174,7 +174,7 @@ public:
      * @brief insertBooklet
      * @param booklet
      */
-    void insertBooklet(FMH::MODEL &booklet);
+    void insertBooklet(const QString &bookId, FMH::MODEL &booklet);
 
     /**
      * @brief removeBooklet
@@ -254,8 +254,8 @@ protected:
     bool removeBookLocal(const QString &id);
     void removeBookRemote(const QString &id);
 
-    bool insertBookletLocal(FMH::MODEL &booklet);
-    void insertBookletRemote(FMH::MODEL &booklet);
+    bool insertBookletLocal(const QString &bookId, FMH::MODEL &booklet);
+    void insertBookletRemote(const QString &bookId, FMH::MODEL &booklet);
     bool updateBookletLocal(const QString &id, const FMH::MODEL &booklet);
     void updateBookletRemote(const QString &id, const FMH::MODEL &booklet);
     bool removeBookletLocal(const QString &id);
@@ -264,7 +264,7 @@ protected:
     const FMH::MODEL_LIST collectAllNotes();
     const FMH::MODEL_LIST collectAllBooks();
 
-    static inline const QUrl saveNoteFile(const FMH::MODEL &note);
+    static inline const QUrl saveNoteFile(const QString &dir, const FMH::MODEL &data);
     static inline const QString noteFileContent(const QUrl &path);
 
 signals:
@@ -281,6 +281,13 @@ signals:
     void bookRemoved(FMH::MODEL book, STATE state);
     void bookReady(FMH::MODEL book);
     void booksReady(FMH::MODEL_LIST books);
+
+    //FOR BOOKLETS
+    void bookletInserted(FMH::MODEL booklet, STATE state);
+    void bookletUpdated(FMH::MODEL booklet, STATE state);
+    void bookletRemoved(FMH::MODEL booklet, STATE state);
+    void bookletReady(FMH::MODEL booklet);
+    void bookletReady(FMH::MODEL_LIST booklets);
 
 
 public slots:
