@@ -121,6 +121,13 @@ void Syncer::insertBook(FMH::MODEL &book)
     emit this->bookInserted(book, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Book inserted locally sucessfully"});
 }
 
+void Syncer::getBooklet(const QString &id)
+{
+   const auto res = this->db->getDBData(QString("select * from booklets where book = '%1'").arg(id));
+
+   emit this->bookletReady(res);
+}
+
 void Syncer::insertBooklet(const QString &bookId, FMH::MODEL &booklet)
 {
     if(!this->insertBookletLocal(bookId, booklet))

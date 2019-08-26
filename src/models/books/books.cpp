@@ -8,6 +8,8 @@ Books::Books(QObject *parent) : MauiList(parent),
 {
     this->syncer->setProvider(new NextNote);
 
+    connect(this, &Books::currentBookChanged, this, &Books::openBook);
+
     connect(syncer, &Syncer::booksReady, [&](FMH::MODEL_LIST books)
     {
         emit this->preListChanged();
@@ -100,7 +102,9 @@ void Books::openBook(const int &index)
 {
     if(index >= this->m_list.size() || index < 0)
         return;
+
     this->m_booklet->setBook(this->m_list.at(index)[FMH::MODEL_KEY::ID]);
+    this->m_booklet->setBookTitle(this->m_list.at(index)[FMH::MODEL_KEY::TITLE]);
 }
 
 void Books::setCurrentBook(int currentBook)
@@ -109,6 +113,5 @@ void Books::setCurrentBook(int currentBook)
         return;
 
     m_currentBook = currentBook;
-    this->openBook(m_currentBook);
     emit currentBookChanged(m_currentBook);
 }

@@ -18,6 +18,7 @@ class Booklet : public MauiList
     Q_PROPERTY(SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
     Q_PROPERTY(QString book READ getBook NOTIFY bookChanged)
+    Q_PROPERTY(QString bookTitle READ getBookTitle NOTIFY bookTitleChanged)
 
 public:
     Booklet(Syncer *_syncer = nullptr, QObject *parent = nullptr);
@@ -50,7 +51,14 @@ public:
     QString getBook() const;
     void setBook(const QString &book);
 
+    void setBookTitle(const QString &title);
+    QString getBookTitle() const
+    {
+        return m_bookTitle;
+    }
+
 public slots:
+    QVariantMap get(const int &index) const;
     void insert(const QVariantMap &data);
     void update(const QVariantMap &data, const int &index);
     void remove(const int &index);
@@ -61,15 +69,19 @@ private:
 
     void sortList();
 
+
     SORTBY sort = SORTBY::MODIFIED;
     ORDER order = ORDER::DESC;
 
     QString m_book;
 
+    QString m_bookTitle;
+
 signals:
     void sortByChanged();
     void orderChanged();
     void bookChanged(QString book);
+    void bookTitleChanged(QString bookTitle);
 };
 
 #endif // BOOKLET_H

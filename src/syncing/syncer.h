@@ -286,7 +286,6 @@ signals:
     void bookletInserted(FMH::MODEL booklet, STATE state);
     void bookletUpdated(FMH::MODEL booklet, STATE state);
     void bookletRemoved(FMH::MODEL booklet, STATE state);
-    void bookletReady(FMH::MODEL booklet);
     void bookletReady(FMH::MODEL_LIST booklets);
 
 

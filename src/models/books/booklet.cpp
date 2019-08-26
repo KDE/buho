@@ -4,7 +4,13 @@
 Booklet::Booklet(Syncer *_syncer,  QObject *parent) : MauiList(parent),
     syncer(_syncer)
 {
-
+    connect(this->syncer, &Syncer::bookletReady, [&](FMH::MODEL_LIST booklets)
+    {
+        emit this->preListChanged();
+        this->m_list = booklets;
+        emit this->postListChanged();
+    });
+    connect(this, &Booklet::bookChanged, syncer, &Syncer::getBooklet);
 }
 
 FMH::MODEL_LIST Booklet::items() const
@@ -37,11 +43,12 @@ QString Booklet::getBook() const
     return m_book;
 }
 
-void Booklet::setBook(const QString &book)
+void Booklet::setBook(const QString &book) //book id
 {
     if (m_book == book)
         return;
 
+    this->setBookTitle(book);
     m_book = book;
     emit bookChanged(m_book);
 }
@@ -74,4 +81,21 @@ void Booklet::remove(const int &index)
 void Booklet::sortList()
 {
 
+}
+
+void Booklet::setBookTitle(const QString &title)
+{
+    if (m_bookTitle == title)
+        return;
+
+    m_bookTitle = title;
+    emit bookTitleChanged(m_bookTitle);
+}
+
+QVariantMap Booklet::get(const int &index) const
+{
+    if(index >= this->m_list.size() || index < 0)
+        return QVariantMap();
+
+    return FMH::toMap(this->m_list.at(index));
 }
