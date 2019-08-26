@@ -8,8 +8,14 @@ Item
 {
     id: control
 
+    property var currentBooklet : ({})
     signal exit()
 
+
+    onCurrentBookletChanged:
+    {
+        editor.document.load(currentBooklet.url)
+    }
 
     Maui.BaseModel
     {
@@ -33,7 +39,12 @@ Item
             ToolButton
             {
                 icon.name: "document-save"
-//                onClicked: control.exit()
+                onClicked:
+                {
+                    currentBooklet.content = editor.text
+                    currentBooklet.title = title.text
+                    _booksList.booklet.update(currentBooklet, _listView.currentIndex)
+                }
             },
 
             TextField
@@ -45,6 +56,7 @@ Item
                 font.weight: Font.Bold
                 font.bold: true
                 font.pointSize: fontSizes.large
+                text: currentBooklet.title
                 //            Kirigami.Theme.backgroundColor: selectedColor
                 //            Kirigami.Theme.textColor: Qt.darker(selectedColor, 2.5)
                 //            color: fgColor
@@ -69,6 +81,7 @@ Item
 
         Maui.Editor
         {
+            id: editor
             anchors.fill: parent
             visible: !_holder.visible
         }
@@ -144,6 +157,7 @@ Item
                             {
                                 _listView.currentIndex = index
                                 console.log("Booklet cliked:",  _booksList.booklet.get(index).url, _booksList.booklet.get(index).content )
+                                currentBooklet =  _booksList.booklet.get(index)
                             }
                         }
                     }
@@ -168,7 +182,6 @@ Item
                         anchors.centerIn: parent
                         icon.name: "list-add"
                         icon.color: "white"
-
                         onClicked: _newChapter.open()
                     }
                 }

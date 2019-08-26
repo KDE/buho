@@ -123,9 +123,27 @@ void Syncer::insertBook(FMH::MODEL &book)
 
 void Syncer::getBooklet(const QString &id)
 {
-   const auto res = this->db->getDBData(QString("select * from booklets where book = '%1'").arg(id));
+    const auto res = this->db->getDBData(QString("select * from booklets where book = '%1'").arg(id));
 
-   emit this->bookletReady(res);
+    emit this->bookletReady(res);
+}
+
+void Syncer::updateBooklet(const QString &id, const QString &bookId, FMH::MODEL &booklet)
+{
+    if(!this->updateBookletLocal(id, bookId, booklet))
+    {
+        qWarning()<< "The booklet could not be updated locally, "
+                     "therefore it was not attempted to update it on the remote server provider, "
+                     "even if it existed.";
+        return;
+    }
+
+    //to update remote booklet we need to pass the stamp as the id
+    //    const auto stamp = Syncer::noteStampFromId(this->db, id);
+    //    if(!stamp.isEmpty())
+    //        this->updateNoteRemote(stamp, note);
+
+    emit this->bookletUpdated(booklet, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Booklet updated locally on the DB"});
 }
 
 void Syncer::insertBooklet(const QString &bookId, FMH::MODEL &booklet)
@@ -376,6 +394,7 @@ void Syncer::updateBookRemote(const QString &id, const FMH::MODEL &book)
 
 bool Syncer::removeBookLocal(const QString &id)
 {
+
     return false;
 }
 
@@ -442,12 +461,31 @@ void Syncer::insertBookletRemote(const QString &bookId, FMH::MODEL &booklet)
 
 }
 
-bool Syncer::updateBookletLocal(const QString &id, const FMH::MODEL &booklet)
+bool Syncer::updateBookletLocal(const QString &id, const QString &bookId, const FMH::MODEL &booklet)
 {
-    return false;
+    //    for(const auto &tg : booklet[FMH::MODEL_KEY::TAG])
+    //        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id);
+
+    const QUrl __path = QFileInfo(booklet[FMH::MODEL_KEY::URL]).dir().path();
+    qDebug()<< "Updating local txt file as"<< __path.toLocalFile();
+    const auto __bookletPath = Syncer::saveNoteFile(__path.toLocalFile()+"/", booklet);
+
+    if(__bookletPath.isEmpty())
+    {
+        qWarning()<< "File could not be saved. Syncer::insertBookletLocal";
+        return false;
+    }
+
+
+    return this->db->update(OWL::TABLEMAP[OWL::TABLE::BOOKLETS],
+            FMH::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::TITLE,
+                                                  FMH::MODEL_KEY::MODIFIED})),
+            QVariantMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::BOOK], bookId}});
+
 }
 
-void Syncer::updateBookletRemote(const QString &id, const FMH::MODEL &booklet)
+void Syncer::updateBookletRemote(const QString &id, const QString &bookId, const FMH::MODEL &booklet)
 {
 
 }

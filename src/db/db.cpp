@@ -233,7 +233,7 @@ bool DB::update(const QString &tableName, const QVariantMap &updateData, const Q
     for (auto key : where.keys())
         condition.append(key+" = '"+where[key].toString()+"'");
 
-    QString sqlQueryString = "UPDATE " + tableName + " SET " + QString(set.join(",")) + " WHERE " + QString(condition.join(","));
+    QString sqlQueryString = "UPDATE " + tableName + " SET " + QString(set.join(",")) + " WHERE " + QString(condition.join(" AND "));
     auto query = this->getQuery(sqlQueryString);
 
     QVariantList values = updateData.values();

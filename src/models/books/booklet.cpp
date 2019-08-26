@@ -70,7 +70,26 @@ void Booklet::insert(const QVariantMap &data)
 
 void Booklet::update(const QVariantMap &data, const int &index)
 {
+    qDebug()<< "Trying to udpate a booklet" << data << index;
 
+    if(index < 0 || index >= this->m_list.size())
+        return;
+
+    auto newData = this->m_list[index];
+    QVector<int> roles;
+    for(const auto &key : data.keys())
+        if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
+        {
+            newData[FMH::MODEL_NAME_KEY[key]] = data[key].toString();
+            roles << FMH::MODEL_NAME_KEY[key];
+        }
+
+    this->m_list[index] = newData;
+
+    newData[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
+    this->syncer->updateBooklet(newData[FMH::MODEL_KEY::ID], this->m_book, newData);
+
+    emit this->updateModel(index, roles);
 }
 
 void Booklet::remove(const int &index)

@@ -168,7 +168,7 @@ public:
      * @param id
      * @param booklet
      */
-    void updateBooklet(const QString &id, FMH::MODEL &booklet);
+    void updateBooklet(const QString &id, const QString &bookId, FMH::MODEL &booklet);
 
     /**
      * @brief insertBooklet
@@ -256,8 +256,8 @@ protected:
 
     bool insertBookletLocal(const QString &bookId, FMH::MODEL &booklet);
     void insertBookletRemote(const QString &bookId, FMH::MODEL &booklet);
-    bool updateBookletLocal(const QString &id, const FMH::MODEL &booklet);
-    void updateBookletRemote(const QString &id, const FMH::MODEL &booklet);
+    bool updateBookletLocal(const QString &id, const QString &bookId, const FMH::MODEL &booklet);
+    void updateBookletRemote(const QString &id, const QString &bookId, const FMH::MODEL &booklet);
     bool removeBookletLocal(const QString &id);
     void removeBookletRemote(const QString &id);
 
