@@ -14,6 +14,7 @@ StackView
     property alias list : _booksList
     property alias cardsView : cardsView
     property bool showDetails: false
+    property var currentBook : ({})
 
     StackView
     {
@@ -159,6 +160,7 @@ StackView
                     {
                         console.log("BOOKLET CLICKED", index)
                         cardsView.currentIndex = index
+                        control.currentBook = _booksList.get(index)
                         _stackView.push(_bookletComponent)
                     }
                 }

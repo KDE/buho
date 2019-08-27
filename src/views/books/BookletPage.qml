@@ -15,6 +15,8 @@ Item
     onCurrentBookletChanged:
     {
         editor.document.load(currentBooklet.url)
+        _drawerPage.title = currentBook.title
+
     }
 
     Maui.BaseModel
@@ -100,22 +102,26 @@ Item
             }
         }
 
+        Connections
+        {
+            target: root
+            onCurrentViewChanged: _drawer.close()
+        }
+
         Kirigami.OverlayDrawer
         {
             id: _drawer
             edge: Qt.RightEdge
             width: Kirigami.Units.gridUnit * 16
-                        height: parent.height - _page.headBar.height
-                        y: _page.headBar.height
+            height: parent.height - _page.headBar.height
+            y: _page.headBar.height
             modal: !isWide
             visible: _holder.visible
 
             contentItem: Maui.Page
             {
+                id: _drawerPage
                 anchors.fill: parent
-
-                title: "argh"
-
                 headBar.visible: true
                 headBar.rightContent: ToolButton
                 {
