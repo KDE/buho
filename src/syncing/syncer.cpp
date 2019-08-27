@@ -511,7 +511,7 @@ const FMH::MODEL_LIST Syncer::collectAllNotes()
 
 const FMH::MODEL_LIST Syncer::collectAllBooks()
 {
-    return this->db->getDBData("select * from books");
+    return this->db->getDBData("select b.*, count(distinct bl.id) as count from books b inner join booklets bl on bl.book = b.id");
 }
 
 const QUrl Syncer::saveNoteFile(const QString &dir, const FMH::MODEL &data)

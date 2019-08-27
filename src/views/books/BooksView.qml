@@ -63,12 +63,25 @@ StackView
         //        }
         //    ]
 
+        headBar.visible: !_holder.visible
         headBar.rightContent: [
             ToolButton
             {
                 icon.name: "view-sort"
             }
         ]
+
+        Maui.Holder
+        {
+            id: _holder
+            visible: !cardsView.count
+            emoji: "qrc:/notepad.png"
+            emojiSize: iconSizes.huge
+            isMask: false
+            title : "There are not Books!"
+            body: "You can create new books and organize your notes"
+        }
+
 
 
         Maui.GridView
@@ -84,6 +97,7 @@ StackView
             cellHeight: itemSize * 1.5
 
             model: _booksModel
+
 
             delegate: ItemDelegate
             {

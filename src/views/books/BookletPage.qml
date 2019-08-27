@@ -53,7 +53,8 @@ Item
             {
                 id: title
                 Layout.fillWidth: true
-                Layout.margins: space.medium
+                Layout.fillHeight: true
+//                Layout.margins: space.medium
                 placeholderText: qsTr("New chapter...")
                 font.weight: Font.Bold
                 font.bold: true
@@ -153,7 +154,7 @@ Item
                     delegate: Maui.LabelDelegate
                     {
                         id: _delegate
-                        label: index  + " - " + model.title
+                        label: index+1  + " - " + model.title
 
                         Connections
                         {
