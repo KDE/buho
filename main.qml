@@ -175,7 +175,7 @@ Maui.ApplicationWindow
         onBookSaved:
         {
             if(title && title.length)
-                booksView.list.insert({title: title})
+                booksView.list.insert({title: title, count: 0})
         }
     }
 

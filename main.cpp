@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 
     Linker linker;
     context->setContextProperty("linker", &linker);  
-    qmlRegisterUncreatableType<Booklet>("Booklet", 1, 0 , "Booklet", "Booklet is instanciated by Books");
+    qmlRegisterType<Booklet>();
     qmlRegisterType<Notes>("Notes", 1, 0, "Notes");
     qmlRegisterType<Books>("Books", 1, 0, "Books");
     qmlRegisterType<Links>("Links", 1, 0, "Links");

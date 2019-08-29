@@ -20,7 +20,7 @@ class Books : public MauiList
 
     Q_PROPERTY(SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
-    Q_PROPERTY(Booklet *booklet READ getBooklet NOTIFY bookletChanged)
+    Q_PROPERTY(Booklet *booklet READ getBooklet NOTIFY bookletChanged CONSTANT FINAL)
     Q_PROPERTY(int currentBook READ getCurrentBook WRITE setCurrentBook NOTIFY currentBookChanged)
 
 
