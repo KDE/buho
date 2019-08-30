@@ -13,7 +13,7 @@ Maui.Dialog
     maxWidth: 700*unit
     maxHeight: maxWidth
 
-    property string selectedColor : "#ffffe6"
+    property string selectedColor : Kirigami.Theme.backgroundColor
     property string fgColor: Qt.darker(selectedColor, 3)
     property bool showEditActions : false
 
@@ -148,7 +148,7 @@ Maui.Dialog
     {
         title.text = note.title
         editor.body.text = note.content
-        selectedColor =  note.color ? note.color : Kirigami.Theme.backgroundColor
+        control.selectedColor =  note.color ? note.color : Kirigami.Theme.backgroundColor
         pinButton.checked = note.pin == 1
         favButton.checked = note.favorite == 1
 

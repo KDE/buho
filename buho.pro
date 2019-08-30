@@ -45,6 +45,8 @@ SOURCES += \
     src/syncing/syncer.cpp \
     src/utils/htmlparser.cpp \
     src/models/notes/notes.cpp \
+    src/models/books/books.cpp \
+    src/models/books/booklet.cpp \
     src/models/links/links.cpp \
     src/providers/nextnote.cpp \
 
@@ -60,6 +62,8 @@ HEADERS += \
     src/linker.h \
     src/utils/htmlparser.h \
     src/models/notes/notes.h \
+    src/models/books/books.h \
+    src/models/books/booklet.h \
     src/models/links/links.h \
     src/providers/nextnote.h \
     src/providers/abstractnotesprovider.h

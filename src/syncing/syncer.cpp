@@ -276,6 +276,8 @@ void Syncer::setConections()
                                                                                                              FMH::MODEL_KEY::STAMP,
                                                                                                              FMH::MODEL_KEY::USER,
                                                                                                              FMH::MODEL_KEY::SERVER})));
+                emit this->noteInserted(__note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note inserted on local db, from the server provider"});
+
 
             }else
             {
@@ -286,7 +288,7 @@ void Syncer::setConections()
                                                       FMH::MODEL_KEY::FAVORITE});
                 __note[FMH::MODEL_KEY::MODIFIED] = QDateTime::fromSecsSinceEpoch(note[FMH::MODEL_KEY::MODIFIED].toInt()).toString(Qt::TextDate);
                 this->updateNoteLocal(id, __note);
-                emit this->noteInserted(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note inserted on local db, from the server provider"});
+                emit this->noteUpdated(__note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note updated on local db, from the server provider"});
             }
         }
 
@@ -336,6 +338,7 @@ void Syncer::setConections()
                                                                                                              FMH::MODEL_KEY::STAMP,
                                                                                                              FMH::MODEL_KEY::USER,
                                                                                                              FMH::MODEL_KEY::SERVER})));
+                emit this->bookletInserted(__booklet, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Booklet inserted on local db, from the server provider"});
 
             }else
             {
@@ -344,9 +347,17 @@ void Syncer::setConections()
                                                       FMH::MODEL_KEY::CONTENT,
                                                       FMH::MODEL_KEY::MODIFIED,
                                                       FMH::MODEL_KEY::FAVORITE});
+
+                __booklet[FMH::MODEL_KEY::ID] = id;
+                __booklet[FMH::MODEL_KEY::BOOK] = booklet[FMH::MODEL_KEY::CATEGORY];
+                __booklet[FMH::MODEL_KEY::URL] = [&]()-> QString {
+                        const auto data = this->db->getDBData(QString("select url from booklets where id = '%1'").arg(id));
+                        return data.isEmpty() ? QString() : data.first()[FMH::MODEL_KEY::URL]; }();
+
+                qDebug()<< " trying to update local booklets with url" <<  __booklet[FMH::MODEL_KEY::URL] << __booklet[FMH::MODEL_KEY::BOOK] << __booklet[FMH::MODEL_KEY::CONTENT]  ;
                 __booklet[FMH::MODEL_KEY::MODIFIED] = QDateTime::fromSecsSinceEpoch(booklet[FMH::MODEL_KEY::MODIFIED].toInt()).toString(Qt::TextDate);
-                this->updateNoteLocal(id, __booklet);
-                emit this->noteInserted(booklet, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note inserted on local db, from the server provider"});
+                this->updateBookletLocal(id, __booklet[FMH::MODEL_KEY::BOOK], __booklet);
+                emit this->bookletUpdated(__booklet, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Booklet updated on local db, from the server provider"});
             }
         }
 
@@ -365,7 +376,15 @@ void Syncer::setConections()
     {
         const auto id = Syncer::bookletIdFromStamp(this->db, this->provider->provider(), booklet[FMH::MODEL_KEY::ID]);
         if(!booklet.isEmpty())
-            this->updateBookletLocal(id, booklet[FMH::MODEL_KEY::CATEGORY], FMH::filterModel(booklet, {FMH::MODEL_KEY::TITLE}));
+        {
+            booklet[FMH::MODEL_KEY::ID] = id;
+            booklet[FMH::MODEL_KEY::BOOK] = booklet[FMH::MODEL_KEY::CATEGORY];
+            booklet[FMH::MODEL_KEY::URL] = [&]()-> QString {
+                    const auto data = this->db->getDBData(QString("select url from booklets where id = '%1'").arg(id));
+                    return data.isEmpty() ? QString() : data.first()[FMH::MODEL_KEY::URL]; }();
+            this->updateBookletLocal(id, booklet[FMH::MODEL_KEY::BOOK], FMH::filterModel(booklet, {FMH::MODEL_KEY::TITLE}));
+        }
+
         emit this->bookletUpdated(booklet, {STATE::TYPE::REMOTE, STATE::STATUS::OK, "Booklet updated on server provider"});
     });
 
@@ -574,8 +593,8 @@ bool Syncer::updateBookletLocal(const QString &id, const QString &bookId, const 
     //        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id);
 
     const QUrl __path = QFileInfo(booklet[FMH::MODEL_KEY::URL]).dir().path();
-    qDebug()<< "Updating local txt file as"<< __path.toLocalFile();
     const auto __bookletPath = Syncer::saveNoteFile(__path.toLocalFile()+"/", booklet);
+    qDebug()<< "Updating local txt file as"<< __path.toLocalFile() << __bookletPath;
 
     if(__bookletPath.isEmpty())
     {
@@ -585,7 +604,8 @@ bool Syncer::updateBookletLocal(const QString &id, const QString &bookId, const 
 
     return this->db->update(OWL::TABLEMAP[OWL::TABLE::BOOKLETS],
             FMH::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::TITLE,
-                                                  FMH::MODEL_KEY::MODIFIED})),
+                                                  FMH::MODEL_KEY::MODIFIED,
+                                                  FMH::MODEL_KEY::FAVORITE})),
             QVariantMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id},
         {FMH::MODEL_NAME[FMH::MODEL_KEY::BOOK], bookId}});
 

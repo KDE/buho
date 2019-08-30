@@ -8,7 +8,7 @@ Item
 {
     id: control
 
-    property var currentBooklet : ({})
+    property var currentBooklet : null
     signal exit()
 
 
@@ -16,8 +16,7 @@ Item
     {
         editor.document.load(currentBooklet.url)
         _drawerPage.title = currentBook.title
-
-    }
+    }    
 
     Maui.BaseModel
     {
@@ -74,7 +73,7 @@ Item
         Maui.Holder
         {
             id: _holder
-            visible: !_listView.count
+            visible: !_listView.count || !currentBooklet
             emoji: "qrc:/Type.png"
             emojiSize: iconSizes.huge
             isMask: false
@@ -151,6 +150,13 @@ Item
                     anchors.fill: parent
                     model: _bookletModel
                     clip: true
+
+                    onCountChanged:
+                    {
+                        _listView.currentIndex = count-1
+                        control.currentBooklet = _booksList.booklet.get(_listView.currentIndex)
+                    }
+
                     delegate: Maui.LabelDelegate
                     {
                         id: _delegate
@@ -163,13 +169,10 @@ Item
                             onClicked:
                             {
                                 _listView.currentIndex = index
-                                console.log("Booklet cliked:",  _booksList.booklet.get(index).url, _booksList.booklet.get(index).content )
                                 currentBooklet =  _booksList.booklet.get(index)
                             }
                         }
                     }
-
-
                 }
 
                 Rectangle
@@ -193,9 +196,6 @@ Item
                     }
                 }
             }
-
-
         }
     }
-
 }
