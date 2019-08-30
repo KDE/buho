@@ -18,7 +18,6 @@ class Notes : public MauiList
     Q_OBJECT
     Q_PROPERTY(SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
-    Q_PROPERTY(QVariantMap account READ getAccount WRITE setAccount NOTIFY accountChanged)
 
 public:    
     enum ORDER : uint8_t
@@ -47,9 +46,6 @@ public:
     void setOrder(const ORDER &order);
     ORDER getOrder() const;
 
-    void setAccount(const QVariantMap &account);
-    QVariantMap getAccount() const;
-
 private:
     Syncer *syncer;
 
@@ -64,7 +60,6 @@ private:
 signals:
     void orderChanged();
     void sortByChanged();
-    void accountChanged();
 
 public slots:
     QVariantList getTags(const int &index);

@@ -5,9 +5,13 @@
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
 #include "fm.h"
+#include "mauiaccounts.h"
+#include "mauiapp.h"
 #else
 #include <MauiKit/tagging.h>
 #include <MauiKit/fm.h>
+#include <MauiKit/mauiapp.h>
+#include <MauiKit/mauiaccounts.h>
 #endif
 
 Notes::Notes(QObject *parent) : MauiList(parent),
@@ -17,7 +21,13 @@ Notes::Notes(QObject *parent) : MauiList(parent),
 
     this->syncer->setProvider(new NextNote);
 
-    connect(this, &Notes::accountChanged, syncer, &Syncer::getNotes);
+    const auto m_account = MauiApp::instance()->getAccounts();
+    connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap currentAccount)
+    {
+        Q_UNUSED(currentAccount)
+        this->syncer->getNotes();
+    });
+
     connect(this, &Notes::sortByChanged, this, &Notes::sortList);
     connect(this, &Notes::orderChanged, this, &Notes::sortList);
 
@@ -181,18 +191,6 @@ bool Notes::remove(const int &index)
     this->notes.removeAt(index);
     emit this->postItemRemoved();
     return true;
-}
-
-void Notes::setAccount(const QVariantMap &account)
-{
-    this->m_account = account;
-    syncer->setAccount(FM::toModel(this->m_account));
-    emit accountChanged();
-}
-
-QVariantMap Notes::getAccount() const
-{
-    return this->m_account;
 }
 
 QVariantList Notes::getTags(const int &index)

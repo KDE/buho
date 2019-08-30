@@ -1,9 +1,11 @@
 #include "booklet.h"
 #include "syncer.h"
+#include "nextnote.h"
 
 Booklet::Booklet(Syncer *_syncer,  QObject *parent) : MauiList(parent),
     syncer(_syncer)
-{
+{  
+
     connect(this->syncer, &Syncer::bookletReady, [&](FMH::MODEL_LIST booklets)
     {
         emit this->preListChanged();
@@ -43,7 +45,7 @@ QString Booklet::getBook() const
     return m_book;
 }
 
-void Booklet::setBook(const QString &book) //book id
+void Booklet::setBook(const QString &book) //book id title
 {
     if (m_book == book)
         return;

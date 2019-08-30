@@ -3,13 +3,27 @@
 #include "nextnote.h"
 #include "booklet.h"
 
+#ifdef STATIC_MAUIKIT
+#include "mauiaccounts.h"
+#include "mauiapp.h"
+#else
+#include <MauiKit/mauiapp.h>
+#include <MauiKit/mauiaccounts.h>
+#endif
+
 Books::Books(QObject *parent) : MauiList(parent),
     syncer(new Syncer(this)), m_booklet(new Booklet(syncer, this))
 {
     this->syncer->setProvider(new NextNote);
 
-    connect(this, &Books::currentBookChanged, this, &Books::openBook);
+    const auto m_account = MauiApp::instance()->getAccounts();
+    connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap currentAccount)
+    {
+        Q_UNUSED(currentAccount)
+        this->syncer->getBooks();
+    });
 
+    connect(this, &Books::currentBookChanged, this, &Books::openBook);
     connect(syncer, &Syncer::booksReady, [&](FMH::MODEL_LIST books)
     {
         emit this->preListChanged();
@@ -103,7 +117,7 @@ void Books::openBook(const int &index)
     if(index >= this->m_list.size() || index < 0)
         return;
 
-    this->m_booklet->setBook(this->m_list.at(index)[FMH::MODEL_KEY::ID]);
+    this->m_booklet->setBook(this->m_list.at(index)[FMH::MODEL_KEY::TITLE]);
     this->m_booklet->setBookTitle(this->m_list.at(index)[FMH::MODEL_KEY::TITLE]);
 }
 

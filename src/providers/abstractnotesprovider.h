@@ -60,6 +60,7 @@ public:
      */
 //    virtual FMH::MODEL getNote(const QString &id) = 0;
     virtual void getNote(const QString &id) = 0;
+    virtual void getBooklet(const QString &id) = 0;
 
     /**
      * @brief getNotes
@@ -67,6 +68,7 @@ public:
      *  When the process is done it shoudl emit the notesReady(FMH::MODEL_LIST) signal
      */
     virtual void getNotes() = 0;
+    virtual void getBooklets() = 0;
 //    virtual void getNotes() const {}
 //    virtual FMH::MODEL_LIST getNotes(const QString &query = QString()) = 0;
 //    virtual FMH::MODEL_LIST getNotes(const QString &query = QString()) const = 0;
@@ -81,6 +83,7 @@ public:
      */
 //    virtual bool insertNote(const FMH::MODEL &note) = 0;
     virtual void insertNote(const FMH::MODEL &note) = 0;
+    virtual void insertBooklet(const FMH::MODEL &booklet) = 0;
 
     /**
      * @brief updateNote
@@ -93,6 +96,7 @@ public:
      */
 //    virtual bool updateNote(const QString &id, const FMH::MODEL &note) = 0;
     virtual void updateNote(const QString &id, const FMH::MODEL &note) = 0;
+    virtual void updateBooklet(const QString &id, const FMH::MODEL &booklet) = 0;
 
     /**
      * @brief removeNote
@@ -103,6 +107,7 @@ public:
      */
 //    virtual bool removeNote(const QString &id) = 0;
     virtual void removeNote(const QString &id) = 0;
+    virtual void removeBooklet(const QString &id) = 0;
 
 protected:
     QString m_user = "";
@@ -125,11 +130,20 @@ protected:
     }
 
 signals:
-    void noteReady(FMH::MODEL note);
-    void notesReady(FMH::MODEL_LIST notes);
-    void noteInserted(FMH::MODEL note);
-    void noteUpdated(FMH::MODEL note);
-    void noteRemoved();
+     void noteReady(FMH::MODEL note);
+     void bookletReady(FMH::MODEL booklet);
+
+     void notesReady(FMH::MODEL_LIST notes);
+     void bookletsReady(FMH::MODEL_LIST booklets);
+
+     void noteInserted(FMH::MODEL note);
+     void bookletInserted(FMH::MODEL booklet);
+
+     void noteUpdated(FMH::MODEL note);
+     void bookletUpdated(FMH::MODEL booklet);
+
+     void noteRemoved();
+     void bookletRemoved();
 
     /**
      * @brief responseReady

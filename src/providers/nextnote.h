@@ -17,10 +17,19 @@ public:
     explicit NextNote(QObject *parent = nullptr);
     ~NextNote() override final;
     void getNote(const QString &id) override final;
+    void getBooklet(const QString &id) override final;
+
     void getNotes() override final;
+    void getBooklets() override final;
+
     void insertNote(const FMH::MODEL &note) override final;
+    void insertBooklet(const FMH::MODEL &booklet) override final;
+
     void updateNote(const QString &id, const FMH::MODEL &note) override final;
+    void updateBooklet(const QString &id, const FMH::MODEL &booklet) override final;
+
     void removeNote(const QString &id) override final;
+    void removeBooklet(const QString &id) override final;
 
 private:
     const static QString API;

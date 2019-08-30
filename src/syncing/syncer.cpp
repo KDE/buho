@@ -7,15 +7,26 @@
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
 #include "fm.h"
+#include "mauiaccounts.h"
+#include "mauiapp.h"
 #else
 #include <MauiKit/tagging.h>
 #include <MauiKit/fm.h>
+#include <MauiKit/mauiapp.h>
+#include <MauiKit/mauiaccounts.h>
 #endif
 
 Syncer::Syncer(QObject *parent) : QObject(parent),
     tag(Tagging::getInstance()),
     db(DB::getInstance()),
-    provider(nullptr) {}
+    provider(nullptr) {
+
+    const auto m_account = MauiApp::instance()->getAccounts();
+    connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap currentAccount)
+    {
+        this->setAccount(FMH::toModel(currentAccount));
+    });
+}
 
 void Syncer::setAccount(const FMH::MODEL &account)
 {
@@ -100,11 +111,10 @@ void Syncer::getBooks()
 {
     const auto books = this->collectAllBooks();
 
-    // this service is still missing
-    //    if(this->provider && this->provider->isValid())
-    //        this->provider->getNotes();
-    //    else
-    //        qWarning()<< "Credentials are missing to get notes or the provider has not been set";
+        if(this->provider && this->provider->isValid())
+            this->provider->getBooklets();
+        else
+            qWarning()<< "Credentials are missing to get notes or the provider has not been set";
 
 
     emit this->booksReady(books);
@@ -121,12 +131,13 @@ void Syncer::insertBook(FMH::MODEL &book)
     emit this->bookInserted(book, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Book inserted locally sucessfully"});
 }
 
-void Syncer::getBooklet(const QString &id)
+void Syncer::getBooklet(const QString &bookId)
 {
-    const auto res = this->db->getDBData(QString("select * from booklets where book = '%1'").arg(id));
+    const auto res = this->db->getDBData(QString("select * from booklets where book = '%1'").arg(bookId));
 
     emit this->bookletReady(res);
 }
+
 
 void Syncer::updateBooklet(const QString &id, const QString &bookId, FMH::MODEL &booklet)
 {
@@ -138,10 +149,12 @@ void Syncer::updateBooklet(const QString &id, const QString &bookId, FMH::MODEL 
         return;
     }
 
-    //to update remote booklet we need to pass the stamp as the id
-    //    const auto stamp = Syncer::noteStampFromId(this->db, id);
-    //    if(!stamp.isEmpty())
-    //        this->updateNoteRemote(stamp, note);
+    // to update remote booklet we need to pass the stamp as the id
+    const auto stamp = Syncer::bookletStampFromId(this->db, id);
+    qDebug()<< "booklet stamp from id" << stamp;
+
+    if(!stamp.isEmpty())
+        this->updateBookletRemote(stamp, bookId, booklet);
 
     emit this->bookletUpdated(booklet, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Booklet updated locally on the DB"});
 }
@@ -154,6 +167,7 @@ void Syncer::insertBooklet(const QString &bookId, FMH::MODEL &booklet)
         return;
     }
 
+    this->insertBookletRemote(bookId, booklet);
     emit this->bookletInserted(booklet, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Booklet inserted locally sucessfully"});
 }
 
@@ -180,6 +194,22 @@ const QString Syncer::noteStampFromId(DB *_db, const QString &id)
     }();
 }
 
+const QString Syncer::bookletIdFromStamp(DB *_db, const QString &provider, const QString &stamp)
+{
+    return [&]() -> QString {
+        const auto data = _db->getDBData(QString("select id from booklets_sync where server = '%1' AND stamp = '%2'").arg(provider, stamp));
+        return data.isEmpty() ? QString() : data.first()[FMH::MODEL_KEY::ID];
+    }();
+}
+
+const QString Syncer::bookletStampFromId(DB *_db, const QString &id)
+{
+    return [&]() -> QString {
+        const auto data = _db->getDBData(QString("select stamp from booklets_sync where id = '%1'").arg(id));
+        return data.isEmpty() ? QString() : data.first()[FMH::MODEL_KEY::STAMP];
+    }();
+}
+
 void Syncer::setConections()
 {
     connect(this->provider, &AbstractNotesProvider::noteInserted, [&](FMH::MODEL note)
@@ -190,6 +220,16 @@ void Syncer::setConections()
                                                                                                    FMH::MODEL_KEY::USER,
                                                                                                    FMH::MODEL_KEY::SERVER})));
         emit this->noteInserted(note, {STATE::TYPE::REMOTE, STATE::STATUS::OK, "Note inserted on server provider"});
+    });
+
+    connect(this->provider, &AbstractNotesProvider::bookletInserted, [&](FMH::MODEL booklet)
+    {
+        qDebug()<< "STAMP OF THE NEWLY INSERTED BOOKLET" << booklet[FMH::MODEL_KEY::ID] << booklet;
+        this->db->insert(OWL::TABLEMAP[OWL::TABLE::BOOKLETS_SYNC], FMH::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::ID,
+                                                                                                         FMH::MODEL_KEY::STAMP,
+                                                                                                         FMH::MODEL_KEY::USER,
+                                                                                                         FMH::MODEL_KEY::SERVER})));
+        emit this->bookletInserted(booklet, {STATE::TYPE::REMOTE, STATE::STATUS::OK, "Booklet inserted on server provider"});
     });
 
     connect(this->provider, &AbstractNotesProvider::notesReady, [&](FMH::MODEL_LIST notes)
@@ -253,12 +293,80 @@ void Syncer::setConections()
         emit this->notesReady(this->collectAllNotes());
     });
 
+    connect(this->provider, &AbstractNotesProvider::bookletsReady, [&](FMH::MODEL_LIST booklets)
+    {
+        //        qDebug()<< "SERVER NOETS READY "<< notes;
+
+        //if there are no notes in the provider server, then just return
+        if(booklets.isEmpty())
+            return;
+
+        qDebug()<< "Booklets READY << " << booklets;
+        // there might be two case scenarios:
+        // the booklet exists locally in the db, so it needs to be updated with the server version
+        // the booklet does not exists locally, so it needs to be inserted into the db
+        for(const auto &booklet : booklets)
+        {
+            const auto id = Syncer::bookletIdFromStamp(this->db, this->provider->provider(), booklet[FMH::MODEL_KEY::ID]); //the id is actually the stamp id
+
+            // if the id is empty then the booklet does not exists, so insert the booklet into the local db
+            if(id.isEmpty())
+            {
+                //here insert the note into the db
+                auto __booklet = FMH::filterModel(booklet, {FMH::MODEL_KEY::TITLE,
+                                                      FMH::MODEL_KEY::CONTENT,
+                                                      FMH::MODEL_KEY::MODIFIED,
+                                                      FMH::MODEL_KEY::ADDDATE});
+
+                __booklet[FMH::MODEL_KEY::MODIFIED] = QDateTime::fromSecsSinceEpoch(booklet[FMH::MODEL_KEY::MODIFIED].toInt()).toString(Qt::TextDate);
+                __booklet[FMH::MODEL_KEY::ADDDATE] = __booklet[FMH::MODEL_KEY::MODIFIED];
+
+                if(!this->insertBookletLocal(booklet[FMH::MODEL_KEY::CATEGORY], __booklet))
+                {
+                    qWarning()<< "Remote booklet could not be inserted to the local storage";
+                    continue;
+                }
+
+                __booklet[FMH::MODEL_KEY::STAMP] = booklet[FMH::MODEL_KEY::ID];
+                __booklet[FMH::MODEL_KEY::USER] = this->provider->user();
+                __booklet[FMH::MODEL_KEY::SERVER] = this->provider->provider();
+
+
+                this->db->insert(OWL::TABLEMAP[OWL::TABLE::BOOKLETS_SYNC], FMH::toMap(FMH::filterModel(__booklet, {FMH::MODEL_KEY::ID,
+                                                                                                             FMH::MODEL_KEY::STAMP,
+                                                                                                             FMH::MODEL_KEY::USER,
+                                                                                                             FMH::MODEL_KEY::SERVER})));
+
+            }else
+            {
+                //the booklet exists in the db locally, so update it
+                auto __booklet = FMH::filterModel(booklet, {FMH::MODEL_KEY::TITLE,
+                                                      FMH::MODEL_KEY::CONTENT,
+                                                      FMH::MODEL_KEY::MODIFIED,
+                                                      FMH::MODEL_KEY::FAVORITE});
+                __booklet[FMH::MODEL_KEY::MODIFIED] = QDateTime::fromSecsSinceEpoch(booklet[FMH::MODEL_KEY::MODIFIED].toInt()).toString(Qt::TextDate);
+                this->updateNoteLocal(id, __booklet);
+                emit this->noteInserted(booklet, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note inserted on local db, from the server provider"});
+            }
+        }
+
+        emit this->booksReady(this->collectAllBooks()); //???
+    });
+
     connect(this->provider, &AbstractNotesProvider::noteUpdated, [&](FMH::MODEL note)
     {
         const auto id = Syncer::noteIdFromStamp(this->db, this->provider->provider(), note[FMH::MODEL_KEY::ID]);
         if(!note.isEmpty())
             this->updateNoteLocal(id, FMH::filterModel(note, {FMH::MODEL_KEY::TITLE}));
         emit this->noteUpdated(note, {STATE::TYPE::REMOTE, STATE::STATUS::OK, "Note updated on server provider"});
+    });
+
+    connect(this->provider, &AbstractNotesProvider::bookletUpdated, [&](FMH::MODEL booklet)
+    {
+        const auto id = Syncer::bookletIdFromStamp(this->db, this->provider->provider(), booklet[FMH::MODEL_KEY::ID]);
+        if(!booklet.isEmpty())
+            this->updateBookletLocal(id, booklet[FMH::MODEL_KEY::CATEGORY], FMH::filterModel(booklet, {FMH::MODEL_KEY::TITLE}));
+        emit this->bookletUpdated(booklet, {STATE::TYPE::REMOTE, STATE::STATUS::OK, "Booklet updated on server provider"});
     });
 
     connect(this->provider, &AbstractNotesProvider::noteRemoved, [&]()
@@ -356,7 +464,6 @@ bool Syncer::insertBookLocal(FMH::MODEL &book)
     {
         qWarning()<< "The directory for the book already exists. Syncer::insertBookLocal" << book[FMH::MODEL_KEY::TITLE];
         return false;
-
     }
 
     if(!FM::createDir(QUrl::fromLocalFile(OWL::BooksPath), book[FMH::MODEL_KEY::TITLE]))
@@ -365,11 +472,9 @@ bool Syncer::insertBookLocal(FMH::MODEL &book)
         return false;
     }
 
-    Syncer::addId(book);
     book[FMH::MODEL_KEY::URL] = __path.toString();
 
-    return(this->db->insert(OWL::TABLEMAP[OWL::TABLE::BOOKS], FMH::toMap(FMH::filterModel(book,{FMH::MODEL_KEY::ID,
-                                                                                                FMH::MODEL_KEY::URL,
+    return(this->db->insert(OWL::TABLEMAP[OWL::TABLE::BOOKS], FMH::toMap(FMH::filterModel(book,{FMH::MODEL_KEY::URL,
                                                                                                 FMH::MODEL_KEY::TITLE,
                                                                                                 FMH::MODEL_KEY::FAVORITE,
                                                                                                 FMH::MODEL_KEY::ADDDATE,
@@ -414,18 +519,17 @@ bool Syncer::insertBookletLocal(const QString &bookId, FMH::MODEL &booklet)
 
     Syncer::addId(booklet); //adds a local id to the booklet
 
-    // create a file for the note
-    const auto __bookTitle = [&]() -> QString {
-            const auto data = this->db->getDBData(QString("select title from books where id = '%1'").arg(bookId));
-            return data.isEmpty() ? QString() : data.first()[FMH::MODEL_KEY::TITLE]; } ();
-
-    if(__bookTitle.isEmpty() || !FMH::fileExists(QUrl::fromLocalFile(OWL::BooksPath+__bookTitle)))
+    if(!FMH::fileExists(QUrl::fromLocalFile(OWL::BooksPath+bookId)))
     {
-        qWarning()<< "The book does not exists in the db or the directory is missing. Syncer::insertBookletLocal";
-        return false;
+        qWarning()<< "The book does not exists in the db or the directory is missing. Syncer::insertBookletLocal. "
+                     "Creating a new book registry" << bookId;
+
+        FMH::MODEL __book;
+        __book[FMH::MODEL_KEY::TITLE] = bookId;
+        this->insertBook(__book);
     }
 
-    const auto __bookletPath = Syncer::saveNoteFile(OWL::BooksPath+__bookTitle+"/", booklet);
+    const auto __bookletPath = Syncer::saveNoteFile(OWL::BooksPath+bookId+"/", booklet);
 
     if(__bookletPath.isEmpty())
     {
@@ -458,7 +562,10 @@ bool Syncer::insertBookletLocal(const QString &bookId, FMH::MODEL &booklet)
 
 void Syncer::insertBookletRemote(const QString &bookId, FMH::MODEL &booklet)
 {
-
+    qDebug()<< "trying to insert booklet remotely" << (this->provider ? "provider exists" : "failed provider") << this->provider->isValid();
+    booklet[FMH::MODEL_KEY::CATEGORY] = bookId;
+    if(this->provider && this->provider->isValid())
+        this->provider->insertBooklet(booklet);
 }
 
 bool Syncer::updateBookletLocal(const QString &id, const QString &bookId, const FMH::MODEL &booklet)
@@ -476,7 +583,6 @@ bool Syncer::updateBookletLocal(const QString &id, const QString &bookId, const 
         return false;
     }
 
-
     return this->db->update(OWL::TABLEMAP[OWL::TABLE::BOOKLETS],
             FMH::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::TITLE,
                                                   FMH::MODEL_KEY::MODIFIED})),
@@ -485,9 +591,11 @@ bool Syncer::updateBookletLocal(const QString &id, const QString &bookId, const 
 
 }
 
-void Syncer::updateBookletRemote(const QString &id, const QString &bookId, const FMH::MODEL &booklet)
+void Syncer::updateBookletRemote(const QString &id, const QString &bookId, FMH::MODEL &booklet)
 {
-
+    booklet[FMH::MODEL_KEY::CATEGORY] = bookId;
+    if(this->provider && this->provider->isValid())
+        this->provider->updateBooklet(id, booklet);
 }
 
 bool Syncer::removeBookletLocal(const QString &id)
@@ -511,7 +619,7 @@ const FMH::MODEL_LIST Syncer::collectAllNotes()
 
 const FMH::MODEL_LIST Syncer::collectAllBooks()
 {
-//    return this->db->getDBData("select b.*, count(distinct bl.id) as count from books b inner join booklets bl on bl.book = b.id");
+    //    return this->db->getDBData("select b.*, count(distinct bl.id) as count from books b inner join booklets bl on bl.book = b.id");
     return this->db->getDBData("select * from books");
 }
 

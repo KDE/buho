@@ -161,7 +161,7 @@ public:
      * @brief getBooklet
      * @param id
      */
-    void getBooklet(const QString &id);
+    void getBooklet(const QString &bookId);
 
     /**
      * @brief updateBooklet
@@ -220,7 +220,11 @@ private:
     static void addId(FMH::MODEL &model);
 
     static const QString noteIdFromStamp(DB *_db, const QString &provider, const QString &stamp) ;
-    static const QString noteStampFromId(DB *_db, const QString &id) ;
+    static const QString noteStampFromId(DB *_db, const QString &id);
+
+    static const QString bookletIdFromStamp(DB *_db, const QString &provider, const QString &stamp) ;
+    static const QString bookletStampFromId(DB *_db, const QString &id) ;
+
 
     void setConections();
 
@@ -257,7 +261,7 @@ protected:
     bool insertBookletLocal(const QString &bookId, FMH::MODEL &booklet);
     void insertBookletRemote(const QString &bookId, FMH::MODEL &booklet);
     bool updateBookletLocal(const QString &id, const QString &bookId, const FMH::MODEL &booklet);
-    void updateBookletRemote(const QString &id, const QString &bookId, const FMH::MODEL &booklet);
+    void updateBookletRemote(const QString &id, const QString &bookId, FMH::MODEL &booklet);
     bool removeBookletLocal(const QString &id);
     void removeBookletRemote(const QString &id);
 

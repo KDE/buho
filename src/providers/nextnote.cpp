@@ -66,6 +66,11 @@ void NextNote::getNote(const QString &id)
     downloader->getArray(url, header);
 }
 
+void NextNote::getBooklet(const QString &id)
+{
+
+}
+
 void NextNote::sendNotes(QByteArray array)
 {
     //    emit this->notesReady(notes);
@@ -84,7 +89,39 @@ void NextNote::getNotes()
     const auto downloader = new FMH::Downloader;
     connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
     {
-        emit this->notesReady(this->parseNotes(array));
+        //exclude notes that have its own category
+        FMH::MODEL_LIST notes;
+        for(const auto &data : this->parseNotes(array))
+            if(data[FMH::MODEL_KEY::CATEGORY].isEmpty() || data[FMH::MODEL_KEY::CATEGORY].isNull())
+                notes << data;
+
+        emit this->notesReady(notes);
+        downloader->deleteLater();
+    });
+
+    downloader->getArray(url, header);
+}
+
+void NextNote::getBooklets()
+{
+    auto url = NextNote::formatUrl(this->m_user, this->m_password, this->m_provider)+"notes";
+
+    QString concatenated = this->m_user + ":" + this->m_password;
+    QByteArray data = concatenated.toLocal8Bit().toBase64();
+    QString headerData = "Basic " + data;
+
+    QMap<QString, QString> header {{"Authorization", headerData.toLocal8Bit()}};
+
+    const auto downloader = new FMH::Downloader;
+    connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
+    {
+        //exclude notes that have its own category
+        FMH::MODEL_LIST booklets;
+        for(const auto &data : this->parseNotes(array))
+            if(!data[FMH::MODEL_KEY::CATEGORY].isEmpty() && !data[FMH::MODEL_KEY::CATEGORY].isNull())
+                booklets << data;
+
+        emit this->bookletsReady(booklets);
         downloader->deleteLater();
     });
 
@@ -113,6 +150,38 @@ void NextNote::insertNote(const FMH::MODEL &note)
                                         note = notes.first();
                                         note[FMH::MODEL_KEY::STAMP] = note[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
                                         note[FMH::MODEL_KEY::ID] = __note[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
+                                        note[FMH::MODEL_KEY::SERVER] = this->m_provider; //adds the provider server address
+                                        note[FMH::MODEL_KEY::USER] = this->m_user; //adds the user name
+                                    }
+                                    return note;
+                                }());
+
+        restclient->deleteLater();
+    });
+}
+
+void NextNote::insertBooklet(const FMH::MODEL &booklet)
+{
+    QByteArray payload = QJsonDocument::fromVariant(FM::toMap(booklet)).toJson();
+    qDebug() << "UPLOADING NEW BOOKLET" << QVariant(payload).toString();
+
+    const auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
+
+    const auto request = formRequest(url, this->m_user, this->m_password);
+
+    auto restclient = new QNetworkAccessManager; //constructor
+    QNetworkReply *reply = restclient->post(request,payload);
+    connect(reply, &QNetworkReply::finished, [=, __booklet = booklet]()
+    {
+        qDebug() << "Note insertyion finished?";
+        const auto notes = this->parseNotes(reply->readAll());
+        emit this->bookletInserted([&]() -> FMH::MODEL {
+                                    FMH::MODEL note;
+                                    if(!notes.isEmpty())
+                                    {
+                                        note = notes.first();
+                                        note[FMH::MODEL_KEY::STAMP] = note[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
+                                        note[FMH::MODEL_KEY::ID] = __booklet[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
                                         note[FMH::MODEL_KEY::SERVER] = this->m_provider; //adds the provider server address
                                         note[FMH::MODEL_KEY::USER] = this->m_user; //adds the user name
                                     }
@@ -166,6 +235,50 @@ void NextNote::updateNote(const QString &id, const FMH::MODEL &note)
     });
 }
 
+void NextNote::updateBooklet(const QString &id, const FMH::MODEL &booklet)
+{
+    if(id.isEmpty() || booklet.isEmpty())
+    {
+        qWarning()<< "The id or note are empty. Can not proceed. NextNote::update";
+        return;
+    }
+
+    QByteArray payload = QJsonDocument::fromVariant(FM::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::CONTENT,
+                                                                                      FMH::MODEL_KEY::FAVORITE,
+                                                                                      FMH::MODEL_KEY::MODIFIED,
+                                                                                      FMH::MODEL_KEY::CATEGORY}))).toJson();
+    qDebug() << "UPDATING BOOKLET" << QVariant(payload).toString();
+
+    const auto url = QString(NextNote::API+"%1%2").replace("PROVIDER", this->m_provider).arg("notes/", id);
+
+    qDebug()<< "tryiong to update note" << url;
+    const auto request = formRequest(url, this->m_user, this->m_password);
+
+    auto restclient = new QNetworkAccessManager; //constructor
+    QNetworkReply *reply = restclient->put(request, payload);
+    connect(reply, &QNetworkReply::finished, [=, __booklet = booklet]()
+    {
+        qDebug() << "Note update finished?" << reply->errorString();
+        const auto booklets = this->parseNotes(reply->readAll());
+        emit this->bookletUpdated([&]() -> FMH::MODEL {
+                                   FMH::MODEL booklet;
+
+                                      if(booklets.isEmpty())
+                                   return booklet;
+
+                                   booklet = booklets.first();
+                                   booklet[FMH::MODEL_KEY::STAMP] = booklet[FMH::MODEL_KEY::ID]; //adds the stamp to the local note form the remote id
+                                   booklet[FMH::MODEL_KEY::ID] = __booklet[FMH::MODEL_KEY::TITLE]; //adds back the id of the local booklet
+                                   booklet[FMH::MODEL_KEY::SERVER] = this->m_provider; //adds the provider server address
+                                   booklet[FMH::MODEL_KEY::USER] = this->m_user; //adds the user name
+
+                                   return booklet;
+                               }());
+
+        restclient->deleteLater();
+    });
+}
+
 void NextNote::removeNote(const QString &id)
 {
     if(id.isEmpty())
@@ -185,6 +298,11 @@ void NextNote::removeNote(const QString &id)
         emit this->noteRemoved();
         restclient->deleteLater();
     });
+}
+
+void NextNote::removeBooklet(const QString &id)
+{
+
 }
 
 const QString NextNote::formatUrl(const QString &user, const QString &password, const QString &provider)

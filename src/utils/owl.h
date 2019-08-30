@@ -22,6 +22,7 @@ namespace OWL
         NOTES_SYNC,
         BOOKS,
         BOOKLETS,
+        BOOKLETS_SYNC,
         LINKS,
         NONE
     };
@@ -32,6 +33,7 @@ namespace OWL
         {TABLE::NOTES_SYNC,"notes_sync"},
         {TABLE::BOOKS,"books"},
         {TABLE::BOOKLETS,"booklets"},
+        {TABLE::BOOKLETS_SYNC,"booklets_sync"},
         {TABLE::LINKS,"links"},
     };
 
