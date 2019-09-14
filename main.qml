@@ -14,8 +14,6 @@ Maui.ApplicationWindow
     id: root
     title: qsTr("Buho")
 
-    /***** PROPS *****/
-    //    altToolBars: false
 
     /**** BRANDING COLORS ****/
     //    menuButton.colorScheme.highlightColor: accentColor
@@ -28,8 +26,8 @@ Maui.ApplicationWindow
 
 //    altColorText : "white"/*Qt.darker(accentColor, 2.5)*/
     showAccounts: true
-    about.appDescription: qsTr("Buho allows you to take quick notes, collect links and take long notes organized by chapters.")
-    about.appIcon: "qrc:/buho.svg"
+    Maui.App.description: qsTr("Buho allows you to take quick notes, collect links and take long notes organized by chapters.")
+    Maui.App.iconName: "qrc:/buho.svg"
 
     property int currentView : views.notes
     readonly property var views : ({
@@ -42,6 +40,7 @@ Maui.ApplicationWindow
     property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
 //    headBarFGColor: "red"
 
+//    headBar.position: ToolBar.Footer
     headBar.middleContent: Kirigami.ActionToolBar
     {
         display: isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
