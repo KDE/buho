@@ -129,10 +129,10 @@ if (ANDROID)
     target_link_libraries(vvave Qt5::AndroidExtras)
     kde_source_files_enable_exceptions(buho src/buho.cpp)
 else()
-    find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config KIO Attica)
+    find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config KIO Attica SyntaxHighlighting)
     find_package(Qt5 REQUIRED COMPONENTS WebEngine)
 
-    target_link_libraries(buho KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n KF5::Attica)
+    target_link_libraries(buho KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n KF5::Attica KF5::SyntaxHighlighting)
 endif()
 
 if (TARGET create-apk-buho)
