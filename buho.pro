@@ -23,7 +23,7 @@ linux:unix:!android {
 
     message(Building helpers for Android)
     QT += androidextras webview
-#    include($$PWD/3rdparty/openssl/openssl.pri)
+    include($$PWD/3rdparty/openssl/openssl.pri)
 
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)
@@ -86,13 +86,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    3rdparty/mauikit/src/android/AndroidManifest.xml \
-    3rdparty/mauikit/src/android/build.gradle \
-    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.jar \
-    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.properties \
-    3rdparty/mauikit/src/android/gradlew \
-    3rdparty/mauikit/src/android/gradlew.bat \
-    3rdparty/mauikit/src/android/res/values/libs.xml \
     src/db/script.sql \
 
 include($$PWD/install.pri)
