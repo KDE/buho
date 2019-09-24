@@ -19,8 +19,6 @@ Maui.Page
     signal noteClicked(var note)
 
     padding: space.big
-
-    headBar.drawBorder: false
     headBar.visible: !cardsView.holder.visible
     title : cardsView.count + " notes"
 
