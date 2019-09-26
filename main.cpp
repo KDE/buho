@@ -38,6 +38,7 @@ int main(int argc, char *argv[]) {
   qDebug() << "hasThemeIcon(view-pim-notes) :"
            << QIcon::hasThemeIcon("view-pim-notes");
 
+  qDebug() << "searchPaths :" << QIcon::themeSearchPaths();
   qDebug() << "fallbackSearchPaths :" << QIcon::fallbackSearchPaths();
 
 #ifdef Q_OS_ANDROID
