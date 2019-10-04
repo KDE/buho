@@ -23,6 +23,7 @@ Maui.Page
 
     headBar.visible: !cardsView.holder.visible
     padding: Maui.Style.space.big
+
     title : cardsView.count + " links"
     headBar.leftContent: [
         ToolButton

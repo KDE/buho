@@ -14,17 +14,10 @@ TEMPLATE = app
 DESTDIR = $$OUT_PWD/
 
 linux:unix:!android {
-
-    message(Building for Linux KDE)
-    QT += webengine
-    LIBS += -lMauiKit
-
 } else:android {
 
     message(Building helpers for Android)
     QT += androidextras webview
-    include($$PWD/3rdparty/openssl/openssl.pri)
-
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)
 

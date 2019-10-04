@@ -90,9 +90,6 @@ Maui.ApplicationWindow
         ]
     }
 
-    //    headBar.colorScheme.borderColor: Qt.darker(accentColor, 1.4)
-//    headBar.implicitHeight: Maui.Style.toolBarHeight * 1.5
-
     Rectangle
     {
         z: 999
