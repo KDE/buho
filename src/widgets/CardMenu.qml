@@ -5,7 +5,7 @@ import org.kde.kirigami 2.7 as Kirigami
 
 Menu
 {
-    implicitWidth: colorBar.implicitWidth + space.medium
+    implicitWidth: colorBar.implicitWidth + Maui.Style.space.medium
     property bool isFav : false
     property bool isPin: false
 
@@ -73,7 +73,7 @@ Menu
     MenuItem
     {
         width: parent.width
-        height: rowHeight
+        height: Maui.Style.rowHeight
 
         ColorsBar
         {

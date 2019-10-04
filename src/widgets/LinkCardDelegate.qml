@@ -9,9 +9,9 @@ ItemDelegate
 {
     id: control
     property string noteColor : model.color ? model.color : viewBackgroundColor
-    property int cardWidth: visible ? unit * 200 : 0
-    property int cardHeight: visible ? unit * 120 : 0
-    property int cardRadius: radiusV
+    property int cardWidth: visible ? Maui.Style.unit * 200 : 0
+    property int cardHeight: visible ? Maui.Style.unit * 120 : 0
+    property int cardRadius: Maui.Style.radiusV
 
     property bool condition : true
 
@@ -53,7 +53,7 @@ ItemDelegate
         {
             id: imgLoader
             anchors.fill: parent
-            anchors.margins: space.small
+            anchors.margins: Maui.Style.space.small
             clip: true
             sourceComponent:  typeof model.preview !== 'undefined' ? imgComponent : undefined
         }
@@ -71,18 +71,18 @@ ItemDelegate
     Item
     {
         visible: title.text.length > 0
-        height: layout.implicitHeight + space.big
+        height: layout.implicitHeight + Maui.Style.space.big
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        anchors.margins: unit
+        anchors.margins: Maui.Style.unit
         clip: true
 
         ColumnLayout
         {
             id: layout
             anchors.fill: parent
-            anchors.margins: space.small
+            anchors.margins: Maui.Style.space.small
             spacing: 0
             Label
             {
@@ -98,7 +98,7 @@ ItemDelegate
                 wrapMode: TextEdit.WrapAnywhere
                 font.weight: Font.Bold
                 font.bold: true
-                font.pointSize: fontSizes.small
+                font.pointSize: Maui.Style.fontSizes.small
                 clip: true
             }
 
@@ -115,7 +115,7 @@ ItemDelegate
                 wrapMode: TextEdit.WrapAnywhere
                 font.weight: Font.Bold
                 font.bold: true
-                font.pointSize: fontSizes.large
+                font.pointSize: Maui.Style.fontSizes.large
                 clip: true
             }
         }
@@ -145,7 +145,7 @@ ItemDelegate
             wrapMode: TextEdit.WrapAnywhere
 
             textFormat: TextEdit.RichText
-            font.pointSize: fontSizes.big
+            font.pointSize: Maui.Style.fontSizes.big
 
             background: Rectangle
             {

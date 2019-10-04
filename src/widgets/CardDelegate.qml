@@ -4,14 +4,15 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.mauikit 1.0 as Maui
 
 ItemDelegate
 {
     id: control
     property string noteColor : model.color ? model.color : Kirigami.Theme.backgroundColor
-    property int cardWidth: visible ? unit * 200 : 0
-    property int cardHeight: visible ? unit * 120 : 0
-    property int cardRadius: radiusV
+    property int cardWidth: visible ? Maui.Style.unit * 200 : 0
+    property int cardHeight: visible ? Maui.Style.unit * 120 : 0
+    property int cardRadius: Maui.Style.radiusV
 
     property bool condition : true
 
@@ -72,9 +73,9 @@ ItemDelegate
             id: date
             padding: 0
             visible: date.text.length > 0
-            Layout.leftMargin: space.medium
-            Layout.topMargin: space.medium
-            Layout.rightMargin: space.medium
+            Layout.leftMargin: Maui.Style.space.medium
+            Layout.topMargin: Maui.Style.space.medium
+            Layout.rightMargin: Maui.Style.space.medium
             Layout.alignment: Qt.AlignLeft
 
             Layout.fillWidth: true
@@ -84,7 +85,7 @@ ItemDelegate
             wrapMode: TextEdit.WrapAnywhere
             font.weight: Font.Bold
             font.bold: true
-            font.pointSize: fontSizes.small
+            font.pointSize: Maui.Style.fontSizes.small
         }
 
         Label
@@ -92,9 +93,9 @@ ItemDelegate
             id: title
             padding: 0
             visible: title.text.length > 0
-            Layout.leftMargin: space.medium
-            Layout.bottomMargin: space.medium
-            Layout.rightMargin: space.medium
+            Layout.leftMargin: Maui.Style.space.medium
+            Layout.bottomMargin: Maui.Style.space.medium
+            Layout.rightMargin: Maui.Style.space.medium
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
             Layout.preferredHeight: if(model.preview) parent.height * 0.4
 
@@ -106,7 +107,7 @@ ItemDelegate
             wrapMode: TextEdit.WrapAnywhere
             font.weight: Font.Bold
             font.bold: true
-            font.pointSize: fontSizes.large
+            font.pointSize: Maui.Style.fontSizes.large
             clip: true
         }
 
@@ -114,10 +115,10 @@ ItemDelegate
             Loader
             {
                 id: bodyLoader
-                Layout.leftMargin: space.medium
-                Layout.bottomMargin: space.medium
-                Layout.rightMargin: space.medium
-                Layout.topMargin: title.visible ? 0 : space.medium
+                Layout.leftMargin: Maui.Style.space.medium
+                Layout.bottomMargin: Maui.Style.space.medium
+                Layout.rightMargin: Maui.Style.space.medium
+                Layout.topMargin: title.visible ? 0 : Maui.Style.space.medium
                 Layout.alignment: Qt.AlignLeft
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -131,10 +132,10 @@ ItemDelegate
             id: imgLoader
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.margins: unit
+            Layout.margins: Maui.Style.unit
             Layout.alignment: Qt.AlignCenter
             clip: true
-            Layout.topMargin: space.medium
+            Layout.topMargin: Maui.Style.space.medium
             sourceComponent:  typeof model.preview !== 'undefined' ? imgComponent : undefined
         }
     }
@@ -154,7 +155,7 @@ ItemDelegate
             wrapMode: TextEdit.WrapAnywhere
 
             textFormat : TextEdit.AutoText
-            font.pointSize: fontSizes.big
+            font.pointSize: Maui.Style.fontSizes.big
             background: Rectangle
             {
                 color: "transparent"

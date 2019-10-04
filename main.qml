@@ -91,21 +91,20 @@ Maui.ApplicationWindow
     }
 
     //    headBar.colorScheme.borderColor: Qt.darker(accentColor, 1.4)
-    headBar.drawBorder: false
-//    headBar.implicitHeight: toolBarHeight * 1.5
+//    headBar.implicitHeight: Maui.Style.toolBarHeight * 1.5
 
     Rectangle
     {
         z: 999
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: toolBarHeight
-        anchors.bottomMargin: toolBarHeight
-        height: toolBarHeight
+        anchors.margins: Maui.Style.toolBarHeight
+        anchors.bottomMargin: Maui.Style.toolBarHeight
+        height: Maui.Style.toolBarHeight
         width: height
 
         color: Kirigami.Theme.highlightColor
-        radius: radiusV
+        radius: Maui.Style.radiusV
 
         Maui.PieButton
         {

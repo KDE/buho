@@ -3,9 +3,10 @@ Name=Buho
 Comment=Note taking app
 TryExec=buho
 Exec=buho %U
+Keywords=notes;todo;nextcloud;maui;
 Terminal=false
 Type=Application
-Categories=Qt;KDE;Utility;TextTools;X-KDE-Utilities-Desktop;
+Categories=Qt;KDE;Utility;TextTools;TextEditor;Todo;X-KDE-Utilities-Desktop;
 StartupNotify=true
 Icon=buho
 

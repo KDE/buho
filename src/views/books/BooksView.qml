@@ -49,7 +49,7 @@ StackView
     Maui.Page
     {
         id: _booksPage
-        padding: showDetails ? 0 : space.big
+        padding: showDetails ? 0 : Maui.Style.space.big
 
         title : cardsView.count + " books"
         //    headBar.leftContent: [
@@ -76,7 +76,7 @@ StackView
             id: _holder
             visible: !cardsView.count
             emoji: "qrc:/notepad.png"
-            emojiSize: iconSizes.huge
+            emojiSize: Maui.Style.iconSizes.huge
             isMask: false
             title : "There are not Books!"
             body: "You can create new books and organize your notes"
@@ -89,9 +89,9 @@ StackView
             id: cardsView
             anchors.fill: parent
             adaptContent: !showDetails
-            itemSize: showDetails ? iconSizes.big : iconSizes.huge
+            itemSize: showDetails ? Maui.Style.iconSizes.big : Maui.Style.iconSizes.huge
             //        centerContent: true
-            spacing: space.huge
+            spacing: Maui.Style.space.huge
 
             cellWidth: showDetails ?  parent.width : itemSize * 1.5
             cellHeight: itemSize * 1.5
@@ -137,7 +137,7 @@ StackView
                         Layout.fillHeight: true
 
                         color: hovered ? Kirigami.Theme.highlightColor : "transparent"
-                        radius: radiusV
+                        radius: Maui.Style.radiusV
                         Label
                         {
                             width: parent.width
@@ -157,7 +157,7 @@ StackView
                     {
                         left: parent.left
                         top: parent.top
-                        margins: space.small
+                        margins: Maui.Style.space.small
                     }
 
                     Kirigami.Theme.backgroundColor: Kirigami.Theme.neutralTextColor

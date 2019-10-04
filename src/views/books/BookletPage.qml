@@ -53,11 +53,11 @@ Item
                 id: title
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-//                Layout.margins: space.medium
+//                Layout.margins: Maui.Style.space.medium
                 placeholderText: qsTr("New chapter...")
                 font.weight: Font.Bold
                 font.bold: true
-                font.pointSize: fontSizes.large
+                font.pointSize: Maui.Style.fontSizes.large
                 text: currentBooklet.title
                 //            Kirigami.Theme.backgroundColor: selectedColor
                 //            Kirigami.Theme.textColor: Qt.darker(selectedColor, 2.5)
@@ -75,7 +75,7 @@ Item
             id: _holder
             visible: !_listView.count || !currentBooklet
             emoji: "qrc:/Type.png"
-            emojiSize: iconSizes.huge
+            emojiSize: Maui.Style.iconSizes.huge
             isMask: false
             title : "Nothing to edit!"
             body: "Select a chapter or create a new one"
@@ -135,10 +135,10 @@ Item
 
                 Maui.Holder
                 {
-                    anchors.margins: space.huge
+                    anchors.margins: Maui.Style.space.huge
                     visible: !_listView.count
                     emoji: "qrc:/E-reading.png"
-                    emojiSize: iconSizes.huge
+                    emojiSize: Maui.Style.iconSizes.huge
                     isMask: false
                     title : "This book is empty!"
                     body: "Start by creating a new chapter for your book by clicking the + icon"
@@ -179,13 +179,13 @@ Item
                 {
                     z: 999
                     anchors.bottom: parent.bottom
-                    anchors.margins: space.huge
+                    anchors.margins: Maui.Style.space.huge
                     anchors.horizontalCenter: parent.horizontalCenter
-                    height: toolBarHeight
+                    height: Maui.Style.toolBarHeight
                     width: height
 
                     color: Kirigami.Theme.positiveTextColor
-                    radius: radiusV
+                    radius: Maui.Style.radiusV
 
                     ToolButton
                     {

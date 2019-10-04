@@ -9,8 +9,8 @@ Maui.Dialog
     parent: parent
     heightHint: 0.95
     widthHint: 0.95
-    maxHeight: previewReady ? unit * 800 : contentLayout.implicitHeight
-    maxWidth: unit *700
+    maxHeight: previewReady ? Maui.Style.unit * 800 : contentLayout.implicitHeight
+    maxWidth: Maui.Style.unit *700
 
     signal linkSaved(var link)
     property string selectedColor : "#ffffe6"
@@ -50,12 +50,12 @@ Maui.Dialog
             id: title
             visible: previewReady
             Layout.fillWidth: true
-            Layout.margins: space.medium
+            Layout.margins: Maui.Style.space.medium
             height: 24
             placeholderText: qsTr("Title")
             font.weight: Font.Bold
             font.bold: true
-            font.pointSize: fontSizes.large
+            font.pointSize: Maui.Style.fontSizes.large
             color: fgColor
 
             background: Rectangle
@@ -112,13 +112,13 @@ Maui.Dialog
         {
             id: link
             Layout.fillWidth: true
-            Layout.margins: space.medium
-            height: rowHeight
+            Layout.margins: Maui.Style.space.medium
+            height: Maui.Style.rowHeight
             verticalAlignment: Qt.AlignVCenter
             placeholderText: qsTr("URL")
             font.weight: Font.Bold
             font.bold: true
-            font.pointSize: fontSizes.large
+            font.pointSize: Maui.Style.fontSizes.large
             color: fgColor
             Layout.alignment: Qt.AlignCenter
 

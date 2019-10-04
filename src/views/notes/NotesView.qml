@@ -18,9 +18,8 @@ Maui.Page
 
     signal noteClicked(var note)
 
-    padding: space.big
+    padding: Maui.Style.space.big
 
-    headBar.drawBorder: false
     headBar.visible: !cardsView.holder.visible
     title : cardsView.count + " notes"
 
@@ -150,7 +149,7 @@ Maui.Page
             }
 
             color: Kirigami.Theme.backgroundColor
-            radius: radiusV
+            radius: Maui.Style.radiusV
 
             border.color: Qt.darker(Kirigami.Theme.backgroundColor, 1.4)
         }
@@ -163,7 +162,7 @@ Maui.Page
             Layout.fillWidth: true
             width: parent.width
             holder.emoji: "qrc:/Type.png"
-            holder.emojiSize: iconSizes.huge
+            holder.emojiSize: Maui.Style.iconSizes.huge
             holder.isMask: false
             holder.title : "No notes!"
             holder.body: "Click here to create a new note"

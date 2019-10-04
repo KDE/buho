@@ -6,8 +6,8 @@ ListView
     id: control
     clip: true
 
-    property int itemWidth: unit * 300
-    property int itemHeight: unit * 200
+    property int itemWidth: Maui.Style.unit * 300
+    property int itemHeight: Maui.Style.unit * 200
     signal itemClicked(int index)
 
     boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
@@ -19,7 +19,7 @@ ListView
 //        id: holder
 //        visible: control.count > 0
 //        emoji: "qrc:/Type.png"
-//        emojiSize: iconSizes.big
+//        emojiSize: Maui.Style.iconSizes.big
 //        isMask: false
 //        title : "No pinned notes!"
 //        body: "You can pin your notes to see them here"
