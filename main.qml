@@ -41,53 +41,37 @@ Maui.ApplicationWindow
 //    headBarFGColor: "red"
 
 //    headBar.position: ToolBar.Footer
-    headBar.middleContent: Kirigami.ActionToolBar
+    headBar.middleContent: Maui.ActionGroup
     {
-        display: isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
-        position: ToolBar.Header
-        Layout.fillWidth: true
+        id: _actionGroup
+        Layout.fillHeight: true
+        //        Layout.fillWidth: true
+        Layout.minimumWidth: implicitWidth
+        currentIndex : swipeView.currentIndex
+        onCurrentIndexChanged: swipeView.currentIndex = currentIndex
+        //        strech: true
 
-        actions: [
-            Kirigami.Action
+        Action
             {
-                onTriggered: currentView = views.notes
-                //                icon.color: checked ? accentColor : textColor
-//                Kirigami.Theme.highlightColor: accentColor
-//                Kirigami.Theme.textColor: accentColor
                 icon.name: "view-pim-notes"
                 text: qsTr("Notes")
-                checked: currentView === views.notes
-            },
-
-            Kirigami.Action
+            }
+Action
             {
-                onTriggered: currentView = views.links
-//                icon.color: checked ? accentColor : textColor
-//                Kirigami.Theme.highlightColor: accentColor
                 icon.name: "view-pim-news"
                 text: qsTr("Links")
-                checked: currentView === views.links
-            },
-
-            Kirigami.Action
+            }
+Action
             {
-                onTriggered: currentView = views.books
-//                icon.color: checked?  accentColor : textColor
-//                Kirigami.Theme.highlightColor: accentColor
                 icon.name: "view-pim-journal"
                 text: qsTr("Books")
-                checked: currentView === views.books
-            },
-
-            Kirigami.Action
+            }
+Action
             {
-//                icon.color: checked ? accentColor : textColor
-//                Kirigami.Theme.highlightColor: accentColor
                 icon.name: "tag"
                 text: qsTr("Tags")
-                checked: currentView === views.tags
             }
-        ]
+
     }
 
     Rectangle
@@ -180,18 +164,8 @@ Maui.ApplicationWindow
     {
         id: swipeView
         anchors.fill: parent
-        currentIndex: currentView
-        onCurrentIndexChanged:
-        {
-            currentView = currentIndex
-
-//            if(currentView === views.notes)
-//                accentColor = "#ff9494"
-//            else if(currentView === views.links)
-//                accentColor = "#25affb"
-//            else if(currentView === views.books)
-//                accentColor = "#6bc5a5"
-        }
+        currentIndex: _actionGroup.currentIndex
+        onCurrentIndexChanged: _actionGroup.currentIndex = currentIndex
 
         interactive: isMobile
 
