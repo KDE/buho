@@ -10,7 +10,7 @@ Maui.Dialog
     parent: parent
     heightHint: 0.97
     widthHint: 0.97
-    maxWidth: 800* Maui.Style.unit
+    maxWidth: 800*Maui.Style.unit
     maxHeight: maxWidth
     page.padding: 0
     property color selectedColor : "transparent"

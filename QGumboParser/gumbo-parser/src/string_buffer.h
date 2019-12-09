@@ -48,7 +48,7 @@ typedef struct {
 void gumbo_string_buffer_init(
     struct GumboInternalParser* parser, GumboStringBuffer* output);
 
-// Ensures that the buffer contains at least a certain amount of space.  Most
+// Ensures that the buffer contains at least a certain amount of Maui.Style.space.  Most
 // useful with snprintf and the other length-delimited string functions, which
 // may want to write directly into the buffer.
 void gumbo_string_buffer_reserve(struct GumboInternalParser* parser,

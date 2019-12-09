@@ -56,11 +56,11 @@ void NextNote::getNote(const QString &id)
     QMap<QString, QString> header {{"Authorization", headerData.toLocal8Bit()}};
 
     auto downloader = new FMH::Downloader;
-    connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
+    connect(downloader, &FMH::Downloader::dataReady, [&, downloader_ = std::move(downloader)](QByteArray array)
     {
         const auto notes = this->parseNotes(array);
         emit this->noteReady(notes.isEmpty() ? FMH::MODEL() : notes.first());
-        downloader->deleteLater();
+        downloader_->deleteLater();
     });
 
     downloader->getArray(url, header);
@@ -87,7 +87,7 @@ void NextNote::getNotes()
     QMap<QString, QString> header {{"Authorization", headerData.toLocal8Bit()}};
 
     const auto downloader = new FMH::Downloader;
-    connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
+    connect(downloader, &FMH::Downloader::dataReady, [&, downloader_ = std::move(downloader)](QByteArray array)
     {
         //exclude notes that have its own category
         FMH::MODEL_LIST notes;
@@ -96,7 +96,7 @@ void NextNote::getNotes()
                 notes << data;
 
         emit this->notesReady(notes);
-        downloader->deleteLater();
+        downloader_->deleteLater();
     });
 
     downloader->getArray(url, header);
@@ -113,7 +113,7 @@ void NextNote::getBooklets()
     QMap<QString, QString> header {{"Authorization", headerData.toLocal8Bit()}};
 
     const auto downloader = new FMH::Downloader;
-    connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
+    connect(downloader, &FMH::Downloader::dataReady, [&, downloader_ = std::move(downloader)](QByteArray array)
     {
         //exclude notes that have its own category
         FMH::MODEL_LIST booklets;
@@ -122,7 +122,7 @@ void NextNote::getBooklets()
                 booklets << data;
 
         emit this->bookletsReady(booklets);
-        downloader->deleteLater();
+        downloader_->deleteLater();
     });
 
     downloader->getArray(url, header);
@@ -130,7 +130,7 @@ void NextNote::getBooklets()
 
 void NextNote::insertNote(const FMH::MODEL &note)
 {
-    QByteArray payload = QJsonDocument::fromVariant(FM::toMap(note)).toJson();
+    QByteArray payload = QJsonDocument::fromVariant(FMH::toMap(note)).toJson();
     qDebug() << "UPLOADING NEW NOT" << QVariant(payload).toString();
 
     const auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
@@ -162,7 +162,7 @@ void NextNote::insertNote(const FMH::MODEL &note)
 
 void NextNote::insertBooklet(const FMH::MODEL &booklet)
 {
-    QByteArray payload = QJsonDocument::fromVariant(FM::toMap(booklet)).toJson();
+    QByteArray payload = QJsonDocument::fromVariant(FMH::toMap(booklet)).toJson();
     qDebug() << "UPLOADING NEW BOOKLET" << QVariant(payload).toString();
 
     const auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
@@ -200,7 +200,7 @@ void NextNote::updateNote(const QString &id, const FMH::MODEL &note)
         return;
     }
 
-    QByteArray payload = QJsonDocument::fromVariant(FM::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::CONTENT,
+    QByteArray payload = QJsonDocument::fromVariant(FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::CONTENT,
                                                                                       FMH::MODEL_KEY::FAVORITE,
                                                                                       FMH::MODEL_KEY::MODIFIED,
                                                                                       FMH::MODEL_KEY::CATEGORY}))).toJson();
@@ -243,7 +243,7 @@ void NextNote::updateBooklet(const QString &id, const FMH::MODEL &booklet)
         return;
     }
 
-    QByteArray payload = QJsonDocument::fromVariant(FM::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::CONTENT,
+    QByteArray payload = QJsonDocument::fromVariant(FMH::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::CONTENT,
                                                                                       FMH::MODEL_KEY::FAVORITE,
                                                                                       FMH::MODEL_KEY::MODIFIED,
                                                                                       FMH::MODEL_KEY::CATEGORY}))).toJson();
@@ -332,13 +332,10 @@ const FMH::MODEL_LIST NextNote::parseNotes(const QByteArray &array)
     if(data.isNull() || !data.isValid())
         return res;
 
-    if(!data.toList().isEmpty())
-    {
-        for(const auto &map : data.toList())
-            res << FM::toModel(map.toMap());
-    }
+    if(!data.toList().isEmpty())    
+        res<< FMH::toModelList(data.toList());
     else
-        res << FM::toModel(data.toMap());
+        res << FMH::toModel(data.toMap());
 
     return res;
 }

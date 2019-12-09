@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include "qgumbodocument.h"
-#include "qgumbonode.h"
+//#include "qgumbodocument.h"
+//#include "qgumbonode.h"
 #include <QVariantMap>
 
 typedef QVariantMap LINK;
@@ -19,7 +19,7 @@ public:
     Q_INVOKABLE void extract(const QString &url);
 
 private:
-    QStringList query(const QByteArray &array, const HtmlTag &tag, const QString &attribute = QString());
+    QStringList query(const QByteArray &array, const QString &tag, const QString &attribute = QString());
 
 signals:
     void previewReady(QVariantMap link);

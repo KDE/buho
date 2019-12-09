@@ -5,9 +5,12 @@
 #include <functional>
 #ifdef STATIC_MAUIKIT
 #include "fmh.h"
+#include "downloader.h"
 #else
 #include <MauiKit/fmh.h>
+#include <MauiKit/downloader.h>
 #endif
+
 /**
  * @brief The AbstractNoteSyncer class
  * is an abstraction for different services backend to sync notes.

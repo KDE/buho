@@ -18,11 +18,11 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-add_definitions( -Wall -O2 -fexceptions -std=c99)
+#add_definitions( -Wall -O2 -fexceptions -std=c99)
 
 include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/QGumboParser
-    ${CMAKE_CURRENT_BINARY_DIR}/QGumboParser
+#    ${CMAKE_CURRENT_SOURCE_DIR}/QGumboParser
+#    ${CMAKE_CURRENT_BINARY_DIR}/QGumboParser
 
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_BINARY_DIR}/src
@@ -69,64 +69,65 @@ set(buho_HDRS
 set(buho_ASSETS
     qml.qrc
     assets/assets.qrc
+    assets/icon-theme.qrc
     )
 
-set(qgumbo_SRCS
+#set(qgumbo_SRCS
 
-    QGumboParser/qgumbodocument.cpp
-    QGumboParser/qgumbonode.cpp
-    QGumboParser/qgumboattribute.cpp
-    QGumboParser/gumbo-parser/src/attribute.c
-    QGumboParser/gumbo-parser/src/char_ref.c
-    QGumboParser/gumbo-parser/src/error.c
-    QGumboParser/gumbo-parser/src/parser.c
-    QGumboParser/gumbo-parser/src/string_buffer.c
-    QGumboParser/gumbo-parser/src/string_piece.c
-    QGumboParser/gumbo-parser/src/tag.c
-    QGumboParser/gumbo-parser/src/tokenizer.c
-    QGumboParser/gumbo-parser/src/utf8.c
-    QGumboParser/gumbo-parser/src/util.c
-    QGumboParser/gumbo-parser/src/vector.c
-    )
+#    QGumboParser/qgumbodocument.cpp
+#    QGumboParser/qgumbonode.cpp
+#    QGumboParser/qgumboattribute.cpp
+#    QGumboParser/gumbo-parser/src/attribute.c
+#    QGumboParser/gumbo-parser/src/char_ref.c
+#    QGumboParser/gumbo-parser/src/error.c
+#    QGumboParser/gumbo-parser/src/parser.c
+#    QGumboParser/gumbo-parser/src/string_buffer.c
+#    QGumboParser/gumbo-parser/src/string_piece.c
+#    QGumboParser/gumbo-parser/src/tag.c
+#    QGumboParser/gumbo-parser/src/tokenizer.c
+#    QGumboParser/gumbo-parser/src/utf8.c
+#    QGumboParser/gumbo-parser/src/util.c
+#    QGumboParser/gumbo-parser/src/vector.c
+#    )
 
-set(qgumbo_HDRS
-    QGumboParser/qgumboattribute.h
-    QGumboParser/qgumbodocument.h
-    QGumboParser/HtmlTag.h
-    QGumboParser/qgumbonode.h
-    QGumboParser/gumbo-parser/src/attribute.h
-    QGumboParser/gumbo-parser/src/char_ref.h
-    QGumboParser/gumbo-parser/src/char_ref.rl
-    QGumboParser/gumbo-parser/src/error.h
-    QGumboParser/gumbo-parser/src/gumbo.h
-    QGumboParser/gumbo-parser/src/insertion_mode.h
-    QGumboParser/gumbo-parser/src/parser.h
-    QGumboParser/gumbo-parser/src/string_buffer.h
-    QGumboParser/gumbo-parser/src/string_piece.h
-    QGumboParser/gumbo-parser/src/tag_enum.h
-    QGumboParser/gumbo-parser/src/tag_gperf.h
-    QGumboParser/gumbo-parser/src/tag_sizes.h
-    QGumboParser/gumbo-parser/src/tag_strings.h
-    QGumboParser/gumbo-parser/src/token_type.h
-    QGumboParser/gumbo-parser/src/tokenizer_states.h
-    QGumboParser/gumbo-parser/src/tokenizer.h
-    QGumboParser/gumbo-parser/src/utf8.h
-    QGumboParser/gumbo-parser/src/util.h
-    QGumboParser/gumbo-parser/src/vector.h
-    )
+#set(qgumbo_HDRS
+#    QGumboParser/qgumboattribute.h
+#    QGumboParser/qgumbodocument.h
+#    QGumboParser/HtmlTag.h
+#    QGumboParser/qgumbonode.h
+#    QGumboParser/gumbo-parser/src/attribute.h
+#    QGumboParser/gumbo-parser/src/char_ref.h
+#    QGumboParser/gumbo-parser/src/char_ref.rl
+#    QGumboParser/gumbo-parser/src/error.h
+#    QGumboParser/gumbo-parser/src/gumbo.h
+#    QGumboParser/gumbo-parser/src/insertion_mode.h
+#    QGumboParser/gumbo-parser/src/parser.h
+#    QGumboParser/gumbo-parser/src/string_buffer.h
+#    QGumboParser/gumbo-parser/src/string_piece.h
+#    QGumboParser/gumbo-parser/src/tag_enum.h
+#    QGumboParser/gumbo-parser/src/tag_gperf.h
+#    QGumboParser/gumbo-parser/src/tag_sizes.h
+#    QGumboParser/gumbo-parser/src/tag_strings.h
+#    QGumboParser/gumbo-parser/src/token_type.h
+#    QGumboParser/gumbo-parser/src/tokenizer_states.h
+#    QGumboParser/gumbo-parser/src/tokenizer.h
+#    QGumboParser/gumbo-parser/src/utf8.h
+#    QGumboParser/gumbo-parser/src/util.h
+#    QGumboParser/gumbo-parser/src/vector.h
+#    )
 
 add_executable(buho
     ${buho_SRCS}
     ${buho_HDRS}
     ${buho_ASSETS}
-    ${qgumbo_SRCS}
-    ${qgumbo_HDRS}
+#    ${qgumbo_SRCS}
+#    ${qgumbo_HDRS}
     )
 
 if (ANDROID)
     find_package(Qt5 REQUIRED COMPONENTS AndroidExtras)
 
-    target_link_libraries(vvave Qt5::AndroidExtras)
+    target_link_libraries(buho Qt5::AndroidExtras)
     kde_source_files_enable_exceptions(buho src/buho.cpp)
 else()
     find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config KIO Attica SyntaxHighlighting)
@@ -148,4 +149,4 @@ install(FILES org.kde.buho.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES assets/buho.svg DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps)
 #install(FILES org.kde.buho.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
-feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

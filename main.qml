@@ -25,7 +25,7 @@ Maui.ApplicationWindow
     //    highlightColor: accentColor
 
 //    altColorText : "white"/*Qt.darker(accentColor, 2.5)*/
-    showAccounts: true
+    Maui.App.handleAccounts: true
     Maui.App.description: qsTr("Buho allows you to take quick notes, collect links and take long notes organized by chapters.")
     Maui.App.iconName: "qrc:/buho.svg"
 

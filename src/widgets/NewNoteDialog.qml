@@ -10,7 +10,9 @@ Maui.Dialog
     parent: parent
     heightHint: 0.95
     widthHint: 0.95
+
     maxWidth: 700 * Maui.Style.unit
+
     maxHeight: maxWidth
 
     property string selectedColor : Kirigami.Theme.backgroundColor

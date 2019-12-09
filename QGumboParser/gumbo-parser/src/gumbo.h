@@ -207,7 +207,7 @@ GumboTag gumbo_tagn_enum(const char* tagname, unsigned int length);
 /**
  * Attribute namespaces.
  * HTML includes special handling for XLink, XML, and XMLNS namespaces on
- * attributes.  Everything else goes in the generic "NONE" namespace.
+ * attributes.  Everything else goes in the generic "NONE" nameMaui.Style.space.
  */
 typedef enum {
   GUMBO_ATTR_NAMESPACE_NONE,
@@ -299,7 +299,7 @@ typedef enum {
   GUMBO_NODE_CDATA,
   /** Comment node.  v will be a GumboText, excluding comment delimiters. */
   GUMBO_NODE_COMMENT,
-  /** Text node, where all contents is whitespace.  v will be a GumboText. */
+  /** Text node, where all contents is whiteMaui.Style.space.  v will be a GumboText. */
   GUMBO_NODE_WHITESPACE,
   /** Template node.  This is separate from GUMBO_NODE_ELEMENT because many
    * client libraries will want to ignore the contents of template nodes, as
@@ -329,7 +329,7 @@ typedef enum {
  * Unlike in X(HT)ML, namespaces in HTML5 are not denoted by a prefix.  Rather,
  * anything inside an <svg> tag is in the SVG namespace, anything inside the
  * <math> tag is in the MathML namespace, and anything else is inside the HTML
- * namespace.  No other namespaces are supported, so this can be an enum only.
+ * nameMaui.Style.space.  No other namespaces are supported, so this can be an enum only.
  */
 typedef enum {
   GUMBO_NAMESPACE_HTML,
