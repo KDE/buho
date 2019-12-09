@@ -10,7 +10,7 @@ Maui.Dialog
     parent: parent
     heightHint: 0.97
     widthHint: 0.97
-    maxWidth: 800*unit
+    maxWidth: 800*Maui.Style.unit
     maxHeight: maxWidth
     page.padding: 0
     property color selectedColor : "transparent"
@@ -92,7 +92,7 @@ Maui.Dialog
         //            Item
         //            {
         //                Layout.fillWidth: true
-        //                height: rowHeightAlt
+        //                height: Maui.Style.rowHeightAlt
 
         //                Label
         //                {
@@ -103,7 +103,7 @@ Maui.Dialog
         //                    horizontalAlignment: Qt.AlignHCenter
         //                    verticalAlignment: Qt.AlignVCenter
         //                    font.bold: true
-        //                    font.pointSize: fontSizes.big
+        //                    font.pointSize: Maui.Style.fontSizes.big
         //                    font.weight: Font.Bold
         //                    elide: Label.ElideRight
         //                }

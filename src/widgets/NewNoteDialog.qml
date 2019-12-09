@@ -10,7 +10,7 @@ Maui.Dialog
     parent: parent
     heightHint: 0.95
     widthHint: 0.95
-    maxWidth: 700*unit
+    maxWidth: 700*Maui.Style.unit
     maxHeight: maxWidth
 
     property string selectedColor : Kirigami.Theme.backgroundColor
@@ -27,11 +27,11 @@ Maui.Dialog
     {
         id: title
         Layout.fillWidth: true
-        Layout.margins: space.medium
+        Layout.margins: Maui.Style.space.medium
         placeholderText: qsTr("Title")
         font.weight: Font.Bold
         font.bold: true
-        font.pointSize: fontSizes.large
+        font.pointSize: Maui.Style.fontSizes.large
         //            Kirigami.Theme.backgroundColor: selectedColor
         //            Kirigami.Theme.textColor: Qt.darker(selectedColor, 2.5)
         //            color: fgColor

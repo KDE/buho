@@ -10,11 +10,11 @@ GridView
 
     property alias holder : holder
     property alias menu : cardMenu
-    readonly property  int defaultSize : unit * 200
+    readonly property  int defaultSize : Maui.Style.unit * 200
     property int itemWidth : !gridView ?  width :
-                                        (isMobile ? width * 0.5 : unit * 400)
-    property int itemHeight: unit * 180
-    property int itemSpacing:  space.huge
+                                        (isMobile ? width * 0.5 : Maui.Style.unit * 400)
+    property int itemHeight: Maui.Style.unit * 180
+    property int itemSpacing:  Maui.Style.space.huge
 
     signal itemClicked(int index)
     boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds

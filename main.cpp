@@ -2,7 +2,6 @@
 #include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QQuickStyle>
 
 #ifdef STATIC_KIRIGAMI
 #include "3rdparty/kirigami/src/kirigamiplugin.h"
@@ -18,7 +17,7 @@
 #include <QtWebView/QtWebView>
 #else
 #include <QApplication>
-#include <QtWebEngine>
+#include <QtWebView/QtWebView>
 #endif
 
 #include "./src/buho.h"

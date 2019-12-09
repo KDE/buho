@@ -10,7 +10,6 @@
 #else
 #include <MauiKit/tagging.h>
 #include <MauiKit/fm.h>
-#include <MauiKit/mauiapp.h>
 #include <MauiKit/mauiaccounts.h>
 #endif
 
@@ -21,7 +20,7 @@ Notes::Notes(QObject *parent) : MauiList(parent),
 
     this->syncer->setProvider(new NextNote);
 
-    const auto m_account = MauiApp::instance()->getAccounts();
+    const auto m_account = MauiAccounts::instance();
     connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap currentAccount)
     {
         Q_UNUSED(currentAccount)

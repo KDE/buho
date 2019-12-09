@@ -1,14 +1,15 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import org.kde.kirigami 2.7 as Kirigami
+import org.kde.mauikit 1.0 as Maui
 
 Row
 {
     signal colorPicked(color color)
     anchors.verticalCenter: parent.verticalCenter
-    spacing: space.medium
+    spacing: Maui.Style.space.medium
     property string currentColor
-    property int size : iconSizes.medium
+    property int size : Maui.Style.iconSizes.medium
 
     Rectangle
     {
@@ -16,7 +17,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: radiusV
+        radius: Maui.Style.radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea
@@ -36,7 +37,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: radiusV
+        radius: Maui.Style.radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea
@@ -56,7 +57,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: radiusV
+        radius: Maui.Style.radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea
@@ -76,7 +77,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: radiusV
+        radius: Maui.Style.radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea
@@ -96,7 +97,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: radiusV
+        radius: Maui.Style.radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea
@@ -118,7 +119,7 @@ Row
         anchors.verticalCenter: parent.verticalCenter
         height: size
         width: height
-        radius: radiusV
+        radius: Maui.Style.radiusV
         border.color: Qt.darker(color, 1.7)
 
         MouseArea

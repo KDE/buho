@@ -8,11 +8,10 @@
 #include "tagging.h"
 #include "fm.h"
 #include "mauiaccounts.h"
-#include "mauiapp.h"
 #else
 #include <MauiKit/tagging.h>
 #include <MauiKit/fm.h>
-#include <MauiKit/mauiapp.h>
+#include <MauiKit/fmstatic.h>
 #include <MauiKit/mauiaccounts.h>
 #endif
 
@@ -21,7 +20,7 @@ Syncer::Syncer(QObject *parent) : QObject(parent),
     db(DB::getInstance()),
     provider(nullptr) {
 
-    const auto m_account = MauiApp::instance()->getAccounts();
+    const auto m_account = MauiAccounts::instance();
     connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap currentAccount)
     {
         this->setAccount(FMH::toModel(currentAccount));
@@ -485,7 +484,7 @@ bool Syncer::insertBookLocal(FMH::MODEL &book)
         return false;
     }
 
-    if(!FM::createDir(QUrl::fromLocalFile(OWL::BooksPath), book[FMH::MODEL_KEY::TITLE]))
+    if(!FMStatic::createDir(QUrl::fromLocalFile(OWL::BooksPath), book[FMH::MODEL_KEY::TITLE]))
     {
         qWarning() << "Could not create directory for the given book name. Syncer::insertBookLocal" << book[FMH::MODEL_KEY::TITLE];
         return false;

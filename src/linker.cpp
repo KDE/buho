@@ -50,57 +50,57 @@ QByteArray Linker::getUrl(const QString &url)
 /* extract needs to extract from a url the title, the body and a preview image*/
 void Linker::extract(const QString &url)
 {
-    auto data = getUrl(url);
+//    auto data = getUrl(url);
 
-    QString title = url;
-    auto titles = query(data, HtmlTag::TITLE);
+//    QString title = url;
+//    auto titles = query(data, HtmlTag::TITLE);
 
-    if(!titles.isEmpty())
-        title = titles[0];
+//    if(!titles.isEmpty())
+//        title = titles[0];
 
-    title = title.isEmpty() ? url : title;
+//    title = title.isEmpty() ? url : title;
 
-    QStringList imgs;
+//    QStringList imgs;
 
-    //    auto tags = query(data, HtmlTag::META);
+//    //    auto tags = query(data, HtmlTag::META);
 
-    for(auto img : query(data, HtmlTag::IMG, "src"))
-    {
-        if(imgs.contains(img) || img.isEmpty()) continue;
+//    for(auto img : query(data, HtmlTag::IMG, "src"))
+//    {
+//        if(imgs.contains(img) || img.isEmpty()) continue;
 
-        qDebug()<< "IMGAE URL" << img;
-        if((img.startsWith("http") || img.startsWith("https"))
-                && (img.endsWith(".png", Qt::CaseInsensitive) ||
-                    img.endsWith(".jpg", Qt::CaseInsensitive) ||
-                    img.endsWith(".gif", Qt::CaseInsensitive) ||
-                    img.endsWith(".jpeg", Qt::CaseInsensitive)))
+//        qDebug()<< "IMGAE URL" << img;
+//        if((img.startsWith("http") || img.startsWith("https"))
+//                && (img.endsWith(".png", Qt::CaseInsensitive) ||
+//                    img.endsWith(".jpg", Qt::CaseInsensitive) ||
+//                    img.endsWith(".gif", Qt::CaseInsensitive) ||
+//                    img.endsWith(".jpeg", Qt::CaseInsensitive)))
 
-            imgs << img;
-        else continue;
-    }
+//            imgs << img;
+//        else continue;
+//    }
 
-    qDebug() << imgs;
-    LINK link_data {{FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title.trimmed()},
-                    {FMH::MODEL_NAME[FMH::MODEL_KEY::CONTENT], data},
-                    {FMH::MODEL_NAME[FMH::MODEL_KEY::URL], data},
-                    {FMH::MODEL_NAME[FMH::MODEL_KEY::IMG], imgs}};
-    emit previewReady(link_data);
+//    qDebug() << imgs;
+//    LINK link_data {{FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title.trimmed()},
+//                    {FMH::MODEL_NAME[FMH::MODEL_KEY::CONTENT], data},
+//                    {FMH::MODEL_NAME[FMH::MODEL_KEY::URL], data},
+//                    {FMH::MODEL_NAME[FMH::MODEL_KEY::IMG], imgs}};
+//    emit previewReady(link_data);
 }
 
-QStringList Linker::query(const QByteArray &array, const HtmlTag &tag, const QString &attribute)
+QStringList Linker::query(const QByteArray &array, const QString &tag, const QString &attribute)
 {
     QStringList res;
-    auto doc = QGumboDocument::parse(array);
-    auto root = doc.rootNode();
+//    auto doc = QGumboDocument::parse(array);
+//    auto root = doc.rootNode();
 
-    auto node = root.getElementsByTagName(tag);
+//    auto node = root.getElementsByTagName(tag);
 
-    for(const auto &i : node)
-    {
-        if(attribute.isEmpty())
-            res << i.innerText();
-        else res << i.getAttribute(attribute);
-    }
+//    for(const auto &i : node)
+//    {
+//        if(attribute.isEmpty())
+//            res << i.innerText();
+//        else res << i.getAttribute(attribute);
+//    }
 
     return res;
 }

@@ -5,9 +5,7 @@
 
 #ifdef STATIC_MAUIKIT
 #include "mauiaccounts.h"
-#include "mauiapp.h"
 #else
-#include <MauiKit/mauiapp.h>
 #include <MauiKit/mauiaccounts.h>
 #endif
 
@@ -16,7 +14,7 @@ Books::Books(QObject *parent) : MauiList(parent),
 {
     this->syncer->setProvider(new NextNote);
 
-    const auto m_account = MauiApp::instance()->getAccounts();
+    const auto m_account = MauiAccounts::instance();
     connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap currentAccount)
     {
         Q_UNUSED(currentAccount)

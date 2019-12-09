@@ -22,7 +22,7 @@ Maui.Page
     signal linkClicked(var link)
 
     headBar.visible: !cardsView.holder.visible
-    padding: space.big
+    padding: Maui.Style.space.big
     title : cardsView.count + " links"
     headBar.leftContent: [
         ToolButton
@@ -134,8 +134,8 @@ Maui.Page
         holder.isMask: false
         holder.title : "No Links!"
         holder.body: "Click here to save a new link"
-        holder.emojiSize: iconSizes.huge
-        itemHeight: unit * 250
+        holder.emojiSize: Maui.Style.iconSizes.huge
+        itemHeight: Maui.Style.unit * 250
 
         model: linksModel
 
