@@ -52,25 +52,28 @@ Maui.ApplicationWindow
         //        strech: true
 
         Action
-            {
-                icon.name: "view-pim-notes"
-                text: qsTr("Notes")
-            }
-Action
-            {
-                icon.name: "view-pim-news"
-                text: qsTr("Links")
-            }
-Action
-            {
-                icon.name: "view-pim-journal"
-                text: qsTr("Books")
-            }
-Action
-            {
-                icon.name: "tag"
-                text: qsTr("Tags")
-            }
+        {
+            icon.name: "view-pim-notes"
+            text: qsTr("Notes")
+        }
+
+        Action
+        {
+            icon.name: "view-pim-news"
+            text: qsTr("Links")
+        }
+
+        Action
+        {
+            icon.name: "view-pim-journal"
+            text: qsTr("Books")
+        }
+
+        Action
+        {
+            icon.name: "tag"
+            text: qsTr("Tags")
+        }
 
     }
 
