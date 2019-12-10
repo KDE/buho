@@ -28,7 +28,7 @@
 #include "./src/models/links/links.h"
 #include "./src/models/notes/notes.h"
 
-int main(int argc, char *argv[]) {
+int Q_DECL_EXPORT main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QIcon::setThemeName("Luv");
 

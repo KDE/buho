@@ -6,6 +6,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH})
 
 find_package(MauiKit REQUIRED)
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Qml Quick Sql Svg QuickControls2 Widgets)
+find_package(KF5 REQUIRED COMPONENTS Config KIO Notifications I18n Attica)
 include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
@@ -134,10 +135,6 @@ else()
     find_package(Qt5 REQUIRED COMPONENTS WebEngine)
 
     target_link_libraries(buho KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n KF5::Attica KF5::SyntaxHighlighting)
-endif()
-
-if (TARGET create-apk-buho)
-    set_target_properties(create-apk-buho PROPERTIES ANDROID_APK_DIR "${MAUIKIT_ANDROID_DIR}")
 endif()
 
 target_link_libraries(buho MauiKit Qt5::Sql Qt5::Qml Qt5::Widgets Qt5::Svg)
