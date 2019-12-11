@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>db/script.sql</file>
+        <file>widgets/NewNoteDialog.qml</file>
+        <file>widgets/CardsView.qml</file>
+        <file>views/notes/NotesView.qml</file>
+        <file>widgets/CardDelegate.qml</file>
+        <file>widgets/NewLinkDialog.qml</file>
+        <file>views/links/LinksView.qml</file>
+        <file>utils.js</file>
+        <file>views/links/WebViewAndroid.qml</file>
+        <file>views/links/WebViewLinux.qml</file>
+        <file>views/links/Previewer.qml</file>
+        <file>views/books/BooksView.qml</file>
+        <file>widgets/ColorsBar.qml</file>
+        <file>widgets/CardsList.qml</file>
+        <file>widgets/CardMenu.qml</file>
+        <file>widgets/LinkCardDelegate.qml</file>
+        <file>views/books/NewBookDialog.qml</file>
+        <file>views/books/BookletPage.qml</file>
+    </qresource>
+</RCC>
