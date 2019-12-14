@@ -44,7 +44,6 @@ set(buho_HDRS
 set(buho_ASSETS
     qml.qrc
     assets/assets.qrc
-    assets/icon-theme.qrc
     )
 
 #set(qgumbo_SRCS
