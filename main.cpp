@@ -30,14 +30,6 @@
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-  QIcon::setThemeName("Luv");
-
-  qDebug() << "hasThemeIcon(view-pim-notes) :"
-           << QIcon::hasThemeIcon("view-pim-notes");
-  qDebug() << QIcon::fromTheme("view-pim-notes");
-
-  qDebug() << "searchPaths :" << QIcon::themeSearchPaths();
-  qDebug() << "fallbackSearchPaths :" << QIcon::fallbackSearchPaths();
 
 #ifdef Q_OS_ANDROID
   QGuiApplication app(argc, argv);
