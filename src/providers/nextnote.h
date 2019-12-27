@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QString>
 #include "abstractnotesprovider.h"
-#include<functional>
+#include <functional>
 /**
  * @brief The NextNote class follows the NextCloud API specification
  *  for syncing notes.
