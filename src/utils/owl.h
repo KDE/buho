@@ -13,6 +13,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
+#include "../buho_version.h"
+
 namespace OWL
 {
     Q_NAMESPACE  
@@ -97,7 +99,7 @@ namespace OWL
     const QString BooksPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/books/";
     const QString LinksPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/links/";
     const QString App = "Buho";
-    const QString version = "1.0";
+    const QString version = BUHO_VERSION_STRING;
     const QString comment = "Notes taking and link collector manager";
     const QString DBName = "collection.db";
 

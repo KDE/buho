@@ -1,5 +1,6 @@
-project(buho)
 cmake_minimum_required(VERSION 3.0)
+set(BUHO_VERSION 1.0.0)
+project(buho VERSION ${BUHO_VERSION})
 
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH})
@@ -12,12 +13,18 @@ include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
 include(ECMInstallIcons)
-include(FeatureSummary)
+include(ECMSetupVersion)
 include(ECMAddAppIcon)
+include(FeatureSummary)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #add_definitions( -Wall -O2 -fexceptions -std=c99)
+
+ecm_setup_version(${BUHO_VERSION}
+    VARIABLE_PREFIX BUHO
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/buho_version.h"
+    )
 
 if (ANDROID)
     find_package(Qt5 REQUIRED COMPONENTS AndroidExtras)
