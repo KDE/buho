@@ -107,7 +107,6 @@ Maui.Dialog
             Layout.fillWidth: true
             Kirigami.Theme.backgroundColor: selectedColor
             Kirigami.Theme.textColor: Qt.darker(selectedColor, 2.5)
-            stickyHeadBar: true
 
             headBar.leftContent: ToolButton
             {
