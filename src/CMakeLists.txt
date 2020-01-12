@@ -10,6 +10,12 @@ include_directories(
 
     ${CMAKE_CURRENT_SOURCE_DIR}/providers
     ${CMAKE_CURRENT_BINARY_DIR}/providers
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/controllers
+    ${CMAKE_CURRENT_BINARY_DIR}/controllers
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/models
+    ${CMAKE_CURRENT_BINARY_DIR}/models
     )
 
 set(buho_SRCS
@@ -24,6 +30,9 @@ set(buho_SRCS
     models/books/booklet.cpp
     providers/nextnote.cpp
     syncing/syncer.cpp
+    controllers/notes/notescontroller.cpp
+    controllers/books/bookscontroller.cpp
+    controllers/links/linkscontroller.cpp
     )
 
 set(buho_HDRS
@@ -39,6 +48,9 @@ set(buho_HDRS
     providers/nextnote.h
     providers/abstractnotesprovider.h
     syncing/syncer.h
+    controllers/notes/notescontroller.h
+    controllers/books/bookscontroller.h
+    controllers/links/linkscontroller.h
     )
 
 set(buho_ASSETS
