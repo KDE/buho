@@ -18,12 +18,11 @@ Notes::Notes(QObject *parent) : MauiList(parent),
 {
     qDebug()<< "CREATING NOTES LIST";
 
-    this->syncer->setProvider(new NextNote);
+    this->syncer->setProvider(new NextNote); //Syncer takes ownership of NextNote or the provider
 
     const auto m_account = MauiAccounts::instance();
-    connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap currentAccount)
+    connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap)
     {
-        Q_UNUSED(currentAccount)
         this->syncer->getNotes();
     });
 

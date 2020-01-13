@@ -29,17 +29,17 @@ public:
      * @brief setCredentials
      * sets the credential to authenticate to the provider server
      * @param account
-     * the account data is represented by FMH::MODEL
+     * the account data is represented by FMH::MODEL and must contain the fileds: USER, PASSWORD and SERVER
      */
-    virtual void setCredentials(const FMH::MODEL &account) final
+    void setCredentials(const FMH::MODEL &account)
     {
         this->m_user = account[FMH::MODEL_KEY::USER];
         this->m_password = account[FMH::MODEL_KEY::PASSWORD];
         this->m_provider = QUrl(account[FMH::MODEL_KEY::SERVER]).host();
     }
 
-    virtual QString user() final { return this->m_user; }
-    virtual QString provider() final { return this->m_provider; }
+    const QString user() const { return this->m_user; }
+    const QString provider() const { return this->m_provider; }
 
     /**
      * @brief isValid
@@ -48,7 +48,7 @@ public:
      * @return
      * true if the credentials are all set or false is somethign is missing
      */
-    virtual bool isValid() final
+    bool isValid() const
     {
         return !(this->m_user.isEmpty() || this->m_user.isNull()
                  || this->m_provider.isEmpty() || this->m_provider.isNull()

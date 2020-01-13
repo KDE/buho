@@ -68,7 +68,6 @@ public slots:
     bool insert(const QVariantMap &note);
     bool update(const QVariantMap &data, const int &index);
     bool remove(const int &index);
-
 };
 
 #endif // NOTES_H

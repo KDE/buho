@@ -11,8 +11,6 @@
 #endif
 
 class DB;
-class Tagging;
-
 class Links : public MauiList
 {
     Q_OBJECT
@@ -48,9 +46,7 @@ public:
 
 private:
     DB *db;
-    Tagging *tag;
-
-   FMH::MODEL_LIST links;
+    FMH::MODEL_LIST links;
     void sortList();
 
     SORTBY sort = SORTBY::MODIFIED;

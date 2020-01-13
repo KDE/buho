@@ -8,15 +8,15 @@ Buho::Buho(QObject *parent) : QObject(parent)
 
 void Buho::setFolders()
 {
-    QDir notes_path(OWL::NotesPath);
+    QDir notes_path(OWL::NotesPath.toLocalFile());
     if (!notes_path.exists())
         notes_path.mkpath(".");
 
-    QDir links_path(OWL::LinksPath);
+    QDir links_path(OWL::LinksPath.toLocalFile());
     if (!links_path.exists())
         links_path.mkpath(".");
 
-    QDir books_path(OWL::BooksPath);
+    QDir books_path(OWL::BooksPath.toLocalFile());
     if (!books_path.exists())
         books_path.mkpath(".");
 }

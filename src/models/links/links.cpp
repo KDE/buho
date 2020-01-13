@@ -13,7 +13,6 @@
 Links::Links(QObject *parent) : MauiList(parent)
 {
     this->db = DB::getInstance();
-    this->tag =  Tagging::getInstance();
     this->sortList();
 
     connect(this, &Links::sortByChanged, this, &Links::sortList);
@@ -83,7 +82,7 @@ bool Links::insert(const QVariantMap &link)
     auto __model = FMH::toModel(link);
     __model[FMH::MODEL_KEY::ADDDATE] =  QDateTime::currentDateTime().toString();
     __model[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString();
-    __model[FMH::MODEL_KEY::PREVIEW] =  OWL::saveImage(Linker::getUrl(__model[FMH::MODEL_KEY::PREVIEW]), OWL::LinksPath+QUuid::createUuid().toString());
+    __model[FMH::MODEL_KEY::PREVIEW] =  OWL::saveImage(Linker::getUrl(__model[FMH::MODEL_KEY::PREVIEW]), OWL::LinksPath.toString()+QUuid::createUuid().toString());
 
 
     __model = FMH::filterModel(__model, {FMH::MODEL_KEY::URL,
@@ -97,8 +96,8 @@ bool Links::insert(const QVariantMap &link)
 
     if(this->db->insert(OWL::TABLEMAP[OWL::TABLE::LINKS], FMH::toMap(__model)))
     {
-        for(auto tg : __model[FMH::MODEL_KEY::TAG].split(","))
-            this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], __model[FMH::MODEL_KEY::URL]);
+        for(const auto &tg : __model[FMH::MODEL_KEY::TAG].split(","))
+            Tagging::getInstance()->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], __model[FMH::MODEL_KEY::URL]);
         this->links << __model;
 
         emit postItemAppended();
@@ -172,8 +171,8 @@ bool Links::update(const FMH::MODEL &link)
         {FMH::MODEL_NAME[FMH::MODEL_KEY::MODIFIED], updated}
     };
 
-    for(auto tg : tags)
-        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
+    for(const auto &tg : tags)
+        Tagging::getInstance()->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
 
     return this->db->update(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map, {{FMH::MODEL_NAME[FMH::MODEL_KEY::LINK], url}} );
 }
@@ -202,5 +201,5 @@ QVariantList Links::getTags(const int &index)
 
     auto link = this->links.at(index)[FMH::MODEL_KEY::LINK];
 
-    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
+    return Tagging::getInstance()->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
 }

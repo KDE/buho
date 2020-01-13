@@ -36,6 +36,7 @@ struct STATE
 };
 
 class DB;
+class NotesController;
 class AbstractNotesProvider;
 class Tagging;
 class Syncer: public QObject
@@ -44,7 +45,6 @@ class Syncer: public QObject
 
 public:
     explicit Syncer(QObject *parent = nullptr);
-
     /**
      * @brief setProviderAccount
      * sets the credentials to the current account
@@ -201,8 +201,9 @@ private:
      * @brief server
      * Abstract instance to the online server to perfom CRUD actions
      */
-    AbstractNotesProvider *provider;
+    AbstractNotesProvider * m_provider;
 
+    NotesController *m_notesController;
     /**
      * @brief syncNote
      * Has the job to sync a note between the offline and online versions
@@ -229,23 +230,8 @@ private:
     void setConections();
 
 protected:
-    /**
-     * @brief insertLocal
-     * performs the insertion of a new note in the local storage
-     * @param note
-     * note to be inserted
-     * @return bool
-     * true if the note was inserted sucessfully in the local storage
-     */
-    bool insertNoteLocal(FMH::MODEL &note);
 
-    /**
-     * @brief insertRemote
-     * perfroms the insertion of a new note in the remote provider server
-     * @param note
-     * the note to be inserted
-     */
-    void insertNoteRemote(FMH::MODEL &note);
+
     bool updateNoteLocal(const QString &id, const FMH::MODEL &note);
     void updateNoteRemote(const QString &id, const FMH::MODEL &note);
     bool removeNoteLocal(const QString &id);
@@ -265,10 +251,10 @@ protected:
     bool removeBookletLocal(const QString &id);
     void removeBookletRemote(const QString &id);
 
-    const FMH::MODEL_LIST collectAllNotes();
+    void collectAllNotes();
     const FMH::MODEL_LIST collectAllBooks();
 
-    static inline const QUrl saveNoteFile(const QString &dir, const FMH::MODEL &data);
+    const QUrl localStoragePath(const QUrl &pathHint);
     static inline const QString noteFileContent(const QUrl &path);
 
 signals:

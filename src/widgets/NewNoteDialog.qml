@@ -8,22 +8,33 @@ Maui.Dialog
 {
     id: control
     parent: parent
-    heightHint: 0.95
-    widthHint: 0.95
-
-    maxWidth: 700 * Maui.Style.unit
-
-    maxHeight: maxWidth
 
     property string selectedColor : Kirigami.Theme.backgroundColor
     property string fgColor: Qt.darker(selectedColor, 3)
     property bool showEditActions : false
-
-    rejectButton.visible: false
     signal noteSaved(var note)
-    page.padding: 0
+
     Kirigami.Theme.backgroundColor: selectedColor
     Kirigami.Theme.textColor: fgColor
+
+    heightHint: 0.95
+    widthHint: 0.95
+    maxWidth: 700 * Maui.Style.unit
+    maxHeight: maxWidth
+
+    page.padding: 0
+
+    rejectText:  qsTr("Discard")
+    rejectButton.visible: false
+    acceptText: qsTr("Save")
+    onAccepted:
+    {
+        if(editor.body.text.length > 0)
+            packNote()
+        clear()
+    }
+
+    onRejected: clear()
 
     headBar.middleContent:  TextField
     {
@@ -34,9 +45,7 @@ Maui.Dialog
         font.weight: Font.Bold
         font.bold: true
         font.pointSize: Maui.Style.fontSizes.large
-        //            Kirigami.Theme.backgroundColor: selectedColor
-        //            Kirigami.Theme.textColor: Qt.darker(selectedColor, 2.5)
-        //            color: fgColor
+
         background: Rectangle
         {
             color: "transparent"
@@ -74,40 +83,29 @@ Maui.Dialog
         {
             icon.name: "document-export"
             icon.color: Kirigami.Theme.textColor
-
         },
 
         ToolButton
         {
             icon.name: "entry-delete"
             icon.color: Kirigami.Theme.textColor
-
         }
-    ]
-
-    acceptText: qsTr("Save")
-    rejectText:  qsTr("Discard")
-    onAccepted:
-    {
-        if(editor.body.text.length > 0)
-            packNote()
-        clear()
-    }
-
-    onRejected: clear()
+    ]   
 
     ColumnLayout
     {
         anchors.fill: parent
+        spacing: 0
 
         Maui.Editor
         {
             id: editor
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Kirigami.Theme.backgroundColor: selectedColor
-            Kirigami.Theme.textColor: Qt.darker(selectedColor, 2.5)
+            Kirigami.Theme.backgroundColor: control.selectedColor
+            Kirigami.Theme.textColor: Qt.darker(control.selectedColor, 2.5)
 
+            footBar.visible: false
             headBar.leftContent: ToolButton
             {
                 icon.name: "image"
@@ -116,27 +114,27 @@ Maui.Dialog
 
             headBar.rightContent: ColorsBar
             {
-                onColorPicked: selectedColor = color
+                onColorPicked: control.selectedColor = color
             }
         }
 
         Maui.TagsBar
         {
             id: tagBar
+            position: ToolBar.Footer
             Layout.fillWidth: true
-            allowEditMode: true
-            list.abstract: true
-            list.key: "notes"
-            onTagsEdited: list.updateToAbstract(tags)
-            onTagRemovedClicked: list.removeFromAbstract(index)
+            allowEditMode: true           
+            onTagsEdited: list.append(tags)
+            list.strict: true
+            list.urls: [""]
+//            onTagRemovedClicked: list.removeFromAbstract(index)
             Kirigami.Theme.backgroundColor: "transparent"
             Kirigami.Theme.textColor: Kirigami.Theme.textColor
 
         }
     }
 
-    onOpened: if(isMobile) editor.body.forceActiveFocus()
-
+    onOpened: editor.body.forceActiveFocus()
 
     function clear()
     {
@@ -152,20 +150,19 @@ Maui.Dialog
         control.selectedColor =  note.color ? note.color : Kirigami.Theme.backgroundColor
         pinButton.checked = note.pin == 1
         favButton.checked = note.favorite == 1
-
-        tagBar.list.lot= note.id
-
+        tagBar.list.urls = [note.url]
         open()
     }
 
     function packNote()
     {
-        noteSaved({
+        console.log("TAGS", tagBar.list.tags)
+        control.noteSaved({
                       id: notesView.currentNote.id,
                       title: title.text.trim(),
                       content: editor.body.text,
                       color: selectedColor,
-                      tag: tagBar.getTags(),
+                      tag: tagBar.list.tags.join(","),
                       pin: pinButton.checked ? 1 : 0,
                       favorite: favButton.checked ? 1 : 0,
                       modified: new Date()

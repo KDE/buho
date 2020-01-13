@@ -333,7 +333,7 @@ const FMH::MODEL_LIST NextNote::parseNotes(const QByteArray &array)
         return res;
 
     if(!data.toList().isEmpty())    
-        res<< FMH::toModelList(data.toList());
+        res << FMH::toModelList(data.toList());
     else
         res << FMH::toModel(data.toMap());
 
