@@ -13,7 +13,7 @@
 
 namespace OWL
 {
-    Q_NAMESPACE  
+    Q_NAMESPACE
     enum class TABLE : uint8_t
     {
         NOTES,
@@ -35,7 +35,7 @@ namespace OWL
         {TABLE::LINKS,"links"},
     };
 
-    const static inline QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/";
+    const static inline QUrl CollectionDBPath = QUrl::fromLocalFile (QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/");
     const static inline  QUrl NotesPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/notes/");
     const static inline  QUrl BooksPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/books/");
     const static inline  QUrl LinksPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/links/");

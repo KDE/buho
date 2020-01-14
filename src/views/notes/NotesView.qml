@@ -164,8 +164,8 @@ Maui.Page
             holder.emoji: "qrc:/Type.png"
             holder.emojiSize: Maui.Style.iconSizes.huge
             holder.isMask: false
-            holder.title : "No notes!"
-            holder.body: "Click here to create a new note"
+            holder.title :qsTr("No notes!")
+            holder.body: qsTr("Click here to create a new note")
 
             model: notesModel
             delegate: CardDelegate
