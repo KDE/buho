@@ -90,7 +90,7 @@ Maui.Dialog
             icon.name: "entry-delete"
             icon.color: Kirigami.Theme.textColor
         }
-    ]   
+    ]
 
     ColumnLayout
     {
@@ -123,8 +123,16 @@ Maui.Dialog
             id: tagBar
             position: ToolBar.Footer
             Layout.fillWidth: true
-            allowEditMode: true           
-            onTagsEdited: list.append(tags)
+            allowEditMode: true
+            onTagsEdited:
+            {
+                if(Maui.FM.fileExists(editor.fileUrl))
+                    tagBar.list.updateToUrls(tags)
+                else
+                    tagBar.list.append(tags)
+                console.log(tags)
+            }
+
             list.strict: true
             list.urls: [""]
 //            onTagRemovedClicked: list.removeFromAbstract(index)
@@ -146,10 +154,10 @@ Maui.Dialog
     function fill(note)
     {
         title.text = note.title
-        editor.body.text = note.content
+        editor.fileUrl = note.url
         control.selectedColor =  note.color ? note.color : Kirigami.Theme.backgroundColor
         pinButton.checked = note.pin == 1
-        favButton.checked = note.favorite == 1
+        favButton.checked = note.fav == 1
         tagBar.list.urls = [note.url]
         open()
     }

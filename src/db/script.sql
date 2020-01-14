@@ -1,12 +1,7 @@
 CREATE TABLE IF NOT EXISTS NOTES (
-id TEXT PRIMARY KEY,
-title TEXT,
-url TEXT,
+url TEXT PRIMARY KEY,
 color TEXT,
-favorite INT,
-pin INT,
-adddate DATE,
-modified DATE
+pin INT
 );
 
 CREATE TABLE IF NOT EXISTS NOTES_SYNC (
@@ -15,27 +10,18 @@ server TEXT,
 user TEXT,
 stamp TEXT,
 PRIMARY KEY(server, stamp),
-FOREIGN KEY(id) REFERENCES NOTES(id)
+FOREIGN KEY(id) REFERENCES NOTES(url)
 );
 
 CREATE TABLE IF NOT EXISTS BOOKS (
-title TEXT PRIMARY KEY,
-url TEXT,
-favorite INT,
-adddate DATE,
-modified DATE
+url TEXT PRIMARY KEY
 );
 
 CREATE TABLE IF NOT EXISTS BOOKLETS (
-id TEXT,
 book TEXT,
 url TEXT,
-title TEXT NOT NULL,
-favorite INT,
-adddate DATE,
-modified DATE,
-PRIMARY KEY(id, book),
-FOREIGN KEY(book) REFERENCES BOOKS(title)
+PRIMARY KEY(url, book),
+FOREIGN KEY(book) REFERENCES BOOKS(url)
 );
 
 CREATE TABLE IF NOT EXISTS BOOKLETS_SYNC (
@@ -44,7 +30,7 @@ server TEXT,
 user TEXT,
 stamp TEXT,
 PRIMARY KEY(server, stamp),
-FOREIGN KEY(id) REFERENCES BOOKLETS(id)
+FOREIGN KEY(id) REFERENCES BOOKLETS(url)
 );
 
 CREATE TABLE IF NOT EXISTS LINKS (
@@ -52,7 +38,6 @@ url TEXT PRIMARY KEY,
 title TEXT,
 preview TEXT,
 color TEXT,
-favorite INT,
 pin INT,
 adddate DATE,
 modified DATE

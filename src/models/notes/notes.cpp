@@ -14,196 +14,213 @@
 #endif
 
 Notes::Notes(QObject *parent) : MauiList(parent),
-    syncer(new Syncer(this))
+	syncer(new Syncer(this))
 {
-    qDebug()<< "CREATING NOTES LIST";
+	qDebug()<< "CREATING NOTES LIST";
 
-    this->syncer->setProvider(new NextNote); //Syncer takes ownership of NextNote or the provider
+	this->syncer->setProvider(new NextNote); //Syncer takes ownership of NextNote or the provider
 
-    const auto m_account = MauiAccounts::instance();
-    connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap)
-    {
-        this->syncer->getNotes();
-    });
+	const auto m_account = MauiAccounts::instance();
+	connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap)
+	{
+		this->syncer->getNotes();
+	});
 
-    connect(this, &Notes::sortByChanged, this, &Notes::sortList);
-    connect(this, &Notes::orderChanged, this, &Notes::sortList);
+	connect(this, &Notes::sortByChanged, this, &Notes::sortList);
+	connect(this, &Notes::orderChanged, this, &Notes::sortList);
 
-    connect(syncer, &Syncer::notesReady, [&](FMH::MODEL_LIST data)
-    {
-        emit this->preListChanged();
-        this->notes = data;
-        emit this->postListChanged();
-    });
+	connect(syncer, &Syncer::noteReady, [&](FMH::MODEL note)
+	{
+		emit this->preItemAppended ();
+		note[FMH::MODEL_KEY::FAV] = FMStatic::isFav (note[FMH::MODEL_KEY::URL]) ? 1 : 0;
+		note[FMH::MODEL_KEY::COLOR] = [&note]() -> QString {
 
-    this->syncer->getNotes();
+									  const auto tags = Tagging::getInstance ()->getUrlTags (note[FMH::MODEL_KEY::URL], true);
+		const auto it = std::find_if(tags.constBegin (), tags.constEnd (), [](const QVariant &map)
+		{
+			qDebug()<< "CHECKING COLOR OF NOTE"<< FMH::mapValue (map.toMap (), FMH::MODEL_KEY::COLOR);
+			return (FMH::mapValue (map.toMap (), FMH::MODEL_KEY::TAG).startsWith ("notes-") && !FMH::mapValue (map.toMap (), FMH::MODEL_KEY::COLOR).isEmpty ());
+
+		});
+
+		if(it != tags.constEnd ())
+			return FMH::mapValue (it->toMap (), FMH::MODEL_KEY::COLOR);
+		else return QString();
+	}();
+
+	qDebug() << "COLOR" << note[FMH::MODEL_KEY::COLOR];
+		this->notes << note;
+		emit this->postItemAppended ();
+	});
+
+	this->syncer->getNotes();
 }
 
 void Notes::sortList()
 {
-    emit this->preListChanged();
-    const auto key = static_cast<FMH::MODEL_KEY>(this->sort);
-    qDebug()<< "SORTING LIST BY"<< this->sort;
-    std::sort(this->notes.begin(), this->notes.end(), [&](const FMH::MODEL &e1, const FMH::MODEL &e2) -> bool
-    {
-        switch(key)
-        {
-        case FMH::MODEL_KEY::FAVORITE:
-        {
-                return e1[key] == "true";
-        }
+	emit this->preListChanged();
+	const auto key = static_cast<FMH::MODEL_KEY>(this->sort);
+	qDebug()<< "SORTING LIST BY"<< this->sort;
+	std::sort(this->notes.begin(), this->notes.end(), [&](const FMH::MODEL &e1, const FMH::MODEL &e2) -> bool
+	{
+		switch(key)
+		{
+		case FMH::MODEL_KEY::FAVORITE:
+		{
+				return e1[key] == "true";
+		}
 
-            case FMH::MODEL_KEY::ADDDATE:
-            case FMH::MODEL_KEY::MODIFIED:
-        {
-            const auto date1 = QDateTime::fromString(e1[key], Qt::TextDate);
-            const auto date2 = QDateTime::fromString(e2[key], Qt::TextDate);
+			case FMH::MODEL_KEY::ADDDATE:
+			case FMH::MODEL_KEY::MODIFIED:
+		{
+			const auto date1 = QDateTime::fromString(e1[key], Qt::TextDate);
+			const auto date2 = QDateTime::fromString(e2[key], Qt::TextDate);
 
-            if(this->order == Notes::ORDER::ASC)
-            {
-                if(date1.secsTo(QDateTime::currentDateTime()) >  date2.secsTo(QDateTime::currentDateTime()))
-                    return true;
-            }
+			if(this->order == Notes::ORDER::ASC)
+			{
+				if(date1.secsTo(QDateTime::currentDateTime()) >  date2.secsTo(QDateTime::currentDateTime()))
+					return true;
+			}
 
 
-            if(this->order == Notes::ORDER::DESC)
-            {
-                if(date1.secsTo(QDateTime::currentDateTime()) <  date2.secsTo(QDateTime::currentDateTime()))
-                    return true;
-            }
+			if(this->order == Notes::ORDER::DESC)
+			{
+				if(date1.secsTo(QDateTime::currentDateTime()) <  date2.secsTo(QDateTime::currentDateTime()))
+					return true;
+			}
 
-            break;
-        }
+			break;
+		}
 
-        case FMH::MODEL_KEY::TITLE:
-        case FMH::MODEL_KEY::COLOR:
-        {
-            const auto str1 = QString(e1[key]).toLower();
-            const auto str2 = QString(e2[key]).toLower();
+		case FMH::MODEL_KEY::TITLE:
+		case FMH::MODEL_KEY::COLOR:
+		{
+			const auto str1 = QString(e1[key]).toLower();
+			const auto str2 = QString(e2[key]).toLower();
 
-            if(this->order == Notes::ORDER::ASC)
-            {
-                if(str1 < str2)
-                    return true;
-            }
+			if(this->order == Notes::ORDER::ASC)
+			{
+				if(str1 < str2)
+					return true;
+			}
 
-            if(this->order == Notes::ORDER::DESC)
-            {
-                if(str1 > str2)
-                    return true;
-            }
+			if(this->order == Notes::ORDER::DESC)
+			{
+				if(str1 > str2)
+					return true;
+			}
 
-            break;
-        }
+			break;
+		}
 
-        default:
-            if(e1[key] < e2[key])
-                return true;
-        }
+		default:
+			if(e1[key] < e2[key])
+				return true;
+		}
 
-        return false;
-    });
-    emit this->postListChanged();
+		return false;
+	});
+	emit this->postListChanged();
 }
 
 FMH::MODEL_LIST Notes::items() const
 {
-    return this->notes;
+	return this->notes;
 }
 
 void Notes::setSortBy(const Notes::SORTBY &sort)
 {
-    if(this->sort == sort)
-        return;
+	if(this->sort == sort)
+		return;
 
-    this->sort = sort;
-    emit this->sortByChanged();
+	this->sort = sort;
+	emit this->sortByChanged();
 }
 
 Notes::SORTBY Notes::getSortBy() const
 {
-    return this->sort;
+	return this->sort;
 }
 
 void Notes::setOrder(const Notes::ORDER &order)
 {
-    if(this->order == order)
-        return;
+	if(this->order == order)
+		return;
 
-    this->order = order;
-    emit this->orderChanged();
+	this->order = order;
+	emit this->orderChanged();
 }
 
 Notes::ORDER Notes::getOrder() const
 {
-    return this->order;
+	return this->order;
 }
 
 bool Notes::insert(const QVariantMap &note)
 {
-    emit this->preItemAppended();
+	emit this->preItemAppended();
 
-    auto __note = FMH::toModel(note);
-    __note[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
-    __note[FMH::MODEL_KEY::ADDDATE] = QDateTime::currentDateTime().toString(Qt::TextDate);
+	auto __note = FMH::toModel(note);
+	__note[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
+	__note[FMH::MODEL_KEY::ADDDATE] = QDateTime::currentDateTime().toString(Qt::TextDate);
 
-    this->syncer->insertNote(__note);
+	this->syncer->insertNote(__note);
 
-    this->notes << __note;
+	this->notes << __note;
 
-    emit this->postItemAppended();
-    return true;
+	emit this->postItemAppended();
+	return true;
 }
 
 
 bool Notes::update(const QVariantMap &data, const int &index)
 {
-    if(index < 0 || index >= this->notes.size())
-        return false;
+	if(index < 0 || index >= this->notes.size())
+		return false;
 
-    auto newData = this->notes[index];
-    QVector<int> roles;
-    for(const auto &key : data.keys())
-        if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
-        {
-            newData[FMH::MODEL_NAME_KEY[key]] = data[key].toString();
-            roles << FMH::MODEL_NAME_KEY[key];
-        }
+	auto newData = this->notes[index];
+	QVector<int> roles;
+	for(const auto &key : data.keys())
+		if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
+		{
+			newData[FMH::MODEL_NAME_KEY[key]] = data[key].toString();
+			roles << FMH::MODEL_NAME_KEY[key];
+		}
 
-    this->notes[index] = newData;
+	this->notes[index] = newData;
 
-    newData[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
-    this->syncer->updateNote(newData[FMH::MODEL_KEY::ID], newData);
+	newData[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
+	this->syncer->updateNote(newData[FMH::MODEL_KEY::ID], newData);
 
-    emit this->updateModel(index, roles);
-    return true;
+	emit this->updateModel(index, roles);
+	return true;
 }
 
 bool Notes::remove(const int &index)
 {
-    if(index < 0 || index >= this->notes.size())
-        return false;
+	if(index < 0 || index >= this->notes.size())
+		return false;
 
-    emit this->preItemRemoved(index);
-    this->syncer->removeNote(this->notes.at(index)[FMH::MODEL_KEY::ID]);
-    this->notes.removeAt(index);
-    emit this->postItemRemoved();
-    return true;
+	emit this->preItemRemoved(index);
+	this->syncer->removeNote(this->notes.at(index)[FMH::MODEL_KEY::ID]);
+	this->notes.removeAt(index);
+	emit this->postItemRemoved();
+	return true;
 }
 
 QVariantList Notes::getTags(const int &index)
 {
-    //    if(index < 0 || index >= this->notes.size())
-    //        return QVariantList();
+	//    if(index < 0 || index >= this->notes.size())
+	//        return QVariantList();
 
-    //    auto id = this->notes.at(index)[FMH::MODEL_KEY::ID];
-    //    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::NOTES], id);
-    return QVariantList();
+	//    auto id = this->notes.at(index)[FMH::MODEL_KEY::ID];
+	//    return this->tag->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::NOTES], id);
+	return QVariantList();
 }
 
 QVariantMap Notes::get(const int &index) const
 {
-    if(index >= this->notes.size() || index < 0)
-        return QVariantMap();
-    return FMH::toMap(this->notes.at(index));
+	if(index >= this->notes.size() || index < 0)
+		return QVariantMap();
+	return FMH::toMap(this->notes.at(index));
 }

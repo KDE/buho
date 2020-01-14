@@ -111,21 +111,18 @@ ItemDelegate
             clip: true
         }
 
-
-            Loader
-            {
-                id: bodyLoader
-                Layout.leftMargin: Maui.Style.space.medium
-                Layout.bottomMargin: Maui.Style.space.medium
-                Layout.rightMargin: Maui.Style.space.medium
-                Layout.topMargin: title.visible ? 0 : Maui.Style.space.medium
-                Layout.alignment: Qt.AlignLeft
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                sourceComponent: typeof model.content !== 'undefined' ? bodyComponent : undefined
-            }
-
-
+        Loader
+        {
+            id: bodyLoader
+            Layout.leftMargin: Maui.Style.space.medium
+            Layout.bottomMargin: Maui.Style.space.medium
+            Layout.rightMargin: Maui.Style.space.medium
+            Layout.topMargin: title.visible ? 0 : Maui.Style.space.medium
+            Layout.alignment: Qt.AlignLeft
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            sourceComponent: typeof model.content !== 'undefined' ? bodyComponent : undefined
+        }
 
         Loader
         {
