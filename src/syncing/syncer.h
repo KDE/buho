@@ -254,8 +254,6 @@ protected:
 	void collectAllNotes();
 	const FMH::MODEL_LIST collectAllBooks();
 
-	const QUrl localStoragePath(const QUrl &pathHint);
-
 signals:
 	//FOR NOTES
 	void noteInserted(FMH::MODEL note, STATE state);

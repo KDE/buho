@@ -47,10 +47,16 @@ const QUrl NotesController::saveNoteFile(const QUrl &url, const FMH::MODEL &data
 	if(data.isEmpty())
 	{
 		qWarning() << "the note is empty, therefore it could not be saved into a file";
-		return QUrl();
+        return url;
 	}
 
-	QFile file(url.toLocalFile()+data[FMH::MODEL_KEY::TITLE]+QStringLiteral(".txt"));
+    if((url.isLocalFile() && !FMH::fileExists(url)) || !url.isValid())
+    {
+        qWarning() << "the url is not valid or does not exists, therefore it could not be saved into a file";
+        return url;
+    }
+
+    QFile file(url.toLocalFile()+data[FMH::MODEL_KEY::TITLE]+data[FMH::MODEL_KEY::FORMAT]);
 	file.open(QFile::WriteOnly);
 	file.write(data[FMH::MODEL_KEY::CONTENT].toUtf8());
 	file.close();
@@ -99,38 +105,36 @@ bool NotesController::insertNote(const FMH::MODEL &note, const QUrl &url)
 
 	auto m_note = note;
 	m_note[FMH::MODEL_KEY::URL] = __notePath.toString();
-	qDebug()<< "note saved to <<" << __notePath << m_note[FMH::MODEL_KEY::TAG];
 
 	for(const auto &tg : m_note[FMH::MODEL_KEY::TAG].split(",", QString::SplitBehavior::SkipEmptyParts))
 		Tagging::getInstance()->tagUrl(__notePath.toString(), tg, note[FMH::MODEL_KEY::COLOR]);
 
-	if(QColor::isValidColor (note[FMH::MODEL_KEY::COLOR]))
-		Tagging::getInstance()->tagUrl(__notePath.toString(), "notes"+ QString(note[FMH::MODEL_KEY::COLOR]).replace("#", "-"), note[FMH::MODEL_KEY::COLOR]);
+    auto __noteMap = FMH::toMap(FMH::filterModel(m_note, {FMH::MODEL_KEY::COLOR,
+                                                        FMH::MODEL_KEY::URL,
+                                                        FMH::MODEL_KEY::PIN}));
 
-	return true;
+
+    return (this->m_db->insert(OWL::TABLEMAP[OWL::TABLE::NOTES], __noteMap));
 }
 
-void NotesController::getNotes(const QUrl &url)
+void NotesController::getNotes()
 {
-	emit this->fetchNotes(url);
+    emit this->fetchNotes();
 }
 
-void NotesLoader::fetchNotes(const QUrl &url)
+void NotesLoader::fetchNotes()
 {
-	FMH::MODEL_LIST notes;
-	QDirIterator it(url.toLocalFile (), FMH::FILTER_LIST[FMH::FILTER_TYPE::TEXT], QDir::Filter::Files | QDir::Filter::Readable | QDir::Filter::Writable | QDir::Filter::NoDotAndDotDot, QDirIterator::IteratorFlag::Subdirectories);
+    auto notes = DB::getInstance()->getDBData("select * from notes");
 
-	while(it.hasNext ())
+    for(auto &note : notes)
 	{
-		const auto url = QUrl::fromLocalFile (it.next ());
+        const auto url = QUrl(note[FMH::MODEL_KEY::URL]);
 		qDebug() << "Fetching URLS" << url;
-		auto item =FMH::getFileInfoModel (url);
-		item[FMH::MODEL_KEY::URL] = item[FMH::MODEL_KEY::PATH];
-		item[FMH::MODEL_KEY::TITLE] = item[FMH::MODEL_KEY::NAME];
-//		item[FMH::MODEL_KEY::FAV] = FMStatic::isFav (url);
-		item[FMH::MODEL_KEY::CONTENT] = NotesLoader::fileContentPreview (url);
-		notes << item;
-		emit this->noteReady (item);
+        note.unite(FMH::getFileInfoModel (url));
+        note[FMH::MODEL_KEY::TITLE] = note[FMH::MODEL_KEY::NAME];
+        note[FMH::MODEL_KEY::FAV] = FMStatic::isFav (url);
+        note[FMH::MODEL_KEY::CONTENT] = NotesLoader::fileContentPreview (url);
+        emit this->noteReady (note);
 	}
 
 	qDebug()<< "FINISHED FETCHING URLS";

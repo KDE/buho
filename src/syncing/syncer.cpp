@@ -46,7 +46,7 @@ void Syncer::setProvider(AbstractNotesProvider *provider)
 
 void Syncer::insertNote(FMH::MODEL &note)
 {
-	if(!this->m_notesController->insertNote(note, this->localStoragePath(OWL::NotesPath)))
+    if(!this->m_notesController->insertNote(note, OWL::NotesPath))
 	{
 		qWarning()<< "The note could not be inserted locally, "
 					 "therefore it was not attempted to insert it to the remote provider server, "
@@ -260,7 +260,7 @@ void Syncer::setConections()
 				__note[FMH::MODEL_KEY::MODIFIED] = QDateTime::fromSecsSinceEpoch(note[FMH::MODEL_KEY::MODIFIED].toInt()).toString(Qt::TextDate);
 				__note[FMH::MODEL_KEY::ADDDATE] = __note[FMH::MODEL_KEY::MODIFIED];
 
-				if(!this->m_notesController->insertNote(__note, this->localStoragePath(OWL::NotesPath)))
+                if(!this->m_notesController->insertNote(__note, OWL::NotesPath))
 				{
 					qWarning()<< "Remote note could not be inserted to the local storage";
 					continue;
@@ -582,31 +582,12 @@ void Syncer::removeBookletRemote(const QString &id)
 
 void Syncer::collectAllNotes()
 {
-	this->m_notesController->getNotes(OWL::NotesPath);
+    this->m_notesController->getNotes();
 }
 
 const FMH::MODEL_LIST Syncer::collectAllBooks()
 {
 	//    return this->db->getDBData("select b.*, count(distinct bl.id) as count from books b inner join booklets bl on bl.book = b.id");
 	return this->db->getDBData("select * from books");
-}
-
-const QUrl Syncer::localStoragePath(const QUrl &pathHint)
-{
-	if(!this->m_provider || !this->m_provider->isValid())
-	{
-		qWarning()<< "There is not a Provider setup for saving the notes. Saving locally now  to " << pathHint;
-		return pathHint;
-	}
-
-	QUrl res = pathHint.toString() + this->m_provider->provider()+"/"+this->m_provider->user()+"/";
-	QDir dir(res.toLocalFile());
-	if(!dir.exists())
-	{
-		if(dir.mkpath("."))
-			 return res;
-		else return pathHint;
-
-	}else return res;
 }
 

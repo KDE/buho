@@ -77,46 +77,36 @@ Maui.ApplicationWindow
 
     }
 
-    Rectangle
+    Maui.PieButton
     {
+        id: addButton
         z: 999
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: Maui.Style.toolBarHeight
-        anchors.bottomMargin: Maui.Style.toolBarHeight
+        anchors.margins: height
         height: Maui.Style.toolBarHeight
-        width: height
 
-        color: Kirigami.Theme.highlightColor
-        radius: Maui.Style.radiusV
+        icon.name: "list-add"
+        icon.color: Kirigami.Theme.highlightedTextColor
+        alignment: Qt.AlignLeft
 
-        Maui.PieButton
+        Action
         {
-            id: addButton
-            anchors.fill : parent
-            icon.name: "list-add"
-            icon.color: Kirigami.Theme.highlightedTextColor
-            barHeight: parent.height
-            alignment: Qt.AlignLeft
-            content: [
-                ToolButton
-                {
-                    icon.name: "view-pim-notes"
-                    onClicked: newNote()
-                },
-                ToolButton
-                {
-                    icon.name: "view-pim-news"
-                    onClicked: newLink()
-                },
-                ToolButton
-                {
-                    icon.name: "view-pim-journal"
-                    onClicked: newBook()
-                }
-            ]
+            icon.name: "view-pim-notes"
+            onTriggered: newNote()
+        }
+        Action
+        {
+            icon.name: "view-pim-news"
+            onTriggered: newLink()
+        }
+        Action
+        {
+            icon.name: "view-pim-journal"
+            onTriggered: newBook()
         }
     }
+
 
     Maui.SyncDialog
     {

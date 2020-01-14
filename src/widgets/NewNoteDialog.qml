@@ -164,16 +164,14 @@ Maui.Dialog
 
     function packNote()
     {
-        console.log("TAGS", tagBar.list.tags)
         control.noteSaved({
-                      id: notesView.currentNote.id,
                       title: title.text.trim(),
                       content: editor.body.text,
                       color: selectedColor,
                       tag: tagBar.list.tags.join(","),
                       pin: pinButton.checked ? 1 : 0,
-                      favorite: favButton.checked ? 1 : 0,
-                      modified: new Date()
+                      fav: favButton.checked ? 1 : 0,
+                      format: ".txt" //for now only simple txt files
                   })
     }
 }

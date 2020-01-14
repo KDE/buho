@@ -10,12 +10,14 @@
 #include <MauiKit/fmh.h>
 #endif
 
+#include "owl.h"
+
 class DB;
 class NotesLoader : public QObject
 {
 	Q_OBJECT
 public:
-	void fetchNotes(const QUrl &url);
+    void fetchNotes();
 
 private:
 	static const QString fileContentPreview(const QUrl &path);
@@ -45,7 +47,7 @@ public slots:
 	 */
 	bool insertNote(const FMH::MODEL &note, const QUrl &url);
 
-	void getNotes(const QUrl &url);
+    void getNotes();
 
 private:
 	QThread m_worker;
@@ -58,8 +60,7 @@ signals:
 	void notesReady(FMH::MODEL_LIST notes);
 	void noteInserted(FMH::MODEL note);
 
-	void fetchNotes(QUrl url);
-
+    void fetchNotes();
 };
 
 #endif // NOTESCONTROLLER_H
