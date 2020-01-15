@@ -1,18 +1,13 @@
 <RCC>
     <qresource prefix="/">
-        <file>Type.png</file>
-        <file>Spaceship.png</file>
-        <file>Grow.png</file>
-        <file>BugSearch.png</file>
-        <file>Bomb.png</file>
-        <file>E-reading.png</file>
-        <file>Astronaut.png</file>
-        <file>Faq.png</file>
         <file>buho.png</file>
         <file>buho72.png</file>
         <file>buho96.png</file>
         <file>buho.svg</file>
         <file>booklet.svg</file>
-        <file>notepad.png</file>
+        <file>view-books.svg</file>
+        <file>view-links.svg</file>
+        <file>view-notes.svg</file>
+        <file>document-edit.svg</file>
     </qresource>
 </RCC>

@@ -13,6 +13,8 @@
 #include <MauiKit/mauiaccounts.h>
 #endif
 
+#include <algorithm>
+
 Notes::Notes(QObject *parent) : MauiList(parent),
 	syncer(new Syncer(this))
 {
@@ -31,26 +33,18 @@ Notes::Notes(QObject *parent) : MauiList(parent),
 
 	connect(syncer, &Syncer::noteReady, [&](FMH::MODEL note)
 	{
-		emit this->preItemAppended ();
+		auto index = this->indexOf (FMH::MODEL_KEY::URL, note[FMH::MODEL_KEY::URL]);
 		note[FMH::MODEL_KEY::FAV] = FMStatic::isFav (note[FMH::MODEL_KEY::URL]) ? 1 : 0;
-		note[FMH::MODEL_KEY::COLOR] = [&note]() -> QString {
 
-									  const auto tags = Tagging::getInstance ()->getUrlTags (note[FMH::MODEL_KEY::URL], true);
-		const auto it = std::find_if(tags.constBegin (), tags.constEnd (), [](const QVariant &map)
+		if(index >= 0)
 		{
-			qDebug()<< "CHECKING COLOR OF NOTE"<< FMH::mapValue (map.toMap (), FMH::MODEL_KEY::COLOR);
-			return (FMH::mapValue (map.toMap (), FMH::MODEL_KEY::TAG).startsWith ("notes-") && !FMH::mapValue (map.toMap (), FMH::MODEL_KEY::COLOR).isEmpty ());
-
-		});
-
-		if(it != tags.constEnd ())
-			return FMH::mapValue (it->toMap (), FMH::MODEL_KEY::COLOR);
-		else return QString();
-	}();
-
-	qDebug() << "COLOR" << note[FMH::MODEL_KEY::COLOR];
-		this->notes << note;
-		emit this->postItemAppended ();
+			this->updateModel (index, FMH::modelRoles (note));
+		}else
+		{
+			emit this->preItemAppended ();
+			this->notes << note;
+			emit this->postItemAppended ();
+		}
 	});
 
 	this->syncer->getNotes();

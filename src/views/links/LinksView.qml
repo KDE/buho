@@ -130,10 +130,9 @@ Maui.Page
     {
         id: cardsView
         anchors.fill: parent
-        holder.emoji: "qrc:/Astronaut.png"
-        holder.isMask: false
-        holder.title : "No Links!"
-        holder.body: "Click here to save a new link"
+        holder.emoji: "qrc:/view-links.svg"
+        holder.title : qsTr("No Links!")
+        holder.body: qsTr("Click here to save a new link")
         holder.emojiSize: Maui.Style.iconSizes.huge
         itemHeight: Maui.Style.unit * 250
 

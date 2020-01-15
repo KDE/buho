@@ -14,17 +14,6 @@ Maui.ApplicationWindow
     id: root
     title: qsTr("Buho")
 
-
-    /**** BRANDING COLORS ****/
-    //    menuButton.colorScheme.highlightColor: accentColor
-    //    searchButton.colorScheme.highlightColor: accentColor
-
-    //    headBarBGColor: viewBackgroundColor
-//    headBarFGColor: textColor
-//    accentColor : "#ff9494"
-    //    highlightColor: accentColor
-
-//    altColorText : "white"/*Qt.darker(accentColor, 2.5)*/
     Maui.App.handleAccounts: true
     Maui.App.description: qsTr("Buho allows you to take quick notes, collect links and take long notes organized by chapters.")
     Maui.App.iconName: "qrc:/buho.svg"
@@ -37,19 +26,14 @@ Maui.ApplicationWindow
                                        tags: 3,
                                        search: 4
                                    })
-    property color headBarTint : Qt.lighter(headBarBGColor, 1.25)
-//    headBarFGColor: "red"
 
-//    headBar.position: ToolBar.Footer
     headBar.middleContent: Maui.ActionGroup
     {
         id: _actionGroup
         Layout.fillHeight: true
-        //        Layout.fillWidth: true
         Layout.minimumWidth: implicitWidth
         currentIndex : swipeView.currentIndex
         onCurrentIndexChanged: swipeView.currentIndex = currentIndex
-        //        strech: true
 
         Action
         {
@@ -74,7 +58,6 @@ Maui.ApplicationWindow
             icon.name: "tag"
             text: qsTr("Tags")
         }
-
     }
 
     Maui.PieButton
@@ -113,15 +96,7 @@ Maui.ApplicationWindow
         id: syncDialog
     }
 
-    mainMenu: [
-        MenuItem
-        {
-            text: qsTr("Syncing")
-            onTriggered: syncDialog.open()
-        }
-    ]
-
-    //    /***** COMPONENTS *****/
+     //    /***** COMPONENTS *****/
 
     NewNoteDialog
     {

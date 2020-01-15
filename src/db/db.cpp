@@ -145,7 +145,7 @@ const FMH::MODEL_LIST DB::getDBData(const QString &queryTxt)
 			while(query.next())
 			{
 				FMH::MODEL data;
-				for(auto key : FMH::MODEL_NAME.keys())
+				for(const auto &key : FMH::MODEL_NAME.keys())
 					if(query.record().indexOf(FMH::MODEL_NAME[key])>-1)
 						data.insert(key, query.value(FMH::MODEL_NAME[key]).toString());
 

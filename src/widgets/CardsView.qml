@@ -12,7 +12,7 @@ GridView
     property alias menu : cardMenu
     readonly property  int defaultSize : Maui.Style.unit * 200
     property int itemWidth : !gridView ?  width :
-                                        (isMobile ? width * 0.5 : Maui.Style.unit * 400)
+                                        (Kirigami.Settings.isMobile ? width * 0.5 : Maui.Style.unit * 400)
     property int itemHeight: Maui.Style.unit * 180
     property int itemSpacing:  Maui.Style.space.huge
 
@@ -27,6 +27,7 @@ GridView
     Maui.Holder
     {
         id: holder
+        isMask: true
         visible: count < 1
         z: 999
     }

@@ -17,7 +17,7 @@ class NotesLoader : public QObject
 {
 	Q_OBJECT
 public:
-    void fetchNotes();
+	void fetchNotes();
 
 private:
 	static const QString fileContentPreview(const QUrl &path);
@@ -45,9 +45,10 @@ public slots:
 	 * @return bool
 	 * true if the note was inserted sucessfully in the local storage
 	 */
-	bool insertNote(const FMH::MODEL &note, const QUrl &url);
+	QUrl insertNote(const FMH::MODEL &note, const QUrl &url);
+	bool updateNote(const FMH::MODEL &note, const QUrl &url);
 
-    void getNotes();
+	void getNotes();
 
 private:
 	QThread m_worker;
@@ -60,7 +61,9 @@ signals:
 	void notesReady(FMH::MODEL_LIST notes);
 	void noteInserted(FMH::MODEL note);
 
-    void fetchNotes();
+	void noteUpdated(FMH::MODEL note);
+
+	void fetchNotes();
 };
 
 #endif // NOTESCONTROLLER_H

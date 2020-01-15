@@ -44,39 +44,40 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class DB : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 private:
-    DB();
-    ~DB();
-    QString name;
-    QSqlDatabase m_db;
+	DB();
+	~DB();
+
+	DB(const DB&) = delete;
+	DB& operator=(const DB &) = delete;
+	DB(DB &&) = delete;
+	DB & operator=(DB &&) = delete;
+
+	QString name;
+	QSqlDatabase m_db;
 
 public:
-    static DB * getInstance()
-    {
-        static DB db;
-        return &db;
-    }
+	static DB * getInstance()
+	{
+		static DB db;
+		return &db;
+	}
 
-    DB(const DB&) = delete;
-    DB& operator=(const DB &) = delete;
-    DB(DB &&) = delete;
-    DB & operator=(DB &&) = delete;
+	/* utils*/
+	bool checkExistance(const QString &tableName, const QString &searchId, const QString &search);
+	const FMH::MODEL_LIST getDBData(const QString &queryTxt);
+	QSqlQuery getQuery(const QString &queryTxt);
 
-    /* utils*/
-    bool checkExistance(const QString &tableName, const QString &searchId, const QString &search);
-    const FMH::MODEL_LIST getDBData(const QString &queryTxt);
-    QSqlQuery getQuery(const QString &queryTxt);
-
-    bool insert(const QString &tableName, const QVariantMap &insertData);
-    bool update(const QString &tableName, const QVariantMap &updateData, const QVariantMap &where);
-    bool update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id);
-    bool remove(const QString &tableName, const QVariantMap &removeData);
+	bool insert(const QString &tableName, const QVariantMap &insertData);
+	bool update(const QString &tableName, const QVariantMap &updateData, const QVariantMap &where);
+	bool update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id);
+	bool remove(const QString &tableName, const QVariantMap &removeData);
 
 protected:
-    void openDB(const QString &name);
-    void prepareCollectionDB() const;
+	void openDB(const QString &name);
+	void prepareCollectionDB() const;
 
 signals:
 

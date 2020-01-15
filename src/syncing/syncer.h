@@ -92,7 +92,7 @@ public:
 	 * @param note
 	 * the new note contents represented by FMH::MODEL
 	 */
-	void updateNote(const QString &id, const FMH::MODEL &note);
+	void updateNote(const QString &url, const FMH::MODEL &note);
 
 	/**
 	 * @brief removeNote
@@ -212,27 +212,16 @@ private:
 	 */
 	void syncNote(const QString &id);
 
-	/**
-	 * @brief stampNote
-	 * Adds an stamp id to identify the note offline and online
-	 * @param note
-	 * the note model is passed by ref and a STAMP key value is inserted
-	 */
-	static void addId(FMH::MODEL &model);
+	static const QString noteUrlFromStamp(const QString &provider, const QString &stamp) ;
+	static const QString noteStampFromUrl(const QString &url);
 
-	static const QString noteIdFromStamp(DB *_db, const QString &provider, const QString &stamp) ;
-	static const QString noteStampFromId(DB *_db, const QString &id);
-
-	static const QString bookletIdFromStamp(DB *_db, const QString &provider, const QString &stamp) ;
-	static const QString bookletStampFromId(DB *_db, const QString &id) ;
+	static const QString bookletUrlFromStamp(const QString &provider, const QString &stamp) ;
+	static const QString bookletStampFromUrl(const QString &url);
 
 
 	void setConections();
 
 protected:
-
-
-	bool updateNoteLocal(const QString &id, const FMH::MODEL &note);
 	void updateNoteRemote(const QString &id, const FMH::MODEL &note);
 	bool removeNoteLocal(const QString &id);
 	void removeNoteRemote(const QString &id);

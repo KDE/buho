@@ -16,7 +16,7 @@ Item
     {
         editor.document.load(currentBooklet.url)
         _drawerPage.title = currentBook.title
-    }    
+    }
 
     Maui.BaseModel
     {
@@ -74,11 +74,11 @@ Item
         {
             id: _holder
             visible: !_listView.count || !currentBooklet
-            emoji: "qrc:/Type.png"
+            emoji: "qrc:/document-edit.svg"
             emojiSize: Maui.Style.iconSizes.huge
             isMask: false
-            title : "Nothing to edit!"
-            body: "Select a chapter or create a new one"
+            title : qsTr("Nothing to edit!")
+            body: qsTr("Select a chapter or create a new one")
         }
 
         Maui.Editor
@@ -137,11 +137,11 @@ Item
                 {
                     anchors.margins: Maui.Style.space.huge
                     visible: !_listView.count
-                    emoji: "qrc:/E-reading.png"
+                    emoji: "qrc:/document-edit.svg"
                     emojiSize: Maui.Style.iconSizes.huge
                     isMask: false
-                    title : "This book is empty!"
-                    body: "Start by creating a new chapter for your book by clicking the + icon"
+                    title : qsTr("This book is empty!")
+                    body: qsTr("Start by creating a new chapter for your book by clicking the + icon")
                 }
 
                 ListView

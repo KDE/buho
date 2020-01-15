@@ -75,11 +75,10 @@ StackView
         {
             id: _holder
             visible: !cardsView.count
-            emoji: "qrc:/notepad.png"
+            emoji: "qrc:/view-books.svg"
             emojiSize: Maui.Style.iconSizes.huge
-            isMask: false
-            title : "There are not Books!"
-            body: "You can create new books and organize your notes"
+            title : qsTr("There are not Books!")
+            body: qsTr("You can create new books and organize your notes")
         }
 
 
@@ -87,6 +86,7 @@ StackView
         Maui.GridView
         {
             id: cardsView
+            visible: !_holder.visible
             anchors.fill: parent
             adaptContent: !showDetails
             itemSize: showDetails ? Maui.Style.iconSizes.big : Maui.Style.iconSizes.huge
@@ -179,10 +179,6 @@ StackView
                     }
                 }
             }
-
         }
-
     }
-
-
 }

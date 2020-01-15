@@ -161,9 +161,8 @@ Maui.Page
             Layout.fillHeight: true
             Layout.fillWidth: true
             width: parent.width
-            holder.emoji: "qrc:/Type.png"
+            holder.emoji: "qrc:/view-notes.svg"
             holder.emojiSize: Maui.Style.iconSizes.huge
-            holder.isMask: false
             holder.title :qsTr("No notes!")
             holder.body: qsTr("Click here to create a new note")
 
