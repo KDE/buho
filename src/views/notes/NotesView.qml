@@ -170,8 +170,8 @@ Maui.Page
             delegate: CardDelegate
             {
                 id: delegate
-                cardWidth: Math.min(cardsView.cellWidth, cardsView.itemWidth) - Kirigami.Units.largeSpacing * 2
-                cardHeight: cardsView.itemHeight
+                width: Math.min(cardsView.cellWidth, cardsView.itemWidth) - Kirigami.Units.largeSpacing * 2
+                height: cardsView.itemHeight
                 anchors.left: parent.left
                 anchors.leftMargin: cardsView.width <= cardsView.itemWidth ? 0 : (index % 2 === 0 ? Math.max(0, cardsView.cellWidth - cardsView.itemWidth) :
                                                                                                     cardsView.cellWidth)

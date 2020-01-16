@@ -1,8 +1,7 @@
 #include "notescontroller.h"
 #include "owl.h"
 #include "db/db.h"
-
-#include <QDirIterator>
+#include <QStringRef>
 
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
@@ -42,25 +41,28 @@ NotesController::~NotesController()
 	m_worker.wait();
 }
 
-const QUrl NotesController::saveNoteFile(const QUrl &url, const FMH::MODEL &data)
+ bool NotesController::saveNoteFile(const QUrl &url, const FMH::MODEL &data)
 {
 	if(data.isEmpty())
 	{
 		qWarning() << "the note is empty, therefore it could not be saved into a file" << url;
-		return url;
+        return false;
 	}
 
 	if(url.isEmpty () || !url.isValid())
 	{
 		qWarning() << "the url is not valid or is empty, therefore it could not be saved into a file" << url;
-		return url;
+        return false;
 	}
 
 	QFile file(url.toLocalFile());
-	file.open(QFile::WriteOnly);
-	file.write(data[FMH::MODEL_KEY::CONTENT].toUtf8());
-	file.close();
-	return QUrl::fromLocalFile(file.fileName());
+    if(file.open(QFile::WriteOnly))
+    {
+        file.write(data[FMH::MODEL_KEY::CONTENT].toUtf8());
+        file.close();
+        return true;
+    }
+    return false;
 }
 
 const QString NotesLoader::fileContentPreview(const QUrl & path)
@@ -85,51 +87,69 @@ const QString NotesLoader::fileContentPreview(const QUrl & path)
 	return QString();
 }
 
-QUrl NotesController::insertNote(const FMH::MODEL &note, const QUrl &url)
+bool NotesController::insertNote(FMH::MODEL &note)
 {
 	if(note.isEmpty())
 	{
 		qWarning()<< "Could not insert note locally. The note is empty. NotesController::insertNote.";
-		return QUrl();
+        return false;
 	}
 
-	if((url.isLocalFile() && !FMH::fileExists(url)) || url.isEmpty() || !url.isValid())
+    if((OWL::NotesPath.isLocalFile() && !FMH::fileExists(OWL::NotesPath)) || OWL::NotesPath.isEmpty() || !OWL::NotesPath.isValid())
 	{
-		qWarning() << "The url destination is not valid or does not exists, therefore it could not be saved into a file" << url;
+        qWarning() << "The url destination is not valid or does not exists, therefore it could not be saved into a file" << OWL::NotesPath;
 		qWarning()<< "File could not be saved. NotesController::insertNote.";
-		return QUrl();
+        return false;
 	}
 
-	const auto url_ = QUrl(url.toString()+note[FMH::MODEL_KEY::TITLE]+note[FMH::MODEL_KEY::FORMAT]);
+    note[FMH::MODEL_KEY::ID] = NotesController::createId();
+    const auto url_ = QUrl(OWL::NotesPath.toString()+note[FMH::MODEL_KEY::ID]+note[FMH::MODEL_KEY::FORMAT]);
+    if(!NotesController::saveNoteFile(url_, note))
+        return false;
 
-	const auto __notePath = NotesController::saveNoteFile(url_, note);
-	if(!FMH::fileExists(__notePath))
-		return QUrl();
+    note[FMH::MODEL_KEY::URL] = url_.toString();
 
-	auto m_note = note;
-	m_note[FMH::MODEL_KEY::URL] = __notePath.toString();
+    for(const auto &tg : note[FMH::MODEL_KEY::TAG].split(",", QString::SplitBehavior::SkipEmptyParts))
+        Tagging::getInstance()->tagUrl(url_.toString(), tg, note[FMH::MODEL_KEY::COLOR]);
 
-	for(const auto &tg : m_note[FMH::MODEL_KEY::TAG].split(",", QString::SplitBehavior::SkipEmptyParts))
-		Tagging::getInstance()->tagUrl(__notePath.toString(), tg, note[FMH::MODEL_KEY::COLOR]);
-
-	this->m_db->insert(OWL::TABLEMAP[OWL::TABLE::NOTES],
-			FMH::toMap(FMH::filterModel(m_note, {FMH::MODEL_KEY::COLOR,
-												 FMH::MODEL_KEY::URL,
-												 FMH::MODEL_KEY::PIN})));
-
-	return __notePath;
+    return(this->m_db->insert(OWL::TABLEMAP[OWL::TABLE::NOTES],
+           FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::URL,
+                                              FMH::MODEL_KEY::ID,
+                                              FMH::MODEL_KEY::COLOR,
+                                              FMH::MODEL_KEY::PIN}))));
 }
 
-bool NotesController::updateNote(const FMH::MODEL & note, const QUrl & url)
+bool NotesController::updateNote(FMH::MODEL &note, QString id)
 {
-	if(!note[FMH::MODEL_KEY::TAG].isEmpty ())
-		Tagging::getInstance ()->updateUrlTags (url.toString (),  note[FMH::MODEL_KEY::TAG].split (","));
+    if(note.isEmpty())
+        return false;
 
-	NotesController::saveNoteFile (url, note);
+	if(!note[FMH::MODEL_KEY::TAG].isEmpty ())
+        Tagging::getInstance ()->updateUrlTags (note[FMH::MODEL_KEY::URL],  note[FMH::MODEL_KEY::TAG].split (","));
+
+    if(note[FMH::MODEL_KEY::URL].isEmpty())
+        note[FMH::MODEL_KEY::URL] = [&]() -> const QString {
+                const auto data = DB::getInstance ()->getDBData(QString("select url from notes where id = '%1'").arg(id));
+                return data.isEmpty() ? QString() : data.first()[FMH::MODEL_KEY::URL];
+            }();
+
+    if(note[FMH::MODEL_KEY::URL].isEmpty())
+        return false;
+
+    if(!NotesController::saveNoteFile(note[FMH::MODEL_KEY::URL], note))
+        return false;
+
+    qDebug()<< "TRYING TO UPDATE NOTE" << id << note[FMH::MODEL_KEY::URL];
 
 	return this->m_db->update(OWL::TABLEMAP[OWL::TABLE::NOTES],
-			FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::COLOR,
-											   FMH::MODEL_KEY::PIN})), QVariantMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url.toString ()}});
+            FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::COLOR,
+                                               FMH::MODEL_KEY::PIN})), QVariantMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
+}
+
+bool NotesController::removeNote(const QUrl &url)
+{
+    this->m_db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES_SYNC], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], url.toString()}});
+    return this->m_db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], url.toString()}});
 }
 
 void NotesController::getNotes()
@@ -144,10 +164,10 @@ void NotesLoader::fetchNotes()
 	for(auto &note : notes)
 	{
 		const auto url = QUrl(note[FMH::MODEL_KEY::URL]);
-		qDebug() << "Fetching URLS" << url;
+        const auto contentPreview =  NotesLoader::fileContentPreview (url);
 		note.unite(FMH::getFileInfoModel (url));
-		note[FMH::MODEL_KEY::TITLE] = note[FMH::MODEL_KEY::NAME];
-		note[FMH::MODEL_KEY::CONTENT] = NotesLoader::fileContentPreview (url);
+        note[FMH::MODEL_KEY::CONTENT] = contentPreview;
+
 		emit this->noteReady (note);
 	}
 

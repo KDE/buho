@@ -10,8 +10,8 @@ ItemDelegate
 {
     id: control
     property string noteColor : model.color ? model.color : Kirigami.Theme.backgroundColor
-    property int cardWidth: visible ? Maui.Style.unit * 200 : 0
-    property int cardHeight: visible ? Maui.Style.unit * 120 : 0
+    implicitWidth: Maui.Style.unit * 200
+    implicitHeight: Maui.Style.unit * 120
     property int cardRadius: Maui.Style.radiusV
 
     property bool condition : true
@@ -20,12 +20,13 @@ ItemDelegate
 
     visible: condition
 
-    width: cardWidth
-    height: cardHeight
-    hoverEnabled: !isMobile
+    hoverEnabled: !Kirigami.Settings.isMobile
     background: Rectangle
     {
-        color: "transparent"
+        border.color: Qt.darker(noteColor, 1.2)
+        color:  noteColor
+        radius: cardRadius
+        opacity: hovered ? 0.8 : 1
     }
 
     MouseArea
@@ -34,30 +35,19 @@ ItemDelegate
         acceptedButtons:  Qt.RightButton
         onClicked:
         {
-            if(!isMobile && mouse.button === Qt.RightButton)
+            if(!Kirigami.Settings.isMobile && mouse.button === Qt.RightButton)
                 rightClicked()
         }
     }
 
-    Rectangle
+    Maui.Holder
     {
-        id: card
-        z: -999
-        anchors.centerIn: control
-        anchors.fill: control
-        border.color: Qt.darker(noteColor, 1.2)
-
-        color: noteColor
-        radius: cardRadius
-    }
-
-    Rectangle
-    {
-        anchors.fill: parent
-        color: hovered? "#333" :  "transparent"
-        z: 999
-        opacity: 0.2
-        radius: cardRadius
+        visible: !title.visible
+        title: qsTr("Empty")
+        body: qsTr("Edit this note")
+        emoji: "qrc:/view-notes.svg"
+        emojiSize: Maui.Style.iconSizes.large
+        isMask: true
     }
 
     ColumnLayout
@@ -101,7 +91,7 @@ ItemDelegate
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            text: model.title ? model.title : ""
+            text: model.content.split('\n')[0].trim();
             color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
@@ -145,7 +135,7 @@ ItemDelegate
         {
             id: body
             padding: 0
-            visible: typeof model.content !== 'undefined'
+            visible: typeof model.content !== 'undefined' && body.text.length > 0
             enabled: false
             text: model.content ? model.content : ""
             color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
@@ -156,7 +146,7 @@ ItemDelegate
             background: Rectangle
             {
                 color: "transparent"
-            }
+            }           
         }
     }
 
@@ -198,18 +188,5 @@ ItemDelegate
                 }
             }
         }
-
-    }
-
-    function update(item)
-    {
-        console.log("update link color", item.color, item.tag)
-        model.title = item.title
-        model.content = item.content
-        model.color = item.color
-        model.pin = item.pin ? 1 : 0
-        model.favorite = item.favorite ? 1 : 0
-        model.modified = item.modified
-        model.tag = item.tag.join(",")
     }
 }

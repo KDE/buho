@@ -9,6 +9,7 @@ Maui.Dialog
     id: control
     parent: parent
 
+    property alias editor: _editor
     property string selectedColor : Kirigami.Theme.backgroundColor
     property string fgColor: Qt.darker(selectedColor, 3)
     property bool showEditActions : false
@@ -29,29 +30,11 @@ Maui.Dialog
     acceptText: qsTr("Save")
     onAccepted:
     {
-        if(editor.body.text.length > 0)
-            packNote()
-        clear()
+        packNote()
+        control.close()
     }
 
     onRejected: clear()
-
-    headBar.middleContent:  TextField
-    {
-        id: title
-        Layout.fillWidth: true
-        Layout.margins: Maui.Style.space.medium
-        placeholderText: qsTr("Title")
-        font.weight: Font.Bold
-        font.bold: true
-        font.pointSize: Maui.Style.fontSizes.large
-
-        background: Rectangle
-        {
-            color: "transparent"
-        }
-    }
-
     footBar.leftContent: [
         ToolButton
         {
@@ -76,7 +59,6 @@ Maui.Dialog
             onClicked: isAndroid ? Maui.Android.shareText(editor.body.text) :
                                    shareDialog.show(editor.body.text)
             icon.color: Kirigami.Theme.textColor
-
         },
 
         ToolButton
@@ -99,7 +81,8 @@ Maui.Dialog
 
         Maui.Editor
         {
-            id: editor
+            id: _editor
+            document.autoReload: true
             Layout.fillHeight: true
             Layout.fillWidth: true
             Kirigami.Theme.backgroundColor: control.selectedColor
@@ -146,14 +129,12 @@ Maui.Dialog
 
     function clear()
     {
-        title.clear()
         editor.body.clear()
         close()
     }
 
     function fill(note)
     {
-        title.text = note.title
         editor.fileUrl = note.url
         control.selectedColor =  note.color ? note.color : Kirigami.Theme.backgroundColor
         pinButton.checked = note.pin == 1
@@ -164,14 +145,18 @@ Maui.Dialog
 
     function packNote()
     {
+        const content =  editor.body.text
+        if(content.length == 0)
+            return;
+
         control.noteSaved({
-                      title: title.text.trim(),
-                      content: editor.body.text,
-                      color: selectedColor,
-                      tag: tagBar.list.tags.join(","),
-                      pin: pinButton.checked ? 1 : 0,
-                      fav: favButton.checked ? 1 : 0,
-                      format: ".txt" //for now only simple txt files
-                  })
+                              url: editor.fileUrl,
+                              content: content,
+                              color: selectedColor,
+                              tag: tagBar.list.tags.join(","),
+                              pin: pinButton.checked ? 1 : 0,
+                              fav: favButton.checked ? 1 : 0,
+                              format: ".txt" //for now only simple txt files
+                          })
     }
 }

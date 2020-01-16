@@ -7,6 +7,7 @@
 #else
 #include <MauiKit/fmh.h>
 #endif
+
 /**
  * @brief The Syncer class
  * This interfaces between local storage and cloud
@@ -92,7 +93,7 @@ public:
 	 * @param note
 	 * the new note contents represented by FMH::MODEL
 	 */
-	void updateNote(const QString &url, const FMH::MODEL &note);
+    void updateNote(QString id, FMH::MODEL &note);
 
 	/**
 	 * @brief removeNote
@@ -102,7 +103,7 @@ public:
 	 * @param id
 	 * ID of the exisiting  note
 	 */
-	void removeNote(const QString &id);
+    void removeNote(const QString &id);
 
 	/**
 	 * @brief getNote
@@ -212,19 +213,16 @@ private:
 	 */
 	void syncNote(const QString &id);
 
-	static const QString noteUrlFromStamp(const QString &provider, const QString &stamp) ;
-	static const QString noteStampFromUrl(const QString &url);
+    static const QString noteIdFromStamp(const QString &provider, const QString &stamp) ;
+    static const QString noteStampFromId(const QString &id);
 
-	static const QString bookletUrlFromStamp(const QString &provider, const QString &stamp) ;
-	static const QString bookletStampFromUrl(const QString &url);
+    static const QString bookletIdFromStamp(const QString &provider, const QString &stamp) ;
+    static const QString bookletStampFromId(const QString &id);
 
-
-	void setConections();
-
+    void setConections();
 protected:
 	void updateNoteRemote(const QString &id, const FMH::MODEL &note);
-	bool removeNoteLocal(const QString &id);
-	void removeNoteRemote(const QString &id);
+    void removeNoteRemote(const QString &id);
 
 	bool insertBookLocal(FMH::MODEL &book);
 	void insertBookRemote(FMH::MODEL &book);
@@ -241,7 +239,7 @@ protected:
 	void removeBookletRemote(const QString &id);
 
 	void collectAllNotes();
-	const FMH::MODEL_LIST collectAllBooks();
+    const FMH::MODEL_LIST collectAllBooks();
 
 signals:
 	//FOR NOTES

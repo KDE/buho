@@ -36,8 +36,8 @@ ListView
 
         CardDelegate
         {
-            cardWidth: parent.width * 0.8
-            cardHeight:  parent.height
+            width: parent.width * 0.8
+            height:  parent.height
 
             anchors.centerIn: parent
 

@@ -94,6 +94,7 @@ void NextNote::getNotes()
 		for(const auto &data : this->parseNotes(array))
 		{
 			auto item = data;
+            item[FMH::MODEL_KEY::STAMP] = item[FMH::MODEL_KEY::ID];
 			item[FMH::MODEL_KEY::USER] = this->user ();
 			item[FMH::MODEL_KEY::SERVER] = this->provider ();
 			item[FMH::MODEL_KEY::FORMAT] = ".txt";
@@ -142,10 +143,7 @@ void NextNote::getBooklets()
 
 void NextNote::insertNote(const FMH::MODEL &note)
 {
-	auto note_ = note;
-	note_[FMH::MODEL_KEY::CONTENT] = note[FMH::MODEL_KEY::TITLE] +"\n" + note[FMH::MODEL_KEY::CONTENT];
-
-	QByteArray payload = QJsonDocument::fromVariant(FMH::toMap(note_)).toJson();
+    QByteArray payload = QJsonDocument::fromVariant(FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::CONTENT, FMH::MODEL_KEY::FAVORITE}))).toJson();
 	qDebug() << "UPLOADING NEW NOT" << QVariant(payload).toString();
 
 	const auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
@@ -154,7 +152,7 @@ void NextNote::insertNote(const FMH::MODEL &note)
 
 	auto restclient = new QNetworkAccessManager; //constructor
 	QNetworkReply *reply = restclient->post(request,payload);
-	connect(reply, &QNetworkReply::finished, [=, __note = note_]()
+    connect(reply, &QNetworkReply::finished, [=, __note = note]()
 	{
 		qDebug() << "Note insertyion finished?";
 		const auto notes = this->parseNotes(reply->readAll());
@@ -164,7 +162,7 @@ void NextNote::insertNote(const FMH::MODEL &note)
 									{
 										note = notes.first();
 										note[FMH::MODEL_KEY::STAMP] = note[FMH::MODEL_KEY::ID]; //adds the id of the uploaded note as a stamp
-										note[FMH::MODEL_KEY::URL] = __note[FMH::MODEL_KEY::URL]; //adds the url of the original local note
+                                        note[FMH::MODEL_KEY::ID] = __note[FMH::MODEL_KEY::ID]; //adds the url of the original local note
 										note[FMH::MODEL_KEY::SERVER] = this->m_provider; //adds the provider server address
 										note[FMH::MODEL_KEY::USER] = this->m_user; //adds the user name
 									}
@@ -333,13 +331,13 @@ const QString NextNote::formatUrl(const QString &user, const QString &password, 
 const FMH::MODEL_LIST NextNote::parseNotes(const QByteArray &array)
 {
 	FMH::MODEL_LIST res;
-	qDebug()<< "trying to parse notes" << array;
+//	qDebug()<< "trying to parse notes" << array;
 	QJsonParseError jsonParseError;
 	QJsonDocument jsonResponse = QJsonDocument::fromJson(static_cast<QString>(array).toUtf8(), &jsonParseError);
 
 	if (jsonParseError.error != QJsonParseError::NoError)
 	{
-		qDebug()<< "ERROR PARSING";
+        qDebug()<< "ERROR PARSING" << array;
 		return res;
 	}
 

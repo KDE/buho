@@ -22,29 +22,41 @@ Notes::Notes(QObject *parent) : MauiList(parent),
 
 	this->syncer->setProvider(new NextNote); //Syncer takes ownership of NextNote or the provider
 
-	const auto m_account = MauiAccounts::instance();
-	connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap)
-	{
-		this->syncer->getNotes();
-	});
+    connect(MauiAccounts::instance(), &MauiAccounts::currentAccountChanged, [&](QVariantMap)
+    {
+        this->syncer->getNotes();
+    });
 
 	connect(this, &Notes::sortByChanged, this, &Notes::sortList);
 	connect(this, &Notes::orderChanged, this, &Notes::sortList);
 
+    connect(syncer, &Syncer::noteInserted, [&](FMH::MODEL note, STATE state)
+    {
+        if(state.type == STATE::TYPE::LOCAL)
+        {
+            emit this->preItemAppended ();
+            this->notes << note;
+            emit this->postItemAppended ();
+        }
+    });
+
+    connect(syncer, &Syncer::noteUpdated, [&](FMH::MODEL note, STATE state)
+    {
+        if(state.type == STATE::TYPE::LOCAL)
+        {
+            const auto index = this->indexOf (FMH::MODEL_KEY::ID, note[FMH::MODEL_KEY::ID]);
+            if(index >= 0)
+                this->updateModel (index, FMH::modelRoles(note));
+        }
+    });
+
 	connect(syncer, &Syncer::noteReady, [&](FMH::MODEL note)
-	{
-		auto index = this->indexOf (FMH::MODEL_KEY::URL, note[FMH::MODEL_KEY::URL]);
+	{       
 		note[FMH::MODEL_KEY::FAV] = FMStatic::isFav (note[FMH::MODEL_KEY::URL]) ? 1 : 0;
 
-		if(index >= 0)
-		{
-			this->updateModel (index, FMH::modelRoles (note));
-		}else
-		{
-			emit this->preItemAppended ();
-			this->notes << note;
-			emit this->postItemAppended ();
-		}
+        emit this->preItemAppended ();
+        this->notes << note;
+        emit this->postItemAppended ();
 	});
 
 	this->syncer->getNotes();
@@ -152,41 +164,19 @@ Notes::ORDER Notes::getOrder() const
 
 bool Notes::insert(const QVariantMap &note)
 {
-	emit this->preItemAppended();
-
-	auto __note = FMH::toModel(note);
-	__note[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
-	__note[FMH::MODEL_KEY::ADDDATE] = QDateTime::currentDateTime().toString(Qt::TextDate);
-
+    auto __note = FMH::toModel(note);
 	this->syncer->insertNote(__note);
 
-	this->notes << __note;
-
-	emit this->postItemAppended();
 	return true;
 }
-
 
 bool Notes::update(const QVariantMap &data, const int &index)
 {
 	if(index < 0 || index >= this->notes.size())
 		return false;
 
-	auto newData = this->notes[index];
-	QVector<int> roles;
-	for(const auto &key : data.keys())
-		if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
-		{
-			newData[FMH::MODEL_NAME_KEY[key]] = data[key].toString();
-			roles << FMH::MODEL_NAME_KEY[key];
-		}
-
-	this->notes[index] = newData;
-
-	newData[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
-	this->syncer->updateNote(newData[FMH::MODEL_KEY::ID], newData);
-
-	emit this->updateModel(index, roles);
+    this->notes[index] = this->notes[index].unite(FMH::toModel(data));
+    this->syncer->updateNote(this->notes[index][FMH::MODEL_KEY::ID], this->notes[index]);
 	return true;
 }
 

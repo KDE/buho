@@ -9,7 +9,7 @@
 #else
 #include <MauiKit/fmh.h>
 #endif
-
+#include<QUuid>
 #include "owl.h"
 
 class DB;
@@ -45,8 +45,9 @@ public slots:
 	 * @return bool
 	 * true if the note was inserted sucessfully in the local storage
 	 */
-	QUrl insertNote(const FMH::MODEL &note, const QUrl &url);
-	bool updateNote(const FMH::MODEL &note, const QUrl &url);
+    bool insertNote(FMH::MODEL &note);
+    bool updateNote(FMH::MODEL &note, QString id);
+    bool removeNote(const QUrl &url);
 
 	void getNotes();
 
@@ -54,7 +55,11 @@ private:
 	QThread m_worker;
 	DB *m_db;
 
-	static inline const QUrl saveNoteFile(const QUrl &url, const FMH::MODEL &data);
+    static inline bool saveNoteFile(const QUrl &url, const FMH::MODEL &data);
+    static inline const QString createId ()
+    {
+        return QUuid::createUuid().toString();
+    }
 
 signals:
 	void noteReady(FMH::MODEL note);
