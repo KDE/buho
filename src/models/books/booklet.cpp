@@ -6,20 +6,8 @@ Booklet::Booklet(BooksSyncer *_syncer,  QObject *parent) : MauiList(parent),
     syncer(_syncer)
 {
 
-    connect(this->syncer, &BooksSyncer::bookletReady, [&](FMH::MODEL booklet)
-    {
-        emit this->preItemAppended();
-        booklet = booklet.unite(FMH::getFileInfoModel(booklet[FMH::MODEL_KEY::URL]));
-        this->m_list << booklet;
-        emit this->preItemAppended();
-    });
-
-    connect(this->syncer, &BooksSyncer::bookletInserted, [&](FMH::MODEL booklet)
-    {
-        emit this->preItemAppended();
-        this->m_list << booklet;
-        emit this->postItemAppended();
-    });
+    connect(this->syncer, &BooksSyncer::bookletReady,this, &Booklet::appendBooklet);
+    connect(this->syncer, &BooksSyncer::bookletInserted,this, &Booklet::appendBooklet);
 }
 
 FMH::MODEL_LIST Booklet::items() const
@@ -111,6 +99,20 @@ void Booklet::clear()
 void Booklet::sortList()
 {
 
+}
+
+void Booklet::appendBooklet(FMH::MODEL booklet)
+{
+    emit this->preItemAppended();
+    booklet = booklet.unite(FMH::getFileInfoModel(booklet[FMH::MODEL_KEY::URL]));
+    booklet[FMH::MODEL_KEY::TITLE] = [&]()
+    {
+      const auto lines = booklet[FMH::MODEL_KEY::CONTENT].split("\n");
+      return lines.isEmpty() ?  QString() : lines.first().trimmed();
+    }();
+
+    this->m_list << booklet;
+    emit this->preItemAppended();
 }
 
 void Booklet::setBookTitle(const QString &title)

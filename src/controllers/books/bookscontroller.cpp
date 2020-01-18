@@ -105,7 +105,10 @@ void BooksController::getBooklets(const QString &book)
 {
     auto booklets = this->m_db->getDBData(QString("select * from booklets where book = '%1'").arg(book));
     for(auto &booklet : booklets)
+    {
+        booklet[FMH::MODEL_KEY::CONTENT] =  OWL::fileContentPreview (booklet[FMH::MODEL_KEY::URL]);
         emit this->bookletReady(booklet);
+    }
 
     emit this->bookletsReady(booklets);
 }

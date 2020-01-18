@@ -11,11 +11,10 @@ Item
     property var currentBooklet : null
     signal exit()
 
-
     onCurrentBookletChanged:
     {
         editor.document.load(currentBooklet.url)
-        _drawerPage.title = currentBook.title
+        _sidebar.title = currentBook.title
     }
 
     Maui.BaseModel
@@ -28,7 +27,6 @@ Item
     {
         id: _page
         anchors.fill: parent
-        anchors.rightMargin: _drawer.modal === false ? _drawer.contentItem.width * _drawer.position : 0
 
         headBar.leftContent: [
             ToolButton
@@ -53,7 +51,7 @@ Item
                 id: title
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-//                Layout.margins: Maui.Style.space.medium
+                //                Layout.margins: Maui.Style.space.medium
                 placeholderText: qsTr("New chapter...")
                 font.weight: Font.Bold
                 font.bold: true
@@ -80,47 +78,26 @@ Item
             body: qsTr("Select a chapter or create a new one")
         }
 
-        Maui.Editor
+
+        Kirigami.PageRow
         {
-            id: editor
+            id: _layout
             anchors.fill: parent
-            visible: !_holder.visible
-        }
-
-        Maui.Dialog
-        {
-            id: _newChapter
-
-            title: qsTr("New Chapter")
-            message: qsTr("Create a new chapter for your current book. Give it a title")
-            entryField: true
-
-            onAccepted:
+            initialPage: [_sidebar, editor]
+            interactive: true
+defaultColumnWidth: Kirigami.Units.gridUnit * 13
+            Maui.Editor
             {
-                _booksList.booklet.insert({title: textEntry.text})
+                id: editor
+                visible: !_holder.visible
+                footBar.visible: false
+
             }
-        }
 
-        Connections
-        {
-            target: root
-            onCurrentViewChanged: _drawer.close()
-        }
-
-        Kirigami.OverlayDrawer
-        {
-            id: _drawer
-            edge: Qt.RightEdge
-            width: Kirigami.Units.gridUnit * 16
-            height: parent.height - _page.headBar.height
-            y: _page.headBar.height
-            modal: !isWide
-            visible: _holder.visible
-
-            contentItem: Maui.Page
+            Maui.Page
             {
-                id: _drawerPage
-                anchors.fill: parent
+
+                id: _sidebar
                 headBar.visible: true
                 headBar.rightContent: ToolButton
                 {
@@ -159,6 +136,7 @@ Item
                     delegate: Maui.LabelDelegate
                     {
                         id: _delegate
+                        width: parent.width
                         label: index+1  + " - " + model.title
 
                         Connections
@@ -196,5 +174,22 @@ Item
                 }
             }
         }
+
+
+
+        Maui.Dialog
+        {
+            id: _newChapter
+
+            title: qsTr("New Chapter")
+            message: qsTr("Create a new chapter for your current book. Give it a title")
+            entryField: true
+
+            onAccepted:
+            {
+                _booksList.booklet.insert({title: textEntry.text})
+            }
+        }
+
     }
 }

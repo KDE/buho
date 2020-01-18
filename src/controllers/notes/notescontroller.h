@@ -18,7 +18,6 @@ class NotesLoader : public QObject
 	Q_OBJECT
 public:
     void fetchNotes(FMH::MODEL_LIST notes);
-	static const QString fileContentPreview(const QUrl &path);
 
 signals:
 	void noteReady(FMH::MODEL note);

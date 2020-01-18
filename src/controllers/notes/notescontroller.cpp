@@ -41,28 +41,6 @@ NotesController::~NotesController()
 	m_worker.wait();
 }
 
-const QString NotesLoader::fileContentPreview(const QUrl & path)
-{
-	if(!path.isLocalFile())
-	{
-		qWarning()<< "Can not open note file, the url is not a local path";
-		return QString();
-	}
-
-	if(!FMH::fileExists (path))
-		return QString();
-
-	QFile file(path.toLocalFile());
-	if(file.open(QFile::ReadOnly))
-	{
-		const auto content = file.read(512);
-		file.close();
-		return QString(content);
-	}
-
-	return QString();
-}
-
 bool NotesController::insertNote(FMH::MODEL &note)
 {
 	if(note.isEmpty())
@@ -149,7 +127,7 @@ void NotesLoader::fetchNotes(FMH::MODEL_LIST notes)
 	for(auto &note : notes)
 	{
 		const auto url = QUrl(note[FMH::MODEL_KEY::URL]);
-        const auto contentPreview =  NotesLoader::fileContentPreview (url);
+        const auto contentPreview =  OWL::fileContentPreview (url);
         note[FMH::MODEL_KEY::CONTENT] = contentPreview;
 		emit this->noteReady (note);
 	}

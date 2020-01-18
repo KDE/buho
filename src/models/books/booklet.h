@@ -69,13 +69,12 @@ private:
     BooksSyncer *syncer;
 
     void sortList();
-
+    void appendBooklet(FMH::MODEL booklet);
 
     SORTBY sort = SORTBY::MODIFIED;
     ORDER order = ORDER::DESC;
 
     QString m_book;
-
     QString m_bookTitle;
 
 signals:
