@@ -69,7 +69,6 @@ Item
             }
         ]
 
-
         Maui.Holder
         {
             id: _holder

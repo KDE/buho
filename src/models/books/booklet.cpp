@@ -1,18 +1,25 @@
 #include "booklet.h"
-#include "syncer.h"
+#include "bookssyncer.h"
 #include "nextnote.h"
 
-Booklet::Booklet(Syncer *_syncer,  QObject *parent) : MauiList(parent),
+Booklet::Booklet(BooksSyncer *_syncer,  QObject *parent) : MauiList(parent),
     syncer(_syncer)
-{  
+{
 
-    connect(this->syncer, &Syncer::bookletReady, [&](FMH::MODEL_LIST booklets)
+    connect(this->syncer, &BooksSyncer::bookletReady, [&](FMH::MODEL booklet)
     {
-        emit this->preListChanged();
-        this->m_list = booklets;
-        emit this->postListChanged();
+        emit this->preItemAppended();
+        booklet = booklet.unite(FMH::getFileInfoModel(booklet[FMH::MODEL_KEY::URL]));
+        this->m_list << booklet;
+        emit this->preItemAppended();
     });
-    connect(this, &Booklet::bookChanged, syncer, &Syncer::getBooklet);
+
+    connect(this->syncer, &BooksSyncer::bookletInserted, [&](FMH::MODEL booklet)
+    {
+        emit this->preItemAppended();
+        this->m_list << booklet;
+        emit this->postItemAppended();
+    });
 }
 
 FMH::MODEL_LIST Booklet::items() const
@@ -52,22 +59,17 @@ void Booklet::setBook(const QString &book) //book id title
 
     this->setBookTitle(book);
     m_book = book;
+
+    this->clear();
+    this->syncer->getBooklets(this->m_book);
+
     emit bookChanged(m_book);
 }
 
 void Booklet::insert(const QVariantMap &data)
 {
-    emit this->preItemAppended();
-
-    auto __booklet = FMH::toModel(data);
-    __booklet[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
-    __booklet[FMH::MODEL_KEY::ADDDATE] = QDateTime::currentDateTime().toString(Qt::TextDate);
-
-    this->syncer->insertBooklet(this->m_book, __booklet);
-
-    this->m_list << __booklet;
-
-    emit this->postItemAppended();
+    auto booklet = FMH::toModel(data);
+    this->syncer->insertBooklet(this->m_book, booklet);
 }
 
 void Booklet::update(const QVariantMap &data, const int &index)
@@ -89,7 +91,7 @@ void Booklet::update(const QVariantMap &data, const int &index)
     this->m_list[index] = newData;
 
     newData[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
-    this->syncer->updateBooklet(newData[FMH::MODEL_KEY::ID], this->m_book, newData);
+//    this->syncer->updateBooklet(newData[FMH::MODEL_KEY::ID], this->m_book, newData);
 
     emit this->updateModel(index, roles);
 }
@@ -97,6 +99,13 @@ void Booklet::update(const QVariantMap &data, const int &index)
 void Booklet::remove(const int &index)
 {
 
+}
+
+void Booklet::clear()
+{
+    emit this->preListChanged();
+    this->m_list.clear();
+    emit this->postListChanged();
 }
 
 void Booklet::sortList()

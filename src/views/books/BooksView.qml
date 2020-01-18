@@ -81,74 +81,46 @@ StackView
             body: qsTr("You can create new books and organize your notes")
         }
 
-
-
         Maui.GridView
         {
             id: cardsView
             visible: !_holder.visible
             anchors.fill: parent
-            adaptContent: !showDetails
-            itemSize: showDetails ? Maui.Style.iconSizes.big : Maui.Style.iconSizes.huge
+            adaptContent: false
+            itemSize:  Maui.Style.iconSizes.huge
             //        centerContent: true
             spacing: Maui.Style.space.huge
 
-            cellWidth: showDetails ?  parent.width : itemSize * 1.5
+            cellWidth: itemSize * 2
             cellHeight: itemSize * 1.5
 
             model: _booksModel
 
-
-            delegate: ItemDelegate
+            delegate: Maui.ItemDelegate
             {
                 id: _delegate
 
                 width: cardsView.cellWidth * 0.9
                 height: cardsView.cellHeight
 
-                hoverEnabled: !isMobile
-                background: Rectangle
+                padding: Maui.Style.space.small
+
+                background: null
+                isCurrentItem: GridView.isCurrentItem
+
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered
+                ToolTip.text: model.url
+
+                Maui.GridItemTemplate
                 {
-                    color: "transparent"
-                }
+                    isCurrentItem: _delegate.isCurrentItem
 
-                ColumnLayout
-                {
-                    anchors.fill : parent
-
-                    Item
-                    {
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: cardsView.itemSize
-
-                        Image
-                        {
-                            id: _img
-                            anchors.centerIn: parent
-                            source: "qrc:/booklet.svg"
-                            sourceSize.width: cardsView.itemSize
-                            sourceSize.height: cardsView.itemSize
-                        }
-                    }
-
-                    Rectangle
-                    {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-
-                        color: hovered ? Kirigami.Theme.highlightColor : "transparent"
-                        radius: Maui.Style.radiusV
-                        Label
-                        {
-                            width: parent.width
-                            height: parent.height
-                            color: hovered ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
-                            text: model.title
-                            horizontalAlignment: Qt.AlignHCenter
-
-                        }
-                    }
-
+                    anchors.fill: parent
+                    label1.text: model.title
+                    iconSizeHint: Maui.Style.iconSizes.large
+                    imageSource:  "qrc:/booklet.svg"
                 }
 
                 Maui.Badge

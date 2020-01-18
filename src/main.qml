@@ -175,10 +175,9 @@ Maui.ApplicationWindow
 
     function setNote(note)
     {
-        var tags = notesView.list.getTags(notesView.currentIndex)
-        note.tags = tags
         notesView.currentNote = note
         editNote.fill(note)
+        editNote.open()
     }
 
     function previewLink(link)

@@ -12,7 +12,7 @@
 #include <MauiKit/mauilist.h>
 #endif
 
-class Syncer;
+class NotesSyncer;
 class Notes : public MauiList
 {
     Q_OBJECT
@@ -47,7 +47,7 @@ public:
     ORDER getOrder() const;
 
 private:
-    Syncer *syncer;
+    NotesSyncer *syncer;
 
     FMH::MODEL_LIST notes;
     QVariantMap m_account;
@@ -57,13 +57,13 @@ private:
     SORTBY sort = SORTBY::MODIFIED;
     ORDER order = ORDER::DESC;
 
+    void appendNote(FMH::MODEL note);
+
 signals:
     void orderChanged();
     void sortByChanged();
 
 public slots:
-    QVariantList getTags(const int &index);
-
     QVariantMap get(const int &index) const;
     bool insert(const QVariantMap &note);
     bool update(const QVariantMap &data, const int &index);

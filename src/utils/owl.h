@@ -6,9 +6,16 @@
 #include <QStandardPaths>
 #include <QImage>
 #include <QUrl>
+#include <QUuid>
 
 #ifndef STATIC_MAUIKIT
 #include "../buho_version.h"
+#endif
+
+#ifdef STATIC_MAUIKIT
+#include "fmh.h"
+#else
+#include <MauiKit/fmh.h>
 #endif
 
 namespace OWL
@@ -61,6 +68,35 @@ namespace OWL
         }else qDebug()<<"array is empty";
 
         return QString();
+    }
+
+    static inline  bool saveNoteFile(const QUrl &url, const QByteArray &data)
+    {
+        if(data.isEmpty())
+        {
+            qWarning() << "the note is empty, therefore it could not be saved into a file" << url;
+            return false;
+        }
+
+        if(url.isEmpty () || !url.isValid())
+        {
+            qWarning() << "the url is not valid or is empty, therefore it could not be saved into a file" << url;
+            return false;
+        }
+
+        QFile file(url.toLocalFile());
+        if(file.open(QFile::WriteOnly))
+        {
+            file.write(data);
+            file.close();
+            return true;
+        }else qWarning() << "Couldn-t open file to writte the text "<< url;
+
+        return false;
+    }
+    static inline const QString createId ()
+    {
+        return QUuid::createUuid().toString();
     }
 }
 

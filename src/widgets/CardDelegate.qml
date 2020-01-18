@@ -69,7 +69,7 @@ ItemDelegate
             Layout.alignment: Qt.AlignLeft
 
             Layout.fillWidth: true
-            text: Qt.formatDateTime(new Date(model.updated), "d MMM h:mm")
+            text: Qt.formatDateTime(new Date(model.modified), "d MMM h:mm")
             color: model.color ? Qt.darker(model.color) : Kirigami.Theme.textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
@@ -91,7 +91,7 @@ ItemDelegate
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            text: model.content.split('\n')[0].trim();
+            text: model.title
             color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere

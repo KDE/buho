@@ -128,8 +128,11 @@ void NextNote::getBooklets()
 		for(const auto &data : this->parseNotes(array))
 		{
 			auto item = data;
-			item[FMH::MODEL_KEY::USER] = this->user ();
-			item[FMH::MODEL_KEY::SERVER] = this->provider ();
+            item[FMH::MODEL_KEY::STAMP] =  item[FMH::MODEL_KEY::ID];
+            item[FMH::MODEL_KEY::USER] = this->user ();
+            item[FMH::MODEL_KEY::SERVER] = this->provider ();
+            item[FMH::MODEL_KEY::FORMAT] = ".txt";
+
 			if(!item[FMH::MODEL_KEY::CATEGORY].isEmpty() && !item[FMH::MODEL_KEY::CATEGORY].isNull())
 				booklets << item;
 		}

@@ -10,13 +10,19 @@ Maui.Dialog
     parent: parent
 
     property alias editor: _editor
-    property string selectedColor : Kirigami.Theme.backgroundColor
-    property string fgColor: Qt.darker(selectedColor, 3)
+    property string selectedColor
+    property color fgColor: Qt.darker(selectedColor, 3)
     property bool showEditActions : false
     signal noteSaved(var note)
 
-    Kirigami.Theme.backgroundColor: selectedColor
-    Kirigami.Theme.textColor: fgColor
+    Kirigami.Theme.backgroundColor: if(selectedColor)
+                                    {
+                                        return control.selectedColor
+                                    }
+    Kirigami.Theme.textColor: if(selectedColor)
+                              {
+                                  return fgColor
+                              }
 
     heightHint: 0.95
     widthHint: 0.95
@@ -28,12 +34,7 @@ Maui.Dialog
     rejectText:  qsTr("Discard")
     rejectButton.visible: false
     acceptText: qsTr("Save")
-    onAccepted:
-    {
-        packNote()
-        control.close()
-    }
-
+    onAccepted:  packNote()
     onRejected: clear()
     footBar.leftContent: [
         ToolButton
@@ -129,18 +130,18 @@ Maui.Dialog
 
     function clear()
     {
+        control.close()
         editor.body.clear()
-        close()
+        fill(({}))
     }
 
     function fill(note)
     {
         editor.fileUrl = note.url
-        control.selectedColor =  note.color ? note.color : Kirigami.Theme.backgroundColor
+        control.selectedColor =  note.color ? note.color : ""
         pinButton.checked = note.pin == 1
-        favButton.checked = note.fav == 1
+        favButton.checked = note.favorite == 1
         tagBar.list.urls = [note.url]
-        open()
     }
 
     function packNote()
@@ -148,15 +149,17 @@ Maui.Dialog
         const content =  editor.body.text
         if(content.length == 0)
             return;
+        console.log("SVED COLOR", control.selectedColor)
 
         control.noteSaved({
                               url: editor.fileUrl,
                               content: content,
-                              color: selectedColor,
+                              color: control.selectedColor ?  control.selectedColor : "",
                               tag: tagBar.list.tags.join(","),
                               pin: pinButton.checked ? 1 : 0,
                               fav: favButton.checked ? 1 : 0,
                               format: ".txt" //for now only simple txt files
                           })
+        control.clear()
     }
 }

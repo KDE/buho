@@ -10,7 +10,7 @@
 #include <MauiKit/mauilist.h>
 #endif
 
-class Syncer;
+class BooksSyncer;
 class Booklet : public MauiList
 {
     Q_OBJECT
@@ -21,7 +21,7 @@ class Booklet : public MauiList
     Q_PROPERTY(QString bookTitle READ getBookTitle NOTIFY bookTitleChanged)
 
 public:
-    Booklet(Syncer *_syncer = nullptr, QObject *parent = nullptr);
+    Booklet(BooksSyncer *_syncer = nullptr, QObject *parent = nullptr);
 
     enum ORDER : uint8_t
     {
@@ -62,10 +62,11 @@ public slots:
     void insert(const QVariantMap &data);
     void update(const QVariantMap &data, const int &index);
     void remove(const int &index);
+    void clear();
 
 private:
     FMH::MODEL_LIST m_list;
-    Syncer *syncer;
+    BooksSyncer *syncer;
 
     void sortList();
 

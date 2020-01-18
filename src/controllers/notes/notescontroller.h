@@ -9,7 +9,7 @@
 #else
 #include <MauiKit/fmh.h>
 #endif
-#include<QUuid>
+
 #include "owl.h"
 
 class DB;
@@ -17,9 +17,7 @@ class NotesLoader : public QObject
 {
 	Q_OBJECT
 public:
-	void fetchNotes();
-
-private:
+    void fetchNotes(FMH::MODEL_LIST notes);
 	static const QString fileContentPreview(const QUrl &path);
 
 signals:
@@ -47,28 +45,20 @@ public slots:
 	 */
     bool insertNote(FMH::MODEL &note);
     bool updateNote(FMH::MODEL &note, QString id);
-    bool removeNote(const QUrl &url);
+    bool removeNote(const QString &id);
 
 	void getNotes();
 
 private:
 	QThread m_worker;
-	DB *m_db;
-
-    static inline bool saveNoteFile(const QUrl &url, const FMH::MODEL &data);
-    static inline const QString createId ()
-    {
-        return QUuid::createUuid().toString();
-    }
+    DB *m_db;
 
 signals:
 	void noteReady(FMH::MODEL note);
 	void notesReady(FMH::MODEL_LIST notes);
 	void noteInserted(FMH::MODEL note);
-
 	void noteUpdated(FMH::MODEL note);
-
-	void fetchNotes();
+    void fetchNotes(FMH::MODEL_LIST notes);
 };
 
 #endif // NOTESCONTROLLER_H

@@ -1,35 +1,28 @@
 #include "books.h"
-#include "syncer.h"
+#include "bookssyncer.h"
 #include "nextnote.h"
 #include "booklet.h"
 
-#ifdef STATIC_MAUIKIT
-#include "mauiaccounts.h"
-#else
-#include <MauiKit/mauiaccounts.h>
-#endif
-
 Books::Books(QObject *parent) : MauiList(parent),
-    syncer(new Syncer(this)), m_booklet(new Booklet(syncer, this))
+    syncer(new BooksSyncer(this)), m_booklet(new Booklet(syncer, this))
 {
     this->syncer->setProvider(new NextNote);
-
-    const auto m_account = MauiAccounts::instance();
-    connect(m_account, &MauiAccounts::currentAccountChanged, [&](QVariantMap currentAccount)
-    {
-        Q_UNUSED(currentAccount)
-        this->syncer->getBooks();
-    });
-
     connect(this, &Books::currentBookChanged, this, &Books::openBook);
-    connect(syncer, &Syncer::booksReady, [&](FMH::MODEL_LIST books)
+    connect(syncer, &BooksSyncer::bookReady, [&](FMH::MODEL book)
     {
-        emit this->preListChanged();
-        this->m_list = books;
-        qDebug()<< "ALL THE BOOKS ARE < "<< this->m_list;
-        emit this->postListChanged();
+        emit this->preItemAppended();
+        book = book.unite(FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]));
+        this->m_list << book;
+        emit this->postItemAppended();
     });
 
+    connect(syncer, &BooksSyncer::bookInserted, [&](FMH::MODEL book)
+    {
+        emit this->preItemAppended();
+        book = book.unite(FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]));
+        this->m_list << book;
+        emit this->postItemAppended();
+    });
     this->syncer->getBooks();
 }
 
@@ -121,9 +114,9 @@ void Books::openBook(const int &index)
 
 void Books::setCurrentBook(int currentBook)
 {
-    if (m_currentBook == currentBook)
+    if (this->m_currentBook == currentBook)
         return;
 
-    m_currentBook = currentBook;
-    emit currentBookChanged(m_currentBook);
+    this->m_currentBook = currentBook;
+    emit this->currentBookChanged(m_currentBook);
 }

@@ -13,14 +13,14 @@
 #endif
 
 class Booklet;
-class Syncer;
+class BooksSyncer;
 class Books : public MauiList
 {
     Q_OBJECT
 
     Q_PROPERTY(SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
-    Q_PROPERTY(Booklet *booklet READ getBooklet NOTIFY bookletChanged CONSTANT FINAL)
+    Q_PROPERTY(Booklet *booklet READ getBooklet NOTIFY bookletChanged FINAL)
     Q_PROPERTY(int currentBook READ getCurrentBook WRITE setCurrentBook NOTIFY currentBookChanged)
 
 
@@ -57,7 +57,7 @@ public:
     int getCurrentBook() const;
 
 private:
-    Syncer *syncer;
+    BooksSyncer *syncer;
     Booklet * m_booklet;
 
     FMH::MODEL_LIST m_list;

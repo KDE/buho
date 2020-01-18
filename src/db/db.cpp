@@ -124,12 +124,12 @@ void DB::prepareCollectionDB() const
 bool DB::checkExistance(const QString &tableName, const QString &searchId, const QString &search)
 {
 	auto queryStr = QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(searchId, tableName, searchId, search);
-	auto query = this->getQuery(queryStr);
+    auto query = this->getQuery(queryStr);
 
-	if (query.exec())
-	{
-		if (query.next()) return true;
-	}else qDebug()<<query.lastError().text();
+    if (query.exec())
+    {
+        if (query.next()) return true;
+    }else qDebug()<<query.lastError().text();
 
 	return false;
 }

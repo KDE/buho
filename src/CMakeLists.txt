@@ -27,6 +27,8 @@ set(buho_SRCS
     models/books/booklet.cpp
     providers/nextnote.cpp
     syncing/syncer.cpp
+    syncing/bookssyncer.cpp
+    syncing/notessyncer.cpp
     controllers/notes/notescontroller.cpp
     controllers/books/bookscontroller.cpp
     controllers/links/linkscontroller.cpp
@@ -45,6 +47,8 @@ set(buho_HDRS
     providers/nextnote.h
     providers/abstractnotesprovider.h
     syncing/syncer.h
+    syncing/bookssyncer.h
+    syncing/notessyncer.h
     controllers/notes/notescontroller.h
     controllers/books/bookscontroller.h
     controllers/links/linkscontroller.h
