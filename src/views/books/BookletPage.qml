@@ -27,6 +27,19 @@ Item
     {
         id: _page
         anchors.fill: parent
+        title: currentBooklet.title
+
+        headBar.rightContent: ToolButton
+        {
+            icon.name: "document-save"
+            text: qsTr("Save")
+            onClicked:
+            {
+                currentBooklet.content = editor.text
+                currentBooklet.title = title.text
+                _booksList.booklet.update(currentBooklet, _listView.currentIndex)
+            }
+        }
 
         headBar.leftContent: [
             ToolButton
@@ -35,35 +48,22 @@ Item
                 onClicked: control.exit()
             },
 
-            ToolButton
+            Kirigami.Separator
             {
-                icon.name: "document-save"
-                onClicked:
-                {
-                    currentBooklet.content = editor.text
-                    currentBooklet.title = title.text
-                    _booksList.booklet.update(currentBooklet, _listView.currentIndex)
-                }
+
             },
 
-            TextField
+            ToolButton
             {
-                id: title
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                //                Layout.margins: Maui.Style.space.medium
-                placeholderText: qsTr("New chapter...")
-                font.weight: Font.Bold
-                font.bold: true
-                font.pointSize: Maui.Style.fontSizes.large
-                text: currentBooklet.title
-                //            Kirigami.Theme.backgroundColor: selectedColor
-                //            Kirigami.Theme.textColor: Qt.darker(selectedColor, 2.5)
-                //            color: fgColor
-                background: Rectangle
-                {
-                    color: "transparent"
-                }
+              icon.name: "view-calendar-list"
+              text: qsTr("Chapters")
+              onClicked:
+              {
+                  console.log(_layout.visibleChildren, _layout.visibleChildren)
+                  _layout.currentIndex = 0
+              }
+
+              checked: _layout.firstVisibleItem === _sidebar
             }
         ]
 
@@ -85,7 +85,7 @@ Item
             anchors.fill: parent
             initialPage: [_sidebar, editor]
             interactive: true
-defaultColumnWidth: Kirigami.Units.gridUnit * 13
+defaultColumnWidth: Kirigami.Units.gridUnit * 11
             Maui.Editor
             {
                 id: editor
@@ -152,30 +152,21 @@ defaultColumnWidth: Kirigami.Units.gridUnit * 13
                     }
                 }
 
-                Rectangle
+                Maui.FloatingButton
                 {
                     z: 999
                     anchors.bottom: parent.bottom
-                    anchors.margins: Maui.Style.space.huge
+                    anchors.margins: height
                     anchors.horizontalCenter: parent.horizontalCenter
                     height: Maui.Style.toolBarHeight
                     width: height
-
-                    color: Kirigami.Theme.positiveTextColor
-                    radius: Maui.Style.radiusV
-
-                    ToolButton
-                    {
-                        anchors.centerIn: parent
-                        icon.name: "list-add"
-                        icon.color: "white"
-                        onClicked: _newChapter.open()
-                    }
+                    Kirigami.Theme.backgroundColor: Kirigami.Theme.positiveTextColor
+                    icon.name: "list-add"
+                    icon.color: "white"
+                    onClicked: _newChapter.open()
                 }
             }
         }
-
-
 
         Maui.Dialog
         {
@@ -184,7 +175,7 @@ defaultColumnWidth: Kirigami.Units.gridUnit * 13
             title: qsTr("New Chapter")
             message: qsTr("Create a new chapter for your current book. Give it a title")
             entryField: true
-
+            page.padding: Maui.Style.space.huge
             onAccepted:
             {
                 _booksList.booklet.insert({title: textEntry.text})
