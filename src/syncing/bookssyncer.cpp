@@ -90,10 +90,33 @@ void BooksSyncer::updateBooklet(const QString &id, const QString &bookId, FMH::M
     {
         booklet[FMH::MODEL_KEY::CATEGORY] = bookId;
         if(this->validProvider())
-            this->getProvider().updateBooklet(id, booklet);
+            this->getProvider().updateBooklet(stamp, booklet);
     }
 
     emit this->bookletUpdated(booklet, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Booklet updated locally on the DB"});
+}
+
+void BooksSyncer::removeBooklet(const QString &id)
+{
+    //to remove the remote booklet we need to pass the stamp as the id,
+    //and before removing the note locally we need to retireved first
+
+    const auto stamp = BooksSyncer::bookletStampFromId(id);
+    if(!this->m_booksController->removeBooklet(id))
+    {
+        qWarning()<< "The note could not be inserted locally, "
+                     "therefore it was not attempted to insert it to the remote provider server, "
+                     "even if it existed.";
+        return;
+    }
+
+    if(!stamp.isEmpty())
+    {
+        if(this->validProvider())
+            this->getProvider().removeBooklet(stamp);
+    }
+
+    emit this->bookletRemoved(FMH::MODEL(), {STATE::TYPE::LOCAL, STATE::STATUS::OK, "The booklet has been removed from the local DB"});
 }
 
 void BooksSyncer::insertBooklet(const QString &bookId, FMH::MODEL &booklet)
@@ -103,6 +126,7 @@ void BooksSyncer::insertBooklet(const QString &bookId, FMH::MODEL &booklet)
         qWarning()<< "Could not insert Booklet, BooksSyncer::insertBooklet";
         return;
     }
+
     booklet[FMH::MODEL_KEY::CATEGORY] = bookId;
     if(this->validProvider())
         this->getProvider().insertBooklet(booklet);
@@ -128,10 +152,9 @@ const QString BooksSyncer::bookletStampFromId(const QString &id)
 
 void BooksSyncer::setConections()
 {
-
     connect(&this->getProvider(), &AbstractNotesProvider::bookletInserted, [&](FMH::MODEL booklet)
     {
-        qDebug()<< "STAMP OF THE NEWLY INSERTED BOOKLET" << booklet[FMH::MODEL_KEY::ID] << booklet;
+        qDebug()<< "STAMP OF THE NEWLY INSERTED BOOKLET" << booklet[FMH::MODEL_KEY::ID] << booklet[FMH::MODEL_KEY::STAMP] << booklet;
         this->db->insert(OWL::TABLEMAP[OWL::TABLE::BOOKLETS_SYNC], FMH::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::ID,
                                                                                                          FMH::MODEL_KEY::STAMP,
                                                                                                          FMH::MODEL_KEY::USER,
@@ -186,10 +209,10 @@ void BooksSyncer::setConections()
                 auto remoteDate = QDateTime::fromSecsSinceEpoch(booklet[FMH::MODEL_KEY::MODIFIED].toInt());
                 auto localDate = QFileInfo(QUrl(booklet[FMH::MODEL_KEY::URL]).toLocalFile()).lastModified();
 
-                if(remoteDate <= localDate)
-                    continue;
+//                if(remoteDate <= localDate)
+//                    continue;
 
-                if(! this->m_booksController->updateBook(id, booklet))
+                if(! this->m_booksController->updateBooklet(booklet, id))
                     continue;
 
                 emit this->bookletUpdated(booklet, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Booklet updated on local db, from the server provider"});

@@ -179,7 +179,7 @@ void NextNote::insertNote(const FMH::MODEL &note)
 
 void NextNote::insertBooklet(const FMH::MODEL &booklet)
 {
-	QByteArray payload = QJsonDocument::fromVariant(FMH::toMap(booklet)).toJson();
+    QByteArray payload = QJsonDocument::fromVariant(FMH::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::CONTENT, FMH::MODEL_KEY::FAVORITE, FMH::MODEL_KEY::CATEGORY}))).toJson();
 	qDebug() << "UPLOADING NEW BOOKLET" << QVariant(payload).toString();
 
 	const auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
@@ -191,21 +191,22 @@ void NextNote::insertBooklet(const FMH::MODEL &booklet)
 	connect(reply, &QNetworkReply::finished, [=, __booklet = booklet]()
 	{
 		qDebug() << "Note insertyion finished?";
-		const auto notes = this->parseNotes(reply->readAll());
+        const auto booklets = this->parseNotes(reply->readAll());
 		emit this->bookletInserted([&]() -> FMH::MODEL {
-									FMH::MODEL note;
-									if(!notes.isEmpty())
+                                    FMH::MODEL p_booklet;
+                                    if(!booklets.isEmpty())
 									{
-										note = notes.first();
-										note[FMH::MODEL_KEY::STAMP] = note[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
-										note[FMH::MODEL_KEY::ID] = __booklet[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
-										note[FMH::MODEL_KEY::SERVER] = this->m_provider; //adds the provider server address
-										note[FMH::MODEL_KEY::USER] = this->m_user; //adds the user name
+                                        p_booklet = booklets.first();
+                                        p_booklet[FMH::MODEL_KEY::STAMP] = p_booklet[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
+                                        p_booklet[FMH::MODEL_KEY::ID] = __booklet[FMH::MODEL_KEY::ID]; //adds the id of the local note as a stamp
+                                        p_booklet[FMH::MODEL_KEY::SERVER] = this->m_provider; //adds the provider server address
+                                        p_booklet[FMH::MODEL_KEY::USER] = this->m_user; //adds the user name
 									}
-									return note;
+                                    return p_booklet;
 								}());
 
 		restclient->deleteLater();
+        reply->deleteLater();
 	});
 }
 
@@ -249,6 +250,7 @@ void NextNote::updateNote(const QString &id, const FMH::MODEL &note)
 							   }());
 
 		restclient->deleteLater();
+        reply->deleteLater();
 	});
 }
 
@@ -261,8 +263,6 @@ void NextNote::updateBooklet(const QString &id, const FMH::MODEL &booklet)
 	}
 
 	QByteArray payload = QJsonDocument::fromVariant(FMH::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::CONTENT,
-																					  FMH::MODEL_KEY::FAVORITE,
-																					  FMH::MODEL_KEY::MODIFIED,
 																					  FMH::MODEL_KEY::CATEGORY}))).toJson();
 	qDebug() << "UPDATING BOOKLET" << QVariant(payload).toString();
 
@@ -285,7 +285,7 @@ void NextNote::updateBooklet(const QString &id, const FMH::MODEL &booklet)
 
 								   booklet = booklets.first();
 								   booklet[FMH::MODEL_KEY::STAMP] = booklet[FMH::MODEL_KEY::ID]; //adds the stamp to the local note form the remote id
-								   booklet[FMH::MODEL_KEY::ID] = __booklet[FMH::MODEL_KEY::TITLE]; //adds back the id of the local booklet
+                                   booklet[FMH::MODEL_KEY::ID] = __booklet[FMH::MODEL_KEY::ID]; //adds back the id of the local booklet
 								   booklet[FMH::MODEL_KEY::SERVER] = this->m_provider; //adds the provider server address
 								   booklet[FMH::MODEL_KEY::USER] = this->m_user; //adds the user name
 
@@ -293,6 +293,7 @@ void NextNote::updateBooklet(const QString &id, const FMH::MODEL &booklet)
 							   }());
 
 		restclient->deleteLater();
+        reply->deleteLater();
 	});
 }
 
@@ -314,12 +315,13 @@ void NextNote::removeNote(const QString &id)
 		qDebug() << "Note remove finished?" << reply->errorString();
 		emit this->noteRemoved();
 		restclient->deleteLater();
+        reply->deleteLater();
 	});
 }
 
 void NextNote::removeBooklet(const QString &id)
 {
-
+    this->removeNote(id);
 }
 
 const QString NextNote::formatUrl(const QString &user, const QString &password, const QString &provider)

@@ -109,11 +109,6 @@ private:
     static const QString noteStampFromId(const QString &id);
 
     void setConections() override final;
-
-protected:
-	void updateNoteRemote(const QString &id, const FMH::MODEL &note);
-    void removeNoteRemote(const QString &id);
-
 signals:
 	//FOR NOTES
 	void noteInserted(FMH::MODEL note, STATE state);

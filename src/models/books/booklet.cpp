@@ -7,7 +7,11 @@ Booklet::Booklet(BooksSyncer *_syncer,  QObject *parent) : MauiList(parent),
 {
 
     connect(this->syncer, &BooksSyncer::bookletReady,this, &Booklet::appendBooklet);
-    connect(this->syncer, &BooksSyncer::bookletInserted,this, &Booklet::appendBooklet);
+    connect(this->syncer, &BooksSyncer::bookletInserted,[&](FMH::MODEL item, STATE state)
+    {
+        if(state.type == STATE::TYPE::LOCAL)
+            this->appendBooklet(item);
+    });
 }
 
 FMH::MODEL_LIST Booklet::items() const
@@ -67,26 +71,19 @@ void Booklet::update(const QVariantMap &data, const int &index)
     if(index < 0 || index >= this->m_list.size())
         return;
 
-    auto newData = this->m_list[index];
-    QVector<int> roles;
-    for(const auto &key : data.keys())
-        if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
-        {
-            newData[FMH::MODEL_NAME_KEY[key]] = data[key].toString();
-            roles << FMH::MODEL_NAME_KEY[key];
-        }
-
-    this->m_list[index] = newData;
-
-    newData[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
-//    this->syncer->updateBooklet(newData[FMH::MODEL_KEY::ID], this->m_book, newData);
-
-    emit this->updateModel(index, roles);
+    this->m_list[index] = this->m_list[index].unite(FMH::toModel(data));
+    this->syncer->updateBooklet(this->m_list[index][FMH::MODEL_KEY::ID], this->m_book, this->m_list[index]);
 }
 
 void Booklet::remove(const int &index)
 {
+    qDebug()<< "Trying to remove a booklet" << index;
+    if(index < 0 || index >= this->m_list.size())
+        return;
 
+    emit this->preItemRemoved(index);
+    this->syncer->removeBooklet(this->m_list.takeAt(index)[FMH::MODEL_KEY::ID]);
+    emit this->postItemRemoved();
 }
 
 void Booklet::clear()
@@ -112,7 +109,7 @@ void Booklet::appendBooklet(FMH::MODEL booklet)
     }();
 
     this->m_list << booklet;
-    emit this->preItemAppended();
+    emit this->postItemAppended();
 }
 
 void Booklet::setBookTitle(const QString &title)

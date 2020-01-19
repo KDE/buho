@@ -29,18 +29,6 @@ Item
         anchors.fill: parent
         title: currentBooklet.title
 
-        headBar.rightContent: ToolButton
-        {
-            icon.name: "document-save"
-            text: qsTr("Save")
-            onClicked:
-            {
-                currentBooklet.content = editor.text
-                currentBooklet.title = title.text
-                _booksList.booklet.update(currentBooklet, _listView.currentIndex)
-            }
-        }
-
         headBar.leftContent: [
             ToolButton
             {
@@ -50,6 +38,7 @@ Item
 
             Kirigami.Separator
             {
+               Layout.fillHeight: true
 
             },
 
@@ -57,13 +46,9 @@ Item
             {
               icon.name: "view-calendar-list"
               text: qsTr("Chapters")
-              onClicked:
-              {
-                  console.log(_layout.visibleChildren, _layout.visibleChildren)
-                  _layout.currentIndex = 0
-              }
-
+              onClicked: checked ? _layout.currentIndex = 0 : _layout.currentIndex = 1
               checked: _layout.firstVisibleItem === _sidebar
+
             }
         ]
 
@@ -91,7 +76,31 @@ defaultColumnWidth: Kirigami.Units.gridUnit * 11
                 id: editor
                 visible: !_holder.visible
                 footBar.visible: false
+                document.autoReload: true
 
+                headBar.rightContent: [
+
+                    ToolButton
+                    {
+                        icon.name: "document-save"
+                        text: qsTr("Save")
+                        onClicked:
+                        {
+                            currentBooklet.content = editor.text
+                            _booksList.booklet.update(currentBooklet, _listView.currentIndex)
+                        }
+                    },
+
+                    ToolButton
+                    {
+                        icon.name: "edit-delete"
+                        icon.color: Kirigami.Theme.negativeTextColor
+                        onClicked:
+                        {
+                            _booksList.booklet.remove(_listView.currentIndex)
+                        }
+                    }
+                ]
             }
 
             Maui.Page
@@ -133,6 +142,18 @@ defaultColumnWidth: Kirigami.Units.gridUnit * 11
                         control.currentBooklet = _booksList.booklet.get(_listView.currentIndex)
                     }
 
+                    footerPositioning: ListView.OverlayFooter
+                    footer: Button
+                    {
+                        text: qsTr("New chapter")
+                        onClicked: _newChapter.open()
+
+                        height: Maui.Style.rowHeight
+                        width: parent.width
+                        Kirigami.Theme.backgroundColor: Kirigami.Theme.positiveTextColor
+                        Kirigami.Theme.textColor: "white"
+                    }
+
                     delegate: Maui.LabelDelegate
                     {
                         id: _delegate
@@ -151,20 +172,6 @@ defaultColumnWidth: Kirigami.Units.gridUnit * 11
                         }
                     }
                 }
-
-                Maui.FloatingButton
-                {
-                    z: 999
-                    anchors.bottom: parent.bottom
-                    anchors.margins: height
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    height: Maui.Style.toolBarHeight
-                    width: height
-                    Kirigami.Theme.backgroundColor: Kirigami.Theme.positiveTextColor
-                    icon.name: "list-add"
-                    icon.color: "white"
-                    onClicked: _newChapter.open()
-                }
             }
         }
 
@@ -178,7 +185,7 @@ defaultColumnWidth: Kirigami.Units.gridUnit * 11
             page.padding: Maui.Style.space.huge
             onAccepted:
             {
-                _booksList.booklet.insert({title: textEntry.text})
+                _booksList.booklet.insert({content: textEntry.text})
             }
         }
 

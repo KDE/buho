@@ -52,7 +52,10 @@ void NotesSyncer::updateNote(QString id, FMH::MODEL &note)
     //to update remote note we need to pass the stamp as the id
     const auto stamp = NotesSyncer::noteStampFromId(id);
     if(!stamp.isEmpty())
-        this->updateNoteRemote(stamp, note);
+    {
+        if(this->validProvider())
+            this->getProvider().updateNote(stamp, note);
+    }
 
     emit this->noteUpdated(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note updated on the DB locally"});
 }
@@ -72,7 +75,10 @@ void NotesSyncer::removeNote(const QString &id)
     }
 
     if(!stamp.isEmpty())
-        this->removeNoteRemote(stamp);
+    {
+        if(this->validProvider())
+            this->getProvider().removeNote(stamp);
+    }
 
     emit this->noteRemoved(FMH::MODEL(), {STATE::TYPE::LOCAL, STATE::STATUS::OK, "The note has been removed from the local DB"});
 }
@@ -196,14 +202,4 @@ void NotesSyncer::setConections()
     });
 }
 
-void NotesSyncer::updateNoteRemote(const QString &id, const FMH::MODEL &note)
-{
-    if(this->validProvider())
-        this->getProvider().updateNote(id, note);
-}
 
-void NotesSyncer::removeNoteRemote(const QString &id)
-{
-    if(this->validProvider())
-        this->getProvider().removeNote(id);
-}

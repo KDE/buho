@@ -104,7 +104,6 @@ bool NotesController::updateNote(FMH::MODEL &note, QString id)
 
 bool NotesController::removeNote(const QString &id)
 {
-
     const auto url = QUrl([&]() -> const QString {
             const auto data = DB::getInstance ()->getDBData(QString("select url from notes where id = '%1'").arg(id));
             return data.isEmpty() ? QString() : data.first()[FMH::MODEL_KEY::URL];

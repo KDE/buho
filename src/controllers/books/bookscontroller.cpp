@@ -69,27 +69,32 @@ bool BooksController::updateBooklet(FMH::MODEL &booklet, QString id)
     //    for(const auto &tg : booklet[FMH::MODEL_KEY::TAG])
     //        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id);
 
-    const QUrl __path = QFileInfo(booklet[FMH::MODEL_KEY::URL]).dir().path();
-//    const auto __bookletPath = BooksSyncer::saveNoteFile(__path.toLocalFile()+"/", booklet);
-//    qDebug()<< "Updating local txt file as"<< __path.toLocalFile() << __bookletPath;
+    const QUrl __path = FMH::fileDir(booklet[FMH::MODEL_KEY::URL]);
 
-//    if(__bookletPath.isEmpty())
-//    {
-//        qWarning()<< "File could not be saved. BooksSyncer::insertBookletLocal";
-//        return false;
-//    }
+    if(!FMH::fileExists(__path))
+        return false;
 
-    return this->m_db->update(OWL::TABLEMAP[OWL::TABLE::BOOKLETS],
-            FMH::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::TITLE,
-                                                  FMH::MODEL_KEY::MODIFIED,
-                                                  FMH::MODEL_KEY::FAVORITE})),
-            QVariantMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::BOOK], booklet[FMH::MODEL_KEY::BOOK]}});
+    if(booklet[FMH::MODEL_KEY::URL].isEmpty())
+        return false;
+
+    if(!OWL::saveNoteFile(booklet[FMH::MODEL_KEY::URL], booklet[FMH::MODEL_KEY::CONTENT].toUtf8()))
+        return false;
+
+    return true;
 }
 
 bool BooksController::removeBooklet(const QString &id)
 {
-    return false;
+    const auto url = QUrl([&]() -> const QString {
+            const auto data = DB::getInstance ()->getDBData(QString("select url from booklets where id = '%1'").arg(id));
+            return data.isEmpty() ? QString() : data.first()[FMH::MODEL_KEY::URL];
+        }());
+
+    this->m_db->remove(OWL::TABLEMAP[OWL::TABLE::BOOKLETS_SYNC], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
+
+    FMStatic::removeFile(url);
+
+    return this->m_db->remove(OWL::TABLEMAP[OWL::TABLE::BOOKLETS], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
 }
 
 void BooksController::getBooks()
