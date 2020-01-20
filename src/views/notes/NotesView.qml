@@ -1,10 +1,10 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.3
+import QtQuick 2.10
+import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 import Notes 1.0
-import Qt.labs.platform 1.0
+import Qt.labs.platform 1.0 as Labs
 
 import "../../widgets"
 
@@ -52,17 +52,17 @@ Maui.Page
             {
                 id: sortMenu
 
-                MenuItemGroup
+                Labs.MenuItemGroup
                 {
                     id: orderGroup
                 }
 
-                MenuItemGroup
+                Labs.MenuItemGroup
                 {
                     id: sortGroup
                 }
 
-                MenuItem
+                Labs.MenuItem
                 {
                     text: qsTr("Ascedent")
                     checkable: true
@@ -71,7 +71,7 @@ Maui.Page
                     group: sortGroup
                 }
 
-                MenuItem
+                Labs.MenuItem
                 {
                     text: qsTr("Descendent")
                     checkable: true
@@ -82,7 +82,7 @@ Maui.Page
 
                 MenuSeparator{}
 
-                MenuItem
+               Labs.MenuItem
                 {
                     text: qsTr("Title")
                     checkable: true
@@ -91,7 +91,7 @@ Maui.Page
                     group: orderGroup
                 }
 
-                MenuItem
+                Labs.MenuItem
                 {
                     text: qsTr("Color")
                     checkable: true
@@ -100,7 +100,7 @@ Maui.Page
                     group: orderGroup
                 }
 
-                MenuItem
+                Labs.MenuItem
                 {
                     text: qsTr("Add date")
                     checkable: true
@@ -109,7 +109,7 @@ Maui.Page
                     group: orderGroup
                 }
 
-                MenuItem
+                Labs.MenuItem
                 {
                     text: qsTr("Updated")
                     checkable: true
@@ -118,7 +118,7 @@ Maui.Page
                     group: orderGroup
                 }
 
-                MenuItem
+                Labs.MenuItem
                 {
                     text: qsTr("Favorite")
                     checkable: true
@@ -174,7 +174,7 @@ Maui.Page
                 title : qsTr("No pins!")
                 body: qsTr("No matched pinned notes. You can pin your notes to access them quickly")
                 z: 999
-           }
+            }
 
             CardsList
             {
@@ -221,14 +221,14 @@ Maui.Page
                 {
                     currentIndex = index
                     currentNote = notesList.get(index)
-                    cardsView.menu.popup()
+                    _notesMenu.popup()
                 }
 
                 onPressAndHold:
                 {
                     currentIndex = index
                     currentNote = notesList.get(index)
-                    cardsView.menu.popup()
+                    _notesMenu.popup()
                 }
             }
 
@@ -238,34 +238,94 @@ Maui.Page
                 onActionTriggered: newNote()
             }
 
-            Connections
+            Menu
             {
-                target: cardsView.menu
-                onOpened:
+                id: _notesMenu
+
+                property bool isFav: currentNote.favorite == 1
+                property bool isPin: currentNote.pin == 1
+
+                MenuItem
                 {
-                    cardsView.menu.isFav =  currentNote.favorite == 1
-                    cardsView.menu.isPin = currentNote.pin == 1
+                    icon.name: "love"
+                    text: qsTr(_notesMenu.isFav? "UnFav" : "Fav")
+                    onTriggered:
+                    {
+                        notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), cardsView.currentIndex)
+                        _notesMenu.close()
+                    }
                 }
 
-                onDeleteClicked: notesList.remove(cardsView.currentIndex)
-                onColorClicked:
+                MenuItem
                 {
-                    notesList.update(({"color": color}), cardsView.currentIndex)
+                    icon.name: "pin"
+                    text: qsTr(_notesMenu.isPin? "UnPin" : "Pin")
+                    onTriggered:
+                    {
+                        notesList.update(({"pin": _notesMenu.isPin ? 0 : 1}), cardsView.currentIndex)
+                        _notesMenu.close()
+                    }
                 }
 
-                onFavClicked:
+                MenuItem
                 {
-                    notesList.update(({"favorite": favorite}), cardsView.currentIndex)
+                    icon.name: "document-export"
+                    text: qsTr("Export")
+                    onTriggered:
+                    {
+                        _notesMenu.close()
+                    }
                 }
 
-                onPinClicked:
+                MenuItem
                 {
-                    notesList.update(({"pin": pin}), cardsView.currentIndex)
+                    icon.name : "edit-copy"
+                    text: qsTr("Copy")
+                    onTriggered:
+                    {
+                        Maui.Handy.copyToClipboard(currentNote.content)
+                        _notesMenu.close()
+                    }
                 }
 
-                onCopyClicked:
+                MenuSeparator
                 {
-                    Maui.Handy.copyToClipboard(currentNote.content)
+
+                }
+
+
+                MenuItem
+                {
+                    icon.name: "edit-delete"
+                    text: qsTr("Remove")
+                    Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+                    onTriggered:
+                    {
+                        notesList.remove(cardsView.currentIndex)
+                        _notesMenu.close()
+                    }
+                }
+
+                MenuSeparator
+                {
+
+                }
+
+                MenuItem
+                {
+                    width: parent.width
+                    height: Maui.Style.rowHeight
+
+                    ColorsBar
+                    {
+                        id: colorBar
+                        anchors.centerIn: parent
+                        onColorPicked:
+                        {
+                            notesList.update(({"color": color}), cardsView.currentIndex)
+                            _notesMenu.close()
+                        }
+                    }
                 }
             }
         }

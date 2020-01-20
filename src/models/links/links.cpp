@@ -82,7 +82,7 @@ bool Links::insert(const QVariantMap &link)
     auto __model = FMH::toModel(link);
     __model[FMH::MODEL_KEY::ADDDATE] =  QDateTime::currentDateTime().toString();
     __model[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString();
-    __model[FMH::MODEL_KEY::PREVIEW] = QUrl::fromLocalFile(__model[FMH::MODEL_KEY::PREVIEW]).toString();
+    __model[FMH::MODEL_KEY::PREVIEW] = QUrl(__model[FMH::MODEL_KEY::PREVIEW]).toString();
 
     __model = FMH::filterModel(__model, {FMH::MODEL_KEY::URL,
                                          FMH::MODEL_KEY::TITLE,
@@ -114,7 +114,7 @@ bool Links::update(const QVariantMap &data, const int &index)
     this->links[index] = this->links[index].unite(FMH::toModel(data));
 
     this->links[index][FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
-   this->links[index][FMH::MODEL_KEY::PREVIEW] = QUrl::fromLocalFile(this->links[index][FMH::MODEL_KEY::PREVIEW]).toString();
+   this->links[index][FMH::MODEL_KEY::PREVIEW] = QUrl(this->links[index][FMH::MODEL_KEY::PREVIEW]).toString();
 
     for(const auto &tg :  this->links[index][FMH::MODEL_KEY::TAG].split(",", QString::SkipEmptyParts))
         Tagging::getInstance()->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], this->links[index][FMH::MODEL_KEY::URL]);

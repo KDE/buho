@@ -1,5 +1,5 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.3
+import QtQuick 2.10
+import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
@@ -71,7 +71,7 @@ Maui.Page
                     checkable: true
                     text: qsTr("Title")
                     onTriggered: Links.TITLE
-                }              
+                }
 
                 MenuItem
                 {
@@ -140,14 +140,14 @@ Maui.Page
             {
                 currentIndex = index
                 currentLink = linksList.get(index)
-                cardsView.menu.popup()
+              _linksMenu.popup()
             }
 
             onPressAndHold:
             {
                 currentIndex = index
                 currentLink = linksList.get(index)
-                cardsView.menu.popup()
+                _linksMenu.popup()
             }
         }
 
@@ -157,33 +157,71 @@ Maui.Page
             onActionTriggered: newLink()
         }
 
-        Connections
+        Menu
         {
-            target: cardsView.menu
-            onDeleteClicked: linksList.remove(cardsView.currentIndex)
-            onOpened:
+            id: _linksMenu
+            property bool isPin : currentLink.pin == 1 ? true : false
+            property bool isFav : currentLink.favorite == 1 ? true : false
+
+            MenuItem
             {
-                cardsView.menu.isFav = currentLink.fav == 1 ? true : false
-                cardsView.menu.isPin = currentLink.pin == 1 ? true : false
-            }
-            onColorClicked:
-            {
-                linksList.update(({"color": color}), cardsView.currentIndex)
+                icon.name: "love"
+                text: qsTr(_linksMenu.isFav? "UnFav" : "Fav")
+                onTriggered:
+                {
+                    linksList.update(({"favorite": _linksMenu.isFav ? 0 : 1}), cardsView.currentIndex)
+                    _linksMenu.close()
+                }
             }
 
-            onFavClicked:
+            MenuItem
             {
-                linksList.update(({"fav": fav}), cardsView.currentIndex)
+                icon.name: "pin"
+                text: qsTr(_linksMenu.isPin? "UnPin" : "Pin")
+                onTriggered:
+                {
+                    linksList.update(({"pin": _linksMenu.isPin ? 0 : 1}), cardsView.currentIndex)
+                    _linksMenu.close()
+                }
             }
 
-            onPinClicked:
+            MenuItem
             {
-                linksList.update(({"pin": pin}), cardsView.currentIndex)
+                icon.name: "document-export"
+                text: qsTr("Export")
+                onTriggered:
+                {
+                    _linksMenu.close()
+                }
             }
 
-            onCopyClicked:
+            MenuItem
             {
-                Maui.Handy.copyToClipboard(currentLink.title+"\n"+currentLink.link)
+                icon.name : "edit-copy"
+                text: qsTr("Copy")
+                onTriggered:
+                {
+                    Maui.Handy.copyToClipboard(currentLink.link)
+                    _linksMenu.close()
+                }
+            }
+
+            MenuSeparator
+            {
+
+            }
+
+
+            MenuItem
+            {
+                icon.name: "edit-delete"
+                text: qsTr("Remove")
+                Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+                onTriggered:
+                {
+                    linksList.remove(cardsView.currentIndex)
+                    _linksMenu.close()
+                }
             }
         }
     }

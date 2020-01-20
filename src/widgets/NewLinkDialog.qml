@@ -162,7 +162,7 @@ Maui.Dialog
             var data = ({
                             url : _webView.url,
                             title: title.text,
-                            preview: imgUrl,
+                            preview: "file://"+imgUrl,
                             tag: tagBar.list.tags.join(","),
                             pin: pinButton.checked ? 1 : 0,
                             favorite: favButton.checked ? 1 : 0
