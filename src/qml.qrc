@@ -9,9 +9,6 @@
         <file>widgets/NewLinkDialog.qml</file>
         <file>views/links/LinksView.qml</file>
         <file>utils.js</file>
-        <file>views/links/WebViewAndroid.qml</file>
-        <file>views/links/WebViewLinux.qml</file>
-        <file>views/links/Previewer.qml</file>
         <file>views/books/BooksView.qml</file>
         <file>widgets/ColorsBar.qml</file>
         <file>widgets/CardsList.qml</file>

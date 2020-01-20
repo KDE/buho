@@ -83,12 +83,6 @@ Maui.ApplicationWindow
         }
     }
 
-
-    Maui.SyncDialog
-    {
-        id: syncDialog
-    }
-
      //    /***** COMPONENTS *****/
 
     NewNoteDialog
@@ -107,6 +101,12 @@ Maui.ApplicationWindow
     {
         id: newLinkDialog
         onLinkSaved: linksView.list.insert(link)
+    }
+
+    NewLinkDialog
+    {
+        id: editLinkDialog
+        onLinkSaved: linksView.list.update(link, linksView.currentIndex)
     }
 
     NewBookDialog
@@ -139,7 +139,7 @@ Maui.ApplicationWindow
         LinksView
         {
             id: linksView
-            onLinkClicked: previewLink(link)
+            onLinkClicked: setLink(link)
         }
 
         BooksView
@@ -173,11 +173,10 @@ Maui.ApplicationWindow
         editNote.open()
     }
 
-    function previewLink(link)
+    function setLink(link)
     {
-        var tags = linksView.list.getTags(linksView.currentIndex)
-        link.tags = tags
-
-        linksView.previewer.show(link)
+        linksView.currentLink = link
+        editLinkDialog.fill(link)
+        editLinkDialog.open()
     }
 }

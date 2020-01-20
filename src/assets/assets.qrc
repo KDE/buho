@@ -10,5 +10,6 @@
         <file>view-notes.svg</file>
         <file>document-edit.svg</file>
         <file>edit-pin.svg</file>
+        <file>link-default.png</file>
     </qresource>
 </RCC>

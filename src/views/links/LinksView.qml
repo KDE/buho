@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.3
-
+import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.2 as Kirigami
 import Links 1.0
@@ -12,7 +12,6 @@ Maui.Page
     id: control
 
     property alias cardsView : cardsView
-    property alias previewer : previewer
     property alias model : linksModel
     property alias list : linksList
     property alias currentIndex : cardsView.currentIndex
@@ -21,16 +20,25 @@ Maui.Page
 
     signal linkClicked(var link)
 
-    headBar.visible: !cardsView.holder.visible
+    headBar.visible: linksList.count > 0
     padding: Maui.Style.space.big
-    title : cardsView.count + " links"
-    headBar.leftContent: [
-        ToolButton
-        {
-            icon.name: cardsView.gridView ? "view-list-icons" : "view-list-details"
-            onClicked: cardsView.gridView = !cardsView.gridView
 
-        },
+    headBar.middleContent: Maui.TextField
+    {
+        Layout.fillWidth: true
+        placeholderText: linksList.count + " " + qsTr("links")
+        onAccepted: linksModel.filter = text
+        onCleared: linksModel.filter = ""
+    }
+
+    headBar.leftContent: ToolButton
+    {
+        icon.name: cardsView.gridView ? "view-list-icons" : "view-list-details"
+        onClicked: cardsView.gridView = !cardsView.gridView
+    }
+
+    headBar.rightContent: [
+
         ToolButton
         {
             icon.name: "view-sort"
@@ -60,60 +68,34 @@ Maui.Page
 
                 MenuItem
                 {
+                    checkable: true
                     text: qsTr("Title")
                     onTriggered: Links.TITLE
-                }
-
-                MenuItem
-
-                {
-                    text: qsTr("Color")
-                    onTriggered: linksList.sortBy = Links.COLOR
-                }
+                }              
 
                 MenuItem
                 {
+                    checkable: true
                     text: qsTr("Add date")
                     onTriggered: linksList.sortBy = Links.ADD_DATE
                 }
 
                 MenuItem
                 {
+                    checkable: true
                     text: qsTr("Updated")
                     onTriggered: linksList.sortBy = Links.MODIFIED
                 }
 
                 MenuItem
                 {
-                    text: qsTr("Fav")
+                    checkable: true
+                    text: qsTr("Favorite")
                     onTriggered: linksList.sortBy = Links.FAVORITE
                 }
             }
         }
     ]
-
-    headBar.rightContent: [
-        ToolButton
-        {
-            icon.name: "tag-recents"
-        },
-
-        ToolButton
-        {
-            icon.name: "edit-pin"
-        },
-
-        ToolButton
-        {
-            icon.name: "view-calendar"
-        }
-    ]
-
-    Previewer
-    {
-        id: previewer
-        onLinkSaved: linksList.update(link, linksView.currentIndex)
-    }
 
     Links
     {
@@ -141,8 +123,8 @@ Maui.Page
         delegate: LinkCardDelegate
         {
             id: delegate
-            cardWidth: Math.min(cardsView.cellWidth, cardsView.itemWidth) - Kirigami.Units.largeSpacing * 2
-            cardHeight: cardsView.itemHeight
+            width: Math.min(cardsView.cellWidth, cardsView.itemWidth) - Kirigami.Units.largeSpacing * 2
+            height: cardsView.itemHeight
             anchors.left: parent.left
             anchors.leftMargin: cardsView.width <= cardsView.itemWidth ? 0 : (index % 2 === 0 ? Math.max(0, cardsView.cellWidth - cardsView.itemWidth) :
                                                                                                 cardsView.cellWidth)

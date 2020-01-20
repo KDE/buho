@@ -19,8 +19,6 @@ set(buho_SRCS
     main.cpp
     db/db.cpp
     buho.cpp
-    linker.cpp
-    utils/htmlparser.cpp
     models/notes/notes.cpp
     models/links/links.cpp
     models/books/books.cpp
@@ -38,8 +36,6 @@ set(buho_HDRS
     db/db.h
     buho.h
     utils/owl.h
-    linker.h
-    utils/htmlparser.h
     models/notes/notes.h
     models/links/links.h
     models/books/books.h

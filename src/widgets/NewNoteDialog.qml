@@ -16,13 +16,10 @@ Maui.Dialog
     signal noteSaved(var note)
 
     Kirigami.Theme.backgroundColor: if(selectedColor)
-                                    {
                                         return control.selectedColor
-                                    }
+
     Kirigami.Theme.textColor: if(selectedColor)
-                              {
                                   return fgColor
-                              }
 
     heightHint: 0.95
     widthHint: 0.95
@@ -149,7 +146,6 @@ Maui.Dialog
         const content =  editor.body.text
         if(content.length == 0)
             return;
-        console.log("SVED COLOR", control.selectedColor)
 
         control.noteSaved({
                               url: editor.fileUrl,

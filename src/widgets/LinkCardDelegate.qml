@@ -1,209 +1,140 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.10
+import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import org.kde.mauikit 1.0 as Maui
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 
-ItemDelegate
+Maui.ItemDelegate
 {
     id: control
-    property string noteColor : model.color ? model.color : viewBackgroundColor
-    property int cardWidth: visible ? Maui.Style.unit * 200 : 0
-    property int cardHeight: visible ? Maui.Style.unit * 120 : 0
-    property int cardRadius: Maui.Style.radiusV
-
+    Kirigami.Theme.inherit: false
     property bool condition : true
-
-    signal rightClicked();
+    isCurrentItem: GridView.isCurrentItem
 
     visible: condition
-    clip: true
-
-    width: cardWidth
-    height: cardHeight
-    hoverEnabled: !isMobile
-    background: Rectangle
-    {
-        color: "transparent"
-    }
-
-    MouseArea
-    {
-        anchors.fill: parent
-        acceptedButtons:  Qt.RightButton
-        onClicked:
-        {
-            if(!isMobile && mouse.button === Qt.RightButton)
-                rightClicked()
-        }
-    }
-
-    Rectangle
-    {
-        id: card
-        z: -999
-        anchors.centerIn: control
-        anchors.fill: control
-        border.color: Qt.darker(noteColor, 1.2)
-        color: noteColor
-        radius: cardRadius
-
-        Loader
-        {
-            id: imgLoader
-            anchors.fill: parent
-            anchors.margins: Maui.Style.space.small
-            clip: true
-            sourceComponent:  typeof model.preview !== 'undefined' ? imgComponent : undefined
-        }
-    }
-
-    Rectangle
-    {
-        anchors.fill: parent
-        color: hovered? "#333" :  "transparent"
-        z: 999
-        opacity: 0.2
-        radius: cardRadius
-    }
+    padding: Maui.Style.space.medium
 
     Item
     {
-        visible: title.text.length > 0
-        height: layout.implicitHeight + Maui.Style.space.big
-        anchors.right: parent.right
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        anchors.margins: Maui.Style.unit
-        clip: true
-
-        ColumnLayout
-        {
-            id: layout
-            anchors.fill: parent
-            anchors.margins: Maui.Style.space.small
-            spacing: 0
-            Label
-            {
-                id: date
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                padding: 0
-                visible: date.text.length > 0
-                text: Qt.formatDateTime(new Date(model.updated), "d MMM h:mm")
-                color: model.color ? Qt.darker(model.color) : textColor
-                elide: Qt.ElideRight
-                wrapMode: TextEdit.WrapAnywhere
-                font.weight: Font.Bold
-                font.bold: true
-                font.pointSize: Maui.Style.fontSizes.small
-                clip: true
-            }
-
-            Label
-            {
-                id: title
-                padding: 0
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                text: model.title ? model.title : ""
-                color: model.color ? Qt.darker(model.color, 3) : textColor
-                elide: Qt.ElideRight
-                wrapMode: TextEdit.WrapAnywhere
-                font.weight: Font.Bold
-                font.bold: true
-                font.pointSize: Maui.Style.fontSizes.large
-                clip: true
-            }
-        }
-
-        Rectangle
-        {
-            anchors.fill: parent
-            color: noteColor
-            z: -1
-        }
-    }
-
-
-    Component
-    {
-        id: bodyComponent
-
-        TextArea
-        {
-            id: body
-            padding: 0
-            visible: typeof model.body !== 'undefined'
-
-            enabled: false
-            text: model.body ? model.body : ""
-            color: model.color ? Qt.darker(model.color, 3) : textColor
-            wrapMode: TextEdit.WrapAnywhere
-
-            textFormat: TextEdit.RichText
-            font.pointSize: Maui.Style.fontSizes.big
-
-            background: Rectangle
-            {
-                color: "transparent"
-            }
-        }
-    }
-
-    Component
-    {
-        id: imgComponent
+        anchors.fill: parent
+        anchors.margins: Maui.Style.space.tiny
+        anchors.centerIn: parent
 
         Image
         {
-            id: img
+            id: _image
 
-            visible: status === Image.Ready
-            asynchronous: true
-
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            height: parent.height
-            width: parent.width
+            anchors.fill: parent
+            anchors.margins: 1
             sourceSize.height: height
             sourceSize.width: width
+            source: model.preview
             fillMode: Image.PreserveAspectCrop
-            source: model.preview ? model.preview : ''
+            smooth: true
+            asynchronous: true
 
-            layer.enabled: img.visible
+            onStatusChanged:
+            {
+                if (status == Image.Error)
+                    source = "qrc:/link-default.png";
+            }
+
+            layer.enabled: true
             layer.effect: OpacityMask
             {
                 maskSource: Item
                 {
-                    width: img.width
-                    height: img.height
+                    width: _image.width
+                    height: _image.height
+
                     Rectangle
                     {
                         anchors.centerIn: parent
-                        width: img.width
-                        height: img.height
-                        radius: cardRadius
-                        //                    radius: Math.min(width, height)
+                        width:_image.width
+                        height: _image.height
+                        radius: Maui.Style.radiusV
                     }
                 }
             }
         }
 
+        Item
+        {
+            id: _labelBg
+            height: parent.height * 0.3 + Maui.Style.space.big
+            width: parent.width -1
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.backgroundColor: "#333";
+            Kirigami.Theme.textColor: "#fafafa"
+
+            FastBlur
+            {
+                id: blur
+                anchors.fill: parent
+                source: ShaderEffectSource
+                {
+                    sourceItem: _image
+                    sourceRect:Qt.rect(0,
+                                       _image.height - _labelBg.height,
+                                       _labelBg.width,
+                                       _labelBg.height)
+                }
+                radius: 50
+
+                Rectangle
+                {
+                    anchors.fill: parent
+                    color: _labelBg.Kirigami.Theme.backgroundColor
+                    opacity: 0.2
+                }
+
+                layer.enabled: true
+                layer.effect: OpacityMask
+                {
+                    maskSource: Item
+                    {
+                        width: blur.width
+                        height: blur.height
+
+                        Rectangle
+                        {
+                            anchors.centerIn: parent
+                            width: parent.width
+                            height: parent.height
+                            radius: Maui.Style.radiusV
+
+                            Rectangle
+                            {
+                                anchors.top: parent.top
+                                width: parent.width
+                                height: parent.radius
+                            }
+                        }
+                    }
+                }
+            }
+
+            Label
+            {
+                id: _label1
+                width: parent.width *0.9
+                height: Math.min(parent.height * 0.9, implicitHeight)
+                anchors.centerIn: parent
+                horizontalAlignment: Qt.AlignLeft
+                elide: Text.ElideRight
+                font.pointSize: Maui.Style.fontSizes.big
+                font.bold: true
+                font.weight: Font.Bold
+                color: Kirigami.Theme.textColor
+                wrapMode: Text.WrapAnywhere
+                text: model.title
+            }
+        }
     }
 
-    function update(item)
-    {
-        console.log("update link color", item.color, item.tag)
-        model.title = item.title
-        model.body = item.body
-        model.color = item.color
-        model.pin = item.pin ? 1 : 0
-        model.fav = item.fav ? 1 : 0
-        model.updated = item.updated
-        model.tag = item.tag.join(",")
-    }
+
 }

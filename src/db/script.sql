@@ -40,7 +40,6 @@ CREATE TABLE IF NOT EXISTS LINKS (
 url TEXT PRIMARY KEY,
 title TEXT,
 preview TEXT,
-color TEXT,
 pin INT,
 adddate DATE,
 modified DATE

@@ -9,43 +9,23 @@ Maui.Dialog
 {
     id: control
     parent: parent
-    heightHint: 0.95
-    widthHint: 0.95
-    maxHeight: previewReady ? Maui.Style.unit * 800 : contentLayout.implicitHeight
-    maxWidth: Maui.Style.unit *700
 
     signal linkSaved(var link)
-    property string selectedColor : "#ffffe6"
-    property string fgColor: Qt.darker(selectedColor, 2.5)
+    property bool previewReady : String(_webView.url).length > 0
 
-    property bool previewReady : false
-    x: (parent.width / 2) - (width / 2)
-    y: (parent.height /2 ) - (height / 2)
+    heightHint: 0.95
+    widthHint: 0.95
+    maxHeight: previewReady ? 1000 : contentLayout.implicitHeight
+    maxWidth: Maui.Style.unit *700
+
     modal: true
     padding: isAndroid ? 1 : undefined
     page.padding: 0
 
-    Connections
-    {
-        target: linker
-        onPreviewReady:
-        {
-            previewReady = true
-            fill(link)
-        }
-    }
     headBar.visible: previewReady
     footBar.visible: previewReady
 
     headBar.leftContent: [
-        ToolButton
-        {
-            id: pinButton
-            icon.name: "window-pin"
-            checkable: true
-            icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-            //                onClicked: checked = !checked
-        },
 
         TextField
         {
@@ -58,7 +38,6 @@ Maui.Dialog
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: Maui.Style.fontSizes.large
-            color: fgColor
             text: _webView.title
 
             background: Rectangle
@@ -68,12 +47,15 @@ Maui.Dialog
         }
     ]
 
-    headBar.rightContent: ColorsBar
-    {
-        onColorPicked: selectedColor = color
-    }
-
     footBar.leftContent: [
+        ToolButton
+        {
+            id: pinButton
+            icon.name: "window-pin"
+            checkable: true
+            icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+            //                onClicked: checked = !checked
+        },
 
         ToolButton
         {
@@ -119,40 +101,29 @@ Maui.Dialog
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: Maui.Style.fontSizes.large
-            color: fgColor
             Layout.alignment: Qt.AlignCenter
-
+            text: _webView.url
             background: Rectangle
             {
                 color: "transparent"
             }
 
-            onAccepted:
-            {
-                _webView.url = link.text
-                control.previewReady = true
-            }
+            onAccepted: _webView.url = link.text
+
         }
 
-        Item
+        WebView
         {
-            id: _webViewItem
+            id: _webView
             Layout.fillHeight: true
             Layout.fillWidth: true
             visible: control.previewReady
-
-            WebView
-            {
-                id: _webView
-                anchors.fill: parent
-            }
         }
-
-
 
         Maui.TagsBar
         {
             id: tagBar
+            position: ToolBar.Footer
             visible: control.previewReady
             Layout.fillWidth: visible
             allowEditMode: true
@@ -168,48 +139,37 @@ Maui.Dialog
         title.clear()
         link.clear()
         tagBar.clear()
-        _webView.stop()
-        previewReady = false
+        _webView.url = ""
         close()
     }
 
     function fill(link)
     {
-        title.text = link.title
-        populatePreviews(link.img)
         tagBar.list.lot= link.url
-
+        _webView.url = link.url
+        pinButton.checked = link.pin == 1
+        favButton.checked = link.favorite == 1
         open()
-    }
-
-    function populatePreviews(imgs)
-    {
-        for(var i in imgs)
-        {
-            console.log("PREVIEW:", imgs[i])
-            previewList.model.append({url : imgs[i]})
-        }
     }
 
     function packLink()
     {
-        const imgUrl = "/home/camilo/.local/share/buho/links/" +Math.floor(Math.random() * 100) + ".jpeg";
+        const imgUrl = linksView.list.previewsCachePath() +Math.floor(Math.random() * 100) + ".jpeg";
         _webView.grabToImage(function (result)
         {
             console.log("save to", imgUrl)
             result.saveToFile(imgUrl)
+            var data = ({
+                            url : _webView.url,
+                            title: title.text,
+                            preview: imgUrl,
+                            tag: tagBar.list.tags.join(","),
+                            pin: pinButton.checked ? 1 : 0,
+                            favorite: favButton.checked ? 1 : 0
+                        })
+            linkSaved(data)
             clear()
-        }, Qt.size(_webView.width -48, _webView.height - 48));
+        }, Qt.size(_webView.width -48,Math.min( _webView.height - 48, _webView.width * 1.2)));
 
-        var data = ({
-                        url : _webView.url,
-                        title: title.text,
-                        preview: imgUrl,
-                        color: control.selectedColor ?  control.selectedColor : "",
-                        tag: tagBar.list.tags.join(","),
-                        pin: pinButton.checked ? 1 : 0,
-                        favorite: favButton.checked ? 1 : 0
-                    })
-        linkSaved(data)
     }
 }

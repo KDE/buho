@@ -10,6 +10,8 @@
 #include <MauiKit/mauilist.h>
 #endif
 
+#include "owl.h"
+
 class DB;
 class Links : public MauiList
 {
@@ -59,13 +61,12 @@ signals:
 public slots:
     QVariantMap get(const int &index) const;
     bool insert(const QVariantMap &link);
-    bool update(const int &index, const QVariant &value, const int &role); //deprecrated
     bool update(const QVariantMap &data, const int &index);
-    bool update(const FMH::MODEL &link);
     bool remove(const int &index);
-
-    QVariantList getTags(const int &index);
-
+    static const QString previewsCachePath()
+    {
+        return OWL::LinksPath.toLocalFile();
+    }
 };
 
 #endif // NOTES_H

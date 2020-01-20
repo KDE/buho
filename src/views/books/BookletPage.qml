@@ -52,31 +52,21 @@ Item
             }
         ]
 
-        Maui.Holder
-        {
-            id: _holder
-            visible: !_listView.count || !currentBooklet
-            emoji: "qrc:/document-edit.svg"
-            emojiSize: Maui.Style.iconSizes.huge
-            isMask: false
-            title : qsTr("Nothing to edit!")
-            body: qsTr("Select a chapter or create a new one")
-        }
-
-
         Kirigami.PageRow
         {
             id: _layout
             anchors.fill: parent
             initialPage: [_sidebar, editor]
             interactive: true
-defaultColumnWidth: Kirigami.Units.gridUnit * 11
+            defaultColumnWidth: Kirigami.Units.gridUnit * 12
+
             Maui.Editor
             {
                 id: editor
-                visible: !_holder.visible
+                enabled: !_holder.visible
                 footBar.visible: false
                 document.autoReload: true
+
 
                 headBar.rightContent: [
 
@@ -102,6 +92,17 @@ defaultColumnWidth: Kirigami.Units.gridUnit * 11
                         }
                     }
                 ]
+
+                Maui.Holder
+                {
+                    id: _holder
+                    visible: _listView.count === 0
+                    emoji: "qrc:/document-edit.svg"
+                    emojiSize: Maui.Style.iconSizes.huge
+                    isMask: false
+                    title : qsTr("Nothing to edit!")
+                    body: qsTr("Select a chapter or create a new one")
+                }
             }
 
             Maui.Page
@@ -119,16 +120,18 @@ defaultColumnWidth: Kirigami.Units.gridUnit * 11
                     color: "transparent"
                 }
 
-                Maui.Holder
+                footBar.middleContent: Button
                 {
-                    anchors.margins: Maui.Style.space.huge
-                    visible: !_listView.count
-                    emoji: "qrc:/document-edit.svg"
-                    emojiSize: Maui.Style.iconSizes.huge
-                    isMask: false
-                    title : qsTr("This book is empty!")
-                    body: qsTr("Start by creating a new chapter for your book by clicking the + icon")
+                    text: qsTr("New chapter")
+                    onClicked: _newChapter.open()
+
+                    Layout.preferredHeight: Maui.Style.rowHeight
+                    Layout.fillWidth: true
+                    Kirigami.Theme.backgroundColor: Kirigami.Theme.positiveTextColor
+                    Kirigami.Theme.textColor: "white"
                 }
+
+
 
                 ListView
                 {
@@ -143,17 +146,17 @@ defaultColumnWidth: Kirigami.Units.gridUnit * 11
                         control.currentBooklet = _booksList.booklet.get(_listView.currentIndex)
                     }
 
-                    footerPositioning: ListView.OverlayFooter
-                    footer: Button
+                    Maui.Holder
                     {
-                        text: qsTr("New chapter")
-                        onClicked: _newChapter.open()
-
-                        height: Maui.Style.rowHeight
-                        width: parent.width
-                        Kirigami.Theme.backgroundColor: Kirigami.Theme.positiveTextColor
-                        Kirigami.Theme.textColor: "white"
+                        anchors.margins: Maui.Style.space.huge
+                        visible: !_listView.count
+                        emoji: "qrc:/document-edit.svg"
+                        emojiSize: Maui.Style.iconSizes.huge
+                        isMask: false
+                        title : qsTr("This book is empty!")
+                        body: qsTr("Start by creating a new chapter for your book")
                     }
+
 
                     delegate: Maui.LabelDelegate
                     {
@@ -187,6 +190,7 @@ defaultColumnWidth: Kirigami.Units.gridUnit * 11
             onAccepted:
             {
                 _booksList.booklet.insert({content: textEntry.text})
+                _newChapter.close()
             }
         }
 

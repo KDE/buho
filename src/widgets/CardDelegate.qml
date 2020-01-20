@@ -23,7 +23,7 @@ ItemDelegate
     hoverEnabled: !Kirigami.Settings.isMobile
     background: Rectangle
     {
-        border.color: Qt.darker(noteColor, 1.2)
+        border.color: Qt.darker(color, 1.2)
         color:  noteColor
         radius: cardRadius
         opacity: hovered ? 0.8 : 1

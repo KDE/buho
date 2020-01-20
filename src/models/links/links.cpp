@@ -105,74 +105,33 @@ bool Links::insert(const QVariantMap &link)
     return false;
 }
 
-bool Links::update(const int &index, const QVariant &value, const int &role)
-{
-    if(index < 0 || index >= links.size())
-        return false;
-
-    const auto oldValue = this->links[index][static_cast<FMH::MODEL_KEY>(role)];
-
-    if(oldValue == value.toString())
-        return false;
-
-    qDebug()<< "VALUE TO UPDATE"<<  FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(role)] << oldValue;
-
-    this->links[index].insert(static_cast<FMH::MODEL_KEY>(role), value.toString());
-
-    this->update(this->links[index]);
-
-    return true;
-}
 
 bool Links::update(const QVariantMap &data, const int &index)
 {
     if(index < 0 || index >= this->links.size())
         return false;
 
-    auto newData = this->links[index];
-    QVector<int> roles;
+    this->links[index] = this->links[index].unite(FMH::toModel(data));
 
-    for(auto key : data.keys())
-        if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
-        {
-            newData.insert(FMH::MODEL_NAME_KEY[key], data[key].toString());
-            roles << FMH::MODEL_NAME_KEY[key];
-        }
+    this->links[index][FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
+   this->links[index][FMH::MODEL_KEY::PREVIEW] = QUrl::fromLocalFile(this->links[index][FMH::MODEL_KEY::PREVIEW]).toString();
 
-    this->links[index] = newData;
+    for(const auto &tg :  this->links[index][FMH::MODEL_KEY::TAG].split(",", QString::SkipEmptyParts))
+        Tagging::getInstance()->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], this->links[index][FMH::MODEL_KEY::URL]);
 
-    if(this->update(newData))
+
+    const auto map = FMH::toMap(FMH::filterModel(this->links[index], {FMH::MODEL_KEY::URL,
+                                                                      FMH::MODEL_KEY::TITLE,
+                                                                      FMH::MODEL_KEY::PREVIEW,
+                                                                      FMH::MODEL_KEY::PIN,
+                                                                      FMH::MODEL_KEY::MODIFIED}));
+
+    if(this->db->update(OWL::TABLEMAP[OWL::TABLE::LINKS], map, {{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], this->links[index][FMH::MODEL_KEY::URL]}} ))
     {
-        qDebug() << "update link" << newData;
-
-        emit this->updateModel(index, roles);
+        this->updateModel(index, FMH::modelRoles(this->links[index]));
         return true;
     }
-
     return false;
-}
-
-bool Links::update(const FMH::MODEL &link)
-{
-    auto url = link[FMH::MODEL_KEY::URL];
-    auto color = link[FMH::MODEL_KEY::COLOR];
-    auto pin = link[FMH::MODEL_KEY::PIN].toInt();
-    auto fav = link[FMH::MODEL_KEY::FAVORITE].toInt();
-    auto tags = link[FMH::MODEL_KEY::TAG].split(",", QString::SkipEmptyParts);
-    auto updated = link[FMH::MODEL_KEY::MODIFIED];
-
-    QVariantMap link_map =
-    {
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], color},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::PIN], pin},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::FAVORITE], fav},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::MODIFIED], updated}
-    };
-
-    for(const auto &tg : tags)
-        Tagging::getInstance()->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], url, color);
-
-    return this->db->update(OWL::TABLEMAP[OWL::TABLE::LINKS], link_map, {{FMH::MODEL_NAME[FMH::MODEL_KEY::LINK], url}} );
 }
 
 bool Links::remove(const int &index)
@@ -192,12 +151,3 @@ bool Links::remove(const int &index)
     return false;
 }
 
-QVariantList Links::getTags(const int &index)
-{
-    if(index < 0 || index >= this->links.size())
-        return QVariantList();
-
-    auto link = this->links.at(index)[FMH::MODEL_KEY::LINK];
-
-    return Tagging::getInstance()->getAbstractTags(OWL::TABLEMAP[OWL::TABLE::LINKS], link);
-}
