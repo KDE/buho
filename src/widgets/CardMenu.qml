@@ -10,13 +10,14 @@ Menu
     property bool isPin: false
 
     signal deleteClicked()
-    signal colorClicked(color color)
-    signal favClicked(int fav)
+    signal colorClicked(string color)
+    signal favClicked(int favorite)
     signal pinClicked(int pin)
     signal copyClicked()
 
     MenuItem
     {
+        icon.name: "love"
         text: qsTr(isFav? "UnFav" : "Fav")
         onTriggered:
         {
@@ -27,6 +28,7 @@ Menu
 
     MenuItem
     {
+        icon.name: "pin"
         text: qsTr(isPin? "UnPin" : "Pin")
         onTriggered:
         {
@@ -37,6 +39,7 @@ Menu
 
       MenuItem
     {
+        icon.name: "document-export"
         text: qsTr("Export")
         onTriggered:
         {
@@ -46,6 +49,7 @@ Menu
 
     MenuItem
     {
+        icon.name : "edit-copy"
         text: qsTr("Copy")
         onTriggered:
         {
@@ -54,8 +58,15 @@ Menu
         }
     }
 
+    MenuSeparator
+    {
+
+    }
+
+
     MenuItem
     {
+        icon.name: "edit-delete"
         text: qsTr("Remove")
         Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
         onTriggered:

@@ -82,6 +82,7 @@ defaultColumnWidth: Kirigami.Units.gridUnit * 11
 
                     ToolButton
                     {
+                        enabled: editor.document.modified
                         icon.name: "document-save"
                         text: qsTr("Save")
                         onClicked:

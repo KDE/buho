@@ -5,7 +5,7 @@ import org.kde.mauikit 1.0 as Maui
 
 Row
 {
-    signal colorPicked(color color)
+    signal colorPicked(string color)
     anchors.verticalCenter: parent.verticalCenter
     spacing: Maui.Style.space.medium
     property string currentColor
@@ -128,6 +128,26 @@ Row
             onClicked:
             {
                 currentColor = parent.color
+                colorPicked(currentColor)
+            }
+        }
+    }
+
+    Kirigami.Icon
+    {
+        anchors.verticalCenter: parent.verticalCenter
+        height: size
+        width: height
+
+        source: "edit-clear"
+        color: Kirigami.Theme.textColor
+
+        MouseArea
+        {
+            anchors.fill: parent
+            onClicked:
+            {
+                currentColor = ""
                 colorPicked(currentColor)
             }
         }

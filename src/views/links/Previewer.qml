@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 import "../../widgets"
+import QtWebView 1.1
 
 Maui.Dialog
 {
@@ -14,7 +15,6 @@ Maui.Dialog
     maxHeight: maxWidth
     page.padding: 0
     property color selectedColor : "transparent"
-    property alias webView: webViewer.item
 
     signal linkSaved(var link)
     headBar.leftContent: [
@@ -35,7 +35,7 @@ Maui.Dialog
         ToolButton
         {
             icon.name: "document-launch"
-            onClicked: Maui.FM.openUrl(webView.url)
+            onClicked: Qt.openUrlExternally(_webView.url)
         }
     ]
 
@@ -58,8 +58,8 @@ Maui.Dialog
         ToolButton
         {
             icon.name: "document-share"
-            onClicked: isAndroid ? Maui.Android.shareLink(webView.url) :
-                                   shareDialog.show(webView.url)
+            onClicked: isAndroid ? Maui.Android.shareLink(_webView.url) :
+                                   shareDialog.show(_webView.url)
         },
 
         ToolButton
@@ -88,41 +88,16 @@ Maui.Dialog
     ColumnLayout
     {
         anchors.fill: parent
-
-        //            Item
-        //            {
-        //                Layout.fillWidth: true
-        //                height: Maui.Style.rowHeightAlt
-
-        //                Label
-        //                {
-        //                    clip: true
-        //                    text: webView.title
-        //                    width: parent.width
-        //                    height: parent.height
-        //                    horizontalAlignment: Qt.AlignHCenter
-        //                    verticalAlignment: Qt.AlignVCenter
-        //                    font.bold: true
-        //                    font.pointSize: Maui.Style.fontSizes.big
-        //                    font.weight: Font.Bold
-        //                    elide: Label.ElideRight
-        //                }
-        //            }
-
-        Loader
+        WebView
         {
-            id: webViewer
+            id: _webView
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.margins: 0
-            source: isAndroid ? "qrc:/src/views/links/WebViewAndroid.qml" :
-                                "qrc:/src/views/links/WebViewLinux.qml"
 
             onVisibleChanged:
             {
-                if(!visible) webView.url = "about:blank"
+                if(!visible) _webView.url = "about:blank"
             }
-
         }
 
         Maui.TagsBar
@@ -141,8 +116,8 @@ Maui.Dialog
     function show(link)
     {
         console.log("STATE:" , link.fav)
-        webView.url = link.link
-        tagBar.list.lot = link.link
+        _webView.url = link.url
+        tagBar.list.lot = link.url
         pinButton.checked = link.pin == 1
         favButton.checked = link.fav == 1
         selectedColor = link.color
@@ -153,8 +128,8 @@ Maui.Dialog
     {
         console.log(favButton.checked)
         linkSaved({
-                      title: webView.title,
-                      link: webView.url,
+                      title: _webView.title,
+                      url: _webView.url,
                       color: selectedColor,
                       tag: tagBar.getTags(),
                       pin: pinButton.checked ? 1 : 0,

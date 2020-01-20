@@ -52,6 +52,7 @@ Maui.Dialog
             icon.name: "love"
             checkable: true
             icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
+
         },
 
         ToolButton
@@ -114,7 +115,6 @@ Maui.Dialog
                     tagBar.list.updateToUrls(tags)
                 else
                     tagBar.list.append(tags)
-                console.log(tags)
             }
 
             list.strict: true
@@ -157,7 +157,7 @@ Maui.Dialog
                               color: control.selectedColor ?  control.selectedColor : "",
                               tag: tagBar.list.tags.join(","),
                               pin: pinButton.checked ? 1 : 0,
-                              fav: favButton.checked ? 1 : 0,
+                              favorite: favButton.checked ? 1 : 0,
                               format: ".txt" //for now only simple txt files
                           })
         control.clear()

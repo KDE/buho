@@ -1,5 +1,6 @@
-import QtQuick 2.0
+import QtQuick 2.10
 import org.kde.mauikit 1.0 as Maui
+import QtGraphicalEffects 1.0
 
 ListView
 {
@@ -12,20 +13,7 @@ ListView
 
     boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
     orientation: ListView.Horizontal
-    spacing: 0
-
-//    Maui.Holder
-//    {
-//        id: holder
-//        visible: control.count > 0
-//        emoji: "qrc:/Type.png"
-//        emojiSize: Maui.Style.iconSizes.big
-//        isMask: false
-//        title : "No pinned notes!"
-//        body: "You can pin your notes to see them here"
-//        z: 999
-//         colorScheme.textColor: altColorText
-//   }
+    spacing: 0   
 
     model: notesView.model
     delegate: Item
@@ -36,9 +24,9 @@ ListView
 
         CardDelegate
         {
-            width: parent.width * 0.8
-            height:  parent.height
-
+            id: cardDelegate
+            anchors.fill: parent
+            anchors.margins: Maui.Style.space.medium
             anchors.centerIn: parent
 
             onClicked:
@@ -47,6 +35,16 @@ ListView
                 itemClicked(index)
             }
         }
-    }
 
+        DropShadow
+        {
+            anchors.fill: cardDelegate
+            horizontalOffset: 0
+            verticalOffset: 0
+            radius: 8.0
+            samples: 17
+            color: "#80000000"
+            source: cardDelegate
+        }
+    }
 }

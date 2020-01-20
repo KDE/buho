@@ -82,14 +82,12 @@ bool Links::insert(const QVariantMap &link)
     auto __model = FMH::toModel(link);
     __model[FMH::MODEL_KEY::ADDDATE] =  QDateTime::currentDateTime().toString();
     __model[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString();
-    __model[FMH::MODEL_KEY::PREVIEW] =  OWL::saveImage(Linker::getUrl(__model[FMH::MODEL_KEY::PREVIEW]), OWL::LinksPath.toString()+QUuid::createUuid().toString());
-
+    __model[FMH::MODEL_KEY::PREVIEW] = QUrl::fromLocalFile(__model[FMH::MODEL_KEY::PREVIEW]).toString();
 
     __model = FMH::filterModel(__model, {FMH::MODEL_KEY::URL,
                                          FMH::MODEL_KEY::TITLE,
                                          FMH::MODEL_KEY::PREVIEW,
                                          FMH::MODEL_KEY::COLOR,
-                                         FMH::MODEL_KEY::FAVORITE,
                                          FMH::MODEL_KEY::PIN,
                                          FMH::MODEL_KEY::MODIFIED,
                                          FMH::MODEL_KEY::ADDDATE});
@@ -156,10 +154,10 @@ bool Links::update(const QVariantMap &data, const int &index)
 
 bool Links::update(const FMH::MODEL &link)
 {
-    auto url = link[FMH::MODEL_KEY::LINK];
+    auto url = link[FMH::MODEL_KEY::URL];
     auto color = link[FMH::MODEL_KEY::COLOR];
     auto pin = link[FMH::MODEL_KEY::PIN].toInt();
-    auto fav = link[FMH::MODEL_KEY::FAV].toInt();
+    auto fav = link[FMH::MODEL_KEY::FAVORITE].toInt();
     auto tags = link[FMH::MODEL_KEY::TAG].split(",", QString::SkipEmptyParts);
     auto updated = link[FMH::MODEL_KEY::MODIFIED];
 
@@ -167,7 +165,7 @@ bool Links::update(const FMH::MODEL &link)
     {
         {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], color},
         {FMH::MODEL_NAME[FMH::MODEL_KEY::PIN], pin},
-        {FMH::MODEL_NAME[FMH::MODEL_KEY::FAV], fav},
+        {FMH::MODEL_NAME[FMH::MODEL_KEY::FAVORITE], fav},
         {FMH::MODEL_NAME[FMH::MODEL_KEY::MODIFIED], updated}
     };
 

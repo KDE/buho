@@ -17,7 +17,7 @@ GridView
     property int itemSpacing:  Maui.Style.space.huge
 
     signal itemClicked(int index)
-    boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
+    boundsBehavior: !Kirigami.Settings.isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
 
     cellWidth: width > itemWidth ? width/2 : width
     cellHeight: itemHeight + itemSpacing

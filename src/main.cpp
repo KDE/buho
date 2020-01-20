@@ -20,7 +20,7 @@
 #include <QtWebView>
 
 #include "buho.h"
-#include "linker.h"
+//#include "linker.h"
 
 #include "models/books/booklet.h"
 #include "models/books/books.h"
@@ -54,12 +54,8 @@ int Q_DECL_EXPORT main(int argc, char *argv[]) {
   Buho owl;
 
   QQmlApplicationEngine engine;
-  auto context = engine.rootContext();
-
-  context->setContextProperty("owl", &owl);
-
-  Linker linker;
-  context->setContextProperty("linker", &linker);
+//  Linker linker;
+//  context->setContextProperty("linker", &linker);
   qmlRegisterType<Booklet>();
   qmlRegisterType<Notes>("Notes", 1, 0, "Notes");
   qmlRegisterType<Books>("Books", 1, 0, "Books");

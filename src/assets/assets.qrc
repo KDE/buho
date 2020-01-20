@@ -9,5 +9,6 @@
         <file>view-links.svg</file>
         <file>view-notes.svg</file>
         <file>document-edit.svg</file>
+        <file>edit-pin.svg</file>
     </qresource>
 </RCC>

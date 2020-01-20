@@ -61,7 +61,7 @@ void Notes::sortList()
         {
             case FMH::MODEL_KEY::FAVORITE:
             {
-                return e1[key] == "true";
+                return e1[key] == "1";
             }
 
             case FMH::MODEL_KEY::DATE:
@@ -119,7 +119,7 @@ void Notes::sortList()
 void Notes::appendNote(FMH::MODEL note)
 {
     qDebug() << "APPEND NOTE <<" << note[FMH::MODEL_KEY::ID];
-    note[FMH::MODEL_KEY::FAVORITE] = FMStatic::isFav (note[FMH::MODEL_KEY::URL]) ? 1 : 0;
+    note[FMH::MODEL_KEY::FAVORITE] = FMStatic::isFav (note[FMH::MODEL_KEY::URL]) ? "1" : "0";
     note[FMH::MODEL_KEY::TITLE] = [&]()
     {
       const auto lines = note[FMH::MODEL_KEY::CONTENT].split("\n");

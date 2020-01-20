@@ -15,18 +15,17 @@ Maui.ApplicationWindow
     title: qsTr("Buho")
 
     Maui.App.handleAccounts: true
-    Maui.App.description: qsTr("Buho allows you to take quick notes, collect links and take long notes organized by chapters.")
+    Maui.App.description: qsTr("Buho allows you to take quick notes, collect links and organize notes as books.")
     Maui.App.iconName: "qrc:/buho.svg"
 
     property int currentView : views.notes
     readonly property var views : ({
                                        notes: 0,
                                        links: 1,
-                                       books: 2,
-                                       tags: 3,
-                                       search: 4
+                                       books: 2
                                    })
 
+    rightIcon.visible: false
     headBar.middleContent: Maui.ActionGroup
     {
         id: _actionGroup
@@ -51,12 +50,6 @@ Maui.ApplicationWindow
         {
             icon.name: "view-pim-journal"
             text: qsTr("Books")
-        }
-
-        Action
-        {
-            icon.name: "tag"
-            text: qsTr("Tags")
         }
     }
 

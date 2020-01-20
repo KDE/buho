@@ -3,9 +3,11 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
+import QtWebView 1.1
 
 Maui.Dialog
 {
+    id: control
     parent: parent
     heightHint: 0.95
     widthHint: 0.95
@@ -57,6 +59,7 @@ Maui.Dialog
             font.bold: true
             font.pointSize: Maui.Style.fontSizes.large
             color: fgColor
+            text: _webView.title
 
             background: Rectangle
             {
@@ -96,11 +99,8 @@ Maui.Dialog
     acceptText: qsTr("Save")
     rejectText:  qsTr("Discard")
 
-    onAccepted:
-    {
-        packLink()
-        clear()
-    }
+    onAccepted: packLink()
+
     onRejected:  clear()
 
     ColumnLayout
@@ -127,63 +127,33 @@ Maui.Dialog
                 color: "transparent"
             }
 
-            onAccepted: linker.extract(link.text)
+            onAccepted:
+            {
+                _webView.url = link.text
+                control.previewReady = true
+            }
         }
 
         Item
         {
-            visible: previewReady
+            id: _webViewItem
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            visible: control.previewReady
 
-            Layout.fillWidth: previewReady
-            Layout.fillHeight: previewReady
-
-            ListView
+            WebView
             {
-                id: previewList
+                id: _webView
                 anchors.fill: parent
-                anchors.centerIn: parent
-                visible: count > 0
-                clip: true
-                snapMode: ListView.SnapOneItem
-                orientation: ListView.Horizontal
-                interactive: count > 1
-                highlightFollowsCurrentItem: true
-                model: ListModel{}
-                onMovementEnded:
-                {
-                    var index = indexAt(contentX, contentY)
-                    currentIndex = index
-                }
-                delegate: ItemDelegate
-                {
-                    height: previewList.height
-                    width: previewList.width
-
-                    background: Rectangle
-                    {
-                        color: "transparent"
-                    }
-
-                    Image
-                    {
-                        id: img
-                        source: model.url
-                        fillMode: Image.PreserveAspectFit
-                        asynchronous: true
-                        width: parent.width
-                        height: parent.height
-                        sourceSize.height: height
-                        horizontalAlignment: Qt.AlignHCenter
-                        verticalAlignment: Qt.AlignVCenter
-                    }
-                }
             }
         }
+
+
 
         Maui.TagsBar
         {
             id: tagBar
-            visible: previewReady
+            visible: control.previewReady
             Layout.fillWidth: visible
             allowEditMode: true
             list.abstract: true
@@ -197,11 +167,10 @@ Maui.Dialog
     {
         title.clear()
         link.clear()
-        previewList.model.clear()
         tagBar.clear()
+        _webView.stop()
         previewReady = false
         close()
-
     }
 
     function fill(link)
@@ -224,14 +193,22 @@ Maui.Dialog
 
     function packLink()
     {
+        const imgUrl = "/home/camilo/.local/share/buho/links/" +Math.floor(Math.random() * 100) + ".jpeg";
+        _webView.grabToImage(function (result)
+        {
+            console.log("save to", imgUrl)
+            result.saveToFile(imgUrl)
+            clear()
+        }, Qt.size(_webView.width -48, _webView.height - 48));
+
         var data = ({
-                        url : link.text,
+                        url : _webView.url,
                         title: title.text,
-                        preview: previewList.count > 0 ? previewList.model.get(previewList.currentIndex).url :  "",
-                        color: selectedColor,
-                        tag: tagBar.getTags(),
-                        pin: pinButton.checked,
-                        favorite: favButton.checked
+                        preview: imgUrl,
+                        color: control.selectedColor ?  control.selectedColor : "",
+                        tag: tagBar.list.tags.join(","),
+                        pin: pinButton.checked ? 1 : 0,
+                        favorite: favButton.checked ? 1 : 0
                     })
         linkSaved(data)
     }

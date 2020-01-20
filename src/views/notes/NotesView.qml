@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 import Notes 1.0
+import Qt.labs.platform 1.0
 
 import "../../widgets"
 
@@ -21,7 +22,6 @@ Maui.Page
     padding: Maui.Style.space.big
 
     headBar.visible: !cardsView.holder.visible
-    title : cardsView.count + " notes"
 
     headBar.leftContent: [
         ToolButton
@@ -34,6 +34,14 @@ Maui.Page
         }
     ]
 
+    headBar.middleContent: Maui.TextField
+    {
+        Layout.fillWidth: true
+        placeholderText: cardsView.count + " " + qsTr("notes")
+        onAccepted: notesModel.filter = text
+        onCleared: notesModel.filter = ""
+    }
+
     headBar.rightContent: [
         ToolButton
         {
@@ -43,22 +51,33 @@ Maui.Page
             Menu
             {
                 id: sortMenu
-                parent: parent
+
+                MenuItemGroup
+                {
+                    id: orderGroup
+                }
+
+                MenuItemGroup
+                {
+                    id: sortGroup
+                }
 
                 MenuItem
                 {
                     text: qsTr("Ascedent")
-                    checkable: false
+                    checkable: true
                     checked: notesList.order === Notes.ASC
                     onTriggered: notesList.order = Notes.ASC
+                    group: sortGroup
                 }
 
                 MenuItem
                 {
                     text: qsTr("Descendent")
-                    checkable: false
+                    checkable: true
                     checked: notesList.order === Notes.DESC
                     onTriggered: notesList.order = Notes.DESC
+                    group: sortGroup
                 }
 
                 MenuSeparator{}
@@ -66,9 +85,10 @@ Maui.Page
                 MenuItem
                 {
                     text: qsTr("Title")
-                    checkable: false
+                    checkable: true
                     checked: notesList.sortBy === Notes.TITLE
                     onTriggered: notesList.sortBy = Notes.TITLE
+                    group: orderGroup
                 }
 
                 MenuItem
@@ -77,30 +97,34 @@ Maui.Page
                     checkable: true
                     checked: notesList.sortBy === Notes.COLOR
                     onTriggered: notesList.sortBy = Notes.COLOR
+                    group: orderGroup
                 }
 
                 MenuItem
                 {
                     text: qsTr("Add date")
-                    checkable: false
+                    checkable: true
                     checked: notesList.sortBy === Notes.ADDDATE
                     onTriggered: notesList.sortBy = Notes.ADDDATE
+                    group: orderGroup
                 }
 
                 MenuItem
                 {
                     text: qsTr("Updated")
-                    checkable: false
+                    checkable: true
                     checked: notesList.sortBy === Notes.Modified
                     onTriggered: notesList.sortBy = Notes.Modified
+                    group: orderGroup
                 }
 
                 MenuItem
                 {
-                    text: qsTr("Fav")
-                    checkable: false
+                    text: qsTr("Favorite")
+                    checkable: true
                     checked: notesList.sortBy === Notes.FAVORITE
                     onTriggered: notesList.sortBy = Notes.FAVORITE
+                    group: orderGroup
                 }
             }
         },
@@ -122,6 +146,9 @@ Maui.Page
     {
         id: notesModel
         list: notesList
+        recursiveFilteringEnabled: true
+        sortCaseSensitivity: Qt.CaseInsensitive
+        filterCaseSensitivity: Qt.CaseInsensitive
     }
 
     ColumnLayout
@@ -135,11 +162,23 @@ Maui.Page
             Layout.alignment: Qt.AlignVCenter
             Layout.fillWidth: true
             height: cardsView.itemHeight
+            color: Kirigami.Theme.backgroundColor
+
+            Maui.Holder
+            {
+                id: holder
+                visible: pinnedList.count == 0
+                emoji: "qrc:/edit-pin.svg"
+                emojiSize: Maui.Style.iconSizes.big
+                isMask: true
+                title : qsTr("No pins!")
+                body: qsTr("No matched pinned notes. You can pin your notes to access them quickly")
+                z: 999
+           }
 
             CardsList
             {
                 id: pinnedList
-
                 height: parent.height *0.9
                 width: parent.width * 0.9
                 anchors.centerIn: parent
@@ -147,11 +186,6 @@ Maui.Page
                 itemWidth: itemHeight * 1.5
                 onItemClicked: noteClicked(cardsView.model.get(index))
             }
-
-            color: Kirigami.Theme.backgroundColor
-            radius: Maui.Style.radiusV
-
-            border.color: Qt.darker(Kirigami.Theme.backgroundColor, 1.4)
         }
 
 
@@ -209,7 +243,7 @@ Maui.Page
                 target: cardsView.menu
                 onOpened:
                 {
-                    cardsView.menu.isFav = currentNote.fav == 1
+                    cardsView.menu.isFav =  currentNote.favorite == 1
                     cardsView.menu.isPin = currentNote.pin == 1
                 }
 
@@ -221,7 +255,7 @@ Maui.Page
 
                 onFavClicked:
                 {
-                    notesList.update(({"fav": fav}), cardsView.currentIndex)
+                    notesList.update(({"favorite": favorite}), cardsView.currentIndex)
                 }
 
                 onPinClicked:
@@ -231,7 +265,7 @@ Maui.Page
 
                 onCopyClicked:
                 {
-                    Maui.Handy.copyToClipboard(currentNote.title+"\n"+currentNote.body)
+                    Maui.Handy.copyToClipboard(currentNote.content)
                 }
             }
         }
