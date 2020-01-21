@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Buho
 Name[ca]=Buho
+Name[cs]=Buho
 Name[es]=Buho
 Name[it]=Buho
 Name[nl]=Buho
@@ -12,6 +13,7 @@ Name[x-test]=xxBuhoxx
 Name[zh_TW]=Buho
 Comment=Note taking app
 Comment[ca]=Aplicació per prendre notes
+Comment[cs]=Aplikace pro psaní poznámek
 Comment[es]=Aplicación para tomar notas
 Comment[it]=Applicazione per prendere nota
 Comment[nl]=Hulpprogramma voor het maken van notities
@@ -25,11 +27,12 @@ TryExec=buho
 Exec=buho %U
 Keywords=notes;todo;nextcloud;maui;
 Keywords[ca]=notes;todo;pendents;nextcloud;maui;
+Keywords[cs]=poznámky;úkoly;nextcloud;maui;
 Keywords[es]=notas;pendiente;nextcloud;maui;
 Keywords[it]=note;da fare;nextcloud;maui;
 Keywords[nl]=notities;tedoen;nextcloud;maui;
 Keywords[pt]=notas;tarefas;nextcloud;maui;
-Keywords[pt_BR]=notas;tarefa;nextcloud;maui;anotações
+Keywords[pt_BR]=notas;tarefa;nextcloud;maui;anotações;
 Keywords[uk]=notes;todo;nextcloud;maui;нотатки;завдання;записи;некстклауд;мауї;
 Keywords[x-test]=xxnotesxx;xxtodoxx;xxnextcloudxx;xxmauixx;
 Keywords[zh_TW]=notes;todo;nextcloud;maui;筆記;待辦事項;
@@ -41,6 +44,7 @@ Icon=buho
 
 GenericName=Note Taker
 GenericName[ca]=Prendre notes
+GenericName[cs]=Nástroj pro poznámky
 GenericName[es]=Toma de notas
 GenericName[it]=Strumento per annotazioni
 GenericName[nl]=Notitieboekje
