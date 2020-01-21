@@ -1,5 +1,7 @@
 import QtQuick 2.10
 import org.kde.mauikit 1.0 as Maui
+import org.kde.kirigami 2.7 as Kirigami
+
 import QtGraphicalEffects 1.0
 
 ListView
@@ -11,16 +13,16 @@ ListView
     property int itemHeight: Maui.Style.unit * 200
     signal itemClicked(int index)
 
-    boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
+    boundsBehavior: !Kirigami.Settings.isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
     orientation: ListView.Horizontal
-    spacing: 0   
+    spacing: 0
 
     model: notesView.model
     delegate: Item
     {
-        width: model.pin == 1 ? itemWidth : 0
-        height:  model.pin == 1 ? itemHeight : 0
-        visible: model.pin == 1
+        width: model.favorite == 1 ? itemWidth : 0
+        height:  model.favorite == 1 ? itemHeight : 0
+        visible: model.favorite == 1
 
         CardDelegate
         {

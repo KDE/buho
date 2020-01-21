@@ -48,14 +48,6 @@ Maui.Dialog
     ]
 
     footBar.leftContent: [
-        ToolButton
-        {
-            id: pinButton
-            icon.name: "window-pin"
-            checkable: true
-            icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-            //                onClicked: checked = !checked
-        },
 
         ToolButton
         {
@@ -147,7 +139,6 @@ Maui.Dialog
     {
         tagBar.list.lot= link.url
         _webView.url = link.url
-        pinButton.checked = link.pin == 1
         favButton.checked = link.favorite == 1
         open()
     }
@@ -164,7 +155,6 @@ Maui.Dialog
                             title: title.text,
                             preview: "file://"+imgUrl,
                             tag: tagBar.list.tags.join(","),
-                            pin: pinButton.checked ? 1 : 0,
                             favorite: favButton.checked ? 1 : 0
                         })
             linkSaved(data)

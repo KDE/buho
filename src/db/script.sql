@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS NOTES (
 id TEXT PRIMARY KEY,
 url TEXT NOT NULL,
 color TEXT,
-pin INT
+favorite INT
 );
 
 CREATE TABLE IF NOT EXISTS NOTES_SYNC (
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS LINKS (
 url TEXT PRIMARY KEY,
 title TEXT,
 preview TEXT,
-pin INT,
+favorite INT,
 adddate DATE,
 modified DATE
 );

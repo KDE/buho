@@ -130,8 +130,8 @@ Maui.Page
         },
         ToolButton
         {
-            id: pinButton
-            icon.name: "pin"
+            id: favButton
+            icon.name: "love"
             checkable: true
             icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
         }
@@ -158,7 +158,7 @@ Maui.Page
 
         Rectangle
         {
-            visible: pinButton.checked
+            visible: favButton.checked
             Layout.alignment: Qt.AlignVCenter
             Layout.fillWidth: true
             height: cardsView.itemHeight
@@ -167,18 +167,18 @@ Maui.Page
             Maui.Holder
             {
                 id: holder
-                visible: pinnedList.count == 0
+                visible: favedList.count == 0
                 emoji: "qrc:/edit-pin.svg"
                 emojiSize: Maui.Style.iconSizes.big
                 isMask: true
-                title : qsTr("No pins!")
-                body: qsTr("No matched pinned notes. You can pin your notes to access them quickly")
+                title : qsTr("No favorites!")
+                body: qsTr("No matched favorites notes. You can fav your notes to access them quickly")
                 z: 999
             }
 
             CardsList
             {
-                id: pinnedList
+                id: favedList
                 height: parent.height *0.9
                 width: parent.width * 0.9
                 anchors.centerIn: parent
@@ -243,7 +243,6 @@ Maui.Page
                 id: _notesMenu
 
                 property bool isFav: currentNote.favorite == 1
-                property bool isPin: currentNote.pin == 1
 
                 MenuItem
                 {
@@ -252,17 +251,6 @@ Maui.Page
                     onTriggered:
                     {
                         notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), cardsView.currentIndex)
-                        _notesMenu.close()
-                    }
-                }
-
-                MenuItem
-                {
-                    icon.name: "pin"
-                    text: qsTr(_notesMenu.isPin? "UnPin" : "Pin")
-                    onTriggered:
-                    {
-                        notesList.update(({"pin": _notesMenu.isPin ? 0 : 1}), cardsView.currentIndex)
                         _notesMenu.close()
                     }
                 }

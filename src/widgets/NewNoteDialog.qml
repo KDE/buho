@@ -34,14 +34,6 @@ Maui.Dialog
     onAccepted:  packNote()
     onRejected: clear()
     footBar.leftContent: [
-        ToolButton
-        {
-            id: pinButton
-            icon.name: "pin"
-            checkable: true
-            icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-            //                onClicked: checked = !checked
-        },
 
         ToolButton
         {
@@ -136,7 +128,6 @@ Maui.Dialog
     {
         editor.fileUrl = note.url
         control.selectedColor =  note.color ? note.color : ""
-        pinButton.checked = note.pin == 1
         favButton.checked = note.favorite == 1
         tagBar.list.urls = [note.url]
     }
@@ -152,7 +143,6 @@ Maui.Dialog
                               content: content,
                               color: control.selectedColor ?  control.selectedColor : "",
                               tag: tagBar.list.tags.join(","),
-                              pin: pinButton.checked ? 1 : 0,
                               favorite: favButton.checked ? 1 : 0,
                               format: ".txt" //for now only simple txt files
                           })
