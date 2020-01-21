@@ -37,7 +37,7 @@ Maui.Page
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
-        placeholderText: cardsView.count + " " + qsTr("notes")
+        placeholderText: qsTr("Search ") +cardsView.count + " " + qsTr("notes")
         onAccepted: notesModel.filter = text
         onCleared: notesModel.filter = ""
     }
@@ -182,7 +182,7 @@ Maui.Page
                 height: parent.height *0.9
                 width: parent.width * 0.9
                 anchors.centerIn: parent
-                itemHeight: cardsView.itemHeight * 0.9
+                itemHeight: 150
                 itemWidth: itemHeight * 1.5
                 onItemClicked: noteClicked(cardsView.model.get(index))
             }

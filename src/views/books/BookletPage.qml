@@ -58,7 +58,7 @@ Item
             anchors.fill: parent
             initialPage: [_sidebar, editor]
             interactive: true
-            defaultColumnWidth: Kirigami.Units.gridUnit * 12
+            defaultColumnWidth: Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile ? 16 : 12)
 
             Maui.Editor
             {

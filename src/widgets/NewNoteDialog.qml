@@ -78,7 +78,7 @@ Maui.Dialog
             Layout.fillWidth: true
             Kirigami.Theme.backgroundColor: control.selectedColor
             Kirigami.Theme.textColor: Qt.darker(control.selectedColor, 2.5)
-
+            body.placeholderText: qsTr("Title\nBody")
             footBar.visible: false
             headBar.leftContent: ToolButton
             {

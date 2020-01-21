@@ -26,7 +26,7 @@ Maui.Page
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
-        placeholderText: linksList.count + " " + qsTr("links")
+        placeholderText: qsTr("Search ") +linksList.count + " " + qsTr("links")
         onAccepted: linksModel.filter = text
         onCleared: linksModel.filter = ""
     }
@@ -194,11 +194,7 @@ Maui.Page
                 }
             }
 
-            MenuSeparator
-            {
-
-            }
-
+            MenuSeparator { }
 
             MenuItem
             {
