@@ -88,7 +88,7 @@ bool Links::insert(const QVariantMap &link)
                                          FMH::MODEL_KEY::TITLE,
                                          FMH::MODEL_KEY::PREVIEW,
                                          FMH::MODEL_KEY::COLOR,
-                                         FMH::MODEL_KEY::PIN,
+                                         FMH::MODEL_KEY::FAVORITE,
                                          FMH::MODEL_KEY::MODIFIED,
                                          FMH::MODEL_KEY::ADDDATE});
 
@@ -123,7 +123,7 @@ bool Links::update(const QVariantMap &data, const int &index)
     const auto map = FMH::toMap(FMH::filterModel(this->links[index], {FMH::MODEL_KEY::URL,
                                                                       FMH::MODEL_KEY::TITLE,
                                                                       FMH::MODEL_KEY::PREVIEW,
-                                                                      FMH::MODEL_KEY::PIN,
+                                                                      FMH::MODEL_KEY::FAVORITE,
                                                                       FMH::MODEL_KEY::MODIFIED}));
 
     if(this->db->update(OWL::TABLEMAP[OWL::TABLE::LINKS], map, {{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], this->links[index][FMH::MODEL_KEY::URL]}} ))

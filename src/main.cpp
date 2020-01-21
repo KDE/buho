@@ -1,7 +1,5 @@
-#include <QGuiApplication>
 #include <QIcon>
 #include <QQmlApplicationEngine>
-#include <QQmlContext>
 
 #ifdef STATIC_KIRIGAMI
 #include "3rdparty/kirigami/src/kirigamiplugin.h"
@@ -17,10 +15,10 @@
 #else
 #include <QApplication>
 #endif
+
 #include <QtWebView>
 
 #include "buho.h"
-//#include "linker.h"
 
 #include "models/books/booklet.h"
 #include "models/books/books.h"
@@ -35,7 +33,7 @@ int Q_DECL_EXPORT main(int argc, char *argv[]) {
   QtWebView::initialize();
 #else
   QApplication app(argc, argv);
-  //    QtWebEngine::initialize();
+  QtWebView::initialize();
 #endif
 
   app.setApplicationName(OWL::App);
@@ -52,10 +50,7 @@ int Q_DECL_EXPORT main(int argc, char *argv[]) {
 #endif
 
   Buho owl;
-
   QQmlApplicationEngine engine;
-//  Linker linker;
-//  context->setContextProperty("linker", &linker);
   qmlRegisterType<Booklet>();
   qmlRegisterType<Notes>("Notes", 1, 0, "Notes");
   qmlRegisterType<Books>("Books", 1, 0, "Books");

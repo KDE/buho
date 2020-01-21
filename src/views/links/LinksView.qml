@@ -160,7 +160,6 @@ Maui.Page
         Menu
         {
             id: _linksMenu
-            property bool isPin : currentLink.pin == 1 ? true : false
             property bool isFav : currentLink.favorite == 1 ? true : false
 
             MenuItem
@@ -170,17 +169,6 @@ Maui.Page
                 onTriggered:
                 {
                     linksList.update(({"favorite": _linksMenu.isFav ? 0 : 1}), cardsView.currentIndex)
-                    _linksMenu.close()
-                }
-            }
-
-            MenuItem
-            {
-                icon.name: "pin"
-                text: qsTr(_linksMenu.isPin? "UnPin" : "Pin")
-                onTriggered:
-                {
-                    linksList.update(({"pin": _linksMenu.isPin ? 0 : 1}), cardsView.currentIndex)
                     _linksMenu.close()
                 }
             }
@@ -201,7 +189,7 @@ Maui.Page
                 text: qsTr("Copy")
                 onTriggered:
                 {
-                    Maui.Handy.copyToClipboard(currentLink.link)
+                    Maui.Handy.copyToClipboard({'urls': [currentLink.url]})
                     _linksMenu.close()
                 }
             }

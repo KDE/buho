@@ -5,13 +5,10 @@
 
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
-#include "fm.h"
-#include "mauiaccounts.h"
+#include "fmstatic.h"
 #else
 #include <MauiKit/tagging.h>
-#include <MauiKit/fm.h>
 #include <MauiKit/fmstatic.h>
-#include <MauiKit/mauiaccounts.h>
 #endif
 
 Q_DECLARE_METATYPE (FMH::MODEL_LIST)
@@ -64,7 +61,7 @@ bool NotesController::insertNote(FMH::MODEL &note)
 	note[FMH::MODEL_KEY::URL] = url_.toString();
 
 	for(const auto &tg : note[FMH::MODEL_KEY::TAG].split(",", QString::SplitBehavior::SkipEmptyParts))
-		Tagging::getInstance()->tagUrl(url_.toString(), tg, note[FMH::MODEL_KEY::COLOR]);
+        Tagging::getInstance()->tagAbstract(tg, "notes", note[FMH::MODEL_KEY::URL], note[FMH::MODEL_KEY::COLOR]);
 
 	return(this->m_db->insert(OWL::TABLEMAP[OWL::TABLE::NOTES],
 		   FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::URL,
@@ -79,7 +76,7 @@ bool NotesController::updateNote(FMH::MODEL &note, QString id)
 		return false;
 
 	if(!note[FMH::MODEL_KEY::TAG].isEmpty ())
-		Tagging::getInstance ()->updateUrlTags (note[FMH::MODEL_KEY::URL],  note[FMH::MODEL_KEY::TAG].split (","));
+        Tagging::getInstance ()->updateAbstractTags("notes", note[FMH::MODEL_KEY::URL],  note[FMH::MODEL_KEY::TAG].split (","));
 
 	if(note[FMH::MODEL_KEY::URL].isEmpty())
 		note[FMH::MODEL_KEY::URL] = [&]() -> const QString {

@@ -241,6 +241,7 @@ Maui.Page
             Menu
             {
                 id: _notesMenu
+                width: colorBar.implicitWidth + Maui.Style.space.medium
 
                 property bool isFav: currentNote.favorite == 1
 
@@ -271,16 +272,12 @@ Maui.Page
                     text: qsTr("Copy")
                     onTriggered:
                     {
-                        Maui.Handy.copyToClipboard(currentNote.content)
+                        Maui.Handy.copyToClipboard({'text': currentNote.content})
                         _notesMenu.close()
                     }
                 }
 
-                MenuSeparator
-                {
-
-                }
-
+                MenuSeparator { }
 
                 MenuItem
                 {
@@ -294,10 +291,7 @@ Maui.Page
                     }
                 }
 
-                MenuSeparator
-                {
-
-                }
+                MenuSeparator { }
 
                 MenuItem
                 {

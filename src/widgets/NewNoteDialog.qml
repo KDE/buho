@@ -100,14 +100,16 @@ Maui.Dialog
             allowEditMode: true
             onTagsEdited:
             {
-                if(Maui.FM.fileExists(editor.fileUrl))
-                    tagBar.list.updateToUrls(tags)
+                if((editor.fileUrl).toString().length > 0)
+                    tagBar.list.updateToAbstract(tags)
                 else
                     tagBar.list.append(tags)
             }
 
             list.strict: true
-            list.urls: [""]
+            list.abstract: true
+            list.key: "notes"
+            list.lot: " "
 //            onTagRemovedClicked: list.removeFromAbstract(index)
             Kirigami.Theme.backgroundColor: "transparent"
             Kirigami.Theme.textColor: Kirigami.Theme.textColor
@@ -129,7 +131,7 @@ Maui.Dialog
         editor.fileUrl = note.url
         control.selectedColor =  note.color ? note.color : ""
         favButton.checked = note.favorite == 1
-        tagBar.list.urls = [note.url]
+        tagBar.list.lot = note.url
     }
 
     function packNote()

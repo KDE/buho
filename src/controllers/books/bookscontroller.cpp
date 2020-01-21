@@ -1,5 +1,11 @@
 #include "bookscontroller.h"
-#include<MauiKit/fmstatic.h>
+
+#ifdef STATIC_MAUIKIT
+#include "fmstatic.h"
+#else
+#include <MauiKit/fmstatic.h>
+#endif
+
 #include "db/db.h"
 BooksController::BooksController(QObject *parent) : QObject(parent)
     ,m_db(DB::getInstance())

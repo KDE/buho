@@ -11,7 +11,7 @@ Maui.Dialog
     parent: parent
 
     signal linkSaved(var link)
-    property bool previewReady : String(_webView.url).length > 0
+    property bool previewReady : false
 
     heightHint: 0.95
     widthHint: 0.95
@@ -75,7 +75,7 @@ Maui.Dialog
 
     onAccepted: packLink()
 
-    onRejected:  clear()
+    onRejected:  close()
 
     ColumnLayout
     {
@@ -100,7 +100,11 @@ Maui.Dialog
                 color: "transparent"
             }
 
-            onAccepted: _webView.url = link.text
+            onAccepted:
+            {
+                _webView.url = link.text
+                control.previewReady = true
+            }
 
         }
 
@@ -121,18 +125,18 @@ Maui.Dialog
             allowEditMode: true
             list.abstract: true
             list.key: "links"
+            list.lot: _webView.url
             onTagsEdited: list.updateToAbstract(tags)
             onTagRemovedClicked: list.removeFromAbstract(index)
         }
     }
 
-    function clear()
+    onClosed:
     {
-        title.clear()
+        control.previewReady = false
+        _webView.stop()
         link.clear()
         tagBar.clear()
-        _webView.url = ""
-        close()
     }
 
     function fill(link)
@@ -140,6 +144,9 @@ Maui.Dialog
         tagBar.list.lot= link.url
         _webView.url = link.url
         favButton.checked = link.favorite == 1
+
+        if(link.url)
+            control.previewReady = true
         open()
     }
 
@@ -158,7 +165,7 @@ Maui.Dialog
                             favorite: favButton.checked ? 1 : 0
                         })
             linkSaved(data)
-            clear()
+            close()
         }, Qt.size(_webView.width -48,Math.min( _webView.height - 48, _webView.width * 1.2)));
 
     }
