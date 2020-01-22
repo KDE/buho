@@ -27,7 +27,6 @@ NotesSyncer::NotesSyncer(QObject *parent) : Syncer(parent),
 	connect(this->m_notesController, &NotesController::noteReady, this, &NotesSyncer::noteReady);
 }
 
-
 void NotesSyncer::insertNote(FMH::MODEL &note)
 {
 	if(!this->m_notesController->insertNote(note))

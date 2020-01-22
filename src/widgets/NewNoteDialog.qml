@@ -76,6 +76,7 @@ Maui.Dialog
             document.autoReload: true
             Layout.fillHeight: true
             Layout.fillWidth: true
+            body.font.pointSize: Maui.Style.fontSizes.big
             Kirigami.Theme.backgroundColor: control.selectedColor
             Kirigami.Theme.textColor: Qt.darker(control.selectedColor, 2.5)
             body.placeholderText: qsTr("Title\nBody")
