@@ -127,8 +127,7 @@ Maui.ApplicationWindow
         anchors.fill: parent
         currentIndex: _actionGroup.currentIndex
         onCurrentIndexChanged: _actionGroup.currentIndex = currentIndex
-
-        interactive: isMobile
+        interactive: Maui.Handy.isTouch
 
         NotesView
         {

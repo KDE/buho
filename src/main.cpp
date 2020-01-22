@@ -36,9 +36,9 @@ int Q_DECL_EXPORT main(int argc, char *argv[]) {
   QtWebView::initialize();
 #endif
 
-  app.setApplicationName(OWL::App);
+  app.setApplicationName(OWL::appName);
   app.setApplicationVersion(OWL::version);
-  app.setApplicationDisplayName(OWL::App);
+  app.setApplicationDisplayName(OWL::displayName);
   app.setWindowIcon(QIcon(":/buho.png"));
 
 #ifdef STATIC_KIRIGAMI

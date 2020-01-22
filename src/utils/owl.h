@@ -47,7 +47,8 @@ const static inline  QUrl NotesPath = QUrl::fromLocalFile(QStandardPaths::writab
 const static inline  QUrl BooksPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/books/");
 const static inline  QUrl LinksPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/links/");
 
-const static inline  QString App = "Buho";
+const static inline  QString appName = "buho";
+const static inline  QString displayName = "Buho";
 const static inline  QString version = BUHO_VERSION_STRING;
 const static inline  QString comment = "Notes taking and link collector manager";
 const static inline  QString DBName = "collection.db";
