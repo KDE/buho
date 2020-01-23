@@ -25,7 +25,6 @@ Maui.ApplicationWindow
                                        books: 2
                                    })
 
-    rightIcon.visible: false
     headBar.middleContent: Maui.ActionGroup
     {
         id: _actionGroup
