@@ -5,7 +5,6 @@ QT += webview
 
 CONFIG += ordered
 CONFIG += c++17
-QMAKE_LINK += -nostdlib++
 
 TARGET = buho
 TEMPLATE = app
@@ -34,7 +33,6 @@ linux:unix:!android {
 
    DISTFILES += \
 $$PWD/android_files/AndroidManifest.xml
-
 
     QT += androidextras
 

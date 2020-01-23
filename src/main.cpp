@@ -30,11 +30,13 @@ int Q_DECL_EXPORT main(int argc, char *argv[]) {
 
 #ifdef Q_OS_ANDROID
   QGuiApplication app(argc, argv);
-  QtWebView::initialize();
+  if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
+      return -1;
 #else
   QApplication app(argc, argv);
-  QtWebView::initialize();
 #endif
+
+  QtWebView::initialize();
 
   app.setApplicationName(OWL::appName);
   app.setApplicationVersion(OWL::version);
