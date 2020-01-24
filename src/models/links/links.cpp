@@ -111,16 +111,18 @@ bool Links::update(const QVariantMap &data, const int &index)
     if(index < 0 || index >= this->links.size())
         return false;
 
-    this->links[index] = this->links[index].unite(FMH::toModel(data));
+    const auto index_ = this->mappedIndex(index);
 
-    this->links[index][FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
-   this->links[index][FMH::MODEL_KEY::PREVIEW] = QUrl(this->links[index][FMH::MODEL_KEY::PREVIEW]).toString();
+    this->links[index_] = this->links[index_].unite(FMH::toModel(data));
+
+    this->links[index_][FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
+   this->links[index_][FMH::MODEL_KEY::PREVIEW] = QUrl(this->links[index_][FMH::MODEL_KEY::PREVIEW]).toString();
 
     for(const auto &tg :  this->links[index][FMH::MODEL_KEY::TAG].split(",", QString::SkipEmptyParts))
-        Tagging::getInstance()->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], this->links[index][FMH::MODEL_KEY::URL]);
+        Tagging::getInstance()->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::LINKS], this->links[index_][FMH::MODEL_KEY::URL]);
 
 
-    const auto map = FMH::toMap(FMH::filterModel(this->links[index], {FMH::MODEL_KEY::URL,
+    const auto map = FMH::toMap(FMH::filterModel(this->links[index_], {FMH::MODEL_KEY::URL,
                                                                       FMH::MODEL_KEY::TITLE,
                                                                       FMH::MODEL_KEY::PREVIEW,
                                                                       FMH::MODEL_KEY::FAVORITE,
@@ -128,22 +130,27 @@ bool Links::update(const QVariantMap &data, const int &index)
 
     if(this->db->update(OWL::TABLEMAP[OWL::TABLE::LINKS], map, {{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], this->links[index][FMH::MODEL_KEY::URL]}} ))
     {
-        this->updateModel(index, FMH::modelRoles(this->links[index]));
+        this->updateModel(index, FMH::modelRoles(this->links[index_]));
         return true;
     }
     return false;
 }
 
 bool Links::remove(const int &index)
-{
-    emit this->preItemRemoved(index);
+{    
+    if(index < 0 || index >= this->links.size())
+        return false;
 
-    auto linkUrl = this->links.at(index)[FMH::MODEL_KEY::LINK];
+    const auto index_ = this->mappedIndex(index);
+
+    emit this->preItemRemoved(index_);
+
+    auto linkUrl = this->links.at(index_)[FMH::MODEL_KEY::LINK];
     QVariantMap link = {{FMH::MODEL_NAME[FMH::MODEL_KEY::LINK], linkUrl}};
 
     if(this->db->remove(OWL::TABLEMAP[OWL::TABLE::LINKS], link))
     {
-        this->links.removeAt(index);
+        this->links.removeAt(index_);
         emit this->postItemRemoved();
         return true;
     }

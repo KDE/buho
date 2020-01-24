@@ -176,8 +176,10 @@ bool Notes::update(const QVariantMap &data, const int &index)
 	if(index < 0 || index >= this->notes.size())
 		return false;
 
-	this->notes[this->mappedIndex (index)] = this->notes[this->mappedIndex (index)].unite(FMH::toModel(data));
-	this->syncer->updateNote(this->notes[this->mappedIndex (index)][FMH::MODEL_KEY::ID], this->notes[this->mappedIndex (index)]);
+    const auto index_ = this->mappedIndex(index);
+
+    this->notes[index_] = this->notes[index_].unite(FMH::toModel(data));
+    this->syncer->updateNote(this->notes[index_][FMH::MODEL_KEY::ID], this->notes[index_]);
 	return true;
 }
 
@@ -186,10 +188,12 @@ bool Notes::remove(const int &index)
 	if(index < 0 || index >= this->notes.size())
 		return false;
 
-	emit this->preItemRemoved(this->mappedIndex (index));
-	this->syncer->removeNote(this->notes.takeAt(this->mappedIndex (index))[FMH::MODEL_KEY::ID]);
+    const auto index_ = this->mappedIndex(index);
+
+    emit this->preItemRemoved(index_);
+    this->syncer->removeNote(this->notes.takeAt(index_)[FMH::MODEL_KEY::ID]);
 	emit this->postItemRemoved();
-	return true;
+    return true;
 }
 
 QVariantMap Notes::get(const int &index) const

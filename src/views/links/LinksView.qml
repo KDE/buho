@@ -106,6 +106,9 @@ Maui.Page
     {
         id: linksModel
         list: linksList
+        recursiveFilteringEnabled: true
+        sortCaseSensitivity: Qt.CaseInsensitive
+        filterCaseSensitivity: Qt.CaseInsensitive
     }
 
     CardsView
