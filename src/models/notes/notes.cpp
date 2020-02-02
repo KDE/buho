@@ -35,7 +35,7 @@ Notes::Notes(QObject *parent) : MauiList(parent),
 	{
 		if(state.type == STATE::TYPE::LOCAL)
 		{
-			const auto index = this->indexOf (FMH::MODEL_KEY::ID, note[FMH::MODEL_KEY::ID]);
+            const auto index = this->mappedIndex(this->indexOf (FMH::MODEL_KEY::ID, note[FMH::MODEL_KEY::ID]));
 			if(index >= 0)
 			{
 				note.unite(FMH::getFileInfoModel (note[FMH::MODEL_KEY::URL]));
@@ -200,5 +200,5 @@ QVariantMap Notes::get(const int &index) const
 {
 	if(index >= this->notes.size() || index < 0)
 		return QVariantMap();
-	return FMH::toMap(this->notes.at(this->mappedIndex (index)));
+    return FMH::toMap(this->notes.at(this->mappedIndex ( index )));
 }
