@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Buho
 Name[ca]=Buho
+Name[ca@valencia]=Buho
 Name[cs]=Buho
 Name[es]=Buho
 Name[et]=Buho
@@ -14,6 +15,7 @@ Name[x-test]=xxBuhoxx
 Name[zh_TW]=Buho
 Comment=Note taking app
 Comment[ca]=Aplicació per prendre notes
+Comment[ca@valencia]=Aplicació per prendre notes
 Comment[cs]=Aplikace pro psaní poznámek
 Comment[es]=Aplicación para tomar notas
 Comment[et]=Märkmete tegemise rakendus
@@ -29,6 +31,7 @@ TryExec=buho
 Exec=buho %U
 Keywords=notes;todo;nextcloud;maui;
 Keywords[ca]=notes;todo;pendents;nextcloud;maui;
+Keywords[ca@valencia]=notes;todo;pendents;nextcloud;maui;
 Keywords[cs]=poznámky;úkoly;nextcloud;maui;
 Keywords[es]=notas;pendiente;nextcloud;maui;
 Keywords[et]=märkmed;ülesanded;nextcloud;maui;
@@ -47,6 +50,7 @@ Icon=buho
 
 GenericName=Note Taker
 GenericName[ca]=Prendre notes
+GenericName[ca@valencia]=Prendre notes
 GenericName[cs]=Nástroj pro poznámky
 GenericName[es]=Toma de notas
 GenericName[et]=Märkmete tegemine
