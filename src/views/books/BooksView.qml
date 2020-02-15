@@ -91,7 +91,6 @@ StackView
             //        centerContent: true
             spacing: Maui.Style.space.huge
 
-            cellWidth: itemSize * 2
             cellHeight: itemSize * 1.5
 
             model: _booksModel
@@ -100,12 +99,12 @@ StackView
             {
                 id: _delegate
 
-                width: cardsView.cellWidth * 0.9
+                width: cardsView.cellWidth
                 height: cardsView.cellHeight
 
                 padding: Maui.Style.space.small
 
-                background: null
+                background: Item {}
                 isCurrentItem: GridView.isCurrentItem
 
                 ToolTip.delay: 1000
@@ -119,7 +118,7 @@ StackView
 
                     anchors.fill: parent
                     label1.text: model.title
-                    iconSizeHint: Maui.Style.iconSizes.large
+                    iconSizeHint: parent.height * 0.6
                     imageSource:  "qrc:/booklet.svg"
                 }
 
