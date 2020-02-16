@@ -87,7 +87,7 @@ StackView
             visible: !_holder.visible
             anchors.fill: parent
             adaptContent: false
-            itemSize:  Maui.Style.iconSizes.huge
+            itemSize:  Maui.Style.iconSizes.huge + Maui.Style.space.big
             //        centerContent: true
             spacing: Maui.Style.space.huge
 
