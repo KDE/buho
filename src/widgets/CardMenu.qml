@@ -5,7 +5,7 @@ import org.kde.kirigami 2.7 as Kirigami
 
 Menu
 {
-    implicitWidth: colorBar.implicitWidth + Maui.Style.space.medium
+//    implicitWidth: colorBar.implicitWidth + Maui.Style.space.medium
     property bool isFav : false
     property bool isPin: false
 
@@ -14,6 +14,4 @@ Menu
     signal favClicked(int favorite)
     signal pinClicked(int pin)
     signal copyClicked()
-
-
 }

@@ -6,7 +6,7 @@ import org.kde.mauikit 1.0 as Maui
 Row
 {
     signal colorPicked(string color)
-    anchors.verticalCenter: parent.verticalCenter
+//    anchors.verticalCenter: parent.verticalCenter
     spacing: Maui.Style.space.medium
     property string currentColor
     property int size : Maui.Style.iconSizes.medium
