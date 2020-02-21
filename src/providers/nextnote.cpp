@@ -11,7 +11,7 @@
 #include <MauiKit/fm.h>
 #endif
 
-const QString NextNote::API = QStringLiteral("https://PROVIDER/index.php/apps/notes/api/v0.2/");
+const QString NextNote::API = QStringLiteral("/index.php/apps/notes/api/v0.2/");
 
 static const inline QNetworkRequest formRequest(const QUrl &url, const  QString &user, const QString &password)
 {
@@ -47,8 +47,11 @@ NextNote::~NextNote()
 
 void NextNote::getNote(const QString &id)
 {
-	auto url = QString(NextNote::API+"%1%2").replace("PROVIDER", this->m_provider).arg("notes/", id);
+    QUrl relativeUrl("../.."+NextNote::API+QString("notes/%1").arg(id));
+    auto url = QUrl(this->m_provider).resolved(relativeUrl);
+    qDebug()<< "THE RESOLVED URL IS" << url << this->m_provider;
 
+    const auto request = formRequest(url, this->m_user, this->m_password);
 	QString concatenated = this->m_user + ":" + this->m_password;
 	QByteArray data = concatenated.toLocal8Bit().toBase64();
 	QString headerData = "Basic " + data;
@@ -78,9 +81,11 @@ void NextNote::sendNotes(QByteArray array)
 
 void NextNote::getNotes()
 {
-	auto url = NextNote::formatUrl(this->m_user, this->m_password, this->m_provider)+"notes";
+    QUrl relativeUrl("../.."+NextNote::API+QString("notes"));
+    auto url = QUrl(this->m_provider).resolved(relativeUrl);
+    qDebug()<< "THE RESOLVED URL IS" << url << this->m_provider;
 
-	QString concatenated = this->m_user + ":" + this->m_password;
+    QString concatenated = this->m_user + ":" + this->m_password;
 	QByteArray data = concatenated.toLocal8Bit().toBase64();
 	QString headerData = "Basic " + data;
 
@@ -112,7 +117,9 @@ void NextNote::getNotes()
 
 void NextNote::getBooklets()
 {
-	auto url = NextNote::formatUrl(this->m_user, this->m_password, this->m_provider)+"notes";
+    QUrl relativeUrl("../.."+NextNote::API+QString("notes"));
+    auto url = QUrl(this->m_provider).resolved(relativeUrl);
+    qDebug()<< "THE RESOLVED URL IS" << url << this->m_provider;
 
 	QString concatenated = this->m_user + ":" + this->m_password;
 	QByteArray data = concatenated.toLocal8Bit().toBase64();
@@ -149,7 +156,9 @@ void NextNote::insertNote(const FMH::MODEL &note)
     QByteArray payload = QJsonDocument::fromVariant(FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::CONTENT, FMH::MODEL_KEY::FAVORITE}))).toJson();
 	qDebug() << "UPLOADING NEW NOT" << QVariant(payload).toString();
 
-	const auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
+    QUrl relativeUrl("../.."+NextNote::API+QString("notes"));
+    auto url = QUrl(this->m_provider).resolved(relativeUrl);
+    qDebug()<< "THE RESOLVED URL IS" << url << this->m_provider;
 
 	const auto request = formRequest(url, this->m_user, this->m_password);
 
@@ -182,7 +191,9 @@ void NextNote::insertBooklet(const FMH::MODEL &booklet)
     QByteArray payload = QJsonDocument::fromVariant(FMH::toMap(FMH::filterModel(booklet, {FMH::MODEL_KEY::CONTENT, FMH::MODEL_KEY::FAVORITE, FMH::MODEL_KEY::CATEGORY}))).toJson();
 	qDebug() << "UPLOADING NEW BOOKLET" << QVariant(payload).toString();
 
-	const auto url = QString(NextNote::API+"%1").replace("PROVIDER", this->m_provider).arg("notes");
+    QUrl relativeUrl("../.."+NextNote::API+QString("notes"));
+    auto url = QUrl(this->m_provider).resolved(relativeUrl);
+    qDebug()<< "THE RESOLVED URL IS" << url << this->m_provider;
 
 	const auto request = formRequest(url, this->m_user, this->m_password);
 
@@ -224,7 +235,9 @@ void NextNote::updateNote(const QString &id, const FMH::MODEL &note)
 																					  FMH::MODEL_KEY::CATEGORY}))).toJson();
 	qDebug() << "UPDATING NOTE" << QVariant(payload).toString();
 
-	const auto url = QString(NextNote::API+"%1%2").replace("PROVIDER", this->m_provider).arg("notes/", id);
+    QUrl relativeUrl("../.."+NextNote::API+QString("notes/%1").arg(id));
+    auto url = QUrl(this->m_provider).resolved(relativeUrl);
+    qDebug()<< "THE RESOLVED URL IS" << url << this->m_provider;
 
 	qDebug()<< "tryiong to update note" << url;
 	const auto request = formRequest(url, this->m_user, this->m_password);
@@ -266,7 +279,9 @@ void NextNote::updateBooklet(const QString &id, const FMH::MODEL &booklet)
 																					  FMH::MODEL_KEY::CATEGORY}))).toJson();
 	qDebug() << "UPDATING BOOKLET" << QVariant(payload).toString();
 
-	const auto url = QString(NextNote::API+"%1%2").replace("PROVIDER", this->m_provider).arg("notes/", id);
+    QUrl relativeUrl("../.."+NextNote::API+QString("notes/%1").arg(id));
+    auto url = QUrl(this->m_provider).resolved(relativeUrl);
+    qDebug()<< "THE RESOLVED URL IS" << url << this->m_provider;
 
 	qDebug()<< "tryiong to update note" << url;
 	const auto request = formRequest(url, this->m_user, this->m_password);
@@ -305,8 +320,11 @@ void NextNote::removeNote(const QString &id)
 		return;
 	}
 
-	const auto url = QString(NextNote::API+"%1%2").replace("PROVIDER", this->m_provider).arg("notes/", id);
-	const auto request = formRequest(url, this->m_user, this->m_password);
+    QUrl relativeUrl("../.."+NextNote::API+QString("notes/%1").arg(id));
+    auto url = QUrl(this->m_provider).resolved(relativeUrl);
+    qDebug()<< "THE RESOLVED URL IS" << url << this->m_provider;
+
+    const auto request = formRequest(url, this->m_user, this->m_password);
 	qDebug()<< "trying to remove nextnote <<" << url;
 	auto restclient = new QNetworkAccessManager; //constructor
 	QNetworkReply *reply = restclient->deleteResource(request);
@@ -322,15 +340,6 @@ void NextNote::removeNote(const QString &id)
 void NextNote::removeBooklet(const QString &id)
 {
     this->removeNote(id);
-}
-
-const QString NextNote::formatUrl(const QString &user, const QString &password, const QString &provider)
-{
-	auto url = NextNote::API;
-	url.replace("USER", user);
-	url.replace("PASSWORD", password);
-	url.replace("PROVIDER", provider);
-	return url;
 }
 
 const FMH::MODEL_LIST NextNote::parseNotes(const QByteArray &array)

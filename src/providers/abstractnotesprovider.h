@@ -35,7 +35,7 @@ public:
     {
         this->m_user = account[FMH::MODEL_KEY::USER];
         this->m_password = account[FMH::MODEL_KEY::PASSWORD];
-        this->m_provider = QUrl(account[FMH::MODEL_KEY::SERVER]).host();
+        this->m_provider = account[FMH::MODEL_KEY::SERVER];
     }
 
     const QString user() const { return this->m_user; }
