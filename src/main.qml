@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.3
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.1 as MauiLab
 import QtQuick.Layouts 1.3
 
 import "widgets"
@@ -18,39 +19,11 @@ Maui.ApplicationWindow
     Maui.App.description: qsTr("Buho allows you to take quick notes, collect links and organize notes as books.")
     Maui.App.iconName: "qrc:/buho.svg"
 
-    property int currentView : views.notes
     readonly property var views : ({
                                        notes: 0,
                                        links: 1,
                                        books: 2
                                    })
-
-    headBar.middleContent: Maui.ActionGroup
-    {
-        id: _actionGroup
-        Layout.fillHeight: true
-        Layout.minimumWidth: implicitWidth
-        currentIndex : swipeView.currentIndex
-        onCurrentIndexChanged: swipeView.currentIndex = currentIndex
-
-        Action
-        {
-            icon.name: "view-pim-notes"
-            text: qsTr("Notes")
-        }
-
-        Action
-        {
-            icon.name: "view-pim-news"
-            text: qsTr("Links")
-        }
-
-        Action
-        {
-            icon.name: "view-pim-journal"
-            text: qsTr("Books")
-        }
-    }
 
     Maui.PieButton
     {
@@ -119,48 +92,67 @@ Maui.ApplicationWindow
     }
 
     //    /***** VIEWS *****/
+    property alias notesView : notesViewLoader.item
+    property alias booksView : booksViewLoader.item
+    property alias linksView : linksViewLoader.item
 
-    SwipeView
+    MauiLab.AppViews
     {
         id: swipeView
         anchors.fill: parent
-        currentIndex: _actionGroup.currentIndex
-        onCurrentIndexChanged: _actionGroup.currentIndex = currentIndex
-        interactive: Maui.Handy.isTouch
 
-        NotesView
+        MauiLab.AppView
         {
-            id: notesView
-            onNoteClicked: setNote(note)
+            id: notesViewLoader
+
+            action.icon.name: "view-pim-notes"
+            action.text: qsTr("Notes")
+
+            NotesView
+            {
+                onNoteClicked: setNote(note)
+            }
         }
 
-        LinksView
+        MauiLab.AppView
         {
-            id: linksView
-            onLinkClicked: setLink(link)
+            id: linksViewLoader
+
+            action.icon.name: "view-pim-news"
+            action.text: qsTr("Links")
+            LinksView
+            {
+                onLinkClicked: setLink(link)
+            }
         }
 
-        BooksView
+        MauiLab.AppView
         {
-            id: booksView
+            id: booksViewLoader
+
+            action.icon.name: "view-pim-journal"
+            action.text: qsTr("Books")
+            BooksView
+            {
+            }
         }
     }
 
     function newNote()
     {
-        currentView = views.notes
+        swipeView.currentIndex = views.notes
         newNoteDialog.open()
     }
 
     function newLink()
     {
-        currentView = views.links
+        swipeView.currentIndex = views.links
         newLinkDialog.open()
     }
 
     function newBook()
     {
-        currentView = views.books
+        swipeView.currentIndex = views.books
         newBookDialog.open()
     }
 
