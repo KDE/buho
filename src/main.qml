@@ -92,49 +92,32 @@ Maui.ApplicationWindow
     }
 
     //    /***** VIEWS *****/
-    property alias notesView : notesViewLoader.item
-    property alias booksView : booksViewLoader.item
-    property alias linksView : linksViewLoader.item
-
     MauiLab.AppViews
     {
         id: swipeView
         anchors.fill: parent
 
-        MauiLab.AppView
+        NotesView
         {
-            id: notesViewLoader
-
-            action.icon.name: "view-pim-notes"
-            action.text: qsTr("Notes")
-
-            NotesView
-            {
-                onNoteClicked: setNote(note)
-            }
+            id: notesView
+            onNoteClicked: setNote(note)
+            MauiLab.AppView.iconName: "view-pim-notes"
+            MauiLab.AppView.title: qsTr("Notes")
         }
 
-        MauiLab.AppView
+        LinksView
         {
-            id: linksViewLoader
-
-            action.icon.name: "view-pim-news"
-            action.text: qsTr("Links")
-            LinksView
-            {
-                onLinkClicked: setLink(link)
-            }
+            MauiLab.AppView.iconName: "view-pim-news"
+            MauiLab.AppView.title: qsTr("Links")
+            id: linksView
+            onLinkClicked: setLink(link)
         }
 
-        MauiLab.AppView
+        BooksView
         {
-            id: booksViewLoader
-
-            action.icon.name: "view-pim-journal"
-            action.text: qsTr("Books")
-            BooksView
-            {
-            }
+            id: booksView
+            MauiLab.AppView.iconName: "view-pim-journal"
+            MauiLab.AppView.title: qsTr("Books")
         }
     }
 
