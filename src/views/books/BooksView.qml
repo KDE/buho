@@ -89,7 +89,6 @@ StackView
             adaptContent: false
             itemSize:  Maui.Style.iconSizes.huge + Maui.Style.space.big
             //        centerContent: true
-            spacing: Maui.Style.space.huge
 
             cellHeight: itemSize * 1.5
 
