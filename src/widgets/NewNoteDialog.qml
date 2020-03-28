@@ -67,7 +67,8 @@ Maui.Dialog
 
     ColumnLayout
     {
-        anchors.fill: parent
+        Layout.fillHeight: true
+        Layout.fillWidth: true
         spacing: 0
 
         Maui.Editor

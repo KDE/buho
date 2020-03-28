@@ -80,7 +80,8 @@ Maui.Dialog
     ColumnLayout
     {
         id: contentLayout
-        anchors.fill: parent
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
         TextField
         {

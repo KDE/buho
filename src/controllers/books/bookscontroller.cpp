@@ -98,7 +98,7 @@ bool BooksController::removeBooklet(const QString &id)
 
     this->m_db->remove(OWL::TABLEMAP[OWL::TABLE::BOOKLETS_SYNC], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
 
-    FMStatic::removeFile(url);
+    FMStatic::removeFiles({url});
 
     return this->m_db->remove(OWL::TABLEMAP[OWL::TABLE::BOOKLETS], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
 }
