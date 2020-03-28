@@ -15,12 +15,6 @@ Maui.Dialog
     property bool showEditActions : false
     signal noteSaved(var note)
 
-    Kirigami.Theme.backgroundColor: if(selectedColor)
-                                        return control.selectedColor
-
-    Kirigami.Theme.textColor: if(selectedColor)
-                                  return fgColor
-
     heightHint: 0.95
     widthHint: 0.95
     maxWidth: 700 * Maui.Style.unit
