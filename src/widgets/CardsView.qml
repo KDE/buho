@@ -37,5 +37,5 @@ GridView
         id: cardMenu
     }
 
-    ScrollBar.vertical: ScrollBar{ id:scrollBar; visible: !isMobile}
+    ScrollBar.vertical: ScrollBar{ id:scrollBar; visible: !Kirigami.Settings.isMobile}
 }

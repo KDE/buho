@@ -18,6 +18,7 @@ Maui.Page
     property alias currentIndex : cardsView.currentIndex
 
     signal noteClicked(var note)
+    flickable: cardsView
 
     padding: Maui.Style.space.big
 
