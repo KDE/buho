@@ -68,6 +68,7 @@ Maui.Dialog
         Maui.Editor
         {
             id: _editor
+            showLineNumbers: false
             document.autoReload: true
             Layout.fillHeight: true
             Layout.fillWidth: true

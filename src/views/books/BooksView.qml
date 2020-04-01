@@ -86,10 +86,8 @@ StackView
             id: cardsView
             visible: !_holder.visible
             anchors.fill: parent
-            adaptContent: false
+            adaptContent: true
             itemSize:  Maui.Style.iconSizes.huge + Maui.Style.space.big
-            //        centerContent: true
-
             cellHeight: itemSize * 1.5
 
             model: _booksModel
@@ -98,7 +96,7 @@ StackView
             {
                 id: _delegate
 
-                width: cardsView.cellWidth
+                width: cardsView.itemSize
                 height: cardsView.cellHeight
 
                 padding: Maui.Style.space.small
@@ -114,11 +112,11 @@ StackView
                 Maui.GridItemTemplate
                 {
                     isCurrentItem: _delegate.isCurrentItem
-
+                    hovered: _delegate.hovered
                     anchors.fill: parent
                     label1.text: model.title
                     iconSizeHint: parent.height * 0.6
-                    imageSource:  "qrc:/booklet.svg"
+                    iconSource:  "qrc:/booklet.svg"
                 }
 
                 Maui.Badge

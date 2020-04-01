@@ -19,7 +19,6 @@ Maui.Dialog
     maxWidth: Maui.Style.unit *700
 
     modal: true
-    padding: isAndroid ? 1 : undefined
     page.padding: 0
 
     headBar.visible: previewReady

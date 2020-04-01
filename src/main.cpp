@@ -7,6 +7,9 @@
 
 #ifdef STATIC_MAUIKIT
 #include "3rdparty/mauikit/src/mauikit.h"
+#include "mauiapp.h"
+#else
+#include <MauiKit/mauiapp.h>
 #endif
 
 #ifdef Q_OS_ANDROID
@@ -41,7 +44,10 @@ int Q_DECL_EXPORT main(int argc, char *argv[]) {
   app.setApplicationName(OWL::appName);
   app.setApplicationVersion(OWL::version);
   app.setApplicationDisplayName(OWL::displayName);
+  app.setOrganizationName(OWL::orgName);
+  app.setOrganizationDomain(OWL::orgDomain);
   app.setWindowIcon(QIcon(":/buho.png"));
+  MauiApp::instance()->setCredits ({QVariantMap({{"name", "Camilo Higuita"}, {"email", "milo.h@aol.com"}, {"year", "2019-2020"}})});
 
 #ifdef STATIC_KIRIGAMI
   KirigamiPlugin::getInstance().registerTypes();

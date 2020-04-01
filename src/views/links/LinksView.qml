@@ -2,6 +2,8 @@ import QtQuick 2.10
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.1 as MauiLab
+
 import org.kde.kirigami 2.2 as Kirigami
 import Links 1.0
 
@@ -21,8 +23,6 @@ Maui.Page
     signal linkClicked(var link)
 
     headBar.visible: linksList.count > 0
-    padding: Maui.Style.space.big
-
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
@@ -119,38 +119,44 @@ Maui.Page
         holder.title : qsTr("No Links!")
         holder.body: qsTr("Click here to save a new link")
         holder.emojiSize: Maui.Style.iconSizes.huge
-        itemHeight: Maui.Style.unit * 250
+        holder.visible: linksList.count <= 0
+        gridView.itemSize: Math.min(defaultSize, control.width)
+        gridView.cellHeight: defaultSize + Maui.Style.space.big
 
+        viewType: MauiLab.AltBrowser.ViewType.Grid
         model: linksModel
 
-        delegate: LinkCardDelegate
+        gridDelegate: Item
         {
             id: delegate
-            width: Math.min(cardsView.cellWidth, cardsView.itemWidth) - Kirigami.Units.largeSpacing * 2
-            height: cardsView.itemHeight
-            anchors.left: parent.left
-            anchors.leftMargin: cardsView.width <= cardsView.itemWidth ? 0 : (index % 2 === 0 ? Math.max(0, cardsView.cellWidth - cardsView.itemWidth) :
-                                                                                                cardsView.cellWidth)
+            width: cardsView.gridView.cellWidth
+            height: cardsView.gridView.cellHeight
 
-            onClicked:
+            LinkCardDelegate
             {
-                currentIndex = index
-                currentLink = linksList.get(index)
-                linkClicked(linksList.get(index))
-            }
+                anchors.fill: parent
+                anchors.margins: Maui.Style.space.medium
 
-            onRightClicked:
-            {
-                currentIndex = index
-                currentLink = linksList.get(index)
-              _linksMenu.popup()
-            }
+                onClicked:
+                {
+                    currentIndex = index
+                    currentLink = linksList.get(index)
+                    linkClicked(linksList.get(index))
+                }
 
-            onPressAndHold:
-            {
-                currentIndex = index
-                currentLink = linksList.get(index)
-                _linksMenu.popup()
+                onRightClicked:
+                {
+                    currentIndex = index
+                    currentLink = linksList.get(index)
+                    _linksMenu.popup()
+                }
+
+                onPressAndHold:
+                {
+                    currentIndex = index
+                    currentLink = linksList.get(index)
+                    _linksMenu.popup()
+                }
             }
         }
 

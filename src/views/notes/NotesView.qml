@@ -2,6 +2,8 @@ import QtQuick 2.10
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.1 as MauiLab
+
 import org.kde.kirigami 2.7 as Kirigami
 import Notes 1.0
 import Qt.labs.platform 1.0 as Labs
@@ -19,25 +21,33 @@ Maui.Page
 
     signal noteClicked(var note)
 
-    padding: Maui.Style.space.big
+    padding: 0
 
     headBar.visible: !cardsView.holder.visible
-
-    headBar.leftContent: [
-        ToolButton
+    headBar.leftContent: Maui.ToolActions
+    {
+        autoExclusive: true
+        expanded: isWide
+        currentIndex : cardsView.viewType === MauiLab.AltBrowser.ViewType.List ? 0 : 1
+        Action
         {
-            icon.name:  cardsView.gridView ? "view-list-details" : "view-list-icons"
-            onClicked:
-            {
-                cardsView.gridView = !cardsView.gridView
-            }
+            text: qsTr("List")
+            icon.name: "view-list-details"
+            onTriggered: cardsView.viewType = MauiLab.AltBrowser.ViewType.List
         }
-    ]
+
+        Action
+        {
+            text: qsTr("Grid")
+            icon.name: "view-list-icons"
+            onTriggered: cardsView.viewType= MauiLab.AltBrowser.ViewType.Grid
+        }
+    }
 
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
-        placeholderText: qsTr("Search ") +cardsView.count + " " + qsTr("notes")
+        placeholderText: qsTr("Search ") + notesList.count + " " + qsTr("notes")
         onAccepted: notesModel.filter = text
         onCleared: notesModel.filter = ""
     }
@@ -188,27 +198,24 @@ Maui.Page
             }
         }
 
-
         CardsView
         {
             id: cardsView
             Layout.fillHeight: true
             Layout.fillWidth: true
-            width: parent.width
+            holder.visible: notesList.count < 1
             holder.emoji: "qrc:/view-notes.svg"
             holder.emojiSize: Maui.Style.iconSizes.huge
             holder.title :qsTr("No notes!")
             holder.body: qsTr("Click here to create a new note")
 
             model: notesModel
-            delegate: CardDelegate
+
+            listDelegate: CardDelegate
             {
-                id: delegate
-                width: Math.min(cardsView.cellWidth, cardsView.itemWidth) - Kirigami.Units.largeSpacing * 2
-                height: cardsView.itemHeight
-                anchors.left: parent.left
-                anchors.leftMargin: cardsView.width <= cardsView.itemWidth ? 0 : (index % 2 === 0 ? Math.max(0, cardsView.cellWidth - cardsView.itemWidth) :
-                                                                                                    cardsView.cellWidth)
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width - Maui.Style.space.big
+                height: 150
 
                 onClicked:
                 {
@@ -229,6 +236,40 @@ Maui.Page
                     currentIndex = index
                     currentNote = notesList.get(index)
                     _notesMenu.popup()
+                }
+            }
+
+            gridDelegate: Item
+            {
+                id: delegate
+                width: cardsView.gridView.cellWidth
+                height: cardsView.gridView.cellHeight
+
+                CardDelegate
+                {
+                   anchors.fill: parent
+                   anchors.margins: Maui.Style.space.medium
+
+                    onClicked:
+                    {
+                        currentIndex = index
+                        currentNote = notesList.get(index)
+                        noteClicked(currentNote)
+                    }
+
+                    onRightClicked:
+                    {
+                        currentIndex = index
+                        currentNote = notesList.get(index)
+                        _notesMenu.popup()
+                    }
+
+                    onPressAndHold:
+                    {
+                        currentIndex = index
+                        currentNote = notesList.get(index)
+                        _notesMenu.popup()
+                    }
                 }
             }
 
