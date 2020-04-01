@@ -20,6 +20,7 @@ Maui.Page
     property alias currentIndex : cardsView.currentIndex
 
     signal noteClicked(var note)
+    flickable: cardsView
 
     padding: 0
 
@@ -72,7 +73,7 @@ Maui.Page
                     id: sortGroup
                 }
 
-                Labs.MenuItem
+                MenuItem
                 {
                     text: qsTr("Ascedent")
                     checkable: true
@@ -81,7 +82,7 @@ Maui.Page
                     group: sortGroup
                 }
 
-                Labs.MenuItem
+                MenuItem
                 {
                     text: qsTr("Descendent")
                     checkable: true
