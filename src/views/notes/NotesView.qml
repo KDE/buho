@@ -79,7 +79,6 @@ Maui.Page
                     checkable: true
                     checked: notesList.order === Notes.ASC
                     onTriggered: notesList.order = Notes.ASC
-                    group: sortGroup
                 }
 
                 MenuItem
@@ -88,7 +87,6 @@ Maui.Page
                     checkable: true
                     checked: notesList.order === Notes.DESC
                     onTriggered: notesList.order = Notes.DESC
-                    group: sortGroup
                 }
 
                 MenuSeparator{}
