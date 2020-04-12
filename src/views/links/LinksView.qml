@@ -31,12 +31,6 @@ Maui.Page
         onCleared: linksModel.filter = ""
     }
 
-    headBar.leftContent: ToolButton
-    {
-        icon.name: cardsView.gridView ? "view-list-icons" : "view-list-details"
-        onClicked: cardsView.gridView = !cardsView.gridView
-    }
-
     headBar.rightContent: [
 
         ToolButton

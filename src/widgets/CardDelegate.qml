@@ -87,7 +87,7 @@ ItemDelegate
             Layout.bottomMargin: Maui.Style.space.medium
             Layout.rightMargin: Maui.Style.space.medium
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-            Layout.preferredHeight: if(model.preview) parent.height * 0.4
+            Layout.preferredHeight: model.preview ? parent.height * 0.4 : implicitHeight
 
             Layout.fillWidth: true
             Layout.fillHeight: true
