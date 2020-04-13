@@ -49,7 +49,7 @@ StackView
     Maui.Page
     {
         id: _booksPage
-        padding: showDetails ? 0 : Maui.Style.space.big
+        padding: showDetails ? 0 : 0
 
         title : cardsView.count + " books"
         //    headBar.leftContent: [

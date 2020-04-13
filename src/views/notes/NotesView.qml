@@ -30,6 +30,8 @@ Maui.Page
         autoExclusive: true
         expanded: isWide
         currentIndex : cardsView.viewType === MauiLab.AltBrowser.ViewType.List ? 0 : 1
+        display: ToolButton.TextBesideIcon
+
         Action
         {
             text: qsTr("List")
@@ -39,7 +41,7 @@ Maui.Page
 
         Action
         {
-            text: qsTr("Grid")
+            text: qsTr("Cards")
             icon.name: "view-list-icons"
             onTriggered: cardsView.viewType= MauiLab.AltBrowser.ViewType.Grid
         }

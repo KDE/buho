@@ -26,6 +26,13 @@ Maui.ApplicationWindow
                                        books: 2
                                    })
 
+    mainMenu: MenuItem
+    {
+        text: qsTr("Settings")
+        icon.name: "settings-configure"
+        onTriggered: _settingsDialog.open()
+    }
+
     Maui.PieButton
     {
         id: addButton
@@ -53,6 +60,82 @@ Maui.ApplicationWindow
         {
             icon.name: "view-pim-journal"
             onTriggered: newBook()
+        }
+    }
+
+    MauiLab.SettingsDialog
+    {
+        id: _settingsDialog
+        MauiLab.SettingsSection
+        {
+            title: qsTr("Syncing")
+            description: qsTr("Configure the syncing options.")
+
+            Switch
+            {
+                checkable: true
+                Kirigami.FormData.label: qsTr("Auto Fetch on Start Up")
+                Layout.fillWidth: true
+            }
+        }
+
+        MauiLab.SettingsSection
+        {
+            title: qsTr("Notes")
+            description: qsTr("Configure the notes view behavior.")
+
+            Switch
+            {
+                checkable: true
+                Kirigami.FormData.label: qsTr("Rich Text Formating")
+                Layout.fillWidth: true
+            }
+        }
+
+        MauiLab.SettingsSection
+        {
+            title: qsTr("Links")
+            description: qsTr("Configure the app plugins and behavior.")
+
+            Switch
+            {
+                checkable: true
+                Kirigami.FormData.label: qsTr("Cached")
+                Layout.fillWidth: true
+            }
+        }
+
+        MauiLab.SettingsSection
+        {
+            title: qsTr("Books")
+            description: qsTr("Configure the app plugins and behavior.")
+
+            Item
+            {
+                Kirigami.FormData.label: qsTr("Editor")
+                Kirigami.FormData.isSection: true
+            }
+
+            Switch
+            {
+                checkable: true
+                Kirigami.FormData.label: qsTr("Show Line Numbers")
+                Layout.fillWidth: true
+            }
+
+            Switch
+            {
+                checkable: true
+                Kirigami.FormData.label: qsTr("Support Syntax Highlighting")
+                Layout.fillWidth: true
+            }
+
+            Switch
+            {
+                checkable: true
+                Kirigami.FormData.label: qsTr("Auto Save")
+                Layout.fillWidth: true
+            }
         }
     }
 
