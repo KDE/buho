@@ -10,21 +10,33 @@ import Qt.labs.platform 1.0 as Labs
 
 import "../../widgets"
 
-Maui.Page
+CardsView
 {
+    id: cardsView
     property var currentNote : ({})
 
     property alias cardsView : cardsView
-    property alias model : notesModel
     property alias list : notesList
     property alias currentIndex : cardsView.currentIndex
 
     signal noteClicked(var note)
-    flickable: cardsView
 
-    padding: 0
+    holder.visible: notesList.count < 1
+    holder.emoji: "qrc:/view-notes.svg"
+    holder.emojiSize: Maui.Style.iconSizes.huge
+    holder.title :qsTr("No notes!")
+    holder.body: qsTr("Click here to create a new note")
 
-    headBar.visible: !cardsView.holder.visible
+    model: Maui.BaseModel
+    {
+        id: notesModel
+        list: notesList
+        recursiveFilteringEnabled: true
+        sortCaseSensitivity: Qt.CaseInsensitive
+        filterCaseSensitivity: Qt.CaseInsensitive
+    }
+
+    headBar.visible: !holder.visible
     headBar.leftContent: Maui.ToolActions
     {
         autoExclusive: true
@@ -153,203 +165,142 @@ Maui.Page
         id: notesList
     }
 
-    Maui.BaseModel
+    listDelegate: CardDelegate
     {
-        id: notesModel
-        list: notesList
-        recursiveFilteringEnabled: true
-        sortCaseSensitivity: Qt.CaseInsensitive
-        filterCaseSensitivity: Qt.CaseInsensitive
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: parent.width - Maui.Style.space.big
+        height: 150
+
+        onClicked:
+        {
+            currentIndex = index
+            currentNote = notesList.get(index)
+            noteClicked(currentNote)
+        }
+
+        onRightClicked:
+        {
+            currentIndex = index
+            currentNote = notesList.get(index)
+            _notesMenu.popup()
+        }
+
+        onPressAndHold:
+        {
+            currentIndex = index
+            currentNote = notesList.get(index)
+            _notesMenu.popup()
+        }
     }
 
-    ColumnLayout
+    gridDelegate: Item
     {
-        anchors.fill: parent
-        spacing: 0
+        id: delegate
+        width: cardsView.gridView.cellWidth
+        height: cardsView.gridView.cellHeight
 
-        Rectangle
+        CardDelegate
         {
-            visible: favButton.checked
-            Layout.alignment: Qt.AlignVCenter
-            Layout.fillWidth: true
-            height: cardsView.itemHeight
-            color: Kirigami.Theme.backgroundColor
+           anchors.fill: parent
+           anchors.margins: Maui.Style.space.medium
 
-            Maui.Holder
+            onClicked:
             {
-                id: holder
-                visible: favedList.count == 0
-                emoji: "qrc:/edit-pin.svg"
-                emojiSize: Maui.Style.iconSizes.big
-                isMask: true
-                title : qsTr("No favorites!")
-                body: qsTr("No matched favorites notes. You can fav your notes to access them quickly")
-                z: 999
+                currentIndex = index
+                currentNote = notesList.get(index)
+                noteClicked(currentNote)
             }
 
-            CardsList
+            onRightClicked:
             {
-                id: favedList
-                height: parent.height *0.9
-                width: parent.width * 0.9
-                anchors.centerIn: parent
-                itemHeight: 150
-                itemWidth: itemHeight * 1.5
-                onItemClicked: noteClicked(cardsView.model.get(index))
+                currentIndex = index
+                currentNote = notesList.get(index)
+                _notesMenu.popup()
+            }
+
+            onPressAndHold:
+            {
+                currentIndex = index
+                currentNote = notesList.get(index)
+                _notesMenu.popup()
+            }
+        }
+    }
+
+    Connections
+    {
+        target: cardsView.holder
+        onActionTriggered: newNote()
+    }
+
+    Menu
+    {
+        id: _notesMenu
+        width: colorBar.implicitWidth + Maui.Style.space.medium
+
+        property bool isFav: currentNote.favorite == 1
+
+        MenuItem
+        {
+            icon.name: "love"
+            text: qsTr(_notesMenu.isFav? "UnFav" : "Fav")
+            onTriggered:
+            {
+                notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), cardsView.currentIndex)
+                _notesMenu.close()
             }
         }
 
-        CardsView
+        MenuItem
         {
-            id: cardsView
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            holder.visible: notesList.count < 1
-            holder.emoji: "qrc:/view-notes.svg"
-            holder.emojiSize: Maui.Style.iconSizes.huge
-            holder.title :qsTr("No notes!")
-            holder.body: qsTr("Click here to create a new note")
-
-            model: notesModel
-
-            listDelegate: CardDelegate
+            icon.name: "document-export"
+            text: qsTr("Export")
+            onTriggered:
             {
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - Maui.Style.space.big
-                height: 150
-
-                onClicked:
-                {
-                    currentIndex = index
-                    currentNote = notesList.get(index)
-                    noteClicked(currentNote)
-                }
-
-                onRightClicked:
-                {
-                    currentIndex = index
-                    currentNote = notesList.get(index)
-                    _notesMenu.popup()
-                }
-
-                onPressAndHold:
-                {
-                    currentIndex = index
-                    currentNote = notesList.get(index)
-                    _notesMenu.popup()
-                }
+                _notesMenu.close()
             }
+        }
 
-            gridDelegate: Item
+        MenuItem
+        {
+            icon.name : "edit-copy"
+            text: qsTr("Copy")
+            onTriggered:
             {
-                id: delegate
-                width: cardsView.gridView.cellWidth
-                height: cardsView.gridView.cellHeight
-
-                CardDelegate
-                {
-                   anchors.fill: parent
-                   anchors.margins: Maui.Style.space.medium
-
-                    onClicked:
-                    {
-                        currentIndex = index
-                        currentNote = notesList.get(index)
-                        noteClicked(currentNote)
-                    }
-
-                    onRightClicked:
-                    {
-                        currentIndex = index
-                        currentNote = notesList.get(index)
-                        _notesMenu.popup()
-                    }
-
-                    onPressAndHold:
-                    {
-                        currentIndex = index
-                        currentNote = notesList.get(index)
-                        _notesMenu.popup()
-                    }
-                }
+                Maui.Handy.copyToClipboard({'text': currentNote.content})
+                _notesMenu.close()
             }
+        }
 
-            Connections
+        MenuSeparator { }
+
+        MenuItem
+        {
+            icon.name: "edit-delete"
+            text: qsTr("Remove")
+            Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+            onTriggered:
             {
-                target: cardsView.holder
-                onActionTriggered: newNote()
+                notesList.remove(cardsView.currentIndex)
+                _notesMenu.close()
             }
+        }
 
-            Menu
+        MenuSeparator { }
+
+        MenuItem
+        {
+            width: parent.width
+            height: Maui.Style.rowHeight
+
+            ColorsBar
             {
-                id: _notesMenu
-                width: colorBar.implicitWidth + Maui.Style.space.medium
-
-                property bool isFav: currentNote.favorite == 1
-
-                MenuItem
+                id: colorBar
+                anchors.centerIn: parent
+                onColorPicked:
                 {
-                    icon.name: "love"
-                    text: qsTr(_notesMenu.isFav? "UnFav" : "Fav")
-                    onTriggered:
-                    {
-                        notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), cardsView.currentIndex)
-                        _notesMenu.close()
-                    }
-                }
-
-                MenuItem
-                {
-                    icon.name: "document-export"
-                    text: qsTr("Export")
-                    onTriggered:
-                    {
-                        _notesMenu.close()
-                    }
-                }
-
-                MenuItem
-                {
-                    icon.name : "edit-copy"
-                    text: qsTr("Copy")
-                    onTriggered:
-                    {
-                        Maui.Handy.copyToClipboard({'text': currentNote.content})
-                        _notesMenu.close()
-                    }
-                }
-
-                MenuSeparator { }
-
-                MenuItem
-                {
-                    icon.name: "edit-delete"
-                    text: qsTr("Remove")
-                    Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
-                    onTriggered:
-                    {
-                        notesList.remove(cardsView.currentIndex)
-                        _notesMenu.close()
-                    }
-                }
-
-                MenuSeparator { }
-
-                MenuItem
-                {
-                    width: parent.width
-                    height: Maui.Style.rowHeight
-
-                    ColorsBar
-                    {
-                        id: colorBar
-                        anchors.centerIn: parent
-                        onColorPicked:
-                        {
-                            notesList.update(({"color": color}), cardsView.currentIndex)
-                            _notesMenu.close()
-                        }
-                    }
+                    notesList.update(({"color": color}), cardsView.currentIndex)
+                    _notesMenu.close()
                 }
             }
         }

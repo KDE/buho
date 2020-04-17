@@ -9,14 +9,12 @@ import Links 1.0
 
 import "../../widgets"
 
-Maui.Page
+CardsView
 {
     id: control
 
-    property alias cardsView : cardsView
-    property alias model : linksModel
     property alias list : linksList
-    property alias currentIndex : cardsView.currentIndex
+    property alias currentIndex : control.currentIndex
 
     property var currentLink : ({})
 
@@ -96,7 +94,16 @@ Maui.Page
         id: linksList
     }
 
-    Maui.BaseModel
+    holder.emoji: "qrc:/view-links.svg"
+    holder.title : qsTr("No Links!")
+    holder.body: qsTr("Click here to save a new link")
+    holder.emojiSize: Maui.Style.iconSizes.huge
+    holder.visible: linksList.count <= 0
+    gridView.itemSize: Math.min(defaultSize, control.width)
+    gridView.cellHeight: defaultSize + Maui.Style.space.big
+
+    viewType: MauiLab.AltBrowser.ViewType.Grid
+    model:  Maui.BaseModel
     {
         id: linksModel
         list: linksList
@@ -105,111 +112,96 @@ Maui.Page
         filterCaseSensitivity: Qt.CaseInsensitive
     }
 
-    CardsView
+    gridDelegate: Item
     {
-        id: cardsView
-        anchors.fill: parent
-        holder.emoji: "qrc:/view-links.svg"
-        holder.title : qsTr("No Links!")
-        holder.body: qsTr("Click here to save a new link")
-        holder.emojiSize: Maui.Style.iconSizes.huge
-        holder.visible: linksList.count <= 0
-        gridView.itemSize: Math.min(defaultSize, control.width)
-        gridView.cellHeight: defaultSize + Maui.Style.space.big
+        id: delegate
+        width: control.gridView.cellWidth
+        height: control.gridView.cellHeight
 
-        viewType: MauiLab.AltBrowser.ViewType.Grid
-        model: linksModel
-
-        gridDelegate: Item
+        LinkCardDelegate
         {
-            id: delegate
-            width: cardsView.gridView.cellWidth
-            height: cardsView.gridView.cellHeight
+            anchors.fill: parent
+            anchors.margins: Maui.Style.space.medium
 
-            LinkCardDelegate
+            onClicked:
             {
-                anchors.fill: parent
-                anchors.margins: Maui.Style.space.medium
+                currentIndex = index
+                currentLink = linksList.get(index)
+                linkClicked(linksList.get(index))
+            }
 
-                onClicked:
-                {
-                    currentIndex = index
-                    currentLink = linksList.get(index)
-                    linkClicked(linksList.get(index))
-                }
+            onRightClicked:
+            {
+                currentIndex = index
+                currentLink = linksList.get(index)
+                _linksMenu.popup()
+            }
 
-                onRightClicked:
-                {
-                    currentIndex = index
-                    currentLink = linksList.get(index)
-                    _linksMenu.popup()
-                }
+            onPressAndHold:
+            {
+                currentIndex = index
+                currentLink = linksList.get(index)
+                _linksMenu.popup()
+            }
+        }
+    }
 
-                onPressAndHold:
-                {
-                    currentIndex = index
-                    currentLink = linksList.get(index)
-                    _linksMenu.popup()
-                }
+    Connections
+    {
+        target: control.holder
+        onActionTriggered: newLink()
+    }
+
+    Menu
+    {
+        id: _linksMenu
+        property bool isFav : currentLink.favorite == 1 ? true : false
+
+        MenuItem
+        {
+            icon.name: "love"
+            text: qsTr(_linksMenu.isFav? "UnFav" : "Fav")
+            onTriggered:
+            {
+                linksList.update(({"favorite": _linksMenu.isFav ? 0 : 1}), control.currentIndex)
+                _linksMenu.close()
             }
         }
 
-        Connections
+        MenuItem
         {
-            target: cardsView.holder
-            onActionTriggered: newLink()
+            icon.name: "document-export"
+            text: qsTr("Export")
+            onTriggered:
+            {
+                _linksMenu.close()
+            }
         }
 
-        Menu
+        MenuItem
         {
-            id: _linksMenu
-            property bool isFav : currentLink.favorite == 1 ? true : false
-
-            MenuItem
+            icon.name : "edit-copy"
+            text: qsTr("Copy")
+            onTriggered:
             {
-                icon.name: "love"
-                text: qsTr(_linksMenu.isFav? "UnFav" : "Fav")
-                onTriggered:
-                {
-                    linksList.update(({"favorite": _linksMenu.isFav ? 0 : 1}), cardsView.currentIndex)
-                    _linksMenu.close()
-                }
+                Maui.Handy.copyToClipboard({'urls': [currentLink.url]})
+                _linksMenu.close()
             }
+        }
 
-            MenuItem
+        MenuSeparator { }
+
+        MenuItem
+        {
+            icon.name: "edit-delete"
+            text: qsTr("Remove")
+            Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+            onTriggered:
             {
-                icon.name: "document-export"
-                text: qsTr("Export")
-                onTriggered:
-                {
-                    _linksMenu.close()
-                }
-            }
-
-            MenuItem
-            {
-                icon.name : "edit-copy"
-                text: qsTr("Copy")
-                onTriggered:
-                {
-                    Maui.Handy.copyToClipboard({'urls': [currentLink.url]})
-                    _linksMenu.close()
-                }
-            }
-
-            MenuSeparator { }
-
-            MenuItem
-            {
-                icon.name: "edit-delete"
-                text: qsTr("Remove")
-                Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
-                onTriggered:
-                {
-                    linksList.remove(cardsView.currentIndex)
-                    _linksMenu.close()
-                }
+                linksList.remove(control.currentIndex)
+                _linksMenu.close()
             }
         }
     }
 }
+
