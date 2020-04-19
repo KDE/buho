@@ -18,7 +18,7 @@ Maui.ApplicationWindow
     Maui.App.handleAccounts: true
     Maui.App.description: qsTr("Buho allows you to take quick notes, collect links and organize notes as books.")
     Maui.App.iconName: "qrc:/buho.svg"
-//    Maui.App.enableCSD: true
+    Maui.App.enableCSD: true
 
     readonly property var views : ({
                                        notes: 0,
