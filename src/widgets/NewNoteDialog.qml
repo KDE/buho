@@ -10,8 +10,7 @@ Maui.Dialog
     parent: parent
 
     property alias editor: _editor
-    property string selectedColor
-    property color fgColor: Qt.darker(selectedColor, 3)
+    property string backgroundColor: Kirigami.Theme.backgroundColor
     property bool showEditActions : false
     signal noteSaved(var note)
 
@@ -73,10 +72,11 @@ Maui.Dialog
             Layout.fillHeight: true
             Layout.fillWidth: true
             body.font.pointSize: Maui.Style.fontSizes.big
-            Kirigami.Theme.backgroundColor: control.selectedColor
+
+            Kirigami.Theme.backgroundColor: control.backgroundColor
+            Kirigami.Theme.textColor: control.backgroundColor.length ? Qt.darker(control.backgroundColor, 2) : control.Kirigami.Theme.textColor
+
             document.enableSyntaxHighlighting: false
-            document.backgroundColor:  Kirigami.Theme.backgroundColor
-            Kirigami.Theme.textColor: Qt.darker(control.selectedColor, 2.5)
             body.placeholderText: qsTr("Title\nBody")
             footBar.visible: false
             headBar.leftContent: ToolButton
@@ -128,7 +128,7 @@ Maui.Dialog
     function fill(note)
     {
         editor.fileUrl = note.url
-        control.selectedColor =  note.color ? note.color : ""
+        control.backgroundColor =  note.color ? note.color : ""
         favButton.checked = note.favorite == 1
         tagBar.list.lot = note.url
     }
