@@ -87,7 +87,7 @@ Maui.Dialog
 
             headBar.rightContent: ColorsBar
             {
-                onColorPicked: control.selectedColor = color
+                onColorPicked: control.backgroundColor = color
             }
         }
 
@@ -142,7 +142,7 @@ Maui.Dialog
         control.noteSaved({
                               url: editor.fileUrl,
                               content: content,
-                              color: control.selectedColor ?  control.selectedColor : "",
+                              color: control.backgroundColor ?  control.backgroundColor : "",
                               tag: tagBar.list.tags.join(","),
                               favorite: favButton.checked ? 1 : 0,
                               format: ".txt" //for now only simple txt files
