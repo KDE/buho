@@ -3,7 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
-import QtWebView 1.1
+import QtWebEngine 1.5
 
 Maui.Dialog
 {
@@ -108,7 +108,7 @@ Maui.Dialog
 
         }
 
-        WebView
+        WebEngineView
         {
             id: _webView
             Layout.fillHeight: true

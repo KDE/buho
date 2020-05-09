@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>Buho</DisplayName>
+    <Description>Buho Notes Taker</Description>
+    <Version>1.1.0-1</Version>
+    <ReleaseDate>2020-04-04</ReleaseDate>
+    <Default>true</Default>
+    <Script>installscript.qs</Script>
+</Package>
