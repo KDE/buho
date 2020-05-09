@@ -4,28 +4,16 @@ import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 
-Maui.Dialog
+Maui.Page
 {
     id: control
-    parent: parent
-
     property alias editor: _editor
-    property string backgroundColor: Kirigami.Theme.backgroundColor
+    property string backgroundColor: note.color ? note.color : Kirigami.Theme.backgroundColor
     property bool showEditActions : false
     signal noteSaved(var note)
 
-    heightHint: 0.95
-    widthHint: 0.95
-    maxWidth: 700 * Maui.Style.unit
-    maxHeight: maxWidth
+    property var note : ({})
 
-    page.padding: 0
-
-    rejectText:  qsTr("Discard")
-    rejectButton.visible: false
-    acceptText: qsTr("Save")
-    onAccepted:  packNote()
-    onRejected: clear()
     footBar.leftContent: [
 
         ToolButton
@@ -33,6 +21,7 @@ Maui.Dialog
             id: favButton
             icon.name: "love"
             checkable: true
+            checked:  note.favorite == 1
             icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
 
         },
@@ -60,13 +49,13 @@ Maui.Dialog
 
     ColumnLayout
     {
-        Layout.fillHeight: true
-        Layout.fillWidth: true
+        anchors.fill: parent
         spacing: 0
 
         Maui.Editor
         {
             id: _editor
+            fileUrl: control.note.url ? control.note.url : ""
             showLineNumbers: false
             document.autoReload: true
             Layout.fillHeight: true
@@ -83,6 +72,12 @@ Maui.Dialog
             {
                 icon.name: "image"
                 icon.color: control.Kirigami.Theme.textColor
+            }
+
+            headBar.farLeftContent: ToolButton
+            {
+                icon.name: "go-previous"
+                onClicked: control.parent.pop(StackView.Immediate)
             }
 
             headBar.rightContent: ColorsBar
@@ -108,7 +103,7 @@ Maui.Dialog
             list.strict: true
             list.abstract: true
             list.key: "notes"
-            list.lot: " "
+            list.lot: control.note.url ? control.note.url : " "
 //            onTagRemovedClicked: list.removeFromAbstract(index)
             Kirigami.Theme.backgroundColor: "transparent"
             Kirigami.Theme.textColor: Kirigami.Theme.textColor
@@ -116,21 +111,15 @@ Maui.Dialog
         }
     }
 
-    onOpened: editor.body.forceActiveFocus()
 
     function clear()
     {
-        control.close()
         editor.body.clear()
-        fill(({}))
+        control.note = ({})
     }
 
     function fill(note)
     {
-        editor.fileUrl = note.url
-        control.backgroundColor =  note.color ? note.color : ""
-        favButton.checked = note.favorite == 1
-        tagBar.list.lot = note.url
     }
 
     function packNote()

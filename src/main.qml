@@ -48,7 +48,7 @@ Maui.ApplicationWindow
         Action
         {
             icon.name: "view-pim-notes"
-            onTriggered: newNote()
+            onTriggered: notesView.newNote()
         }
         Action
         {
@@ -140,18 +140,6 @@ Maui.ApplicationWindow
 
      //    /***** COMPONENTS *****/
 
-    NewNoteDialog
-    {
-        id: newNoteDialog
-        onNoteSaved: notesView.list.insert(note)
-    }
-
-    NewNoteDialog
-    {
-        id: editNote
-        onNoteSaved: notesView.list.update(note, notesView.currentIndex)
-    }
-
     NewLinkDialog
     {
         id: newLinkDialog
@@ -183,7 +171,7 @@ Maui.ApplicationWindow
         NotesView
         {
             id: notesView
-            onNoteClicked: setNote(note)
+
             MauiLab.AppView.iconName: "view-pim-notes"
             MauiLab.AppView.title: qsTr("Notes")
         }
@@ -204,11 +192,6 @@ Maui.ApplicationWindow
         }
     }
 
-    function newNote()
-    {
-        swipeView.currentIndex = views.notes
-        newNoteDialog.open()
-    }
 
     function newLink()
     {
@@ -222,12 +205,7 @@ Maui.ApplicationWindow
         newBookDialog.open()
     }
 
-    function setNote(note)
-    {
-        notesView.currentNote = note
-        editNote.fill(note)
-        editNote.open()
-    }
+
 
     function setLink(link)
     {
