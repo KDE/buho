@@ -15,7 +15,7 @@ Maui.Dialog
 
     heightHint: 0.95
     widthHint: 0.95
-    maxHeight: previewReady ? 1000 : contentLayout.implicitHeight
+    maxHeight: previewReady ? 1000 : implicitHeight
     maxWidth: Maui.Style.unit *700
 
     modal: true

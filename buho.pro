@@ -17,8 +17,6 @@ VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
 
 DEFINES += BUHO_VERSION_STRING=\\\"$$VERSION\\\"
 
-DESTDIR = $$OUT_PWD/
-
 linux:unix:!android {
 
     message(Building for Linux KDE)
@@ -51,11 +49,6 @@ linux:unix:!android {
     win32 {
         QT += webengine
         RC_ICONS = $$PWD/windows_files/buho.ico
-
-     LIBS += -L$$PWD/../../../../CraftRoot/lib/ -llibssl
-
-        INCLUDEPATH += $$PWD/../../../../CraftRoot/include
-        DEPENDPATH += $$PWD/../../../../CraftRoot/include
     }
 }
 
