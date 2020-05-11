@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 
-Maui.Dialog
+Maui.NewDialog
 {
     id: control
 

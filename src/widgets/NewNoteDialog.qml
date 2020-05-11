@@ -14,6 +14,12 @@ Maui.Page
 
     property var note : ({})
 
+    footBar.rightContent: Button
+    {
+        text: qsTr("Save")
+        onClicked: packNote()
+    }
+
     footBar.leftContent: [
 
         ToolButton
@@ -137,5 +143,7 @@ Maui.Page
                               format: ".txt" //for now only simple txt files
                           })
         control.clear()
+        control.parent.pop(StackView.Immediate)
+
     }
 }

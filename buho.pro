@@ -1,7 +1,7 @@
 QT += qml
 QT += quick
 QT += sql
-QT += webview
+QT += network
 
 CONFIG += ordered
 CONFIG += c++17
@@ -10,47 +10,46 @@ TARGET = buho
 TEMPLATE = app
 
 VERSION_MAJOR = 1
-VERSION_MINOR = 0
+VERSION_MINOR = 1
 VERSION_BUILD = 0
 
 VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
 
 DEFINES += BUHO_VERSION_STRING=\\\"$$VERSION\\\"
 
-DESTDIR = $$OUT_PWD/
-
 linux:unix:!android {
 
     message(Building for Linux KDE)
     LIBS += -lMauiKit
 
-} else:android {
+} else {
 
-    message(Building helpers for Android)
+    android {
+        message(Building for Android)
+        QMAKE_LINK += -nostdlib++
+        QT += androidextras
+        QT += webview
 
-    QMAKE_LINK += -nostdlib++
-    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
-
-   DISTFILES += \
-$$PWD/android_files/AndroidManifest.xml
-
-    QT += androidextras
+        ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
+        DISTFILES += $$PWD/android_files/AndroidManifest.xml
+        DEFINES *= ANDROID_OPENSSL
+     }
 
     DEFINES *= \
         COMPONENT_FM \
         COMPONENT_TAGGING \
         COMPONENT_ACCOUNTS \
         COMPONENT_EDITOR \
-        MAUIKIT_STYLE \
-        ANDROID_OPENSSL
+        MAUIKIT_STYLE
 
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)
 
     DEFINES += STATIC_KIRIGAMI
-
-} else {
-    message("Unknown configuration")
+    win32 {
+        QT += webengine
+        RC_ICONS = $$PWD/windows_files/buho.ico
+    }
 }
 
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -71,8 +70,8 @@ SOURCES += \
     src/providers/nextnote.cpp \
 
 RESOURCES += \
-    src/qml.qrc \
-    src/assets/assets.qrc
+    src/assets/imgs.qrc \
+    src/qml.qrc
 
 HEADERS += \
     src/db/db.h \
@@ -112,3 +111,4 @@ DISTFILES += \
     src/db/script.sql \
 
 include($$PWD/install.pri)
+

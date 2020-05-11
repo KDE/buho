@@ -19,7 +19,11 @@
 #include <QApplication>
 #endif
 
+#ifdef Q_OS_WIN
+#include <QtWebEngine>
+#else
 #include <QtWebView>
+#endif
 
 #include "buho.h"
 
@@ -30,6 +34,7 @@
 
 int Q_DECL_EXPORT main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+  QtWebEngine::initialize();
 
 #ifdef Q_OS_ANDROID
   QGuiApplication app(argc, argv);
@@ -39,7 +44,6 @@ int Q_DECL_EXPORT main(int argc, char *argv[]) {
   QApplication app(argc, argv);
 #endif
 
-  QtWebView::initialize();
 
   app.setApplicationName(OWL::appName);
   app.setApplicationVersion(OWL::version);
