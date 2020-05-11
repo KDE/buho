@@ -52,7 +52,7 @@ set(buho_HDRS
 
 set(buho_ASSETS
     qml.qrc
-    assets/assets.qrc
+    assets/imgs.qrc
     )
 
 add_executable(buho
@@ -66,7 +66,7 @@ if(ANDROID)
     kde_source_files_enable_exceptions(buho buho.cpp)
 endif()
 
-target_link_libraries(buho MauiKit Qt5::Sql Qt5::Qml Qt5::Widgets Qt5::Svg Qt5::WebView)
+target_link_libraries(buho MauiKit Qt5::Sql Qt5::Qml Qt5::Svg Qt5::WebView)
 target_link_libraries(buho KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n KF5::Attica KF5::SyntaxHighlighting)
 
 install(TARGETS buho ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
