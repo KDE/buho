@@ -20,9 +20,9 @@ Maui.NewDialog
     acceptButton.text: qsTr("Create")
     rejectButton.text: qsTr("Cancel")
 
-    onAccepted:
+    onFinished:
     {
-        control.bookSaved(textEntry.text)
+        control.bookSaved(text)
         close()
     }
 }

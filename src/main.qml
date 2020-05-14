@@ -25,6 +25,9 @@ Maui.ApplicationWindow
                                        books: 2
                                    })
 
+//    headBar.visible: Kirigami.Settings.isMobile ? !Qt.inputMethod.visible : true
+    altHeader: Kirigami.Settings.isMobile
+
     mainMenu: MenuItem
     {
         text: qsTr("Settings")
@@ -157,7 +160,7 @@ Maui.ApplicationWindow
         id: newBookDialog
         onBookSaved:
         {
-            if(title && title.length)
+//            if(title && title.length)
                 booksView.list.insert({title: title, count: 0})
         }
     }
