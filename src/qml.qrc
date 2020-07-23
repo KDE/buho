@@ -16,5 +16,8 @@
         <file>widgets/LinkCardDelegate.qml</file>
         <file>views/books/NewBookDialog.qml</file>
         <file>views/books/BookletPage.qml</file>
+        <file>widgets/WebView.qml</file>
+        <file>widgets/WebViewLinux.qml</file>
+        <file>widgets/WebViewOther.qml</file>
     </qresource>
 </RCC>

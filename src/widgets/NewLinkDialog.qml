@@ -3,7 +3,6 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
-import QtWebView 1.1
 
 Maui.Dialog
 {
@@ -15,11 +14,10 @@ Maui.Dialog
 
     heightHint: 0.95
     widthHint: 0.95
-    maxHeight: previewReady ? 1000 : contentLayout.implicitHeight
+    maxHeight: previewReady ? 1000 : implicitHeight
     maxWidth: Maui.Style.unit *700
 
     modal: true
-    padding: isAndroid ? 1 : undefined
     page.padding: 0
 
     headBar.visible: previewReady
@@ -38,7 +36,7 @@ Maui.Dialog
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: Maui.Style.fontSizes.large
-            text: _webView.title
+            text: _webView.item.title
 
             background: Rectangle
             {
@@ -80,7 +78,8 @@ Maui.Dialog
     ColumnLayout
     {
         id: contentLayout
-        anchors.fill: parent
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
         TextField
         {
@@ -94,7 +93,7 @@ Maui.Dialog
             font.bold: true
             font.pointSize: Maui.Style.fontSizes.large
             Layout.alignment: Qt.AlignCenter
-            text: _webView.url
+            text: _webView.item ?  _webView.item.url : ""
             background: Rectangle
             {
                 color: "transparent"
@@ -102,7 +101,7 @@ Maui.Dialog
 
             onAccepted:
             {
-                _webView.url = link.text
+                _webView.item.url = link.text
                 control.previewReady = true
             }
 
@@ -125,7 +124,7 @@ Maui.Dialog
             allowEditMode: true
             list.abstract: true
             list.key: "links"
-            list.lot: _webView.url
+            list.lot: _webView.item.url
             onTagsEdited: list.updateToAbstract(tags)
             onTagRemovedClicked: list.removeFromAbstract(index)
         }
@@ -134,7 +133,7 @@ Maui.Dialog
     onClosed:
     {
         control.previewReady = false
-        _webView.stop()
+        _webView.item.stop()
         link.clear()
         tagBar.clear()
     }
@@ -142,7 +141,7 @@ Maui.Dialog
     function fill(link)
     {
         tagBar.list.lot= link.url
-        _webView.url = link.url
+        _webView.item.url = link.url
         favButton.checked = link.favorite == 1
 
         if(link.url)
@@ -153,12 +152,12 @@ Maui.Dialog
     function packLink()
     {
         const imgUrl = linksView.list.previewsCachePath() +Math.floor(Math.random() * 100) + ".jpeg";
-        _webView.grabToImage(function (result)
+        _webView.item.grabToImage(function (result)
         {
             console.log("save to", imgUrl)
             result.saveToFile(imgUrl)
             var data = ({
-                            url : _webView.url,
+                            url : _webView.item.url,
                             title: title.text,
                             preview: "file://"+imgUrl,
                             tag: tagBar.list.tags.join(","),

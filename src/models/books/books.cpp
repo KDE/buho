@@ -82,8 +82,8 @@ bool Books::insert(const QVariantMap &book)
     __book[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
     __book[FMH::MODEL_KEY::ADDDATE] = QDateTime::currentDateTime().toString(Qt::TextDate);
 
+    qDebug()<< "Trying to add a book" << __book;
     this->syncer->insertBook(__book);
-
     return true;
 }
 

@@ -134,6 +134,15 @@ Maui.ItemDelegate
                 text: model.title
             }
         }
+
+        Rectangle
+        {
+            anchors.fill: parent
+            color: "transparent"
+            border.color: Kirigami.Theme.textColor
+            opacity: 0.3
+            radius: Maui.Style.radiusV
+        }
     }
 
 

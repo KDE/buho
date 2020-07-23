@@ -2,39 +2,31 @@ import QtQuick 2.10
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.1 as MauiLab
+
 import org.kde.kirigami 2.2 as Kirigami
 import Links 1.0
 
 import "../../widgets"
 
-Maui.Page
+CardsView
 {
     id: control
 
-    property alias cardsView : cardsView
-    property alias model : linksModel
     property alias list : linksList
-    property alias currentIndex : cardsView.currentIndex
+    property alias currentIndex : control.currentIndex
 
     property var currentLink : ({})
 
     signal linkClicked(var link)
 
     headBar.visible: linksList.count > 0
-    padding: Maui.Style.space.big
-
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
         placeholderText: qsTr("Search ") +linksList.count + " " + qsTr("links")
         onAccepted: linksModel.filter = text
         onCleared: linksModel.filter = ""
-    }
-
-    headBar.leftContent: ToolButton
-    {
-        icon.name: cardsView.gridView ? "view-list-icons" : "view-list-details"
-        onClicked: cardsView.gridView = !cardsView.gridView
     }
 
     headBar.rightContent: [
@@ -102,7 +94,16 @@ Maui.Page
         id: linksList
     }
 
-    Maui.BaseModel
+    holder.emoji: "qrc:/view-links.svg"
+    holder.title : qsTr("No Links!")
+    holder.body: qsTr("Click here to save a new link")
+    holder.emojiSize: Maui.Style.iconSizes.huge
+    holder.visible: linksList.count <= 0
+    gridView.itemSize: Math.min(defaultSize, control.width)
+    gridView.cellHeight: defaultSize + Maui.Style.space.big
+
+    viewType: MauiLab.AltBrowser.ViewType.Grid
+    model:  Maui.BaseModel
     {
         id: linksModel
         list: linksList
@@ -111,26 +112,16 @@ Maui.Page
         filterCaseSensitivity: Qt.CaseInsensitive
     }
 
-    CardsView
+    gridDelegate: Item
     {
-        id: cardsView
-        anchors.fill: parent
-        holder.emoji: "qrc:/view-links.svg"
-        holder.title : qsTr("No Links!")
-        holder.body: qsTr("Click here to save a new link")
-        holder.emojiSize: Maui.Style.iconSizes.huge
-        itemHeight: Maui.Style.unit * 250
+        id: delegate
+        width: control.gridView.cellWidth
+        height: control.gridView.cellHeight
 
-        model: linksModel
-
-        delegate: LinkCardDelegate
+        LinkCardDelegate
         {
-            id: delegate
-            width: Math.min(cardsView.cellWidth, cardsView.itemWidth) - Kirigami.Units.largeSpacing * 2
-            height: cardsView.itemHeight
-            anchors.left: parent.left
-            anchors.leftMargin: cardsView.width <= cardsView.itemWidth ? 0 : (index % 2 === 0 ? Math.max(0, cardsView.cellWidth - cardsView.itemWidth) :
-                                                                                                cardsView.cellWidth)
+            anchors.fill: parent
+            anchors.margins: Maui.Style.space.medium
 
             onClicked:
             {
@@ -143,7 +134,7 @@ Maui.Page
             {
                 currentIndex = index
                 currentLink = linksList.get(index)
-              _linksMenu.popup()
+                _linksMenu.popup()
             }
 
             onPressAndHold:
@@ -153,63 +144,64 @@ Maui.Page
                 _linksMenu.popup()
             }
         }
+    }
 
-        Connections
+    Connections
+    {
+        target: control.holder
+        onActionTriggered: newLink()
+    }
+
+    Menu
+    {
+        id: _linksMenu
+        property bool isFav : currentLink.favorite == 1 ? true : false
+
+        MenuItem
         {
-            target: cardsView.holder
-            onActionTriggered: newLink()
+            icon.name: "love"
+            text: qsTr(_linksMenu.isFav? "UnFav" : "Fav")
+            onTriggered:
+            {
+                linksList.update(({"favorite": _linksMenu.isFav ? 0 : 1}), control.currentIndex)
+                _linksMenu.close()
+            }
         }
 
-        Menu
+        MenuItem
         {
-            id: _linksMenu
-            property bool isFav : currentLink.favorite == 1 ? true : false
-
-            MenuItem
+            icon.name: "document-export"
+            text: qsTr("Export")
+            onTriggered:
             {
-                icon.name: "love"
-                text: qsTr(_linksMenu.isFav? "UnFav" : "Fav")
-                onTriggered:
-                {
-                    linksList.update(({"favorite": _linksMenu.isFav ? 0 : 1}), cardsView.currentIndex)
-                    _linksMenu.close()
-                }
+                _linksMenu.close()
             }
+        }
 
-            MenuItem
+        MenuItem
+        {
+            icon.name : "edit-copy"
+            text: qsTr("Copy")
+            onTriggered:
             {
-                icon.name: "document-export"
-                text: qsTr("Export")
-                onTriggered:
-                {
-                    _linksMenu.close()
-                }
+                Maui.Handy.copyToClipboard({'urls': [currentLink.url]})
+                _linksMenu.close()
             }
+        }
 
-            MenuItem
+        MenuSeparator { }
+
+        MenuItem
+        {
+            icon.name: "edit-delete"
+            text: qsTr("Remove")
+            Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+            onTriggered:
             {
-                icon.name : "edit-copy"
-                text: qsTr("Copy")
-                onTriggered:
-                {
-                    Maui.Handy.copyToClipboard({'urls': [currentLink.url]})
-                    _linksMenu.close()
-                }
-            }
-
-            MenuSeparator { }
-
-            MenuItem
-            {
-                icon.name: "edit-delete"
-                text: qsTr("Remove")
-                Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
-                onTriggered:
-                {
-                    linksList.remove(cardsView.currentIndex)
-                    _linksMenu.close()
-                }
+                linksList.remove(control.currentIndex)
+                _linksMenu.close()
             }
         }
     }
 }
+

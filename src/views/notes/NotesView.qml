@@ -2,219 +2,245 @@ import QtQuick 2.10
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.1 as MauiLab
+
 import org.kde.kirigami 2.7 as Kirigami
 import Notes 1.0
 import Qt.labs.platform 1.0 as Labs
 
 import "../../widgets"
 
-Maui.Page
+StackView
 {
+    id: control
     property var currentNote : ({})
 
     property alias cardsView : cardsView
-    property alias model : notesModel
     property alias list : notesList
     property alias currentIndex : cardsView.currentIndex
 
-    signal noteClicked(var note)
+    function setNote(note)
+    {
+        control.push(_editNoteComponent, {}, StackView.Immediate)
+        currentNote = note
+        control.currentItem.editor.body.forceActiveFocus()
+    }
 
-    padding: Maui.Style.space.big
+    function newNote()
+    {
+         control.push(_newNoteComponent, {}, StackView.Immediate)
+        control.currentItem.editor.body.forceActiveFocus()
+    }
 
-    headBar.visible: !cardsView.holder.visible
-
-    headBar.leftContent: [
-        ToolButton
+    Component
+    {
+        id: _editNoteComponent
+        NewNoteDialog
         {
-            icon.name:  cardsView.gridView ? "view-list-details" : "view-list-icons"
+            note: control.currentNote
+            onNoteSaved: control.list.update(note, control.currentIndex)
+        }
+    }
+
+    Component
+    {
+        id: _newNoteComponent
+        NewNoteDialog
+        {
+            onNoteSaved: control.list.insert(note)
+        }
+    }
+
+    initialItem:    CardsView
+    {
+        id: cardsView
+
+        holder.visible: notesList.count < 1
+        holder.emoji: "qrc:/view-notes.svg"
+        holder.emojiSize: Maui.Style.iconSizes.huge
+        holder.title :qsTr("No notes!")
+        holder.body: qsTr("Click here to create a new note")
+
+        model: Maui.BaseModel
+        {
+            id: notesModel
+            list: notesList
+            recursiveFilteringEnabled: true
+            sortCaseSensitivity: Qt.CaseInsensitive
+            filterCaseSensitivity: Qt.CaseInsensitive
+        }
+
+        headBar.visible: !holder.visible
+        headBar.leftContent: Maui.ToolActions
+        {
+            autoExclusive: true
+            expanded: isWide
+            currentIndex : cardsView.viewType === MauiLab.AltBrowser.ViewType.List ? 0 : 1
+            display: ToolButton.TextBesideIcon
+
+            Action
+            {
+                text: qsTr("List")
+                icon.name: "view-list-details"
+                onTriggered: cardsView.viewType = MauiLab.AltBrowser.ViewType.List
+            }
+
+            Action
+            {
+                text: qsTr("Cards")
+                icon.name: "view-list-icons"
+                onTriggered: cardsView.viewType= MauiLab.AltBrowser.ViewType.Grid
+            }
+        }
+
+        headBar.middleContent: Maui.TextField
+        {
+            Layout.fillWidth: true
+            placeholderText: qsTr("Search ") + notesList.count + " " + qsTr("notes")
+            onAccepted: notesModel.filter = text
+            onCleared: notesModel.filter = ""
+        }
+
+        headBar.rightContent: [
+            ToolButton
+            {
+                icon.name: "view-sort"
+                onClicked: sortMenu.open();
+
+                Menu
+                {
+                    id: sortMenu
+
+                    Labs.MenuItemGroup
+                    {
+                        id: orderGroup
+                    }
+
+                    Labs.MenuItemGroup
+                    {
+                        id: sortGroup
+                    }
+
+                    MenuItem
+                    {
+                        text: qsTr("Ascedent")
+                        checkable: true
+                        checked: notesList.order === Notes.ASC
+                        onTriggered: notesList.order = Notes.ASC
+                    }
+
+                    MenuItem
+                    {
+                        text: qsTr("Descendent")
+                        checkable: true
+                        checked: notesList.order === Notes.DESC
+                        onTriggered: notesList.order = Notes.DESC
+                    }
+
+                    MenuSeparator{}
+
+                   Labs.MenuItem
+                    {
+                        text: qsTr("Title")
+                        checkable: true
+                        checked: notesList.sortBy === Notes.TITLE
+                        onTriggered: notesList.sortBy = Notes.TITLE
+                        group: orderGroup
+                    }
+
+                    Labs.MenuItem
+                    {
+                        text: qsTr("Color")
+                        checkable: true
+                        checked: notesList.sortBy === Notes.COLOR
+                        onTriggered: notesList.sortBy = Notes.COLOR
+                        group: orderGroup
+                    }
+
+                    Labs.MenuItem
+                    {
+                        text: qsTr("Add date")
+                        checkable: true
+                        checked: notesList.sortBy === Notes.ADDDATE
+                        onTriggered: notesList.sortBy = Notes.ADDDATE
+                        group: orderGroup
+                    }
+
+                    Labs.MenuItem
+                    {
+                        text: qsTr("Updated")
+                        checkable: true
+                        checked: notesList.sortBy === Notes.Modified
+                        onTriggered: notesList.sortBy = Notes.Modified
+                        group: orderGroup
+                    }
+
+                    Labs.MenuItem
+                    {
+                        text: qsTr("Favorite")
+                        checkable: true
+                        checked: notesList.sortBy === Notes.FAVORITE
+                        onTriggered: notesList.sortBy = Notes.FAVORITE
+                        group: orderGroup
+                    }
+                }
+            },
+            ToolButton
+            {
+                id: favButton
+                icon.name: "love"
+                checkable: true
+                icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+            }
+        ]
+
+        Notes
+        {
+            id: notesList
+        }
+
+        listDelegate: CardDelegate
+        {
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - Maui.Style.space.big
+            height: 150
+
             onClicked:
             {
-                cardsView.gridView = !cardsView.gridView
-            }
-        }
-    ]
-
-    headBar.middleContent: Maui.TextField
-    {
-        Layout.fillWidth: true
-        placeholderText: qsTr("Search ") +cardsView.count + " " + qsTr("notes")
-        onAccepted: notesModel.filter = text
-        onCleared: notesModel.filter = ""
-    }
-
-    headBar.rightContent: [
-        ToolButton
-        {
-            icon.name: "view-sort"
-            onClicked: sortMenu.open();
-
-            Menu
-            {
-                id: sortMenu
-
-                Labs.MenuItemGroup
-                {
-                    id: orderGroup
-                }
-
-                Labs.MenuItemGroup
-                {
-                    id: sortGroup
-                }
-
-                Labs.MenuItem
-                {
-                    text: qsTr("Ascedent")
-                    checkable: true
-                    checked: notesList.order === Notes.ASC
-                    onTriggered: notesList.order = Notes.ASC
-                    group: sortGroup
-                }
-
-                Labs.MenuItem
-                {
-                    text: qsTr("Descendent")
-                    checkable: true
-                    checked: notesList.order === Notes.DESC
-                    onTriggered: notesList.order = Notes.DESC
-                    group: sortGroup
-                }
-
-                MenuSeparator{}
-
-               Labs.MenuItem
-                {
-                    text: qsTr("Title")
-                    checkable: true
-                    checked: notesList.sortBy === Notes.TITLE
-                    onTriggered: notesList.sortBy = Notes.TITLE
-                    group: orderGroup
-                }
-
-                Labs.MenuItem
-                {
-                    text: qsTr("Color")
-                    checkable: true
-                    checked: notesList.sortBy === Notes.COLOR
-                    onTriggered: notesList.sortBy = Notes.COLOR
-                    group: orderGroup
-                }
-
-                Labs.MenuItem
-                {
-                    text: qsTr("Add date")
-                    checkable: true
-                    checked: notesList.sortBy === Notes.ADDDATE
-                    onTriggered: notesList.sortBy = Notes.ADDDATE
-                    group: orderGroup
-                }
-
-                Labs.MenuItem
-                {
-                    text: qsTr("Updated")
-                    checkable: true
-                    checked: notesList.sortBy === Notes.Modified
-                    onTriggered: notesList.sortBy = Notes.Modified
-                    group: orderGroup
-                }
-
-                Labs.MenuItem
-                {
-                    text: qsTr("Favorite")
-                    checkable: true
-                    checked: notesList.sortBy === Notes.FAVORITE
-                    onTriggered: notesList.sortBy = Notes.FAVORITE
-                    group: orderGroup
-                }
-            }
-        },
-        ToolButton
-        {
-            id: favButton
-            icon.name: "love"
-            checkable: true
-            icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-        }
-    ]
-
-    Notes
-    {
-        id: notesList
-    }
-
-    Maui.BaseModel
-    {
-        id: notesModel
-        list: notesList
-        recursiveFilteringEnabled: true
-        sortCaseSensitivity: Qt.CaseInsensitive
-        filterCaseSensitivity: Qt.CaseInsensitive
-    }
-
-    ColumnLayout
-    {
-        anchors.fill: parent
-        spacing: 0
-
-        Rectangle
-        {
-            visible: favButton.checked
-            Layout.alignment: Qt.AlignVCenter
-            Layout.fillWidth: true
-            height: cardsView.itemHeight
-            color: Kirigami.Theme.backgroundColor
-
-            Maui.Holder
-            {
-                id: holder
-                visible: favedList.count == 0
-                emoji: "qrc:/edit-pin.svg"
-                emojiSize: Maui.Style.iconSizes.big
-                isMask: true
-                title : qsTr("No favorites!")
-                body: qsTr("No matched favorites notes. You can fav your notes to access them quickly")
-                z: 999
+                currentIndex = index
+                setNote(notesList.get(index))
             }
 
-            CardsList
+            onRightClicked:
             {
-                id: favedList
-                height: parent.height *0.9
-                width: parent.width * 0.9
-                anchors.centerIn: parent
-                itemHeight: 150
-                itemWidth: itemHeight * 1.5
-                onItemClicked: noteClicked(cardsView.model.get(index))
+                currentIndex = index
+                currentNote = notesList.get(index)
+                _notesMenu.popup()
+            }
+
+            onPressAndHold:
+            {
+                currentIndex = index
+                currentNote = notesList.get(index)
+                _notesMenu.popup()
             }
         }
 
-
-        CardsView
+        gridDelegate: Item
         {
-            id: cardsView
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            width: parent.width
-            holder.emoji: "qrc:/view-notes.svg"
-            holder.emojiSize: Maui.Style.iconSizes.huge
-            holder.title :qsTr("No notes!")
-            holder.body: qsTr("Click here to create a new note")
+            id: delegate
+            width: cardsView.gridView.cellWidth
+            height: cardsView.gridView.cellHeight
 
-            model: notesModel
-            delegate: CardDelegate
+            CardDelegate
             {
-                id: delegate
-                width: Math.min(cardsView.cellWidth, cardsView.itemWidth) - Kirigami.Units.largeSpacing * 2
-                height: cardsView.itemHeight
-                anchors.left: parent.left
-                anchors.leftMargin: cardsView.width <= cardsView.itemWidth ? 0 : (index % 2 === 0 ? Math.max(0, cardsView.cellWidth - cardsView.itemWidth) :
-                                                                                                    cardsView.cellWidth)
+               anchors.fill: parent
+               anchors.margins: Maui.Style.space.medium
 
                 onClicked:
                 {
                     currentIndex = index
-                    currentNote = notesList.get(index)
-                    noteClicked(currentNote)
+                    setNote(notesList.get(index))
                 }
 
                 onRightClicked:
@@ -231,85 +257,87 @@ Maui.Page
                     _notesMenu.popup()
                 }
             }
+        }
 
-            Connections
+        Connections
+        {
+            target: cardsView.holder
+            onActionTriggered: newNote()
+        }
+
+        Menu
+        {
+            id: _notesMenu
+            width: colorBar.implicitWidth + Maui.Style.space.medium
+
+            property bool isFav: currentNote.favorite == 1
+
+            MenuItem
             {
-                target: cardsView.holder
-                onActionTriggered: newNote()
+                icon.name: "love"
+                text: qsTr(_notesMenu.isFav? "UnFav" : "Fav")
+                onTriggered:
+                {
+                    notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), cardsView.currentIndex)
+                    _notesMenu.close()
+                }
             }
 
-            Menu
+            MenuItem
             {
-                id: _notesMenu
-                width: colorBar.implicitWidth + Maui.Style.space.medium
-
-                property bool isFav: currentNote.favorite == 1
-
-                MenuItem
+                icon.name: "document-export"
+                text: qsTr("Export")
+                onTriggered:
                 {
-                    icon.name: "love"
-                    text: qsTr(_notesMenu.isFav? "UnFav" : "Fav")
-                    onTriggered:
-                    {
-                        notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), cardsView.currentIndex)
-                        _notesMenu.close()
-                    }
+                    _notesMenu.close()
                 }
+            }
 
-                MenuItem
+            MenuItem
+            {
+                icon.name : "edit-copy"
+                text: qsTr("Copy")
+                onTriggered:
                 {
-                    icon.name: "document-export"
-                    text: qsTr("Export")
-                    onTriggered:
-                    {
-                        _notesMenu.close()
-                    }
+                    Maui.Handy.copyToClipboard({'text': currentNote.content})
+                    _notesMenu.close()
                 }
+            }
 
-                MenuItem
+            MenuSeparator { }
+
+            MenuItem
+            {
+                icon.name: "edit-delete"
+                text: qsTr("Remove")
+                Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+                onTriggered:
                 {
-                    icon.name : "edit-copy"
-                    text: qsTr("Copy")
-                    onTriggered:
-                    {
-                        Maui.Handy.copyToClipboard({'text': currentNote.content})
-                        _notesMenu.close()
-                    }
+                    notesList.remove(cardsView.currentIndex)
+                    _notesMenu.close()
                 }
+            }
 
-                MenuSeparator { }
+            MenuSeparator { }
 
-                MenuItem
+            MenuItem
+            {
+                width: parent.width
+                height: Maui.Style.rowHeight
+
+                ColorsBar
                 {
-                    icon.name: "edit-delete"
-                    text: qsTr("Remove")
-                    Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
-                    onTriggered:
+                    id: colorBar
+                    anchors.centerIn: parent
+                    onColorPicked:
                     {
-                        notesList.remove(cardsView.currentIndex)
+                        notesList.update(({"color": color}), cardsView.currentIndex)
                         _notesMenu.close()
-                    }
-                }
-
-                MenuSeparator { }
-
-                MenuItem
-                {
-                    width: parent.width
-                    height: Maui.Style.rowHeight
-
-                    ColorsBar
-                    {
-                        id: colorBar
-                        anchors.centerIn: parent
-                        onColorPicked:
-                        {
-                            notesList.update(({"color": color}), cardsView.currentIndex)
-                            _notesMenu.close()
-                        }
                     }
                 }
             }
         }
     }
+
 }
+

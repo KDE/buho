@@ -108,7 +108,7 @@ bool NotesController::removeNote(const QString &id)
 
 	this->m_db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES_SYNC], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
 
-	FMStatic::removeFile(url);
+    FMStatic::removeFiles({url});
 
 	return this->m_db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
 }

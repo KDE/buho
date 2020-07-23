@@ -50,6 +50,8 @@ const static inline  QUrl LinksPath = QUrl::fromLocalFile(QStandardPaths::writab
 const static inline  QString appName = "buho";
 const static inline  QString displayName = "Buho";
 const static inline  QString version = BUHO_VERSION_STRING;
+const static inline QString orgName = QStringLiteral("Maui");
+const static inline QString orgDomain = QStringLiteral("org.maui.index");
 const static inline  QString comment = "Notes taking and link collector manager";
 const static inline  QString DBName = "collection.db";
 

@@ -1,6 +1,6 @@
 #include "nextnote.h"
 #include <QUrl>
-#include <QDomDocument>
+//#include <QDomDocument>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QVariantMap>

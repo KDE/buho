@@ -4,35 +4,22 @@ import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 
-Maui.Dialog
+Maui.Page
 {
     id: control
-    parent: parent
-
     property alias editor: _editor
-    property string selectedColor
-    property color fgColor: Qt.darker(selectedColor, 3)
+    property string backgroundColor: note.color ? note.color : Kirigami.Theme.backgroundColor
     property bool showEditActions : false
     signal noteSaved(var note)
 
-    Kirigami.Theme.backgroundColor: if(selectedColor)
-                                        return control.selectedColor
+    property var note : ({})
 
-    Kirigami.Theme.textColor: if(selectedColor)
-                                  return fgColor
+    footBar.rightContent: Button
+    {
+        text: qsTr("Save")
+        onClicked: packNote()
+    }
 
-    heightHint: 0.95
-    widthHint: 0.95
-    maxWidth: 700 * Maui.Style.unit
-    maxHeight: maxWidth
-
-    page.padding: 0
-
-    rejectText:  qsTr("Discard")
-    rejectButton.visible: false
-    acceptText: qsTr("Save")
-    onAccepted:  packNote()
-    onRejected: clear()
     footBar.leftContent: [
 
         ToolButton
@@ -40,6 +27,7 @@ Maui.Dialog
             id: favButton
             icon.name: "love"
             checkable: true
+            checked:  note.favorite == 1
             icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
 
         },
@@ -73,12 +61,17 @@ Maui.Dialog
         Maui.Editor
         {
             id: _editor
+            fileUrl: control.note.url ? control.note.url : ""
+            showLineNumbers: false
             document.autoReload: true
             Layout.fillHeight: true
             Layout.fillWidth: true
-            body.font.pointSize: Maui.Style.fontSizes.big
-            Kirigami.Theme.backgroundColor: control.selectedColor
-            Kirigami.Theme.textColor: Qt.darker(control.selectedColor, 2.5)
+            body.font.pointSize: Maui.Style.fontSizes.huge
+
+            Kirigami.Theme.backgroundColor: control.backgroundColor
+            Kirigami.Theme.textColor: control.backgroundColor.length ? Qt.darker(control.backgroundColor, 2) : control.Kirigami.Theme.textColor
+
+            document.enableSyntaxHighlighting: false
             body.placeholderText: qsTr("Title\nBody")
             footBar.visible: false
             headBar.leftContent: ToolButton
@@ -87,9 +80,15 @@ Maui.Dialog
                 icon.color: control.Kirigami.Theme.textColor
             }
 
+            headBar.farLeftContent: ToolButton
+            {
+                icon.name: "go-previous"
+                onClicked: control.parent.pop(StackView.Immediate)
+            }
+
             headBar.rightContent: ColorsBar
             {
-                onColorPicked: control.selectedColor = color
+                onColorPicked: control.backgroundColor = color
             }
         }
 
@@ -110,7 +109,7 @@ Maui.Dialog
             list.strict: true
             list.abstract: true
             list.key: "notes"
-            list.lot: " "
+            list.lot: control.note.url ? control.note.url : " "
 //            onTagRemovedClicked: list.removeFromAbstract(index)
             Kirigami.Theme.backgroundColor: "transparent"
             Kirigami.Theme.textColor: Kirigami.Theme.textColor
@@ -118,21 +117,15 @@ Maui.Dialog
         }
     }
 
-    onOpened: editor.body.forceActiveFocus()
 
     function clear()
     {
-        control.close()
         editor.body.clear()
-        fill(({}))
+        control.note = ({})
     }
 
     function fill(note)
     {
-        editor.fileUrl = note.url
-        control.selectedColor =  note.color ? note.color : ""
-        favButton.checked = note.favorite == 1
-        tagBar.list.lot = note.url
     }
 
     function packNote()
@@ -144,11 +137,13 @@ Maui.Dialog
         control.noteSaved({
                               url: editor.fileUrl,
                               content: content,
-                              color: control.selectedColor ?  control.selectedColor : "",
+                              color: control.backgroundColor ?  control.backgroundColor : "",
                               tag: tagBar.list.tags.join(","),
                               favorite: favButton.checked ? 1 : 0,
                               format: ".txt" //for now only simple txt files
                           })
         control.clear()
+        control.parent.pop(StackView.Immediate)
+
     }
 }

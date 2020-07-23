@@ -7,7 +7,7 @@ project(buho VERSION ${BUHO_VERSION})
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH})
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Qml Quick Sql Svg QuickControls2 Widgets WebView)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Qml Quick Sql Svg QuickControls2 WebView)
 find_package(KF5 REQUIRED COMPONENTS Config KIO Notifications I18n Attica SyntaxHighlighting)
 find_package(MauiKit REQUIRED)
 
