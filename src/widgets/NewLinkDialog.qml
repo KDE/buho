@@ -68,8 +68,8 @@ Maui.Dialog
         }
     ]
 
-    acceptText: qsTr("Save")
-    rejectText:  qsTr("Discard")
+    acceptButton.text: qsTr("Save")
+    rejectButton.text:  qsTr("Discard")
 
     onAccepted: packLink()
 
