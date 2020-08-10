@@ -1,8 +1,7 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.3
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.0 as Maui
-import org.kde.mauikit 1.1 as MauiLab
+import org.kde.mauikit 1.2 as Maui
 import QtQuick.Layouts 1.3
 
 import "widgets"
@@ -25,7 +24,7 @@ Maui.ApplicationWindow
                                        books: 2
                                    })
 
-//    headBar.visible: Kirigami.Settings.isMobile ? !Qt.inputMethod.visible : true
+    //    headBar.visible: Kirigami.Settings.isMobile ? !Qt.inputMethod.visible : true
     altHeader: Kirigami.Settings.isMobile
 
     mainMenu: MenuItem
@@ -65,83 +64,99 @@ Maui.ApplicationWindow
         }
     }
 
-    MauiLab.SettingsDialog
+    Maui.SettingsDialog
     {
         id: _settingsDialog
-        MauiLab.SettingsSection
+        Maui.SettingsSection
         {
             title: qsTr("Syncing")
             description: qsTr("Configure the syncing options.")
 
-            Switch
+            Maui.SettingTemplate
             {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Auto Fetch on Start Up")
-                Layout.fillWidth: true
+                label1.text: qsTr("Auto Fetch on Start Up")
+                label2.text: qsTr("Gathers album and artists artwoks from online services")
+
+                Switch
+                {
+                    checkable: true
+                }
             }
         }
 
-        MauiLab.SettingsSection
+        Maui.SettingsSection
         {
             title: qsTr("Notes")
             description: qsTr("Configure the notes view behavior.")
-
-            Switch
+            Maui.SettingTemplate
             {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Rich Text Formating")
-                Layout.fillWidth: true
+                label1.text: qsTr("Rich Text Formating")
+                label2.text: qsTr("Gathers album and artists artwoks from online services")
+
+                Switch
+                {
+                    checkable: true
+                }
             }
         }
 
-        MauiLab.SettingsSection
+        Maui.SettingsSection
         {
             title: qsTr("Links")
             description: qsTr("Configure the app plugins and behavior.")
 
-            Switch
+            Maui.SettingTemplate
             {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Cached")
-                Layout.fillWidth: true
+                label1.text: qsTr("Cached")
+                label2.text: qsTr("Gathers album and artists artwoks from online services")
+
+                Switch
+                {
+                    checkable: true
+                }
             }
         }
 
-        MauiLab.SettingsSection
+        Maui.SettingsSection
         {
             title: qsTr("Books")
             description: qsTr("Configure the app plugins and behavior.")
 
-            Item
+            Maui.SettingTemplate
             {
-                Kirigami.FormData.label: qsTr("Editor")
-                Kirigami.FormData.isSection: true
+                label1.text: qsTr("Show Line Numbers")
+                label2.text: qsTr("Gathers album and artists artwoks from online services")
+
+                Switch
+                {
+                    checkable: true
+                }
             }
 
-            Switch
+            Maui.SettingTemplate
             {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Show Line Numbers")
-                Layout.fillWidth: true
+                label1.text: qsTr("Support Syntax Highlighting")
+
+                Switch
+                {
+                    checkable: true
+                }
             }
 
-            Switch
+            Maui.SettingTemplate
             {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Support Syntax Highlighting")
-                Layout.fillWidth: true
-            }
+                label1.text: qsTr("Auto Save")
+                label2.text: qsTr("Gathers album and artists artwoks from online services")
 
-            Switch
-            {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Auto Save")
-                Layout.fillWidth: true
+                Switch
+                {
+                    checkable: true
+                }
             }
         }
     }
 
-     //    /***** COMPONENTS *****/
+    //    /***** COMPONENTS *****/
 
     NewLinkDialog
     {
@@ -160,13 +175,13 @@ Maui.ApplicationWindow
         id: newBookDialog
         onBookSaved:
         {
-//            if(title && title.length)
-                booksView.list.insert({title: title, count: 0})
+            //            if(title && title.length)
+            booksView.list.insert({title: title, count: 0})
         }
     }
 
     //    /***** VIEWS *****/
-    MauiLab.AppViews
+    Maui.AppViews
     {
         id: swipeView
         anchors.fill: parent
@@ -175,14 +190,14 @@ Maui.ApplicationWindow
         {
             id: notesView
 
-            MauiLab.AppView.iconName: "view-pim-notes"
-            MauiLab.AppView.title: qsTr("Notes")
+            Maui.AppView.iconName: "view-pim-notes"
+            Maui.AppView.title: qsTr("Notes")
         }
 
         LinksView
         {
-            MauiLab.AppView.iconName: "view-pim-news"
-            MauiLab.AppView.title: qsTr("Links")
+            Maui.AppView.iconName: "view-pim-news"
+            Maui.AppView.title: qsTr("Links")
             id: linksView
             onLinkClicked: setLink(link)
         }
@@ -190,8 +205,8 @@ Maui.ApplicationWindow
         BooksView
         {
             id: booksView
-            MauiLab.AppView.iconName: "view-pim-journal"
-            MauiLab.AppView.title: qsTr("Books")
+            Maui.AppView.iconName: "view-pim-journal"
+            Maui.AppView.title: qsTr("Books")
         }
     }
 
