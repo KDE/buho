@@ -26,9 +26,7 @@ linux:unix:!android {
 
     android {
         message(Building for Android)
-        QMAKE_LINK += -nostdlib++
         QT += androidextras
-        QT += webview
 
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
         DISTFILES += $$PWD/android_files/AndroidManifest.xml
@@ -47,8 +45,12 @@ linux:unix:!android {
 
     DEFINES += STATIC_KIRIGAMI
     win32 {
-        QT += webengine
         RC_ICONS = $$PWD/windows_files/buho.ico
+    }
+
+    macos {
+        message(Building for Macos)
+        ICON = $$PWD/macos_files/buho.icns
     }
 }
 
@@ -66,7 +68,6 @@ SOURCES += \
     src/models/notes/notes.cpp \
     src/models/books/books.cpp \
     src/models/books/booklet.cpp \
-    src/models/links/links.cpp \
     src/providers/nextnote.cpp \
 
 RESOURCES += \
@@ -85,7 +86,6 @@ HEADERS += \
     src/models/notes/notes.h \
     src/models/books/books.h \
     src/models/books/booklet.h \
-    src/models/links/links.h \
     src/providers/nextnote.h \
     src/providers/abstractnotesprovider.h
 

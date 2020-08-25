@@ -1,4 +1,5 @@
 #include <QIcon>
+#include <QQmlContext>
 #include <QQmlApplicationEngine>
 
 #ifdef STATIC_KIRIGAMI
@@ -19,27 +20,20 @@
 #include <QApplication>
 #endif
 
-#ifdef Q_OS_WIN
-#include <QtWebEngine>
-#else
-#include <QtWebView>
-#endif
-
 #include "buho.h"
 
 #include "models/books/booklet.h"
 #include "models/books/books.h"
-#include "models/links/links.h"
 #include "models/notes/notes.h"
+
+#ifdef Q_OS_MACOS
+#include <KF5/KI18n/KLocalizedContext>
+#else
+#include <KI18n/KLocalizedContext>
+#endif
 
 int Q_DECL_EXPORT main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
-#if defined Q_OS_LINUX || defined Q_OS_ANDROID
-  QtWebView::initialize();
-#else
-  QtWebEngine::initialize();
-#endif
 
 #ifdef Q_OS_ANDROID
   QGuiApplication app(argc, argv);
@@ -48,7 +42,6 @@ int Q_DECL_EXPORT main(int argc, char *argv[]) {
 #else
   QApplication app(argc, argv);
 #endif
-
 
   app.setApplicationName(OWL::appName);
   app.setApplicationVersion(OWL::version);
@@ -60,7 +53,6 @@ int Q_DECL_EXPORT main(int argc, char *argv[]) {
 
   MauiApp::instance()->setCredits ({QVariantMap({{"name", "Camilo Higuita"}, {"email", "milo.h@aol.com"}, {"year", "2019-2020"}})});
 
-
 #ifdef STATIC_KIRIGAMI
   KirigamiPlugin::getInstance().registerTypes();
 #endif
@@ -71,10 +63,12 @@ int Q_DECL_EXPORT main(int argc, char *argv[]) {
 
   Buho owl;
   QQmlApplicationEngine engine;
-  qmlRegisterType<Booklet>();
+
+  engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+
+  qmlRegisterAnonymousType<Booklet>("Booklet", 1);
   qmlRegisterType<Notes>("Notes", 1, 0, "Notes");
   qmlRegisterType<Books>("Books", 1, 0, "Books");
-  qmlRegisterType<Links>("Links", 1, 0, "Links");
 
   engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
   if (engine.rootObjects().isEmpty())

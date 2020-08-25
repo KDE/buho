@@ -5,7 +5,6 @@ import org.kde.mauikit 1.0 as Maui
 import org.kde.mauikit 1.1 as MauiLab
 
 import org.kde.kirigami 2.2 as Kirigami
-import Links 1.0
 
 import "../../widgets"
 
@@ -88,11 +87,6 @@ CardsView
             }
         }
     ]
-
-    Links
-    {
-        id: linksList
-    }
 
     holder.emoji: "qrc:/view-links.svg"
     holder.title : qsTr("No Links!")
