@@ -6,7 +6,6 @@ import QtQuick.Layouts 1.3
 
 import "widgets"
 import "views/notes"
-import "views/links"
 import "views/books"
 
 Maui.ApplicationWindow
@@ -15,13 +14,12 @@ Maui.ApplicationWindow
     title: qsTr("Buho")
 
     Maui.App.handleAccounts: true
-    Maui.App.description: qsTr("Buho allows you to take quick notes, collect links and organize notes as books.")
+    Maui.App.description: qsTr("Buho allows you to take quick notes organize notes as books.")
     Maui.App.iconName: "qrc:/buho.svg"
 
     readonly property var views : ({
                                        notes: 0,
-                                       links: 1,
-                                       books: 2
+                                       books: 1
                                    })
 
     //    headBar.visible: Kirigami.Settings.isMobile ? !Qt.inputMethod.visible : true
@@ -52,11 +50,7 @@ Maui.ApplicationWindow
             icon.name: "view-pim-notes"
             onTriggered: notesView.newNote()
         }
-        Action
-        {
-            icon.name: "view-pim-news"
-            onTriggered: newLink()
-        }
+
         Action
         {
             icon.name: "view-pim-journal"
@@ -91,23 +85,6 @@ Maui.ApplicationWindow
             Maui.SettingTemplate
             {
                 label1.text: qsTr("Rich Text Formating")
-                label2.text: qsTr("Gathers album and artists artwoks from online services")
-
-                Switch
-                {
-                    checkable: true
-                }
-            }
-        }
-
-        Maui.SettingsSection
-        {
-            title: qsTr("Links")
-            description: qsTr("Configure the app plugins and behavior.")
-
-            Maui.SettingTemplate
-            {
-                label1.text: qsTr("Cached")
                 label2.text: qsTr("Gathers album and artists artwoks from online services")
 
                 Switch
@@ -158,19 +135,7 @@ Maui.ApplicationWindow
 
     //    /***** COMPONENTS *****/
 
-    NewLinkDialog
-    {
-        id: newLinkDialog
-        onLinkSaved: linksView.list.insert(link)
-    }
-
-    NewLinkDialog
-    {
-        id: editLinkDialog
-        onLinkSaved: linksView.list.update(link, linksView.currentIndex)
-    }
-
-    NewBookDialog
+     NewBookDialog
     {
         id: newBookDialog
         onBookSaved:
@@ -194,14 +159,6 @@ Maui.ApplicationWindow
             Maui.AppView.title: qsTr("Notes")
         }
 
-        LinksView
-        {
-            Maui.AppView.iconName: "view-pim-news"
-            Maui.AppView.title: qsTr("Links")
-            id: linksView
-            onLinkClicked: setLink(link)
-        }
-
         BooksView
         {
             id: booksView
@@ -210,25 +167,10 @@ Maui.ApplicationWindow
         }
     }
 
-
-    function newLink()
-    {
-        swipeView.currentIndex = views.links
-        newLinkDialog.open()
-    }
-
     function newBook()
     {
         swipeView.currentIndex = views.books
         newBookDialog.open()
     }
 
-
-
-    function setLink(link)
-    {
-        linksView.currentLink = link
-        editLinkDialog.fill(link)
-        editLinkDialog.open()
-    }
 }
