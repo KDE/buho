@@ -28,7 +28,7 @@ StackView
 
     function newNote()
     {
-         control.push(_newNoteComponent, {}, StackView.Immediate)
+        control.push(_newNoteComponent, {}, StackView.Immediate)
         control.currentItem.editor.body.forceActiveFocus()
     }
 
@@ -51,7 +51,7 @@ StackView
         }
     }
 
-    initialItem:    CardsView
+    initialItem: CardsView
     {
         id: cardsView
 
@@ -64,7 +64,10 @@ StackView
         model: Maui.BaseModel
         {
             id: notesModel
-            list: notesList
+            list: Notes
+            {
+                id: notesList
+            }
             recursiveFilteringEnabled: true
             sortCaseSensitivity: Qt.CaseInsensitive
             filterCaseSensitivity: Qt.CaseInsensitive
@@ -139,7 +142,7 @@ StackView
 
                     MenuSeparator{}
 
-                   Labs.MenuItem
+                    Labs.MenuItem
                     {
                         text: qsTr("Title")
                         checkable: true
@@ -194,11 +197,6 @@ StackView
             }
         ]
 
-        Notes
-        {
-            id: notesList
-        }
-
         listDelegate: CardDelegate
         {
             anchors.horizontalCenter: parent.horizontalCenter
@@ -234,8 +232,8 @@ StackView
 
             CardDelegate
             {
-               anchors.fill: parent
-               anchors.margins: Maui.Style.space.medium
+                anchors.fill: parent
+                anchors.margins: Maui.Style.space.medium
 
                 onClicked:
                 {
@@ -262,7 +260,10 @@ StackView
         Connections
         {
             target: cardsView.holder
-            onActionTriggered: newNote()
+            function onActionTriggered()
+            {
+                newNote()
+            }
         }
 
         Menu

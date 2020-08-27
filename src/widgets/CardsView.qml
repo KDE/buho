@@ -9,7 +9,6 @@ MauiLab.AltBrowser
     id: control
 
     viewType: MauiLab.AltBrowser.ViewType.Grid
-    property alias menu : cardMenu
     property int defaultSize : 300
 
     signal itemClicked(int index)
@@ -19,9 +18,4 @@ MauiLab.AltBrowser
     gridView.topMargin: Maui.Style.contentMargins
     listView.topMargin: Maui.Style.contentMargins
     listView.spacing: Maui.Style.space.big
-
-    CardMenu
-    {
-        id: cardMenu
-    }
 }

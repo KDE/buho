@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.2 as Maui
 
 ItemDelegate
 {
@@ -48,6 +48,18 @@ ItemDelegate
         emoji: "qrc:/view-notes.svg"
         emojiSize: Maui.Style.iconSizes.large
         isMask: true
+    }
+
+    Kirigami.Icon
+    {
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.margins: Maui.Style.space.medium
+        source: "love"
+        color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
+        height: Maui.Style.iconSizes.small
+        width: height
+        visible: model.favorite == 1
     }
 
     ColumnLayout
@@ -111,7 +123,7 @@ ItemDelegate
             Layout.alignment: Qt.AlignLeft
             Layout.fillHeight: true
             Layout.fillWidth: true
-            sourceComponent: typeof model.content !== 'undefined' ? bodyComponent : undefined
+            sourceComponent:  model.content ? bodyComponent : null
         }
 
         Loader
@@ -123,7 +135,7 @@ ItemDelegate
             Layout.alignment: Qt.AlignCenter
             clip: true
             Layout.topMargin: Maui.Style.space.medium
-            sourceComponent:  typeof model.preview !== 'undefined' ? imgComponent : undefined
+            sourceComponent:  model.preview ? imgComponent : null
         }
     }
 
@@ -135,7 +147,7 @@ ItemDelegate
         {
             id: body
             padding: 0
-            visible: typeof model.content !== 'undefined' && body.text.length > 0
+            visible: model.content && body.text.length > 0
             enabled: false
             text: model.content ? model.content : ""
             color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
@@ -146,7 +158,7 @@ ItemDelegate
             background: Rectangle
             {
                 color: "transparent"
-            }           
+            }
         }
     }
 

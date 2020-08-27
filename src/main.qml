@@ -13,16 +13,11 @@ Maui.ApplicationWindow
     id: root
     title: qsTr("Buho")
 
-    Maui.App.handleAccounts: true
-    Maui.App.description: qsTr("Buho allows you to take quick notes organize notes as books.")
-    Maui.App.iconName: "qrc:/buho.svg"
-
     readonly property var views : ({
                                        notes: 0,
                                        books: 1
                                    })
 
-    //    headBar.visible: Kirigami.Settings.isMobile ? !Qt.inputMethod.visible : true
     altHeader: Kirigami.Settings.isMobile
 
     mainMenu: MenuItem
@@ -32,9 +27,8 @@ Maui.ApplicationWindow
         onTriggered: _settingsDialog.open()
     }
 
-    Maui.PieButton
+    Maui.FloatingButton
     {
-        id: addButton
         z: 999
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -43,19 +37,87 @@ Maui.ApplicationWindow
 
         icon.name: "list-add"
         icon.color: Kirigami.Theme.highlightedTextColor
-        alignment: Qt.AlignLeft
+        onClicked: _newNoteDialog.open()
+    }
 
-        Action
+    Maui.Dialog
+    {
+        id: _newNoteDialog
+        rejectButton.visible : true
+        acceptButton.visible : false
+        page.padding: 0
+
+        onRejected: close()
+
+        Maui.AlternateListItem
         {
-            icon.name: "view-pim-notes"
-            onTriggered: notesView.newNote()
+            Layout.fillWidth: true
+            implicitHeight: Maui.Style.rowHeight * 2
+            alt: false
+
+            Maui.ListItemTemplate
+            {
+                anchors.fill:parent
+                hovered: parent.hovered
+                iconSizeHint: Math.min(height, Maui.Style.iconSizes.big)
+                iconSource: "view-pim-notes"
+                label1.text: i18n("New note")
+                label2.text: i18n("Create a simple note")
+            }
+
+            onClicked:
+            {
+                notesView.newNote()
+                _newNoteDialog.close()
+            }
         }
 
-        Action
+        Maui.AlternateListItem
         {
-            icon.name: "view-pim-journal"
-            onTriggered: newBook()
+            alt: true
+            Layout.fillWidth: true
+            implicitHeight: Maui.Style.rowHeight * 2
+
+            Maui.ListItemTemplate
+            {
+                anchors.fill:parent
+                hovered: parent.hovered
+                iconSizeHint: Math.min(height, Maui.Style.iconSizes.big)
+                iconSource: "view-pim-journal"
+                label1.text: i18n("New book")
+                label2.text: i18n("Create a new book to organize notes")
+            }
+
+            onClicked:
+            {
+                newBook()
+                _newNoteDialog.close()
+            }
         }
+
+        Maui.AlternateListItem
+        {
+            alt: false
+            Layout.fillWidth: true
+            implicitHeight: Maui.Style.rowHeight * 2
+
+            Maui.ListItemTemplate
+            {
+                anchors.fill:parent
+                hovered: parent.hovered
+                iconSizeHint: Math.min(height, Maui.Style.iconSizes.big)
+                iconSource: "view-pim-journal"
+                label1.text: i18n("New book & chapters")
+                label2.text: i18n("Create a new book and all the wanted chapters quickly")
+            }
+
+            onClicked:
+            {
+                newBook()
+                _newNoteDialog.close()
+            }
+        }
+
     }
 
     Maui.SettingsDialog
@@ -135,7 +197,7 @@ Maui.ApplicationWindow
 
     //    /***** COMPONENTS *****/
 
-     NewBookDialog
+    NewBookDialog
     {
         id: newBookDialog
         onBookSaved:
