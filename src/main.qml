@@ -20,7 +20,7 @@ Maui.ApplicationWindow
 
     altHeader: Kirigami.Settings.isMobile
 
-    mainMenu: MenuItem
+    mainMenu: Action
     {
         text: qsTr("Settings")
         icon.name: "settings-configure"
