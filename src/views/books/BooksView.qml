@@ -15,6 +15,7 @@ Item
     property alias cardsView : cardsView
     property bool showDetails: false
     property var currentBook : ({})
+    readonly property bool editing : _stackView.depth > 1
 
     StackView
     {

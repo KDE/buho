@@ -18,6 +18,7 @@ StackView
     property alias cardsView : cardsView
     property alias list : notesList
     property alias currentIndex : cardsView.currentIndex
+    readonly property bool editing : control.depth > 1
 
     function setNote(note)
     {

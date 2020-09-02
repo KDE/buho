@@ -19,6 +19,7 @@ Maui.ApplicationWindow
                                    })
 
     altHeader: Kirigami.Settings.isMobile
+    autoHideHeader: swipeView.currentItem.editing
 
     mainMenu: Action
     {
