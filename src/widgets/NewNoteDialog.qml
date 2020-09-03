@@ -10,9 +10,9 @@ Maui.Page
     property alias editor: _editor
     property string backgroundColor: note.color ? note.color : Kirigami.Theme.backgroundColor
     property bool showEditActions : false
-    signal noteSaved(var note)
-
     property var note : ({})
+
+    signal noteSaved(var note)
 
     footBar.rightContent: Button
     {
@@ -67,6 +67,7 @@ Maui.Page
             Layout.fillHeight: true
             Layout.fillWidth: true
             body.font.pointSize: Maui.Style.fontSizes.huge
+            autoHideHeader: true
 
             Kirigami.Theme.backgroundColor: control.backgroundColor
             Kirigami.Theme.textColor: control.backgroundColor.length ? Qt.darker(control.backgroundColor, 2) : control.Kirigami.Theme.textColor
