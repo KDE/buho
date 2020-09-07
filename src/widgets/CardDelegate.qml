@@ -81,7 +81,7 @@ ItemDelegate
             Layout.alignment: Qt.AlignLeft
 
             Layout.fillWidth: true
-            text: Qt.formatDateTime(new Date(model.modified), "d MMM h:mm")
+            text: Qt.formatDateTime(new Date(model.modified), "h:mm d MMM yyyy")
             color: model.color ? Qt.darker(model.color) : Kirigami.Theme.textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere

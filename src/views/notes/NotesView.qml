@@ -106,95 +106,67 @@ StackView
         }
 
         headBar.rightContent: [
-            ToolButton
+            Maui.ToolButtonMenu
             {
                 icon.name: "view-sort"
-                onClicked: sortMenu.open();
 
-                Menu
+                MenuItem
                 {
-                    id: sortMenu
-
-                    Labs.MenuItemGroup
-                    {
-                        id: orderGroup
-                    }
-
-                    Labs.MenuItemGroup
-                    {
-                        id: sortGroup
-                    }
-
-                    MenuItem
-                    {
-                        text: qsTr("Ascedent")
-                        checkable: true
-                        checked: notesList.order === Notes.ASC
-                        onTriggered: notesList.order = Notes.ASC
-                    }
-
-                    MenuItem
-                    {
-                        text: qsTr("Descendent")
-                        checkable: true
-                        checked: notesList.order === Notes.DESC
-                        onTriggered: notesList.order = Notes.DESC
-                    }
-
-                    MenuSeparator{}
-
-                    Labs.MenuItem
-                    {
-                        text: qsTr("Title")
-                        checkable: true
-                        checked: notesList.sortBy === Notes.TITLE
-                        onTriggered: notesList.sortBy = Notes.TITLE
-                        group: orderGroup
-                    }
-
-                    Labs.MenuItem
-                    {
-                        text: qsTr("Color")
-                        checkable: true
-                        checked: notesList.sortBy === Notes.COLOR
-                        onTriggered: notesList.sortBy = Notes.COLOR
-                        group: orderGroup
-                    }
-
-                    Labs.MenuItem
-                    {
-                        text: qsTr("Add date")
-                        checkable: true
-                        checked: notesList.sortBy === Notes.ADDDATE
-                        onTriggered: notesList.sortBy = Notes.ADDDATE
-                        group: orderGroup
-                    }
-
-                    Labs.MenuItem
-                    {
-                        text: qsTr("Updated")
-                        checkable: true
-                        checked: notesList.sortBy === Notes.Modified
-                        onTriggered: notesList.sortBy = Notes.Modified
-                        group: orderGroup
-                    }
-
-                    Labs.MenuItem
-                    {
-                        text: qsTr("Favorite")
-                        checkable: true
-                        checked: notesList.sortBy === Notes.FAVORITE
-                        onTriggered: notesList.sortBy = Notes.FAVORITE
-                        group: orderGroup
-                    }
+                    text: qsTr("Ascedent")
+                    checkable: true
+                    checked: notesModel.sortOrder === Qt.AscendingOrder
+                    onTriggered: notesModel.sortOrder = Qt.AscendingOrder
                 }
-            },
-            ToolButton
-            {
-                id: favButton
-                icon.name: "love"
-                checkable: true
-                icon.color: checked ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+
+                MenuItem
+                {
+                    text: qsTr("Descendent")
+                    checkable: true
+                    checked: notesModel.sortOrder === Qt.DescendingOrder
+                    onTriggered: notesModel.sortOrder = Qt.DescendingOrder
+                }
+
+                MenuSeparator{}
+
+                MenuItem
+                {
+                    text: qsTr("Title")
+                    checkable: true
+                    checked: notesModel.sort === "title"
+                    onTriggered: notesModel.sort = "title"
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Color")
+                    checkable: true
+                    checked: notesModel.sort === "color"
+                    onTriggered: notesModel.sort = "color"
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Creation date")
+                    checkable: true
+                    checked: notesModel.sort === "date"
+                    onTriggered: notesModel.sort = "date"
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Updated")
+                    checkable: true
+                    checked: notesModel.sort === "modified"
+                    onTriggered: notesModel.sort = "modified"
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Favorite")
+                    checkable: true
+                    checked: notesModel.sort === "favorite"
+                    onTriggered: notesModel.sort = "favorite"
+                }
             }
         ]
 

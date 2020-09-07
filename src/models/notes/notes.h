@@ -16,35 +16,10 @@ class NotesSyncer;
 class Notes : public MauiList
 {
     Q_OBJECT
-    Q_PROPERTY(SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
-    Q_PROPERTY(ORDER order READ getOrder WRITE setOrder NOTIFY orderChanged)
 
-public:    
-    enum ORDER : uint8_t
-    {
-        DESC,
-        ASC
-    };
-    Q_ENUM(ORDER)
-
-    enum SORTBY : uint8_t
-    {
-        TITLE = FMH::MODEL_KEY::TITLE,
-        ADDDATE = FMH::MODEL_KEY::ADDDATE,
-        MODIFIED = FMH::MODEL_KEY::MODIFIED,
-        COLOR = FMH::MODEL_KEY::COLOR,
-        FAVORITE = FMH::MODEL_KEY::FAVORITE,
-        PIN = FMH::MODEL_KEY::PIN
-    };
-    Q_ENUM(SORTBY)
-
+public:
     explicit Notes(QObject *parent = nullptr);
     FMH::MODEL_LIST items() const override final;
-
-    void setSortBy(const SORTBY &sort);
-    SORTBY getSortBy() const;
-    void setOrder(const ORDER &order);
-    ORDER getOrder() const;
 
 private:
     NotesSyncer *syncer;
@@ -54,14 +29,7 @@ private:
 
     void sortList();
 
-    SORTBY sort = SORTBY::MODIFIED;
-    ORDER order = ORDER::DESC;
-
     void appendNote(FMH::MODEL note);
-
-signals:
-    void orderChanged();
-    void sortByChanged();
 
 public slots:
     QVariantMap get(const int &index) const;

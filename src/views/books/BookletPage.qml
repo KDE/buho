@@ -152,15 +152,10 @@ Maui.Page
                     width: parent.width
                     label: index+1  + " - " + model.title
 
-                    Connections
+                    onClicked:
                     {
-                        target:_delegate
-
-                        onClicked:
-                        {
-                            _listView.currentIndex = index
-                            currentBooklet =  _booksList.booklet.get(index)
-                        }
+                        _listView.currentIndex = index
+                        currentBooklet =  _booksList.booklet.get(index)
                     }
                 }
             }

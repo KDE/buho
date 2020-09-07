@@ -47,6 +47,7 @@ Maui.ApplicationWindow
         rejectButton.visible : true
         acceptButton.visible : false
         page.padding: 0
+        spacing: 0
 
         onRejected: close()
 
