@@ -20,7 +20,6 @@ set(buho_SRCS
     db/db.cpp
     buho.cpp
     models/notes/notes.cpp
-    models/links/links.cpp
     models/books/books.cpp
     models/books/booklet.cpp
     providers/nextnote.cpp
@@ -29,7 +28,6 @@ set(buho_SRCS
     syncing/notessyncer.cpp
     controllers/notes/notescontroller.cpp
     controllers/books/bookscontroller.cpp
-    controllers/links/linkscontroller.cpp
     )
 
 set(buho_HDRS
@@ -37,7 +35,6 @@ set(buho_HDRS
     buho.h
     utils/owl.h
     models/notes/notes.h
-    models/links/links.h
     models/books/books.h
     models/books/booklet.h
     providers/nextnote.h
@@ -47,7 +44,6 @@ set(buho_HDRS
     syncing/notessyncer.h
     controllers/notes/notescontroller.h
     controllers/books/bookscontroller.h
-    controllers/links/linkscontroller.h
     )
 
 set(buho_ASSETS

@@ -1,12 +1,10 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
-import org.kde.mauikit 1.0 as Maui
-import org.kde.mauikit 1.1 as MauiLab
+import org.kde.mauikit 1.2 as Maui
 
 import org.kde.kirigami 2.7 as Kirigami
 import Notes 1.0
-import Qt.labs.platform 1.0 as Labs
 
 import "../../widgets"
 
@@ -61,6 +59,7 @@ StackView
         holder.emojiSize: Maui.Style.iconSizes.huge
         holder.title :qsTr("No notes!")
         holder.body: qsTr("Click here to create a new note")
+        viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
         model: Maui.BaseModel
         {
@@ -69,33 +68,35 @@ StackView
             {
                 id: notesList
             }
+           sortOrder: Qt.DescendingOrder
+           sort: "modified"
             recursiveFilteringEnabled: true
             sortCaseSensitivity: Qt.CaseInsensitive
             filterCaseSensitivity: Qt.CaseInsensitive
         }
 
         headBar.visible: !holder.visible
-        headBar.leftContent: Maui.ToolActions
-        {
-            autoExclusive: true
-            expanded: isWide
-            currentIndex : cardsView.viewType === MauiLab.AltBrowser.ViewType.List ? 0 : 1
-            display: ToolButton.TextBesideIcon
+//        headBar.leftContent: Maui.ToolActions
+//        {
+//            autoExclusive: true
+//            expanded: isWide
+//            currentIndex : cardsView.viewType === MauiLab.AltBrowser.ViewType.List ? 0 : 1
+//            display: ToolButton.TextBesideIcon
 
-            Action
-            {
-                text: qsTr("List")
-                icon.name: "view-list-details"
-                onTriggered: cardsView.viewType = MauiLab.AltBrowser.ViewType.List
-            }
+//            Action
+//            {
+//                text: qsTr("List")
+//                icon.name: "view-list-details"
+//                onTriggered: cardsView.viewType = MauiLab.AltBrowser.ViewType.List
+//            }
 
-            Action
-            {
-                text: qsTr("Cards")
-                icon.name: "view-list-icons"
-                onTriggered: cardsView.viewType= MauiLab.AltBrowser.ViewType.Grid
-            }
-        }
+//            Action
+//            {
+//                text: qsTr("Cards")
+//                icon.name: "view-list-icons"
+//                onTriggered: cardsView.viewType= MauiLab.AltBrowser.ViewType.Grid
+//            }
+//        }
 
         headBar.middleContent: Maui.TextField
         {

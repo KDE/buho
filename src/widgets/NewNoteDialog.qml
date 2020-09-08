@@ -75,11 +75,6 @@ Maui.Page
             document.enableSyntaxHighlighting: false
             body.placeholderText: qsTr("Title\nBody")
             footBar.visible: false
-            headBar.leftContent: ToolButton
-            {
-                icon.name: "image"
-                icon.color: control.Kirigami.Theme.textColor
-            }
 
             headBar.farLeftContent: ToolButton
             {
@@ -108,7 +103,6 @@ Maui.Page
             }
 
             list.strict: true
-            list.abstract: true
             list.key: "notes"
             list.lot: control.note.url ? control.note.url : " "
 //            onTagRemovedClicked: list.removeFromAbstract(index)

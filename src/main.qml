@@ -48,14 +48,13 @@ Maui.ApplicationWindow
         acceptButton.visible : false
         page.padding: 0
         spacing: 0
-
         onRejected: close()
 
         Maui.AlternateListItem
         {
             Layout.fillWidth: true
             implicitHeight: Maui.Style.rowHeight * 2
-            alt: false
+            alt: true
 
             Maui.ListItemTemplate
             {
@@ -76,7 +75,7 @@ Maui.ApplicationWindow
 
         Maui.AlternateListItem
         {
-            alt: true
+            alt: false
             Layout.fillWidth: true
             implicitHeight: Maui.Style.rowHeight * 2
 
@@ -99,7 +98,7 @@ Maui.ApplicationWindow
 
         Maui.AlternateListItem
         {
-            alt: false
+            alt: true
             Layout.fillWidth: true
             implicitHeight: Maui.Style.rowHeight * 2
 
