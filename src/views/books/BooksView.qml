@@ -41,6 +41,19 @@ StackView
             onCleared: _booksModel.filter = ""
         }
 
+        Maui.FloatingButton
+        {
+            z: parent.z + 1
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: height
+            height: Maui.Style.toolBarHeight
+
+            icon.name: "list-add"
+            icon.color: Kirigami.Theme.highlightedTextColor
+            onClicked: newBook()
+        }
+
         Maui.Holder
         {
             id: _holder
@@ -59,7 +72,7 @@ StackView
             viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
             anchors.fill: parent
-            gridView.itemSize: 180
+            gridView.itemSize: 140
             gridView.itemHeight: gridView.itemSize * 1.2
             gridView.margins: Kirigami.Settings.isMobile ? 0 : Maui.Style.space.big
 
@@ -69,10 +82,16 @@ StackView
             model: Maui.BaseModel
             {
                 id: _booksModel
+                sortOrder: Qt.DescendingOrder
+                sort: "modified"
+                recursiveFilteringEnabled: true
+                sortCaseSensitivity: Qt.CaseInsensitive
+                filterCaseSensitivity: Qt.CaseInsensitive
+
                 list: Books
                 {
                     id: _booksList
-                    currentBook: cardsView.currentIndex
+                    currentBook: mappedIndex(cardsView.currentIndex)
                 }
             }
 
@@ -90,45 +109,49 @@ StackView
                 RowLayout
                 {
                     anchors.fill: parent
+
                     Rectangle
                     {
                         Layout.fillHeight: true
                         Layout.preferredWidth: height
-                        Layout.margins: Maui.Style.space.tiny
+                        Layout.margins: Maui.Style.space.small
                         color: model.color
                         radius: Maui.Style.radiusV
 
-                        Maui.Badge
-                        {
-                            height: parent.height * 0.6
-                            width: height
-                            anchors.centerIn: parent
-                            color: Qt.lighter(parent.color)
-                            Kirigami.Theme.backgroundColor: Kirigami.Theme.neutralTextColor
-                            Kirigami.Theme.textColor: Qt.darker(Kirigami.Theme.neutralTextColor, 2.4)
-radius: 4
-                            text: model.count
-                        }
+                       Label
+                       {
+                           text: model.title[0].toUpperCase()
+                           font.pointSize: Maui.Style.iconSizes.big
+                           color: Qt.lighter(parent.color)
+                           anchors.centerIn: parent
+                           font.family: "Lobster"
+                       }
                     }
 
                     Maui.ListItemTemplate
                     {
                         Layout.fillHeight: true
                         Layout.fillWidth: true
+                        rightMargin: Maui.Style.space.small
                         isCurrentItem: _listDelegate.isCurrentItem
                         hovered: _listDelegate.hovered
                         label1.text: model.title
-//                        labe1.font.bold: true
+                        //                        labe1.font.bold: true
                         label1.font.weight: Font.Bold
                         label2.text: Qt.formatDateTime(new Date(model.modified), "d MMM yyyy")
 
+                        Maui.Badge
+                        {
+                            radius: 4
+                            text: model.count
+                        }
                     }
                 }
 
                 onClicked:
                 {
                     cardsView.currentIndex = index
-                    control.currentBook = _booksList.get(index)
+                    control.currentBook = _booksModel.get(cardsView.currentIndex)
                     control.push(_bookletComponent)
                 }
 
@@ -139,9 +162,8 @@ radius: 4
                 id: _delegate
 
                 width: cardsView.gridView.cellWidth
-                height: cardsView.gridView.itemHeight
+                height: cardsView.gridView.cellHeight
                 isCurrentItem: GridView.isCurrentItem
-                padding: Maui.Style.space.small
 
                 background: Item {}
 
@@ -152,7 +174,9 @@ radius: 4
 
                 ColumnLayout
                 {
-                    anchors.fill: parent
+                    height: cardsView.gridView.itemHeight
+                    width: cardsView.gridView.itemSize -20
+                    anchors.centerIn: parent
                     spacing: Maui.Style.space.medium
                     Rectangle
                     {
@@ -161,16 +185,12 @@ radius: 4
                         color: model.color
                         radius: Maui.Style.radiusV
 
-                        Maui.Badge
+                        Label
                         {
-                            height: parent.height * 0.6
-                            width: height
-                            anchors.centerIn: parent
+                            text: model.title[0].toUpperCase()
+                            font.pointSize: Maui.Style.iconSizes.huge
                             color: Qt.lighter(parent.color)
-                            Kirigami.Theme.backgroundColor: Kirigami.Theme.neutralTextColor
-                            Kirigami.Theme.textColor: Qt.darker(Kirigami.Theme.neutralTextColor, 2.4)
-radius: 4
-                            text: model.count
+                            anchors.centerIn: parent
                         }
                     }
 
@@ -180,16 +200,22 @@ radius: 4
                         hovered: _delegate.hovered
                         Layout.fillWidth: true
                         label1.text: model.title
-//                        labe1.font.bold: true
+                        //                        labe1.font.bold: true
                         label1.font.weight: Font.Bold
                         label2.text: Qt.formatDateTime(new Date(model.modified), "d MMM yyyy")
+
+                        Maui.Badge
+                        {
+                            radius: 4
+                            text: model.count
+                        }
                     }
                 }
 
                 onClicked:
                 {
                     cardsView.currentIndex = index
-                    control.currentBook = _booksList.get(index)
+                    control.currentBook = _booksModel.get(index)
                     control.push(_bookletComponent)
                 }
             }

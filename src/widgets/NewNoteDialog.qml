@@ -66,9 +66,11 @@ Maui.Page
             document.autoReload: true
             Layout.fillHeight: true
             Layout.fillWidth: true
-            body.font.pointSize: Maui.Style.fontSizes.huge
-            autoHideHeader: true
 
+//            body.font.pointSize: Maui.Style.fontSizes.huge
+            body.font: root.font
+
+            autoHideHeader: true
             Kirigami.Theme.backgroundColor: control.backgroundColor
             Kirigami.Theme.textColor: control.backgroundColor.length ? Qt.darker(control.backgroundColor, 2) : control.Kirigami.Theme.textColor
 

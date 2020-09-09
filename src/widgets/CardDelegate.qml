@@ -9,9 +9,11 @@ import org.kde.mauikit 1.2 as Maui
 ItemDelegate
 {
     id: control
-    property string noteColor : model.color ? model.color : Kirigami.Theme.backgroundColor
     implicitWidth: Maui.Style.unit * 200
     implicitHeight: Maui.Style.unit * 120
+
+    property string noteColor : model.color ? model.color : Kirigami.Theme.backgroundColor
+
     property int cardRadius: Maui.Style.radiusV
 
     property bool condition : true
@@ -24,8 +26,8 @@ ItemDelegate
     background: Rectangle
     {
         border.color: Qt.darker(color, 1.2)
-        color:  noteColor
-        radius: cardRadius
+        color:  control.noteColor
+        radius: control.cardRadius
         opacity: hovered ? 0.8 : 1
     }
 
@@ -78,13 +80,14 @@ ItemDelegate
             Layout.leftMargin: Maui.Style.space.medium
             Layout.topMargin: Maui.Style.space.medium
             Layout.rightMargin: Maui.Style.space.medium
-            Layout.alignment: Qt.AlignLeft
+            Layout.alignment: Qt.AlignLeft | Qt.AlignTop
 
             Layout.fillWidth: true
             text: Qt.formatDateTime(new Date(model.modified), "h:mm d MMM yyyy")
             color: model.color ? Qt.darker(model.color) : Kirigami.Theme.textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
+            font.family: root.font.family
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: Maui.Style.fontSizes.small
@@ -98,15 +101,16 @@ ItemDelegate
             Layout.leftMargin: Maui.Style.space.medium
             Layout.bottomMargin: Maui.Style.space.medium
             Layout.rightMargin: Maui.Style.space.medium
-            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            Layout.alignment: Qt.AlignLeft | Qt.AlignTop
             Layout.preferredHeight: model.preview ? parent.height * 0.4 : implicitHeight
 
             Layout.fillWidth: true
-            Layout.fillHeight: true
+
             text: model.title
             color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
+            font.family: root.font.family
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: Maui.Style.fontSizes.large
@@ -120,7 +124,7 @@ ItemDelegate
             Layout.bottomMargin: Maui.Style.space.medium
             Layout.rightMargin: Maui.Style.space.medium
             Layout.topMargin: title.visible ? 0 : Maui.Style.space.medium
-            Layout.alignment: Qt.AlignLeft
+            Layout.alignment: Qt.AlignLeft | Qt.AlignTop
             Layout.fillHeight: true
             Layout.fillWidth: true
             sourceComponent:  model.content ? bodyComponent : null
@@ -152,7 +156,7 @@ ItemDelegate
             text: model.content ? model.content : ""
             color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
             wrapMode: TextEdit.WrapAnywhere
-
+            font.family: root.font
             textFormat : TextEdit.AutoText
             font.pointSize: Maui.Style.fontSizes.big
             background: Rectangle
