@@ -69,7 +69,7 @@ ItemDelegate
         height: parent.height * 0.9
         width: parent.width * 0.9
         anchors.centerIn: parent
-        spacing: 0
+        spacing: Maui.Style.space.small
         clip: true
 
         Label

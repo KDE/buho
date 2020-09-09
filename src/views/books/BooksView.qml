@@ -124,7 +124,6 @@ StackView
                            font.pointSize: Maui.Style.iconSizes.big
                            color: Qt.lighter(parent.color)
                            anchors.centerIn: parent
-                           font.family: "Lobster"
                        }
                     }
 
