@@ -113,6 +113,7 @@ Maui.ApplicationWindow
         Maui.SettingsSection
         {
             title: qsTr("Books")
+
             description: qsTr("Configure the app plugins and behavior.")
 
             Maui.SettingTemplate

@@ -78,6 +78,7 @@ StackView
 
             listView.topMargin: Maui.Style.contentMargins
             listView.spacing: Maui.Style.space.medium
+            listView.snapMode: ListView.SnapOneItem
 
             model: Maui.BaseModel
             {

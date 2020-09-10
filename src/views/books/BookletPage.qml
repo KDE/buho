@@ -78,10 +78,10 @@ StackView
                 filterCaseSensitivity: Qt.CaseInsensitive
             }
 
-            spacing: Maui.Style.space.medium
+            spacing: Maui.Style.space.big
             delegate: CardDelegate
             {
-                width: Math.min(_listView.width * 0.7, 400)
+                width: Math.min(Math.max(200, _listView.width * 0.7), 400)
                 noteColor: Qt.lighter(Kirigami.Theme.backgroundColor)
                 height: _listView.height
 
