@@ -88,7 +88,7 @@ StackView
                 onClicked:
                 {
                     _listView.currentIndex = index
-                    currentBooklet = _bookletModel.get(index)
+                    currentBooklet = model
                 }
             }
         }

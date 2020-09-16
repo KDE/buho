@@ -151,7 +151,7 @@ StackView
                 onClicked:
                 {
                     cardsView.currentIndex = index
-                    control.currentBook = _booksModel.get(cardsView.currentIndex)
+                    control.currentBook = model
                     control.push(_bookletComponent)
                 }
 
@@ -215,7 +215,7 @@ StackView
                 onClicked:
                 {
                     cardsView.currentIndex = index
-                    control.currentBook = _booksModel.get(index)
+                    control.currentBook = model
                     control.push(_bookletComponent)
                 }
             }

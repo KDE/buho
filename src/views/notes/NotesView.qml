@@ -193,20 +193,20 @@ StackView
             onClicked:
             {
                 currentIndex = index
-                setNote(notesList.get(index))
+                setNote(model)
             }
 
             onRightClicked:
             {
                 currentIndex = index
-                currentNote = notesList.get(index)
+                currentNote = model
                 _notesMenu.popup()
             }
 
             onPressAndHold:
             {
                 currentIndex = index
-                currentNote = notesList.get(index)
+                currentNote = model
                 _notesMenu.popup()
             }
         }
@@ -225,20 +225,20 @@ StackView
                 onClicked:
                 {
                     currentIndex = index
-                    setNote(notesList.get(index))
+                    setNote(model)
                 }
 
                 onRightClicked:
                 {
                     currentIndex = index
-                    currentNote = notesList.get(index)
+                    currentNote = model
                     _notesMenu.popup()
                 }
 
                 onPressAndHold:
                 {
                     currentIndex = index
-                    currentNote = notesList.get(index)
+                    currentNote = model
                     _notesMenu.popup()
                 }
             }
@@ -326,6 +326,5 @@ StackView
             }
         }
     }
-
 }
 
