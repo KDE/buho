@@ -41,16 +41,16 @@ static const QMap<TABLE,QString> TABLEMAP =
 };
 
 const static inline QUrl CollectionDBPath = QUrl::fromLocalFile (QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/");
-const static inline  QUrl NotesPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/notes/");
-const static inline  QUrl BooksPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/books/");
+const static inline QUrl NotesPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/notes/");
+const static inline QUrl BooksPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/books/");
 
-const static inline  QString appName = "buho";
-const static inline  QString displayName = "Buho";
-const static inline  QString version = BUHO_VERSION_STRING;
+const static inline QString appName = "buho";
+const static inline QString displayName = "Buho";
+const static inline QString version = BUHO_VERSION_STRING;
 const static inline QString orgName = QStringLiteral("Maui");
 const static inline QString orgDomain = QStringLiteral("org.maui.buho");
-const static inline  QString comment = "Notes taking organizer";
-const static inline  QString DBName = "collection.db";
+const static inline QString comment = "Notes taking organizer";
+const static inline QString DBName = "collection.db";
 
 inline QString saveImage(QByteArray array, const QString &path)
 {

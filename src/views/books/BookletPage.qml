@@ -21,7 +21,6 @@ StackView
 
     initialItem:  Maui.Page
     {
-        margins: Maui.Style.space.big
         headBar.visible: true
         headBar.farLeftContent: ToolButton
         {
@@ -66,6 +65,8 @@ StackView
             id: _listView
             visible: _booksList.booklet.count >0
             anchors.fill: parent
+            margins: Maui.Style.space.big
+
             orientation: ListView.Horizontal
             model:  Maui.BaseModel
             {

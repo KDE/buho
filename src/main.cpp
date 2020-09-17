@@ -62,6 +62,8 @@ int Q_DECL_EXPORT main(int argc, char *argv[]) {
 	MauiKit::getInstance().registerTypes();
 #endif
 
+    Buho buho;
+
 	QQmlApplicationEngine engine;
 
 	engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
