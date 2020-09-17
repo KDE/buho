@@ -6,40 +6,30 @@ import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.2 as Maui
 
-ItemDelegate
+Maui.ItemDelegate
 {
     id: control
     implicitWidth: Maui.Style.unit * 200
     implicitHeight: Maui.Style.unit * 120
 
-    property string noteColor : model.color ? model.color : Kirigami.Theme.backgroundColor
-
+    property string noteColor : model.color ? model.color : "transparent"
     property int cardRadius: Maui.Style.radiusV
 
-    property bool condition : true
+    draggable: true
 
-    signal rightClicked();
+    Drag.keys: ["text/uri-list"]
+    Drag.mimeData: Drag.active ?
+                       {
+                           "text/uri-list": control.filterSelectedItems(model.path)
+                       } : {}
 
-    visible: condition
-
-    hoverEnabled: !Kirigami.Settings.isMobile
     background: Rectangle
     {
+    Kirigami.Theme.inherit: false
         border.color: Qt.darker(color, 1.2)
-        color:  control.noteColor
+        color:  control.noteColor !== "transparent" ? control.noteColor : Qt.lighter(Kirigami.Theme.backgroundColor)
         radius: control.cardRadius
         opacity: hovered ? 0.8 : 1
-    }
-
-    MouseArea
-    {
-        anchors.fill: parent
-        acceptedButtons:  Qt.RightButton
-        onClicked:
-        {
-            if(!Kirigami.Settings.isMobile && mouse.button === Qt.RightButton)
-                rightClicked()
-        }
     }
 
     Maui.Holder
@@ -49,7 +39,7 @@ ItemDelegate
         body: qsTr("Edit this note")
         emoji: "qrc:/view-notes.svg"
         emojiSize: Maui.Style.iconSizes.large
-        isMask: true
+        Kirigami.Theme.textColor: date.color
     }
 
     Kirigami.Icon

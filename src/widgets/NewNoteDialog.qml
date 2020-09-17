@@ -1,119 +1,113 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.0
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
+
 
 Maui.Page
 {
     id: control
     property alias editor: _editor
-    property string backgroundColor: note.color ? note.color : Kirigami.Theme.backgroundColor
+    property string backgroundColor: note.color ? note.color : "transparent"
     property bool showEditActions : false
     property var note : ({})
 
     signal noteSaved(var note)
 
-    footBar.rightContent: Button
+    floatingFooter: true
+
+    Maui.Editor
     {
-        text: qsTr("Save")
-        onClicked: packNote()
-    }
-
-    footBar.leftContent: [
-
-        ToolButton
-        {
-            id: favButton
-            icon.name: "love"
-            checkable: true
-            checked:  note.favorite == 1
-            icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
-
-        },
-
-        ToolButton
-        {
-            icon.name: "document-share"
-            onClicked: isAndroid ? Maui.Android.shareText(editor.body.text) :
-                                   shareDialog.show(editor.body.text)
-            icon.color: Kirigami.Theme.textColor
-        },
-
-        ToolButton
-        {
-            icon.name: "document-export"
-            icon.color: Kirigami.Theme.textColor
-        },
-
-        ToolButton
-        {
-            icon.name: "entry-delete"
-            icon.color: Kirigami.Theme.textColor
-        }
-    ]
-
-    ColumnLayout
-    {
+        id: _editor
+        fileUrl: control.note.url ? control.note.url : ""
+        showLineNumbers: false
+        document.autoReload: true
         anchors.fill: parent
-        spacing: 0
 
-        Maui.Editor
+        body.font: root.font
+
+        autoHideHeader: true
+        autoHideHeaderMargins: control.height * 0.3
+
+        Kirigami.Theme.backgroundColor: control.backgroundColor !== "transparent" ? control.backgroundColor : Kirigami.Theme.backgroundColor
+        Kirigami.Theme.textColor: control.backgroundColor  !== "transparent" ? Qt.darker(control.backgroundColor, 2) : control.Kirigami.Theme.textColor
+
+        document.enableSyntaxHighlighting: false
+        body.placeholderText: qsTr("Title\nBody")
+        footBar.visible: false
+
+        headBar.farLeftContent: ToolButton
         {
-            id: _editor
-            fileUrl: control.note.url ? control.note.url : ""
-            showLineNumbers: false
-            document.autoReload: true
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-
-//            body.font.pointSize: Maui.Style.fontSizes.huge
-            body.font: root.font
-
-            autoHideHeader: true
-            Kirigami.Theme.backgroundColor: control.backgroundColor
-            Kirigami.Theme.textColor: control.backgroundColor.length ? Qt.darker(control.backgroundColor, 2) : control.Kirigami.Theme.textColor
-
-            document.enableSyntaxHighlighting: false
-            body.placeholderText: qsTr("Title\nBody")
-            footBar.visible: false
-
-            headBar.farLeftContent: ToolButton
+            icon.name: "go-previous"
+            onClicked:
             {
-                icon.name: "go-previous"
-                onClicked: control.parent.pop(StackView.Immediate)
+                packNote()
             }
+        }
 
-            headBar.rightContent: ColorsBar
+        headBar.rightContent: [
+
+            ToolButton
+            {
+                id: favButton
+                icon.name: "love"
+                checkable: true
+                checked:  note.favorite == 1
+                icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
+
+            },
+
+            ColorsBar
             {
                 onColorPicked: control.backgroundColor = color
-            }
-        }
+                currentColor: control.backgroundColor
+            },
 
-        Maui.TagsBar
-        {
-            id: tagBar
-            position: ToolBar.Footer
-            Layout.fillWidth: true
-            allowEditMode: true
-            onTagsEdited:
+            Maui.ToolButtonMenu
             {
-                if((editor.fileUrl).toString().length > 0)
-                    tagBar.list.updateToAbstract(tags)
-                else
-                    tagBar.list.append(tags)
+                icon.name: "overflow-menu"
+
+                MenuItem
+                {
+                    text: qsTr("Share")
+                    icon.name: "document-share"
+
+                    onTriggered: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
+                                                        shareDialog.show(editor.body.text)
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Export")
+                    icon.name: "document-export"
+                }
+
+                MenuItem
+                {
+                    text: qsTr("Delete")
+                    icon.name: "entry-delete"
+                    Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+                }
             }
-
-            list.strict: true
-            list.key: "notes"
-            list.lot: control.note.url ? control.note.url : " "
-//            onTagRemovedClicked: list.removeFromAbstract(index)
-            Kirigami.Theme.backgroundColor: "transparent"
-            Kirigami.Theme.textColor: Kirigami.Theme.textColor
-
-        }
+        ]
     }
 
+    footer: Maui.TagsBar
+    {
+        id: tagBar
+        position: ToolBar.Footer
+        width: parent.width
+        allowEditMode: true
+        onTagsEdited:
+        {
+            if(editor.fileUrl)
+                tagBar.list.updateToUrls(tags)
+        }
+
+        list.strict: true
+        list.urls: editor.fileUrl ? [editor.fileUrl] : []
+    }
 
     function clear()
     {
@@ -121,26 +115,30 @@ Maui.Page
         control.note = ({})
     }
 
-    function fill(note)
-    {
-    }
-
     function packNote()
     {
-        const content =  editor.body.text
-        if(content.length == 0)
-            return;
+        if(_editor.document.modified /*|| control.note.favorite != favButton.checked */)
+        {
+            const content =  editor.body.text
+            if(content.length > 0)
+            {
+                var note  = {
+                    url: editor.fileUrl,
+                    content: content,
+                    favorite: favButton.checked ? 1 : 0,
+                    format: ".txt" //for now only simple txt files
+                }
 
-        control.noteSaved({
-                              url: editor.fileUrl,
-                              content: content,
-                              color: control.backgroundColor ?  control.backgroundColor : "",
-                              tag: tagBar.list.tags.join(","),
-                              favorite: favButton.checked ? 1 : 0,
-                              format: ".txt" //for now only simple txt files
-                          })
+                if(control.backgroundColor  !== "transparent")
+                {
+                    note["color"] = control.backgroundColor
+                }
+
+                control.noteSaved(note)
+            }
+        }
+
         control.clear()
         control.parent.pop(StackView.Immediate)
-
     }
 }

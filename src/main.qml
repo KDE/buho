@@ -26,7 +26,8 @@ Maui.ApplicationWindow
                                    })
 
     altHeader: Kirigami.Settings.isMobile
-    autoHideHeader: swipeView.currentItem.editing
+//    autoHideHeader: swipeView.currentItem.editing
+    headBar.visible: !swipeView.currentItem.editing
 
     mainMenu: Action
     {
@@ -34,123 +35,7 @@ Maui.ApplicationWindow
         icon.name: "settings-configure"
         onTriggered: _settingsDialog.open()
     }
-
-    Maui.SettingsDialog
-    {
-        id: _settingsDialog
-        Maui.SettingsSection
-        {
-            title: qsTr("Syncing")
-            description: qsTr("Configure the syncing options.")
-
-            Maui.SettingTemplate
-            {
-                label1.text: qsTr("Auto Fetch on Start Up")
-                label2.text: qsTr("Gathers album and artists artwoks from online services")
-
-                Switch
-                {
-                    checkable: true
-                }
-            }
-        }
-
-        Maui.SettingsSection
-        {
-            title: qsTr("Editor")
-            description: qsTr("Configure the syncing options.")
-
-            Maui.SettingTemplate
-            {
-                label1.text:  i18n("Font Family")
-
-                ComboBox
-                {
-//                    Layout.fillWidth: true
-                    model: Qt.fontFamilies()
-                    Component.onCompleted: currentIndex = find(root.font.family, Qt.MatchExactly)
-                    onActivated:
-                    {
-                        root.font.family = currentText
-                        Maui.FM.saveSettings("FONT", root.font, "EDITOR")
-                    }
-                }
-            }
-
-            Maui.SettingTemplate
-            {
-                label1.text:  i18n("Font Size")
-
-                SpinBox
-                {
-                    from: 0; to : 500
-                    value: root.font.pointSize
-                    onValueChanged:
-                    {
-                        root.font.pointSize = value
-                        Maui.FM.saveSettings("FONT", root.font, "EDITOR")
-                    }
-                }
-            }
-        }
-
-        Maui.SettingsSection
-        {
-            title: qsTr("Notes")
-            description: qsTr("Configure the notes view behavior.")
-            Maui.SettingTemplate
-            {
-                label1.text: qsTr("Rich Text Formating")
-                label2.text: qsTr("Gathers album and artists artwoks from online services")
-
-                Switch
-                {
-                    checkable: true
-                }
-            }
-        }
-
-        Maui.SettingsSection
-        {
-            title: qsTr("Books")
-
-            description: qsTr("Configure the app plugins and behavior.")
-
-            Maui.SettingTemplate
-            {
-                label1.text: qsTr("Show Line Numbers")
-                label2.text: qsTr("Gathers album and artists artwoks from online services")
-
-                Switch
-                {
-                    checkable: true
-                }
-            }
-
-            Maui.SettingTemplate
-            {
-                label1.text: qsTr("Support Syntax Highlighting")
-
-                Switch
-                {
-                    checkable: true
-                }
-            }
-
-            Maui.SettingTemplate
-            {
-                label1.text: qsTr("Auto Save")
-                label2.text: qsTr("Gathers album and artists artwoks from online services")
-
-                Switch
-                {
-                    checkable: true
-                }
-            }
-        }
-    }
-
-    //    /***** COMPONENTS *****/
+ //    /***** COMPONENTS *****/
 
     NewBookDialog
     {

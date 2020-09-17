@@ -28,7 +28,6 @@ enum class TABLE : uint8_t
     BOOKS,
     BOOKLETS,
     BOOKLETS_SYNC,
-    LINKS,
     NONE
 };
 
@@ -38,21 +37,19 @@ static const QMap<TABLE,QString> TABLEMAP =
     {TABLE::NOTES_SYNC,"notes_sync"},
     {TABLE::BOOKS,"books"},
     {TABLE::BOOKLETS,"booklets"},
-    {TABLE::BOOKLETS_SYNC,"booklets_sync"},
-    {TABLE::LINKS,"links"},
+    {TABLE::BOOKLETS_SYNC,"booklets_sync"}
 };
 
 const static inline QUrl CollectionDBPath = QUrl::fromLocalFile (QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/");
 const static inline  QUrl NotesPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/notes/");
 const static inline  QUrl BooksPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/books/");
-const static inline  QUrl LinksPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/links/");
 
 const static inline  QString appName = "buho";
 const static inline  QString displayName = "Buho";
 const static inline  QString version = BUHO_VERSION_STRING;
 const static inline QString orgName = QStringLiteral("Maui");
-const static inline QString orgDomain = QStringLiteral("org.maui.index");
-const static inline  QString comment = "Notes taking and link collector manager";
+const static inline QString orgDomain = QStringLiteral("org.maui.buho");
+const static inline  QString comment = "Notes taking organizer";
 const static inline  QString DBName = "collection.db";
 
 inline QString saveImage(QByteArray array, const QString &path)
@@ -73,7 +70,7 @@ inline QString saveImage(QByteArray array, const QString &path)
     return QString();
 }
 
-static inline  bool saveNoteFile(const QUrl &url, const QByteArray &data)
+static inline bool saveNoteFile(const QUrl &url, const QByteArray &data)
 {
     if(data.isEmpty())
     {

@@ -16,12 +16,12 @@ StackView
     property alias cardsView : cardsView
     property alias list : notesList
     property alias currentIndex : cardsView.currentIndex
+
     readonly property bool editing : control.depth > 1
 
     function setNote(note)
     {
         control.push(_editNoteComponent, {}, StackView.Immediate)
-        currentNote = note
         control.currentItem.editor.body.forceActiveFocus()
     }
 
@@ -193,7 +193,8 @@ StackView
             onClicked:
             {
                 currentIndex = index
-                setNote(model)
+                currentNote = model
+                setNote()
             }
 
             onRightClicked:
@@ -225,7 +226,9 @@ StackView
                 onClicked:
                 {
                     currentIndex = index
-                    setNote(model)
+                    currentNote = model
+
+                    setNote()
                 }
 
                 onRightClicked:
