@@ -65,7 +65,6 @@ StackView
             id: _listView
             visible: _booksList.booklet.count >0
             anchors.fill: parent
-            margins: Maui.Style.space.big
 
             orientation: ListView.Horizontal
             model:  Maui.BaseModel
@@ -79,12 +78,11 @@ StackView
                 filterCaseSensitivity: Qt.CaseInsensitive
             }
 
-            spacing: Maui.Style.space.big
             delegate: CardDelegate
             {
-                width: Math.min(Math.max(200, _listView.width * 0.7), 400)
+                width: Math.min(Math.max(200, parent.width * 0.7), 400)
                 noteColor: Qt.lighter(Kirigami.Theme.backgroundColor)
-                height: _listView.height
+                height: parent.height
 
                 onClicked:
                 {

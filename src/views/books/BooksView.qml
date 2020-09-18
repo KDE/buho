@@ -74,10 +74,6 @@ StackView
             anchors.fill: parent
             gridView.itemSize: 140
             gridView.itemHeight: gridView.itemSize * 1.2
-            gridView.margins: Kirigami.Settings.isMobile ? 0 : Maui.Style.space.big
-
-            listView.topMargin: Maui.Style.contentMargins
-            listView.spacing: Maui.Style.space.medium
             listView.snapMode: ListView.SnapOneItem
 
             model: Maui.BaseModel
@@ -99,11 +95,9 @@ StackView
             listDelegate: Maui.ItemDelegate
             {
                 id: _listDelegate
-                width: cardsView.width
+                width: parent.width
                 height: Maui.Style.rowHeight * 2
                 isCurrentItem: ListView.isCurrentItem
-                leftPadding: Maui.Style.space.small
-                rightPadding: Maui.Style.space.small
 
                 Kirigami.Theme.backgroundColor: Qt.lighter(control.Kirigami.Theme.backgroundColor, 2)
 

@@ -14,8 +14,5 @@ MauiLab.AltBrowser
     signal itemClicked(int index)
 
     gridView.itemSize: Math.min(defaultSize, control.width* 0.4)
-    gridView.cellHeight: defaultSize + Maui.Style.space.big
-    gridView.margins: Maui.Style.contentMargins
-    listView.topMargin: Maui.Style.contentMargins
-    listView.spacing: Maui.Style.space.big
+    gridView.cellHeight: defaultSize + Maui.Style.space.big   
 }
