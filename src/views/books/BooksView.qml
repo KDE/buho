@@ -95,7 +95,7 @@ StackView
             listDelegate: Maui.ItemDelegate
             {
                 id: _listDelegate
-                width: parent.width
+                width: ListView.view.width
                 height: Maui.Style.rowHeight * 2
                 isCurrentItem: ListView.isCurrentItem
 

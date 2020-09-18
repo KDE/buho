@@ -186,8 +186,7 @@ StackView
 
         listDelegate: CardDelegate
         {
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width - Maui.Style.space.big
+            width: ListView.view.width
             height: 150
 
             onClicked:

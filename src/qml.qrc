@@ -12,5 +12,6 @@
         <file>widgets/CardsList.qml</file>
         <file>views/books/NewBookDialog.qml</file>
         <file>views/books/BookletPage.qml</file>
+        <file>widgets/SettingsDialog.qml</file>
     </qresource>
 </RCC>
