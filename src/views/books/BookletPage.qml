@@ -9,6 +9,7 @@ import "../../widgets"
 StackView
 {
     id: control
+    clip: true
 
     property var currentBooklet : null
     signal exit()
@@ -19,7 +20,7 @@ StackView
         control.currentItem.document.load(currentBooklet.url)
     }
 
-    initialItem:  Maui.Page
+    initialItem: Maui.Page
     {
         headBar.visible: true
         headBar.farLeftContent: ToolButton
@@ -60,38 +61,66 @@ StackView
             body: qsTr("Start by creating a new chapter for your book")
         }
 
-        Maui.ListBrowser
+        ColumnLayout
         {
-            id: _listView
-            visible: _booksList.booklet.count >0
             anchors.fill: parent
+            anchors.margins: Maui.Style.space.big
 
-            orientation: ListView.Horizontal
-            model:  Maui.BaseModel
+            Maui.ListItemTemplate
             {
-                id: _bookletModel
-                list: _booksList.booklet
-                sortOrder: Qt.DescendingOrder
-                sort: "modified"
-                recursiveFilteringEnabled: true
-                sortCaseSensitivity: Qt.CaseInsensitive
-                filterCaseSensitivity: Qt.CaseInsensitive
+                Layout.fillWidth: true
+                implicitHeight: Maui.Style.rowHeight * 2
+                label1.font.pointSize: Maui.Style.fontSizes.large
+                label1.font.weight: Font.Bold
+                label1.font.bold: true
+
+                label1.text: currentBook.title
+                label2.text: "Notes in this book: " + currentBook.count
+                label3.text: Qt.formatDateTime(new Date(currentBook.modified), "d MMM yyyy")
             }
 
-            delegate: CardDelegate
+            Maui.ListBrowser
             {
-                width: Math.min(Math.max(200, parent.width * 0.7), 400)
-                noteColor: Qt.lighter(Kirigami.Theme.backgroundColor)
-                height: parent.height
+                id: _listView
+                Layout.fillHeight: true
+                Layout.fillWidth: true
 
-                onClicked:
+                visible: _booksList.booklet.count >0
+
+                margins: Maui.Style.space.big
+                spacing: margins
+                orientation: ListView.Horizontal
+
+                verticalScrollBarPolicy: ScrollBar.AlwaysOff
+
+                model: Maui.BaseModel
                 {
-                    _listView.currentIndex = index
-                    currentBooklet = model
+                    id: _bookletModel
+                    list: _booksList.booklet
+                    sortOrder: Qt.DescendingOrder
+                    sort: "modified"
+                    recursiveFilteringEnabled: true
+                    sortCaseSensitivity: Qt.CaseInsensitive
+                    filterCaseSensitivity: Qt.CaseInsensitive
+                }
+
+                delegate: CardDelegate
+                {
+                    width: Math.min(Math.max(200, ListView.view.width * 0.7), 400)
+                    noteColor: Qt.lighter(Kirigami.Theme.backgroundColor)
+                    height: ListView.view.height
+
+                    onClicked:
+                    {
+                        _listView.currentIndex = index
+                        currentBooklet = model
+                    }
                 }
             }
+
         }
-    }
+
+     }
 
     Component
     {

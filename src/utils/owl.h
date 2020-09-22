@@ -2,15 +2,9 @@
 #define OWL_H
 
 #include <QString>
-#include <QDebug>
 #include <QStandardPaths>
-#include <QImage>
 #include <QUrl>
 #include <QUuid>
-
-#ifndef STATIC_MAUIKIT
-#include "../buho_version.h"
-#endif
 
 #ifdef STATIC_MAUIKIT
 #include "fmh.h"
@@ -44,31 +38,8 @@ const static inline QUrl CollectionDBPath = QUrl::fromLocalFile (QStandardPaths:
 const static inline QUrl NotesPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/notes/");
 const static inline QUrl BooksPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/buho/books/");
 
-const static inline QString appName = "buho";
-const static inline QString displayName = "Buho";
-const static inline QString version = BUHO_VERSION_STRING;
-const static inline QString orgName = QStringLiteral("Maui");
-const static inline QString orgDomain = QStringLiteral("org.maui.buho");
-const static inline QString comment = "Notes taking organizer";
+
 const static inline QString DBName = "collection.db";
-
-inline QString saveImage(QByteArray array, const QString &path)
-{
-    if(!array.isNull()&&!array.isEmpty())
-    {
-        QImage img;
-        img.loadFromData(array);
-        QString name = path;
-        name.replace("/", "-");
-        name.replace("&", "-");
-        QString format = "JPEG";
-        if (img.save(path+".jpg", format.toLatin1(), 100))
-            return path+".jpg";
-        else  qDebug() << "couldn't save artwork";
-    }else qDebug()<<"array is empty";
-
-    return QString();
-}
 
 static inline bool saveNoteFile(const QUrl &url, const QByteArray &data)
 {
@@ -94,6 +65,7 @@ static inline bool saveNoteFile(const QUrl &url, const QByteArray &data)
 
     return false;
 }
+
 static inline const QString createId ()
 {
     return QUuid::createUuid().toString();
