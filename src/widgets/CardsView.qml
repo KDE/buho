@@ -9,10 +9,9 @@ MauiLab.AltBrowser
     id: control
 
     viewType: MauiLab.AltBrowser.ViewType.Grid
-    property int defaultSize : 300
 
     signal itemClicked(int index)
 
-    gridView.itemSize: Math.min(defaultSize, control.width* 0.4)
-    gridView.cellHeight: defaultSize + Maui.Style.space.big   
+    gridView.itemSize: Math.min(300, control.width* 0.4)
+    gridView.cellHeight: gridView.itemSize + Maui.Style.rowHeight
 }

@@ -1,7 +1,10 @@
-QT += qml
-QT += quick
-QT += sql
-QT += network
+QT *= core \
+    quick \
+    network \
+    sql \
+    qml \
+    quickcontrols2
+
 
 CONFIG += ordered
 CONFIG += c++17
@@ -24,6 +27,13 @@ linux:unix:!android {
 
 } else {
 
+    DEFINES *= \
+        COMPONENT_FM \
+        COMPONENT_TAGGING \
+        COMPONENT_ACCOUNTS \
+        COMPONENT_EDITOR \
+        MAUIKIT_STYLE
+
     android {
         message(Building for Android)
         QT += androidextras
@@ -33,15 +43,9 @@ linux:unix:!android {
         DEFINES *= ANDROID_OPENSSL
      }
 
-    DEFINES *= \
-        COMPONENT_FM \
-        COMPONENT_TAGGING \
-        COMPONENT_ACCOUNTS \
-        COMPONENT_EDITOR \
-        MAUIKIT_STYLE
-
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)
+
 
     DEFINES += STATIC_KIRIGAMI
     win32 {
@@ -68,7 +72,7 @@ SOURCES += \
     src/models/notes/notes.cpp \
     src/models/books/books.cpp \
     src/models/books/booklet.cpp \
-    src/providers/nextnote.cpp \
+    src/providers/nextnote.cpp
 
 RESOURCES += \
     src/assets/imgs.qrc \
@@ -107,8 +111,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    src/db/script.sql \
-
 include($$PWD/install.pri)
+
+ANDROID_ABIS = armeabi-v7a
 

@@ -48,8 +48,8 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
 
 #ifdef Q_OS_ANDROID
 	QGuiApplication app(argc, argv);
-	if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
-		return -1;
+    if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
+        return -1;
 #else
 	QApplication app(argc, argv);
 #endif
@@ -57,8 +57,8 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     app.setOrganizationName(QStringLiteral("Maui"));
 	app.setWindowIcon(QIcon(":/buho.png"));
 
-	MauiApp::instance ()->setIconName ("qrc:/buho.svg");
-	MauiApp::instance ()->setHandleAccounts (true);
+    MauiApp::instance ()->setIconName ("qrc:/buho.svg");
+    MauiApp::instance ()->setHandleAccounts (true);
 
     KLocalizedString::setApplicationDomain("buho");
     KAboutData about(QStringLiteral("buho"), i18n("Buho"), BUHO_VERSION_STRING, i18n("Buho allows you to take quick notes and organize notebooks."),
@@ -83,18 +83,18 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
 #endif
 
 #ifdef STATIC_MAUIKIT
-	MauiKit::getInstance().registerTypes();
+    MauiKit::getInstance().registerTypes();
 #endif
 
     Buho buho;
 
 	QQmlApplicationEngine engine;
 
-	engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
-	qmlRegisterAnonymousType<Booklet>("Booklet", 1);
-	qmlRegisterType<Notes>("Notes", 1, 0, "Notes");
-	qmlRegisterType<Books>("Books", 1, 0, "Books");
+    qmlRegisterAnonymousType<Booklet>("Booklet", 1);
+    qmlRegisterType<Notes>("Notes", 1, 0, "Notes");
+    qmlRegisterType<Books>("Books", 1, 0, "Books");
 
 	engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 	if (engine.rootObjects().isEmpty())

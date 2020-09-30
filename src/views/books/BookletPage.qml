@@ -65,6 +65,7 @@ StackView
         {
             anchors.fill: parent
             anchors.margins: Maui.Style.space.big
+            visible: _booksList.booklet.count >0
 
             Maui.ListItemTemplate
             {
@@ -84,8 +85,6 @@ StackView
                 id: _listView
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-
-                visible: _booksList.booklet.count >0
 
                 margins: Maui.Style.space.big
                 spacing: margins

@@ -13,7 +13,6 @@
 #include <MauiKit/mauiaccounts.h>
 #endif
 
-
 NotesSyncer::NotesSyncer(QObject *parent) : Syncer(parent),
 	tag(Tagging::getInstance()),
 	db(DB::getInstance()),
