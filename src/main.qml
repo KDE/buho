@@ -89,7 +89,7 @@ Maui.ApplicationWindow
             Switch
             {
                 checkable: true
-                Kirigami.FormData.label: qsTr("Rich Text Formating")
+                Kirigami.FormData.label: qsTr("Rich Text Formatting")
                 Layout.fillWidth: true
             }
         }

@@ -42,7 +42,7 @@ CardsView
 
                 MenuItem
                 {
-                    text: qsTr("Ascedent")
+                    text: qsTr("Ascendant")
                     checkable: true
                     checked: linksList.order === Links.ASC
                     onTriggered: linksList.order = Links.ASC
@@ -50,7 +50,7 @@ CardsView
 
                 MenuItem
                 {
-                    text: qsTr("Descendent")
+                    text: qsTr("Descendant")
                     checkable: true
                     checked: linksList.order === Links.DESC
                     onTriggered: linksList.order = Links.DESC

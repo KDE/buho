@@ -123,7 +123,7 @@ StackView
 
                     MenuItem
                     {
-                        text: qsTr("Ascedent")
+                        text: qsTr("Ascendant")
                         checkable: true
                         checked: notesList.order === Notes.ASC
                         onTriggered: notesList.order = Notes.ASC
@@ -131,7 +131,7 @@ StackView
 
                     MenuItem
                     {
-                        text: qsTr("Descendent")
+                        text: qsTr("Descendant")
                         checkable: true
                         checked: notesList.order === Notes.DESC
                         onTriggered: notesList.order = Notes.DESC
