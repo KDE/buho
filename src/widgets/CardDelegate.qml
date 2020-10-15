@@ -77,7 +77,7 @@ Maui.ItemDelegate
             color: model.color ? Qt.darker(model.color) : Kirigami.Theme.textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
-            font.family: root.font.family
+            font.family: settings.font.family
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: Maui.Style.fontSizes.small
@@ -100,7 +100,7 @@ Maui.ItemDelegate
             color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
             elide: Qt.ElideRight
             wrapMode: TextEdit.WrapAnywhere
-            font.family: root.font.family
+            font.family: settings.font.family
             font.weight: Font.Bold
             font.bold: true
             font.pointSize: Maui.Style.fontSizes.large
@@ -146,7 +146,7 @@ Maui.ItemDelegate
             text: model.content ? model.content : ""
             color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
             wrapMode: TextEdit.WrapAnywhere
-            font.family: root.font
+            font.family: settings.font
             textFormat : TextEdit.AutoText
             font.pointSize: Maui.Style.fontSizes.big
             background: Rectangle

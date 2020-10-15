@@ -37,6 +37,8 @@ StackView
             onCleared: _bookletModel.filter = ""
         }
 
+
+
         Maui.FloatingButton
         {
             z: parent.z + 1
@@ -76,7 +78,7 @@ StackView
                 label1.font.bold: true
 
                 label1.text: currentBook.title
-                label2.text: "Notes in this book: " + currentBook.count
+                label2.text: qsTr("Notes in this book: ") + currentBook.count
                 label3.text: Qt.formatDateTime(new Date(currentBook.modified), "d MMM yyyy")
             }
 
@@ -112,7 +114,7 @@ StackView
                     onClicked:
                     {
                         _listView.currentIndex = index
-                        currentBooklet = model
+                        control.currentBooklet = _bookletModel.get(index)
                     }
                 }
             }
@@ -130,8 +132,29 @@ StackView
             id: editor
             enabled: !_holder.visible
             footBar.visible: false
-            document.autoReload: true
-            body.font: root.font
+            document.autoReload: settings.autoReload
+            document.autoSave: settings.autoSave
+            body.font: settings.font
+            showLineNumbers: settings.lineNumbers
+
+            function saveFile(path)
+            {
+                if (path && Maui.FM.fileExists(path))
+                {
+                    editor.document.saveAs(path)
+                }
+        //        else
+//                {
+        //            _dialogLoader.sourceComponent = _fileDialogComponent
+        //            dialog.mode = dialog.modes.SAVE;
+        //            //            fileDialog.settings.singleSelection = true
+        //            dialog.show(function (paths)
+        //            {
+        //                item.document.saveAs(paths[0])
+        //                _historyList.append(paths[0])
+        //            });
+//                }
+            }
 
             headBar.farLeftContent: ToolButton
             {
@@ -148,8 +171,9 @@ StackView
                     text: qsTr("Save")
                     onClicked:
                     {
-                        currentBooklet.content = editor.text
-                        _booksList.booklet.update(currentBooklet, _listView.currentIndex)
+                        saveFile(editor.fileUrl)
+                        control.currentBooklet.content = editor.text
+                        _booksList.booklet.update(control.currentBooklet, _listView.currentIndex)
                     }
                 },
 
@@ -193,5 +217,7 @@ StackView
             control.currentBooklet = _bookletModel.get(_listView.currentIndex)
         }
     }
+
+
 }
 

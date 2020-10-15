@@ -10,154 +10,122 @@ Maui.SettingsDialog
 {
     Maui.SettingsSection
     {
-        title: i18n("Navigation")
-        description: i18n("Configure the app plugins and behavior.")
+        title: i18n("Editor")
+        description: i18n("Configure the editor behaviour.")
 
         Maui.SettingTemplate
         {
-            label1.text: i18n("Thumbnails")
-            label2.text: i18n("Show previews of images, videos and PDF files")
-
+            label1.text:  i18n("Auto Save")
+            label2.text: i18n("Auto saves your file every few seconds")
             Switch
             {
                 checkable: true
-                checked:  root.showThumbnails
-                onToggled:  root.showThumbnails = ! root.showThumbnails
+                checked: settings.autoSave
+                onToggled: settings.autoSave = !settings.autoSave
             }
         }
 
         Maui.SettingTemplate
         {
-            label1.text: i18n("Hidden Files")
-            label2.text: i18n("List hidden files")
-
+            label1.text:  i18n("Auto Reload")
+            label2.text: i18n("Auto reload the text on external changes.")
             Switch
             {
                 checkable: true
-                checked:  root.showHiddenFiles
-                onToggled:  root.showHiddenFiles = !root.showHiddenFiles
+                checked: settings.autoReload
+                onToggled: settings.autoReload = !settings.autoReload
             }
         }
 
         Maui.SettingTemplate
         {
-            label1.text:  i18n("Single Click")
-            label2.text: i18n("Open files with a single or double click")
+            label1.text: i18n("Line Numbers")
+            label2.text: i18n("Display the line numbers on the left side.")
 
             Switch
             {
                 checkable: true
-                checked:  root.singleClick
-                onToggled:
-                {
-                    root.singleClick = !root.singleClick
-                    Maui.FM.saveSettings("SINGLE_CLICK",  root.singleClick, "BROWSER")
-                }
-            }
-        }
+                checked: settings.lineNumbers
+                onToggled: settings.lineNumbers = !settings.lineNumbers
 
-        Maui.SettingTemplate
-        {
-            label1.text:  i18n("Save Session")
-            label2.text: i18n("Save and restore tabs")
-
-            Switch
-            {
-                checkable: true
-                checked:  root.restoreSession
-                onToggled:
-                {
-                    root.restoreSession = !root.restoreSession
-                    Maui.FM.saveSettings("RESTORE_SESSION",  root.restoreSession, "BROWSER")
-                }
             }
         }
     }
 
     Maui.SettingsSection
     {
-        title: i18n("Interface")
-        description: i18n("Configure the app UI.")
-        lastOne: true
+        title: i18n("Fonts")
+        description: i18n("Configure the global editor font family and size")
 
         Maui.SettingTemplate
         {
-            label1.text:  i18n("SideBar")
-            label2.text: i18n("Keep sidebar on constrained spaces")
+            label1.text:  i18n("Family")
+
+            ComboBox
+            {
+                Layout.fillWidth: true
+                model: Qt.fontFamilies()
+                Component.onCompleted: currentIndex = find(settings.font.family, Qt.MatchExactly)
+                onActivated: settings.font.family = currentText
+
+            }
+        }
+
+        Maui.SettingTemplate
+        {
+            label1.text:  i18n("Size")
+
+            SpinBox
+            {
+                from: 0; to : 500
+                value: settings.font.pointSize
+                onValueChanged: settings.font.pointSize = value
+            }
+        }
+    }
+
+    Maui.SettingsSection
+    {
+        title: i18n("Syncing")
+        description: i18n("Configure the syncing of notes and books.")
+
+        Maui.SettingTemplate
+        {
+            label1.text: i18n("Auto sync")
+            label2.text: i18n("Sync notes and books on start up")
 
             Switch
             {
                 checkable: true
-                checked: placesSidebar.stick
-                onToggled:
-                {
-                    placesSidebar.stick = ! placesSidebar.stick
-                    Maui.FM.saveSettings("STICK_SIDEBAR", placesSidebar.stick, "UI")
-                }
+                checked:  settings.showThumbnails
+                onToggled:  settings.showThumbnails = ! settings.showThumbnails
             }
         }
+    }
+
+    Maui.SettingsSection
+    {
+        title: i18n("Sorting")
+        description: i18n("Sorting order and behavior.")
 
         Maui.SettingTemplate
         {
-            label1.text: i18n("Show Status Bar")
-            label2.text: i18n("For filtering and other quick actions")
-
-            Switch
-            {
-                checkable: true
-                checked:  root.showStatusBar
-                onToggled:  root.showStatusBar = !root.showStatusBar
-            }
-        }
-
-        Maui.SettingTemplate
-        {
-            label1.text: i18n("Translucent Sidebar")
-
-            Switch
-            {
-                checkable: true
-                checked:  root.translucency
-                enabled: Maui.Handy.isLinux
-                onToggled:
-                {
-                    root.translucency = !root.translucency
-                    Maui.FM.saveSettings("TRANSLUCENCY",  root.translucency, "UI")
-                }
-            }
-        }
-
-        Maui.SettingTemplate
-        {
-            label1.text: i18n("Dark Mode")
-            enabled: false
-
-            Switch
-            {
-
-            }
-        }
-
-        Maui.SettingTemplate
-        {
-            label1.text: i18n("Grid Size")
-            label2.text: i18n("Thumbnails size in the grid view")
+            label1.text: i18n("Sorting by")
+            label2.text: i18n("Change the sorting key.")
 
             Maui.ToolActions
             {
-                id: _gridIconSizesGroup
                 expanded: true
                 autoExclusive: true
                 display: ToolButton.TextOnly
 
                 Binding on currentIndex
                 {
-                    value:  switch(iconSize)
+                    value:  switch(settings.sortBy)
                             {
-                            case 32: return 0;
-                            case 48: return 1;
-                            case 64: return 2;
-                            case 96: return 3;
+                            case  "title": return 0;
+                            case  "modified": return 1;
+                            case  "favorite": return 2;
                             default: return -1;
                             }
                     restoreMode: Binding.RestoreValue
@@ -165,26 +133,58 @@ Maui.SettingsDialog
 
                 Action
                 {
-                    text: i18n("S")
-                    onTriggered: setIconSize(32)
+                    text: i18n("Title")
+                    onTriggered: settings.sortBy =  "title"
                 }
 
                 Action
                 {
-                    text: i18n("M")
-                    onTriggered: setIconSize(48)
+                    text: i18n("Date")
+                    onTriggered: settings.sortBy = "modified"
                 }
 
                 Action
                 {
-                    text: i18n("X")
-                    onTriggered: setIconSize(64)
+                    text: i18n("Fav")
+                    onTriggered: settings.sortBy = "favorite"
+                }
+            }
+        }
+
+        Maui.SettingTemplate
+        {
+            label1.text: i18n("Sort order")
+            label2.text: i18n("Change the sorting order.")
+
+            Maui.ToolActions
+            {
+                expanded: true
+                autoExclusive: true
+                display: ToolButton.IconOnly
+
+                Binding on currentIndex
+                {
+                    value:  switch(settings.sortOrder)
+                            {
+                            case Qt.AscendingOrder: return 0;
+                            case Qt.DescendingOrder: return 1;
+                            default: return -1;
+                            }
+                    restoreMode: Binding.RestoreValue
                 }
 
                 Action
                 {
-                    text: i18n("XL")
-                    onTriggered: setIconSize(96)
+                    text: i18n("Ascending")
+                    icon.name: "view-sort-ascending"
+                    onTriggered: settings.sortOrder = Qt.AscendingOrder
+                }
+
+                Action
+                {
+                    text: i18n("Descending")
+                    icon.name: "view-sort-descending"
+                    onTriggered: settings.sortOrder = Qt.DescendingOrder
                 }
             }
         }

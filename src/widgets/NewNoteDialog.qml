@@ -22,10 +22,11 @@ Maui.Page
         id: _editor
         fileUrl: control.note.url ? control.note.url : ""
         showLineNumbers: false
-        document.autoReload: true
+        document.autoReload: settings.autoReload
+        document.autoSave: settings.autoSave
         anchors.fill: parent
 
-        body.font: root.font
+        body.font: settings.font
 
         autoHideHeader: true
         autoHideHeaderMargins: control.height * 0.3

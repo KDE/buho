@@ -68,8 +68,8 @@ StackView
             {
                 id: notesList
             }
-            sortOrder: Qt.DescendingOrder
-            sort: "modified"
+            sortOrder: settings.sortOrder
+            sort: settings.sortBy
             recursiveFilteringEnabled: true
             sortCaseSensitivity: Qt.CaseInsensitive
             filterCaseSensitivity: Qt.CaseInsensitive
@@ -118,71 +118,6 @@ StackView
             onAccepted: notesModel.filter = text
             onCleared: notesModel.filter = ""
         }
-
-        headBar.rightContent: [
-            Maui.ToolButtonMenu
-            {
-                icon.name: "view-sort"
-
-                MenuItem
-                {
-                    text: qsTr("Ascedent")
-                    checkable: true
-                    checked: notesModel.sortOrder === Qt.AscendingOrder
-                    onTriggered: notesModel.sortOrder = Qt.AscendingOrder
-                }
-
-                MenuItem
-                {
-                    text: qsTr("Descendent")
-                    checkable: true
-                    checked: notesModel.sortOrder === Qt.DescendingOrder
-                    onTriggered: notesModel.sortOrder = Qt.DescendingOrder
-                }
-
-                MenuSeparator{}
-
-                MenuItem
-                {
-                    text: qsTr("Title")
-                    checkable: true
-                    checked: notesModel.sort === "title"
-                    onTriggered: notesModel.sort = "title"
-                }
-
-                MenuItem
-                {
-                    text: qsTr("Color")
-                    checkable: true
-                    checked: notesModel.sort === "color"
-                    onTriggered: notesModel.sort = "color"
-                }
-
-                MenuItem
-                {
-                    text: qsTr("Creation date")
-                    checkable: true
-                    checked: notesModel.sort === "date"
-                    onTriggered: notesModel.sort = "date"
-                }
-
-                MenuItem
-                {
-                    text: qsTr("Updated")
-                    checkable: true
-                    checked: notesModel.sort === "modified"
-                    onTriggered: notesModel.sort = "modified"
-                }
-
-                MenuItem
-                {
-                    text: qsTr("Favorite")
-                    checkable: true
-                    checked: notesModel.sort === "favorite"
-                    onTriggered: notesModel.sort = "favorite"
-                }
-            }
-        ]
 
         listDelegate: CardDelegate
         {

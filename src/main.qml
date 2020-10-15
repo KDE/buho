@@ -1,8 +1,10 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
+import QtQuick.Layouts 1.3
+import Qt.labs.settings 1.0
+
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.2 as Maui
-import QtQuick.Layouts 1.3
 
 import "widgets"
 import "views/notes"
@@ -13,7 +15,6 @@ Maui.ApplicationWindow
     id: root
     title: qsTr("Buho")
 
-    property font font : Maui.FM.loadSettings("FONT", "EDITOR", defaultFont)
     readonly property font defaultFont:
     {
         family: "Noto Sans Mono"
@@ -36,6 +37,26 @@ Maui.ApplicationWindow
         onTriggered: _settingsDialog.open()
     }
  //    /***** COMPONENTS *****/
+    Settings
+    {
+        id: settings
+        category: "General"
+        property bool autoSync : true
+        property bool autoSave: true
+        property bool autoReload: true
+        property bool lineNumbers: true
+
+        property string sortBy:  "modified"
+        property int sortOrder : Qt.DescendingOrder
+
+        property font font : defaultFont
+    }
+
+
+    SettingsDialog
+    {
+        id: _settingsDialog
+    }
 
     NewBookDialog
     {
