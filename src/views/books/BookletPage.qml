@@ -37,8 +37,6 @@ StackView
             onCleared: _bookletModel.filter = ""
         }
 
-
-
         Maui.FloatingButton
         {
             z: parent.z + 1
@@ -208,6 +206,7 @@ StackView
         title: qsTr("New Chapter")
         message: qsTr("Create a new chapter for your current book. Give it a title")
         entryField: true
+        textEntry.text:  Qt.formatDateTime(new Date(), "d-MMM-yyyy")
         page.margins: Maui.Style.space.big
         onAccepted:
         {
