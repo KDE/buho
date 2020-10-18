@@ -35,7 +35,7 @@ Maui.Page
         Kirigami.Theme.textColor: control.backgroundColor  !== "transparent" ? Qt.darker(control.backgroundColor, 2) : control.Kirigami.Theme.textColor
 
         document.enableSyntaxHighlighting: false
-        body.placeholderText: qsTr("Title\nBody")
+        body.placeholderText: i18n("Title\nBody")
         footBar.visible: false
 
         headBar.farLeftContent: ToolButton
@@ -71,7 +71,7 @@ Maui.Page
 
                 MenuItem
                 {
-                    text: qsTr("Share")
+                    text: i18n("Share")
                     icon.name: "document-share"
 
                     onTriggered: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
@@ -80,13 +80,13 @@ Maui.Page
 
                 MenuItem
                 {
-                    text: qsTr("Export")
+                    text: i18n("Export")
                     icon.name: "document-export"
                 }
 
                 MenuItem
                 {
-                    text: qsTr("Delete")
+                    text: i18n("Delete")
                     icon.name: "entry-delete"
                     Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
                 }

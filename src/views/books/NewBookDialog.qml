@@ -11,14 +11,14 @@ Maui.NewDialog
     signal bookSaved(string title)
     entryField: true
 
-    title: qsTr("New Book")
-    message: qsTr("Give a title to your new book. Your new book can contain many notes grouped together")
+    title: i18n("New Book")
+    message: i18n("Give a title to your new book. Your new book can contain many notes grouped together")
 
 
-    textEntry.placeholderText:  qsTr("My Book...")
+    textEntry.placeholderText:  i18n("My Book...")
 
-    acceptButton.text: qsTr("Create")
-    rejectButton.text: qsTr("Cancel")
+    acceptButton.text: i18n("Create")
+    rejectButton.text: i18n("Cancel")
 
     onFinished:
     {

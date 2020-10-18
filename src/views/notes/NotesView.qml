@@ -57,8 +57,8 @@ StackView
         holder.visible: notesList.count < 1
         holder.emoji: "qrc:/view-notes.svg"
         holder.emojiSize: Maui.Style.iconSizes.huge
-        holder.title :qsTr("No notes!")
-        holder.body: qsTr("Click here to create a new note")
+        holder.title :i18n("No notes!")
+        holder.body: i18n("Click here to create a new note")
         viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
         model: Maui.BaseModel
@@ -98,14 +98,14 @@ StackView
 
         //            Action
         //            {
-        //                text: qsTr("List")
+        //                text: i18n("List")
         //                icon.name: "view-list-details"
         //                onTriggered: cardsView.viewType = MauiLab.AltBrowser.ViewType.List
         //            }
 
         //            Action
         //            {
-        //                text: qsTr("Cards")
+        //                text: i18n("Cards")
         //                icon.name: "view-list-icons"
         //                onTriggered: cardsView.viewType= MauiLab.AltBrowser.ViewType.Grid
         //            }
@@ -114,7 +114,7 @@ StackView
         headBar.middleContent: Maui.TextField
         {
             Layout.fillWidth: true
-            placeholderText: qsTr("Search ") + notesList.count + " " + qsTr("notes")
+            placeholderText: i18n("Search ") + notesList.count + " " + i18n("notes")
             onAccepted: notesModel.filter = text
             onCleared: notesModel.filter = ""
         }
@@ -211,7 +211,7 @@ StackView
             MenuItem
             {
                 icon.name: "document-export"
-                text: qsTr("Export")
+                text: i18n("Export")
                 onTriggered:
                 {
                     _notesMenu.close()
@@ -221,7 +221,7 @@ StackView
             MenuItem
             {
                 icon.name : "edit-copy"
-                text: qsTr("Copy")
+                text: i18n("Copy")
                 onTriggered:
                 {
                     Maui.Handy.copyToClipboard({'text': currentNote.content})
@@ -234,7 +234,7 @@ StackView
             MenuItem
             {
                 icon.name: "edit-delete"
-                text: qsTr("Remove")
+                text: i18n("Remove")
                 Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
                 onTriggered:
                 {

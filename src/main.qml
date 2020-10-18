@@ -13,7 +13,7 @@ import "views/books"
 Maui.ApplicationWindow
 {
     id: root
-    title: qsTr("Buho")
+    title: i18n("Buho")
 
     readonly property font defaultFont:
     {
@@ -32,7 +32,7 @@ Maui.ApplicationWindow
 
     mainMenu: Action
     {
-        text: qsTr("Settings")
+        text: i18n("Settings")
         icon.name: "settings-configure"
         onTriggered: _settingsDialog.open()
     }
@@ -79,14 +79,14 @@ Maui.ApplicationWindow
             id: notesView
 
             Maui.AppView.iconName: "view-pim-notes"
-            Maui.AppView.title: qsTr("Notes")
+            Maui.AppView.title: i18n("Notes")
         }
 
         BooksView
         {
             id: booksView
             Maui.AppView.iconName: "view-pim-journal"
-            Maui.AppView.title: qsTr("Books")
+            Maui.AppView.title: i18n("Books")
         }
     }
 

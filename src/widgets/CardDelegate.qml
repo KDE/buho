@@ -35,8 +35,8 @@ Maui.ItemDelegate
     Maui.Holder
     {
         visible: !title.visible
-        title: qsTr("Empty")
-        body: qsTr("Edit this note")
+        title: i18n("Empty")
+        body: i18n("Edit this note")
         emoji: "qrc:/view-notes.svg"
         emojiSize: Maui.Style.iconSizes.large
         Kirigami.Theme.textColor: date.color

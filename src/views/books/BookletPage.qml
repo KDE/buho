@@ -32,7 +32,7 @@ StackView
         headBar.middleContent: Maui.TextField
         {
             Layout.fillWidth: true
-            placeholderText: qsTr("Filter ") + _booksList.booklet.count + " " + qsTr("booklets in ") + currentBook.title
+            placeholderText: i18n("Filter ") + _booksList.booklet.count + " " + i18n("booklets in ") + currentBook.title
             onAccepted: _bookletModel.filter = text
             onCleared: _bookletModel.filter = ""
         }
@@ -57,8 +57,8 @@ StackView
             emoji: "qrc:/document-edit.svg"
             emojiSize: Maui.Style.iconSizes.huge
             isMask: false
-            title : qsTr("This book is empty!")
-            body: qsTr("Start by creating a new chapter for your book")
+            title : i18n("This book is empty!")
+            body: i18n("Start by creating a new chapter for your book")
         }
 
         ColumnLayout
@@ -76,7 +76,7 @@ StackView
                 label1.font.bold: true
 
                 label1.text: currentBook.title
-                label2.text: qsTr("Notes in this book: ") + currentBook.count
+                label2.text: i18n("Notes in this book: ") + currentBook.count
                 label3.text: Qt.formatDateTime(new Date(currentBook.modified), "d MMM yyyy")
             }
 
@@ -166,7 +166,7 @@ StackView
                 {
                     enabled: editor.document.modified
                     icon.name: "document-save"
-                    text: qsTr("Save")
+                    text: i18n("Save")
                     onClicked:
                     {
                         saveFile(editor.fileUrl)
@@ -193,8 +193,8 @@ StackView
                 emoji: "qrc:/document-edit.svg"
                 emojiSize: Maui.Style.iconSizes.huge
                 isMask: false
-                title : qsTr("Nothing to edit!")
-                body: qsTr("Select a chapter or create a new one")
+                title : i18n("Nothing to edit!")
+                body: i18n("Select a chapter or create a new one")
             }
         }
     }
@@ -203,8 +203,8 @@ StackView
     {
         id: _newChapter
 
-        title: qsTr("New Chapter")
-        message: qsTr("Create a new chapter for your current book. Give it a title")
+        title: i18n("New Chapter")
+        message: i18n("Create a new chapter for your current book. Give it a title")
         entryField: true
         textEntry.text:  Qt.formatDateTime(new Date(), "d-MMM-yyyy")
         page.margins: Maui.Style.space.big

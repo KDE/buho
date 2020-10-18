@@ -36,7 +36,7 @@ StackView
         headBar.middleContent: Maui.TextField
         {
             Layout.fillWidth: true
-            placeholderText: qsTr("Search ") + _booksList.count + " " + qsTr("books")
+            placeholderText: i18n("Search ") + _booksList.count + " " + i18n("books")
             onAccepted: _booksModel.filter = text
             onCleared: _booksModel.filter = ""
         }
@@ -60,8 +60,8 @@ StackView
             visible: _booksList.count === 0
             emoji: "qrc:/view-books.svg"
             emojiSize: Maui.Style.iconSizes.huge
-            title : qsTr("There are not Books!")
-            body: qsTr("You can create new books and organize your notes")
+            title : i18n("There are no Books!")
+            body: i18n("You can create new books and organize your notes")
         }
 
         Maui.AltBrowser
