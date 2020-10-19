@@ -36,7 +36,7 @@ Maui.Page
 
         document.enableSyntaxHighlighting: false
         body.placeholderText: i18n("Title\nBody")
-        footBar.visible: false
+//        footBar.visible: true
 
         headBar.farLeftContent: ToolButton
         {
@@ -47,54 +47,48 @@ Maui.Page
             }
         }
 
-        headBar.rightContent: [
-
-            ToolButton
-            {
-                id: favButton
-                icon.name: "love"
-                checkable: true
-                checked:  note.favorite == 1
-                icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
-
-            },
-
-            ColorsBar
-            {
-                onColorPicked: control.backgroundColor = color
-                currentColor: control.backgroundColor
-            },
-
-            Maui.ToolButtonMenu
-            {
-                icon.name: "overflow-menu"
-
-                MenuItem
-                {
-                    text: i18n("Share")
-                    icon.name: "document-share"
-
-                    onTriggered: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
-                                                        shareDialog.show(editor.body.text)
-                }
-
-                MenuItem
-                {
-                    text: i18n("Export")
-                    icon.name: "document-export"
-                }
-
-                MenuItem
-                {
-                    text: i18n("Delete")
-                    icon.name: "entry-delete"
-                    Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
-                }
-            }
-        ]
+        headBar.rightContent: ColorsBar
+        {
+            onColorPicked: control.backgroundColor = color
+            currentColor: control.backgroundColor
+        }
     }
+    footBar.rightContent: [
 
-    footer: Maui.TagsBar
+        ToolButton
+        {
+            id: favButton
+            icon.name: "love"
+            checkable: true
+            checked:  note.favorite == 1
+            icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
+
+        },
+
+        ToolButton
+        {
+//                text: i18n("Share")
+            icon.name: "document-share"
+
+            onClicked: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
+                                                shareDialog.show(editor.body.text)
+        },
+
+//            ToolButton
+//            {
+//                text: i18n("Export")
+//                icon.name: "document-export"
+//            },
+
+        ToolButton
+        {
+            text: i18n("Delete")
+            icon.name: "entry-delete"
+            Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+        }
+    ]
+
+    footerColumn: Maui.TagsBar
     {
         id: tagBar
         position: ToolBar.Footer

@@ -116,9 +116,7 @@ StackView
                     }
                 }
             }
-
         }
-
      }
 
     Component
