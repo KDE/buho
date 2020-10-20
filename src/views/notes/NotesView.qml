@@ -134,14 +134,14 @@ StackView
             onRightClicked:
             {
                 currentIndex = index
-                currentNote = model
+                currentNote = notesModel.get(index)
                 _notesMenu.popup()
             }
 
             onPressAndHold:
             {
                 currentIndex = index
-                currentNote = model
+                currentNote = notesModel.get(index)
                 _notesMenu.popup()
             }
         }
@@ -160,7 +160,7 @@ StackView
                 onClicked:
                 {
                     currentIndex = index
-                    currentNote = model
+                    currentNote = notesModel.get(index)
 
                     setNote()
                 }
@@ -168,14 +168,14 @@ StackView
                 onRightClicked:
                 {
                     currentIndex = index
-                    currentNote = model
+                    currentNote = notesModel.get(index)
                     _notesMenu.popup()
                 }
 
                 onPressAndHold:
                 {
                     currentIndex = index
-                    currentNote = model
+                    currentNote = notesModel.get(index)
                     _notesMenu.popup()
                 }
             }

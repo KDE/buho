@@ -43,7 +43,14 @@ Maui.Page
             icon.name: "go-previous"
             onClicked:
             {
-                packNote()
+                if(_editor.document.modified /*|| control.note.favorite != favButton.checked */)
+                {
+                    packNote()
+
+                }
+
+                control.clear()
+                control.parent.pop(StackView.Immediate)
             }
         }
 
@@ -51,6 +58,16 @@ Maui.Page
         {
             onColorPicked: control.backgroundColor = color
             currentColor: control.backgroundColor
+        }
+
+        Connections
+        {
+            target: _editor.document
+            function onFileSaved()
+            {
+                console.log("NOTE SAVED")
+                packNote()
+            }
         }
     }
     footBar.rightContent: [
@@ -112,28 +129,22 @@ Maui.Page
 
     function packNote()
     {
-        if(_editor.document.modified /*|| control.note.favorite != favButton.checked */)
+        const content =  editor.body.text
+        if(content.length > 0)
         {
-            const content =  editor.body.text
-            if(content.length > 0)
-            {
-                var note  = {
-                    url: editor.fileUrl,
-                    content: content,
-                    favorite: favButton.checked ? 1 : 0,
-                    format: ".txt" //for now only simple txt files
-                }
-
-                if(control.backgroundColor  !== "transparent")
-                {
-                    note["color"] = control.backgroundColor
-                }
-
-                control.noteSaved(note)
+            var note  = {
+                url: editor.fileUrl,
+                content: content,
+                favorite: favButton.checked ? 1 : 0,
+                format: ".txt" //for now only simple txt files
             }
-        }
 
-        control.clear()
-        control.parent.pop(StackView.Immediate)
+            if(control.backgroundColor  !== "transparent")
+            {
+                note["color"] = control.backgroundColor
+            }
+
+            control.noteSaved(note)
+        }
     }
 }
