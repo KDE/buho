@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.2 as Maui
 
 import org.kde.kirigami 2.7 as Kirigami
-import Notes 1.0
+import org.maui.buho 1.0
 
 import "../../widgets"
 

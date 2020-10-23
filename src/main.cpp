@@ -39,6 +39,8 @@
 #include "models/books/books.h"
 #include "models/notes/notes.h"
 
+#define BUHO_URI "org.maui.buho"
+
 int Q_DECL_EXPORT main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -67,7 +69,7 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     about.setHomepage("https://mauikit.org");
     about.setProductName("maui/buho");
     about.setBugAddress("https://invent.kde.org/maui/buho/-/issues");
-    about.setOrganizationDomain("org.maui.buho");
+    about.setOrganizationDomain(BUHO_URI);
     about.setProgramLogo(app.windowIcon());
 
     KAboutData::setApplicationData(about);
@@ -92,9 +94,9 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
-    qmlRegisterAnonymousType<Booklet>("Booklet", 1);
-    qmlRegisterType<Notes>("Notes", 1, 0, "Notes");
-    qmlRegisterType<Books>("Books", 1, 0, "Books");
+    qmlRegisterAnonymousType<Booklet>(BUHO_URI, 1);
+    qmlRegisterType<Notes>(BUHO_URI, 1, 0, "Notes");
+    qmlRegisterType<Books>(BUHO_URI, 1, 0, "Books");
 
 	engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 	if (engine.rootObjects().isEmpty())
