@@ -100,6 +100,11 @@ bool Notes::remove(const int &index)
     return true;
 }
 
+int Notes::indexOfNote(const QUrl &url)
+{
+    return this->indexOf(FMH::MODEL_KEY::PATH, url.toString());
+}
+
 QVariantMap Notes::get(const int &index) const
 {
 	if(index >= this->notes.size() || index < 0)

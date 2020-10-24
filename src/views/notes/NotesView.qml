@@ -17,6 +17,8 @@ StackView
     property alias list : notesList
     property alias currentIndex : cardsView.currentIndex
 
+    readonly property Flickable flickable : currentItem.flickable
+
     readonly property bool editing : control.depth > 1
 
     function setNote(note)
@@ -59,7 +61,23 @@ StackView
         holder.emojiSize: Maui.Style.iconSizes.huge
         holder.title :i18n("No notes!")
         holder.body: i18n("Click here to create a new note")
+        enableLassoSelection: true
+
         viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
+
+        Connections
+        {
+            target: cardsView.currentView
+            ignoreUnknownSignals: true
+
+            function onItemsSelected(indexes)
+            {
+                console.log(indexes)
+                for(var index of indexes)
+                    select(notesModel.get(index))
+            }
+        }
+
 
         model: Maui.BaseModel
         {
@@ -119,16 +137,70 @@ StackView
             onCleared: notesModel.filter = ""
         }
 
+        footer: Maui.SelectionBar
+        {
+            id: _selectionbar
+            visible: count > 0 && !swipeView.currentItem.editing
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+            padding: Maui.Style.space.big
+            maxListHeight: swipeView.height - Maui.Style.space.medium
+
+            onExitClicked: clear()
+
+            Action
+            {
+                text: qsTr("Favorite")
+                icon.name: "love"
+                onTriggered:
+                {
+                    for(var item of _selectionbar.items)
+                        notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), notesList.indexOfNote(item.path))
+
+                    _selectionbar.clear()
+                }
+            }
+
+            Action
+            {
+                text: qsTr("Share")
+                icon.name: "document-share"
+            }
+
+            Action
+            {
+                text: qsTr("Export")
+                icon.name: "document-export"
+            }
+
+            Action
+            {
+                text: qsTr("Delete")
+                Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+                icon.name: "edit-delete"
+            }
+        }
+
         listDelegate: CardDelegate
         {
+            id: _listDelegate
             width: ListView.view.width
             height: 150
+            checkable: root.selectionMode
+            checked: _selectionbar.contains(model.path)
 
             onClicked:
             {
-                currentIndex = index
-                currentNote = model
-                setNote()
+                currentIndex = index                
+
+                if(root.selectionMode)
+                {
+                    select(notesModel.get(index))
+                }else
+                {
+                    currentNote = notesModel.get(index)
+                    setNote()
+                }
             }
 
             onRightClicked:
@@ -144,6 +216,39 @@ StackView
                 currentNote = notesModel.get(index)
                 _notesMenu.popup()
             }
+
+            onToggled:
+            {
+                currentIndex = index
+                select(notesModel.get(index))
+            }
+
+            Connections
+            {
+                target: _selectionbar
+                ignoreUnknownSignals: true
+
+                function onUriRemoved(uri)
+                {
+                    if(uri === model.url)
+                    {
+                        _listDelegate.checked = false
+                    }
+                }
+
+                function onUriAdded(uri)
+                {
+                    if(uri === model.url)
+                    {
+                        _listDelegate.checked = true
+                    }
+                }
+
+                function onCleared()
+                {
+                    _listDelegate.checked = false
+                }
+            }
         }
 
         gridDelegate: Item
@@ -154,15 +259,24 @@ StackView
 
             CardDelegate
             {
+                id: _gridDelegate
                 anchors.fill: parent
                 anchors.margins: Maui.Style.space.medium
+                checkable: root.selectionMode
+                checked: _selectionbar.contains(model.path)
 
                 onClicked:
                 {
                     currentIndex = index
-                    currentNote = notesModel.get(index)
 
-                    setNote()
+                    if(root.selectionMode)
+                    {
+                        select(notesModel.get(index))
+                    }else
+                    {
+                        currentNote = notesModel.get(index)
+                        setNote()
+                    }
                 }
 
                 onRightClicked:
@@ -177,6 +291,39 @@ StackView
                     currentIndex = index
                     currentNote = notesModel.get(index)
                     _notesMenu.popup()
+                }
+
+                onToggled:
+                {
+                    currentIndex = index
+                    select(notesModel.get(index))
+                }
+            }
+
+            Connections
+            {
+                target: _selectionbar
+                ignoreUnknownSignals: true
+
+                function onUriRemoved(uri)
+                {
+                    if(uri === model.url)
+                    {
+                        _gridDelegate.checked = false
+                    }
+                }
+
+                function onUriAdded(uri)
+                {
+                    if(uri === model.url)
+                    {
+                        _gridDelegate.checked = true
+                    }
+                }
+
+                function onCleared()
+                {
+                    _gridDelegate.checked = false
                 }
             }
         }
@@ -261,6 +408,19 @@ StackView
                     }
                 }
             }
+        }
+    }
+
+
+    function select(item)
+    {
+        if(_selectionbar.contains(item.path))
+        {
+            _selectionbar.removeAtUri(item.path)
+        }else
+        {
+            _selectionbar.append(item.path, item)
+
         }
     }
 }

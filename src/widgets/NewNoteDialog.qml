@@ -17,14 +17,17 @@ Maui.Page
 
     floatingFooter: true
 
+
     Maui.Editor
     {
         id: _editor
+        anchors.fill: parent
+
         fileUrl: control.note.url ? control.note.url : ""
         showLineNumbers: false
         document.autoReload: settings.autoReload
         document.autoSave: settings.autoSave
-        anchors.fill: parent
+
 
         body.font: settings.font
 
