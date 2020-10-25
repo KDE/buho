@@ -39,7 +39,11 @@ StackView
         NewNoteDialog
         {
             note: control.currentNote
-            onNoteSaved: control.list.update(note, control.currentIndex)
+            onNoteSaved:
+            {
+                console.log("updating note <<" , note)
+                control.list.update(note, control.currentIndex)
+            }
         }
     }
 

@@ -46,12 +46,11 @@ Maui.Page
             icon.name: "go-previous"
             onClicked:
             {
-                if(_editor.document.modified /*|| control.note.favorite != favButton.checked */)
-                {
-                    packNote()
-
-                }
-
+//                if(_editor.document.modified || control.note.favorite != favButton.checked )
+//                {
+//                    packNote()
+//                }
+                packNote()
                 control.clear()
                 control.parent.pop(StackView.Immediate)
             }
