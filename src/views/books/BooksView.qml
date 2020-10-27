@@ -168,8 +168,8 @@ StackView
 
                 ColumnLayout
                 {
-                    height: cardsView.gridView.itemHeight
-                    width: cardsView.gridView.itemSize -20
+                    height: cardsView.gridView.itemHeight - 10
+                    width: cardsView.gridView.itemSize - 20
                     anchors.centerIn: parent
                     spacing: Maui.Style.space.medium
                     Rectangle
@@ -184,7 +184,9 @@ StackView
                             text: model.title[0].toUpperCase()
                             font.pointSize: Maui.Style.iconSizes.huge
                             color: Qt.lighter(parent.color)
-                            anchors.centerIn: parent
+                            horizontalAlignment: Qt.AlignHCenter
+                            verticalAlignment: Qt.AlignVCenter
+                            anchors.fill: parent
                         }
                     }
 
