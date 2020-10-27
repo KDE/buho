@@ -38,7 +38,7 @@ Notes::Notes(QObject *parent) : MauiList(parent),
 			{
 				note.unite(FMH::getFileInfoModel (note[FMH::MODEL_KEY::URL]));
 				this->notes[index] = note;
-				this->updateModel (index, FMH::modelRoles(note));
+                this->updateModel (index, {});
 			}
 		}
 	});
