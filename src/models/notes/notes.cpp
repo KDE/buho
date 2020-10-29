@@ -34,12 +34,14 @@ Notes::Notes(QObject *parent) : MauiList(parent),
 	{
 		if(state.type == STATE::TYPE::LOCAL)
 		{
-            const auto index = this->mappedIndex(this->indexOf (FMH::MODEL_KEY::ID, note[FMH::MODEL_KEY::ID]));
-			if(index >= 0)
+            const auto mappedIndex = this->mappedIndex(this->indexOf (FMH::MODEL_KEY::ID, note[FMH::MODEL_KEY::ID]));
+            if(mappedIndex >= 0)
 			{
-				note.unite(FMH::getFileInfoModel (note[FMH::MODEL_KEY::URL]));
-				this->notes[index] = note;
-                this->updateModel (index, {});
+                qDebug() << note[FMH::MODEL_KEY::MODIFIED];
+                note.insert(FMH::getFileInfoModel (note[FMH::MODEL_KEY::URL]));
+                qDebug() << note[FMH::MODEL_KEY::MODIFIED];
+                this->notes[mappedIndex] = note;
+                this->updateModel (mappedIndex, {});
 			}
 		}
 	});
@@ -57,7 +59,7 @@ void Notes::appendNote(FMH::MODEL note)
 	  const auto lines = note[FMH::MODEL_KEY::CONTENT].split("\n");
 	  return lines.isEmpty() ?  QString() : lines.first().trimmed();
 	}();
-	note.unite(FMH::getFileInfoModel (note[FMH::MODEL_KEY::URL]));
+    note.insert(FMH::getFileInfoModel (note[FMH::MODEL_KEY::URL]));
 	emit this->preItemAppended ();
 	this->notes << note;
 	emit this->postItemAppended ();
@@ -70,6 +72,7 @@ FMH::MODEL_LIST Notes::items() const
 
 bool Notes::insert(const QVariantMap &note)
 {
+    qDebug() << "Inserting new note" << note;
 	auto __note = FMH::toModel(note);
 	this->syncer->insertNote(__note);
 
@@ -83,8 +86,9 @@ bool Notes::update(const QVariantMap &data, const int &index)
 
     const auto index_ = this->mappedIndex(index);
 
-    this->notes[index_] = this->notes[index_].unite(FMH::toModel(data));
-    this->syncer->updateNote(this->notes[index_][FMH::MODEL_KEY::ID], this->notes[index_]);
+    auto note = this->notes[index_];
+    note.insert(FMH::toModel(data));
+    this->syncer->updateNote(note[FMH::MODEL_KEY::ID], note);
 	return true;
 }
 

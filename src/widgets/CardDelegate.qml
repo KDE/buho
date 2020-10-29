@@ -45,6 +45,7 @@ background: Rectangle
     color:  control.noteColor !== "transparent" ? control.noteColor : Qt.lighter(Kirigami.Theme.backgroundColor)
     radius: control.cardRadius
     opacity: hovered ? 0.8 : 1
+    border.width: control.isCurrentItem || control.checked ? 2 : 1
 }
 
 Maui.Holder
