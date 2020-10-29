@@ -55,7 +55,6 @@ Maui.ApplicationWindow
         property font font : defaultFont
     }
 
-
     SettingsDialog
     {
         id: _settingsDialog
@@ -69,18 +68,7 @@ Maui.ApplicationWindow
             //            if(title && title.length)
             booksView.list.insert({title: title, count: 0})
         }
-    }
-
-    headBar.rightContent: ToolButton
-    {
-        id: _selectButton
-//        visible: Maui.Handy.isTouch
-        icon.name: "item-select"
-        checkable: true
-        checked: root.selectionMode
-        onClicked: root.selectionMode = !root.selectionMode
-//        onPressAndHold: currentBrowser.selectAll()
-    }    
+    }   
 
     //    /***** VIEWS *****/
     Maui.AppViews

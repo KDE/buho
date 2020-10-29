@@ -28,10 +28,20 @@ Maui.ItemDelegate
                            "text/uri-list": control.filterSelectedItems(model.path)
                        } : {}
 
+
+Rectangle
+{
+    anchors.fill: parent
+    color: Qt.darker(Kirigami.Theme.textColor)
+    opacity: 0.2
+    visible: control.checkable || control.checked
+    radius: control.cardRadius
+}
+
 background: Rectangle
 {
     Kirigami.Theme.inherit: false
-    border.color: Qt.darker(color, 1.2)
+    border.color: control.isCurrentItem ? Kirigami.Theme.highlightColor : Qt.darker(color, 1.2)
     color:  control.noteColor !== "transparent" ? control.noteColor : Qt.lighter(Kirigami.Theme.backgroundColor)
     radius: control.cardRadius
     opacity: hovered ? 0.8 : 1

@@ -60,6 +60,8 @@ StackView
     {
         id: cardsView
 
+        floatingFooter: true
+
         holder.visible: notesList.count < 1
         holder.emoji: "qrc:/view-notes.svg"
         holder.emojiSize: Maui.Style.iconSizes.huge
@@ -80,8 +82,28 @@ StackView
                 for(var index of indexes)
                     select(notesModel.get(index))
             }
+
+            function onKeyPress(event)
+            {
+                const index = cardsView.currentIndex
+                const item = cardsView.model.get(index)
+
+                if((event.key == Qt.Key_Left || event.key == Qt.Key_Right || event.key == Qt.Key_Down || event.key == Qt.Key_Up) && (event.modifiers & Qt.ControlModifier) && (event.modifiers & Qt.ShiftModifier))
+                {
+                    cardsView.currentView.itemsSelected([index])
+                }
+            }
         }
 
+        headBar.rightContent: ToolButton
+        {
+            id: _selectButton
+            visible: Maui.Handy.isTouch
+            icon.name: "item-select"
+            checkable: true
+            checked: cardsView.selectionMode
+            onClicked: cardsView.selectionMode = !cardsView.selectionMode
+        }
 
         model: Maui.BaseModel
         {
@@ -190,17 +212,28 @@ StackView
             id: _listDelegate
             width: ListView.view.width
             height: 150
-            checkable: root.selectionMode
+            checkable: cardsView.selectionMode
             checked: _selectionbar.contains(model.path)
+            isCurrentItem: ListView.isCurrentItem
 
             onClicked:
             {
                 currentIndex = index                
 
-                if(root.selectionMode)
+                if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
                 {
-                    select(notesModel.get(index))
-                }else
+                    cardsView.currentView.itemsSelected([index])
+                }else if(Maui.Handy.singleClick)
+                {
+                    currentNote = notesModel.get(index)
+                    setNote()
+                }
+            }
+
+            onDoubleClicked:
+            {
+                control.currentIndex = index
+                if(!Maui.Handy.singleClick && !cardsView.selectionMode)
                 {
                     currentNote = notesModel.get(index)
                     setNote()
@@ -261,22 +294,35 @@ StackView
             width: cardsView.gridView.cellWidth
             height: cardsView.gridView.cellHeight
 
+            property bool isCurrentItem: GridView.isCurrentItem
+
             CardDelegate
             {
                 id: _gridDelegate
                 anchors.fill: parent
                 anchors.margins: Maui.Style.space.medium
-                checkable: root.selectionMode
+                checkable: cardsView.selectionMode
                 checked: _selectionbar.contains(model.path)
+                isCurrentItem: parent.isCurrentItem
 
                 onClicked:
                 {
                     currentIndex = index
 
-                    if(root.selectionMode)
+                    if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
                     {
-                        select(notesModel.get(index))
-                    }else
+                        cardsView.currentView.itemsSelected([index])
+                    }else if(Maui.Handy.singleClick)
+                    {
+                        currentNote = notesModel.get(index)
+                        setNote()
+                    }
+                }
+
+                onDoubleClicked:
+                {
+                    control.currentIndex = index
+                    if(!Maui.Handy.singleClick && !cardsView.selectionMode)
                     {
                         currentNote = notesModel.get(index)
                         setNote()
