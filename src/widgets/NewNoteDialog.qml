@@ -15,9 +15,6 @@ Maui.Page
 
     signal noteSaved(var note)
 
-    floatingFooter: true
-
-
     Maui.Editor
     {
         id: _editor
@@ -72,7 +69,8 @@ Maui.Page
             }
         }
     }
-    footBar.rightContent: [
+
+    footBar.leftContent: [
 
         ToolButton
         {
@@ -86,13 +84,15 @@ Maui.Page
 
         ToolButton
         {
-//                text: i18n("Share")
             icon.name: "document-share"
 
             onClicked: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
                                                 shareDialog.show(editor.body.text)
-        },
+        }
 
+    ]
+
+    footBar.rightContent: [
 //            ToolButton
 //            {
 //                text: i18n("Export")

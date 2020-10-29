@@ -15,9 +15,6 @@ Maui.ApplicationWindow
     id: root
     title: i18n("Buho")
 
-    flickable: swipeView.currentItem.flickable
-    floatingFooter: true
-    property bool selectionMode: false
     readonly property font defaultFont:
     {
         family: "Noto Sans Mono"

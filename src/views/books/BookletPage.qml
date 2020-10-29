@@ -14,12 +14,6 @@ StackView
     property var currentBooklet : null
     signal exit()
 
-    onCurrentBookletChanged:
-    {
-        control.push(_editorView)
-        control.currentItem.document.load(currentBooklet.url)
-    }
-
     initialItem: Maui.Page
     {
         headBar.visible: true
@@ -42,7 +36,7 @@ StackView
             z: parent.z + 1
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            anchors.margins: height
+            anchors.margins: Maui.Style.space.huge
             height: Maui.Style.toolBarHeight
 
             icon.name: "list-add"
@@ -64,12 +58,13 @@ StackView
         ColumnLayout
         {
             anchors.fill: parent
-            anchors.margins: Maui.Style.space.big
             visible: _booksList.booklet.count >0
+            spacing: 0
 
             Maui.ListItemTemplate
             {
                 Layout.fillWidth: true
+                Layout.margins: Maui.Style.space.small
                 implicitHeight: Maui.Style.rowHeight * 2
                 label1.font.pointSize: Maui.Style.fontSizes.large
                 label1.font.weight: Font.Bold
@@ -108,11 +103,28 @@ StackView
                     width: Math.min(Math.max(200, ListView.view.width * 0.7), 400)
                     noteColor: Qt.lighter(Kirigami.Theme.backgroundColor)
                     height: ListView.view.height
+                    isCurrentItem: ListView.isCurrentItem
 
                     onClicked:
                     {
                         _listView.currentIndex = index
-                        control.currentBooklet = _bookletModel.get(index)
+
+                        if(Maui.Handy.singleClick)
+                        {
+                             control.currentBooklet = _bookletModel.get(index)
+                             control.push(_editorView)
+                        }
+                    }
+
+                    onDoubleClicked:
+                    {
+                        _listView.currentIndex = index
+
+                        if(!Maui.Handy.singleClick)
+                        {
+                            control.currentBooklet = _bookletModel.get(index)
+                            control.push(_editorView)
+                        }
                     }
                 }
             }
@@ -130,6 +142,7 @@ StackView
             footBar.visible: false
             document.autoReload: settings.autoReload
             document.autoSave: settings.autoSave
+            document.fileUrl: currentBooklet.url
             body.font: settings.font
             showLineNumbers: settings.lineNumbers
 

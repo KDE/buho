@@ -20,6 +20,7 @@ Notes::Notes(QObject *parent) : MauiList(parent),
 {
 	qDebug()<< "CREATING NOTES LIST";
     qRegisterMetaType<FMH::MODEL>("FMH::MODEL");
+    qRegisterMetaType<FMH::MODEL_LIST>("FMH::MODEL_LIST");
 
 	this->syncer->setProvider(new NextNote); //Syncer takes ownership of NextNote or the provider
 
