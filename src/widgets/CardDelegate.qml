@@ -41,7 +41,7 @@ Rectangle
 background: Rectangle
 {
     Kirigami.Theme.inherit: false
-    border.color: control.isCurrentItem ? Kirigami.Theme.highlightColor : Qt.darker(color, 1.2)
+    border.color: control.isCurrentItem || control.checked ? Kirigami.Theme.highlightColor : Qt.darker(color, 1.2)
     color:  control.noteColor !== "transparent" ? control.noteColor : Qt.lighter(Kirigami.Theme.backgroundColor)
     radius: control.cardRadius
     opacity: hovered ? 0.8 : 1
