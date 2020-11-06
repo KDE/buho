@@ -4,10 +4,8 @@
 #include <QIcon>
 
 #if defined Q_OS_MACOS || defined Q_OS_WIN
-#include <KF5/KI18n/KLocalizedContext>
 #include <KF5/KI18n/KLocalizedString>
 #else
-#include <KI18n/KLocalizedContext>
 #include <KI18n/KLocalizedString>
 #endif
 
@@ -91,8 +89,6 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     Buho buho;
 
 	QQmlApplicationEngine engine;
-
-    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
     qmlRegisterAnonymousType<Booklet>(BUHO_URI, 1);
     qmlRegisterType<Notes>(BUHO_URI, 1, 0, "Notes");

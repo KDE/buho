@@ -75,9 +75,6 @@ bool NotesController::updateNote(FMH::MODEL &note, QString id)
 	if(note.isEmpty())
 		return false;
 
-//	if(!note[FMH::MODEL_KEY::TAG].isEmpty ())
-//        Tagging::getInstance ()->updateAbstractTags("notes", note[FMH::MODEL_KEY::URL],  note[FMH::MODEL_KEY::TAG].split (","));
-
 	if(note[FMH::MODEL_KEY::URL].isEmpty())
 		note[FMH::MODEL_KEY::URL] = [&]() -> const QString {
 				const auto data = DB::getInstance ()->getDBData(QString("select url from notes where id = '%1'").arg(id));
@@ -85,9 +82,6 @@ bool NotesController::updateNote(FMH::MODEL &note, QString id)
 			}();
 
 	if(note[FMH::MODEL_KEY::URL].isEmpty())
-		return false;
-
-	if(!OWL::saveNoteFile(note[FMH::MODEL_KEY::URL], note[FMH::MODEL_KEY::CONTENT].toUtf8()))
 		return false;
 
 	const auto f_note = FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::COLOR,

@@ -15,19 +15,15 @@ Maui.Page
 
     signal noteSaved(var note)
 
-    floatingFooter: true
-
-
     Maui.Editor
     {
         id: _editor
         anchors.fill: parent
 
-        fileUrl: control.note.url ? control.note.url : ""
+        fileUrl: control.note.url
         showLineNumbers: false
         document.autoReload: settings.autoReload
         document.autoSave: settings.autoSave
-
 
         body.font: settings.font
 
@@ -39,18 +35,20 @@ Maui.Page
 
         document.enableSyntaxHighlighting: false
         body.placeholderText: i18n("Title\nBody")
-//        footBar.visible: true
 
         headBar.farLeftContent: ToolButton
         {
             icon.name: "go-previous"
             onClicked:
             {
-//                if(_editor.document.modified || control.note.favorite != favButton.checked )
-//                {
-//                    packNote()
-//                }
-                packNote()
+                console.log(_editor.document.fileUrl, "File Url")
+                if(Maui.FM.fileExists(_editor.document.fileUrl))
+                {
+                    _editor.document.saveAs(_editor.document.fileUrl)
+                }
+
+                control.noteSaved(packNote())
+
                 control.clear()
                 control.parent.pop(StackView.Immediate)
             }
@@ -68,11 +66,12 @@ Maui.Page
             function onFileSaved()
             {
                 console.log("NOTE SAVED")
-                packNote()
+//                control.noteSaved(packNote())
             }
         }
     }
-    footBar.rightContent: [
+
+    footBar.leftContent: [
 
         ToolButton
         {
@@ -86,13 +85,15 @@ Maui.Page
 
         ToolButton
         {
-//                text: i18n("Share")
             icon.name: "document-share"
 
             onClicked: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
                                                 shareDialog.show(editor.body.text)
-        },
+        }
 
+    ]
+
+    footBar.rightContent: [
 //            ToolButton
 //            {
 //                text: i18n("Export")
@@ -131,10 +132,11 @@ Maui.Page
 
     function packNote()
     {
+        var note = ({})
         const content =  editor.body.text
         if(content.length > 0)
         {
-            var note  = {
+             note  = {
                 url: editor.fileUrl,
                 content: content,
                 favorite: favButton.checked ? 1 : 0,
@@ -145,8 +147,8 @@ Maui.Page
             {
                 note["color"] = control.backgroundColor
             }
-
-            control.noteSaved(note)
         }
+
+        return note
     }
 }

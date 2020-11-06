@@ -46,7 +46,7 @@ StackView
             z: parent.z + 1
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            anchors.margins: height
+            anchors.margins: Maui.Style.space.huge
             height: Maui.Style.toolBarHeight
 
             icon.name: "list-add"
