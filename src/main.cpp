@@ -78,14 +78,6 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     about.setupCommandLine(&parser);
     about.processCommandLine(&parser);
 
-#ifdef STATIC_KIRIGAMI
-	KirigamiPlugin::getInstance().registerTypes();
-#endif
-
-#ifdef STATIC_MAUIKIT
-    MauiKit::getInstance().registerTypes();
-#endif
-
     Buho buho;
 
 	QQmlApplicationEngine engine;
@@ -93,6 +85,14 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     qmlRegisterAnonymousType<Booklet>(BUHO_URI, 1);
     qmlRegisterType<Notes>(BUHO_URI, 1, 0, "Notes");
     qmlRegisterType<Books>(BUHO_URI, 1, 0, "Books");
+
+#ifdef STATIC_KIRIGAMI
+    KirigamiPlugin::getInstance().registerTypes();
+#endif
+
+#ifdef STATIC_MAUIKIT
+    MauiKit::getInstance().registerTypes(&engine);
+#endif
 
 	engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 	if (engine.rootObjects().isEmpty())
