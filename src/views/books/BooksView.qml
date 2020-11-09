@@ -1,130 +1,21 @@
-import QtQuick 2.9
+import QtQuick 2.14
 import "../../widgets"
-import QtQuick.Controls 2.3
-import QtQuick.Layouts 1.3
-import org.kde.mauikit 1.0 as Maui
+import QtQuick.Controls 2.14
+import QtQuick.Layouts 1.4
+import org.kde.mauikit 1.2 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 
-import Books 1.0
+import org.maui.buho 1.0
 
-Item
+StackView
 {
     id: control
 
     property alias list : _booksList
     property alias cardsView : cardsView
-    property bool showDetails: false
     property var currentBook : ({})
 
-    StackView
-    {
-        id: _stackView
-        anchors.fill: parent
-        initialItem: Maui.Page
-            {
-                id: _booksPage
-                padding: showDetails ? 0 : 0
-
-                title : cardsView.count + " books"
-                //    headBar.leftContent: [
-                //        ToolButton
-                //        {
-                //            icon.name:  showDetails ? "view-list-icons" : "view-list-details"
-                //            onClicked:
-                //            {
-                //                showDetails = !showDetails
-                //            }
-                //        }
-                //    ]
-
-                headBar.visible: !_holder.visible
-                headBar.rightContent: [
-                    ToolButton
-                    {
-                        icon.name: "view-sort"
-                    }
-                ]
-
-                Maui.Holder
-                {
-                    id: _holder
-                    visible: !cardsView.count
-                    emoji: "qrc:/view-books.svg"
-                    emojiSize: Maui.Style.iconSizes.huge
-                    title : qsTr("There are not Books!")
-                    body: qsTr("You can create new books and organize your notes")
-                }
-
-                Maui.GridView
-                {
-                    id: cardsView
-                    visible: !_holder.visible
-                    anchors.fill: parent
-                    adaptContent: true
-                    itemSize:  Maui.Style.iconSizes.huge + Maui.Style.space.big
-                    cellHeight: itemSize * 1.5
-
-                    model: _booksModel
-
-                    delegate: Maui.ItemDelegate
-                    {
-                        id: _delegate
-
-                        width: cardsView.itemSize
-                        height: cardsView.cellHeight
-
-                        padding: Maui.Style.space.small
-
-                        background: Item {}
-                        isCurrentItem: GridView.isCurrentItem
-
-                        ToolTip.delay: 1000
-                        ToolTip.timeout: 5000
-                        ToolTip.visible: hovered
-                        ToolTip.text: model.url
-
-                        Maui.GridItemTemplate
-                        {
-                            isCurrentItem: _delegate.isCurrentItem
-                            hovered: _delegate.hovered
-                            anchors.fill: parent
-                            label1.text: model.title
-                            iconSizeHint: parent.height * 0.6
-                            iconSource:  "qrc:/booklet.svg"
-                        }
-
-                        Maui.Badge
-                        {
-                            anchors
-                            {
-                                left: parent.left
-                                top: parent.top
-                                margins: Maui.Style.space.small
-                            }
-
-                            Kirigami.Theme.backgroundColor: Kirigami.Theme.neutralTextColor
-                            Kirigami.Theme.textColor: Qt.darker(Kirigami.Theme.neutralTextColor, 2.4)
-
-                            text: model.count
-                        }
-
-                        Connections
-                        {
-                            target:_delegate
-
-                            onClicked:
-                            {
-                                console.log("BOOKLET CLICKED", index)
-                                cardsView.currentIndex = index
-                                control.currentBook = _booksList.get(index)
-                                _stackView.push(_bookletComponent)
-                            }
-                        }
-                    }
-                }
-            }
-
-    }
+    readonly property bool editing : depth > 1
 
     Component
     {
@@ -132,20 +23,205 @@ Item
 
         BookletPage
         {
-            onExit: _stackView.pop()
+            onExit: control.pop()
         }
     }
 
-
-    Maui.BaseModel
+    initialItem: Maui.Page
     {
-        id: _booksModel
-        list: _booksList
-    }
+        id: _booksPage
 
-    Books
-    {
-        id: _booksList
-        currentBook: cardsView.currentIndex
+        headBar.visible: !_holder.visible
+
+        headBar.middleContent: Maui.TextField
+        {
+            Layout.fillWidth: true
+            placeholderText: i18n("Search ") + _booksList.count + " " + i18n("books")
+            onAccepted: _booksModel.filter = text
+            onCleared: _booksModel.filter = ""
+        }
+
+        Maui.FloatingButton
+        {
+            z: parent.z + 1
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: Maui.Style.space.huge
+            height: Maui.Style.toolBarHeight
+
+            icon.name: "list-add"
+            icon.color: Kirigami.Theme.highlightedTextColor
+            onClicked: newBook()
+        }
+
+        Maui.Holder
+        {
+            id: _holder
+            visible: _booksList.count === 0
+            emoji: "qrc:/view-books.svg"
+            emojiSize: Maui.Style.iconSizes.huge
+            title : i18n("There are no Books!")
+            body: i18n("You can create new books and organize your notes")
+        }
+
+        Maui.AltBrowser
+        {
+            id: cardsView
+
+            visible: !_holder.visible
+            viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
+
+            anchors.fill: parent
+            gridView.itemSize: 140
+            gridView.itemHeight: gridView.itemSize * 1.2
+            listView.snapMode: ListView.SnapOneItem
+
+            model: Maui.BaseModel
+            {
+                id: _booksModel
+                sortOrder: settings.sortOrder
+                sort: settings.sortBy
+                recursiveFilteringEnabled: true
+                sortCaseSensitivity: Qt.CaseInsensitive
+                filterCaseSensitivity: Qt.CaseInsensitive
+
+                list: Books
+                {
+                    id: _booksList
+                    currentBook: mappedIndex(cardsView.currentIndex)
+                }
+            }
+
+            listDelegate: Maui.ItemDelegate
+            {
+                id: _listDelegate
+                width: ListView.view.width
+                height: Maui.Style.rowHeight * 2
+                isCurrentItem: ListView.isCurrentItem
+
+                Kirigami.Theme.backgroundColor: Qt.lighter(control.Kirigami.Theme.backgroundColor, 2)
+
+                RowLayout
+                {
+                    anchors.fill: parent
+
+                    Rectangle
+                    {
+                        Layout.fillHeight: true
+                        Layout.preferredWidth: height
+                        Layout.margins: Maui.Style.space.small
+                        color: model.color
+                        radius: Maui.Style.radiusV
+
+                       Label
+                       {
+                           text: model.title[0].toUpperCase()
+                           font.pointSize: Maui.Style.iconSizes.big
+                           color: Qt.lighter(parent.color)
+                           anchors.centerIn: parent
+                       }
+                    }
+
+                    Maui.ListItemTemplate
+                    {
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        rightMargin: Maui.Style.space.small
+                        isCurrentItem: _listDelegate.isCurrentItem
+                        hovered: _listDelegate.hovered
+                        label1.text: model.title
+                        //                        labe1.font.bold: true
+                        label1.font.weight: Font.Bold
+                        label2.text: Qt.formatDateTime(new Date(model.modified), "d MMM yyyy")
+
+                        Maui.Badge
+                        {
+                            radius: 4
+                            text: model.count
+                        }
+                    }
+                }
+
+                onClicked:
+                {
+                    cardsView.currentIndex = index
+                    control.currentBook = model
+                    control.push(_bookletComponent)
+                }
+
+            }
+
+            gridDelegate: Maui.ItemDelegate
+            {
+                id: _delegate
+
+                width: cardsView.gridView.cellWidth
+                height: cardsView.gridView.cellHeight
+                isCurrentItem: GridView.isCurrentItem
+
+                background: Item {}
+
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered
+                ToolTip.text: model.url
+
+                ColumnLayout
+                {
+                    height: cardsView.gridView.itemHeight - 10
+                    width: cardsView.gridView.itemSize - 20
+                    anchors.centerIn: parent
+                    spacing: Maui.Style.space.medium
+                    Rectangle
+                    {
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        color: model.color
+                        radius: Maui.Style.radiusV
+
+                        Label
+                        {
+                            text: model.title[0].toUpperCase()
+                            font.pointSize: Maui.Style.iconSizes.huge
+                            color: Qt.lighter(parent.color)
+                            horizontalAlignment: Qt.AlignHCenter
+                            verticalAlignment: Qt.AlignVCenter
+                            anchors.fill: parent
+                        }
+                    }
+
+                    Maui.ListItemTemplate
+                    {
+                        isCurrentItem: _delegate.isCurrentItem
+                        hovered: _delegate.hovered
+                        Layout.fillWidth: true
+                        label1.text: model.title
+                        //                        labe1.font.bold: true
+                        label1.font.weight: Font.Bold
+                        label2.text: Qt.formatDateTime(new Date(model.modified), "d MMM yyyy")
+
+                        Maui.Badge
+                        {
+                            radius: 4
+                            text: model.count
+                        }
+                    }
+                }
+
+                onClicked:
+                {
+                    cardsView.currentIndex = index
+                    control.currentBook = model
+                    control.push(_bookletComponent)
+                }
+            }
+        }
     }
 }
+
+
+
+
+
+
+

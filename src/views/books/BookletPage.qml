@@ -4,57 +4,172 @@ import QtQuick.Layouts 1.3
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 
-Maui.Page
+import "../../widgets"
+
+StackView
 {
     id: control
-
-    title: currentBooklet.title
+    clip: true
 
     property var currentBooklet : null
     signal exit()
 
-    onCurrentBookletChanged:
+    initialItem: Maui.Page
     {
-        editor.document.load(currentBooklet.url)
-        _sidebar.title = currentBook.title
-    }
+        headBar.visible: true
+        headBar.farLeftContent: ToolButton
+        {
+            icon.name: "go-previous"
+            onClicked: control.exit()
+        }
 
-    Maui.BaseModel
+        headBar.middleContent: Maui.TextField
+        {
+            Layout.fillWidth: true
+            placeholderText: i18n("Filter ") + _booksList.booklet.count + " " + i18n("booklets in ") + currentBook.title
+            onAccepted: _bookletModel.filter = text
+            onCleared: _bookletModel.filter = ""
+        }
+
+        Maui.FloatingButton
+        {
+            z: parent.z + 1
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: Maui.Style.space.huge
+            height: Maui.Style.toolBarHeight
+
+            icon.name: "list-add"
+            icon.color: Kirigami.Theme.highlightedTextColor
+            onClicked:  _newChapter.open()
+        }
+
+        Maui.Holder
+        {
+            anchors.margins: Maui.Style.space.huge
+            visible: _booksList.booklet.count === 0
+            emoji: "qrc:/document-edit.svg"
+            emojiSize: Maui.Style.iconSizes.huge
+            isMask: false
+            title : i18n("This book is empty!")
+            body: i18n("Start by creating a new chapter for your book")
+        }
+
+        ColumnLayout
+        {
+            anchors.fill: parent
+            visible: _booksList.booklet.count >0
+            spacing: 0
+
+            Maui.ListItemTemplate
+            {
+                Layout.fillWidth: true
+                Layout.margins: Maui.Style.space.small
+                implicitHeight: Maui.Style.rowHeight * 2
+                label1.font.pointSize: Maui.Style.fontSizes.large
+                label1.font.weight: Font.Bold
+                label1.font.bold: true
+
+                label1.text: currentBook.title
+                label2.text: i18n("Notes in this book: ") + currentBook.count
+                label3.text: Qt.formatDateTime(new Date(currentBook.modified), "d MMM yyyy")
+            }
+
+            Maui.ListBrowser
+            {
+                id: _listView
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+
+                margins: Maui.Style.space.big
+                spacing: margins
+                orientation: ListView.Horizontal
+
+                verticalScrollBarPolicy: ScrollBar.AlwaysOff
+
+                model: Maui.BaseModel
+                {
+                    id: _bookletModel
+                    list: _booksList.booklet
+                    sortOrder: Qt.DescendingOrder
+                    sort: "modified"
+                    recursiveFilteringEnabled: true
+                    sortCaseSensitivity: Qt.CaseInsensitive
+                    filterCaseSensitivity: Qt.CaseInsensitive
+                }
+
+                delegate: CardDelegate
+                {
+                    width: Math.min(Math.max(200, ListView.view.width * 0.7), 400)
+                    noteColor: Qt.lighter(Kirigami.Theme.backgroundColor)
+                    height: ListView.view.height
+                    isCurrentItem: ListView.isCurrentItem
+
+                    onClicked:
+                    {
+                        _listView.currentIndex = index
+
+                        if(Maui.Handy.singleClick)
+                        {
+                             control.currentBooklet = _bookletModel.get(index)
+                             control.push(_editorView)
+                        }
+                    }
+
+                    onDoubleClicked:
+                    {
+                        _listView.currentIndex = index
+
+                        if(!Maui.Handy.singleClick)
+                        {
+                            control.currentBooklet = _bookletModel.get(index)
+                            control.push(_editorView)
+                        }
+                    }
+                }
+            }
+        }
+     }
+
+    Component
     {
-        id: _bookletModel
-        list: _booksList.booklet
-    }
-
-    headBar.farLeftContent: ToolButton
-    {
-        icon.name: "go-previous"
-        onClicked: control.exit()
-    }
-
-    headBar.leftContent: ToolButton
-    {
-        icon.name: "view-calendar-list"
-        text: qsTr("Chapters")
-        onClicked: checked ? _layout.currentIndex = 0 : _layout.currentIndex = 1
-        checked: _layout.firstVisibleItem === _sidebar
-    }
-
-    Kirigami.PageRow
-    {
-        id: _layout
-        anchors.fill: parent
-        initialPage: [_sidebar, editor]
-        interactive: true
-        defaultColumnWidth: Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile ? 16 : 12)
-
-        clip: true
+        id: _editorView
 
         Maui.Editor
         {
             id: editor
             enabled: !_holder.visible
             footBar.visible: false
-            document.autoReload: true
+            document.autoReload: settings.autoReload
+            document.autoSave: settings.autoSave
+            document.fileUrl: currentBooklet.url
+            body.font: settings.font
+            showLineNumbers: settings.lineNumbers
+
+            function saveFile(path)
+            {
+                if (path && Maui.FM.fileExists(path))
+                {
+                    editor.document.saveAs(path)
+                }
+        //        else
+//                {
+        //            _dialogLoader.sourceComponent = _fileDialogComponent
+        //            dialog.mode = dialog.modes.SAVE;
+        //            //            fileDialog.settings.singleSelection = true
+        //            dialog.show(function (paths)
+        //            {
+        //                item.document.saveAs(paths[0])
+        //                _historyList.append(paths[0])
+        //            });
+//                }
+            }
+
+            headBar.farLeftContent: ToolButton
+            {
+                icon.name: "go-previous"
+                onClicked: control.pop()
+            }
 
             headBar.rightContent: [
 
@@ -62,11 +177,12 @@ Maui.Page
                 {
                     enabled: editor.document.modified
                     icon.name: "document-save"
-                    text: qsTr("Save")
+                    text: i18n("Save")
                     onClicked:
                     {
-                        currentBooklet.content = editor.text
-                        _booksList.booklet.update(currentBooklet, _listView.currentIndex)
+                        saveFile(editor.fileUrl)
+                        control.currentBooklet.content = editor.text
+                        _booksList.booklet.update(control.currentBooklet, _listView.currentIndex)
                     }
                 },
 
@@ -88,81 +204,8 @@ Maui.Page
                 emoji: "qrc:/document-edit.svg"
                 emojiSize: Maui.Style.iconSizes.huge
                 isMask: false
-                title : qsTr("Nothing to edit!")
-                body: qsTr("Select a chapter or create a new one")
-            }
-        }
-
-        Maui.Page
-        {
-
-            id: _sidebar
-            headBar.visible: true
-            headBar.rightContent: ToolButton
-            {
-                icon.name: "view-sort"
-            }
-
-            background: Rectangle
-            {
-                color: "transparent"
-            }
-
-            footBar.middleContent: Button
-            {
-                text: qsTr("New chapter")
-                onClicked: _newChapter.open()
-
-                Layout.preferredHeight: Maui.Style.rowHeight
-                Layout.fillWidth: true
-                Kirigami.Theme.backgroundColor: Kirigami.Theme.positiveTextColor
-                Kirigami.Theme.textColor: "white"
-            }
-
-
-
-            ListView
-            {
-                id: _listView
-                anchors.fill: parent
-                model: _bookletModel
-                clip: true
-
-                onCountChanged:
-                {
-                    _listView.currentIndex = count-1
-                    control.currentBooklet = _booksList.booklet.get(_listView.currentIndex)
-                }
-
-                Maui.Holder
-                {
-                    anchors.margins: Maui.Style.space.huge
-                    visible: !_listView.count
-                    emoji: "qrc:/document-edit.svg"
-                    emojiSize: Maui.Style.iconSizes.huge
-                    isMask: false
-                    title : qsTr("This book is empty!")
-                    body: qsTr("Start by creating a new chapter for your book")
-                }
-
-
-                delegate: Maui.LabelDelegate
-                {
-                    id: _delegate
-                    width: parent.width
-                    label: index+1  + " - " + model.title
-
-                    Connections
-                    {
-                        target:_delegate
-
-                        onClicked:
-                        {
-                            _listView.currentIndex = index
-                            currentBooklet =  _booksList.booklet.get(index)
-                        }
-                    }
-                }
+                title : i18n("Nothing to edit!")
+                body: i18n("Select a chapter or create a new one")
             }
         }
     }
@@ -171,16 +214,20 @@ Maui.Page
     {
         id: _newChapter
 
-        title: qsTr("New Chapter")
-        message: qsTr("Create a new chapter for your current book. Give it a title")
+        title: i18n("New Chapter")
+        message: i18n("Create a new chapter for your current book. Give it a title")
         entryField: true
-        page.padding: Maui.Style.space.huge
+        textEntry.text:  Qt.formatDateTime(new Date(), "d-MMM-yyyy")
+        page.margins: Maui.Style.space.big
         onAccepted:
         {
             _booksList.booklet.insert({content: textEntry.text})
             _newChapter.close()
+            _listView.currentIndex = _listView.count-1
+            control.currentBooklet = _bookletModel.get(_listView.currentIndex)
         }
     }
+
 
 }
 

@@ -1,158 +1,60 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.3
-import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.0 as Maui
-import org.kde.mauikit 1.1 as MauiLab
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
+import Qt.labs.settings 1.0
+
+import org.kde.kirigami 2.7 as Kirigami
+import org.kde.mauikit 1.2 as Maui
 
 import "widgets"
 import "views/notes"
-import "views/links"
 import "views/books"
 
 Maui.ApplicationWindow
 {
     id: root
-    title: qsTr("Buho")
+    title: i18n("Buho")
 
-    Maui.App.handleAccounts: true
-    Maui.App.description: qsTr("Buho allows you to take quick notes, collect links and organize notes as books.")
-    Maui.App.iconName: "qrc:/buho.svg"
+    readonly property font defaultFont:
+    {
+        family: "Noto Sans Mono"
+        pointSize: Maui.Style.fontSizes.huge
+    }
 
     readonly property var views : ({
                                        notes: 0,
-                                       links: 1,
-                                       books: 2
+                                       books: 1
                                    })
 
-//    headBar.visible: Kirigami.Settings.isMobile ? !Qt.inputMethod.visible : true
     altHeader: Kirigami.Settings.isMobile
+//    autoHideHeader: swipeView.currentItem.editing
+    headBar.visible: !swipeView.currentItem.editing
 
-    mainMenu: MenuItem
+    mainMenu: Action
     {
-        text: qsTr("Settings")
+        text: i18n("Settings")
         icon.name: "settings-configure"
         onTriggered: _settingsDialog.open()
     }
-
-    Maui.PieButton
+ //    /***** COMPONENTS *****/
+    Settings
     {
-        id: addButton
-        z: 999
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins: height
-        height: Maui.Style.toolBarHeight
+        id: settings
+        category: "General"
+        property bool autoSync : true
+        property bool autoSave: true
+        property bool autoReload: true
+        property bool lineNumbers: true
 
-        icon.name: "list-add"
-        icon.color: Kirigami.Theme.highlightedTextColor
-        alignment: Qt.AlignLeft
+        property string sortBy:  "modified"
+        property int sortOrder : Qt.DescendingOrder
 
-        Action
-        {
-            icon.name: "view-pim-notes"
-            onTriggered: notesView.newNote()
-        }
-        Action
-        {
-            icon.name: "view-pim-news"
-            onTriggered: newLink()
-        }
-        Action
-        {
-            icon.name: "view-pim-journal"
-            onTriggered: newBook()
-        }
+        property font font : defaultFont
     }
 
-    MauiLab.SettingsDialog
+    SettingsDialog
     {
         id: _settingsDialog
-        MauiLab.SettingsSection
-        {
-            title: qsTr("Syncing")
-            description: qsTr("Configure the syncing options.")
-
-            Switch
-            {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Auto Fetch on Start Up")
-                Layout.fillWidth: true
-            }
-        }
-
-        MauiLab.SettingsSection
-        {
-            title: qsTr("Notes")
-            description: qsTr("Configure the notes view behavior.")
-
-            Switch
-            {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Rich Text Formatting")
-                Layout.fillWidth: true
-            }
-        }
-
-        MauiLab.SettingsSection
-        {
-            title: qsTr("Links")
-            description: qsTr("Configure the app plugins and behavior.")
-
-            Switch
-            {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Cached")
-                Layout.fillWidth: true
-            }
-        }
-
-        MauiLab.SettingsSection
-        {
-            title: qsTr("Books")
-            description: qsTr("Configure the app plugins and behavior.")
-
-            Item
-            {
-                Kirigami.FormData.label: qsTr("Editor")
-                Kirigami.FormData.isSection: true
-            }
-
-            Switch
-            {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Show Line Numbers")
-                Layout.fillWidth: true
-            }
-
-            Switch
-            {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Support Syntax Highlighting")
-                Layout.fillWidth: true
-            }
-
-            Switch
-            {
-                checkable: true
-                Kirigami.FormData.label: qsTr("Auto Save")
-                Layout.fillWidth: true
-            }
-        }
-    }
-
-     //    /***** COMPONENTS *****/
-
-    NewLinkDialog
-    {
-        id: newLinkDialog
-        onLinkSaved: linksView.list.insert(link)
-    }
-
-    NewLinkDialog
-    {
-        id: editLinkDialog
-        onLinkSaved: linksView.list.update(link, linksView.currentIndex)
     }
 
     NewBookDialog
@@ -160,13 +62,13 @@ Maui.ApplicationWindow
         id: newBookDialog
         onBookSaved:
         {
-//            if(title && title.length)
-                booksView.list.insert({title: title, count: 0})
+            //            if(title && title.length)
+            booksView.list.insert({title: title, count: 0})
         }
-    }
+    }   
 
     //    /***** VIEWS *****/
-    MauiLab.AppViews
+    Maui.AppViews
     {
         id: swipeView
         anchors.fill: parent
@@ -175,31 +77,16 @@ Maui.ApplicationWindow
         {
             id: notesView
 
-            MauiLab.AppView.iconName: "view-pim-notes"
-            MauiLab.AppView.title: qsTr("Notes")
-        }
-
-        LinksView
-        {
-            MauiLab.AppView.iconName: "view-pim-news"
-            MauiLab.AppView.title: qsTr("Links")
-            id: linksView
-            onLinkClicked: setLink(link)
+            Maui.AppView.iconName: "view-pim-notes"
+            Maui.AppView.title: i18n("Notes")
         }
 
         BooksView
         {
             id: booksView
-            MauiLab.AppView.iconName: "view-pim-journal"
-            MauiLab.AppView.title: qsTr("Books")
+            Maui.AppView.iconName: "view-pim-journal"
+            Maui.AppView.title: i18n("Books")
         }
-    }
-
-
-    function newLink()
-    {
-        swipeView.currentIndex = views.links
-        newLinkDialog.open()
     }
 
     function newBook()
@@ -208,12 +95,4 @@ Maui.ApplicationWindow
         newBookDialog.open()
     }
 
-
-
-    function setLink(link)
-    {
-        linksView.currentLink = link
-        editLinkDialog.fill(link)
-        editLinkDialog.open()
-    }
 }

@@ -6,18 +6,12 @@
         <file>widgets/CardsView.qml</file>
         <file>views/notes/NotesView.qml</file>
         <file>widgets/CardDelegate.qml</file>
-        <file>widgets/NewLinkDialog.qml</file>
-        <file>views/links/LinksView.qml</file>
         <file>utils.js</file>
         <file>views/books/BooksView.qml</file>
         <file>widgets/ColorsBar.qml</file>
         <file>widgets/CardsList.qml</file>
-        <file>widgets/CardMenu.qml</file>
-        <file>widgets/LinkCardDelegate.qml</file>
         <file>views/books/NewBookDialog.qml</file>
         <file>views/books/BookletPage.qml</file>
-        <file>widgets/WebView.qml</file>
-        <file>widgets/WebViewLinux.qml</file>
-        <file>widgets/WebViewOther.qml</file>
+        <file>widgets/SettingsDialog.qml</file>
     </qresource>
 </RCC>

@@ -5,130 +5,33 @@ import org.kde.mauikit 1.0 as Maui
 
 Row
 {
-    signal colorPicked(string color)
-//    anchors.verticalCenter: parent.verticalCenter
     spacing: Maui.Style.space.medium
-    property string currentColor
+
+    property color currentColor
     property int size : Maui.Style.iconSizes.medium
+    signal colorPicked(string color)
 
-    Rectangle
+    Repeater
     {
-        color:"#ffded4"
-        anchors.verticalCenter: parent.verticalCenter
-        height: size
-        width: height
-        radius: Maui.Style.radiusV
-        border.color: Qt.darker(color, 1.7)
+        model: ["#ffded4", "#d3ffda", "#caf3ff", "#dbd8ff", "#ffcdf4"]
 
-        MouseArea
+        Rectangle
         {
-            anchors.fill: parent
-            onClicked:
+            color: modelData
+            anchors.verticalCenter: parent.verticalCenter
+            height: size
+            width: size
+            radius: color == currentColor ? Maui.Style.radiusV : size
+            border.color: Qt.lighter(color, 2.5)
+
+            MouseArea
             {
-                currentColor = parent.color
-                colorPicked(currentColor)
-            }
-        }
-    }
-
-    Rectangle
-    {
-        color:"#d3ffda"
-        anchors.verticalCenter: parent.verticalCenter
-        height: size
-        width: height
-        radius: Maui.Style.radiusV
-        border.color: Qt.darker(color, 1.7)
-
-        MouseArea
-        {
-            anchors.fill: parent
-            onClicked:
-            {
-                currentColor = parent.color
-                colorPicked(currentColor)
-            }
-        }
-    }
-
-    Rectangle
-    {
-        color:"#caf3ff"
-        anchors.verticalCenter: parent.verticalCenter
-        height: size
-        width: height
-        radius: Maui.Style.radiusV
-        border.color: Qt.darker(color, 1.7)
-
-        MouseArea
-        {
-            anchors.fill: parent
-            onClicked:
-            {
-                currentColor = parent.color
-                colorPicked(currentColor)
-            }
-        }
-    }
-
-    Rectangle
-    {
-        color:"#dbd8ff"
-        anchors.verticalCenter: parent.verticalCenter
-        height: size
-        width: height
-        radius: Maui.Style.radiusV
-        border.color: Qt.darker(color, 1.7)
-
-        MouseArea
-        {
-            anchors.fill: parent
-            onClicked:
-            {
-                currentColor = parent.color
-                colorPicked(currentColor)
-            }
-        }
-    }
-
-    Rectangle
-    {
-        color:"#ffcdf4"
-        anchors.verticalCenter: parent.verticalCenter
-        height: size
-        width: height
-        radius: Maui.Style.radiusV
-        border.color: Qt.darker(color, 1.7)
-
-        MouseArea
-        {
-            anchors.fill: parent
-            onClicked:
-            {
-                currentColor = parent.color
-                colorPicked(currentColor)
-            }
-        }
-    }
-
-    Rectangle
-    {
-        Kirigami.Theme.inherit: false
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        color: Kirigami.Theme.backgroundColor
-        anchors.verticalCenter: parent.verticalCenter
-        height: size
-        width: height
-        radius: Maui.Style.radiusV
-        border.color: Qt.darker(color, 1.7)
-
-        MouseArea
-        {
-            anchors.fill: parent
-            onClicked:
-            {
-                currentColor = parent.color
-                colorPicked(currentColor)
+                anchors.fill: parent
+                onClicked:
+                {
+                    currentColor = parent.color
+                    colorPicked(currentColor)
+                }
             }
         }
     }

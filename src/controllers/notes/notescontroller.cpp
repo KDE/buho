@@ -60,8 +60,8 @@ bool NotesController::insertNote(FMH::MODEL &note)
 
 	note[FMH::MODEL_KEY::URL] = url_.toString();
 
-	for(const auto &tg : note[FMH::MODEL_KEY::TAG].split(",", QString::SplitBehavior::SkipEmptyParts))
-        Tagging::getInstance()->tagAbstract(tg, "notes", note[FMH::MODEL_KEY::URL], note[FMH::MODEL_KEY::COLOR]);
+//	for(const auto &tg : note[FMH::MODEL_KEY::TAG].split(",", QString::SplitBehavior::SkipEmptyParts))
+//        Tagging::getInstance()->tagAbstract(tg, "notes", note[FMH::MODEL_KEY::URL], note[FMH::MODEL_KEY::COLOR]);
 
 	return(this->m_db->insert(OWL::TABLEMAP[OWL::TABLE::NOTES],
 		   FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::URL,
@@ -75,9 +75,6 @@ bool NotesController::updateNote(FMH::MODEL &note, QString id)
 	if(note.isEmpty())
 		return false;
 
-	if(!note[FMH::MODEL_KEY::TAG].isEmpty ())
-        Tagging::getInstance ()->updateAbstractTags("notes", note[FMH::MODEL_KEY::URL],  note[FMH::MODEL_KEY::TAG].split (","));
-
 	if(note[FMH::MODEL_KEY::URL].isEmpty())
 		note[FMH::MODEL_KEY::URL] = [&]() -> const QString {
 				const auto data = DB::getInstance ()->getDBData(QString("select url from notes where id = '%1'").arg(id));
@@ -85,9 +82,6 @@ bool NotesController::updateNote(FMH::MODEL &note, QString id)
 			}();
 
 	if(note[FMH::MODEL_KEY::URL].isEmpty())
-		return false;
-
-	if(!OWL::saveNoteFile(note[FMH::MODEL_KEY::URL], note[FMH::MODEL_KEY::CONTENT].toUtf8()))
 		return false;
 
 	const auto f_note = FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::COLOR,
@@ -108,7 +102,7 @@ bool NotesController::removeNote(const QString &id)
 
 	this->m_db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES_SYNC], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
 
-    FMStatic::removeFiles({url});
+	FMStatic::removeFiles({url});
 
 	return this->m_db->remove(OWL::TABLEMAP[OWL::TABLE::NOTES], {{FMH::MODEL_NAME[FMH::MODEL_KEY::ID], id}});
 }

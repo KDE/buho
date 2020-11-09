@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
-set(BUHO_VERSION 1.1.1)
+
+set(BUHO_VERSION 1.2.0)
+
 project(buho VERSION ${BUHO_VERSION})
 
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)

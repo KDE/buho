@@ -1,7 +1,10 @@
-QT += qml
-QT += quick
-QT += sql
-QT += network
+QT *= core \
+    quick \
+    network \
+    sql \
+    qml \
+    quickcontrols2
+
 
 CONFIG += ordered
 CONFIG += c++17
@@ -10,8 +13,8 @@ TARGET = buho
 TEMPLATE = app
 
 VERSION_MAJOR = 1
-VERSION_MINOR = 1
-VERSION_BUILD = 1
+VERSION_MINOR = 2
+VERSION_BUILD = 0
 
 VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
 
@@ -24,17 +27,6 @@ linux:unix:!android {
 
 } else {
 
-    android {
-        message(Building for Android)
-        QMAKE_LINK += -nostdlib++
-        QT += androidextras
-        QT += webview
-
-        ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
-        DISTFILES += $$PWD/android_files/AndroidManifest.xml
-        DEFINES *= ANDROID_OPENSSL
-     }
-
     DEFINES *= \
         COMPONENT_FM \
         COMPONENT_TAGGING \
@@ -42,13 +34,27 @@ linux:unix:!android {
         COMPONENT_EDITOR \
         MAUIKIT_STYLE
 
+    android {
+        message(Building for Android)
+        QT += androidextras
+
+        ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
+        DISTFILES += $$PWD/android_files/AndroidManifest.xml
+        DEFINES *= ANDROID_OPENSSL
+     }
+
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)
 
+
     DEFINES += STATIC_KIRIGAMI
     win32 {
-        QT += webengine
         RC_ICONS = $$PWD/windows_files/buho.ico
+    }
+
+    macos {
+        message(Building for Macos)
+        ICON = $$PWD/macos_files/buho.icns
     }
 }
 
@@ -66,8 +72,7 @@ SOURCES += \
     src/models/notes/notes.cpp \
     src/models/books/books.cpp \
     src/models/books/booklet.cpp \
-    src/models/links/links.cpp \
-    src/providers/nextnote.cpp \
+    src/providers/nextnote.cpp
 
 RESOURCES += \
     src/assets/imgs.qrc \
@@ -85,7 +90,6 @@ HEADERS += \
     src/models/notes/notes.h \
     src/models/books/books.h \
     src/models/books/booklet.h \
-    src/models/links/links.h \
     src/providers/nextnote.h \
     src/providers/abstractnotesprovider.h
 
@@ -107,8 +111,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    src/db/script.sql \
-
 include($$PWD/install.pri)
+
+ANDROID_ABIS = armeabi-v7a
 
