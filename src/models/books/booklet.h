@@ -41,7 +41,7 @@ public:
     };
     Q_ENUM(SORTBY)
 
-    FMH::MODEL_LIST items() const override final;
+    const FMH::MODEL_LIST &items() const override final;
 
     void setSortBy(const SORTBY &sort);
     SORTBY getSortBy() const;

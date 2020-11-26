@@ -32,7 +32,7 @@ Books::Books(QObject *parent) : MauiList(parent),
 	this->syncer->getBooks();
 }
 
-FMH::MODEL_LIST Books::items() const
+const FMH::MODEL_LIST &Books::items() const
 {
 	return this->m_list;
 }

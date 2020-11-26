@@ -14,7 +14,7 @@ Booklet::Booklet(BooksSyncer *_syncer,  QObject *parent) : MauiList(parent),
 	});
 }
 
-FMH::MODEL_LIST Booklet::items() const
+const FMH::MODEL_LIST &Booklet::items() const
 {
 	return this->m_list;
 }

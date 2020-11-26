@@ -23,7 +23,7 @@ class Books : public MauiList
 public:
 	Books(QObject *parent = nullptr);
 
-	FMH::MODEL_LIST items() const override final;
+        const FMH::MODEL_LIST &items() const override final;
 
 	Booklet * getBooklet() const;
 

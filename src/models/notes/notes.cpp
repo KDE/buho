@@ -65,7 +65,7 @@ void Notes::appendNote(FMH::MODEL note)
 	emit this->postItemAppended ();
 }
 
-FMH::MODEL_LIST Notes::items() const
+const FMH::MODEL_LIST &Notes::items() const
 {
 	return this->notes;
 }

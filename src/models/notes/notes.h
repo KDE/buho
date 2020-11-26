@@ -19,7 +19,7 @@ class Notes : public MauiList
 
 public:
     explicit Notes(QObject *parent = nullptr);
-    FMH::MODEL_LIST items() const override final;
+    const FMH::MODEL_LIST &items() const override final;
 
 private:
     NotesSyncer *syncer;

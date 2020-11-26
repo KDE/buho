@@ -6,6 +6,8 @@ import Qt.labs.settings 1.0
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.2 as Maui
 
+import org.maui.buho 1.0 as Buho
+
 import "widgets"
 import "views/notes"
 import "views/books"
@@ -30,11 +32,16 @@ Maui.ApplicationWindow
 //    autoHideHeader: swipeView.currentItem.editing
     headBar.visible: !swipeView.currentItem.editing
 
+    Buho.Doodle
+    {
+        id: _doodleHandler
+    }
+
     mainMenu: Action
     {
         text: i18n("Settings")
         icon.name: "settings-configure"
-        onTriggered: _settingsDialog.open()
+        onTriggered: _doodleDialog.open()
     }
  //    /***** COMPONENTS *****/
     Settings
@@ -50,6 +57,12 @@ Maui.ApplicationWindow
         property int sortOrder : Qt.DescendingOrder
 
         property font font : defaultFont
+    }
+
+    Maui.NewDialog
+    {
+        id: _doodleDialog
+        onFinished: _doodleHandler.getText(text)
     }
 
     SettingsDialog
