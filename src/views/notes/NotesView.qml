@@ -177,7 +177,7 @@ StackView
 
             Action
             {
-                text: qsTr("Favorite")
+                text: i18n("Favorite")
                 icon.name: "love"
                 onTriggered:
                 {
@@ -190,19 +190,19 @@ StackView
 
             Action
             {
-                text: qsTr("Share")
+                text: i18n("Share")
                 icon.name: "document-share"
             }
 
             Action
             {
-                text: qsTr("Export")
+                text: i18n("Export")
                 icon.name: "document-export"
             }
 
             Action
             {
-                text: qsTr("Delete")
+                text: i18n("Delete")
                 Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
                 icon.name: "edit-delete"
             }
@@ -398,7 +398,7 @@ StackView
             MenuItem
             {
                 icon.name: "love"
-                text: qsTr(_notesMenu.isFav? "UnFav" : "Fav")
+                text: _notesMenu.isFav? i18n("UnFav") : i18n("Fav")
                 onTriggered:
                 {
                     notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), cardsView.currentIndex)
