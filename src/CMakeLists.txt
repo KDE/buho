@@ -28,7 +28,7 @@ set(buho_SRCS
     syncing/notessyncer.cpp
     controllers/notes/notescontroller.cpp
     controllers/books/bookscontroller.cpp
-    doodle/doodlehanlder.cpp
+#    doodle/doodlehanlder.cpp
     )
 
 set(buho_HDRS
@@ -45,7 +45,7 @@ set(buho_HDRS
     syncing/notessyncer.h
     controllers/notes/notescontroller.h
     controllers/books/bookscontroller.h
-    doodle/doodlehanlder.h
+#    doodle/doodlehanlder.h
     )
 
 set(buho_ASSETS
@@ -64,7 +64,7 @@ if(ANDROID)
     kde_source_files_enable_exceptions(buho buho.cpp)
 endif()
 
-target_link_libraries(buho MauiKit tesseract Qt5::Sql Qt5::Qml Qt5::Svg Qt5::WebView)
+target_link_libraries(buho MauiKit #[[tesseract]] Qt5::Sql Qt5::Qml Qt5::Svg Qt5::WebView)
 target_link_libraries(buho KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n KF5::Attica KF5::SyntaxHighlighting)
 
 install(TARGETS buho ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

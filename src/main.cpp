@@ -37,7 +37,7 @@
 #include "models/books/books.h"
 #include "models/notes/notes.h"
 
-#include "doodle/doodlehanlder.h"
+//#include "doodle/doodlehanlder.h"
 
 #define BUHO_URI "org.maui.buho"
 
@@ -87,7 +87,7 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     qmlRegisterAnonymousType<Booklet>(BUHO_URI, 1);
     qmlRegisterType<Notes>(BUHO_URI, 1, 0, "Notes");
     qmlRegisterType<Books>(BUHO_URI, 1, 0, "Books");
-    qmlRegisterType<DoodleHanlder>(BUHO_URI, 1, 0, "Doodle");
+//    qmlRegisterType<DoodleHanlder>(BUHO_URI, 1, 0, "Doodle");
 
 #ifdef STATIC_KIRIGAMI
     KirigamiPlugin::getInstance().registerTypes();

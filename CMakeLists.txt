@@ -13,8 +13,8 @@ find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Qml Quick Sql Svg QuickControls2 
 find_package(KF5 REQUIRED COMPONENTS Config KIO Notifications I18n Attica SyntaxHighlighting)
 find_package(MauiKit REQUIRED)
 
-find_package(Tesseract REQUIRED)
-find_package(Leptonica REQUIRED)
+#find_package(Tesseract REQUIRED)
+#find_package(Leptonica REQUIRED)
 
 include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)

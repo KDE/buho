@@ -32,16 +32,16 @@ Maui.ApplicationWindow
 //    autoHideHeader: swipeView.currentItem.editing
     headBar.visible: !swipeView.currentItem.editing
 
-    Buho.Doodle
-    {
-        id: _doodleHandler
-    }
+//    Buho.Doodle
+//    {
+//        id: _doodleHandler
+//    }
 
     mainMenu: Action
     {
         text: i18n("Settings")
         icon.name: "settings-configure"
-        onTriggered: _doodleDialog.open()
+        onTriggered: _settingsDialog.open()
     }
  //    /***** COMPONENTS *****/
     Settings
@@ -57,12 +57,6 @@ Maui.ApplicationWindow
         property int sortOrder : Qt.DescendingOrder
 
         property font font : defaultFont
-    }
-
-    Maui.NewDialog
-    {
-        id: _doodleDialog
-        onFinished: _doodleHandler.getText(text)
     }
 
     SettingsDialog
