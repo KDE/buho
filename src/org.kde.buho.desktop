@@ -80,7 +80,7 @@ StartupNotify=true
 Icon=buho
 
 GenericName=Note Taker
-GenericName[az]=Qeyd aparıcı
+GenericName[az]=Qeyd aparan
 GenericName[ca]=Prendre notes
 GenericName[ca@valencia]=Prendre notes
 GenericName[cs]=Nástroj pro poznámky
