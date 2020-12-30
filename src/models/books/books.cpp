@@ -70,11 +70,16 @@ bool Books::insert(const QVariantMap &book)
 
 bool Books::update(const QVariantMap &data, const int &index)
 {
+    Q_UNUSED(data)
+    Q_UNUSED(index)
+
     return false;
 }
 
 bool Books::remove(const int &index)
 {
+    Q_UNUSED(index)
+    
     return false;
 }
 

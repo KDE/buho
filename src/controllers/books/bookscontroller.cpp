@@ -65,6 +65,8 @@ bool BooksController::insertBooklet(QString bookId, FMH::MODEL &booklet)
 
 bool BooksController::updateBooklet(FMH::MODEL &booklet, QString id)
 {
+    Q_UNUSED(id)
+
     //    for(const auto &tg : booklet[FMH::MODEL_KEY::TAG])
     //        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id);
 
@@ -140,5 +142,8 @@ bool BooksController::insertBook(FMH::MODEL &book)
 
 bool BooksController::updateBook(const QString &id, const FMH::MODEL &book)
 {
+    Q_UNUSED(id)
+    Q_UNUSED(book)
+    
     return false;
 }

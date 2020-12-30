@@ -20,6 +20,7 @@ const FMH::MODEL_LIST &Booklet::items() const
 
 void Booklet::setSortBy(const Booklet::SORTBY &sort)
 {
+    Q_UNUSED(sort)
 }
 
 Booklet::SORTBY Booklet::getSortBy() const
@@ -29,6 +30,7 @@ Booklet::SORTBY Booklet::getSortBy() const
 
 void Booklet::setOrder(const Booklet::ORDER &order)
 {
+    Q_UNUSED(order)
 }
 
 Booklet::ORDER Booklet::getOrder() const

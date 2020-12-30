@@ -70,10 +70,12 @@ void NextNote::getNote(const QString &id)
 
 void NextNote::getBooklet(const QString &id)
 {
+    Q_UNUSED(id)
 }
 
 void NextNote::sendNotes(QByteArray array)
 {
+    Q_UNUSED(array)
     //    emit this->notesReady(notes);
 }
 
