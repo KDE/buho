@@ -32,7 +32,6 @@ public:
     void updateBooklet(const QString &id, const QString &bookId, FMH::MODEL &booklet);
     void removeBooklet(const QString &id);
 
-
     void insertBook(FMH::MODEL &book);
     void updateBook(const QString &id, const FMH::MODEL &book);
     void removeBook(const QString &id);
@@ -55,20 +54,20 @@ private:
 
     BooksController *m_booksController;
 
-    static const QString bookletIdFromStamp(const QString &provider, const QString &stamp) ;
+    static const QString bookletIdFromStamp(const QString &provider, const QString &stamp);
     static const QString bookletStampFromId(const QString &id);
     void setConections() override final;
-     const FMH::MODEL_LIST collectAllBooks();
+    const FMH::MODEL_LIST collectAllBooks();
 
 signals:
-    //FOR BOOKS
+    // FOR BOOKS
     void bookInserted(FMH::MODEL book, STATE state);
     void bookUpdated(FMH::MODEL book, STATE state);
     void bookRemoved(FMH::MODEL book, STATE state);
     void bookReady(FMH::MODEL book);
     void booksReady(FMH::MODEL_LIST books);
 
-    //FOR BOOKLETS
+    // FOR BOOKLETS
     void bookletInserted(FMH::MODEL booklet, STATE state);
     void bookletUpdated(FMH::MODEL booklet, STATE state);
     void bookletRemoved(FMH::MODEL booklet, STATE state);

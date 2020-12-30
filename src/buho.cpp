@@ -1,7 +1,8 @@
 #include "buho.h"
 #include "owl.h"
 
-Buho::Buho(QObject *parent) : QObject(parent)
+Buho::Buho(QObject *parent)
+    : QObject(parent)
 {
     this->setFolders();
 }

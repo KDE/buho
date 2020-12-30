@@ -19,53 +19,44 @@
  * instead of manually inserting to the db or the cloud providers
  */
 
-struct STATE
-{
-	enum TYPE : uint
-	{
-		LOCAL,
-		REMOTE
-	};
+struct STATE {
+    enum TYPE : uint { LOCAL, REMOTE };
 
-	enum STATUS : uint
-	{
-		OK,
-		ERROR
-	};
+    enum STATUS : uint { OK, ERROR };
 
-	TYPE type;
-	STATUS status;
-	QString msg = QString();
+    TYPE type;
+    STATUS status;
+    QString msg = QString();
 };
 
-class Syncer: public QObject
+class Syncer : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	explicit Syncer(QObject *parent = nullptr);
-	/**
-	 * @brief setProviderAccount
-	 * sets the credentials to the current account
-	 * for the current provider being used
-	 * @param account
-	 * the account data represented by FMH::MODEL
-	 * where the valid keys are:
-	 * FMH::MODEL_KEY::USER user name
-	 * FMH::MODEL_KEY::PASSWORD users password
-	 * FMH::MODEL_KEY::PROVIDER the url to the provider server
-	 */
-	void setAccount(const FMH::MODEL &account);
+    explicit Syncer(QObject *parent = nullptr);
+    /**
+     * @brief setProviderAccount
+     * sets the credentials to the current account
+     * for the current provider being used
+     * @param account
+     * the account data represented by FMH::MODEL
+     * where the valid keys are:
+     * FMH::MODEL_KEY::USER user name
+     * FMH::MODEL_KEY::PASSWORD users password
+     * FMH::MODEL_KEY::PROVIDER the url to the provider server
+     */
+    void setAccount(const FMH::MODEL &account);
 
-	/**
-	 * @brief setProvider
-	 * sets the provider interface
-	 * this allows to change the provider source
-	 * @param provider
-	 * the provider must inherit the asbtract class AbstractNotesProvider.
-	 * The value passed is then moved to this class private property Syncer::provider
-	 */
-	void setProvider(AbstractNotesProvider *provider);
+    /**
+     * @brief setProvider
+     * sets the provider interface
+     * this allows to change the provider source
+     * @param provider
+     * the provider must inherit the asbtract class AbstractNotesProvider.
+     * The value passed is then moved to this class private property Syncer::provider
+     */
+    void setProvider(AbstractNotesProvider *provider);
 
     AbstractNotesProvider &getProvider() const
     {
@@ -78,14 +69,12 @@ public:
     }
 
 private:
-	/**
-	 * @brief server
-	 * Abstract instance to the online server to perfom CRUD actions
-	 */
-	AbstractNotesProvider * m_provider;
+    /**
+     * @brief server
+     * Abstract instance to the online server to perfom CRUD actions
+     */
+    AbstractNotesProvider *m_provider;
     virtual void setConections() = 0;
-
 };
-
 
 #endif // SYNCER_H

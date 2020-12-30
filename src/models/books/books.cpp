@@ -1,97 +1,97 @@
 #include "books.h"
+#include "booklet.h"
 #include "bookssyncer.h"
 #include "nextnote.h"
-#include "booklet.h"
-#include <QRandomGenerator>
 #include <QColor>
+#include <QRandomGenerator>
 
-Books::Books(QObject *parent) : MauiList(parent),
-	syncer(new BooksSyncer(this)), m_booklet(new Booklet(syncer, this))
+Books::Books(QObject *parent)
+    : MauiList(parent)
+    , syncer(new BooksSyncer(this))
+    , m_booklet(new Booklet(syncer, this))
 {
-	this->syncer->setProvider(new NextNote);
-	connect(this, &Books::currentBookChanged, this, &Books::openBook);
-	connect(syncer, &BooksSyncer::bookReady, [&](FMH::MODEL book)
-	{
-		emit this->preItemAppended();
-		auto book_data = FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
-		book_data.insert (FMH::MODEL_KEY::COLOR, QColor::fromRgb(QRandomGenerator::global()->generate()).name());
-		book = book.unite(book_data);
-		this->m_list << book;
-		emit this->postItemAppended();
-	});
+    this->syncer->setProvider(new NextNote);
+    connect(this, &Books::currentBookChanged, this, &Books::openBook);
+    connect(syncer, &BooksSyncer::bookReady, [&](FMH::MODEL book) {
+        emit this->preItemAppended();
+        auto book_data = FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
+        book_data.insert(FMH::MODEL_KEY::COLOR, QColor::fromRgb(QRandomGenerator::global()->generate()).name());
+        book = book.unite(book_data);
+        this->m_list << book;
+        emit this->postItemAppended();
+    });
 
-	connect(syncer, &BooksSyncer::bookInserted, [&](FMH::MODEL book)
-	{
-		emit this->preItemAppended();
-		auto book_data = FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
-		book_data.insert (FMH::MODEL_KEY::COLOR, QColor::fromRgb(QRandomGenerator::global()->generate()).name());
-		book = book.unite(book_data);
-		this->m_list << book;
-		emit this->postItemAppended();
-	});
-	this->syncer->getBooks();
+    connect(syncer, &BooksSyncer::bookInserted, [&](FMH::MODEL book) {
+        emit this->preItemAppended();
+        auto book_data = FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
+        book_data.insert(FMH::MODEL_KEY::COLOR, QColor::fromRgb(QRandomGenerator::global()->generate()).name());
+        book = book.unite(book_data);
+        this->m_list << book;
+        emit this->postItemAppended();
+    });
+    this->syncer->getBooks();
 }
 
 const FMH::MODEL_LIST &Books::items() const
 {
-	return this->m_list;
+    return this->m_list;
 }
 
 Booklet *Books::getBooklet() const
 {
-	return m_booklet;
+    return m_booklet;
 }
 
 int Books::getCurrentBook() const
 {
-	return m_currentBook;
+    return m_currentBook;
 }
 
 QVariantMap Books::get(const int &index) const
 {
-	if(index >= this->m_list.size() || index < 0)
-		return QVariantMap();
+    if (index >= this->m_list.size() || index < 0)
+        return QVariantMap();
 
-	return FMH::toMap(this->m_list.at(index));
+    return FMH::toMap(this->m_list.at(index));
 }
 
 bool Books::insert(const QVariantMap &book)
 {
-	auto __book = FMH::toModel(book);
-	__book[FMH::MODEL_KEY::THUMBNAIL] = "qrc:/booklet.svg";
-	__book[FMH::MODEL_KEY::LABEL] =__book[FMH::MODEL_KEY::TITLE];
-	__book[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
-	__book[FMH::MODEL_KEY::ADDDATE] = QDateTime::currentDateTime().toString(Qt::TextDate);
+    auto __book = FMH::toModel(book);
+    __book[FMH::MODEL_KEY::THUMBNAIL] = "qrc:/booklet.svg";
+    __book[FMH::MODEL_KEY::LABEL] = __book[FMH::MODEL_KEY::TITLE];
+    __book[FMH::MODEL_KEY::MODIFIED] = QDateTime::currentDateTime().toString(Qt::TextDate);
+    __book[FMH::MODEL_KEY::ADDDATE] = QDateTime::currentDateTime().toString(Qt::TextDate);
 
-	qDebug()<< "Trying to add a book" << __book;
-	this->syncer->insertBook(__book);
-	return true;
+    qDebug() << "Trying to add a book" << __book;
+    this->syncer->insertBook(__book);
+    return true;
 }
 
 bool Books::update(const QVariantMap &data, const int &index)
 {
-return false;
+    return false;
 }
 
 bool Books::remove(const int &index)
 {
-	return false;
+    return false;
 }
 
 void Books::openBook(const int &index)
 {
-	if(index >= this->m_list.size() || index < 0)
-		return;
+    if (index >= this->m_list.size() || index < 0)
+        return;
 
-	this->m_booklet->setBook(this->m_list.at(index)[FMH::MODEL_KEY::TITLE]);
-	this->m_booklet->setBookTitle(this->m_list.at(index)[FMH::MODEL_KEY::TITLE]);
+    this->m_booklet->setBook(this->m_list.at(index)[FMH::MODEL_KEY::TITLE]);
+    this->m_booklet->setBookTitle(this->m_list.at(index)[FMH::MODEL_KEY::TITLE]);
 }
 
 void Books::setCurrentBook(int currentBook)
 {
-	if (this->m_currentBook == currentBook)
-		return;
+    if (this->m_currentBook == currentBook)
+        return;
 
-	this->m_currentBook = currentBook;
-	emit this->currentBookChanged(m_currentBook);
+    this->m_currentBook = currentBook;
+    emit this->currentBookChanged(m_currentBook);
 }

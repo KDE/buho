@@ -23,22 +23,10 @@ class Booklet : public MauiList
 public:
     Booklet(BooksSyncer *_syncer = nullptr, QObject *parent = nullptr);
 
-    enum ORDER : uint8_t
-    {
-        DESC,
-        ASC
-    };
+    enum ORDER : uint8_t { DESC, ASC };
     Q_ENUM(ORDER)
 
-    enum SORTBY : uint8_t
-    {
-        TITLE = FMH::MODEL_KEY::TITLE,
-        ADDDATE = FMH::MODEL_KEY::ADDDATE,
-        MODIFIED = FMH::MODEL_KEY::MODIFIED,
-        COLOR = FMH::MODEL_KEY::COLOR,
-        FAVORITE = FMH::MODEL_KEY::FAVORITE,
-        PIN = FMH::MODEL_KEY::PIN
-    };
+    enum SORTBY : uint8_t { TITLE = FMH::MODEL_KEY::TITLE, ADDDATE = FMH::MODEL_KEY::ADDDATE, MODIFIED = FMH::MODEL_KEY::MODIFIED, COLOR = FMH::MODEL_KEY::COLOR, FAVORITE = FMH::MODEL_KEY::FAVORITE, PIN = FMH::MODEL_KEY::PIN };
     Q_ENUM(SORTBY)
 
     const FMH::MODEL_LIST &items() const override final;

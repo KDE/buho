@@ -14,6 +14,7 @@ class Buho : public QObject
     Q_OBJECT
 public:
     explicit Buho(QObject *parent = nullptr);
+
 private:
     void setFolders();
 

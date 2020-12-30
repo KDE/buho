@@ -1,7 +1,7 @@
-#include <QQmlApplicationEngine>
 #include <QCommandLineParser>
-#include <QQmlContext>
 #include <QIcon>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 #if defined Q_OS_MACOS || defined Q_OS_WIN
 #include <KF5/KI18n/KLocalizedString>
@@ -49,22 +49,21 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_DisableSessionManager, true);
 
 #ifdef Q_OS_ANDROID
-	QGuiApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
     if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
         return -1;
 #else
-	QApplication app(argc, argv);
+    QApplication app(argc, argv);
 #endif
 
     app.setOrganizationName(QStringLiteral("Maui"));
-	app.setWindowIcon(QIcon(":/buho.png"));
+    app.setWindowIcon(QIcon(":/buho.png"));
 
-    MauiApp::instance ()->setIconName ("qrc:/buho.svg");
-    MauiApp::instance ()->setHandleAccounts (true);
+    MauiApp::instance()->setIconName("qrc:/buho.svg");
+    MauiApp::instance()->setHandleAccounts(true);
 
     KLocalizedString::setApplicationDomain("buho");
-    KAboutData about(QStringLiteral("buho"), i18n("Buho"), BUHO_VERSION_STRING, i18n("Buho allows you to take quick notes and organize notebooks."),
-                     KAboutLicense::LGPL_V3, i18n("© 2019-2020 Nitrux Development Team"));
+    KAboutData about(QStringLiteral("buho"), i18n("Buho"), BUHO_VERSION_STRING, i18n("Buho allows you to take quick notes and organize notebooks."), KAboutLicense::LGPL_V3, i18n("© 2019-2020 Nitrux Development Team"));
     about.addAuthor(i18n("Camilo Higuita"), i18n("Developer"), QStringLiteral("milo.h@aol.com"));
     about.setHomepage("https://mauikit.org");
     about.setProductName("maui/buho");
@@ -82,12 +81,12 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
 
     Buho buho;
 
-	QQmlApplicationEngine engine;
+    QQmlApplicationEngine engine;
 
     qmlRegisterAnonymousType<Booklet>(BUHO_URI, 1);
     qmlRegisterType<Notes>(BUHO_URI, 1, 0, "Notes");
     qmlRegisterType<Books>(BUHO_URI, 1, 0, "Books");
-//    qmlRegisterType<DoodleHanlder>(BUHO_URI, 1, 0, "Doodle");
+    //    qmlRegisterType<DoodleHanlder>(BUHO_URI, 1, 0, "Doodle");
 
 #ifdef STATIC_KIRIGAMI
     KirigamiPlugin::getInstance().registerTypes();
@@ -97,9 +96,9 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     MauiKit::getInstance().registerTypes(&engine);
 #endif
 
-	engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-	if (engine.rootObjects().isEmpty())
-		return -1;
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    if (engine.rootObjects().isEmpty())
+        return -1;
 
-	return app.exec();
+    return app.exec();
 }

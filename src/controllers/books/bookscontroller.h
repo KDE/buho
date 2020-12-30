@@ -1,9 +1,9 @@
 #ifndef BOOKSCONTROLLER_H
 #define BOOKSCONTROLLER_H
 
-#include <QObject>
-#include<QUuid>
 #include "owl.h"
+#include <QObject>
+#include <QUuid>
 
 class DB;
 class BooksController : public QObject
@@ -40,7 +40,6 @@ signals:
     void bookRemoved(FMH::MODEL book);
     void bookReady(FMH::MODEL book);
     void booksReady(FMH::MODEL_LIST books);
-
 };
 
 #endif // BOOKSCONTROLLER_H

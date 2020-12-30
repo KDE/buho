@@ -21,18 +21,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef DB_H
 #define DB_H
 
+#include <QDebug>
+#include <QDir>
+#include <QFileInfo>
+#include <QList>
 #include <QObject>
+#include <QSqlDatabase>
+#include <QSqlDriver>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QSqlRecord>
 #include <QString>
 #include <QStringList>
-#include <QList>
-#include <QSqlDatabase>
-#include <QDebug>
-#include <QSqlQuery>
-#include <QSqlError>
-#include <QSqlRecord>
-#include <QSqlDriver>
-#include <QFileInfo>
-#include <QDir>
 #include <QVariantMap>
 
 #include "../utils/owl.h"
@@ -44,40 +44,40 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class DB : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
 private:
-	DB();
-	~DB();
+    DB();
+    ~DB();
 
-	DB(const DB&) = delete;
-	DB& operator=(const DB &) = delete;
-	DB(DB &&) = delete;
-	DB & operator=(DB &&) = delete;
+    DB(const DB &) = delete;
+    DB &operator=(const DB &) = delete;
+    DB(DB &&) = delete;
+    DB &operator=(DB &&) = delete;
 
-	QString name;
-	QSqlDatabase m_db;
+    QString name;
+    QSqlDatabase m_db;
 
 public:
-	static DB * getInstance()
-	{
-		static DB db;
-		return &db;
-	}
+    static DB *getInstance()
+    {
+        static DB db;
+        return &db;
+    }
 
-	/* utils*/
-	bool checkExistance(const QString &tableName, const QString &searchId, const QString &search);
-	const FMH::MODEL_LIST getDBData(const QString &queryTxt);
-	QSqlQuery getQuery(const QString &queryTxt);
+    /* utils*/
+    bool checkExistance(const QString &tableName, const QString &searchId, const QString &search);
+    const FMH::MODEL_LIST getDBData(const QString &queryTxt);
+    QSqlQuery getQuery(const QString &queryTxt);
 
-	bool insert(const QString &tableName, const QVariantMap &insertData);
-	bool update(const QString &tableName, const QVariantMap &updateData, const QVariantMap &where);
-	bool update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id);
-	bool remove(const QString &tableName, const QVariantMap &removeData);
+    bool insert(const QString &tableName, const QVariantMap &insertData);
+    bool update(const QString &tableName, const QVariantMap &updateData, const QVariantMap &where);
+    bool update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id);
+    bool remove(const QString &tableName, const QVariantMap &removeData);
 
 protected:
-	void openDB(const QString &name);
-	void prepareCollectionDB() const;
+    void openDB(const QString &name);
+    void prepareCollectionDB() const;
 
 signals:
 

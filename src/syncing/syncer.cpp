@@ -1,6 +1,6 @@
 #include "syncer.h"
-#include "db/db.h"
 #include "abstractnotesprovider.h"
+#include "db/db.h"
 
 #ifdef STATIC_MAUIKIT
 #include "mauiaccounts.h"
@@ -8,18 +8,18 @@
 #include <MauiKit/mauiaccounts.h>
 #endif
 
-Syncer::Syncer(QObject *parent) : QObject(parent),
-    m_provider(nullptr) //online service handler
+Syncer::Syncer(QObject *parent)
+    : QObject(parent)
+    , m_provider(nullptr) // online service handler
 {
-    connect(MauiAccounts::instance(), &MauiAccounts::currentAccountChanged, [&](QVariantMap currentAccount)
-    {
+    connect(MauiAccounts::instance(), &MauiAccounts::currentAccountChanged, [&](QVariantMap currentAccount) {
         this->setAccount(FMH::toModel(currentAccount));
     });
 }
 
 void Syncer::setAccount(const FMH::MODEL &account)
 {
-    if(this->m_provider)
+    if (this->m_provider)
         this->m_provider->setCredentials(account);
 }
 

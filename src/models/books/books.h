@@ -1,8 +1,8 @@
 #ifndef BOOKS_H
 #define BOOKS_H
 
-#include <QObject>
 #include "owl.h"
+#include <QObject>
 
 #ifdef STATIC_MAUIKIT
 #include "fmh.h"
@@ -16,46 +16,46 @@ class Booklet;
 class BooksSyncer;
 class Books : public MauiList
 {
-	Q_OBJECT
-	Q_PROPERTY(Booklet *booklet READ getBooklet NOTIFY bookletChanged FINAL)
-	Q_PROPERTY(int currentBook READ getCurrentBook WRITE setCurrentBook NOTIFY currentBookChanged)
+    Q_OBJECT
+    Q_PROPERTY(Booklet *booklet READ getBooklet NOTIFY bookletChanged FINAL)
+    Q_PROPERTY(int currentBook READ getCurrentBook WRITE setCurrentBook NOTIFY currentBookChanged)
 
 public:
-	Books(QObject *parent = nullptr);
+    Books(QObject *parent = nullptr);
 
-        const FMH::MODEL_LIST &items() const override final;
+    const FMH::MODEL_LIST &items() const override final;
 
-	Booklet * getBooklet() const;
+    Booklet *getBooklet() const;
 
-	int getCurrentBook() const;
+    int getCurrentBook() const;
 
 private:
-	BooksSyncer *syncer;
-	Booklet * m_booklet;
+    BooksSyncer *syncer;
+    Booklet *m_booklet;
 
-	FMH::MODEL_LIST m_list;
-	void openBook(const int &index);
+    FMH::MODEL_LIST m_list;
+    void openBook(const int &index);
 
-	int m_currentBook;
+    int m_currentBook;
 
 signals:
-	void bookletChanged(Booklet * booklet);
-	void currentBookChanged(int currentBook);
+    void bookletChanged(Booklet *booklet);
+    void currentBookChanged(int currentBook);
 
 public slots:
-	QVariantMap get(const int &index) const;
+    QVariantMap get(const int &index) const;
 
-	/**
-	 * @brief insert
-	 * insertes a new book by using the syncer interface
-	 * @param note
-	 * @return
-	 */
-	bool insert(const QVariantMap &book);
-	bool update(const QVariantMap &data, const int &index);
-	bool remove(const int &index);
+    /**
+     * @brief insert
+     * insertes a new book by using the syncer interface
+     * @param note
+     * @return
+     */
+    bool insert(const QVariantMap &book);
+    bool update(const QVariantMap &data, const int &index);
+    bool remove(const int &index);
 
-	void setCurrentBook(int currentBook);
+    void setCurrentBook(int currentBook);
 };
 
 #endif // BOOKS_H

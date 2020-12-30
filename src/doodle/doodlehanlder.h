@@ -15,7 +15,6 @@ public slots:
     QString getText(const QString &imagePath);
 
 signals:
-
 };
 
 #endif // DOODLEHANLDER_H

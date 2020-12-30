@@ -25,7 +25,6 @@ signals:
     void previewReady(QVariantMap link);
 
 public slots:
-
 };
 
 #endif // LINKER_H

@@ -1,9 +1,9 @@
 #ifndef NEXTNOTE_H
 #define NEXTNOTE_H
 
+#include "abstractnotesprovider.h"
 #include <QObject>
 #include <QString>
-#include "abstractnotesprovider.h"
 #include <functional>
 /**
  * @brief The NextNote class follows the NextCloud API specification
@@ -36,9 +36,9 @@ private:
     static const QString formatUrl(const QString &user, const QString &password, const QString &provider);
     static const FMH::MODEL_LIST parseNotes(const QByteArray &array);
 
-//    template<typename T>
-//    void request(const QString &url, const QMap<QString, QString> &header, T cb);
-//    void request(const QString &url, const QMap<QString, QString> &header,  std::function<void (QByteArray)>cb);
+    //    template<typename T>
+    //    void request(const QString &url, const QMap<QString, QString> &header, T cb);
+    //    void request(const QString &url, const QMap<QString, QString> &header,  std::function<void (QByteArray)>cb);
 
 signals:
 

@@ -1,8 +1,8 @@
 #ifndef NOTES_H
 #define NOTES_H
 
-#include <QObject>
 #include "owl.h"
+#include <QObject>
 
 #ifdef STATIC_MAUIKIT
 #include "fmh.h"

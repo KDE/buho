@@ -4,11 +4,11 @@
 #include <QObject>
 #include <functional>
 #ifdef STATIC_MAUIKIT
-#include "fmh.h"
 #include "downloader.h"
+#include "fmh.h"
 #else
-#include <MauiKit/fmh.h>
 #include <MauiKit/downloader.h>
+#include <MauiKit/fmh.h>
 #endif
 
 /**
@@ -22,8 +22,13 @@ class AbstractNotesProvider : public QObject
     Q_OBJECT
 
 public:
-    AbstractNotesProvider(QObject *parent) : QObject(parent) {}
-    virtual ~AbstractNotesProvider() {}
+    AbstractNotesProvider(QObject *parent)
+        : QObject(parent)
+    {
+    }
+    virtual ~AbstractNotesProvider()
+    {
+    }
 
     /**
      * @brief setCredentials
@@ -38,8 +43,14 @@ public:
         this->m_provider = account[FMH::MODEL_KEY::SERVER];
     }
 
-    const QString user() const { return this->m_user; }
-    const QString provider() const { return this->m_provider; }
+    const QString user() const
+    {
+        return this->m_user;
+    }
+    const QString provider() const
+    {
+        return this->m_provider;
+    }
 
     /**
      * @brief isValid
@@ -50,9 +61,7 @@ public:
      */
     bool isValid() const
     {
-        return !(this->m_user.isEmpty() || this->m_user.isNull()
-                 || this->m_provider.isEmpty() || this->m_provider.isNull()
-                 || this->m_password.isEmpty() || this->m_password.isNull());
+        return !(this->m_user.isEmpty() || this->m_user.isNull() || this->m_provider.isEmpty() || this->m_provider.isNull() || this->m_password.isEmpty() || this->m_password.isNull());
     }
 
     /**
@@ -61,7 +70,7 @@ public:
      * @param id
      * When the process is done it shoudl emit the noteReady(FMH::MODEL) signal
      */
-//    virtual FMH::MODEL getNote(const QString &id) = 0;
+    //    virtual FMH::MODEL getNote(const QString &id) = 0;
     virtual void getNote(const QString &id) = 0;
     virtual void getBooklet(const QString &id) = 0;
 
@@ -72,10 +81,9 @@ public:
      */
     virtual void getNotes() = 0;
     virtual void getBooklets() = 0;
-//    virtual void getNotes() const {}
-//    virtual FMH::MODEL_LIST getNotes(const QString &query = QString()) = 0;
-//    virtual FMH::MODEL_LIST getNotes(const QString &query = QString()) const = 0;
-
+    //    virtual void getNotes() const {}
+    //    virtual FMH::MODEL_LIST getNotes(const QString &query = QString()) = 0;
+    //    virtual FMH::MODEL_LIST getNotes(const QString &query = QString()) const = 0;
 
     /**
      * @brief insertNote
@@ -84,7 +92,7 @@ public:
      * takes the new note to be inserted represented as FMH::MODEL
      * When the process is done it shoudl emit the noteInserted(FMH::MODEL) signal
      */
-//    virtual bool insertNote(const FMH::MODEL &note) = 0;
+    //    virtual bool insertNote(const FMH::MODEL &note) = 0;
     virtual void insertNote(const FMH::MODEL &note) = 0;
     virtual void insertBooklet(const FMH::MODEL &booklet) = 0;
 
@@ -97,7 +105,7 @@ public:
      * the note prepresented as FMH::MODEL contening the up-to-date values
      * When the process is done it shoudl emit the noteUpdated(FMH::MODEL) signal
      */
-//    virtual bool updateNote(const QString &id, const FMH::MODEL &note) = 0;
+    //    virtual bool updateNote(const QString &id, const FMH::MODEL &note) = 0;
     virtual void updateNote(const QString &id, const FMH::MODEL &note) = 0;
     virtual void updateBooklet(const QString &id, const FMH::MODEL &booklet) = 0;
 
@@ -108,7 +116,7 @@ public:
      * ID of the note to be removed
      * When the process is done it shoudl emit the noteRemoved(FMH::MODEL) signal
      */
-//    virtual bool removeNote(const QString &id) = 0;
+    //    virtual bool removeNote(const QString &id) = 0;
     virtual void removeNote(const QString &id) = 0;
     virtual void removeBooklet(const QString &id) = 0;
 
@@ -117,15 +125,13 @@ protected:
     QString m_password = "";
     QString m_provider = "";
 
-    template<typename T>
-     void request(const QString &url, const QMap<QString, QString> &header, T cb)
-//    inline void request(const QString &url, const QMap<QString, QString> &header, std::function<void (QByteArray)>cb)
+    template<typename T> void request(const QString &url, const QMap<QString, QString> &header, T cb)
+    //    inline void request(const QString &url, const QMap<QString, QString> &header, std::function<void (QByteArray)>cb)
     {
         auto downloader = new FMH::Downloader;
-        connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](const QByteArray &array)
-        {
-//            if(cb != nullptr)
-                cb(array);
+        connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](const QByteArray &array) {
+            //            if(cb != nullptr)
+            cb(array);
             downloader->deleteLater();
         });
 
@@ -133,20 +139,20 @@ protected:
     }
 
 signals:
-     void noteReady(FMH::MODEL note);
-     void bookletReady(FMH::MODEL booklet);
+    void noteReady(FMH::MODEL note);
+    void bookletReady(FMH::MODEL booklet);
 
-     void notesReady(FMH::MODEL_LIST notes);
-     void bookletsReady(FMH::MODEL_LIST booklets);
+    void notesReady(FMH::MODEL_LIST notes);
+    void bookletsReady(FMH::MODEL_LIST booklets);
 
-     void noteInserted(FMH::MODEL note);
-     void bookletInserted(FMH::MODEL booklet);
+    void noteInserted(FMH::MODEL note);
+    void bookletInserted(FMH::MODEL booklet);
 
-     void noteUpdated(FMH::MODEL note);
-     void bookletUpdated(FMH::MODEL booklet);
+    void noteUpdated(FMH::MODEL note);
+    void bookletUpdated(FMH::MODEL booklet);
 
-     void noteRemoved();
-     void bookletRemoved();
+    void noteRemoved();
+    void bookletRemoved();
 
     /**
      * @brief responseReady
@@ -160,10 +166,6 @@ signals:
      * emitted if there's an error when trying to get the array
      */
     void responseError(QString);
-
 };
 
-
 #endif // ABSTRACTNOTESPROVIDER_H
-
-
