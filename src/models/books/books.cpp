@@ -10,26 +10,28 @@ Books::Books(QObject *parent)
     , syncer(new BooksSyncer(this))
     , m_booklet(new Booklet(syncer, this))
 {
-    this->syncer->setProvider(new NextNote);
-    connect(this, &Books::currentBookChanged, this, &Books::openBook);
-    connect(syncer, &BooksSyncer::bookReady, [&](FMH::MODEL book) {
-        emit this->preItemAppended();
-        auto book_data = FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
-        book_data.insert(FMH::MODEL_KEY::COLOR, QColor::fromRgb(QRandomGenerator::global()->generate()).name());
-        book = book.unite(book_data);
-        this->m_list << book;
-        emit this->postItemAppended();
-    });
+	this->syncer->setProvider(new NextNote);
+	connect(this, &Books::currentBookChanged, this, &Books::openBook);
+	connect(syncer, &BooksSyncer::bookReady, [&](FMH::MODEL book)
+	{
+		emit this->preItemAppended();
+		auto book_data = FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
+		book_data.insert (FMH::MODEL_KEY::COLOR, QColor::fromRgb(QRandomGenerator::global()->generate()).name());
+        book.insert(book_data);
+		this->m_list << book;
+		emit this->postItemAppended();
+	});
 
-    connect(syncer, &BooksSyncer::bookInserted, [&](FMH::MODEL book) {
-        emit this->preItemAppended();
-        auto book_data = FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
-        book_data.insert(FMH::MODEL_KEY::COLOR, QColor::fromRgb(QRandomGenerator::global()->generate()).name());
-        book = book.unite(book_data);
-        this->m_list << book;
-        emit this->postItemAppended();
-    });
-    this->syncer->getBooks();
+	connect(syncer, &BooksSyncer::bookInserted, [&](FMH::MODEL book)
+	{
+		emit this->preItemAppended();
+		auto book_data = FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
+		book_data.insert (FMH::MODEL_KEY::COLOR, QColor::fromRgb(QRandomGenerator::global()->generate()).name());
+        book.insert(book_data);
+		this->m_list << book;
+		emit this->postItemAppended();
+	});
+	this->syncer->getBooks();
 }
 
 const FMH::MODEL_LIST &Books::items() const

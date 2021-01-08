@@ -70,9 +70,16 @@ void Booklet::update(const QVariantMap &data, const int &index)
     if (index < 0 || index >= this->m_list.size())
         return;
 
+<<<<<<< HEAD
     this->m_list[index] = this->m_list[index].unite(FMH::toModel(data));
     emit updateModel(index, {FMH::MODEL_KEY::CONTENT});
     this->syncer->updateBooklet(this->m_list[index][FMH::MODEL_KEY::ID], this->m_book, this->m_list[index]);
+=======
+    auto _booklet = this->m_list[index];
+    _booklet.insert(FMH::toModel(data));
+	emit updateModel (index, {FMH::MODEL_KEY::CONTENT});
+	this->syncer->updateBooklet(this->m_list[index][FMH::MODEL_KEY::ID], this->m_book, this->m_list[index]);
+>>>>>>> 4df016d (fix qhash unite warnings)
 }
 
 void Booklet::remove(const int &index)
@@ -99,12 +106,13 @@ void Booklet::sortList()
 
 void Booklet::appendBooklet(FMH::MODEL booklet)
 {
-    emit this->preItemAppended();
-    booklet = booklet.unite(FMH::getFileInfoModel(booklet[FMH::MODEL_KEY::URL]));
-    booklet[FMH::MODEL_KEY::TITLE] = [&]() {
-        const auto lines = booklet[FMH::MODEL_KEY::CONTENT].split("\n");
-        return lines.isEmpty() ? QString() : lines.first().trimmed();
-    }();
+	emit this->preItemAppended();
+    booklet.insert(FMH::getFileInfoModel(booklet[FMH::MODEL_KEY::URL]));
+	booklet[FMH::MODEL_KEY::TITLE] = [&]()
+	{
+	  const auto lines = booklet[FMH::MODEL_KEY::CONTENT].split("\n");
+	  return lines.isEmpty() ?  QString() : lines.first().trimmed();
+	}();
 
     this->m_list << booklet;
     emit this->postItemAppended();
