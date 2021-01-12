@@ -88,7 +88,7 @@ StackView
                 list: Books
                 {
                     id: _booksList
-                    currentBook: mappedIndex(cardsView.currentIndex)
+                    currentBook: _booksList.mappedIndex(cardsView.currentIndex)
                 }
             }
 
@@ -212,6 +212,7 @@ StackView
                 {
                     cardsView.currentIndex = index
                     control.currentBook = model
+                    console.log("CurrentBOok ", control.currentBook.title)
                     control.push(_bookletComponent)
                 }
             }

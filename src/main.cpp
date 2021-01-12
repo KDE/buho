@@ -63,7 +63,7 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     MauiApp::instance()->setHandleAccounts(true);
 
     KLocalizedString::setApplicationDomain("buho");
-    KAboutData about(QStringLiteral("buho"), i18n("Buho"), BUHO_VERSION_STRING, i18n("Buho allows you to take quick notes and organize notebooks."), KAboutLicense::LGPL_V3, i18n("© 2019-2020 Nitrux Development Team"));
+    KAboutData about(QStringLiteral("buho"), i18n("Buho"), BUHO_VERSION_STRING, i18n("Buho allows you to take quick notes and organize notebooks."), KAboutLicense::LGPL_V3, i18n("© 2019-%1 Nitrux Development Team", QString::number(QDate::currentDate().year())));
     about.addAuthor(i18n("Camilo Higuita"), i18n("Developer"), QStringLiteral("milo.h@aol.com"));
     about.setHomepage("https://mauikit.org");
     about.setProductName("maui/buho");
