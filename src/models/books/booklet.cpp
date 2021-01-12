@@ -70,16 +70,10 @@ void Booklet::update(const QVariantMap &data, const int &index)
     if (index < 0 || index >= this->m_list.size())
         return;
 
-<<<<<<< HEAD
-    this->m_list[index] = this->m_list[index].unite(FMH::toModel(data));
-    emit updateModel(index, {FMH::MODEL_KEY::CONTENT});
-    this->syncer->updateBooklet(this->m_list[index][FMH::MODEL_KEY::ID], this->m_book, this->m_list[index]);
-=======
     auto _booklet = this->m_list[index];
     _booklet.insert(FMH::toModel(data));
 	emit updateModel (index, {FMH::MODEL_KEY::CONTENT});
 	this->syncer->updateBooklet(this->m_list[index][FMH::MODEL_KEY::ID], this->m_book, this->m_list[index]);
->>>>>>> 4df016d (fix qhash unite warnings)
 }
 
 void Booklet::remove(const int &index)
