@@ -46,6 +46,7 @@ Comment[sl]=Program za beleženje zapiskov
 Comment[sv]=Anteckningsprogram
 Comment[uk]=Програма для роботи із нотатками
 Comment[x-test]=xxNote taking appxx
+Comment[zh_CN]=记事应用
 Comment[zh_TW]=記事應用程式
 TryExec=buho
 Exec=buho %U
