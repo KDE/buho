@@ -3,36 +3,19 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#if defined Q_OS_MACOS || defined Q_OS_WIN
-#include <KF5/KI18n/KLocalizedString>
-#else
 #include <KI18n/KLocalizedString>
-#endif
 
-#ifdef STATIC_KIRIGAMI
-#include "3rdparty/kirigami/src/kirigamiplugin.h"
-#endif
-
-#ifdef STATIC_MAUIKIT
-#include "3rdparty/mauikit/src/mauikit.h"
-#include "mauiapp.h"
-#else
 #include <MauiKit/mauiapp.h>
-#endif
 
 #ifdef Q_OS_ANDROID
 #include <QGuiApplication>
-#include <QIcon>
 #else
 #include <QApplication>
 #endif
 
-#ifndef STATIC_MAUIKIT
 #include "../buho_version.h"
-#endif
 
 #include "buho.h"
-
 #include "models/books/booklet.h"
 #include "models/books/books.h"
 #include "models/notes/notes.h"
@@ -87,14 +70,6 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     qmlRegisterType<Notes>(BUHO_URI, 1, 0, "Notes");
     qmlRegisterType<Books>(BUHO_URI, 1, 0, "Books");
     //    qmlRegisterType<DoodleHanlder>(BUHO_URI, 1, 0, "Doodle");
-
-#ifdef STATIC_KIRIGAMI
-    KirigamiPlugin::getInstance().registerTypes();
-#endif
-
-#ifdef STATIC_MAUIKIT
-    MauiKit::getInstance().registerTypes(&engine);
-#endif
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

@@ -68,6 +68,7 @@ StackView
         {
             id: cardsView
 
+            headBar.visible: false
             visible: !_holder.visible
             viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 

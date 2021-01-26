@@ -1,3 +1,8 @@
+# Copyright 2018-2020 Camilo Higuita <milo.h@aol.com>
+# Copyright 2018-2020 Nitrux Latinoamericana S.C.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/utils
     ${CMAKE_CURRENT_BINARY_DIR}/utils
@@ -28,7 +33,7 @@ set(buho_SRCS
     syncing/notessyncer.cpp
     controllers/notes/notescontroller.cpp
     controllers/books/bookscontroller.cpp
-#    doodle/doodlehanlder.cpp
+    #    doodle/doodlehanlder.cpp
     )
 
 set(buho_HDRS
@@ -45,7 +50,7 @@ set(buho_HDRS
     syncing/notessyncer.h
     controllers/notes/notescontroller.h
     controllers/books/bookscontroller.h
-#    doodle/doodlehanlder.h
+    #    doodle/doodlehanlder.h
     )
 
 set(buho_ASSETS
@@ -53,23 +58,31 @@ set(buho_ASSETS
     assets/imgs.qrc
     )
 
-add_executable(buho
-    ${buho_SRCS}
-    ${buho_HDRS}
-    ${buho_ASSETS}
-    )
-
 if(ANDROID)
-    target_link_libraries(buho Qt5::AndroidExtras)
-    kde_source_files_enable_exceptions(buho buho.cpp)
+    add_library(${PROJECT_NAME} SHARED
+        ${buho_SRCS}
+        ${buho_HDRS}
+        ${buho_ASSETS} )
+else()
+    add_executable(${PROJECT_NAME}
+        ${buho_SRCS}
+        ${buho_HDRS}
+        ${buho_ASSETS})
 endif()
 
-target_link_libraries(buho MauiKit #[[tesseract]] Qt5::Sql Qt5::Qml Qt5::Svg Qt5::WebView)
-target_link_libraries(buho KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n KF5::Attica KF5::SyntaxHighlighting)
+if (ANDROID)
+    target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras Qt5::QuickControls2)
+elseif(UNIX)
+    target_link_libraries(${PROJECT_NAME} KF5::ConfigCore KF5::KIOCore KF5::KIOFileWidgets KF5::KIONTLM KF5::KIOWidgets)
+endif()
 
-install(TARGETS buho ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES org.kde.buho.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+target_link_libraries(${PROJECT_NAME} MauiKit #[[tesseract]] Qt5::Sql Qt5::Qml Qt5::Svg Qt5::Concurrent  KF5::SyntaxHighlighting KF5::CoreAddons KF5::I18n)
 
-#TODO: port to ecm_install_icons()
-install(FILES assets/buho.svg DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps)
-#install(FILES org.kde.buho.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+    if(UNIX AND NOT APPLE AND NOT ANDROID)
+        install(TARGETS buho ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+        install(FILES org.kde.buho.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+
+        #TODO: port to ecm_install_icons()
+        install(FILES assets/buho.svg DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps)
+        #install(FILES org.kde.buho.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+    endif()
