@@ -15,6 +15,8 @@ Maui.Page
 
     signal noteSaved(var note)
 
+    headBar.visible: false
+
     Maui.Editor
     {
         id: _editor

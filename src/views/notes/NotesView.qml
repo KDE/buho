@@ -95,16 +95,6 @@ StackView
             }
         }
 
-        headBar.rightContent: ToolButton
-        {
-            id: _selectButton
-            visible: Maui.Handy.isTouch
-            icon.name: "item-select"
-            checkable: true
-            checked: cardsView.selectionMode
-            onClicked: cardsView.selectionMode = !cardsView.selectionMode
-        }
-
         model: Maui.BaseModel
         {
             id: notesModel
@@ -173,7 +163,11 @@ StackView
             padding: Maui.Style.space.big
             maxListHeight: swipeView.height - Maui.Style.space.medium
 
-            onExitClicked: clear()
+            onExitClicked:
+            {
+                cardsView.selectionMode = false
+                clear()
+            }
 
             Action
             {
@@ -394,6 +388,21 @@ StackView
             width: colorBar.implicitWidth + Maui.Style.space.medium
 
             property bool isFav: currentNote.favorite == 1
+
+            MenuItem
+            {
+                text: i18n("Select")
+                icon.name: "item-select"
+                onTriggered:
+                {
+                    if(Maui.Handy.isTouch)
+                    {
+                        cardsView.selectionMode = true
+                    }
+
+                    cardsView.currentView.itemsSelected([cardsView.currentIndex])
+                }
+            }
 
             MenuItem
             {
