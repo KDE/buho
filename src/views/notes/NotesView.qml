@@ -169,6 +169,30 @@ StackView
                 clear()
             }
 
+            listDelegate: Maui.ItemDelegate
+            {
+                height: Maui.Style.rowHeight * 2
+                width: ListView.view.width
+
+                background: Rectangle
+                {
+                    color: model.color ? model.color : "transparent"
+                    radius:Maui.Style.radiusV
+                }
+
+                Maui.ListItemTemplate
+                {
+                    id: _template
+                    anchors.fill: parent
+                    label1.text: model.title
+                    iconSizeHint: Maui.Style.iconSizes.small
+                    iconSource: "view-pim-notes"
+                    checkable: true
+                    checked: true
+                    onToggled: control.removeAtIndex(index)
+                }
+            }
+
             Action
             {
                 text: i18n("Favorite")
@@ -213,7 +237,7 @@ StackView
 
             onClicked:
             {
-                currentIndex = index                
+                currentIndex = index
 
                 if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
                 {
