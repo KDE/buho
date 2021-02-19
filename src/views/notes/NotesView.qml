@@ -66,6 +66,10 @@ StackView
         title: i18n("Remove notes")
         message: i18n("Are you sure you want to delete the selected notes?")
 
+        template.iconSource: "view-notes"
+
+        page.margins: Maui.Style.space.big
+
         onAccepted:
         {
             console.log (notes)
