@@ -1,9 +1,10 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.10
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
-import org.kde.mauikit 1.2 as Maui
 
+import org.kde.mauikit 1.3 as Maui
 import org.kde.kirigami 2.7 as Kirigami
+
 import org.maui.buho 1.0
 
 import "../../widgets"
@@ -54,6 +55,24 @@ StackView
         {
             onNoteSaved: control.list.insert(note)
         }
+    }
+
+    Maui.Dialog
+    {
+        id: _removeNotesDialog
+
+        property var notes
+
+        title: i18n("Remove notes")
+        message: i18n("Are you sure you want to delete the selected notes?")
+
+        onAccepted:
+        {
+            console.log (notes)
+        }
+
+        onRejected: close()
+
     }
 
     initialItem: CardsView
@@ -189,7 +208,7 @@ StackView
                     iconSource: "view-pim-notes"
                     checkable: true
                     checked: true
-                    onToggled: control.removeAtIndex(index)
+                    onToggled: _selectionbar.removeAtIndex(index)
                 }
             }
 
@@ -223,6 +242,12 @@ StackView
                 text: i18n("Delete")
                 Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
                 icon.name: "edit-delete"
+
+                onTriggered:
+                {
+                    _removeNotesDialog.notes = _selectionbar.uris
+                    _removeNotesDialog.open()
+                }
             }
         }
 

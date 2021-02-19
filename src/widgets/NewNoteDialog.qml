@@ -1,9 +1,8 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.0
-import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.3 as Maui
 import org.kde.kirigami 2.7 as Kirigami
-
 
 Maui.Page
 {
@@ -29,8 +28,10 @@ Maui.Page
 
         body.font: settings.font
 
-        autoHideHeader: true
-        autoHideHeaderMargins: control.height * 0.3
+        footBar.visible: false
+
+//        autoHideHeader: true
+//        autoHideHeaderMargins: control.height * 0.3
 
         Kirigami.Theme.backgroundColor: control.backgroundColor !== "transparent" ? control.backgroundColor : Kirigami.Theme.backgroundColor
         Kirigami.Theme.textColor: control.backgroundColor  !== "transparent" ? Qt.darker(control.backgroundColor, 2) : control.Kirigami.Theme.textColor
