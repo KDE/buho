@@ -57,11 +57,33 @@ Maui.Page
             }
         }
 
-        headBar.rightContent: ColorsBar
-        {
-            onColorPicked: control.backgroundColor = color
-            currentColor: control.backgroundColor
-        }
+        headBar.rightContent: [
+
+            ToolButton
+            {
+                id: favButton
+                icon.name: "love"
+                checkable: true
+                checked:  note.favorite == 1
+                icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
+
+            },
+
+            ToolButton
+            {
+                icon.name: "document-share"
+
+                onClicked: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
+                                                    shareDialog.show(editor.body.text)
+            },
+
+            ToolButton
+            {
+                icon.name: "edit-find"
+                checked: editor.showFindBar
+                onClicked: editor.showFindBar = !editor.showFindBar
+            }
+        ]
 
         Connections
         {
@@ -74,27 +96,11 @@ Maui.Page
         }
     }
 
-    footBar.leftContent: [
-
-        ToolButton
-        {
-            id: favButton
-            icon.name: "love"
-            checkable: true
-            checked:  note.favorite == 1
-            icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
-
-        },
-
-        ToolButton
-        {
-            icon.name: "document-share"
-
-            onClicked: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
-                                                shareDialog.show(editor.body.text)
-        }
-
-    ]
+    footBar.leftContent: ColorsBar
+    {
+        onColorPicked: control.backgroundColor = color
+        currentColor: control.backgroundColor
+    }
 
     footBar.rightContent: [
 //            ToolButton
@@ -114,7 +120,6 @@ Maui.Page
     footerColumn: Maui.TagsBar
     {
         id: tagBar
-        position: ToolBar.Footer
         width: parent.width
         allowEditMode: true
         onTagsEdited:
