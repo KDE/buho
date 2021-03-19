@@ -37,6 +37,7 @@ StackView
     Component
     {
         id: _editNoteComponent
+
         NewNoteDialog
         {
             note: control.currentNote
@@ -132,42 +133,13 @@ StackView
             filterCaseSensitivity: Qt.CaseInsensitive
         }
 
-        Maui.FloatingButton
-        {
-            z: parent.z + 1
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            anchors.margins: Maui.Style.space.huge
-            anchors.bottomMargin: Maui.Style.space.huge + flickable.bottomMargin
-            height: Maui.Style.toolBarHeight
+        headBar.visible: !holder.visible
 
+        headBar.rightContent: ToolButton
+        {
             icon.name: "list-add"
-            icon.color: Kirigami.Theme.highlightedTextColor
             onClicked: newNote()
         }
-
-        headBar.visible: !holder.visible
-        //        headBar.leftContent: Maui.ToolActions
-        //        {
-        //            autoExclusive: true
-        //            expanded: isWide
-        //            currentIndex : cardsView.viewType === MauiLab.AltBrowser.ViewType.List ? 0 : 1
-        //            display: ToolButton.TextBesideIcon
-
-        //            Action
-        //            {
-        //                text: i18n("List")
-        //                icon.name: "view-list-details"
-        //                onTriggered: cardsView.viewType = MauiLab.AltBrowser.ViewType.List
-        //            }
-
-        //            Action
-        //            {
-        //                text: i18n("Cards")
-        //                icon.name: "view-list-icons"
-        //                onTriggered: cardsView.viewType= MauiLab.AltBrowser.ViewType.Grid
-        //            }
-        //        }
 
         headBar.middleContent: Maui.TextField
         {

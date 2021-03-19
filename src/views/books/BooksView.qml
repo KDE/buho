@@ -41,16 +41,9 @@ StackView
             onCleared: _booksModel.filter = ""
         }
 
-        Maui.FloatingButton
+        headBar.rightContent: ToolButton
         {
-            z: parent.z + 1
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            anchors.margins: Maui.Style.space.huge
-            height: Maui.Style.toolBarHeight
-
             icon.name: "list-add"
-            icon.color: Kirigami.Theme.highlightedTextColor
             onClicked: newBook()
         }
 
