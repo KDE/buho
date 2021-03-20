@@ -95,6 +95,36 @@ StackView
 
         viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
+        property string typingQuery
+
+         Maui.Chip
+         {
+             z: cardsView.z + 99999
+             Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
+             visible: _typingTimer.running
+             label.text: cardsView.typingQuery
+             anchors.left: parent.left
+             anchors.bottom: parent.bottom
+             showCloseButton: false
+             anchors.margins: Maui.Style.space.medium
+         }
+
+         Timer
+         {
+             id: _typingTimer
+             interval: 250
+             onTriggered:
+             {
+                 const index = notesList.indexOfName(cardsView.typingQuery)
+                 if(index > -1)
+                 {
+                     control.currentIndex = index
+                 }
+
+                 cardsView.typingQuery = ""
+             }
+         }
+
         Connections
         {
             target: cardsView.currentView
@@ -110,11 +140,24 @@ StackView
             function onKeyPress(event)
             {
                 const index = cardsView.currentIndex
-                const item = cardsView.model.get(index)
+                const item = notesModel.get(index)
+
+                var pat = /^([a-zA-Z0-9 _-]+)$/
+                if(event.count === 1 && pat.test(event.text))
+                {
+                    cardsView.typingQuery += event.text
+                    _typingTimer.restart()
+                }
 
                 if((event.key == Qt.Key_Left || event.key == Qt.Key_Right || event.key == Qt.Key_Down || event.key == Qt.Key_Up) && (event.modifiers & Qt.ControlModifier) && (event.modifiers & Qt.ShiftModifier))
                 {
                     cardsView.currentView.itemsSelected([index])
+                }
+
+                if(event.key === Qt.Key_Return)
+                {
+                    currentNote = item
+                    setNote()
                 }
             }
         }

@@ -2,16 +2,9 @@
 #include "nextnote.h"
 #include "notessyncer.h"
 
-#ifdef STATIC_MAUIKIT
-#include "fm.h"
-#include "mauiaccounts.h"
-#include "mauiapp.h"
-#include "tagging.h"
-#else
 #include <MauiKit/fm.h>
 #include <MauiKit/mauiaccounts.h>
 #include <MauiKit/tagging.h>
-#endif
 
 #include <algorithm>
 
@@ -44,8 +37,6 @@ Notes::Notes(QObject *parent)
     });
 
     connect(syncer, &NotesSyncer::noteReady, this, &Notes::appendNote);
-
-    this->syncer->getNotes();
 }
 
 void Notes::appendNote(FMH::MODEL note)
@@ -106,9 +97,27 @@ int Notes::indexOfNote(const QUrl &url)
     return this->indexOf(FMH::MODEL_KEY::PATH, url.toString());
 }
 
+int Notes::indexOfName(const QString &query)
+{
+    const auto it = std::find_if(this->items().constBegin(), this->items().constEnd(), [&](const FMH::MODEL &item) -> bool {
+            return item[FMH::MODEL_KEY::TITLE].startsWith(query, Qt::CaseInsensitive);
+        });
+
+        if (it != this->items().constEnd())
+            return this->mappedIndexFromSource(std::distance(this->items().constBegin(), it));
+        else
+            return -1;
+}
+
 QVariantMap Notes::get(const int &index) const
 {
     if (index >= this->notes.size() || index < 0)
         return QVariantMap();
     return FMH::toMap(this->notes.at(this->mappedIndex(index)));
+}
+
+
+void Notes::componentComplete()
+{
+    this->syncer->getNotes();
 }

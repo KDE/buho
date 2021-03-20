@@ -4,13 +4,8 @@
 #include "owl.h"
 #include <QObject>
 
-#ifdef STATIC_MAUIKIT
-#include "fmh.h"
-#include "mauilist.h"
-#else
 #include <MauiKit/fmh.h>
 #include <MauiKit/mauilist.h>
-#endif
 
 class NotesSyncer;
 class Notes : public MauiList
@@ -20,6 +15,7 @@ class Notes : public MauiList
 public:
     explicit Notes(QObject *parent = nullptr);
     const FMH::MODEL_LIST &items() const override final;
+    void componentComplete() override final;
 
 private:
     NotesSyncer *syncer;
@@ -37,6 +33,9 @@ public slots:
     bool update(const QVariantMap &data, const int &index);
     bool remove(const int &index);
     int indexOfNote(const QUrl &url);
+
+    int indexOfName(const QString &query);
+
 };
 
 #endif // NOTES_H
