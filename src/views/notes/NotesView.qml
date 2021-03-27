@@ -307,14 +307,14 @@ StackView
             {
                 currentIndex = index
                 currentNote = notesModel.get(index)
-                _notesMenu.popup()
+                _notesMenu.open()
             }
 
             onPressAndHold:
             {
                 currentIndex = index
                 currentNote = notesModel.get(index)
-                _notesMenu.popup()
+                _notesMenu.open()
             }
 
             onToggled:
@@ -396,14 +396,14 @@ StackView
                 {
                     currentIndex = index
                     currentNote = notesModel.get(index)
-                    _notesMenu.popup()
+                    _notesMenu.open()
                 }
 
                 onPressAndHold:
                 {
                     currentIndex = index
                     currentNote = notesModel.get(index)
-                    _notesMenu.popup()
+                    _notesMenu.open()
                 }
 
                 onToggled:
@@ -450,10 +450,9 @@ StackView
             }
         }
 
-        Menu
+        Maui.ContextualMenu
         {
             id: _notesMenu
-            width: colorBar.implicitWidth + Maui.Style.space.medium
 
             property bool isFav: currentNote.favorite == 1
 
