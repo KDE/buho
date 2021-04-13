@@ -2,9 +2,9 @@
 #include "nextnote.h"
 #include "notessyncer.h"
 
-#include <MauiKit/fm.h>
-#include <MauiKit/mauiaccounts.h>
-#include <MauiKit/tagging.h>
+#include <MauiKit/FileBrowsing/fm.h>
+#include <MauiKit/Core/mauiaccounts.h>
+#include <MauiKit/FileBrowsing/tagging.h>
 
 #include <algorithm>
 
@@ -28,7 +28,7 @@ Notes::Notes(QObject *parent)
             const auto mappedIndex = this->mappedIndex(this->indexOf(FMH::MODEL_KEY::ID, note[FMH::MODEL_KEY::ID]));
             if (mappedIndex >= 0) {
                 qDebug() << note[FMH::MODEL_KEY::MODIFIED];
-                note.insert(FMH::getFileInfoModel(note[FMH::MODEL_KEY::URL]));
+                note.insert(FMStatic::getFileInfoModel(note[FMH::MODEL_KEY::URL]));
                 qDebug() << note[FMH::MODEL_KEY::MODIFIED];
                 this->notes[mappedIndex] = note;
                 this->updateModel(mappedIndex, {});
@@ -46,7 +46,7 @@ void Notes::appendNote(FMH::MODEL note)
         const auto lines = note[FMH::MODEL_KEY::CONTENT].split("\n");
         return lines.isEmpty() ? QString() : lines.first().trimmed();
     }();
-    note.insert(FMH::getFileInfoModel(note[FMH::MODEL_KEY::URL]));
+    note.insert(FMStatic::getFileInfoModel(note[FMH::MODEL_KEY::URL]));
     emit this->preItemAppended();
     this->notes << note;
     emit this->postItemAppended();

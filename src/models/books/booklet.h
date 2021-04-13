@@ -2,13 +2,8 @@
 #define BOOKLET_H
 #include "owl.h"
 
-#ifdef STATIC_MAUIKIT
-#include "fmh.h"
-#include "mauilist.h"
-#else
-#include <MauiKit/fmh.h>
-#include <MauiKit/mauilist.h>
-#endif
+#include <MauiKit/Core/fmh.h>
+#include <MauiKit/Core/mauilist.h>
 
 class BooksSyncer;
 class Booklet : public MauiList

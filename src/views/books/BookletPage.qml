@@ -1,8 +1,12 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
-import org.kde.mauikit 1.0 as Maui
+
 import org.kde.kirigami 2.7 as Kirigami
+
+import org.mauikit.controls 1.0 as Maui
+import org.mauikit.filebrowsing 1.3 as FB
+import org.mauikit.texteditor 1.0 as TE
 
 import "../../widgets"
 
@@ -128,7 +132,7 @@ StackView
     {
         id: _editorView
 
-        Maui.Editor
+        TE.TextEditor
         {
             id: editor
             enabled: !_holder.visible
@@ -141,7 +145,7 @@ StackView
 
             function saveFile(path)
             {
-                if (path && Maui.FM.fileExists(path))
+                if (path && FB.FM.fileExists(path))
                 {
                     editor.document.saveAs(path)
                 }

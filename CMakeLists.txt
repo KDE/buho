@@ -18,7 +18,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(TESSDATA_PREFIX /usr/share/tessdata)
+#set(TESSDATA_PREFIX /usr/share/tessdata)
 
 set(REQUIRED_QT_VERSION 5.14.0)
 set(REQUIRED_KF5_VERSION 5.60)
@@ -30,6 +30,7 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Qml Quick 
 find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED COMPONENTS I18n CoreAddons SyntaxHighlighting)
 
 find_package(MauiKit REQUIRED)
+find_package(MauiKit REQUIRED COMPONENTS FileBrowsing)
 
 #find_package(Tesseract REQUIRED)
 #find_package(Leptonica REQUIRED)

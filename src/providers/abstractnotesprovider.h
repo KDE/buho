@@ -3,13 +3,9 @@
 
 #include <QObject>
 #include <functional>
-#ifdef STATIC_MAUIKIT
-#include "downloader.h"
-#include "fmh.h"
-#else
-#include <MauiKit/downloader.h>
-#include <MauiKit/fmh.h>
-#endif
+
+#include <MauiKit/FileBrowsing/downloader.h>
+#include <MauiKit/Core/fmh.h>
 
 /**
  * @brief The AbstractNoteSyncer class

@@ -36,11 +36,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QVariantMap>
 
 #include "../utils/owl.h"
-#ifdef STATIC_MAUIKIT
-#include "fmh.h"
-#else
-#include <MauiKit/fmh.h>
-#endif
+
+#include <MauiKit/Core/fmh.h>
 
 class DB : public QObject
 {

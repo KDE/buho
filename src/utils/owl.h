@@ -5,12 +5,10 @@
 #include <QString>
 #include <QUrl>
 #include <QUuid>
+#include <QFile>
+#include <QDebug>
 
-#ifdef STATIC_MAUIKIT
-#include "fmh.h"
-#else
-#include <MauiKit/fmh.h>
-#endif
+#include <MauiKit/Core/fmh.h>
 
 namespace OWL
 {

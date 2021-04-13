@@ -1,8 +1,12 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.0
-import org.kde.mauikit 1.3 as Maui
+
 import org.kde.kirigami 2.7 as Kirigami
+
+import org.mauikit.controls 1.3 as Maui
+import org.mauikit.filebrowsing 1.3 as FB
+import org.mauikit.texteditor 1.0 as TE
 
 Maui.Page
 {
@@ -16,7 +20,7 @@ Maui.Page
 
     headBar.visible: false
 
-    Maui.Editor
+    TE.TextEditor
     {
         id: _editor
         anchors.fill: parent
@@ -45,7 +49,7 @@ Maui.Page
             onClicked:
             {
                 console.log(_editor.document.fileUrl, "File Url")
-                if(Maui.FM.fileExists(_editor.document.fileUrl))
+                if(FB.FM.fileExists(_editor.document.fileUrl))
                 {
                     _editor.document.saveAs(_editor.document.fileUrl)
                 }
@@ -117,7 +121,7 @@ Maui.Page
         }
     ]
 
-    footerColumn: Maui.TagsBar
+    footerColumn: FB.TagsBar
     {
         id: tagBar
         width: parent.width

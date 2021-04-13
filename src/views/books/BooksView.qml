@@ -2,7 +2,7 @@ import QtQuick 2.14
 import "../../widgets"
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.4
-import org.kde.mauikit 1.2 as Maui
+import org.mauikit.controls 1.2 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 
 import org.maui.buho 1.0

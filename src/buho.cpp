@@ -1,6 +1,8 @@
 #include "buho.h"
 #include "owl.h"
 
+#include <QDir>
+
 Buho::Buho(QObject *parent)
     : QObject(parent)
 {

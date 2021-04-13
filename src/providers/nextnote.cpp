@@ -5,12 +5,6 @@
 #include <QJsonObject>
 #include <QVariantMap>
 
-#ifdef STATIC_MAUIKIT
-#include "fm.h"
-#else
-#include <MauiKit/fm.h>
-#endif
-
 const QString NextNote::API = QStringLiteral("/index.php/apps/notes/api/v0.2/");
 
 static const inline QNetworkRequest formRequest(const QUrl &url, const QString &user, const QString &password)

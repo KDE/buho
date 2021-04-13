@@ -5,6 +5,8 @@
 #include <QColor>
 #include <QRandomGenerator>
 
+#include <MauiKit/FileBrowsing/fmstatic.h>
+
 Books::Books(QObject *parent)
     : MauiList(parent)
     , syncer(new BooksSyncer(this))
@@ -15,7 +17,7 @@ Books::Books(QObject *parent)
 	connect(syncer, &BooksSyncer::bookReady, [&](FMH::MODEL book)
 	{
 		emit this->preItemAppended();
-		auto book_data = FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
+        auto book_data = FMStatic::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
 		book_data.insert (FMH::MODEL_KEY::COLOR, QColor::fromRgb(QRandomGenerator::global()->generate()).name());
         book.insert(book_data);
 		this->m_list << book;
@@ -25,7 +27,7 @@ Books::Books(QObject *parent)
 	connect(syncer, &BooksSyncer::bookInserted, [&](FMH::MODEL book)
 	{
 		emit this->preItemAppended();
-		auto book_data = FMH::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
+        auto book_data = FMStatic::getDirInfoModel(book[FMH::MODEL_KEY::URL]);
 		book_data.insert (FMH::MODEL_KEY::COLOR, QColor::fromRgb(QRandomGenerator::global()->generate()).name());
         book.insert(book_data);
 		this->m_list << book;

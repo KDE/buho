@@ -2,10 +2,11 @@
 #include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QDate>
 
 #include <KI18n/KLocalizedString>
 
-#include <MauiKit/mauiapp.h>
+#include <MauiKit/Core/mauiapp.h>
 
 #ifdef Q_OS_ANDROID
 #include <QGuiApplication>

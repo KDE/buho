@@ -2,16 +2,9 @@
 #include "controllers/notes/notescontroller.h"
 #include "db/db.h"
 
-#ifdef STATIC_MAUIKIT
-#include "fm.h"
-#include "mauiaccounts.h"
-#include "tagging.h"
-#else
-#include <MauiKit/fm.h>
-#include <MauiKit/fmstatic.h>
-#include <MauiKit/mauiaccounts.h>
-#include <MauiKit/tagging.h>
-#endif
+#include <MauiKit/FileBrowsing/fmstatic.h>
+#include <MauiKit/Core/mauiaccounts.h>
+#include <MauiKit/FileBrowsing/tagging.h>
 
 NotesSyncer::NotesSyncer(QObject *parent)
     : Syncer(parent)

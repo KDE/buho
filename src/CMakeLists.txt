@@ -76,7 +76,7 @@ elseif(UNIX)
     target_link_libraries(${PROJECT_NAME} KF5::ConfigCore KF5::KIOCore KF5::KIOFileWidgets KF5::KIONTLM KF5::KIOWidgets)
 endif()
 
-target_link_libraries(${PROJECT_NAME} MauiKit #[[tesseract]] Qt5::Sql Qt5::Qml Qt5::Svg Qt5::Concurrent  KF5::SyntaxHighlighting KF5::CoreAddons KF5::I18n)
+target_link_libraries(${PROJECT_NAME} MauiKit MauiKit::FileBrowsing #[[tesseract]] Qt5::Sql Qt5::Qml Qt5::Svg Qt5::Concurrent  KF5::SyntaxHighlighting KF5::CoreAddons KF5::I18n)
 
     if(UNIX AND NOT APPLE AND NOT ANDROID)
         install(TARGETS buho ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

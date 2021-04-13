@@ -2,6 +2,8 @@
 #include "bookssyncer.h"
 #include "nextnote.h"
 
+#include <MauiKit/FileBrowsing/fmstatic.h>
+
 Booklet::Booklet(BooksSyncer *_syncer, QObject *parent)
     : MauiList(parent)
     , syncer(_syncer)
@@ -101,7 +103,7 @@ void Booklet::sortList()
 void Booklet::appendBooklet(FMH::MODEL booklet)
 {
 	emit this->preItemAppended();
-    booklet.insert(FMH::getFileInfoModel(booklet[FMH::MODEL_KEY::URL]));
+    booklet.insert(FMStatic::getFileInfoModel(booklet[FMH::MODEL_KEY::URL]));
 	booklet[FMH::MODEL_KEY::TITLE] = [&]()
 	{
 	  const auto lines = booklet[FMH::MODEL_KEY::CONTENT].split("\n");

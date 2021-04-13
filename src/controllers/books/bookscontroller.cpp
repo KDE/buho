@@ -1,10 +1,6 @@
 #include "bookscontroller.h"
 
-#ifdef STATIC_MAUIKIT
-#include "fmstatic.h"
-#else
-#include <MauiKit/fmstatic.h>
-#endif
+#include <MauiKit/FileBrowsing/fmstatic.h>
 
 #include "db/db.h"
 BooksController::BooksController(QObject *parent)
@@ -70,7 +66,7 @@ bool BooksController::updateBooklet(FMH::MODEL &booklet, QString id)
     //    for(const auto &tg : booklet[FMH::MODEL_KEY::TAG])
     //        this->tag->tagAbstract(tg, OWL::TABLEMAP[OWL::TABLE::NOTES], id);
 
-    const QUrl __path = FMH::fileDir(booklet[FMH::MODEL_KEY::URL]);
+    const QUrl __path = FMStatic::fileDir(booklet[FMH::MODEL_KEY::URL]);
 
     if (!FMH::fileExists(__path))
         return false;

@@ -2,11 +2,8 @@
 #define SYNCER_H
 
 #include <QObject>
-#ifdef STATIC_MAUIKIT
-#include "fmh.h"
-#else
-#include <MauiKit/fmh.h>
-#endif
+
+#include <MauiKit/Core/fmh.h>
 
 #include "abstractnotesprovider.h"
 
