@@ -176,8 +176,6 @@ StackView
             filterCaseSensitivity: Qt.CaseInsensitive
         }
 
-        headBar.visible: !holder.visible
-
         headBar.rightContent: ToolButton
         {
             icon.name: "list-add"
