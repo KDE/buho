@@ -526,6 +526,7 @@ StackView
                 {
                     id: colorBar
                     anchors.centerIn: parent
+                    currentColor: currentNote.color
                     onColorPicked:
                     {
                         notesList.update(({"color": color}), cardsView.currentIndex)

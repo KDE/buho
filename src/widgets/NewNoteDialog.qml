@@ -102,7 +102,11 @@ Maui.Page
 
     footBar.leftContent: ColorsBar
     {
-        onColorPicked: control.backgroundColor = color
+        onColorPicked:
+        {
+            control.backgroundColor = color
+        }
+
         currentColor: control.backgroundColor
     }
 
