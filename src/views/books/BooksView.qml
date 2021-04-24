@@ -31,10 +31,9 @@ StackView
     {
         id: _booksPage
 
-        headBar.visible: !_holder.visible
-
         headBar.middleContent: Maui.TextField
         {
+            enabled: !_holder.visible
             Layout.fillWidth: true
             placeholderText: i18n("Search ") + _booksList.count + " " + i18n("books")
             onAccepted: _booksModel.filter = text
@@ -63,7 +62,7 @@ StackView
 
             headBar.visible: false
             visible: !_holder.visible
-            viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
+            viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
             anchors.fill: parent
             gridView.itemSize: 140

@@ -9,6 +9,8 @@ Syncer::Syncer(QObject *parent)
     , m_provider(nullptr) // online service handler
 {
     connect(MauiAccounts::instance(), &MauiAccounts::currentAccountChanged, [&](QVariantMap currentAccount) {
+
+        qDebug() << "Current account changed" << currentAccount;
         this->setAccount(FMH::toModel(currentAccount));
     });
 }

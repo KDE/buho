@@ -119,5 +119,6 @@ QVariantMap Notes::get(const int &index) const
 
 void Notes::componentComplete()
 {
+    qDebug() << "Get the fucking notes";
     this->syncer->getNotes();
 }

@@ -71,7 +71,10 @@ else()
 endif()
 
 if (ANDROID)
-    target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras Qt5::QuickControls2)
+    find_package(OpenSSL REQUIRED)
+
+    target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras Qt5::QuickControls2 OpenSSL::SSL)
+
 elseif(UNIX)
     target_link_libraries(${PROJECT_NAME} KF5::ConfigCore KF5::KIOCore KF5::KIOFileWidgets KF5::KIONTLM KF5::KIOWidgets)
 endif()

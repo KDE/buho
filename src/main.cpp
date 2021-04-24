@@ -10,6 +10,7 @@
 
 #ifdef Q_OS_ANDROID
 #include <QGuiApplication>
+#include <MauiKit/Core/mauiandroid.h>
 #else
 #include <QApplication>
 #endif
