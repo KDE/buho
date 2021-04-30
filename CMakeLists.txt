@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.0)
 
-set(BUHO_VERSION 1.2.1)
+set(BUHO_VERSION 1.2.2)
 
 project(buho VERSION ${BUHO_VERSION})
 
