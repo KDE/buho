@@ -30,6 +30,8 @@ StackView
         headBar.middleContent: Maui.TextField
         {
             Layout.fillWidth: true
+            Layout.maximumWidth: 500
+
             placeholderText: i18n("Filter ") + _booksList.booklet.count + " " + i18n("booklets in ") + currentBook.title
             onAccepted: _bookletModel.filter = text
             onCleared: _bookletModel.filter = ""

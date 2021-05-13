@@ -35,6 +35,8 @@ StackView
         {
             enabled: !_holder.visible
             Layout.fillWidth: true
+            Layout.maximumWidth: 500
+
             placeholderText: i18n("Search ") + _booksList.count + " " + i18n("books")
             onAccepted: _booksModel.filter = text
             onCleared: _booksModel.filter = ""

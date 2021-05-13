@@ -185,6 +185,7 @@ StackView
         headBar.middleContent: Maui.TextField
         {
             Layout.fillWidth: true
+            Layout.maximumWidth: 500
             placeholderText: i18n("Search ") + notesList.count + " " + i18n("notes")
             onAccepted: notesModel.filter = text
             onCleared: notesModel.filter = ""

@@ -29,13 +29,6 @@ Maui.ApplicationWindow
                                    })
 
     altHeader: Kirigami.Settings.isMobile
-//    autoHideHeader: swipeView.currentItem.editing
-    headBar.visible: !swipeView.currentItem.editing
-
-//    Buho.Doodle
-//    {
-//        id: _doodleHandler
-//    }
 
     mainMenu: Action
     {
@@ -43,6 +36,7 @@ Maui.ApplicationWindow
         icon.name: "settings-configure"
         onTriggered: _settingsDialog.open()
     }
+
  //    /***** COMPONENTS *****/
     Settings
     {
