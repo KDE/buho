@@ -8,9 +8,28 @@ SPDX-License-Identifier: CC0-1.0
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-3.0</project_license>
   <name>Buho</name>
+  <name xml:lang="az">Buho</name>
+  <name xml:lang="ca">Buho</name>
+  <name xml:lang="de">Buho</name>
+  <name xml:lang="nl">Buho</name>
+  <name xml:lang="pl">Buho</name>
+  <name xml:lang="pt">Buho</name>
+  <name xml:lang="sv">Buho</name>
+  <name xml:lang="uk">Buho</name>
+  <name xml:lang="x-test">xxBuhoxx</name>
   <summary>Note-taking app</summary>
+  <summary xml:lang="uk">Програма-нотатник</summary>
   <description>
     <p>Buho is a note-taking app. Buho will let you take quick notes, save links, create books and pages for taking classes notes.</p>
+    <p xml:lang="az">Buho qeydləri saxlaan tətbiqdir. Buho sizə sürətli qeydlər etməyə, bağlantıları saxlamağa, dərs qeydləri aparmaq üçün kitablar və səhifələr yaratmağa imkan verir.</p>
+    <p xml:lang="ca">El Buho és una aplicació per a prendre notes. Permetrà prendre notes ràpides, desar enllaços, crear llibres i pàgines per a prendre notes de les classes.</p>
+    <p xml:lang="de">Buho ist eine App zum Erstellen von Notizen. Mit Buho können Sie schnell Notizen machen, Verknüpfungen speichern sowie Bücher und Seiten von Unterrichtsnotizen erstellen.</p>
+    <p xml:lang="nl">Buho is een notitie opnemende toepassing. Buho laat u snel notities opnemen, koppelingen opslaan, boeken en pagina's voor opnemen van klassen van notities aanmaken.</p>
+    <p xml:lang="pl">Buho jest programem do zapisków. Buho umożliwia wykonywanie szybkich zapisków, zapisywyanie odnośników, tworzenie zeszytów oraz wykonywanie notatek.</p>
+    <p xml:lang="pt">O Buho é uma aplicação para tirar notas. O Buho permitir-lhe-á tirar notas rápidas, gravar ligações, criar livros e páginas para apontar notas das aulas.</p>
+    <p xml:lang="sv">Buho är ett anteckningsprogram. Buho låter dig göra snabbanteckningar, spara länkar, skapa böcker och sidor för att göra föreläsningsanteckningar.</p>
+    <p xml:lang="uk">Buho — програма для роботи із нотатками. За допомогою Buho ви зможете створювати короткі нотатки, зберігати посилання, створювати книги та сторінки для нотаток щодо лекцій.</p>
+    <p xml:lang="x-test">xxBuho is a note-taking app. Buho will let you take quick notes, save links, create books and pages for taking classes notes.xx</p>
   </description>
   <url type="homepage">https://mauikit.org/</url>
   <url type="bugtracker">https://invent.kde.org/maui/buho/-/issues</url>
@@ -18,6 +37,15 @@ SPDX-License-Identifier: CC0-1.0
   <screenshots>
     <screenshot type="default">
       <caption>Buho</caption>
+      <caption xml:lang="az">Buho</caption>
+      <caption xml:lang="ca">Buho</caption>
+      <caption xml:lang="de">Buho</caption>
+      <caption xml:lang="nl">Buho</caption>
+      <caption xml:lang="pl">Buho</caption>
+      <caption xml:lang="pt">Buho</caption>
+      <caption xml:lang="sv">Buho</caption>
+      <caption xml:lang="uk">Buho</caption>
+      <caption xml:lang="x-test">xxBuhoxx</caption>
       <image type="source" width="1024" height="723">
         https://nxos.org/wp-content/uploads/2021/05/buho-stable-1024x723.png
       </image>
@@ -31,7 +59,7 @@ SPDX-License-Identifier: CC0-1.0
     <control>keyboard</control>
     <control>touch</control>
   </recommends>
-  <content_rating type="oars-1.0" />
+  <content_rating type="oars-1.0"/>
   <project_group>KDE</project_group>
   <releases>
     <release version="1.2.2" date="2021-05-11">
