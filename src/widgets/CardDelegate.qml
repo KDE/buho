@@ -169,6 +169,7 @@ ColumnLayout
     Loader
     {
         id: bodyLoader
+        asynchronous: true
         Layout.leftMargin: Maui.Style.space.medium
         Layout.bottomMargin: Maui.Style.space.medium
         Layout.rightMargin: Maui.Style.space.medium
@@ -182,6 +183,7 @@ ColumnLayout
     Loader
     {
         id: imgLoader
+        asynchronous: true
         Layout.fillHeight: true
         Layout.fillWidth: true
         Layout.margins: Maui.Style.unit
