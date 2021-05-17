@@ -180,8 +180,8 @@ void BooksSyncer::setConections()
 
                 qDebug() << " trying to update local booklets with url" << booklet[FMH::MODEL_KEY::URL] << booklet[FMH::MODEL_KEY::BOOK] << booklet[FMH::MODEL_KEY::CONTENT];
 
-                auto remoteDate = QDateTime::fromSecsSinceEpoch(booklet[FMH::MODEL_KEY::MODIFIED].toInt());
-                auto localDate = QFileInfo(QUrl(booklet[FMH::MODEL_KEY::URL]).toLocalFile()).lastModified();
+//                auto remoteDate = QDateTime::fromSecsSinceEpoch(booklet[FMH::MODEL_KEY::MODIFIED].toInt());
+//                auto localDate = QFileInfo(QUrl(booklet[FMH::MODEL_KEY::URL]).toLocalFile()).lastModified();
 
                 //                if(remoteDate <= localDate)
                 //                    continue;

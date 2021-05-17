@@ -28,7 +28,6 @@ private:
     void appendNote(FMH::MODEL note);
 
 public slots:
-    QVariantMap get(const int &index) const;
     bool insert(const QVariantMap &note);
     bool update(const QVariantMap &data, const int &index);
     bool remove(const int &index);

@@ -31,7 +31,7 @@ Notes::Notes(QObject *parent)
                 note.insert(FMStatic::getFileInfoModel(note[FMH::MODEL_KEY::URL]));
                 qDebug() << note[FMH::MODEL_KEY::MODIFIED];
                 this->notes[mappedIndex] = note;
-                this->updateModel(mappedIndex, {});
+                emit this->updateModel(mappedIndex, {});
             }
         }
     });
@@ -87,7 +87,7 @@ bool Notes::remove(const int &index)
     const auto index_ = this->mappedIndex(index);
 
     emit this->preItemRemoved(index_);
-    this->syncer->removeNote(this->notes.takeAt(index_)[FMH::MODEL_KEY::ID]);
+    this->syncer->removeNote(this->notes.takeAt(index_).value(FMH::MODEL_KEY::ID));
     emit this->postItemRemoved();
     return true;
 }
@@ -108,14 +108,6 @@ int Notes::indexOfName(const QString &query)
         else
             return -1;
 }
-
-QVariantMap Notes::get(const int &index) const
-{
-    if (index >= this->notes.size() || index < 0)
-        return QVariantMap();
-    return FMH::toMap(this->notes.at(this->mappedIndex(index)));
-}
-
 
 void Notes::componentComplete()
 {

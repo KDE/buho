@@ -45,7 +45,7 @@ void NextNote::getNote(const QString &id)
     auto url = QUrl(this->m_provider).resolved(relativeUrl);
     qDebug() << "THE RESOLVED URL IS" << url << this->m_provider;
 
-    const auto request = formRequest(url, this->m_user, this->m_password);
+//    const auto request = formRequest(url, this->m_user, this->m_password);
     QString concatenated = this->m_user + ":" + this->m_password;
     QByteArray data = concatenated.toLocal8Bit().toBase64();
     QString headerData = "Basic " + data;

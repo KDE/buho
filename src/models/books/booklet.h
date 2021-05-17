@@ -41,7 +41,6 @@ public:
     }
 
 public slots:
-    QVariantMap get(const int &index) const;
     void insert(const QVariantMap &data);
     void update(const QVariantMap &data, const int &index);
     void remove(const int &index);

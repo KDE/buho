@@ -38,7 +38,6 @@ signals:
     void currentBookChanged(int currentBook);
 
 public slots:
-    QVariantMap get(const int &index) const;
 
     /**
      * @brief insert

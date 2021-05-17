@@ -136,11 +136,17 @@ const FMH::MODEL_LIST DB::getDBData(const QString &queryTxt)
     auto query = this->getQuery(queryTxt);
 
     if (query.exec()) {
+        const auto keys = FMH::MODEL_NAME.keys();
         while (query.next()) {
             FMH::MODEL data;
-            for (const auto &key : FMH::MODEL_NAME.keys())
+
+            for (const auto &key : keys)
+            {
                 if (query.record().indexOf(FMH::MODEL_NAME[key]) > -1)
+                {
                     data.insert(key, query.value(FMH::MODEL_NAME[key]).toString());
+                }
+            }
 
             mapList << data;
         }
@@ -198,12 +204,18 @@ bool DB::update(const QString &tableName, const QVariantMap &updateData, const Q
     }
 
     QStringList set;
-    for (auto key : updateData.keys())
+    const auto updateKeys = updateData.keys();
+    for (const auto &key : updateKeys)
+    {
         set.append(key + " = ?");
+    }
 
     QStringList condition;
-    for (auto key : where.keys())
+    const auto whereKeys = where.keys();
+    for (const auto &key : whereKeys)
+    {
         condition.append(key + " = '" + where[key].toString() + "'");
+    }
 
     QString sqlQueryString = "UPDATE " + tableName + " SET " + QString(set.join(",")) + " WHERE " + QString(condition.join(" AND "));
     auto query = this->getQuery(sqlQueryString);
@@ -211,7 +223,9 @@ bool DB::update(const QString &tableName, const QVariantMap &updateData, const Q
     QVariantList values = updateData.values();
     int k = 0;
     foreach (const QVariant &value, values)
+    {
         query.bindValue(k++, value);
+    }
 
     qDebug() << query.lastQuery();
     return query.exec();
@@ -236,8 +250,11 @@ bool DB::remove(const QString &tableName, const QVariantMap &removeData)
     }
 
     QStringList set;
-    for (const auto &key : removeData.keys())
+    const auto removeKeys = removeData.keys();
+    for (const auto &key : removeKeys)
+    {
         set.append(key + " = ?");
+    }
 
     QString sqlQueryString = "DELETE FROM " + tableName + " WHERE " + QString(set.join(" AND "));
     qDebug() << sqlQueryString;

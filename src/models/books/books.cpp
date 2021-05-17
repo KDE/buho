@@ -51,14 +51,6 @@ int Books::getCurrentBook() const
     return m_currentBook;
 }
 
-QVariantMap Books::get(const int &index) const
-{
-    if (index >= this->m_list.size() || index < 0)
-        return QVariantMap();
-
-    return FMH::toMap(this->m_list.at(index));
-}
-
 bool Books::insert(const QVariantMap &book)
 {
     auto __book = FMH::toModel(book);

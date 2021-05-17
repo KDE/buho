@@ -85,7 +85,7 @@ void Booklet::remove(const int &index)
         return;
 
     emit this->preItemRemoved(index);
-    this->syncer->removeBooklet(this->m_list.takeAt(index)[FMH::MODEL_KEY::ID]);
+    this->syncer->removeBooklet(this->m_list.takeAt(index).value(FMH::MODEL_KEY::ID));
     emit this->postItemRemoved();
 }
 
@@ -123,10 +123,3 @@ void Booklet::setBookTitle(const QString &title)
     emit bookTitleChanged(m_bookTitle);
 }
 
-QVariantMap Booklet::get(const int &index) const
-{
-    if (index >= this->m_list.size() || index < 0)
-        return QVariantMap();
-
-    return FMH::toMap(this->m_list.at(index));
-}
