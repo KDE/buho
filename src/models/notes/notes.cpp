@@ -3,7 +3,7 @@
 #include "notessyncer.h"
 
 #include <MauiKit/FileBrowsing/fm.h>
-#include <MauiKit/Core/mauiaccounts.h>
+#include <MauiKit/Accounts/mauiaccounts.h>
 #include <MauiKit/FileBrowsing/tagging.h>
 
 #include <algorithm>

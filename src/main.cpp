@@ -45,7 +45,6 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     app.setWindowIcon(QIcon(":/buho.png"));
 
     MauiApp::instance()->setIconName("qrc:/buho.svg");
-    MauiApp::instance()->setHandleAccounts(true);
 
     KLocalizedString::setApplicationDomain("buho");
     KAboutData about(QStringLiteral("buho"), i18n("Buho"), BUHO_VERSION_STRING, i18n("Create and organize your notes."), KAboutLicense::LGPL_V3, i18n("© 2019-%1 Nitrux Development Team", QString::number(QDate::currentDate().year())), QString(GIT_BRANCH) + "/" + QString(GIT_COMMIT_HASH));

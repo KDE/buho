@@ -3,7 +3,7 @@
 #include "db/db.h"
 
 #include <MauiKit/FileBrowsing/fmstatic.h>
-#include <MauiKit/Core/mauiaccounts.h>
+#include <MauiKit/Accounts/mauiaccounts.h>
 #include <MauiKit/FileBrowsing/tagging.h>
 
 NotesSyncer::NotesSyncer(QObject *parent)

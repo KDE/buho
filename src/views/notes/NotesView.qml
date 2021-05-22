@@ -206,7 +206,7 @@ StackView
                 clear()
             }
 
-            listDelegate: Maui.ItemDelegate
+            listDelegate: Maui.ListBrowserDelegate
             {
                 height: Maui.Style.rowHeight * 2
                 width: ListView.view.width
@@ -217,17 +217,12 @@ StackView
                     radius:Maui.Style.radiusV
                 }
 
-                Maui.ListItemTemplate
-                {
-                    id: _template
-                    anchors.fill: parent
-                    label1.text: model.title
-                    iconSizeHint: Maui.Style.iconSizes.small
-                    iconSource: "view-pim-notes"
-                    checkable: true
-                    checked: true
-                    onToggled: _selectionbar.removeAtIndex(index)
-                }
+                label1.text: model.title
+                template.iconVisible: false
+                iconSource: "view-pim-notes"
+                checkable: true
+                checked: true
+                onToggled: _selectionbar.removeAtIndex(index)
             }
 
             Action

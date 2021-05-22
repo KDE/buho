@@ -5,7 +5,7 @@
 #include <MauiKit/FileBrowsing/fmstatic.h>
 #include <MauiKit/FileBrowsing/tagging.h>
 
-#include <MauiKit/Core/mauiaccounts.h>
+#include <MauiKit/Accounts/mauiaccounts.h>
 
 BooksSyncer::BooksSyncer(QObject *parent)
     : Syncer(parent)

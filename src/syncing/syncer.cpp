@@ -2,7 +2,7 @@
 #include "abstractnotesprovider.h"
 #include "db/db.h"
 
-#include <MauiKit/Core/mauiaccounts.h>
+#include <MauiKit/Accounts/mauiaccounts.h>
 
 Syncer::Syncer(QObject *parent)
     : QObject(parent)
