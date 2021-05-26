@@ -13,6 +13,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="ca-valencia">Buho</name>
   <name xml:lang="de">Buho</name>
   <name xml:lang="es">Buho</name>
+  <name xml:lang="it">Buho</name>
   <name xml:lang="ko">Buho</name>
   <name xml:lang="nl">Buho</name>
   <name xml:lang="pl">Buho</name>
@@ -28,6 +29,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="ca-valencia">Aplicació per a prendre notes</summary>
   <summary xml:lang="de">Notizenanwendung</summary>
   <summary xml:lang="es">Aplicación para tomar notas</summary>
+  <summary xml:lang="it">Applicazione per prendere appunti</summary>
   <summary xml:lang="ko">메모 프로그램</summary>
   <summary xml:lang="nl">Notitie opnemende toepassing</summary>
   <summary xml:lang="pl">Program do robienia zapisków</summary>
@@ -44,6 +46,7 @@ SPDX-License-Identifier: CC0-1.0
     <p xml:lang="ca-valencia">El Buho és una aplicació per a prendre notes. Permetrà prendre notes ràpides, guardar enllaços, crear llibres i pàgines per a prendre notes de les classes.</p>
     <p xml:lang="de">Buho ist eine App zum Erstellen von Notizen. Mit Buho können Sie schnell Notizen machen, Verknüpfungen speichern sowie Bücher und Seiten von Unterrichtsnotizen erstellen.</p>
     <p xml:lang="es">Buho es una aplicación para tomar notas. Buho le permitirá tomar notas rápidas, guardar enlaces, crear cuadernos y páginas para tomar notas en clase.</p>
+    <p xml:lang="it">Buho è un'applicazione per prendere appunti. Ti permette di prendere appunti veloci, di salvare collegamenti e di creare libri e pagine per prendere i classici appunti.</p>
     <p xml:lang="ko">Buho는 메모 앱입니다. Buho를 사용하여 빠른 메모, 링크 저장, 수업 필기용 책과 쪽을 만들 수 있습니다.</p>
     <p xml:lang="nl">Buho is een notitie opnemende toepassing. Buho laat u snel notities opnemen, koppelingen opslaan, boeken en pagina's voor opnemen van klassen van notities aanmaken.</p>
     <p xml:lang="pl">Buho jest programem do zapisków. Buho umożliwia wykonywanie szybkich zapisków, zapisywyanie odnośników, tworzenie zeszytów oraz wykonywanie notatek.</p>
@@ -64,6 +67,7 @@ SPDX-License-Identifier: CC0-1.0
       <caption xml:lang="ca-valencia">Buho</caption>
       <caption xml:lang="de">Buho</caption>
       <caption xml:lang="es">Buho</caption>
+      <caption xml:lang="it">Buho</caption>
       <caption xml:lang="ko">Buho</caption>
       <caption xml:lang="nl">Buho</caption>
       <caption xml:lang="pl">Buho</caption>
