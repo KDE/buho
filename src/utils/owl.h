@@ -19,7 +19,6 @@ static const QMap<TABLE, QString> TABLEMAP = {{TABLE::NOTES, "notes"}, {TABLE::N
 
 const static inline QUrl CollectionDBPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/buho/");
 const static inline QUrl NotesPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/buho/notes/");
-const static inline QUrl BooksPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/buho/books/");
 
 const static inline QString DBName = "collection.db";
 

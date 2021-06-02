@@ -3,6 +3,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QDate>
+#include <QDir>
 
 #include <KI18n/KLocalizedString>
 
@@ -17,14 +18,17 @@
 
 #include "../buho_version.h"
 
-#include "buho.h"
-#include "models/books/booklet.h"
-#include "models/books/books.h"
+#include "owl.h"
 #include "models/notes/notes.h"
-
-//#include "doodle/doodlehanlder.h"
-
+#include "models/tags/tagsmodel.h"
 #define BUHO_URI "org.maui.buho"
+
+void setFolders()
+{
+    QDir notes_path(OWL::NotesPath.toLocalFile());
+    if (!notes_path.exists())
+        notes_path.mkpath(".");
+}
 
 int Q_DECL_EXPORT main(int argc, char *argv[])
 {
@@ -63,14 +67,10 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     about.setupCommandLine(&parser);
     about.processCommandLine(&parser);
 
-    Buho buho;
-
     QQmlApplicationEngine engine;
 
-    qmlRegisterAnonymousType<Booklet>(BUHO_URI, 1);
     qmlRegisterType<Notes>(BUHO_URI, 1, 0, "Notes");
-    qmlRegisterType<Books>(BUHO_URI, 1, 0, "Books");
-    //    qmlRegisterType<DoodleHanlder>(BUHO_URI, 1, 0, "Doodle");
+    qmlRegisterType<TagsModel>(BUHO_URI, 1, 0, "TagsModel");
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

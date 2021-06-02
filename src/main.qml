@@ -10,7 +10,7 @@ import org.maui.buho 1.0 as Buho
 
 import "widgets"
 import "views/notes"
-import "views/books"
+import "views/tags"
 
 Maui.ApplicationWindow
 {
@@ -37,7 +37,7 @@ Maui.ApplicationWindow
         onTriggered: _settingsDialog.open()
     }
 
- //    /***** COMPONENTS *****/
+    /***** COMPONENTS *****/
     Settings
     {
         id: settings
@@ -58,17 +58,7 @@ Maui.ApplicationWindow
         id: _settingsDialog
     }
 
-    NewBookDialog
-    {
-        id: newBookDialog
-        onBookSaved:
-        {
-            //            if(title && title.length)
-            booksView.list.insert({title: title, count: 0})
-        }
-    }   
-
-    //    /***** VIEWS *****/
+  /***** VIEWS *****/
     Maui.AppViews
     {
         id: swipeView
@@ -82,11 +72,11 @@ Maui.ApplicationWindow
             Maui.AppView.title: i18n("Notes")
         }
 
-        BooksView
+        TagsView
         {
             id: booksView
-            Maui.AppView.iconName: "view-pim-journal"
-            Maui.AppView.title: i18n("Books")
+            Maui.AppView.iconName: "tag"
+            Maui.AppView.title: i18n("Tags")
         }
     }
 
@@ -99,11 +89,4 @@ Maui.ApplicationWindow
 
         }
     }
-
-    function newBook()
-    {
-        swipeView.currentIndex = views.books
-        newBookDialog.open()
-    }
-
 }

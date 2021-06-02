@@ -23,33 +23,25 @@ include_directories(
 set(buho_SRCS
     main.cpp
     db/db.cpp
-    buho.cpp
     models/notes/notes.cpp
-    models/books/books.cpp
-    models/books/booklet.cpp
+    models/tags/tagsmodel.cpp
     providers/nextnote.cpp
     syncing/syncer.cpp
-    syncing/bookssyncer.cpp
     syncing/notessyncer.cpp
     controllers/notes/notescontroller.cpp
-    controllers/books/bookscontroller.cpp
     #    doodle/doodlehanlder.cpp
     )
 
 set(buho_HDRS
     db/db.h
-    buho.h
     utils/owl.h
     models/notes/notes.h
-    models/books/books.h
-    models/books/booklet.h
     providers/nextnote.h
     providers/abstractnotesprovider.h
     syncing/syncer.h
-    syncing/bookssyncer.h
     syncing/notessyncer.h
     controllers/notes/notescontroller.h
-    controllers/books/bookscontroller.h
+    models/tags/tagsmodel.h
     #    doodle/doodlehanlder.h
     )
 

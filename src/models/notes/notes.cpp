@@ -109,8 +109,34 @@ int Notes::indexOfName(const QString &query)
             return -1;
 }
 
+void Notes::setTag(QString tag)
+{
+    if (m_tag == tag)
+        return;
+
+    m_tag = tag;
+    emit tagChanged(m_tag);
+}
+
 void Notes::componentComplete()
 {
     qDebug() << "Get the fucking notes";
-    this->syncer->getNotes();
+    connect(this, &Notes::tagChanged, this, &Notes::setList);
+    setList();
+}
+
+QString Notes::tag() const
+{
+    return m_tag;
+}
+
+void Notes::setList()
+{
+    if(m_tag.isEmpty())
+    {
+        this->syncer->getNotes();
+    }else
+    {
+
+    }
 }
