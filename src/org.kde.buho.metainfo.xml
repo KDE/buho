@@ -15,6 +15,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="de">Buho</name>
   <name xml:lang="es">Buho</name>
   <name xml:lang="fi">Buho</name>
+  <name xml:lang="fr">Buho</name>
   <name xml:lang="it">Buho</name>
   <name xml:lang="ko">Buho</name>
   <name xml:lang="nl">Buho</name>
@@ -33,6 +34,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="de">Notizenanwendung</summary>
   <summary xml:lang="es">Aplicación para tomar notas</summary>
   <summary xml:lang="fi">Muistiinpanosovellus</summary>
+  <summary xml:lang="fr">Application de prise de notes</summary>
   <summary xml:lang="it">Applicazione per prendere appunti</summary>
   <summary xml:lang="ko">메모 프로그램</summary>
   <summary xml:lang="nl">Notitie opnemende toepassing</summary>
@@ -51,6 +53,7 @@ SPDX-License-Identifier: CC0-1.0
     <p xml:lang="de">Buho ist eine App zum Erstellen von Notizen. Mit Buho können Sie schnell Notizen machen, Verknüpfungen speichern sowie Bücher und Seiten von Unterrichtsnotizen erstellen.</p>
     <p xml:lang="es">Buho es una aplicación para tomar notas. Buho le permitirá tomar notas rápidas, guardar enlaces, crear cuadernos y páginas para tomar notas en clase.</p>
     <p xml:lang="fi">Buho on muistiinpanosovellus, jolla voi nopeasti tehdä muistiinpanoja, tallentaa linkkejä sekä luoda muistikirjoja ja sivuja.</p>
+    <p xml:lang="fr">Buho est une application de prise de notes. Buho vous permet de prendre des notes rapides, d'enregistrer des liens, de créer des livres et des pages pour prendre des notes de cours.</p>
     <p xml:lang="it">Buho è un'applicazione per prendere appunti. Ti permette di prendere appunti veloci, di salvare collegamenti e di creare libri e pagine per prendere i classici appunti.</p>
     <p xml:lang="ko">Buho는 메모 앱입니다. Buho를 사용하여 빠른 메모, 링크 저장, 수업 필기용 책과 쪽을 만들 수 있습니다.</p>
     <p xml:lang="nl">Buho is een notitie opnemende toepassing. Buho laat u snel notities opnemen, koppelingen opslaan, boeken en pagina's voor opnemen van klassen van notities aanmaken.</p>
@@ -74,6 +77,7 @@ SPDX-License-Identifier: CC0-1.0
       <caption xml:lang="de">Buho</caption>
       <caption xml:lang="es">Buho</caption>
       <caption xml:lang="fi">Buho</caption>
+      <caption xml:lang="fr">Buho</caption>
       <caption xml:lang="it">Buho</caption>
       <caption xml:lang="ko">Buho</caption>
       <caption xml:lang="nl">Buho</caption>
