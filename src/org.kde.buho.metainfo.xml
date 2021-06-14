@@ -16,6 +16,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="el">Buho</name>
   <name xml:lang="en-GB">Buho</name>
   <name xml:lang="es">Buho</name>
+  <name xml:lang="eu">Buho</name>
   <name xml:lang="fi">Buho</name>
   <name xml:lang="fr">Buho</name>
   <name xml:lang="it">Buho</name>
@@ -37,6 +38,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="el">Εφαρμογή σημειωματάριο</summary>
   <summary xml:lang="en-GB">Note-taking app</summary>
   <summary xml:lang="es">Aplicación para tomar notas</summary>
+  <summary xml:lang="eu">Oharrak hartzeko aplikazioa</summary>
   <summary xml:lang="fi">Muistiinpanosovellus</summary>
   <summary xml:lang="fr">Application de prise de notes</summary>
   <summary xml:lang="it">Applicazione per prendere appunti</summary>
@@ -58,6 +60,7 @@ SPDX-License-Identifier: CC0-1.0
     <p xml:lang="el">Το Buho είναι ένα σημειωματάριο. Θα μπορείτε να παίρνετε γρήγορες σημειώσεις, να αποθηκεύετε συνδέσμους, να δημιουργείτε βιβλία και σελίδες για σημειώσεις την ώρα του μαθήματος.</p>
     <p xml:lang="en-GB">Buho is a note-taking app. Buho will let you take quick notes, save links, create books and pages for taking classes notes.</p>
     <p xml:lang="es">Buho es una aplicación para tomar notas. Buho le permitirá tomar notas rápidas, guardar enlaces, crear cuadernos y páginas para tomar notas en clase.</p>
+    <p xml:lang="eu">Buho, oharrak hartzeko aplikazio bat da. Buho-k ohar azkarrak hartzen, estekak gordetzen, eskolako idatzoharrak hartzeko liburuak eta orriak sortzen uzten dizu.</p>
     <p xml:lang="fi">Buho on muistiinpanosovellus, jolla voi nopeasti tehdä muistiinpanoja, tallentaa linkkejä sekä luoda muistikirjoja ja sivuja.</p>
     <p xml:lang="fr">Buho est une application de prise de notes. Buho vous permet de prendre des notes rapides, d'enregistrer des liens, de créer des livres et des pages pour prendre des notes de cours.</p>
     <p xml:lang="it">Buho è un'applicazione per prendere appunti. Ti permette di prendere appunti veloci, di salvare collegamenti e di creare libri e pagine per prendere i classici appunti.</p>
@@ -84,6 +87,7 @@ SPDX-License-Identifier: CC0-1.0
       <caption xml:lang="el">Buho</caption>
       <caption xml:lang="en-GB">Buho</caption>
       <caption xml:lang="es">Buho</caption>
+      <caption xml:lang="eu">Buho</caption>
       <caption xml:lang="fi">Buho</caption>
       <caption xml:lang="fr">Buho</caption>
       <caption xml:lang="it">Buho</caption>
