@@ -86,7 +86,6 @@ StackView
     initialItem: Maui.AltBrowser
     {
         id: cardsView
-
         gridView.itemSize: Math.min(300, control.width* 0.4)
         gridView.cellHeight: gridView.itemSize + Maui.Style.rowHeight
 
@@ -188,7 +187,7 @@ StackView
         footer: Maui.SelectionBar
         {
             id: _selectionbar
-            visible: count > 0 && !swipeView.currentItem.editing
+            visible: count > 0
             anchors.horizontalCenter: parent.horizontalCenter
             width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
             padding: Maui.Style.space.big
