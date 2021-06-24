@@ -15,7 +15,10 @@ StackView
     property var currentNote : ({})
 
     property alias cardsView : cardsView
+
     property alias list : notesList
+    property alias model : notesModel
+
     property alias currentIndex : cardsView.currentIndex
 
     readonly property Flickable flickable : currentItem.flickable
@@ -80,9 +83,12 @@ StackView
 
     }
 
-    initialItem: CardsView
+    initialItem: Maui.AltBrowser
     {
         id: cardsView
+
+        gridView.itemSize: Math.min(300, control.width* 0.4)
+        gridView.cellHeight: gridView.itemSize + Maui.Style.rowHeight
 
         floatingFooter: true
 
@@ -91,6 +97,9 @@ StackView
         holder.emojiSize: Maui.Style.iconSizes.huge
         holder.title :i18n("No notes!")
         holder.body: i18n("Click here to create a new note")
+
+        headBar.visible: false
+
         enableLassoSelection: true
 
         viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
@@ -174,21 +183,6 @@ StackView
             recursiveFilteringEnabled: true
             sortCaseSensitivity: Qt.CaseInsensitive
             filterCaseSensitivity: Qt.CaseInsensitive
-        }
-
-        headBar.rightContent: ToolButton
-        {
-            icon.name: "list-add"
-            onClicked: newNote()
-        }
-
-        headBar.middleContent: Maui.TextField
-        {
-            Layout.fillWidth: true
-            Layout.maximumWidth: 500
-            placeholderText: i18n("Search ") + notesList.count + " " + i18n("notes")
-            onAccepted: notesModel.filter = text
-            onCleared: notesModel.filter = ""
         }
 
         footer: Maui.SelectionBar
@@ -301,14 +295,14 @@ StackView
             {
                 currentIndex = index
                 currentNote = notesModel.get(index)
-                _notesMenu.open()
+                _notesMenu.show()
             }
 
             onPressAndHold:
             {
                 currentIndex = index
                 currentNote = notesModel.get(index)
-                _notesMenu.open()
+                _notesMenu.show()
             }
 
             onToggled:
@@ -390,14 +384,14 @@ StackView
                 {
                     currentIndex = index
                     currentNote = notesModel.get(index)
-                    _notesMenu.open()
+                    _notesMenu.show()
                 }
 
                 onPressAndHold:
                 {
                     currentIndex = index
                     currentNote = notesModel.get(index)
-                    _notesMenu.open()
+                    _notesMenu.show()
                 }
 
                 onToggled:

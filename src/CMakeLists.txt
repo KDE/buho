@@ -24,7 +24,6 @@ set(buho_SRCS
     main.cpp
     db/db.cpp
     models/notes/notes.cpp
-    models/tags/tagsmodel.cpp
     providers/nextnote.cpp
     syncing/syncer.cpp
     syncing/notessyncer.cpp
@@ -41,7 +40,6 @@ set(buho_HDRS
     syncing/syncer.h
     syncing/notessyncer.h
     controllers/notes/notescontroller.h
-    models/tags/tagsmodel.h
     #    doodle/doodlehanlder.h
     )
 

@@ -20,7 +20,7 @@
 
 #include "owl.h"
 #include "models/notes/notes.h"
-#include "models/tags/tagsmodel.h"
+
 #define BUHO_URI "org.maui.buho"
 
 void setFolders()
@@ -70,7 +70,6 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     qmlRegisterType<Notes>(BUHO_URI, 1, 0, "Notes");
-    qmlRegisterType<TagsModel>(BUHO_URI, 1, 0, "TagsModel");
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

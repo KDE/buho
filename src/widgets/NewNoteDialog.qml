@@ -11,6 +11,7 @@ import org.mauikit.texteditor 1.0 as TE
 Maui.Page
 {
     id: control
+
     property alias editor: _editor
     property string backgroundColor: note.color ? note.color : "transparent"
     property bool showEditActions : false
@@ -34,6 +35,7 @@ Maui.Page
 
         footBar.visible: false
 
+//body.cursorPosition : body.text.length
 //        autoHideHeader: true
 //        autoHideHeaderMargins: control.height * 0.3
 
@@ -100,7 +102,7 @@ Maui.Page
         }
     }
 
-    footBar.leftContent: ColorsBar
+    footBar.rightContent: ColorsBar
     {
         onColorPicked:
         {
@@ -110,13 +112,7 @@ Maui.Page
         currentColor: control.backgroundColor
     }
 
-    footBar.rightContent: [
-//            ToolButton
-//            {
-//                text: i18n("Export")
-//                icon.name: "document-export"
-//            },
-
+    footBar.leftContent: [
         ToolButton
         {
             text: i18n("Delete")
@@ -124,21 +120,6 @@ Maui.Page
             Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
         }
     ]
-
-    footerColumn: FB.TagsBar
-    {
-        id: tagBar
-        width: parent.width
-        allowEditMode: true
-        onTagsEdited:
-        {
-            if(editor.fileUrl)
-                tagBar.list.updateToUrls(tags)
-        }
-
-        list.strict: true
-        list.urls: editor.fileUrl ? [editor.fileUrl] : []
-    }
 
     function clear()
     {

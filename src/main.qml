@@ -4,13 +4,12 @@ import QtQuick.Layouts 1.3
 import Qt.labs.settings 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.mauikit.controls 1.2 as Maui
+import org.mauikit.controls 1.3 as Maui
 
 import org.maui.buho 1.0 as Buho
 
 import "widgets"
 import "views/notes"
-import "views/tags"
 
 Maui.ApplicationWindow
 {
@@ -23,12 +22,8 @@ Maui.ApplicationWindow
         pointSize: Maui.Style.fontSizes.huge
     }
 
-    readonly property var views : ({
-                                       notes: 0,
-                                       books: 1
-                                   })
-
     altHeader: Kirigami.Settings.isMobile
+    headBar.visible: !notesView.editing
 
     mainMenu: Action
     {
@@ -58,26 +53,25 @@ Maui.ApplicationWindow
         id: _settingsDialog
     }
 
-  /***** VIEWS *****/
-    Maui.AppViews
+    headBar.rightContent: ToolButton
     {
-        id: swipeView
+        icon.name: "list-add"
+        onClicked: notesView.newNote()
+    }
+
+    headBar.middleContent: Maui.TextField
+    {
+        Layout.fillWidth: true
+        Layout.maximumWidth: 500
+        placeholderText: i18n("Search ") + notesView.list.count + " " + i18n("notes")
+        onAccepted: notesView.model.filter = text
+        onCleared: notesView.model.filter = ""
+    }
+
+    NotesView
+    {
+        id: notesView
         anchors.fill: parent
-
-        NotesView
-        {
-            id: notesView
-
-            Maui.AppView.iconName: "view-pim-notes"
-            Maui.AppView.title: i18n("Notes")
-        }
-
-        TagsView
-        {
-            id: booksView
-            Maui.AppView.iconName: "tag"
-            Maui.AppView.title: i18n("Tags")
-        }
     }
 
     Component.onCompleted:
@@ -86,7 +80,6 @@ Maui.ApplicationWindow
         {
             Maui.Android.statusbarColor(headBar.Kirigami.Theme.backgroundColor, false)
             Maui.Android.navBarColor(headBar.visible ? headBar.Kirigami.Theme.backgroundColor : Kirigami.Theme.backgroundColor, false)
-
         }
     }
 }
