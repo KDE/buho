@@ -16,8 +16,9 @@ Maui.Page
     property string backgroundColor: note.color ? note.color : "transparent"
     property bool showEditActions : false
     property var note : ({})
+    property int noteIndex : -1
 
-    signal noteSaved(var note)
+    signal noteSaved(var note, int noteIndex)
 
     headBar.visible: false
 
@@ -56,7 +57,7 @@ Maui.Page
                     _editor.document.saveAs(_editor.document.fileUrl)
                 }
 
-                control.noteSaved(packNote())
+                control.noteSaved(packNote(), control.noteIndex)
 
                 control.clear()
                 control.parent.pop(StackView.Immediate)

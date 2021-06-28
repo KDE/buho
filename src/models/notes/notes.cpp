@@ -24,13 +24,13 @@ Notes::Notes(QObject *parent)
 
     connect(syncer, &NotesSyncer::noteUpdated, [&](FMH::MODEL note, STATE state) {
         if (state.type == STATE::TYPE::LOCAL) {
-            const auto mappedIndex = this->mappedIndex(this->indexOf(FMH::MODEL_KEY::ID, note[FMH::MODEL_KEY::ID]));
-            if (mappedIndex >= 0) {
-                qDebug() << note[FMH::MODEL_KEY::MODIFIED];
+            const auto index = this->indexOf(FMH::MODEL_KEY::ID, note[FMH::MODEL_KEY::ID]);
+            if (index >= 0) {
+                qDebug() << note[FMH::MODEL_KEY::MODIFIED] << index;
                 note.insert(FMStatic::getFileInfoModel(note[FMH::MODEL_KEY::URL]));
                 qDebug() << note[FMH::MODEL_KEY::MODIFIED];
-                this->notes[mappedIndex] = note;
-                emit this->updateModel(mappedIndex, {});
+                this->notes[index] = note;
+                emit this->updateModel(index, {});
             }
         }
     });
@@ -70,9 +70,9 @@ bool Notes::update(const QVariantMap &data, const int &index)
     if (index < 0 || index >= this->notes.size())
         return false;
 
-    const auto index_ = this->mappedIndex(index);
+    auto note = this->notes[index];
+    qDebug() << "UDPATE MODEL ITEM AT "<< index << note[FMH::MODEL_KEY::TITLE];
 
-    auto note = this->notes[index_];
     note.insert(FMH::toModel(data));
     this->syncer->updateNote(note[FMH::MODEL_KEY::ID], note);
     return true;
@@ -83,10 +83,8 @@ bool Notes::remove(const int &index)
     if (index < 0 || index >= this->notes.size())
         return false;
 
-    const auto index_ = this->mappedIndex(index);
-
-    emit this->preItemRemoved(index_);
-    this->syncer->removeNote(this->notes.takeAt(index_).value(FMH::MODEL_KEY::ID));
+    emit this->preItemRemoved(index);
+    this->syncer->removeNote(this->notes.takeAt(index).value(FMH::MODEL_KEY::ID));
     emit this->postItemRemoved();
     return true;
 }
@@ -103,7 +101,7 @@ int Notes::indexOfName(const QString &query)
         });
 
         if (it != this->items().constEnd())
-            return this->mappedIndexFromSource(std::distance(this->items().constBegin(), it));
+            return std::distance(this->items().constBegin(), it);
         else
             return -1;
 }

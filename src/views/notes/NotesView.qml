@@ -29,6 +29,7 @@ StackView
     {
         control.push(_editNoteComponent, {}, StackView.Immediate)
         control.currentItem.editor.body.forceActiveFocus()
+        control.currentItem.noteIndex = control.currentIndex
     }
 
     function newNote()
@@ -46,8 +47,8 @@ StackView
             note: control.currentNote
             onNoteSaved:
             {
-                console.log("updating note <<" , note)
-                control.list.update(note, control.currentIndex)
+                console.log("updating note <<" , note , control.currentIndex , noteIndex, notesModel.mappedToSource(noteIndex))
+                control.list.update(note, notesModel.mappedToSource(noteIndex))
             }
         }
     }
@@ -126,7 +127,7 @@ StackView
                  const index = notesList.indexOfName(cardsView.typingQuery)
                  if(index > -1)
                  {
-                     control.currentIndex = index
+                     control.currentIndex = notesModel.mappedFromSource(index)
                  }
 
                  cardsView.typingQuery = ""
@@ -191,7 +192,7 @@ StackView
             anchors.horizontalCenter: parent.horizontalCenter
             width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
             padding: Maui.Style.space.big
-            maxListHeight: swipeView.height - Maui.Style.space.medium
+            maxListHeight: control.height - Maui.Style.space.medium
 
             onExitClicked:
             {
@@ -225,7 +226,7 @@ StackView
                 onTriggered:
                 {
                     for(var item of _selectionbar.items)
-                        notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), notesList.indexOfNote(item.path))
+                        notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), notesModel.mappedToSource(notesList.indexOfNote(item.path)))
 
                     _selectionbar.clear()
                 }
@@ -358,6 +359,7 @@ StackView
                 onClicked:
                 {
                     currentIndex = index
+console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model.url))
 
                     if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
                     {
@@ -464,7 +466,7 @@ StackView
                 text: _notesMenu.isFav? i18n("UnFav") : i18n("Fav")
                 onTriggered:
                 {
-                    notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), cardsView.currentIndex)
+                    notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), notesModel.mappedToSource(cardsView.currentIndex))
                     _notesMenu.close()
                 }
             }
@@ -499,7 +501,7 @@ StackView
                 Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
                 onTriggered:
                 {
-                    notesList.remove(cardsView.currentIndex)
+                    notesList.remove(notesModel.mappedToSource(cardsView.currentIndex))
                     _notesMenu.close()
                 }
             }
@@ -518,7 +520,7 @@ StackView
                     currentColor: currentNote.color
                     onColorPicked:
                     {
-                        notesList.update(({"color": color}), cardsView.currentIndex)
+                        notesList.update(({"color": color}), notesModel.mappedToSource(cardsView.currentIndex))
                         _notesMenu.close()
                     }
                 }
