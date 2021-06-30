@@ -1,10 +1,8 @@
 #ifndef NOTES_H
 #define NOTES_H
 
-#include "owl.h"
 #include <QObject>
 
-#include <MauiKit/Core/fmh.h>
 #include <MauiKit/Core/mauilist.h>
 
 class NotesSyncer;

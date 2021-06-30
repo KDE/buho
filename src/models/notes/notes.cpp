@@ -49,6 +49,7 @@ void Notes::appendNote(FMH::MODEL note)
     emit this->preItemAppended();
     this->notes << note;
     emit this->postItemAppended();
+    emit this->countChanged();
 }
 
 const FMH::MODEL_LIST &Notes::items() const
@@ -86,6 +87,8 @@ bool Notes::remove(const int &index)
     emit this->preItemRemoved(index);
     this->syncer->removeNote(this->notes.takeAt(index).value(FMH::MODEL_KEY::ID));
     emit this->postItemRemoved();
+    emit this->countChanged();
+
     return true;
 }
 
