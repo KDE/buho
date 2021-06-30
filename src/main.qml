@@ -25,12 +25,21 @@ Maui.ApplicationWindow
     altHeader: Kirigami.Settings.isMobile
     headBar.visible: !notesView.editing
 
-    mainMenu: Action
-    {
-        text: i18n("Settings")
-        icon.name: "settings-configure"
-        onTriggered: _settingsDialog.open()
-    }
+    mainMenu: [
+        MenuItem
+        {
+            text: i18n("Settings")
+            icon.name: "settings-configure"
+            onTriggered: _settingsDialog.open()
+        },
+
+        MenuItem
+        {
+            text: i18n("About")
+            icon.name: "documentinfo"
+            onTriggered: root.about()
+        }
+    ]
 
     /***** COMPONENTS *****/
     Settings
