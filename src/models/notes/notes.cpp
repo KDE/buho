@@ -18,6 +18,8 @@ Notes::Notes(QObject *parent)
     this->syncer->setProvider(new NextNote); // Syncer takes ownership of NextNote or the provider
 
     connect(syncer, &NotesSyncer::noteInserted, [&](FMH::MODEL note, STATE state) {
+
+      qDebug() << "Insertint new note" << note;
         if (state.type == STATE::TYPE::LOCAL)
             this->appendNote(note);
     });

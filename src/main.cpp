@@ -23,7 +23,7 @@
 
 #define BUHO_URI "org.maui.buho"
 
-void setFolders()
+static void setFolders()
 {
     QDir notes_path(OWL::NotesPath.toLocalFile());
     if (!notes_path.exists())
@@ -44,6 +44,8 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
 #else
     QApplication app(argc, argv);
 #endif
+
+    setFolders ();
 
     app.setOrganizationName(QStringLiteral("Maui"));
     app.setWindowIcon(QIcon(":/buho.png"));

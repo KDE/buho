@@ -2,8 +2,10 @@ import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
-import org.mauikit.controls 1.3 as Maui
 import org.kde.kirigami 2.7 as Kirigami
+
+import org.mauikit.controls 1.3 as Maui
+import org.mauikit.accounts 1.0 as MA
 
 import org.maui.buho 1.0
 
@@ -91,6 +93,7 @@ StackView
         gridView.cellHeight: gridView.itemSize + Maui.Style.rowHeight
 
         floatingFooter: true
+        altHeader: Kirigami.Settings.isMobile
 
         holder.visible: notesList.count < 1
         holder.emoji: "qrc:/view-notes.svg"
@@ -98,7 +101,41 @@ StackView
         holder.title :i18n("No notes!")
         holder.body: i18n("Click here to create a new note")
 
-        headBar.visible: false
+        headBar.rightContent: ToolButton
+        {
+            icon.name: "list-add"
+            onClicked: control.newNote()
+        }
+
+        headBar.middleContent: Maui.TextField
+        {
+            Layout.fillWidth: true
+            Layout.maximumWidth: 500
+            placeholderText: i18n("Search ") + control.list.count + " " + i18n("notes")
+            onAccepted: control.model.filter = text
+            onCleared: control.model.filter = ""
+        }
+
+        headBar.leftContent: Maui.ToolButtonMenu
+        {
+            icon.name: "application-menu"
+
+            MA.AccountsMenuItem{}
+
+            MenuItem
+            {
+                text: i18n("Settings")
+                icon.name: "settings-configure"
+                onTriggered: _settingsDialog.open()
+            }
+
+            MenuItem
+            {
+                text: i18n("About")
+                icon.name: "documentinfo"
+                onTriggered: root.about()
+            }
+        }
 
         enableLassoSelection: true
 

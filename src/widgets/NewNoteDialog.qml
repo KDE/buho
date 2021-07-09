@@ -36,9 +36,9 @@ Maui.Page
 
         footBar.visible: false
 
-//body.cursorPosition : body.text.length
-//        autoHideHeader: true
-//        autoHideHeaderMargins: control.height * 0.3
+        //body.cursorPosition : body.text.length
+        //        autoHideHeader: true
+        //        autoHideHeaderMargins: control.height * 0.3
 
         Kirigami.Theme.backgroundColor: control.backgroundColor !== "transparent" ? control.backgroundColor : Kirigami.Theme.backgroundColor
         Kirigami.Theme.textColor: control.backgroundColor  !== "transparent" ? Qt.darker(control.backgroundColor, 2) : control.Kirigami.Theme.textColor
@@ -64,6 +64,31 @@ Maui.Page
             }
         }
 
+        headBar.leftContent: [
+            Maui.ToolActions
+            {
+                expanded: true
+                autoExclusive: false
+                checkable: false
+
+                Action
+                {
+                    icon.name: "edit-undo"
+                    enabled: editor.body.canUndo
+                    onTriggered: editor.body.undo()
+                }
+
+                Action
+                {
+                    icon.name: "edit-redo"
+                    enabled: editor.body.canRedo
+                    onTriggered: editor.body.redo()
+                }
+            }
+
+
+        ]
+
         headBar.rightContent: [
 
             ToolButton
@@ -81,7 +106,7 @@ Maui.Page
                 icon.name: "document-share"
 
                 onClicked: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
-                                                    shareDialog.show(editor.body.text)
+                                                  shareDialog.show(editor.body.text)
             },
 
             ToolButton
@@ -98,7 +123,7 @@ Maui.Page
             function onFileSaved()
             {
                 console.log("NOTE SAVED")
-//                control.noteSaved(packNote())
+                //                control.noteSaved(packNote())
             }
         }
     }
@@ -134,7 +159,7 @@ Maui.Page
         const content =  editor.body.text
         if(content.length > 0)
         {
-             note  = {
+            note  = {
                 url: editor.fileUrl,
                 content: content,
                 favorite: favButton.checked ? 1 : 0,

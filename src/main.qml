@@ -15,33 +15,12 @@ Maui.ApplicationWindow
 {
     id: root
     title: i18n("Buho")
+    headBar.visible: false
 
     readonly property font defaultFont:
     {
         family: "Noto Sans Mono"
         pointSize: Maui.Style.fontSizes.huge
-    }
-
-    altHeader: Kirigami.Settings.isMobile
-    headBar.visible: !notesView.editing
-
-    headBar.leftContent: Maui.ToolButtonMenu
-    {
-        icon.name: "application-menu"
-
-        MenuItem
-        {
-            text: i18n("Settings")
-            icon.name: "settings-configure"
-            onTriggered: _settingsDialog.open()
-        }
-
-        MenuItem
-        {
-            text: i18n("About")
-            icon.name: "documentinfo"
-            onTriggered: root.about()
-        }
     }
 
     /***** COMPONENTS *****/
@@ -65,20 +44,6 @@ Maui.ApplicationWindow
         id: _settingsDialog
     }
 
-    headBar.rightContent: ToolButton
-    {
-        icon.name: "list-add"
-        onClicked: notesView.newNote()
-    }
-
-    headBar.middleContent: Maui.TextField
-    {
-        Layout.fillWidth: true
-        Layout.maximumWidth: 500
-        placeholderText: i18n("Search ") + notesView.list.count + " " + i18n("notes")
-        onAccepted: notesView.model.filter = text
-        onCleared: notesView.model.filter = ""
-    }
 
     NotesView
     {
