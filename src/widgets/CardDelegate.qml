@@ -50,6 +50,7 @@ Maui.ItemDelegate
 
     Maui.Holder
     {
+anchors.fill: parent
         visible: !title.visible
         title: i18n("Empty")
         body: i18n("Edit this note")
