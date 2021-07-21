@@ -1,10 +1,11 @@
 import QtQuick 2.14
-import QtQuick.Controls 2.14
 import QtQml 2.14
+
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.mauikit.controls 1.2 as Maui
+import org.mauikit.controls 1.3 as Maui
 
 Maui.SettingsDialog
 {
@@ -61,7 +62,7 @@ Maui.SettingsDialog
         {
             label1.text:  i18n("Family")
 
-            ComboBox
+            Maui.ComboBox
             {
                 Layout.fillWidth: true
                 model: Qt.fontFamilies()
