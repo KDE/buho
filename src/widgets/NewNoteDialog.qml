@@ -13,6 +13,9 @@ Maui.Page
     id: control
 
     property alias editor: _editor
+    property alias body : _editor.body
+    property alias document : _editor.document
+
     property string backgroundColor: note.color ? note.color : "transparent"
     property bool showEditActions : false
     property var note : ({})
@@ -33,12 +36,6 @@ Maui.Page
         document.autoSave: settings.autoSave
 
         body.font: settings.font
-
-        footBar.visible: false
-
-        //body.cursorPosition : body.text.length
-        //        autoHideHeader: true
-        //        autoHideHeaderMargins: control.height * 0.3
 
         Kirigami.Theme.backgroundColor: control.backgroundColor !== "transparent" ? control.backgroundColor : Kirigami.Theme.backgroundColor
         Kirigami.Theme.textColor: control.backgroundColor  !== "transparent" ? Qt.darker(control.backgroundColor, 2) : control.Kirigami.Theme.textColor
@@ -64,7 +61,9 @@ Maui.Page
             }
         }
 
+        headBar.visible: !body.readOnly
         headBar.leftContent: [
+
             Maui.ToolActions
             {
                 expanded: true
@@ -74,19 +73,53 @@ Maui.Page
                 Action
                 {
                     icon.name: "edit-undo"
-                    enabled: editor.body.canUndo
-                    onTriggered: editor.body.undo()
+                    enabled: body.canUndo
+                    onTriggered: body.undo()
                 }
 
                 Action
                 {
                     icon.name: "edit-redo"
-                    enabled: editor.body.canRedo
-                    onTriggered: editor.body.redo()
+                    enabled: body.canRedo
+                    onTriggered: body.redo()
+                }
+            },
+
+            Maui.ToolActions
+            {
+                visible: (document.isRich || body.textFormat === Text.RichText) && !body.readOnly
+                expanded: true
+                autoExclusive: false
+                checkable: false
+
+                Action
+                {
+                    icon.name: "format-text-bold"
+                    checked: document.bold
+                    onTriggered: document.bold = !document.bold
+                }
+
+                Action
+                {
+                    icon.name: "format-text-italic"
+                    checked: document.italic
+                    onTriggered: document.italic = !document.italic
+                }
+
+                Action
+                {
+                    icon.name: "format-text-underline"
+                    checked: document.underline
+                    onTriggered: document.underline = !document.underline
+                }
+
+                Action
+                {
+                    icon.name: "format-text-uppercase"
+                    checked: document.uppercase
+                    onTriggered: document.uppercase = !document.uppercase
                 }
             }
-
-
         ]
 
         headBar.rightContent: [
@@ -106,14 +139,48 @@ Maui.Page
                 icon.name: "document-share"
 
                 onClicked: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
-                                                  shareDialog.show(editor.body.text)
+                                                  Maui.Platform.shareFiles(editor.fileUrl)
             },
 
-            ToolButton
+
+            Maui.ToolButtonMenu
             {
-                icon.name: "edit-find"
-                checked: editor.showFindBar
-                onClicked: editor.showFindBar = !editor.showFindBar
+                icon.name: "overflow-menu"
+
+                MenuItem
+                {
+                    ColorsBar
+                    {
+                        anchors.centerIn: parent
+                        onColorPicked:
+                        {
+                            control.backgroundColor = color
+                        }
+
+                        currentColor: control.backgroundColor
+                    }
+                }
+
+                MenuItem
+                {
+                    icon.name: "edit-find"
+                    text: i18n("Find and Replace")
+                    checked: editor.showFindBar
+                    checkable: true
+                    onTriggered: editor.showFindBar = !editor.showFindBar
+                }
+
+                MenuSeparator {}
+
+                MenuItem
+                {
+                    text: i18n("Delete")
+                    icon.name: "entry-delete"
+                    Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+                    onTriggered: {}
+                }
+
+
             }
         ]
 
@@ -128,24 +195,7 @@ Maui.Page
         }
     }
 
-    footBar.rightContent: ColorsBar
-    {
-        onColorPicked:
-        {
-            control.backgroundColor = color
-        }
 
-        currentColor: control.backgroundColor
-    }
-
-    footBar.leftContent: [
-        ToolButton
-        {
-            text: i18n("Delete")
-            icon.name: "entry-delete"
-            Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
-        }
-    ]
 
     function clear()
     {
