@@ -17,11 +17,8 @@ Maui.ApplicationWindow
     title: i18n("Buho")
     headBar.visible: false
 
-    readonly property font defaultFont:
-    {
-        family: "Noto Sans Mono"
-        pointSize: Maui.Style.fontSizes.huge
-    }
+    property font defaultFont : Qt.font({family: "Noto Sans Mono", pointSize: Maui.Style.fontSizes.huge})
+
 
     /***** COMPONENTS *****/
     Settings
