@@ -62,12 +62,12 @@ endif()
 
 if (ANDROID)
     find_package(OpenSSL REQUIRED)
-    target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras OpenSSL::SSL)
+    target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras OpenSSL::SSL Qt5::QuickControls2)
 elseif(UNIX)
-    target_link_libraries(${PROJECT_NAME} KF5::ConfigCore KF5::KIOCore KF5::KIOFileWidgets)
+    target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
 endif()
 
-target_link_libraries(${PROJECT_NAME} MauiKit MauiKit::FileBrowsing MauiKit::Accounts #[[tesseract]] Qt5::Sql Qt5::Quick Qt5::QuickControls2 Qt5::Qml Qt5::Network KF5::CoreAddons KF5::I18n)
+target_link_libraries(${PROJECT_NAME} MauiKit MauiKit::FileBrowsing MauiKit::Accounts #[[tesseract]] Qt5::Sql Qt5::Quick Qt5::Qml Qt5::Network KF5::CoreAddons KF5::I18n)
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(TARGETS buho ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
