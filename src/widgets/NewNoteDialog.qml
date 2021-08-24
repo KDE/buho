@@ -16,7 +16,7 @@ Maui.Page
     property alias body : _editor.body
     property alias document : _editor.document
 
-    property string backgroundColor: note.color ? note.color : "transparent"
+    readonly property string backgroundColor: note.color
     property bool showEditActions : false
     property var note : ({})
     property int noteIndex : -1
@@ -37,27 +37,32 @@ Maui.Page
 
         body.font: settings.font
 
-        Kirigami.Theme.backgroundColor: control.backgroundColor !== "transparent" ? control.backgroundColor : Kirigami.Theme.backgroundColor
-        Kirigami.Theme.textColor: control.backgroundColor  !== "transparent" ? Qt.darker(control.backgroundColor, 2) : control.Kirigami.Theme.textColor
-
         document.enableSyntaxHighlighting: false
         body.placeholderText: i18n("Title\nBody")
 
+//        headBar.farLeftContent: ToolButton
+//        {
+//            icon.name: "go-previous"
+//            onClicked:
+//            {
+//                console.log(_editor.document.fileUrl, "File Url")
+//                if(FB.FM.fileExists(_editor.document.fileUrl))
+//                {
+//                    _editor.document.saveAs(_editor.document.fileUrl)
+//                }
+
+//                control.noteSaved(packNote(), control.noteIndex)
+
+//                control.clear()
+//                control.parent.pop(StackView.Immediate)
+//            }
+//        }
         headBar.farLeftContent: ToolButton
         {
-            icon.name: "go-previous"
+            icon.name: "sidebar-collapse"
             onClicked:
             {
-                console.log(_editor.document.fileUrl, "File Url")
-                if(FB.FM.fileExists(_editor.document.fileUrl))
-                {
-                    _editor.document.saveAs(_editor.document.fileUrl)
-                }
-
-                control.noteSaved(packNote(), control.noteIndex)
-
-                control.clear()
-                control.parent.pop(StackView.Immediate)
+               _sidebar.toggle()
             }
         }
 
@@ -190,12 +195,10 @@ Maui.Page
             function onFileSaved()
             {
                 console.log("NOTE SAVED")
-                //                control.noteSaved(packNote())
+                control.noteSaved(packNote(), control.noteIndex)
             }
         }
     }
-
-
 
     function clear()
     {
@@ -224,4 +227,5 @@ Maui.Page
 
         return note
     }
+
 }

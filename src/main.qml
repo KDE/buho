@@ -5,6 +5,7 @@ import Qt.labs.settings 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.mauikit.controls 1.3 as Maui
+import org.mauikit.filebrowsing 1.3 as FB
 
 import org.maui.buho 1.0 as Buho
 
@@ -41,11 +42,47 @@ Maui.ApplicationWindow
         id: _settingsDialog
     }
 
-
-    NotesView
+    sideBar: Maui.SideBar
     {
-        id: notesView
+        id: _sidebar
+        collapsible: true
+        collapsed : root.width < preferredWidth * 2
+        preferredWidth: Kirigami.Units.gridUnit * 22
+
+        NotesView
+        {
+            id: notesView
+            anchors.fill: parent
+        }
+    }
+
+    NewNoteDialog
+    {
+        id: editorView
         anchors.fill: parent
+
+        onNoteSaved:
+        {
+            if(!FB.FM.fileExists(editorView.document.fileUrl))
+            {
+                notesView.saveNote(note)
+            }else
+            {
+                notesView.updateNote(note, noteIndex)
+            }
+        }
+
+        function setNote(note)
+        {
+            editorView.note = note
+            editorView.editor.body.forceActiveFocus()
+            editorView.noteIndex = notesView.currentIndex
+        }
+
+        function newNote()
+        {
+            control.currentItem.editor.body.forceActiveFocus()
+        }
     }
 
     Component.onCompleted:

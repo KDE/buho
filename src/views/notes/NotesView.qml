@@ -11,10 +11,12 @@ import org.maui.buho 1.0
 
 import "../../widgets"
 
-StackView
+Maui.Page
 {
     id: control
-    property var currentNote : ({})
+
+    floatingFooter: true
+    altHeader: Kirigami.Settings.isMobile
 
     property alias cardsView : cardsView
 
@@ -23,46 +25,44 @@ StackView
 
     property alias currentIndex : cardsView.currentIndex
 
-    readonly property Flickable flickable : currentItem.flickable
+ flickable : cardsView.flickable
 
-    readonly property bool editing : control.depth > 1
-
-    function setNote(note)
+    headBar.rightContent: ToolButton
     {
-        control.push(_editNoteComponent, {}, StackView.Immediate)
-        control.currentItem.editor.body.forceActiveFocus()
-        control.currentItem.noteIndex = control.currentIndex
+        icon.name: "list-add"
+        onClicked: control.newNote()
     }
 
-    function newNote()
+    headBar.middleContent: Maui.TextField
     {
-        control.push(_newNoteComponent, {}, StackView.Immediate)
-        control.currentItem.editor.body.forceActiveFocus()
+        Layout.fillWidth: true
+        Layout.maximumWidth: 500
+        placeholderText: i18n("Search ") + control.list.count + " " + i18n("notes")
+        onAccepted: control.model.filter = text
+        onCleared: control.model.filter = ""
     }
 
-    Component
+    headBar.leftContent: Maui.ToolButtonMenu
     {
-        id: _editNoteComponent
+        icon.name: "application-menu"
 
-        NewNoteDialog
+        MA.AccountsMenuItem{}
+
+        MenuItem
         {
-            note: control.currentNote
-            onNoteSaved:
-            {
-                console.log("updating note <<" , note , control.currentIndex , noteIndex, notesModel.mappedToSource(noteIndex))
-                control.list.update(note, notesModel.mappedToSource(noteIndex))
-            }
+            text: i18n("Settings")
+            icon.name: "settings-configure"
+            onTriggered: _settingsDialog.open()
+        }
+
+        MenuItem
+        {
+            text: i18n("About")
+            icon.name: "documentinfo"
+            onTriggered: root.about()
         }
     }
 
-    Component
-    {
-        id: _newNoteComponent
-        NewNoteDialog
-        {
-            onNoteSaved: control.list.insert(note)
-        }
-    }
 
     Maui.Dialog
     {
@@ -86,14 +86,10 @@ StackView
 
     }
 
-    initialItem: Maui.AltBrowser
+   Maui.ListBrowser
     {
         id: cardsView
-        gridView.itemSize: Math.min(300, control.width* 0.4)
-        gridView.cellHeight: gridView.itemSize + Maui.Style.rowHeight
-
-        floatingFooter: true
-        altHeader: Kirigami.Settings.isMobile
+        anchors.fill: parent
 
         holder.visible: notesList.count < 1
         holder.emoji: "qrc:/view-notes.svg"
@@ -101,45 +97,8 @@ StackView
         holder.title :i18n("No notes!")
         holder.body: i18n("Click here to create a new note")
 
-        headBar.rightContent: ToolButton
-        {
-            icon.name: "list-add"
-            onClicked: control.newNote()
-        }
-
-        headBar.middleContent: Maui.TextField
-        {
-            Layout.fillWidth: true
-            Layout.maximumWidth: 500
-            placeholderText: i18n("Search ") + control.list.count + " " + i18n("notes")
-            onAccepted: control.model.filter = text
-            onCleared: control.model.filter = ""
-        }
-
-        headBar.leftContent: Maui.ToolButtonMenu
-        {
-            icon.name: "application-menu"
-
-            MA.AccountsMenuItem{}
-
-            MenuItem
-            {
-                text: i18n("Settings")
-                icon.name: "settings-configure"
-                onTriggered: _settingsDialog.open()
-            }
-
-            MenuItem
-            {
-                text: i18n("About")
-                icon.name: "documentinfo"
-                onTriggered: root.about()
-            }
-        }
-
         enableLassoSelection: true
 
-        viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
         property string typingQuery
 
@@ -202,8 +161,7 @@ StackView
 
                 if(event.key === Qt.Key_Return)
                 {
-                    currentNote = item
-                    setNote()
+                    editorView.setNote(item)
                 }
             }
         }
@@ -222,80 +180,8 @@ StackView
             filterCaseSensitivity: Qt.CaseInsensitive
         }
 
-        footer: Maui.SelectionBar
-        {
-            id: _selectionbar
-            visible: count > 0
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-            padding: Maui.Style.space.big
-            maxListHeight: control.height - Maui.Style.space.medium
 
-            onExitClicked:
-            {
-                cardsView.selectionMode = false
-                clear()
-            }
-
-            listDelegate: Maui.ListBrowserDelegate
-            {
-                height: Maui.Style.rowHeight * 2
-                width: ListView.view.width
-
-                background: Rectangle
-                {
-                    color: model.color ? model.color : "transparent"
-                    radius:Maui.Style.radiusV
-                }
-
-                label1.text: model.title
-                template.iconVisible: false
-                iconSource: "view-pim-notes"
-                checkable: true
-                checked: true
-                onToggled: _selectionbar.removeAtIndex(index)
-            }
-
-            Action
-            {
-                text: i18n("Favorite")
-                icon.name: "love"
-                onTriggered:
-                {
-                    for(var item of _selectionbar.items)
-                        notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), notesModel.mappedToSource(notesList.indexOfNote(item.path)))
-
-                    _selectionbar.clear()
-                }
-            }
-
-            Action
-            {
-                text: i18n("Share")
-                icon.name: "document-share"
-            }
-
-            Action
-            {
-                text: i18n("Export")
-                icon.name: "document-export"
-            }
-
-            Action
-            {
-                text: i18n("Delete")
-                Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
-                icon.name: "edit-delete"
-
-                onTriggered:
-                {
-                    _removeNotesDialog.notes = _selectionbar.uris
-                    _removeNotesDialog.open()
-                }
-            }
-        }
-
-        listDelegate: CardDelegate
+         delegate: CardDelegate
         {
             id: _listDelegate
             width: ListView.view.width
@@ -313,8 +199,7 @@ StackView
                     cardsView.currentView.itemsSelected([index])
                 }else if(Maui.Handy.singleClick)
                 {
-                    currentNote = notesModel.get(index)
-                    setNote()
+                    editorView.setNote(notesModel.get(index))
                 }
             }
 
@@ -323,22 +208,19 @@ StackView
                 control.currentIndex = index
                 if(!Maui.Handy.singleClick && !cardsView.selectionMode)
                 {
-                    currentNote = notesModel.get(index)
-                    setNote()
+                    editorView.setNote(notesModel.get(index))
                 }
             }
 
             onRightClicked:
             {
                 currentIndex = index
-                currentNote = notesModel.get(index)
                 _notesMenu.show()
             }
 
             onPressAndHold:
             {
                 currentIndex = index
-                currentNote = notesModel.get(index)
                 _notesMenu.show()
             }
 
@@ -376,97 +258,6 @@ StackView
             }
         }
 
-        gridDelegate: Item
-        {
-            id: delegate
-            width: cardsView.gridView.cellWidth
-            height: cardsView.gridView.cellHeight
-
-            property bool isCurrentItem: GridView.isCurrentItem
-
-            CardDelegate
-            {
-                id: _gridDelegate
-                anchors.fill: parent
-                anchors.margins: Maui.Style.space.medium
-                checkable: cardsView.selectionMode
-                checked: _selectionbar.contains(model.path)
-                isCurrentItem: parent.isCurrentItem
-
-                onClicked:
-                {
-                    currentIndex = index
-console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model.url))
-
-                    if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
-                    {
-                        cardsView.currentView.itemsSelected([index])
-                    }else if(Maui.Handy.singleClick)
-                    {
-                        currentNote = notesModel.get(index)
-                        setNote()
-                    }
-                }
-
-                onDoubleClicked:
-                {
-                    control.currentIndex = index
-                    if(!Maui.Handy.singleClick && !cardsView.selectionMode)
-                    {
-                        currentNote = notesModel.get(index)
-                        setNote()
-                    }
-                }
-
-                onRightClicked:
-                {
-                    currentIndex = index
-                    currentNote = notesModel.get(index)
-                    _notesMenu.show()
-                }
-
-                onPressAndHold:
-                {
-                    currentIndex = index
-                    currentNote = notesModel.get(index)
-                    _notesMenu.show()
-                }
-
-                onToggled:
-                {
-                    currentIndex = index
-                    select(notesModel.get(index))
-                }
-            }
-
-            Connections
-            {
-                target: _selectionbar
-                ignoreUnknownSignals: true
-
-                function onUriRemoved(uri)
-                {
-                    if(uri === model.url)
-                    {
-                        _gridDelegate.checked = false
-                    }
-                }
-
-                function onUriAdded(uri)
-                {
-                    if(uri === model.url)
-                    {
-                        _gridDelegate.checked = true
-                    }
-                }
-
-                function onCleared()
-                {
-                    _gridDelegate.checked = false
-                }
-            }
-        }
-
         Connections
         {
             target: cardsView.holder
@@ -480,6 +271,7 @@ console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model
         {
             id: _notesMenu
 
+            property var currentNote : notesModel.get(control.currentIndex)
             property bool isFav: currentNote.favorite == 1
 
             MenuItem
@@ -566,6 +358,79 @@ console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model
     }
 
 
+   footer: Maui.SelectionBar
+   {
+       id: _selectionbar
+       visible: count > 0
+       anchors.horizontalCenter: parent.horizontalCenter
+       width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+       padding: Maui.Style.space.big
+       maxListHeight: control.height - Maui.Style.space.medium
+
+       onExitClicked:
+       {
+           cardsView.selectionMode = false
+           clear()
+       }
+
+       listDelegate: Maui.ListBrowserDelegate
+       {
+           height: Maui.Style.rowHeight * 2
+           width: ListView.view.width
+
+           background: Rectangle
+           {
+               color: model.color ? model.color : "transparent"
+               radius:Maui.Style.radiusV
+           }
+
+           label1.text: model.title
+           template.iconVisible: false
+           iconSource: "view-pim-notes"
+           checkable: true
+           checked: true
+           onToggled: _selectionbar.removeAtIndex(index)
+       }
+
+       Action
+       {
+           text: i18n("Favorite")
+           icon.name: "love"
+           onTriggered:
+           {
+               for(var item of _selectionbar.items)
+                   notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), notesModel.mappedToSource(notesList.indexOfNote(item.path)))
+
+               _selectionbar.clear()
+           }
+       }
+
+       Action
+       {
+           text: i18n("Share")
+           icon.name: "document-share"
+       }
+
+       Action
+       {
+           text: i18n("Export")
+           icon.name: "document-export"
+       }
+
+       Action
+       {
+           text: i18n("Delete")
+           Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+           icon.name: "edit-delete"
+
+           onTriggered:
+           {
+               _removeNotesDialog.notes = _selectionbar.uris
+               _removeNotesDialog.open()
+           }
+       }
+   }
+
     function select(item)
     {
         if(_selectionbar.contains(item.path))
@@ -576,6 +441,18 @@ console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model
             _selectionbar.append(item.path, item)
 
         }
+    }    
+
+    function updateNote(note, index)
+    {
+        control.list.update(note, notesModel.mappedToSource(index))
+        control.currentIndex = 0
+    }
+
+    function saveNote(note)
+    {
+        control.list.insert(note)
+        control.currentIndex = 0
     }
 }
 
