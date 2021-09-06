@@ -90,12 +90,12 @@ StackView
     {
         id: cardsView
         gridView.itemSize: Math.min(300, control.width* 0.4)
-        gridView.cellHeight: gridView.itemSize + Maui.Style.rowHeight
+        gridView.cellHeight: 180
 
         floatingFooter: true
         altHeader: Kirigami.Settings.isMobile
 
-        holder.visible: notesList.count < 1
+        holder.visible: notesList.count === 0 || cardsView.count === 0
         holder.emoji: "qrc:/view-notes.svg"
         holder.emojiSize: Maui.Style.iconSizes.huge
         holder.title :i18n("No notes!")
@@ -230,6 +230,7 @@ StackView
             width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
             padding: Maui.Style.space.big
             maxListHeight: control.height - Maui.Style.space.medium
+            display: ToolButton.IconOnly
 
             onExitClicked:
             {
@@ -239,7 +240,7 @@ StackView
 
             listDelegate: Maui.ListBrowserDelegate
             {
-                height: Maui.Style.rowHeight * 2
+                height: Maui.Style.rowHeight
                 width: ListView.view.width
 
                 background: Rectangle
@@ -299,7 +300,7 @@ StackView
         {
             id: _listDelegate
             width: ListView.view.width
-            height: 150
+            height: cardsView.gridView.cellHeight
             checkable: cardsView.selectionMode
             checked: _selectionbar.contains(model.path)
             isCurrentItem: ListView.isCurrentItem
@@ -545,7 +546,7 @@ console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model
 
             MenuSeparator { }
 
-            MenuItem
+            Item
             {
                 width: parent.width
                 height: Maui.Style.rowHeight

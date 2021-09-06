@@ -33,9 +33,7 @@ static void setFolders()
 int Q_DECL_EXPORT main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QCoreApplication::setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-    QCoreApplication::setAttribute(Qt::AA_DisableSessionManager, true);
 
 #ifdef Q_OS_ANDROID
     QGuiApplication app(argc, argv);
@@ -64,9 +62,10 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     KAboutData::setApplicationData(about);
 
     QCommandLineParser parser;
-    parser.process(app);
 
     about.setupCommandLine(&parser);
+    parser.process(app);
+
     about.processCommandLine(&parser);
 
     QQmlApplicationEngine engine;

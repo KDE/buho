@@ -32,7 +32,8 @@ void NotesSyncer::insertNote(FMH::MODEL &note)
 
 void NotesSyncer::updateNote(QString id, FMH::MODEL &note)
 {
-    if (!this->m_notesController->updateNote(note, id)) {
+    if (!this->m_notesController->updateNote(note, id))
+    {
         qWarning() << "The note could not be updated locally, "
                       "therefore it was not attempted to update it on the remote server provider, "
                       "even if it existed.";

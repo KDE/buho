@@ -73,7 +73,13 @@ bool Notes::update(const QVariantMap &data, const int &index)
     if (index < 0 || index >= this->notes.size())
         return false;
 
+
     auto note = this->notes[index];
+//    if(note[FMH::MODEL_KEY::CONTENT] == data.value("content").toString())
+//    {
+//        return false;
+//    }
+
     qDebug() << "UDPATE MODEL ITEM AT "<< index << note[FMH::MODEL_KEY::TITLE];
 
     note.insert(FMH::toModel(data));
