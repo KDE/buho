@@ -25,14 +25,9 @@ Maui.Page
 
     property alias currentIndex : cardsView.currentIndex
 
- flickable : cardsView.flickable
+    flickable : cardsView.flickable
 
-    headBar.rightContent: ToolButton
-    {
-        icon.name: "list-add"
-        onClicked: control.newNote()
-    }
-
+    headBar.forceCenterMiddleContent: false
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
@@ -86,7 +81,7 @@ Maui.Page
 
     }
 
-   Maui.ListBrowser
+    Maui.ListBrowser
     {
         id: cardsView
         anchors.fill: parent
@@ -99,36 +94,35 @@ Maui.Page
 
         enableLassoSelection: true
 
-
         property string typingQuery
 
-         Maui.Chip
-         {
-             z: cardsView.z + 99999
-             Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
-             visible: _typingTimer.running
-             label.text: cardsView.typingQuery
-             anchors.left: parent.left
-             anchors.bottom: parent.bottom
-             showCloseButton: false
-             anchors.margins: Maui.Style.space.medium
-         }
+        Maui.Chip
+        {
+            z: cardsView.z + 99999
+            Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
+            visible: _typingTimer.running
+            label.text: cardsView.typingQuery
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            showCloseButton: false
+            anchors.margins: Maui.Style.space.medium
+        }
 
-         Timer
-         {
-             id: _typingTimer
-             interval: 250
-             onTriggered:
-             {
-                 const index = notesList.indexOfName(cardsView.typingQuery)
-                 if(index > -1)
-                 {
-                     control.currentIndex = notesModel.mappedFromSource(index)
-                 }
+        Timer
+        {
+            id: _typingTimer
+            interval: 250
+            onTriggered:
+            {
+                const index = notesList.indexOfName(cardsView.typingQuery)
+                if(index > -1)
+                {
+                    control.currentIndex = notesModel.mappedFromSource(index)
+                }
 
-                 cardsView.typingQuery = ""
-             }
-         }
+                cardsView.typingQuery = ""
+            }
+        }
 
         Connections
         {
@@ -180,8 +174,7 @@ Maui.Page
             filterCaseSensitivity: Qt.CaseInsensitive
         }
 
-
-         delegate: CardDelegate
+        delegate: CardDelegate
         {
             id: _listDelegate
             width: ListView.view.width
@@ -285,7 +278,7 @@ Maui.Page
                         cardsView.selectionMode = true
                     }
 
-                    cardsView.currentView.itemsSelected([cardsView.currentIndex])
+                    cardsView.itemsSelected([cardsView.currentIndex])
                 }
             }
 
@@ -316,7 +309,7 @@ Maui.Page
                 text: i18n("Copy")
                 onTriggered:
                 {
-                    Maui.Handy.copyToClipboard({'text': currentNote.content})
+                    Maui.Handy.copyToClipboard({'text': _notesMenu.currentNote.content})
                     _notesMenu.close()
                 }
             }
@@ -337,7 +330,7 @@ Maui.Page
 
             MenuSeparator { }
 
-            MenuItem
+            Item
             {
                 width: parent.width
                 height: Maui.Style.rowHeight
@@ -346,7 +339,7 @@ Maui.Page
                 {
                     id: colorBar
                     anchors.centerIn: parent
-                    currentColor: currentNote.color
+                    currentColor: _notesMenu.currentNote.color
                     onColorPicked:
                     {
                         notesList.update(({"color": color}), notesModel.mappedToSource(cardsView.currentIndex))
@@ -357,79 +350,72 @@ Maui.Page
         }
     }
 
+    footer: Maui.SelectionBar
+    {
+        id: _selectionbar
+        visible: count > 0
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+        padding: Maui.Style.space.big
+        maxListHeight: control.height - Maui.Style.space.medium
+        display: ToolButton.IconOnly
+        onExitClicked:
+        {
+            cardsView.selectionMode = false
+            clear()
+        }
 
-   footer: Maui.SelectionBar
-   {
-       id: _selectionbar
-       visible: count > 0
-       anchors.horizontalCenter: parent.horizontalCenter
-       width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-       padding: Maui.Style.space.big
-       maxListHeight: control.height - Maui.Style.space.medium
+        listDelegate: Maui.ListBrowserDelegate
+        {
+            height: Maui.Style.rowHeight * 2
+            width: ListView.view.width
 
-       onExitClicked:
-       {
-           cardsView.selectionMode = false
-           clear()
-       }
+            background: Rectangle
+            {
+                color: model.color ? model.color : "transparent"
+                radius:Maui.Style.radiusV
+            }
 
-       listDelegate: Maui.ListBrowserDelegate
-       {
-           height: Maui.Style.rowHeight * 2
-           width: ListView.view.width
+            label1.text: model.title
+            template.iconVisible: false
+            iconSource: "view-pim-notes"
+            checkable: true
+            checked: true
+            onToggled: _selectionbar.removeAtIndex(index)
+        }
 
-           background: Rectangle
-           {
-               color: model.color ? model.color : "transparent"
-               radius:Maui.Style.radiusV
-           }
+        Action
+        {
+            text: i18n("Favorite")
+            icon.name: "love"
+            onTriggered:
+            {
+                for(var item of _selectionbar.items)
+                    notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), notesModel.mappedToSource(notesList.indexOfNote(item.path)))
 
-           label1.text: model.title
-           template.iconVisible: false
-           iconSource: "view-pim-notes"
-           checkable: true
-           checked: true
-           onToggled: _selectionbar.removeAtIndex(index)
-       }
+                _selectionbar.clear()
+            }
+        }
 
-       Action
-       {
-           text: i18n("Favorite")
-           icon.name: "love"
-           onTriggered:
-           {
-               for(var item of _selectionbar.items)
-                   notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), notesModel.mappedToSource(notesList.indexOfNote(item.path)))
+        Action
+        {
+            text: i18n("Share")
+            icon.name: "document-share"
+        }
 
-               _selectionbar.clear()
-           }
-       }
+        Action
+        {
+            text: i18n("Delete")
+            Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+            icon.name: "edit-delete"
 
-       Action
-       {
-           text: i18n("Share")
-           icon.name: "document-share"
-       }
-
-       Action
-       {
-           text: i18n("Export")
-           icon.name: "document-export"
-       }
-
-       Action
-       {
-           text: i18n("Delete")
-           Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
-           icon.name: "edit-delete"
-
-           onTriggered:
-           {
-               _removeNotesDialog.notes = _selectionbar.uris
-               _removeNotesDialog.open()
-           }
-       }
-   }
+            onTriggered:
+            {
+                _removeNotesDialog.notes = _selectionbar.uris
+                _removeNotesDialog.open()
+            }
+        }
+    }
 
     function select(item)
     {
@@ -441,7 +427,7 @@ Maui.Page
             _selectionbar.append(item.path, item)
 
         }
-    }    
+    }
 
     function updateNote(note, index)
     {

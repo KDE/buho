@@ -23,8 +23,6 @@ Maui.Page
 
     signal noteSaved(var note, int noteIndex)
 
-    headBar.visible: false
-
     TE.TextEditor
     {
         id: _editor
@@ -40,33 +38,108 @@ Maui.Page
         document.enableSyntaxHighlighting: false
         body.placeholderText: i18n("Title\nBody")
 
-//        headBar.farLeftContent: ToolButton
-//        {
-//            icon.name: "go-previous"
-//            onClicked:
-//            {
-//                console.log(_editor.document.fileUrl, "File Url")
-//                if(FB.FM.fileExists(_editor.document.fileUrl))
-//                {
-//                    _editor.document.saveAs(_editor.document.fileUrl)
-//                }
+        //        headBar.farLeftContent: ToolButton
+        //        {
+        //            icon.name: "go-previous"
+        //            onClicked:
+        //            {
+        //                console.log(_editor.document.fileUrl, "File Url")
+        //                if(FB.FM.fileExists(_editor.document.fileUrl))
+        //                {
+        //                    _editor.document.saveAs(_editor.document.fileUrl)
+        //                }
 
-//                control.noteSaved(packNote(), control.noteIndex)
+        //                control.noteSaved(packNote(), control.noteIndex)
 
-//                control.clear()
-//                control.parent.pop(StackView.Immediate)
-//            }
-//        }
-        headBar.farLeftContent: ToolButton
+        //                control.clear()
+        //                control.parent.pop(StackView.Immediate)
+        //            }
+        //        }
+
+        Label
         {
-            icon.name: "sidebar-collapse"
-            onClicked:
-            {
-               _sidebar.toggle()
-            }
+            padding: 0
+            anchors.margins: Maui.Style.space.big
+            anchors.top: parent.top
+            anchors.right: parent.right
+            horizontalAlignment: Qt.AlignRight
+            text: Qt.formatDateTime(new Date(control.note.modified), "h:mm d MMM yyyy")
+            color: Kirigami.Theme.textColor
+            elide: Qt.ElideRight
+            wrapMode: TextEdit.NoWrap
+            font.family: settings.font.family
+            font.weight: Font.Bold
+            font.bold: true
+            font.pointSize: Maui.Style.fontSizes.small
         }
 
         headBar.visible: !body.readOnly
+        altHeader: true
+
+        headBar.rightContent: [
+
+            ToolButton
+            {
+                id: favButton
+                icon.name: "love"
+                checkable: true
+                checked:  note.favorite == 1
+                icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
+
+            },
+
+            Maui.ToolButtonMenu
+            {
+                icon.name: "overflow-menu"
+
+
+                MenuItem
+                {
+                    icon.name: "document-share"
+                    text: i18n("Share")
+                    onTriggered: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
+                                                        Maui.Platform.shareFiles(editor.fileUrl)
+                }
+
+                MenuItem
+                {
+                    icon.name: "edit-find"
+                    text: i18n("Find and Replace")
+                    checked: editor.showFindBar
+                    checkable: true
+                    onTriggered: editor.showFindBar = !editor.showFindBar
+                }
+
+                MenuSeparator {}
+
+                MenuItem
+                {
+                    text: i18n("Delete")
+                    icon.name: "entry-delete"
+                    Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+                    onTriggered: {}
+                }
+
+                MenuSeparator {}
+
+                Item
+                {
+                    width: parent.width
+                    height: Maui.Style.rowHeight
+                    ColorsBar
+                    {
+                        anchors.centerIn: parent
+                        onColorPicked:
+                        {
+                            control.backgroundColor = color
+                        }
+
+                        currentColor: control.backgroundColor
+                    }
+                }
+            }
+        ]
+
         headBar.leftContent: [
 
             Maui.ToolActions
@@ -92,7 +165,7 @@ Maui.Page
 
             Maui.ToolActions
             {
-                visible: (document.isRich || body.textFormat === Text.RichText) && !body.readOnly
+                //                visible: (document.isRich || body.textFormat === Text.RichText) && !body.readOnly
                 expanded: true
                 autoExclusive: false
                 checkable: false
@@ -127,68 +200,6 @@ Maui.Page
             }
         ]
 
-        headBar.rightContent: [
-
-            ToolButton
-            {
-                id: favButton
-                icon.name: "love"
-                checkable: true
-                checked:  note.favorite == 1
-                icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
-
-            },
-
-            ToolButton
-            {
-                icon.name: "document-share"
-
-                onClicked: Maui.Handy.isAndroid ? Maui.Android.shareText(editor.body.text) :
-                                                  Maui.Platform.shareFiles(editor.fileUrl)
-            },
-
-
-            Maui.ToolButtonMenu
-            {
-                icon.name: "overflow-menu"
-
-                MenuItem
-                {
-                    ColorsBar
-                    {
-                        anchors.centerIn: parent
-                        onColorPicked:
-                        {
-                            control.backgroundColor = color
-                        }
-
-                        currentColor: control.backgroundColor
-                    }
-                }
-
-                MenuItem
-                {
-                    icon.name: "edit-find"
-                    text: i18n("Find and Replace")
-                    checked: editor.showFindBar
-                    checkable: true
-                    onTriggered: editor.showFindBar = !editor.showFindBar
-                }
-
-                MenuSeparator {}
-
-                MenuItem
-                {
-                    text: i18n("Delete")
-                    icon.name: "entry-delete"
-                    Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
-                    onTriggered: {}
-                }
-
-
-            }
-        ]
-
         Connections
         {
             target: _editor.document
@@ -197,13 +208,23 @@ Maui.Page
                 console.log("NOTE SAVED")
                 control.noteSaved(packNote(), control.noteIndex)
             }
+
+            function onModifiedChanged()
+            {
+                if(!FB.FM.fileExists(control.document.fileUrl))
+                {
+                    notesView.saveNote(packNote())
+                }
+            }
         }
     }
 
     function clear()
     {
         editor.body.clear()
+        //        control.note.clear()
         control.note = ({})
+        control.noteChanged()
     }
 
     function packNote()

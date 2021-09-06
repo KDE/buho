@@ -61,20 +61,50 @@ Maui.ApplicationWindow
         id: editorView
         anchors.fill: parent
 
+        headBar.rightContent: ToolButton
+        {
+            icon.name: "list-add"
+            onClicked: editorView.setNote({url: ""})
+        }
+
+        headBar.farLeftContent: ToolButton
+        {
+            icon.name: _sidebar.visible? "sidebar-collapse" : "sidebar-expand"
+            text: i18n("Notes")
+            checkable: true
+            checked: _sidebar.visible
+            onClicked:
+            {
+                _sidebar.toggle()
+            }
+        }
+
         onNoteSaved:
         {
-            if(!FB.FM.fileExists(editorView.document.fileUrl))
-            {
-                notesView.saveNote(note)
-            }else
-            {
-                notesView.updateNote(note, noteIndex)
-            }
+            console.log("note saved")
+            notesView.updateNote(note, noteIndex)
         }
 
         function setNote(note)
         {
+            if(_sidebar.collapsed)
+            {
+                _sidebar.close()
+            }
+
+            if(editorView.document.modified && !FB.FM.fileExists(editorView.document.fileUrl))
+            {
+                notesView.saveNote(packNote())
+            }
+
+//            if(editorView.document.modified && FB.FM.fileExists(document.fileUrl))
+//            {
+//                editorView.noteSaved(packNote(), noteIndex)
+//            }
+
+            editorView.clear()
             editorView.note = note
+
             editorView.editor.body.forceActiveFocus()
             editorView.noteIndex = notesView.currentIndex
         }

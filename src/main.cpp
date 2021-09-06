@@ -61,9 +61,10 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     KAboutData::setApplicationData(about);
 
     QCommandLineParser parser;
-    parser.process(app);
 
     about.setupCommandLine(&parser);
+    parser.process(app);
+
     about.processCommandLine(&parser);
 
     QQmlApplicationEngine engine;
