@@ -66,10 +66,10 @@ TE.TextEditor
             console.log(control.document.fileUrl, "File Url")
 
 
-//            if(FB.FM.fileExists(control.document.fileUrl) && control.document.modified)
-//            {
-//                control.document.saveAs(control.document.fileUrl)
-//            }
+            if(FB.FM.fileExists(control.document.fileUrl) && control.document.modified)
+            {
+                control.document.saveAs(control.document.fileUrl)
+            }
 
             control.noteSaved(packNote(), control.noteIndex)
             control.clear()
