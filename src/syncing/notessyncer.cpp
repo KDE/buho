@@ -2,6 +2,8 @@
 #include "controllers/notes/notescontroller.h"
 #include "db/db.h"
 
+#include <QDateTime>
+
 #include <MauiKit/FileBrowsing/fmstatic.h>
 #include <MauiKit/Accounts/mauiaccounts.h>
 #include <MauiKit/FileBrowsing/tagging.h>

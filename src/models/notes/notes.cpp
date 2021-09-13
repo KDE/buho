@@ -1,7 +1,7 @@
 #include "notes.h"
 #include "nextnote.h"
 #include "notessyncer.h"
-
+#include <QDebug>
 #include <MauiKit/FileBrowsing/fm.h>
 #include <MauiKit/Accounts/mauiaccounts.h>
 

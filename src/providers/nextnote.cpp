@@ -4,6 +4,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QVariantMap>
+#include <QNetworkReply>
 
 const QString NextNote::API = QStringLiteral("/index.php/apps/notes/api/v0.2/");
 

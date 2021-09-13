@@ -41,11 +41,11 @@ Maui.ApplicationWindow
         id: _settingsDialog
     }
 
-
     NotesView
     {
         id: notesView
         anchors.fill: parent
+        cardsView.showCSDControls: true
     }
 
     Component.onCompleted:
