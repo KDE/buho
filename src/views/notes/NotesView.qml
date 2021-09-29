@@ -143,33 +143,33 @@ StackView
 
         property string typingQuery
 
-         Maui.Chip
-         {
-             z: cardsView.z + 99999
-             Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
-             visible: _typingTimer.running
-             label.text: cardsView.typingQuery
-             anchors.left: parent.left
-             anchors.bottom: parent.bottom
-             showCloseButton: false
-             anchors.margins: Maui.Style.space.medium
-         }
+        Maui.Chip
+        {
+            z: cardsView.z + 99999
+            Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
+            visible: _typingTimer.running
+            label.text: cardsView.typingQuery
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            showCloseButton: false
+            anchors.margins: Maui.Style.space.medium
+        }
 
-         Timer
-         {
-             id: _typingTimer
-             interval: 250
-             onTriggered:
-             {
-                 const index = notesList.indexOfName(cardsView.typingQuery)
-                 if(index > -1)
-                 {
-                     control.currentIndex = notesModel.mappedFromSource(index)
-                 }
+        Timer
+        {
+            id: _typingTimer
+            interval: 250
+            onTriggered:
+            {
+                const index = notesList.indexOfName(cardsView.typingQuery)
+                if(index > -1)
+                {
+                    control.currentIndex = notesModel.mappedFromSource(index)
+                }
 
-                 cardsView.typingQuery = ""
-             }
-         }
+                cardsView.typingQuery = ""
+            }
+        }
 
         Connections
         {
@@ -397,7 +397,7 @@ StackView
                 onClicked:
                 {
                     currentIndex = index
-console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model.url))
+                    console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model.url))
 
                     if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
                     {
@@ -483,6 +483,50 @@ console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model
 
             property bool isFav: currentNote.favorite == 1
 
+            Maui.MenuItemActionRow
+            {
+                Action
+                {
+                    icon.name: "love"
+                    text: _notesMenu.isFav? i18n("UnFav") : i18n("Fav")
+                    onTriggered:
+                    {
+                        notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), notesModel.mappedToSource(cardsView.currentIndex))
+                        _notesMenu.close()
+                    }
+                }
+
+                Action
+                {
+                    icon.name: "document-export"
+                    text: i18n("Export")
+                    onTriggered:
+                    {
+                        _notesMenu.close()
+                    }
+                }
+
+                Action
+                {
+                    icon.name : "edit-copy"
+                    text: i18n("Copy")
+                    onTriggered:
+                    {
+                        Maui.Handy.copyToClipboard({'text': currentNote.content})
+                        _notesMenu.close()
+                    }
+                }
+
+                Action
+                {
+                    text: i18n("Share")
+                    icon.name: "document-share"
+                    //                    onTriggered: shareClicked()
+                }
+            }
+
+            MenuSeparator {}
+
             MenuItem
             {
                 text: i18n("Select")
@@ -498,37 +542,6 @@ console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model
                 }
             }
 
-            MenuItem
-            {
-                icon.name: "love"
-                text: _notesMenu.isFav? i18n("UnFav") : i18n("Fav")
-                onTriggered:
-                {
-                    notesList.update(({"favorite": _notesMenu.isFav ? 0 : 1}), notesModel.mappedToSource(cardsView.currentIndex))
-                    _notesMenu.close()
-                }
-            }
-
-            MenuItem
-            {
-                icon.name: "document-export"
-                text: i18n("Export")
-                onTriggered:
-                {
-                    _notesMenu.close()
-                }
-            }
-
-            MenuItem
-            {
-                icon.name : "edit-copy"
-                text: i18n("Copy")
-                onTriggered:
-                {
-                    Maui.Handy.copyToClipboard({'text': currentNote.content})
-                    _notesMenu.close()
-                }
-            }
 
             MenuSeparator { }
 
