@@ -99,7 +99,7 @@ StackView
         holder.emoji: "qrc:/view-notes.svg"
         holder.emojiSize: Maui.Style.iconSizes.huge
         holder.title :i18n("No notes!")
-        holder.body: i18n("Click here to create a new note")
+        holder.body: i18n("Create a new note")
 
         headBar.rightContent: ToolButton
         {
