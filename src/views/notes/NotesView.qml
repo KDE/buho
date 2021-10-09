@@ -92,6 +92,10 @@ StackView
         gridView.itemSize: Math.min(300, control.width* 0.4)
         gridView.cellHeight: 180
 
+        enableLassoSelection: true
+
+        viewType: control.width > Kirigami.Units.gridUnit * 30 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
+
         floatingFooter: true
         altHeader: Kirigami.Settings.isMobile
 
@@ -99,7 +103,14 @@ StackView
         holder.emoji: "qrc:/view-notes.svg"
         holder.emojiSize: Maui.Style.iconSizes.huge
         holder.title :i18n("No notes!")
-        holder.body: i18n("Click here to create a new note")
+        holder.body: i18n("You can quickly create a new note")
+
+        holder.actions:[ Action
+        {
+            text: i18n("New note")
+            icon.name: "list-add"
+            onTriggered: control.newNote()
+        }]
 
         headBar.rightContent: ToolButton
         {
@@ -107,13 +118,21 @@ StackView
             onClicked: control.newNote()
         }
 
-        headBar.middleContent: Maui.TextField
+        headBar.middleContent: Loader
         {
             Layout.fillWidth: true
             Layout.maximumWidth: 500
-            placeholderText: i18n("Search ") + control.list.count + " " + i18n("notes")
-            onAccepted: control.model.filter = text
-            onCleared: control.model.filter = ""
+//            active: notesList.count > 0
+//            visible: active
+            asynchronous: true
+
+            sourceComponent: Maui.TextField
+            {
+
+                placeholderText: i18n("Search ") + control.list.count + " " + i18n("notes")
+                onAccepted: control.model.filter = text
+                onCleared: control.model.filter = ""
+            }
         }
 
         headBar.leftContent: Maui.ToolButtonMenu
@@ -137,9 +156,6 @@ StackView
             }
         }
 
-        enableLassoSelection: true
-
-        viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
         property string typingQuery
 
@@ -300,7 +316,6 @@ StackView
         {
             id: _listDelegate
             width: ListView.view.width
-            height: cardsView.gridView.cellHeight
             checkable: cardsView.selectionMode
             checked: _selectionbar.contains(model.path)
             isCurrentItem: ListView.isCurrentItem

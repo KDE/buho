@@ -9,8 +9,8 @@ Maui.ItemDelegate
 {
     id: control
 
-    implicitWidth: Maui.Style.unit * 200
-    implicitHeight: Maui.Style.unit * 120
+    implicitWidth: 200
+    implicitHeight: Math.min(120, _layout.implicitHeight)
 
     property int cardRadius: Maui.Style.radiusV
 
@@ -20,7 +20,6 @@ Maui.ItemDelegate
     signal toggled(bool state)
 
     draggable: true
-
 
     Drag.keys: ["text/uri-list"]
     Drag.mimeData: Drag.active ?
@@ -138,6 +137,7 @@ Maui.Badge
 
 ColumnLayout
 {
+    id: _layout
     anchors.fill: parent
     anchors.margins: Maui.Style.space.medium
     anchors.leftMargin: _tagColor.width + Maui.Style.space.medium
@@ -149,7 +149,7 @@ ColumnLayout
         id: date
         padding: 0
         visible: text.length > 0
-opacity: 0.7
+        opacity: 0.7
         Layout.alignment: Qt.AlignLeft | Qt.AlignTop
 
         Layout.fillWidth: true
@@ -190,7 +190,6 @@ opacity: 0.7
         id: body
         Layout.fillHeight: true
         Layout.fillWidth: true
-
         padding: 0
         visible: model.content && text.length > 0
         text: model.content ? model.content : ""
@@ -202,6 +201,5 @@ opacity: 0.7
 
     }
 }
-
 
 }

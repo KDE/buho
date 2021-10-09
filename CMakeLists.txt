@@ -27,6 +27,8 @@ if(ANDROID)
     set(ANDROID_ABIS "armeabi-v7a")
 endif()
 
+option(QUICK_COMPILER "Use QtQuick compiler to improve performance" TRUE)
+
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH})
 
@@ -43,6 +45,14 @@ if(ANDROID)
     find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS AndroidExtras QuickControls2)
 elseif(UNIX)
     find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Widgets)
+endif()
+
+if(QUICK_COMPILER)
+    find_package(Qt5QuickCompiler)
+    set_package_properties(Qt5QuickCompiler PROPERTIES
+        DESCRIPTION "Compile QML at build time"
+        TYPE OPTIONAL
+        )
 endif()
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)

@@ -44,20 +44,29 @@ set(buho_HDRS
     )
 
 set(buho_ASSETS
-    qml.qrc
     assets/imgs.qrc
     )
+
+if(QUICK_COMPILER)
+    qtquick_compiler_add_resources(buho_QML_QRC qml.qrc)
+else()
+    qt5_add_resources(buho_QML_QRC qml.qrc)
+endif()
 
 if(ANDROID)
     add_library(${PROJECT_NAME} SHARED
         ${buho_SRCS}
         ${buho_HDRS}
-        ${buho_ASSETS} )
+        ${buho_ASSETS}
+        ${buho_QML_QRC}
+        )
 else()
     add_executable(${PROJECT_NAME}
         ${buho_SRCS}
         ${buho_HDRS}
-        ${buho_ASSETS})
+        ${buho_ASSETS}
+        ${buho_QML_QRC}
+        )
 endif()
 
 if (ANDROID)
