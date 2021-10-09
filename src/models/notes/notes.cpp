@@ -4,7 +4,7 @@
 
 #include <MauiKit/FileBrowsing/fm.h>
 #include <MauiKit/Accounts/mauiaccounts.h>
-
+#include <QDebug>
 #include <algorithm>
 
 Notes::Notes(QObject *parent)

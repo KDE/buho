@@ -6,6 +6,8 @@
 #include <MauiKit/Accounts/mauiaccounts.h>
 #include <MauiKit/FileBrowsing/tagging.h>
 
+#include <QDateTime>
+
 NotesSyncer::NotesSyncer(QObject *parent)
     : Syncer(parent)
     , tag(Tagging::getInstance())
