@@ -244,7 +244,7 @@ StackView
             visible: count > 0
             anchors.horizontalCenter: parent.horizontalCenter
             width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-            padding: Maui.Style.space.big
+
             maxListHeight: control.height - Maui.Style.space.medium
             display: ToolButton.IconOnly
 
