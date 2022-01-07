@@ -16,6 +16,7 @@ Maui.ApplicationWindow
     id: root
     title: i18n("Buho")
     headBar.visible: false
+    Maui.App.darkMode: settings.darkMode
 
     property font defaultFont : Qt.font({family: "Noto Sans Mono", pointSize: Maui.Style.fontSizes.huge})
 
@@ -32,6 +33,7 @@ Maui.ApplicationWindow
 
         property string sortBy:  "modified"
         property int sortOrder : Qt.DescendingOrder
+        property bool darkMode : true
 
         property font font : defaultFont
     }
@@ -50,10 +52,16 @@ Maui.ApplicationWindow
 
     Component.onCompleted:
     {
+        setAndroidStatusBarColor()
+    }
+
+    function setAndroidStatusBarColor()
+    {
         if(Maui.Handy.isAndroid)
         {
-            Maui.Android.statusbarColor(headBar.Kirigami.Theme.backgroundColor, false)
-            Maui.Android.navBarColor(headBar.visible ? headBar.Kirigami.Theme.backgroundColor : Kirigami.Theme.backgroundColor, false)
+            Maui.Android.statusbarColor( Kirigami.Theme.backgroundColor, !Maui.App.darkMode)
+            Maui.Android.navBarColor(headBar.visible ? headBar.Kirigami.Theme.backgroundColor : Kirigami.Theme.backgroundColor, !Maui.App.darkMode)
         }
     }
+
 }
