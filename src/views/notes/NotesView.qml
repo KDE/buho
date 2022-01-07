@@ -241,7 +241,6 @@ StackView
         footer: Maui.SelectionBar
         {
             id: _selectionbar
-            visible: count > 0
             anchors.horizontalCenter: parent.horizontalCenter
             width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
 
