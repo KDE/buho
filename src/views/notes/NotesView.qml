@@ -122,6 +122,7 @@ StackView
         {
             Layout.fillWidth: true
             Layout.maximumWidth: 500
+            Layout.alignment: Qt.AlignCenter
 //            active: notesList.count > 0
 //            visible: active
             asynchronous: true
