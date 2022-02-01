@@ -101,7 +101,6 @@ StackView
 
         holder.visible: notesList.count === 0 || cardsView.count === 0
         holder.emoji: "qrc:/view-notes.svg"
-        holder.emojiSize: Maui.Style.iconSizes.huge
         holder.title :i18n("No notes!")
         holder.body: i18n("You can quickly create a new note")
 
@@ -127,9 +126,8 @@ StackView
 //            visible: active
             asynchronous: true
 
-            sourceComponent: Maui.TextField
+            sourceComponent: Maui.SearchField
             {
-
                 placeholderText: i18n("Search ") + control.list.count + " " + i18n("notes")
                 onAccepted: control.model.filter = text
                 onCleared: control.model.filter = ""
@@ -248,9 +246,16 @@ StackView
             maxListHeight: control.height - Maui.Style.space.medium
             display: ToolButton.IconOnly
 
+            onVisibleChanged:
+            {
+                if(!visible)
+                {
+                    cardsView.selectionMode = false
+                }
+            }
+
             onExitClicked:
             {
-                cardsView.selectionMode = false
                 clear()
             }
 
