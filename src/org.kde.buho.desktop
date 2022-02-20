@@ -93,7 +93,7 @@ Keywords[zh_CN]=notes;todo;nextcloud;maui;笔记;待办事项;便签;便笺;
 Keywords[zh_TW]=notes;todo;nextcloud;maui;筆記;待辦事項;
 Terminal=false
 Type=Application
-Categories=Qt;KDE;Utility;TextTools;TextEditor;Todo;X-KDE-Utilities-Desktop;
+Categories=Qt;KDE;Utility;TextTools;TextEditor;X-Todo;X-KDE-Utilities-Desktop;
 StartupNotify=true
 Icon=buho
 
