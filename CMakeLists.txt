@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-set(BUHO_VERSION 2.1.1)
+set(BUHO_VERSION 2.1.2)
 project(buho VERSION ${BUHO_VERSION})
 
 set(CMAKE_CXX_STANDARD 17)

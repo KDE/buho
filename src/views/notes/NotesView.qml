@@ -105,25 +105,25 @@ StackView
         holder.body: i18n("You can quickly create a new note")
 
         holder.actions:[ Action
-        {
-            text: i18n("New note")
-            icon.name: "list-add"
-            onTriggered: control.newNote()
-        }]
+            {
+                text: i18n("New note")
+                icon.name: "list-add"
+                onTriggered: control.newNote()
+            }]
 
         headBar.rightContent: ToolButton
         {
             icon.name: "list-add"
             onClicked: control.newNote()
         }
-
+        headBar.forceCenterMiddleContent: root.isWide
         headBar.middleContent: Loader
         {
             Layout.fillWidth: true
             Layout.maximumWidth: 500
             Layout.alignment: Qt.AlignCenter
-//            active: notesList.count > 0
-//            visible: active
+            //            active: notesList.count > 0
+            //            visible: active
             asynchronous: true
 
             sourceComponent: Maui.SearchField
