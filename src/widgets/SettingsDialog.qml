@@ -79,13 +79,12 @@ Maui.SettingsDialog
         {
             label1.text:  i18n("Family")
 
-            Maui.ComboBox
+            Maui.FontsComboBox
             {
+                id: _fontsCombobox
                 Layout.fillWidth: true
-                model: Qt.fontFamilies()
                 Component.onCompleted: currentIndex = find(settings.font.family, Qt.MatchExactly)
                 onActivated: settings.font.family = currentText
-
             }
         }
 
