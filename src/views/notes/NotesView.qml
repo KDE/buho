@@ -11,7 +11,7 @@ import org.maui.buho 1.0
 
 import "../../widgets"
 
-StackView
+Maui.StackView
 {
     id: control
     property var currentNote : ({})
