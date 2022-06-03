@@ -30,7 +30,7 @@ Maui.ItemDelegate
 Rectangle
 {
     anchors.fill: parent
-    color: Qt.darker(Kirigami.Theme.textColor)
+    color: Qt.darker(Maui.Theme.textColor)
     opacity: 0.2
     visible: control.checkable || control.checked
     radius: control.cardRadius
@@ -38,9 +38,9 @@ Rectangle
 
 background: Rectangle
 {
-    readonly property color m_color : Qt.tint(Qt.lighter(control.Kirigami.Theme.textColor), Qt.rgba(control.Kirigami.Theme.backgroundColor.r, control.Kirigami.Theme.backgroundColor.g, control.Kirigami.Theme.backgroundColor.b, 0.9))
+    readonly property color m_color : Qt.tint(Qt.lighter(control.Maui.Theme.textColor), Qt.rgba(control.Maui.Theme.backgroundColor.r, control.Maui.Theme.backgroundColor.g, control.Maui.Theme.backgroundColor.b, 0.9))
 
-    color: control.isCurrentItem || control.hovered || control.containsPress ? Qt.rgba(control.Kirigami.Theme.highlightColor.r, control.Kirigami.Theme.highlightColor.g, control.Kirigami.Theme.highlightColor.b, 0.2) : Qt.rgba(m_color.r, m_color.g, m_color.b, 0.4)
+    color: control.isCurrentItem || control.hovered || control.containsPress ? Qt.rgba(control.Maui.Theme.highlightColor.r, control.Maui.Theme.highlightColor.g, control.Maui.Theme.highlightColor.b, 0.2) : Qt.rgba(m_color.r, m_color.g, m_color.b, 0.4)
     radius: control.cardRadius
 
     Kirigami.ShadowedRectangle
@@ -67,7 +67,7 @@ background: Rectangle
     {
         anchors.fill: parent
         color: "transparent"
-        border.color: control.isCurrentItem || control.checked ? Kirigami.Theme.highlightColor : "transparent"
+        border.color: control.isCurrentItem || control.checked ? Maui.Theme.highlightColor : "transparent"
         radius: control.cardRadius
     }
 }
@@ -86,7 +86,7 @@ Kirigami.Icon
     anchors.bottom: parent.bottom
     anchors.margins: Maui.Style.space.medium
     source: "love"
-    color: model.color ? Qt.darker(model.color, 3) : Kirigami.Theme.textColor
+    color: model.color ? Qt.darker(model.color, 3) : Maui.Theme.textColor
     height: Maui.Style.iconSizes.small
     width: height
     visible: model.favorite == 1
@@ -102,9 +102,9 @@ Maui.Badge
     anchors.right: parent.right
     anchors.bottom: parent.bottom
 
-    color: control.checked ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.5)
+    color: control.checked ? Maui.Theme.highlightColor : Qt.rgba(Maui.Theme.backgroundColor.r, Maui.Theme.backgroundColor.g, Maui.Theme.backgroundColor.b, 0.5)
 
-    border.color: Kirigami.Theme.textColor
+    border.color: Maui.Theme.textColor
 
     onClicked:
     {
@@ -115,7 +115,7 @@ Maui.Badge
     Kirigami.Icon
     {
         visible: opacity > 0
-        color: Kirigami.Theme.highlightedTextColor
+        color: Maui.Theme.highlightedTextColor
         anchors.centerIn: parent
         height: control.checked ? Math.round(parent.height * 0.9) : 0
         width: height
@@ -128,7 +128,7 @@ Maui.Badge
         {
             NumberAnimation
             {
-                duration: Kirigami.Units.shortDuration
+                duration: Maui.Style.units.shortDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -154,7 +154,7 @@ ColumnLayout
 
         Layout.fillWidth: true
         text: Qt.formatDateTime(new Date(model.modified), "h:mm d MMM yyyy")
-        color: Kirigami.Theme.textColor
+        color: Maui.Theme.textColor
         elide: Qt.ElideRight
         wrapMode: TextEdit.NoWrap
         font.family: settings.font.family
@@ -175,7 +175,7 @@ ColumnLayout
         Layout.fillWidth: true
 
         text: model.title
-        color: Kirigami.Theme.textColor
+        color: Maui.Theme.textColor
         elide: Qt.ElideRight
         wrapMode: TextEdit.WrapAnywhere
         font.family: settings.font.family
@@ -193,7 +193,7 @@ ColumnLayout
         padding: 0
         visible: model.content && text.length > 0
         text: model.content ? model.content : ""
-        color: Kirigami.Theme.textColor
+        color: Maui.Theme.textColor
         wrapMode: TextEdit.WrapAnywhere
         font.family: settings.font.family
         textFormat : TextEdit.PlainText

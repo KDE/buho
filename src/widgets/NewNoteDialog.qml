@@ -2,8 +2,6 @@ import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.0
 
-import org.kde.kirigami 2.7 as Kirigami
-
 import org.mauikit.controls 1.3 as Maui
 import org.mauikit.filebrowsing 1.3 as FB
 import org.mauikit.texteditor 1.0 as TE
@@ -55,7 +53,7 @@ TE.TextEditor
         visible: _notifyTimer.running
         label.text: i18n("Note saved")
         iconSource: "document-save"
-        Kirigami.Theme.backgroundColor: "yellow"
+        Maui.Theme.backgroundColor: "yellow"
     }
 
     headBar.farLeftContent: ToolButton
@@ -146,7 +144,7 @@ TE.TextEditor
             icon.name: "love"
             checkable: true
             checked:  note.favorite == 1
-            icon.color: checked ? "#ff007f" : Kirigami.Theme.textColor
+            icon.color: checked ? "#ff007f" : Maui.Theme.textColor
 
         },
 
@@ -177,7 +175,7 @@ TE.TextEditor
             {
                 text: i18n("Delete")
                 icon.name: "entry-delete"
-                Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+                Maui.Theme.textColor: Maui.Theme.negativeTextColor
                 onTriggered: {}
             }
 

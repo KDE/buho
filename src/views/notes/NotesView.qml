@@ -2,8 +2,6 @@ import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
-import org.kde.kirigami 2.7 as Kirigami
-
 import org.mauikit.controls 1.3 as Maui
 import org.mauikit.accounts 1.0 as MA
 
@@ -94,10 +92,10 @@ Maui.StackView
 
         enableLassoSelection: true
 
-        viewType: control.width > Kirigami.Units.gridUnit * 30 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
+        viewType: control.width > Maui.Style.units.gridUnit * 30 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
         floatingFooter: true
-        altHeader: Kirigami.Settings.isMobile
+        altHeader: Maui.Handy.isMobile
 
         holder.visible: notesList.count === 0 || cardsView.count === 0
         holder.emoji: "qrc:/view-notes.svg"
@@ -161,7 +159,7 @@ Maui.StackView
         Maui.Chip
         {
             z: cardsView.z + 99999
-            Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
+            Maui.Theme.colorSet:Maui.Theme.Complementary
             visible: _typingTimer.running
             label.text: cardsView.typingQuery
             anchors.left: parent.left
@@ -306,7 +304,7 @@ Maui.StackView
             Action
             {
                 text: i18n("Delete")
-                Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+                Maui.Theme.textColor: Maui.Theme.negativeTextColor
                 icon.name: "edit-delete"
 
                 onTriggered:
@@ -569,7 +567,7 @@ Maui.StackView
             {
                 icon.name: "edit-delete"
                 text: i18n("Remove")
-                Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+                Maui.Theme.textColor: Maui.Theme.negativeTextColor
                 onTriggered:
                 {
                     notesList.remove(notesModel.mappedToSource(cardsView.currentIndex))
