@@ -111,7 +111,7 @@ Maui.Badge
         control.toggled(control.checked)
     }
 
-    Kirigami.Icon
+    Maui.Icon
     {
         visible: opacity > 0
         color: Maui.Theme.highlightedTextColor
