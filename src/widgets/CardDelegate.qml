@@ -1,9 +1,8 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 
-import org.kde.kirigami 2.14 as Kirigami
-import org.mauikit.controls 1.2 as Maui
+import org.mauikit.controls 1.3 as Maui
 
 Maui.ItemDelegate
 {
@@ -43,7 +42,7 @@ background: Rectangle
     color: control.isCurrentItem || control.hovered || control.containsPress ? Qt.rgba(control.Maui.Theme.highlightColor.r, control.Maui.Theme.highlightColor.g, control.Maui.Theme.highlightColor.b, 0.2) : Qt.rgba(m_color.r, m_color.g, m_color.b, 0.4)
     radius: control.cardRadius
 
-    Kirigami.ShadowedRectangle
+    Maui.ShadowedRectangle
     {
         id: _tagColor
         visible:  model.color && model.color.length
@@ -80,7 +79,7 @@ Maui.Holder
     body: i18n("Edit this note")
 }
 
-Kirigami.Icon
+Maui.Icon
 {
     anchors.right: parent.right
     anchors.bottom: parent.bottom
