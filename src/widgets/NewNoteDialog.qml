@@ -71,7 +71,7 @@ TE.TextEditor
 
             control.noteSaved(packNote(), control.noteIndex)
             control.clear()
-            control.parent.pop(StackView.Immediate)
+            control.parent.pop()
         }
     }
 

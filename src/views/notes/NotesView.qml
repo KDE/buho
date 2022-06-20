@@ -27,14 +27,14 @@ Maui.StackView
 
     function setNote(note)
     {
-        control.push(_editNoteComponent, {}, StackView.Immediate)
+        control.push(_editNoteComponent)
         control.currentItem.editor.body.forceActiveFocus()
         control.currentItem.noteIndex = control.currentIndex
     }
 
     function newNote()
     {
-        control.push(_newNoteComponent, {}, StackView.Immediate)
+        control.push(_newNoteComponent)
         control.currentItem.editor.body.forceActiveFocus()
     }
 
