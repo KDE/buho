@@ -14,7 +14,6 @@ Maui.ApplicationWindow
 {
     id: root
     title: i18n("Buho")
-    headBar.visible: false
 //    Maui.Style.styleType: settings.darkMode
 
     property font defaultFont : Qt.font({family: "Noto Sans Mono", pointSize: Maui.Style.fontSizes.huge})
