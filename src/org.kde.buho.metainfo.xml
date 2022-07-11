@@ -32,6 +32,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="uk">Buho</name>
   <name xml:lang="x-test">xxBuhoxx</name>
   <name xml:lang="zh-CN">Buho</name>
+  <name xml:lang="zh-TW">Buho</name>
   <summary>Note-taking app</summary>
   <summary xml:lang="az">Qeyd saxlayan tətbiq</summary>
   <summary xml:lang="ca">Aplicació per a prendre notes</summary>
@@ -57,6 +58,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="uk">Програма-нотатник</summary>
   <summary xml:lang="x-test">xxNote-taking appxx</summary>
   <summary xml:lang="zh-CN">笔记应用</summary>
+  <summary xml:lang="zh-TW">筆記應用程式</summary>
   <description>
     <p>Buho is a note-taking app. Buho will let you take quick notes, save links, create books and pages for taking classes notes.</p>
     <p xml:lang="az">Buho qeydləri saxlaan tətbiqdir. Buho sizə sürətli qeydlər etməyə, bağlantıları saxlamağa, dərs qeydləri aparmaq üçün kitablar və səhifələr yaratmağa imkan verir.</p>
@@ -81,6 +83,7 @@ SPDX-License-Identifier: CC0-1.0
     <p xml:lang="uk">Buho — програма для роботи із нотатками. За допомогою Buho ви зможете створювати короткі нотатки, зберігати посилання, створювати книги та сторінки для нотаток щодо лекцій.</p>
     <p xml:lang="x-test">xxBuho is a note-taking app. Buho will let you take quick notes, save links, create books and pages for taking classes notes.xx</p>
     <p xml:lang="zh-CN">Buho 是一款笔记应用，您可以使用它来进行速记、保存链接。它还可以创建手册和页面以便您进行课堂笔记。</p>
+    <p xml:lang="zh-TW">Buho 是個筆記應用程式。Buho 讓您做快速筆記、儲存連結，以及建立書本與頁面來記課堂筆記。</p>
   </description>
   <url type="homepage">https://mauikit.org/</url>
   <url type="bugtracker">https://invent.kde.org/maui/buho/-/issues</url>
@@ -112,6 +115,7 @@ SPDX-License-Identifier: CC0-1.0
       <caption xml:lang="uk">Buho</caption>
       <caption xml:lang="x-test">xxBuhoxx</caption>
       <caption xml:lang="zh-CN">Buho</caption>
+      <caption xml:lang="zh-TW">Buho</caption>
       <image type="source" width="1024" height="723">
         https://nxos.org/wp-content/uploads/2021/05/buho-stable-1024x723.png
       </image>
