@@ -6,11 +6,14 @@ import org.mauikit.controls 1.3 as Maui
 import org.mauikit.filebrowsing 1.3 as FB
 import org.mauikit.texteditor 1.0 as TE
 
-TE.TextEditor
+
+Maui.Page
 {
+
     id: control
 
-    property alias editor: control
+    property alias editor: _editor
+    property alias document: _editor.document
 
     property string tagColor: note.color ? note.color : "transparent"
     property bool showEditActions : false
@@ -19,42 +22,6 @@ TE.TextEditor
 
     signal noteSaved(var note, int noteIndex)
 
-    fileUrl: control.note.url
-    showLineNumbers: false
-    document.autoReload: settings.autoReload
-    document.autoSave: settings.autoSave
-
-    body.font: settings.font
-
-    document.enableSyntaxHighlighting: false
-    body.placeholderText: i18n("Title\nBody")
-
-    Rectangle
-    {
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-        color: control.tagColor
-        height : 12
-    }
-
-    Timer
-    {
-        id: _notifyTimer
-        running: false
-        interval: 2500
-    }
-
-    Maui.Chip
-    {
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.margins: Maui.Style.space.big
-        visible: _notifyTimer.running
-        label.text: i18n("Note saved")
-        iconSource: "document-save"
-        Maui.Theme.backgroundColor: "yellow"
-    }
 
     headBar.farLeftContent: ToolButton
     {
@@ -87,21 +54,21 @@ TE.TextEditor
             Action
             {
                 icon.name: "edit-undo"
-                enabled: body.canUndo
-                onTriggered: body.undo()
+                enabled: editor.body.canUndo
+                onTriggered: editor.body.undo()
             }
 
             Action
             {
                 icon.name: "edit-redo"
-                enabled: body.canRedo
-                onTriggered: body.redo()
+                enabled: editor.body.canRedo
+                onTriggered: editor.body.redo()
             }
         },
 
         Maui.ToolActions
         {
-            visible: (document.isRich || body.textFormat === Text.RichText) && !body.readOnly
+            visible: (document.isRich || editor.body.textFormat === Text.RichText) && !editor.body.readOnly
             expanded: true
             autoExclusive: false
             checkable: false
@@ -143,7 +110,7 @@ TE.TextEditor
             id: favButton
             icon.name: "love"
             checkable: true
-            checked:  note.favorite == 1
+            checked: note.favorite == 1
             icon.color: checked ? "#ff007f" : Maui.Theme.textColor
 
         },
@@ -197,18 +164,61 @@ TE.TextEditor
                     currentColor: control.tagColor
                 }
             }
-
         }
     ]
 
-    Connections
+    TE.TextEditor
     {
-        target: control.document
-        function onFileSaved()
+      id: _editor
+      anchors.fill: parent
+
+        fileUrl: control.note.url
+        showLineNumbers: false
+        document.autoReload: settings.autoReload
+        document.autoSave: settings.autoSave
+        spellcheckEnabled: settings.spellcheckEnabled
+
+        body.font: settings.font
+
+        document.enableSyntaxHighlighting: false
+        body.placeholderText: i18n("Title\nBody")
+
+        Rectangle
         {
-            console.log("NOTE SAVED")
-            _notifyTimer.start()
-            //                control.noteSaved(packNote())
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            color: control.tagColor
+            height : 12
+        }
+
+        Timer
+        {
+            id: _notifyTimer
+            running: false
+            interval: 2500
+        }
+
+        Maui.Chip
+        {
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.margins: Maui.Style.space.big
+            visible: _notifyTimer.running
+            label.text: i18n("Note saved")
+            iconSource: "document-save"
+            Maui.Theme.backgroundColor: "yellow"
+        }
+
+        Connections
+        {
+            target: control.document
+            function onFileSaved()
+            {
+                console.log("NOTE SAVED")
+                _notifyTimer.start()
+                //                control.noteSaved(packNote())
+            }
         }
     }
 

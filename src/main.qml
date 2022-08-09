@@ -34,6 +34,8 @@ Maui.ApplicationWindow
         property bool darkMode : true
 
         property font font : defaultFont
+
+        property bool spellcheckEnabled: true
     }
 
     SettingsDialog
@@ -57,8 +59,8 @@ Maui.ApplicationWindow
     {
         if(Maui.Handy.isAndroid)
         {
-            Maui.Android.statusbarColor( Maui.Theme.backgroundColor, !Maui.App.darkMode)
-            Maui.Android.navBarColor(headBar.visible ? headBar.Maui.Theme.backgroundColor : Maui.Theme.backgroundColor, !Maui.App.darkMode)
+            Maui.Android.statusbarColor( Maui.Theme.backgroundColor, !settings.darkMode)
+            Maui.Android.navBarColor(Maui.Theme.backgroundColor, !settings.darkMode)
         }
     }
 }
