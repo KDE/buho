@@ -15,6 +15,18 @@ Maui.SettingsDialog
 
         Maui.SettingTemplate
         {
+            label1.text:  i18n("Spell Checker")
+            label2.text: i18n("Check spelling and give suggestions.")
+            Switch
+            {
+                checkable: true
+                checked: settings.spellcheckEnabled
+                onToggled: settings.spellcheckEnabled = !settings.spellcheckEnabled
+            }
+        }
+
+        Maui.SettingTemplate
+        {
             label1.text:  i18n("Auto Save")
             label2.text: i18n("Auto saves your file every few seconds")
             Switch
@@ -113,8 +125,8 @@ Maui.SettingsDialog
             Switch
             {
                 checkable: true
-                checked:  settings.showThumbnails
-                onToggled:  settings.showThumbnails = ! settings.showThumbnails
+//                checked:  settings.showThumbnails
+//                onToggled:  settings.showThumbnails = ! settings.showThumbnails
             }
         }
     }

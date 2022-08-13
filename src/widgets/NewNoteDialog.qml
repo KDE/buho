@@ -42,7 +42,7 @@ Maui.Page
         }
     }
 
-    headBar.visible: !body.readOnly
+    headBar.visible: !editor.body.readOnly
     headBar.leftContent: [
 
         Maui.ToolActions

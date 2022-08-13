@@ -1,4 +1,5 @@
 import QtQuick 2.15
+import QtQml 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 
@@ -91,46 +92,22 @@ Maui.Icon
     visible: model.favorite == 1
 }
 
-Maui.Badge
+CheckBox
 {
-    id: _emblem
 
     visible: control.checkable || control.checked
-    size: Maui.Style.iconSizes.medium
     anchors.margins: Maui.Style.space.medium
     anchors.right: parent.right
     anchors.bottom: parent.bottom
-
-    color: control.checked ? Maui.Theme.highlightColor : Qt.rgba(Maui.Theme.backgroundColor.r, Maui.Theme.backgroundColor.g, Maui.Theme.backgroundColor.b, 0.5)
-
-    border.color: Maui.Theme.textColor
-
-    onClicked:
+    Binding on checked
     {
-        control.checked = !control.checked
-        control.toggled(control.checked)
+        value: control.checked
+        restoreMode: Binding.RestoreBinding
     }
-
-    Maui.Icon
+    onToggled:
     {
-        visible: opacity > 0
-        color: Maui.Theme.highlightedTextColor
-        anchors.centerIn: parent
-        height: control.checked ? Math.round(parent.height * 0.9) : 0
-        width: height
-        opacity: control.checked ? 1 : 0
-        isMask: true
-
-        source: "qrc:/assets/checkmark.svg"
-
-        Behavior on opacity
-        {
-            NumberAnimation
-            {
-                duration: Maui.Style.units.shortDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
+        control.checked = state
+        control.toggled(state)
     }
 }
 
@@ -196,7 +173,7 @@ ColumnLayout
         wrapMode: TextEdit.WrapAnywhere
         font.family: settings.font.family
         textFormat : TextEdit.PlainText
-        font.pointSize: Maui.Style.fontSizes.default
+        font.pointSize: Maui.Style.fontSizes.medium
 
     }
 }

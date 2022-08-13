@@ -577,23 +577,20 @@ Maui.StackView
 
             MenuSeparator { }
 
-            Item
-            {
-                width: parent.width
-                height: Maui.Style.rowHeight
 
-                ColorsBar
+            ColorsBar
+            {
+                id: colorBar
+                padding: control.padding
+                width: parent.width
+                currentColor: currentNote.color
+                onColorPicked:
                 {
-                    id: colorBar
-                    anchors.centerIn: parent
-                    currentColor: currentNote.color
-                    onColorPicked:
-                    {
-                        notesList.update(({"color": color}), notesModel.mappedToSource(cardsView.currentIndex))
-                        _notesMenu.close()
-                    }
+                    notesList.update(({"color": color}), notesModel.mappedToSource(cardsView.currentIndex))
+                    _notesMenu.close()
                 }
             }
+
         }
     }
 
