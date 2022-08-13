@@ -22,6 +22,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="it">Buho</name>
   <name xml:lang="ko">Buho</name>
   <name xml:lang="nl">Buho</name>
+  <name xml:lang="nn">Buho</name>
   <name xml:lang="pa">ਬੁਹੋ</name>
   <name xml:lang="pl">Buho</name>
   <name xml:lang="pt">Buho</name>
@@ -48,6 +49,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="it">Applicazione per prendere appunti</summary>
   <summary xml:lang="ko">메모 프로그램</summary>
   <summary xml:lang="nl">Notitie opnemende toepassing</summary>
+  <summary xml:lang="nn">Notatapp</summary>
   <summary xml:lang="pa">ਨੋਟ ਲੈਣ ਵਾਲੀ ਐਪ</summary>
   <summary xml:lang="pl">Program do robienia zapisków</summary>
   <summary xml:lang="pt">Aplicação de bloco de notas</summary>
@@ -105,6 +107,7 @@ SPDX-License-Identifier: CC0-1.0
       <caption xml:lang="it">Buho</caption>
       <caption xml:lang="ko">Buho</caption>
       <caption xml:lang="nl">Buho</caption>
+      <caption xml:lang="nn">Buho</caption>
       <caption xml:lang="pa">ਬੁਹੋ</caption>
       <caption xml:lang="pl">Buho</caption>
       <caption xml:lang="pt">Buho</caption>
