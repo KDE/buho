@@ -20,6 +20,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="fi">Buho</name>
   <name xml:lang="fr">Buho</name>
   <name xml:lang="it">Buho</name>
+  <name xml:lang="ka">Buho</name>
   <name xml:lang="ko">Buho</name>
   <name xml:lang="nl">Buho</name>
   <name xml:lang="nn">Buho</name>
@@ -47,6 +48,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="fi">Muistiinpanosovellus</summary>
   <summary xml:lang="fr">Application de prise de notes</summary>
   <summary xml:lang="it">Applicazione per prendere appunti</summary>
+  <summary xml:lang="ka">ჩანაწერების გასაკეთებელი პროგრამა</summary>
   <summary xml:lang="ko">메모 프로그램</summary>
   <summary xml:lang="nl">Notitie opnemende toepassing</summary>
   <summary xml:lang="nn">Notatapp</summary>
@@ -74,6 +76,7 @@ SPDX-License-Identifier: CC0-1.0
     <p xml:lang="fi">Buho on muistiinpanosovellus, jolla voi nopeasti tehdä muistiinpanoja, tallentaa linkkejä sekä luoda muistikirjoja ja sivuja.</p>
     <p xml:lang="fr">Buho est une application de prise de notes. Buho vous permet de prendre des notes rapides, d'enregistrer des liens, de créer des livres et des pages pour prendre des notes de cours.</p>
     <p xml:lang="it">Buho è un'applicazione per prendere appunti. Ti permette di prendere appunti veloci, di salvare collegamenti e di creare libri e pagine per prendere i classici appunti.</p>
+    <p xml:lang="ka">Buho არის ჩანაწერების გასაკეთებელი აპლიკაცია. ბუჰო საშუალებას მოგცემთ მიიღოთ სწრაფი ჩანაწერები, შეინახოთ ბმულები, შექმნათ წიგნები და გვერდები სკოლაში შენიშვნების ჩასაწერად.</p>
     <p xml:lang="ko">Buho는 메모 앱입니다. Buho를 사용하여 빠른 메모, 링크 저장, 수업 필기용 책과 쪽을 만들 수 있습니다.</p>
     <p xml:lang="nl">Buho is een notitie opnemende toepassing. Buho laat u snel notities opnemen, koppelingen opslaan, boeken en pagina's voor opnemen van klassen van notities aanmaken.</p>
     <p xml:lang="pa">ਬੁਹੋ ਨੋਟ ਲੈਣ ਵਾਲੀ ਐਪ ਹੈ। ਬੁਹੋ ਤੁਹਾਨੂੰ ਫ਼ੌਰਨ ਨੋਟ ਲੈਣ, ਲਿੰਕ ਸੰਭਾਲਣ, ਕਲਾਸ ਨੋਟਿਸਾਂ ਵਾਸਤੇ ਕਿਤਾਬਾਂ ਤੇ ਸਫ਼ੇ ਬਣਾਉਣ ਲਈ ਮਦਦ ਕਰੇਗੀ।</p>
@@ -105,6 +108,7 @@ SPDX-License-Identifier: CC0-1.0
       <caption xml:lang="fi">Buho</caption>
       <caption xml:lang="fr">Buho</caption>
       <caption xml:lang="it">Buho</caption>
+      <caption xml:lang="ka">Buho</caption>
       <caption xml:lang="ko">Buho</caption>
       <caption xml:lang="nl">Buho</caption>
       <caption xml:lang="nn">Buho</caption>
