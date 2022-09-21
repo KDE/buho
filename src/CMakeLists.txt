@@ -28,6 +28,7 @@ set(buho_SRCS
     syncing/syncer.cpp
     syncing/notessyncer.cpp
     controllers/notes/notescontroller.cpp
+    utils/server.cpp
     #    doodle/doodlehanlder.cpp
     )
 
@@ -53,6 +54,12 @@ else()
     qt5_add_resources(buho_QML_QRC qml.qrc)
 endif()
 
+if(UNIX AND NOT ANDROID)
+    qt_generate_dbus_interface(${CMAKE_CURRENT_SOURCE_DIR}/utils/server.h org.kde.Buho.xml)
+    qt_add_dbus_adaptor(buho_dbus_SRCS ${CMAKE_CURRENT_BINARY_DIR}/org.kde.Buho.xml utils/server.h Server)
+    qt_add_dbus_interface(buho_dbus_SRCS ${CMAKE_CURRENT_BINARY_DIR}/org.kde.Buho.xml buhointerface)
+endif()
+
 if(ANDROID)
     add_library(${PROJECT_NAME} SHARED
         ${buho_SRCS}
@@ -66,6 +73,7 @@ else()
         ${buho_HDRS}
         ${buho_ASSETS}
         ${buho_QML_QRC}
+        ${buho_dbus_SRCS}
         )
 endif()
 
@@ -73,7 +81,7 @@ if (ANDROID)
     find_package(OpenSSL REQUIRED)
     target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras OpenSSL::SSL Qt5::QuickControls2)
 elseif(UNIX)
-    target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
+    target_link_libraries(${PROJECT_NAME} Qt5::Widgets Qt5::DBus)
 endif()
 
 target_link_libraries(${PROJECT_NAME} MauiKit MauiKit::FileBrowsing MauiKit::Accounts #[[tesseract]] Qt5::Sql Qt5::Quick Qt5::Qml Qt5::Network KF5::CoreAddons KF5::I18n)

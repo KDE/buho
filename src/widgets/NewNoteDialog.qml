@@ -20,8 +20,9 @@ Maui.Page
     property var note : ({})
     property int noteIndex : -1
 
-    signal noteSaved(var note, int noteIndex)
+    property alias text: _editor.text
 
+    signal noteSaved(var note, int noteIndex)
 
     headBar.farLeftContent: ToolButton
     {

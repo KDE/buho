@@ -32,9 +32,9 @@ Maui.StackView
         control.currentItem.noteIndex = control.currentIndex
     }
 
-    function newNote()
+    function newNote(contents)
     {
-        control.push(_newNoteComponent)
+        control.push(_newNoteComponent, {'text': contents})
         control.currentItem.editor.body.forceActiveFocus()
     }
 

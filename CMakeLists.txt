@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-set(BUHO_VERSION 2.2.0)
+set(BUHO_VERSION 2.2.1)
 project(buho VERSION ${BUHO_VERSION})
 
 set(CMAKE_CXX_STANDARD 17)
@@ -43,7 +43,7 @@ find_package(MauiKit REQUIRED COMPONENTS FileBrowsing Accounts)
 if(ANDROID)
     find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS AndroidExtras QuickControls2)
 elseif(UNIX)
-    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Widgets)
+    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Widgets DBus)
 endif()
 
 if(QUICK_COMPILER)

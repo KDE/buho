@@ -63,4 +63,9 @@ Maui.ApplicationWindow
             Maui.Android.navBarColor(Maui.Theme.backgroundColor, !settings.darkMode)
         }
     }
+
+    function newNote(content : string)
+    {
+        notesView.newNote(content)
+    }
 }

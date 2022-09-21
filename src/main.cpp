@@ -20,6 +20,7 @@
 
 #include "owl.h"
 #include "models/notes/notes.h"
+#include "utils/server.h"
 
 #define BUHO_URI "org.maui.buho"
 
@@ -61,20 +62,66 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
 
     KAboutData::setApplicationData(about);
 
+    QCommandLineOption newNoteOption(QStringList() << "n" << "new", "Create a new note.");
+    QCommandLineOption newNoteContent(QStringList() << "c" << "content", "new note contents.", "content");
+
     QCommandLineParser parser;
+
+    parser.addOption(newNoteOption);
+    parser.addOption(newNoteContent);
 
     about.setupCommandLine(&parser);
     parser.process(app);
 
     about.processCommandLine(&parser);
 
+
+
+    bool newNote = parser.isSet(newNoteOption);
+    QString noteContent;
+
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
+
+
+    if(newNote)
+    {
+        if(parser.isSet(newNoteContent))
+        {
+            noteContent = parser.value(newNoteContent);
+        }
+    }
+
+    if (AppInstance::attachToExistingInstance(newNote, noteContent))
+    {
+        // Successfully attached to existing instance of Nota
+        return 0;
+    }
+
+    AppInstance::registerService();
+#endif
+
+    auto server = std::make_unique<Server>();
+
     QQmlApplicationEngine engine;
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    QObject::connect(
+                &engine,
+                &QQmlApplicationEngine::objectCreated,
+                &app,
+                [url, newNote, noteContent, &server](QObject *obj, const QUrl &objUrl) {
+        if (!obj && url == objUrl)
+            QCoreApplication::exit(-1);
+
+        server->setQmlObject(obj);
+        if(newNote)
+        {
+        server->newNote(noteContent);
+        }
+    },
+    Qt::QueuedConnection);
 
     qmlRegisterType<Notes>(BUHO_URI, 1, 0, "Notes");
 
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-    if (engine.rootObjects().isEmpty())
-        return -1;
-
+    engine.load(url);
     return app.exec();
 }
