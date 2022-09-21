@@ -8,6 +8,7 @@ SPDX-License-Identifier: CC0-1.0
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-3.0</project_license>
   <name>Buho</name>
+  <name xml:lang="ar">بوهو</name>
   <name xml:lang="az">Buho</name>
   <name xml:lang="ca">Buho</name>
   <name xml:lang="ca-valencia">Buho</name>
@@ -36,6 +37,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="zh-CN">Buho</name>
   <name xml:lang="zh-TW">Buho</name>
   <summary>Note-taking app</summary>
+  <summary xml:lang="ar">برنامج لتدوين الملاحظات</summary>
   <summary xml:lang="az">Qeyd saxlayan tətbiq</summary>
   <summary xml:lang="ca">Aplicació per a prendre notes</summary>
   <summary xml:lang="ca-valencia">Aplicació per a prendre notes</summary>
@@ -65,6 +67,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="zh-TW">筆記應用程式</summary>
   <description>
     <p>Buho is a note-taking app. Buho will let you take quick notes, save links, create books and pages for taking classes notes.</p>
+    <p xml:lang="ar">بوهو هو برنامج تدوين ملاحظات. يمكنك بوهو من أخذ الملاحظات بسرعة وحفظ الروابط وإنشاء الدفاتر والصفحات لأخذ ملاحظاتك في الصفوف الدراسية.</p>
     <p xml:lang="az">Buho qeydləri saxlaan tətbiqdir. Buho sizə sürətli qeydlər etməyə, bağlantıları saxlamağa, dərs qeydləri aparmaq üçün kitablar və səhifələr yaratmağa imkan verir.</p>
     <p xml:lang="ca">El Buho és una aplicació per a prendre notes. Permetrà prendre notes ràpides, desar enllaços, crear llibres i pàgines per a prendre notes de les classes.</p>
     <p xml:lang="ca-valencia">Buho és una aplicació per a prendre notes. Permetrà prendre notes ràpides, guardar enllaços, crear llibres i pàgines per a prendre notes de les classes.</p>
@@ -96,6 +99,7 @@ SPDX-License-Identifier: CC0-1.0
   <screenshots>
     <screenshot type="default">
       <caption>Buho</caption>
+      <caption xml:lang="ar">بوهو</caption>
       <caption xml:lang="az">Buho</caption>
       <caption xml:lang="ca">Buho</caption>
       <caption xml:lang="ca-valencia">Buho</caption>
