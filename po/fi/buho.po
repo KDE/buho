@@ -1,0 +1,381 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the buho package.
+# Tommi Nieminen <translator@legisign.org>, 2021, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: buho\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-22 00:43+0000\n"
+"PO-Revision-Date: 2022-01-11 22:48+0200\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 20.04.2\n"
+
+#: src/main.cpp:55 src/main.qml:16
+#, kde-format
+msgid "Buho"
+msgstr "Buho"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Create and organize your notes."
+msgstr "Luo ja hallitse muistiinpanojasi."
+
+#: src/main.cpp:55
+#, kde-format
+msgid "© 2019-%1 Maui Development Team"
+msgstr "© 2019-%1 Maui-kehitysryhmä"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Camilo Higuita"
+msgstr "Camilo Higuita"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Developer"
+msgstr "Kehittäjä"
+
+#: src/views/notes/NotesView.qml:71
+#, kde-format
+msgid "Remove notes"
+msgstr "Poista muistiinpanot"
+
+#: src/views/notes/NotesView.qml:72
+#, kde-format
+msgid "Are you sure you want to delete the selected notes?"
+msgstr "Haluatko varmasti poistaa valitut muistiinpanot?"
+
+#: src/views/notes/NotesView.qml:102
+#, kde-format
+msgid "No notes!"
+msgstr "Ei muistiinpanoja!"
+
+#: src/views/notes/NotesView.qml:103
+#, kde-format
+msgid "You can quickly create a new note"
+msgstr "Uuden muistiinpanon voi luoda nopeasti"
+
+#: src/views/notes/NotesView.qml:107
+#, kde-format
+msgid "New note"
+msgstr "Uusi muistiinpano"
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "Search "
+msgstr "Etsi"
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "notes"
+msgstr "muistilaput"
+
+#: src/views/notes/NotesView.qml:143
+#, kde-format
+msgid "Settings"
+msgstr "Asetukset"
+
+#: src/views/notes/NotesView.qml:150
+#, kde-format
+msgid "About"
+msgstr "Tietoa"
+
+#: src/views/notes/NotesView.qml:281
+#, kde-format
+msgid "Favorite"
+msgstr "Suosikki"
+
+#: src/views/notes/NotesView.qml:294 src/views/notes/NotesView.qml:540
+#, kde-format
+msgid "Share"
+msgstr "Jaa"
+
+#: src/views/notes/NotesView.qml:300 src/views/notes/NotesView.qml:520
+#, kde-format
+msgid "Export"
+msgstr "Vie"
+
+#: src/views/notes/NotesView.qml:306 src/widgets/NewNoteDialog.qml:144
+#, kde-format
+msgid "Delete"
+msgstr "Poista"
+
+#: src/views/notes/NotesView.qml:509
+#, kde-format
+msgid "UnFav"
+msgstr "Poista suosikeista"
+
+#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:176
+#, kde-format
+msgid "Fav"
+msgstr "Merkitse suosikiksi"
+
+#: src/views/notes/NotesView.qml:530
+#, kde-format
+msgid "Copy"
+msgstr "Kopioi"
+
+#: src/views/notes/NotesView.qml:550
+#, kde-format
+msgid "Select"
+msgstr "Valitse"
+
+#: src/views/notes/NotesView.qml:569
+#, kde-format
+msgid "Remove"
+msgstr "Poista"
+
+#: src/widgets/CardDelegate.qml:79
+#, kde-format
+msgid "Empty"
+msgstr "Tyhjä"
+
+#: src/widgets/CardDelegate.qml:80
+#, kde-format
+msgid "Edit this note"
+msgstr "Muokkaa tätä muistiinpanoa"
+
+#: src/widgets/NewNoteDialog.qml:134
+#, kde-format
+msgid "Find and Replace"
+msgstr "Etsi ja korvaa"
+
+#: src/widgets/NewNoteDialog.qml:185
+#, kde-format
+msgid ""
+"Title\n"
+"Body"
+msgstr ""
+"Otsikko\n"
+"Runko"
+
+#: src/widgets/NewNoteDialog.qml:209
+#, kde-format
+msgid "Note saved"
+msgstr "Muistiinpano tallennettu"
+
+#: src/widgets/SettingsDialog.qml:13
+#, kde-format
+msgid "Editor"
+msgstr "Muokkain"
+
+#: src/widgets/SettingsDialog.qml:14
+#, kde-format
+msgid "Configure the editor behaviour."
+msgstr "Aseta muokkaimen toiminta."
+
+#: src/widgets/SettingsDialog.qml:18
+#, kde-format
+msgid "Spell Checker"
+msgstr ""
+
+#: src/widgets/SettingsDialog.qml:19
+#, kde-format
+msgid "Check spelling and give suggestions."
+msgstr ""
+
+#: src/widgets/SettingsDialog.qml:30
+#, kde-format
+msgid "Auto Save"
+msgstr "Automaattitallennus"
+
+#: src/widgets/SettingsDialog.qml:31
+#, kde-format
+msgid "Auto saves your file every few seconds"
+msgstr "Automaattitallentaa tiedoston muutaman sekunnin välein"
+
+#: src/widgets/SettingsDialog.qml:42
+#, kde-format
+msgid "Auto Reload"
+msgstr "Lataa automaattisesti uudelleen"
+
+#: src/widgets/SettingsDialog.qml:43
+#, kde-format
+msgid "Auto reload the text on external changes."
+msgstr "Lataa tekstin uudelleen toisen ohjelman muutettua sitä."
+
+#: src/widgets/SettingsDialog.qml:54
+#, kde-format
+msgid "Line Numbers"
+msgstr "Rivinumerot"
+
+#: src/widgets/SettingsDialog.qml:55
+#, kde-format
+msgid "Display the line numbers on the left side."
+msgstr "Näyttää rivinumerot vasemmalla puolen."
+
+#: src/widgets/SettingsDialog.qml:68
+#, kde-format
+msgid "Dark Mode"
+msgstr "Tumma tila"
+
+#: src/widgets/SettingsDialog.qml:69
+#, kde-format
+msgid "Switch between light and dark colorscheme"
+msgstr "Vaihda vaalean ja tumman väriteeman välillä"
+
+#: src/widgets/SettingsDialog.qml:86
+#, kde-format
+msgid "Fonts"
+msgstr "Fontit"
+
+#: src/widgets/SettingsDialog.qml:87
+#, kde-format
+msgid "Configure the global editor font family and size"
+msgstr "Aseta muokkaimen yleisfonttiperhe ja -koko"
+
+#: src/widgets/SettingsDialog.qml:91
+#, kde-format
+msgid "Family"
+msgstr "Perhe"
+
+#: src/widgets/SettingsDialog.qml:104
+#, kde-format
+msgid "Size"
+msgstr "Koko"
+
+#: src/widgets/SettingsDialog.qml:117
+#, kde-format
+msgid "Syncing"
+msgstr "Synkronoidaan"
+
+#: src/widgets/SettingsDialog.qml:118
+#, kde-format
+msgid "Configure the syncing of notes and books."
+msgstr "Aseta muistiinpanojen ja muistikirjojen synkronointi."
+
+#: src/widgets/SettingsDialog.qml:122
+#, kde-format
+msgid "Auto sync"
+msgstr "Automaattisynkronointi"
+
+#: src/widgets/SettingsDialog.qml:123
+#, kde-format
+msgid "Sync notes and books on start up"
+msgstr "Synkronoi käynnistettäessä muistiinpanot ja kirjat"
+
+#: src/widgets/SettingsDialog.qml:136
+#, kde-format
+msgid "Sorting"
+msgstr "Lajittelu"
+
+#: src/widgets/SettingsDialog.qml:137
+#, kde-format
+msgid "Sorting order and behavior."
+msgstr "Lajittelujärjestys ja -toiminta."
+
+#: src/widgets/SettingsDialog.qml:141
+#, kde-format
+msgid "Sorting by"
+msgstr "Lajittelutapa"
+
+#: src/widgets/SettingsDialog.qml:142
+#, kde-format
+msgid "Change the sorting key."
+msgstr "Vaihda lajittelutapaa."
+
+#: src/widgets/SettingsDialog.qml:164
+#, kde-format
+msgid "Title"
+msgstr "Otsikko"
+
+#: src/widgets/SettingsDialog.qml:170
+#, kde-format
+msgid "Date"
+msgstr "Päiväys"
+
+#: src/widgets/SettingsDialog.qml:184
+#, kde-format
+msgid "Sort order"
+msgstr "Lajittelujärjestys"
+
+#: src/widgets/SettingsDialog.qml:185
+#, kde-format
+msgid "Change the sorting order."
+msgstr "Vaihda lajittelujärjestystä."
+
+#: src/widgets/SettingsDialog.qml:206
+#, kde-format
+msgid "Ascending"
+msgstr "Nouseva"
+
+#: src/widgets/SettingsDialog.qml:213
+#, kde-format
+msgid "Descending"
+msgstr "Laskeva"
+
+#~ msgid "Filter "
+#~ msgstr "Suodatin"
+
+#~ msgid "booklets in "
+#~ msgstr "vihkot kohteessa "
+
+#~ msgid "This book is empty!"
+#~ msgstr "Tämä muistikirja on tyhjä!"
+
+#~ msgid "Start by creating a new chapter for your book"
+#~ msgstr "Aloita luomalla muistikirjaan uusi luku"
+
+#~ msgid "Notes in this book: "
+#~ msgstr "Tämän muistikirjan muistiinpanot:"
+
+#~ msgid "Save"
+#~ msgstr "Tallenna"
+
+#~ msgid "Nothing to edit!"
+#~ msgstr "Ei muokattavaa!"
+
+#~ msgid "Select a chapter or create a new one"
+#~ msgstr "Valitse luku tai luo uusi"
+
+#~ msgid "New Chapter"
+#~ msgstr "Uusi luku"
+
+#~ msgid "Create a new chapter for your current book. Give it a title"
+#~ msgstr "Luo nykyiseen muistikirjan uusi luku. Anna sille otsikko"
+
+#, fuzzy
+#~| msgid "There are no Books!"
+#~ msgid "There are no Tags!"
+#~ msgstr "Kirjoja ei ole!"
+
+#, fuzzy
+#~| msgid "You can create new books and organize your notes"
+#~ msgid "You can create new tags to organize your notes"
+#~ msgstr "Voit luoda uusia kirjoja ja hallita muistiinpanojasi"
+
+#~ msgid "Books"
+#~ msgstr "Muistikirjat"
+
+#~ msgid "books"
+#~ msgstr "muistikirjaa"
+
+#~ msgid "New Book"
+#~ msgstr "Uusi muistikirja"
+
+#~ msgid ""
+#~ "Give a title to your new book. Your new book can contain many notes "
+#~ "grouped together"
+#~ msgstr ""
+#~ "Anna uuden muistikirjan nimi. Se voi sisältää useita yhteen ryhmitettyjä "
+#~ "muistiinpanoja"
+
+#~ msgid "My Book..."
+#~ msgstr "Muistikirja…"
+
+#~ msgid "Create"
+#~ msgstr "Luo"
+
+#~ msgid "Cancel"
+#~ msgstr "Peru"
+
+#~ msgid "Buho allows you to take quick notes and organize notebooks."
+#~ msgstr ""
+#~ "Buholla voit nopeasti tehdä muistiinpanoja ja hallita muistikirjoja."

@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the buho package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: buho\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-22 00:43+0000\n"
+"PO-Revision-Date: 2022-09-19 18:39+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: src/main.cpp:55 src/main.qml:16
+#, kde-format
+msgid "Buho"
+msgstr "Buho"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Create and organize your notes."
+msgstr "შექმენით და ორგანიზება გაუწიეთ თქვენს შენიშვნებს."
+
+#: src/main.cpp:55
+#, kde-format
+msgid "© 2019-%1 Maui Development Team"
+msgstr "© 2019- %1 Maui განვითარების გუნდი"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Camilo Higuita"
+msgstr "კამილო ჰიგუიტა"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Developer"
+msgstr "პროგრამისტი"
+
+#: src/views/notes/NotesView.qml:71
+#, kde-format
+msgid "Remove notes"
+msgstr "შენიშვნების წაშლა"
+
+#: src/views/notes/NotesView.qml:72
+#, kde-format
+msgid "Are you sure you want to delete the selected notes?"
+msgstr "დარწმუნებული ბრძანდებით, რომ გნებავთ მონიშნული შენიშვნების წაშლა?"
+
+#: src/views/notes/NotesView.qml:102
+#, kde-format
+msgid "No notes!"
+msgstr "შენიშვნების გარეშე!"
+
+#: src/views/notes/NotesView.qml:103
+#, kde-format
+msgid "You can quickly create a new note"
+msgstr "თქვენ შეგიძლიათ სწრაფად შექმნათ ახალი შენიშვნა"
+
+#: src/views/notes/NotesView.qml:107
+#, kde-format
+msgid "New note"
+msgstr "ახალი შენიშვნა"
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "Search "
+msgstr "ძებნა "
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "notes"
+msgstr "შენიშვნები"
+
+#: src/views/notes/NotesView.qml:143
+#, kde-format
+msgid "Settings"
+msgstr "&მორგება"
+
+#: src/views/notes/NotesView.qml:150
+#, kde-format
+msgid "About"
+msgstr "შესახებ"
+
+#: src/views/notes/NotesView.qml:281
+#, kde-format
+msgid "Favorite"
+msgstr "რჩეული"
+
+#: src/views/notes/NotesView.qml:294 src/views/notes/NotesView.qml:540
+#, kde-format
+msgid "Share"
+msgstr "გაზიარება"
+
+#: src/views/notes/NotesView.qml:300 src/views/notes/NotesView.qml:520
+#, kde-format
+msgid "Export"
+msgstr "გატანა"
+
+#: src/views/notes/NotesView.qml:306 src/widgets/NewNoteDialog.qml:144
+#, kde-format
+msgid "Delete"
+msgstr "წაშლა"
+
+#: src/views/notes/NotesView.qml:509
+#, kde-format
+msgid "UnFav"
+msgstr "რჩეულებიდანამოღება"
+
+#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:176
+#, kde-format
+msgid "Fav"
+msgstr "რჩეულებში"
+
+#: src/views/notes/NotesView.qml:530
+#, kde-format
+msgid "Copy"
+msgstr "კოპირება"
+
+#: src/views/notes/NotesView.qml:550
+#, kde-format
+msgid "Select"
+msgstr "არჩევა"
+
+#: src/views/notes/NotesView.qml:569
+#, kde-format
+msgid "Remove"
+msgstr "წაშლა"
+
+#: src/widgets/CardDelegate.qml:79
+#, kde-format
+msgid "Empty"
+msgstr "ცარიელი"
+
+#: src/widgets/CardDelegate.qml:80
+#, kde-format
+msgid "Edit this note"
+msgstr "ამ შენიშვნის ჩასწორება"
+
+#: src/widgets/NewNoteDialog.qml:134
+#, kde-format
+msgid "Find and Replace"
+msgstr "ძებნა და ჩანაცვლება"
+
+#: src/widgets/NewNoteDialog.qml:185
+#, kde-format
+msgid ""
+"Title\n"
+"Body"
+msgstr ""
+"სათაური\n"
+"სხეული"
+
+#: src/widgets/NewNoteDialog.qml:209
+#, kde-format
+msgid "Note saved"
+msgstr "შენიშვნა შენახულია"
+
+#: src/widgets/SettingsDialog.qml:13
+#, kde-format
+msgid "Editor"
+msgstr "რედაქტორი"
+
+#: src/widgets/SettingsDialog.qml:14
+#, kde-format
+msgid "Configure the editor behaviour."
+msgstr "ტექსტური რედაქტორის მორგება."
+
+#: src/widgets/SettingsDialog.qml:18
+#, kde-format
+msgid "Spell Checker"
+msgstr "მართლწერის შემოწმება"
+
+#: src/widgets/SettingsDialog.qml:19
+#, kde-format
+msgid "Check spelling and give suggestions."
+msgstr "მართლწერის შემოწმება და შეთავაზებები."
+
+#: src/widgets/SettingsDialog.qml:30
+#, kde-format
+msgid "Auto Save"
+msgstr "ავტომატური შენახვა"
+
+#: src/widgets/SettingsDialog.qml:31
+#, kde-format
+msgid "Auto saves your file every few seconds"
+msgstr "თქვენი ფაილის ავტომატური შენახვა რამდენიმე წამში ერთხელ"
+
+#: src/widgets/SettingsDialog.qml:42
+#, kde-format
+msgid "Auto Reload"
+msgstr "ავტომატური გადატვირთვა"
+
+#: src/widgets/SettingsDialog.qml:43
+#, kde-format
+msgid "Auto reload the text on external changes."
+msgstr "გარე ცვლილებებისას ტექსტის ავტომატურად თავიდან ჩატვირთვა."
+
+#: src/widgets/SettingsDialog.qml:54
+#, kde-format
+msgid "Line Numbers"
+msgstr "ხაზის ნომრები"
+
+#: src/widgets/SettingsDialog.qml:55
+#, kde-format
+msgid "Display the line numbers on the left side."
+msgstr "მარცხენა მხარეს ხაზის ნომრების ჩვენება."
+
+#: src/widgets/SettingsDialog.qml:68
+#, kde-format
+msgid "Dark Mode"
+msgstr "მუქი რეჟიმი"
+
+#: src/widgets/SettingsDialog.qml:69
+#, kde-format
+msgid "Switch between light and dark colorscheme"
+msgstr "ღია და მუქ ფერებს შორის გადართვა"
+
+#: src/widgets/SettingsDialog.qml:86
+#, kde-format
+msgid "Fonts"
+msgstr "ფონტები"
+
+#: src/widgets/SettingsDialog.qml:87
+#, kde-format
+msgid "Configure the global editor font family and size"
+msgstr "გლობალური რედაქტორის ფონტის ოჯახისა და ზომის მორგება"
+
+#: src/widgets/SettingsDialog.qml:91
+#, kde-format
+msgid "Family"
+msgstr "ოჯახი"
+
+#: src/widgets/SettingsDialog.qml:104
+#, kde-format
+msgid "Size"
+msgstr "ზომა"
+
+#: src/widgets/SettingsDialog.qml:117
+#, kde-format
+msgid "Syncing"
+msgstr "სინქრონიზაცია"
+
+#: src/widgets/SettingsDialog.qml:118
+#, kde-format
+msgid "Configure the syncing of notes and books."
+msgstr "ჩანაწერებისა და წიგნების სინქრონიზაციის მორგება."
+
+#: src/widgets/SettingsDialog.qml:122
+#, kde-format
+msgid "Auto sync"
+msgstr "ავტო სინქრონიზაცია"
+
+#: src/widgets/SettingsDialog.qml:123
+#, kde-format
+msgid "Sync notes and books on start up"
+msgstr "წიგნებისა და ჩანაწერების სინქრონიზაცია ჩართვისას"
+
+#: src/widgets/SettingsDialog.qml:136
+#, kde-format
+msgid "Sorting"
+msgstr "დალაგება"
+
+#: src/widgets/SettingsDialog.qml:137
+#, kde-format
+msgid "Sorting order and behavior."
+msgstr "დალაგების მიმდევრობა და ქცევა."
+
+#: src/widgets/SettingsDialog.qml:141
+#, kde-format
+msgid "Sorting by"
+msgstr "დალაგება"
+
+#: src/widgets/SettingsDialog.qml:142
+#, kde-format
+msgid "Change the sorting key."
+msgstr "დახარისხების გასაღების შეცვლა."
+
+#: src/widgets/SettingsDialog.qml:164
+#, kde-format
+msgid "Title"
+msgstr "სათაური"
+
+#: src/widgets/SettingsDialog.qml:170
+#, kde-format
+msgid "Date"
+msgstr "თარიღი"
+
+#: src/widgets/SettingsDialog.qml:184
+#, kde-format
+msgid "Sort order"
+msgstr "დალაგების წესი"
+
+#: src/widgets/SettingsDialog.qml:185
+#, kde-format
+msgid "Change the sorting order."
+msgstr "დახარისხების გასაღების შეცვლა."
+
+#: src/widgets/SettingsDialog.qml:206
+#, kde-format
+msgid "Ascending"
+msgstr "ზრდის მიხედვით"
+
+#: src/widgets/SettingsDialog.qml:213
+#, kde-format
+msgid "Descending"
+msgstr "დაღმავალი"

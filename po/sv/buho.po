@@ -1,0 +1,381 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the buho package.
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2020, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: buho\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-22 00:43+0000\n"
+"PO-Revision-Date: 2022-09-24 14:58+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.08.1\n"
+
+#: src/main.cpp:55 src/main.qml:16
+#, kde-format
+msgid "Buho"
+msgstr "Buho"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Create and organize your notes."
+msgstr "Skapa och organisera dina anteckningar."
+
+#: src/main.cpp:55
+#, kde-format
+msgid "© 2019-%1 Maui Development Team"
+msgstr "© 2019-%1 Maui utvecklingsgrupp"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Camilo Higuita"
+msgstr "Camilo Higuita"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Developer"
+msgstr "Utvecklare"
+
+#: src/views/notes/NotesView.qml:71
+#, kde-format
+msgid "Remove notes"
+msgstr "Ta bort anteckningar."
+
+#: src/views/notes/NotesView.qml:72
+#, kde-format
+msgid "Are you sure you want to delete the selected notes?"
+msgstr "Är du säker på att du vill ta bort de markerade anteckningarna?"
+
+#: src/views/notes/NotesView.qml:102
+#, kde-format
+msgid "No notes!"
+msgstr "Inga anteckningar."
+
+#: src/views/notes/NotesView.qml:103
+#, kde-format
+msgid "You can quickly create a new note"
+msgstr "Du kan snabbt skapa en ny anteckning"
+
+#: src/views/notes/NotesView.qml:107
+#, kde-format
+msgid "New note"
+msgstr "Ny anteckning"
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "Search "
+msgstr "Sök"
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "notes"
+msgstr "anteckningar"
+
+#: src/views/notes/NotesView.qml:143
+#, kde-format
+msgid "Settings"
+msgstr "Inställningar"
+
+#: src/views/notes/NotesView.qml:150
+#, kde-format
+msgid "About"
+msgstr "Om"
+
+#: src/views/notes/NotesView.qml:281
+#, kde-format
+msgid "Favorite"
+msgstr "Favorit"
+
+#: src/views/notes/NotesView.qml:294 src/views/notes/NotesView.qml:540
+#, kde-format
+msgid "Share"
+msgstr "Dela"
+
+#: src/views/notes/NotesView.qml:300 src/views/notes/NotesView.qml:520
+#, kde-format
+msgid "Export"
+msgstr "Exportera"
+
+#: src/views/notes/NotesView.qml:306 src/widgets/NewNoteDialog.qml:144
+#, kde-format
+msgid "Delete"
+msgstr "Ta bort"
+
+#: src/views/notes/NotesView.qml:509
+#, kde-format
+msgid "UnFav"
+msgstr "Ta bort från favoriter"
+
+#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:176
+#, kde-format
+msgid "Fav"
+msgstr "Favorit"
+
+#: src/views/notes/NotesView.qml:530
+#, kde-format
+msgid "Copy"
+msgstr "Kopiera"
+
+#: src/views/notes/NotesView.qml:550
+#, kde-format
+msgid "Select"
+msgstr "Markera"
+
+#: src/views/notes/NotesView.qml:569
+#, kde-format
+msgid "Remove"
+msgstr "Ta bort"
+
+#: src/widgets/CardDelegate.qml:79
+#, kde-format
+msgid "Empty"
+msgstr "Töm"
+
+#: src/widgets/CardDelegate.qml:80
+#, kde-format
+msgid "Edit this note"
+msgstr "Redigera anteckningen"
+
+#: src/widgets/NewNoteDialog.qml:134
+#, kde-format
+msgid "Find and Replace"
+msgstr "Sök och ersätt"
+
+#: src/widgets/NewNoteDialog.qml:185
+#, kde-format
+msgid ""
+"Title\n"
+"Body"
+msgstr ""
+"Titel\n"
+"Text"
+
+#: src/widgets/NewNoteDialog.qml:209
+#, kde-format
+msgid "Note saved"
+msgstr "Anteckning sparad"
+
+#: src/widgets/SettingsDialog.qml:13
+#, kde-format
+msgid "Editor"
+msgstr "Editor"
+
+#: src/widgets/SettingsDialog.qml:14
+#, kde-format
+msgid "Configure the editor behaviour."
+msgstr "Anpassa editorns beteende."
+
+#: src/widgets/SettingsDialog.qml:18
+#, kde-format
+msgid "Spell Checker"
+msgstr "Stavningskontroll"
+
+#: src/widgets/SettingsDialog.qml:19
+#, kde-format
+msgid "Check spelling and give suggestions."
+msgstr "Kontrollera stavning och ge förslag."
+
+#: src/widgets/SettingsDialog.qml:30
+#, kde-format
+msgid "Auto Save"
+msgstr "Spara automatiskt"
+
+#: src/widgets/SettingsDialog.qml:31
+#, kde-format
+msgid "Auto saves your file every few seconds"
+msgstr "Sparar filen automatiskt med några sekunders mellanrum"
+
+#: src/widgets/SettingsDialog.qml:42
+#, kde-format
+msgid "Auto Reload"
+msgstr "Automatisk återinläsning"
+
+#: src/widgets/SettingsDialog.qml:43
+#, kde-format
+msgid "Auto reload the text on external changes."
+msgstr "Läs in texten automatiskt vid externa ändringar."
+
+#: src/widgets/SettingsDialog.qml:54
+#, kde-format
+msgid "Line Numbers"
+msgstr "Radnummer"
+
+#: src/widgets/SettingsDialog.qml:55
+#, kde-format
+msgid "Display the line numbers on the left side."
+msgstr "Visa radnummer på vänster sida."
+
+#: src/widgets/SettingsDialog.qml:68
+#, kde-format
+msgid "Dark Mode"
+msgstr "Mörkt läge"
+
+#: src/widgets/SettingsDialog.qml:69
+#, kde-format
+msgid "Switch between light and dark colorscheme"
+msgstr "Byt mellan ljust och mörkt färgschema"
+
+#: src/widgets/SettingsDialog.qml:86
+#, kde-format
+msgid "Fonts"
+msgstr "Teckensnitt"
+
+#: src/widgets/SettingsDialog.qml:87
+#, kde-format
+msgid "Configure the global editor font family and size"
+msgstr "Anpassa editorns globala teckensnittsfamilj och storlek"
+
+#: src/widgets/SettingsDialog.qml:91
+#, kde-format
+msgid "Family"
+msgstr "Familj"
+
+#: src/widgets/SettingsDialog.qml:104
+#, kde-format
+msgid "Size"
+msgstr "Storlek"
+
+#: src/widgets/SettingsDialog.qml:117
+#, kde-format
+msgid "Syncing"
+msgstr "Synkroniserar"
+
+#: src/widgets/SettingsDialog.qml:118
+#, kde-format
+msgid "Configure the syncing of notes and books."
+msgstr "Anpassa synkronisering av anteckningar och böcker."
+
+#: src/widgets/SettingsDialog.qml:122
+#, kde-format
+msgid "Auto sync"
+msgstr "Automatisk synkronisering"
+
+#: src/widgets/SettingsDialog.qml:123
+#, kde-format
+msgid "Sync notes and books on start up"
+msgstr "Synkronisera anteckningar och böcker vid start"
+
+#: src/widgets/SettingsDialog.qml:136
+#, kde-format
+msgid "Sorting"
+msgstr "Sortering"
+
+#: src/widgets/SettingsDialog.qml:137
+#, kde-format
+msgid "Sorting order and behavior."
+msgstr "Sorteringsordning och beteende."
+
+#: src/widgets/SettingsDialog.qml:141
+#, kde-format
+msgid "Sorting by"
+msgstr "Sortera enligt"
+
+#: src/widgets/SettingsDialog.qml:142
+#, kde-format
+msgid "Change the sorting key."
+msgstr "Ändra sorteringsbegreppet."
+
+#: src/widgets/SettingsDialog.qml:164
+#, kde-format
+msgid "Title"
+msgstr "Titel"
+
+#: src/widgets/SettingsDialog.qml:170
+#, kde-format
+msgid "Date"
+msgstr "Datum"
+
+#: src/widgets/SettingsDialog.qml:184
+#, kde-format
+msgid "Sort order"
+msgstr "Sorteringsordning"
+
+#: src/widgets/SettingsDialog.qml:185
+#, kde-format
+msgid "Change the sorting order."
+msgstr "Ändra sorteringsordningen."
+
+#: src/widgets/SettingsDialog.qml:206
+#, kde-format
+msgid "Ascending"
+msgstr "Stigande"
+
+#: src/widgets/SettingsDialog.qml:213
+#, kde-format
+msgid "Descending"
+msgstr "Fallande"
+
+#~ msgid "Filter "
+#~ msgstr "Filter"
+
+#~ msgid "booklets in "
+#~ msgstr "häften i"
+
+#~ msgid "This book is empty!"
+#~ msgstr "Boken är tom."
+
+#~ msgid "Start by creating a new chapter for your book"
+#~ msgstr "Börja med att skapa ett nytt kapitel i boken"
+
+#~ msgid "Notes in this book: "
+#~ msgstr "Anteckningar i boken: "
+
+#~ msgid "Save"
+#~ msgstr "Spara"
+
+#~ msgid "Nothing to edit!"
+#~ msgstr "Ingenting att redigera."
+
+#~ msgid "Select a chapter or create a new one"
+#~ msgstr "Välj ett kapitel eller skapa ett nytt"
+
+#~ msgid "New Chapter"
+#~ msgstr "Nytt kapitel"
+
+#~ msgid "Create a new chapter for your current book. Give it a title"
+#~ msgstr "Skapa ett nytt kapitel i den aktuella boken. Ge det en titel."
+
+#, fuzzy
+#~| msgid "There are no Books!"
+#~ msgid "There are no Tags!"
+#~ msgstr "Det finns inga böcker."
+
+#, fuzzy
+#~| msgid "You can create new books and organize your notes"
+#~ msgid "You can create new tags to organize your notes"
+#~ msgstr "Du kan skapa nya böcker och organisera dina anteckningar"
+
+#~ msgid "Books"
+#~ msgstr "Böcker"
+
+#~ msgid "books"
+#~ msgstr "böcker"
+
+#~ msgid "New Book"
+#~ msgstr "Ny bok"
+
+#~ msgid ""
+#~ "Give a title to your new book. Your new book can contain many notes "
+#~ "grouped together"
+#~ msgstr ""
+#~ "Ge den nya boken en titel. Den nya boken kan innehålla många anteckningar "
+#~ "grupperade tillsammans."
+
+#~ msgid "My Book..."
+#~ msgstr "Min bok..."
+
+#~ msgid "Create"
+#~ msgstr "Skapa"
+
+#~ msgid "Cancel"
+#~ msgstr "Avbryt"
+
+#~ msgid "Buho allows you to take quick notes and organize notebooks."
+#~ msgstr ""
+#~ "Buho låter dig göra snabba anteckningar och organisera anteckningsböcker."

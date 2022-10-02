@@ -1,0 +1,386 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the buho package.
+#
+# Kheyyam Gojayev <xxmn77@gmail.com>, 2020, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: buho\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-22 00:43+0000\n"
+"PO-Revision-Date: 2022-01-12 00:32+0400\n"
+"Last-Translator: Kheyyam Gojayev <xxmn77@gmail.com>\n"
+"Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
+"Language: az\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.12.0\n"
+
+#: src/main.cpp:55 src/main.qml:16
+#, kde-format
+msgid "Buho"
+msgstr "Buho"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Create and organize your notes."
+msgstr "Qeydlər yaradın və onları sistemləşdirin."
+
+#: src/main.cpp:55
+#, kde-format
+msgid "© 2019-%1 Maui Development Team"
+msgstr "© 2019-%1 Maui Tərtibatçılar Komandası"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Camilo Higuita"
+msgstr "Camilo Higuita"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Developer"
+msgstr "Tərtibatçı"
+
+#: src/views/notes/NotesView.qml:71
+#, kde-format
+msgid "Remove notes"
+msgstr "Qeydləri silin"
+
+#: src/views/notes/NotesView.qml:72
+#, kde-format
+msgid "Are you sure you want to delete the selected notes?"
+msgstr "Seçilmiş qeydləri silmək istədiyinizə əminsiniz?"
+
+#: src/views/notes/NotesView.qml:102
+#, kde-format
+msgid "No notes!"
+msgstr "Qeydlər yoxdur!"
+
+#: src/views/notes/NotesView.qml:103
+#, kde-format
+msgid "You can quickly create a new note"
+msgstr "Siz cəld bir qeyd yarada bilərsiniz"
+
+#: src/views/notes/NotesView.qml:107
+#, kde-format
+msgid "New note"
+msgstr "Yeni qeyd"
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "Search "
+msgstr "Axtarış "
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "notes"
+msgstr "qeydlər"
+
+#: src/views/notes/NotesView.qml:143
+#, kde-format
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: src/views/notes/NotesView.qml:150
+#, kde-format
+msgid "About"
+msgstr "Haqqında"
+
+#: src/views/notes/NotesView.qml:281
+#, kde-format
+msgid "Favorite"
+msgstr "Seçilmişlər"
+
+#: src/views/notes/NotesView.qml:294 src/views/notes/NotesView.qml:540
+#, kde-format
+msgid "Share"
+msgstr "Paylaşmaq"
+
+#: src/views/notes/NotesView.qml:300 src/views/notes/NotesView.qml:520
+#, kde-format
+msgid "Export"
+msgstr "İxrac"
+
+#: src/views/notes/NotesView.qml:306 src/widgets/NewNoteDialog.qml:144
+#, kde-format
+msgid "Delete"
+msgstr "Silmək"
+
+#: src/views/notes/NotesView.qml:509
+#, kde-format
+msgid "UnFav"
+msgstr "Seçilməm."
+
+#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:176
+#, kde-format
+msgid "Fav"
+msgstr "Seçil."
+
+#: src/views/notes/NotesView.qml:530
+#, kde-format
+msgid "Copy"
+msgstr "Kopyalamaq"
+
+#: src/views/notes/NotesView.qml:550
+#, kde-format
+msgid "Select"
+msgstr "Seçim"
+
+#: src/views/notes/NotesView.qml:569
+#, kde-format
+msgid "Remove"
+msgstr "Silmək"
+
+#: src/widgets/CardDelegate.qml:79
+#, kde-format
+msgid "Empty"
+msgstr "Boş"
+
+#: src/widgets/CardDelegate.qml:80
+#, kde-format
+msgid "Edit this note"
+msgstr "Bu qeydə düzəliş etmək"
+
+#: src/widgets/NewNoteDialog.qml:134
+#, kde-format
+msgid "Find and Replace"
+msgstr "Tapın və Əvəzləyin"
+
+#: src/widgets/NewNoteDialog.qml:185
+#, kde-format
+msgid ""
+"Title\n"
+"Body"
+msgstr ""
+"Başlıq\n"
+"Mündəricat"
+
+#: src/widgets/NewNoteDialog.qml:209
+#, kde-format
+msgid "Note saved"
+msgstr "Qeyd saxlanıldı"
+
+#: src/widgets/SettingsDialog.qml:13
+#, kde-format
+msgid "Editor"
+msgstr "Redaktor"
+
+#: src/widgets/SettingsDialog.qml:14
+#, kde-format
+msgid "Configure the editor behaviour."
+msgstr "Redaktor davranışlarını tənzimləmək."
+
+#: src/widgets/SettingsDialog.qml:18
+#, kde-format
+msgid "Spell Checker"
+msgstr ""
+
+#: src/widgets/SettingsDialog.qml:19
+#, kde-format
+msgid "Check spelling and give suggestions."
+msgstr ""
+
+#: src/widgets/SettingsDialog.qml:30
+#, kde-format
+msgid "Auto Save"
+msgstr "Avtomatik saxlamaq"
+
+#: src/widgets/SettingsDialog.qml:31
+#, kde-format
+msgid "Auto saves your file every few seconds"
+msgstr "Hər saniyədən bir avtomatik saxlamayır"
+
+#: src/widgets/SettingsDialog.qml:42
+#, kde-format
+msgid "Auto Reload"
+msgstr "Avtomatik yenidən yükləmək"
+
+#: src/widgets/SettingsDialog.qml:43
+#, kde-format
+msgid "Auto reload the text on external changes."
+msgstr ""
+"Üçüncü bir proqram tərəfindən dəyişdirildikdə mətnin avtomatik yenidən "
+"yüklənmsi."
+
+#: src/widgets/SettingsDialog.qml:54
+#, kde-format
+msgid "Line Numbers"
+msgstr "Sətir Nömrələri"
+
+#: src/widgets/SettingsDialog.qml:55
+#, kde-format
+msgid "Display the line numbers on the left side."
+msgstr "Sətir nömrələrini sol tərəfdə göstərmək."
+
+#: src/widgets/SettingsDialog.qml:68
+#, kde-format
+msgid "Dark Mode"
+msgstr "Qaranlıq rejim"
+
+#: src/widgets/SettingsDialog.qml:69
+#, kde-format
+msgid "Switch between light and dark colorscheme"
+msgstr "İşıqlı və qaranlıq rəng sxemləri arası keçid"
+
+#: src/widgets/SettingsDialog.qml:86
+#, kde-format
+msgid "Fonts"
+msgstr "Şriftlər"
+
+#: src/widgets/SettingsDialog.qml:87
+#, kde-format
+msgid "Configure the global editor font family and size"
+msgstr "Ümumi redaktorun şriftini və şrift plçüsünü dəyişmək"
+
+#: src/widgets/SettingsDialog.qml:91
+#, kde-format
+msgid "Family"
+msgstr "Şrift ailəsi"
+
+#: src/widgets/SettingsDialog.qml:104
+#, kde-format
+msgid "Size"
+msgstr "Ölçüsü"
+
+#: src/widgets/SettingsDialog.qml:117
+#, kde-format
+msgid "Syncing"
+msgstr "Eyniləşdirmə"
+
+#: src/widgets/SettingsDialog.qml:118
+#, kde-format
+msgid "Configure the syncing of notes and books."
+msgstr "Qeydlərin və kitabların eyniləşdirmə tənzimləməsi."
+
+#: src/widgets/SettingsDialog.qml:122
+#, kde-format
+msgid "Auto sync"
+msgstr "Avtomatik eyniləşdirmə"
+
+#: src/widgets/SettingsDialog.qml:123
+#, kde-format
+msgid "Sync notes and books on start up"
+msgstr "Başlanğıcda kitabları və qeydləri eyniləşdirmək"
+
+#: src/widgets/SettingsDialog.qml:136
+#, kde-format
+msgid "Sorting"
+msgstr "Sıralama"
+
+#: src/widgets/SettingsDialog.qml:137
+#, kde-format
+msgid "Sorting order and behavior."
+msgstr "Sıralama və davranış qaydaları"
+
+#: src/widgets/SettingsDialog.qml:141
+#, kde-format
+msgid "Sorting by"
+msgstr "Buna görə sıralamaq"
+
+#: src/widgets/SettingsDialog.qml:142
+#, kde-format
+msgid "Change the sorting key."
+msgstr "Sıralama açarını dəyişmək"
+
+#: src/widgets/SettingsDialog.qml:164
+#, kde-format
+msgid "Title"
+msgstr "Başlıq"
+
+#: src/widgets/SettingsDialog.qml:170
+#, kde-format
+msgid "Date"
+msgstr "Tarix"
+
+#: src/widgets/SettingsDialog.qml:184
+#, kde-format
+msgid "Sort order"
+msgstr "Sıralama qaydası"
+
+#: src/widgets/SettingsDialog.qml:185
+#, kde-format
+msgid "Change the sorting order."
+msgstr "Sıralama qaydasını dəyişmək"
+
+#: src/widgets/SettingsDialog.qml:206
+#, kde-format
+msgid "Ascending"
+msgstr "Artan sıra ilə"
+
+#: src/widgets/SettingsDialog.qml:213
+#, kde-format
+msgid "Descending"
+msgstr "Azalan sıra ilə"
+
+#~ msgid "Tags"
+#~ msgstr "Yarlıqlar"
+
+#~ msgid "Filter "
+#~ msgstr "Filtr "
+
+#~ msgid "booklets in "
+#~ msgstr "bukletlər "
+
+#~ msgid "This book is empty!"
+#~ msgstr "Bu kitab boşdur"
+
+#~ msgid "Start by creating a new chapter for your book"
+#~ msgstr "Kitabınız üçün yeni bir fəsil yaratmağa başlayın"
+
+#~ msgid "Notes in this book: "
+#~ msgstr "Bu kitabdakı qeydlr: "
+
+#~ msgid "Save"
+#~ msgstr "Saxlamaq"
+
+#~ msgid "Nothing to edit!"
+#~ msgstr "Düzəliş etməli bir şey yoxdur!"
+
+#~ msgid "Select a chapter or create a new one"
+#~ msgstr "Bir fəsil seçin və ya yenisini yaradın"
+
+#~ msgid "New Chapter"
+#~ msgstr "Yeni Fəsil"
+
+#~ msgid "Create a new chapter for your current book. Give it a title"
+#~ msgstr "Hazırkı kitabınız üçün yeni fəsil yaradın. Başlıq təyin edin"
+
+#~ msgid "tags"
+#~ msgstr "yarlıqlar"
+
+#~ msgid "There are no Tags!"
+#~ msgstr "Yarlıqlar Yoxdur!"
+
+#~ msgid "You can create new tags to organize your notes"
+#~ msgstr "Qeydlərinizi sistemləşdirmək üçün yeni yarlıqlar yarada bilərsiniz"
+
+#~ msgid "Books"
+#~ msgstr "Kitablar"
+
+#~ msgid "books"
+#~ msgstr "kkitablar"
+
+#~ msgid "New Book"
+#~ msgstr "Yeni Kitab"
+
+#~ msgid ""
+#~ "Give a title to your new book. Your new book can contain many notes "
+#~ "grouped together"
+#~ msgstr ""
+#~ "Yeni kitabınza ad verin. Yeni kitabınız birlikdə qruplaşdırılmış bir çox "
+#~ "qeydlərdən ibarət ola bilər."
+
+#~ msgid "My Book..."
+#~ msgstr "Mənim Kitabım..."
+
+#~ msgid "Create"
+#~ msgstr "Yaratmaq"
+
+#~ msgid "Cancel"
+#~ msgstr "İmtina"
+
+#~ msgid "Buho allows you to take quick notes and organize notebooks."
+#~ msgstr ""
+#~ "Buho, tez qeydllər aparmağa və qeyd dəftərlərini təşkil etməyə imkan "
+#~ "verir."

@@ -1,0 +1,385 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the buho package.
+#
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: buho\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-22 00:43+0000\n"
+"PO-Revision-Date: 2022-01-08 10:47+0100\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 22.03.70\n"
+
+#: src/main.cpp:55 src/main.qml:16
+#, kde-format
+msgid "Buho"
+msgstr "Buho"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Create and organize your notes."
+msgstr "Twórz i porządkuj swoje zapiski."
+
+#: src/main.cpp:55
+#, kde-format
+msgid "© 2019-%1 Maui Development Team"
+msgstr "© 2019-%1 Zespół programistów Maui"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Camilo Higuita"
+msgstr "Camilo Higuita"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Developer"
+msgstr "Programista"
+
+#: src/views/notes/NotesView.qml:71
+#, kde-format
+msgid "Remove notes"
+msgstr "Usuń zapiski"
+
+#: src/views/notes/NotesView.qml:72
+#, kde-format
+msgid "Are you sure you want to delete the selected notes?"
+msgstr "Czy na pewno usunąć zaznaczone zapiski?"
+
+#: src/views/notes/NotesView.qml:102
+#, kde-format
+msgid "No notes!"
+msgstr "Brak zapisków!"
+
+#: src/views/notes/NotesView.qml:103
+#, kde-format
+msgid "You can quickly create a new note"
+msgstr "Możesz szybko utworzyć nowy zapisek"
+
+#: src/views/notes/NotesView.qml:107
+#, kde-format
+msgid "New note"
+msgstr "Nowa uwaga"
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "Search "
+msgstr "Szukaj "
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "notes"
+msgstr "zapiski"
+
+#: src/views/notes/NotesView.qml:143
+#, kde-format
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: src/views/notes/NotesView.qml:150
+#, kde-format
+msgid "About"
+msgstr "O programie"
+
+#: src/views/notes/NotesView.qml:281
+#, kde-format
+msgid "Favorite"
+msgstr "Ulubione"
+
+#: src/views/notes/NotesView.qml:294 src/views/notes/NotesView.qml:540
+#, kde-format
+msgid "Share"
+msgstr "Udostępnij"
+
+#: src/views/notes/NotesView.qml:300 src/views/notes/NotesView.qml:520
+#, kde-format
+msgid "Export"
+msgstr "Wyeksportuj"
+
+#: src/views/notes/NotesView.qml:306 src/widgets/NewNoteDialog.qml:144
+#, kde-format
+msgid "Delete"
+msgstr "Usuń"
+
+#: src/views/notes/NotesView.qml:509
+#, kde-format
+msgid "UnFav"
+msgstr "Usuń z ulubionych"
+
+#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:176
+#, kde-format
+msgid "Fav"
+msgstr "Ulubione"
+
+#: src/views/notes/NotesView.qml:530
+#, kde-format
+msgid "Copy"
+msgstr "Skopiuj"
+
+#: src/views/notes/NotesView.qml:550
+#, kde-format
+msgid "Select"
+msgstr "Zaznacz"
+
+#: src/views/notes/NotesView.qml:569
+#, kde-format
+msgid "Remove"
+msgstr "Usuń"
+
+#: src/widgets/CardDelegate.qml:79
+#, kde-format
+msgid "Empty"
+msgstr "Pusta"
+
+#: src/widgets/CardDelegate.qml:80
+#, kde-format
+msgid "Edit this note"
+msgstr "Zmień ten zapisek"
+
+#: src/widgets/NewNoteDialog.qml:134
+#, kde-format
+msgid "Find and Replace"
+msgstr "Znajdź i zastąp"
+
+#: src/widgets/NewNoteDialog.qml:185
+#, kde-format
+msgid ""
+"Title\n"
+"Body"
+msgstr ""
+"Treść\n"
+"tytułu"
+
+#: src/widgets/NewNoteDialog.qml:209
+#, kde-format
+msgid "Note saved"
+msgstr "Niezapisane"
+
+#: src/widgets/SettingsDialog.qml:13
+#, kde-format
+msgid "Editor"
+msgstr "Edytor"
+
+#: src/widgets/SettingsDialog.qml:14
+#, kde-format
+msgid "Configure the editor behaviour."
+msgstr "Ustawienia zachowania edytora."
+
+#: src/widgets/SettingsDialog.qml:18
+#, kde-format
+msgid "Spell Checker"
+msgstr ""
+
+#: src/widgets/SettingsDialog.qml:19
+#, kde-format
+msgid "Check spelling and give suggestions."
+msgstr ""
+
+#: src/widgets/SettingsDialog.qml:30
+#, kde-format
+msgid "Auto Save"
+msgstr "Samozapisywanie"
+
+#: src/widgets/SettingsDialog.qml:31
+#, kde-format
+msgid "Auto saves your file every few seconds"
+msgstr "Sam zapisuj plik co każde kilka sekund"
+
+#: src/widgets/SettingsDialog.qml:42
+#, kde-format
+msgid "Auto Reload"
+msgstr "Sam wczytuj ponownie"
+
+#: src/widgets/SettingsDialog.qml:43
+#, kde-format
+msgid "Auto reload the text on external changes."
+msgstr "Sam wczytuj ponownie tekst, gdy inny program go zmieni."
+
+#: src/widgets/SettingsDialog.qml:54
+#, kde-format
+msgid "Line Numbers"
+msgstr "Numery wierszy"
+
+#: src/widgets/SettingsDialog.qml:55
+#, kde-format
+msgid "Display the line numbers on the left side."
+msgstr "Wyświetl numery wierszy po lewej stronie."
+
+#: src/widgets/SettingsDialog.qml:68
+#, kde-format
+msgid "Dark Mode"
+msgstr "Tryb ciemny"
+
+#: src/widgets/SettingsDialog.qml:69
+#, kde-format
+msgid "Switch between light and dark colorscheme"
+msgstr "Przełącz pomiędzy trybem jasnym i ciemnym"
+
+#: src/widgets/SettingsDialog.qml:86
+#, kde-format
+msgid "Fonts"
+msgstr "Czcionki"
+
+#: src/widgets/SettingsDialog.qml:87
+#, kde-format
+msgid "Configure the global editor font family and size"
+msgstr "Ustawienia rodzaju czcionki i jej rozmiaru globalnie dla edytora"
+
+#: src/widgets/SettingsDialog.qml:91
+#, kde-format
+msgid "Family"
+msgstr "Rodzina"
+
+#: src/widgets/SettingsDialog.qml:104
+#, kde-format
+msgid "Size"
+msgstr "Rozmiar"
+
+#: src/widgets/SettingsDialog.qml:117
+#, kde-format
+msgid "Syncing"
+msgstr "Synchronizowanie"
+
+#: src/widgets/SettingsDialog.qml:118
+#, kde-format
+msgid "Configure the syncing of notes and books."
+msgstr "Ustawienia synchronizacji zapisków i zeszytów."
+
+#: src/widgets/SettingsDialog.qml:122
+#, kde-format
+msgid "Auto sync"
+msgstr "Samosynchronizowanie"
+
+#: src/widgets/SettingsDialog.qml:123
+#, kde-format
+msgid "Sync notes and books on start up"
+msgstr "Synchronizuj zeszyty po uruchomieniu"
+
+#: src/widgets/SettingsDialog.qml:136
+#, kde-format
+msgid "Sorting"
+msgstr "Szeregowanie"
+
+#: src/widgets/SettingsDialog.qml:137
+#, kde-format
+msgid "Sorting order and behavior."
+msgstr "Kolejność szeregowania i zachowanie."
+
+#: src/widgets/SettingsDialog.qml:141
+#, kde-format
+msgid "Sorting by"
+msgstr "Szeregowanie wg"
+
+#: src/widgets/SettingsDialog.qml:142
+#, kde-format
+msgid "Change the sorting key."
+msgstr "Zmień klucz szeregowania."
+
+#: src/widgets/SettingsDialog.qml:164
+#, kde-format
+msgid "Title"
+msgstr "Tytuł"
+
+#: src/widgets/SettingsDialog.qml:170
+#, kde-format
+msgid "Date"
+msgstr "Data"
+
+#: src/widgets/SettingsDialog.qml:184
+#, kde-format
+msgid "Sort order"
+msgstr "Porządek szeregowania"
+
+#: src/widgets/SettingsDialog.qml:185
+#, kde-format
+msgid "Change the sorting order."
+msgstr "Zmień kolejność szeregowania."
+
+#: src/widgets/SettingsDialog.qml:206
+#, kde-format
+msgid "Ascending"
+msgstr "Rosnąco"
+
+#: src/widgets/SettingsDialog.qml:213
+#, kde-format
+msgid "Descending"
+msgstr "Malejąco"
+
+#~ msgid "Tags"
+#~ msgstr "Znaczniki"
+
+#~ msgid "Filter "
+#~ msgstr "Odfiltruj "
+
+#~ msgid "booklets in "
+#~ msgstr "broszury w "
+
+#~ msgid "This book is empty!"
+#~ msgstr "Ten zeszyt jest pusty!"
+
+#~ msgid "Start by creating a new chapter for your book"
+#~ msgstr "Rozpocznij od utworzenia nowego rozdziału w swoim zeszycie"
+
+#~ msgid "Notes in this book: "
+#~ msgstr "Zapiski w tym zeszycie: "
+
+#~ msgid "Save"
+#~ msgstr "Zapisz"
+
+#~ msgid "Nothing to edit!"
+#~ msgstr "Nie ma niczego do edytowania!"
+
+#~ msgid "Select a chapter or create a new one"
+#~ msgstr "Wybierz rozdział lub stwórz nowy"
+
+#~ msgid "New Chapter"
+#~ msgstr "Nowy rozdział"
+
+#~ msgid "Create a new chapter for your current book. Give it a title"
+#~ msgstr "Utwórz nowy rozdział w swoim bieżącym zeszycie. Nadaj mu tytuł"
+
+#~ msgid "tags"
+#~ msgstr "znaczniki"
+
+#~ msgid "There are no Tags!"
+#~ msgstr "Nie ma żadnych znaczników!"
+
+#~ msgid "You can create new tags to organize your notes"
+#~ msgstr "Możesz tworzyć nowe znaczniki do porządkowania swoich zapisków"
+
+#~ msgid "Books"
+#~ msgstr "Zeszyty"
+
+#~ msgid "books"
+#~ msgstr "zeszyty"
+
+#~ msgid "New Book"
+#~ msgstr "Nowy zeszyt"
+
+#~ msgid ""
+#~ "Give a title to your new book. Your new book can contain many notes "
+#~ "grouped together"
+#~ msgstr ""
+#~ "Wybierz tytuł dla swojego nowego zeszytu. Twój nowy zeszyt może zawierać "
+#~ "wiele uwag pogrupowanych razem"
+
+#~ msgid "My Book..."
+#~ msgstr "Mój zeszyt..."
+
+#~ msgid "Create"
+#~ msgstr "Utwórz"
+
+#~ msgid "Cancel"
+#~ msgstr "Anuluj"
+
+#~ msgid "Buho allows you to take quick notes and organize notebooks."
+#~ msgstr ""
+#~ "Buho umożliwia szybkie tworzenie zapisków i przechowywanie ich w "
+#~ "zeszytach."

@@ -1,0 +1,501 @@
+# Stelios <sstavra@gmail.com>, 2020, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-22 00:43+0000\n"
+"PO-Revision-Date: 2022-01-09 22:32+0200\n"
+"Last-Translator: Stelios <sstavra@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Qt-Contexts: true\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.04.2\n"
+
+#: src/main.cpp:55 src/main.qml:16
+#, kde-format
+msgid "Buho"
+msgstr "Buho"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Create and organize your notes."
+msgstr "Δημιουργήστε και οργανώστε τις σημειώσεις σας."
+
+#: src/main.cpp:55
+#, kde-format
+msgid "© 2019-%1 Maui Development Team"
+msgstr "© 2019-%1 Η ομάδα ανάπτυξης Maui"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Camilo Higuita"
+msgstr "Camilo Higuita"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Developer"
+msgstr "Προγραμματιστής"
+
+#: src/views/notes/NotesView.qml:71
+#, kde-format
+msgid "Remove notes"
+msgstr "Διαγραφή σημειώσεων"
+
+#: src/views/notes/NotesView.qml:72
+#, kde-format
+msgid "Are you sure you want to delete the selected notes?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε τις επιλεγμένες σημειώσεις;"
+
+#: src/views/notes/NotesView.qml:102
+#, kde-format
+msgid "No notes!"
+msgstr "Δεν υπάρχουν σημειώσεις!"
+
+#: src/views/notes/NotesView.qml:103
+#, kde-format
+msgid "You can quickly create a new note"
+msgstr "Μπορείτε γρήγορα να δημιουργήσετε μια νέα σημείωση"
+
+#: src/views/notes/NotesView.qml:107
+#, kde-format
+msgid "New note"
+msgstr "Μέα σημείωση"
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "Search "
+msgstr "Αναζήτηση "
+
+#: src/views/notes/NotesView.qml:129
+#, kde-format
+msgid "notes"
+msgstr "σημειώσεις"
+
+#: src/views/notes/NotesView.qml:143
+#, kde-format
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: src/views/notes/NotesView.qml:150
+#, kde-format
+msgid "About"
+msgstr "Περίγραμμα"
+
+#: src/views/notes/NotesView.qml:281
+#, kde-format
+msgid "Favorite"
+msgstr "Αγαπημένο"
+
+#: src/views/notes/NotesView.qml:294 src/views/notes/NotesView.qml:540
+#, kde-format
+msgid "Share"
+msgstr "Κοινή χρήση"
+
+#: src/views/notes/NotesView.qml:300 src/views/notes/NotesView.qml:520
+#, kde-format
+msgid "Export"
+msgstr "Εξαγωγή"
+
+#: src/views/notes/NotesView.qml:306 src/widgets/NewNoteDialog.qml:144
+#, kde-format
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: src/views/notes/NotesView.qml:509
+#, kde-format
+msgid "UnFav"
+msgstr "Όχιαγαπ"
+
+#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:176
+#, kde-format
+msgid "Fav"
+msgstr "Αγαπ"
+
+#: src/views/notes/NotesView.qml:530
+#, kde-format
+msgid "Copy"
+msgstr "Αντιγραφή"
+
+#: src/views/notes/NotesView.qml:550
+#, kde-format
+msgid "Select"
+msgstr "Επιλογή"
+
+#: src/views/notes/NotesView.qml:569
+#, kde-format
+msgid "Remove"
+msgstr "Διαγραφή"
+
+#: src/widgets/CardDelegate.qml:79
+#, kde-format
+msgid "Empty"
+msgstr "Κενό"
+
+#: src/widgets/CardDelegate.qml:80
+#, kde-format
+msgid "Edit this note"
+msgstr "Επεξεργασία αυτής της σημείωσης"
+
+#: src/widgets/NewNoteDialog.qml:134
+#, kde-format
+msgid "Find and Replace"
+msgstr "Εύρεση και αντικατάσταση"
+
+#: src/widgets/NewNoteDialog.qml:185
+#, kde-format
+msgid ""
+"Title\n"
+"Body"
+msgstr ""
+"Τίτλος\n"
+"Σώμα"
+
+#: src/widgets/NewNoteDialog.qml:209
+#, kde-format
+msgid "Note saved"
+msgstr "Η σημείωση αποθηκεύθηκε"
+
+#: src/widgets/SettingsDialog.qml:13
+#, kde-format
+msgid "Editor"
+msgstr "Κειμενογράφος"
+
+#: src/widgets/SettingsDialog.qml:14
+#, kde-format
+msgid "Configure the editor behaviour."
+msgstr "Διαμόρφωση της συμπεριφοράς του κειμενογράφου."
+
+#: src/widgets/SettingsDialog.qml:18
+#, kde-format
+msgid "Spell Checker"
+msgstr ""
+
+#: src/widgets/SettingsDialog.qml:19
+#, kde-format
+msgid "Check spelling and give suggestions."
+msgstr ""
+
+#: src/widgets/SettingsDialog.qml:30
+#, kde-format
+msgid "Auto Save"
+msgstr "Αυτόματη αποθήκευση"
+
+#: src/widgets/SettingsDialog.qml:31
+#, kde-format
+msgid "Auto saves your file every few seconds"
+msgstr "Αποθηκεύει αυτόματα το αρχείο σας κάθε λίγα δευτερόλεπτα"
+
+#: src/widgets/SettingsDialog.qml:42
+#, kde-format
+msgid "Auto Reload"
+msgstr "Αυτόματη επαναφόρτωση"
+
+#: src/widgets/SettingsDialog.qml:43
+#, kde-format
+msgid "Auto reload the text on external changes."
+msgstr "Αυτόματη επαναφόρτωση κειμένου με εξωτερικές αλλαγές."
+
+#: src/widgets/SettingsDialog.qml:54
+#, kde-format
+msgid "Line Numbers"
+msgstr "Αρίθμηση γραμμών"
+
+#: src/widgets/SettingsDialog.qml:55
+#, kde-format
+msgid "Display the line numbers on the left side."
+msgstr "Εμφανίζει τους αριθμούς γραμμών στην αριστερή πλευρά."
+
+#: src/widgets/SettingsDialog.qml:68
+#, kde-format
+msgid "Dark Mode"
+msgstr "Σκοτεινό περιβάλλον"
+
+#: src/widgets/SettingsDialog.qml:69
+#, kde-format
+msgid "Switch between light and dark colorscheme"
+msgstr "Εναλλαγή μεταξύ φωτεινού και σκοτεινού χρωματικού σχήματος"
+
+#: src/widgets/SettingsDialog.qml:86
+#, kde-format
+msgid "Fonts"
+msgstr "Γραμματοσειρές"
+
+#: src/widgets/SettingsDialog.qml:87
+#, kde-format
+msgid "Configure the global editor font family and size"
+msgstr ""
+"Διαμόρφωση του επεξεργαστή της οικογένειας και του μεγέθουςτης γραμματοαειράς"
+
+#: src/widgets/SettingsDialog.qml:91
+#, kde-format
+msgid "Family"
+msgstr "Οικογένεια"
+
+#: src/widgets/SettingsDialog.qml:104
+#, kde-format
+msgid "Size"
+msgstr "Μέγεθος"
+
+#: src/widgets/SettingsDialog.qml:117
+#, kde-format
+msgid "Syncing"
+msgstr "Συγχρονισμός"
+
+#: src/widgets/SettingsDialog.qml:118
+#, kde-format
+msgid "Configure the syncing of notes and books."
+msgstr "Διαμόρφωση του συγχρονισμού των σημειώσεων και των βιβλίων."
+
+#: src/widgets/SettingsDialog.qml:122
+#, kde-format
+msgid "Auto sync"
+msgstr "Αυτόματος συγχρονισμός"
+
+#: src/widgets/SettingsDialog.qml:123
+#, kde-format
+msgid "Sync notes and books on start up"
+msgstr "Συγχρονισμός σημειώσεων και βιβλίων στην εκκίνηση"
+
+#: src/widgets/SettingsDialog.qml:136
+#, kde-format
+msgid "Sorting"
+msgstr "Ταξινόμηση"
+
+#: src/widgets/SettingsDialog.qml:137
+#, kde-format
+msgid "Sorting order and behavior."
+msgstr "Σειρά ταξινόμησης και συμπεριφορά."
+
+#: src/widgets/SettingsDialog.qml:141
+#, kde-format
+msgid "Sorting by"
+msgstr "Ταξινόμηση με"
+
+#: src/widgets/SettingsDialog.qml:142
+#, kde-format
+msgid "Change the sorting key."
+msgstr "Αλλαγή του κλειδιού ταξινόμησης."
+
+#: src/widgets/SettingsDialog.qml:164
+#, kde-format
+msgid "Title"
+msgstr "Τίτλος"
+
+#: src/widgets/SettingsDialog.qml:170
+#, kde-format
+msgid "Date"
+msgstr "Ημερομηνία"
+
+#: src/widgets/SettingsDialog.qml:184
+#, kde-format
+msgid "Sort order"
+msgstr "Σειρά ταξινόμσηης"
+
+#: src/widgets/SettingsDialog.qml:185
+#, kde-format
+msgid "Change the sorting order."
+msgstr "Αλλαγή της σειράς ταξινόμησης."
+
+#: src/widgets/SettingsDialog.qml:206
+#, kde-format
+msgid "Ascending"
+msgstr "Αυξουσα"
+
+#: src/widgets/SettingsDialog.qml:213
+#, kde-format
+msgid "Descending"
+msgstr "Φθίνουσα"
+
+#~ msgid "Tags"
+#~ msgstr "Ετικέτες"
+
+#~ msgid "Filter "
+#~ msgstr "Φιλτράρισμα "
+
+#~ msgid "booklets in "
+#~ msgstr "βιβλιαρίων στο "
+
+#~ msgid "This book is empty!"
+#~ msgstr "Αυτό το βιβλίο είναι κενό!"
+
+#~ msgid "Start by creating a new chapter for your book"
+#~ msgstr "Ξεκινήστε με τη δημιουργία ενός νέου κεφαλαίου για το βιβλίο σας"
+
+#~ msgid "Notes in this book: "
+#~ msgstr "Σημειώσεις σε αυτό το βοβλίο: "
+
+#~ msgid "Save"
+#~ msgstr "Αποθήκευση"
+
+#~ msgid "Nothing to edit!"
+#~ msgstr "Τίποτα για επεξεργασία!"
+
+#~ msgid "Select a chapter or create a new one"
+#~ msgstr "Επιλέξτε ένα κεφάλαιο ή δημιουργήστε νέο"
+
+#~ msgid "New Chapter"
+#~ msgstr "Νέο κεφάλαιο"
+
+#~ msgid "Create a new chapter for your current book. Give it a title"
+#~ msgstr ""
+#~ "Δημιουργήστε ένα νέο κεφάλαιο για το τρέχον βιβλίο σας. Δώστε του τίτλο"
+
+#~ msgid "tags"
+#~ msgstr "ετικέτες"
+
+#~ msgid "There are no Tags!"
+#~ msgstr "Δεν υπάρχουν σημειώσεις!"
+
+#~ msgid "You can create new tags to organize your notes"
+#~ msgstr ""
+#~ "Μπορείτε να δημιουργήσετε νέες ετικέτες για να οργανώσετε τις σημειώσεις "
+#~ "σας"
+
+#~ msgid "Books"
+#~ msgstr "Βιβλία"
+
+#~ msgid "books"
+#~ msgstr "βιβλία"
+
+#~ msgid "New Book"
+#~ msgstr "Νέο βιβλίο"
+
+#~ msgid ""
+#~ "Give a title to your new book. Your new book can contain many notes "
+#~ "grouped together"
+#~ msgstr ""
+#~ "Δώστε έναν τίτλο στο βιβλίο σας. Το καινούριο βιβλίο σας μπορεί να "
+#~ "περιέχει πολλές σημειώσεις ομαδοποιημένες"
+
+#~ msgid "My Book..."
+#~ msgstr "Το βιβλίο μου..."
+
+#~ msgid "Create"
+#~ msgstr "Δημιουργία"
+
+#~ msgid "Cancel"
+#~ msgstr "Ακύρωση"
+
+#~ msgid "Buho allows you to take quick notes and organize notebooks."
+#~ msgstr ""
+#~ "Με το Buho παίρνετε γρήγορες σημειώσεις και οργανώνετε σημειωματάρια."
+
+#~ msgctxt "main|"
+#~ msgid "Auto Fetch on Start Up"
+#~ msgstr "Αυτόματη προσκόμιση στην εκκίνηση"
+
+#~ msgctxt "main|"
+#~ msgid "Rich Text Formatting"
+#~ msgstr "Διαμόρφωση πλούσιου κειμένου"
+
+#~ msgctxt "main|"
+#~ msgid "Links"
+#~ msgstr "Σύνδεσμοι"
+
+#~ msgctxt "main|"
+#~ msgid "Configure the app plugins and behavior."
+#~ msgstr "Διαμόρφωση των πρόσθετων για τις εφαρμογές και της συμπεριφοράς."
+
+#~ msgctxt "main|"
+#~ msgid "Cached"
+#~ msgstr "Σε προσωρινή μνήμη"
+
+#~ msgctxt "main|"
+#~ msgid "Support Syntax Highlighting"
+#~ msgstr "Υποστήριξη τονισμού της σύνταξης"
+
+#~ msgctxt "BookletPage|"
+#~ msgid "Chapters"
+#~ msgstr "Κεφάλαια"
+
+#~ msgctxt "BookletPage|"
+#~ msgid "New chapter"
+#~ msgstr "Νέο κεφάλαιο"
+
+#~ msgctxt "LinksView|"
+#~ msgid "links"
+#~ msgstr "σύνδεσμοι"
+
+#~ msgctxt "LinksView|"
+#~ msgid "Add date"
+#~ msgstr "Προσθήκη ημερομηνίας"
+
+#~ msgctxt "LinksView|"
+#~ msgid "Updated"
+#~ msgstr "Ενημερωμένο"
+
+#~ msgctxt "LinksView|"
+#~ msgid "Favorite"
+#~ msgstr "Αγαπημένο"
+
+#~ msgctxt "LinksView|"
+#~ msgid "No Links!"
+#~ msgstr "Δεν υπάρχουν σύνδεσμοι!"
+
+#~ msgctxt "LinksView|"
+#~ msgid "Click here to save a new link"
+#~ msgstr "Με κλικ εδώ αποθηκεύετε έναν νέο σύνδεσμο"
+
+#~ msgctxt "LinksView|"
+#~ msgid "Export"
+#~ msgstr "Εξαγωγή"
+
+#~ msgctxt "NotesView|"
+#~ msgid "List"
+#~ msgstr "Λίστα"
+
+#~ msgctxt "NotesView|"
+#~ msgid "Cards"
+#~ msgstr "Κάρτες"
+
+#~ msgctxt "NotesView|"
+#~ msgid "Search "
+#~ msgstr "Αναζήτηση "
+
+#~ msgctxt "NotesView|"
+#~ msgid "Ascendant"
+#~ msgstr "Αύξοτσα"
+
+#~ msgctxt "NotesView|"
+#~ msgid "Descendant"
+#~ msgstr "Φθίνουσα"
+
+#~ msgctxt "NotesView|"
+#~ msgid "Title"
+#~ msgstr "Τίτλος"
+
+#~ msgctxt "NotesView|"
+#~ msgid "Color"
+#~ msgstr "Χρώμα"
+
+#~ msgctxt "NotesView|"
+#~ msgid "Add date"
+#~ msgstr "Προσθήκη ημερομηνίας"
+
+#~ msgctxt "NotesView|"
+#~ msgid "Updated"
+#~ msgstr "Ενημερωμένο"
+
+#~ msgctxt "NotesView|"
+#~ msgid "Copy"
+#~ msgstr "Αντιγραφή"
+
+#~ msgctxt "NotesView|"
+#~ msgid "Remove"
+#~ msgstr "Διαγραφή"
+
+#~ msgctxt "NewLinkDialog|"
+#~ msgid "Title"
+#~ msgstr "Τίτλος"
+
+#~ msgctxt "NewLinkDialog|"
+#~ msgid "URL"
+#~ msgstr "URL"
+
+#~ msgctxt "NewNoteDialog|"
+#~ msgid "Save"
+#~ msgstr "Αποθήκευση"
