@@ -98,6 +98,8 @@ ecm_setup_version(${BUHO_VERSION}
 
 add_subdirectory(src)
 
+ki18n_install(po)
+
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)

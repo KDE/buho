@@ -120,6 +120,8 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     },
     Qt::QueuedConnection);
 
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+
     qmlRegisterType<Notes>(BUHO_URI, 1, 0, "Notes");
 
     engine.load(url);
