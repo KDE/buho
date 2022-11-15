@@ -49,8 +49,6 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     app.setOrganizationName(QStringLiteral("Maui"));
     app.setWindowIcon(QIcon(":/buho.png"));
 
-    MauiApp::instance()->setIconName("qrc:/buho.svg");
-
     KLocalizedString::setApplicationDomain("buho");
     KAboutData about(QStringLiteral("buho"), i18n("Buho"), BUHO_VERSION_STRING, i18n("Create and organize your notes."), KAboutLicense::LGPL_V3, i18n("© 2019-%1 Maui Development Team", QString::number(QDate::currentDate().year())), QString(GIT_BRANCH) + "/" + QString(GIT_COMMIT_HASH));
     about.addAuthor(i18n("Camilo Higuita"), i18n("Developer"), QStringLiteral("milo.h@aol.com"));
@@ -61,6 +59,7 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     about.setProgramLogo(app.windowIcon());
 
     KAboutData::setApplicationData(about);
+    MauiApp::instance()->setIconName("qrc:/buho.png");
 
     QCommandLineOption newNoteOption(QStringList() << "n" << "new", "Create a new note.");
     QCommandLineOption newNoteContent(QStringList() << "c" << "content", "new note contents.", "content");
