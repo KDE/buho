@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-22 00:43+0000\n"
+"POT-Creation-Date: 2022-11-16 00:45+0000\n"
 "PO-Revision-Date: 2022-09-20 20:31+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -18,27 +18,27 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: src/main.cpp:55 src/main.qml:16
+#: src/main.cpp:53 src/main.qml:16
 #, kde-format
 msgid "Buho"
 msgstr "بوهو"
 
-#: src/main.cpp:55
+#: src/main.cpp:53
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "أنشئ ونظم ملاحظاتك."
 
-#: src/main.cpp:55
+#: src/main.cpp:53
 #, kde-format
 msgid "© 2019-%1 Maui Development Team"
 msgstr "© ٢٠١٩-%1 فريق تطوير ماوي"
 
-#: src/main.cpp:56
+#: src/main.cpp:54
 #, kde-format
 msgid "Camilo Higuita"
 msgstr "كاميلو هيجويتا"
 
-#: src/main.cpp:56
+#: src/main.cpp:54
 #, kde-format
 msgid "Developer"
 msgstr "مطوّر"

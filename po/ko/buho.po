@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-22 00:43+0000\n"
+"POT-Creation-Date: 2022-11-16 00:45+0000\n"
 "PO-Revision-Date: 2022-10-03 16:47+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-i18n-doc@kde.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: src/main.cpp:55 src/main.qml:16
+#: src/main.cpp:53 src/main.qml:16
 #, kde-format
 msgid "Buho"
 msgstr "Buho"
 
-#: src/main.cpp:55
+#: src/main.cpp:53
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "메모를 만들고 관리합니다."
 
-#: src/main.cpp:55
+#: src/main.cpp:53
 #, kde-format
 msgid "© 2019-%1 Maui Development Team"
 msgstr "© 2019-%1 Maui Development Team"
 
-#: src/main.cpp:56
+#: src/main.cpp:54
 #, kde-format
 msgid "Camilo Higuita"
 msgstr "Camilo Higuita"
 
-#: src/main.cpp:56
+#: src/main.cpp:54
 #, kde-format
 msgid "Developer"
 msgstr "개발자"
