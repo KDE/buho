@@ -3,13 +3,13 @@
 # Copyright (C) 2022 This file is copyright:
 # This file is distributed under the same license as the buho package.
 #
-# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2022.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 00:45+0000\n"
-"PO-Revision-Date: 2022-06-19 22:23+0900\n"
+"PO-Revision-Date: 2023-01-06 23:21+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -176,12 +176,12 @@ msgstr "設定編輯器行為。"
 #: src/widgets/SettingsDialog.qml:18
 #, kde-format
 msgid "Spell Checker"
-msgstr ""
+msgstr "拼字檢查"
 
 #: src/widgets/SettingsDialog.qml:19
 #, kde-format
 msgid "Check spelling and give suggestions."
-msgstr ""
+msgstr "檢查拼字並提供建議。"
 
 #: src/widgets/SettingsDialog.qml:30
 #, kde-format
