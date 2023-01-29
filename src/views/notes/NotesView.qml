@@ -9,7 +9,7 @@ import org.maui.buho 1.0
 
 import "../../widgets"
 
-Maui.StackView
+StackView
 {
     id: control
     property var currentNote : ({})

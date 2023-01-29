@@ -8,12 +8,12 @@ import org.mauikit.controls 1.3 as Maui
 
 Maui.SettingsDialog
 {
-    Maui.SettingsSection
+    Maui.SectionGroup
     {
         title: i18n("Editor")
         description: i18n("Configure the editor behaviour.")
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text:  i18n("Spell Checker")
             label2.text: i18n("Check spelling and give suggestions.")
@@ -25,7 +25,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text:  i18n("Auto Save")
             label2.text: i18n("Auto saves your file every few seconds")
@@ -37,7 +37,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text:  i18n("Auto Reload")
             label2.text: i18n("Auto reload the text on external changes.")
@@ -49,7 +49,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text: i18n("Line Numbers")
             label2.text: i18n("Display the line numbers on the left side.")
@@ -63,7 +63,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text: i18n("Dark Mode")
             label2.text: i18n("Switch between light and dark colorscheme")
@@ -81,12 +81,12 @@ Maui.SettingsDialog
         }
     }
 
-    Maui.SettingsSection
+    Maui.SectionGroup
     {
         title: i18n("Fonts")
         description: i18n("Configure the global editor font family and size")
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text:  i18n("Family")
 
@@ -99,7 +99,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text:  i18n("Size")
 
@@ -112,12 +112,12 @@ Maui.SettingsDialog
         }
     }
 
-    Maui.SettingsSection
+    Maui.SectionGroup
     {
         title: i18n("Syncing")
         description: i18n("Configure the syncing of notes and books.")
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text: i18n("Auto sync")
             label2.text: i18n("Sync notes and books on start up")
@@ -131,12 +131,12 @@ Maui.SettingsDialog
         }
     }
 
-    Maui.SettingsSection
+    Maui.SectionGroup
     {
         title: i18n("Sorting")
         description: i18n("Sorting order and behavior.")
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text: i18n("Sorting by")
             label2.text: i18n("Change the sorting key.")
@@ -179,7 +179,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text: i18n("Sort order")
             label2.text: i18n("Change the sorting order.")
