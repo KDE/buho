@@ -65,8 +65,10 @@ Maui.SettingsDialog
 
         Maui.SectionItem
         {
+            visible: Maui.Handy.isAndroid
+
             label1.text: i18n("Dark Mode")
-            label2.text: i18n("Switch between light and dark colorscheme")
+            label2.text: i18n("Switch between light and dark colorscheme.")
 
             Switch
             {
@@ -84,7 +86,7 @@ Maui.SettingsDialog
     Maui.SectionGroup
     {
         title: i18n("Fonts")
-        description: i18n("Configure the global editor font family and size")
+        description: i18n("Configure the global editor font family and size.")
 
         Maui.SectionItem
         {
@@ -120,7 +122,7 @@ Maui.SettingsDialog
         Maui.SectionItem
         {
             label1.text: i18n("Auto sync")
-            label2.text: i18n("Sync notes and books on start up")
+            label2.text: i18n("Sync notes on start up.")
 
             Switch
             {
@@ -138,7 +140,7 @@ Maui.SettingsDialog
 
         Maui.SectionItem
         {
-            label1.text: i18n("Sorting by")
+            label1.text: i18n("Sort by")
             label2.text: i18n("Change the sorting key.")
 
             Maui.ToolActions
@@ -181,7 +183,7 @@ Maui.SettingsDialog
 
         Maui.SectionItem
         {
-            label1.text: i18n("Sort order")
+            label1.text: i18n("Sort Order")
             label2.text: i18n("Change the sorting order.")
 
             Maui.ToolActions
