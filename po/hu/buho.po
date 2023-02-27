@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:45+0000\n"
+"POT-Creation-Date: 2023-02-27 00:59+0000\n"
 "PO-Revision-Date: 2021-11-23 13:40+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -113,7 +113,7 @@ msgstr "Törlés"
 msgid "UnFav"
 msgstr "Nem kedvenc"
 
-#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:176
+#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:178
 #, kde-format
 msgid "Fav"
 msgstr "Kedvenc"
@@ -212,102 +212,106 @@ msgstr "Sorszámok"
 msgid "Display the line numbers on the left side."
 msgstr "A sorok számának megjelenítése a bal oldalon."
 
-#: src/widgets/SettingsDialog.qml:68
+#: src/widgets/SettingsDialog.qml:70
 #, kde-format
 msgid "Dark Mode"
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:69
+#: src/widgets/SettingsDialog.qml:71
 #, kde-format
-msgid "Switch between light and dark colorscheme"
+msgid "Switch between light and dark colorscheme."
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:86
+#: src/widgets/SettingsDialog.qml:88
 #, kde-format
 msgid "Fonts"
 msgstr "Betűkészletek"
 
-#: src/widgets/SettingsDialog.qml:87
-#, kde-format
-msgid "Configure the global editor font family and size"
+#: src/widgets/SettingsDialog.qml:89
+#, fuzzy, kde-format
+#| msgid "Configure the global editor font family and size"
+msgid "Configure the global editor font family and size."
 msgstr "A szerkesztő betűkészletének és betűméretének beállítása"
 
-#: src/widgets/SettingsDialog.qml:91
+#: src/widgets/SettingsDialog.qml:93
 #, kde-format
 msgid "Family"
 msgstr "Család"
 
-#: src/widgets/SettingsDialog.qml:104
+#: src/widgets/SettingsDialog.qml:106
 #, kde-format
 msgid "Size"
 msgstr "Méret"
 
-#: src/widgets/SettingsDialog.qml:117
+#: src/widgets/SettingsDialog.qml:119
 #, kde-format
 msgid "Syncing"
 msgstr "Szinkronizálás"
 
-#: src/widgets/SettingsDialog.qml:118
+#: src/widgets/SettingsDialog.qml:120
 #, kde-format
 msgid "Configure the syncing of notes and books."
 msgstr "A jegyzetek és könyvek szinkronizálásának beállítása."
 
-#: src/widgets/SettingsDialog.qml:122
+#: src/widgets/SettingsDialog.qml:124
 #, kde-format
 msgid "Auto sync"
 msgstr "Automatikus szinkronizálás"
 
-#: src/widgets/SettingsDialog.qml:123
-#, kde-format
-msgid "Sync notes and books on start up"
+#: src/widgets/SettingsDialog.qml:125
+#, fuzzy, kde-format
+#| msgid "Sync notes and books on start up"
+msgid "Sync notes on start up."
 msgstr "A jegyzetek és könyvek szinkronizálása induláskor"
 
-#: src/widgets/SettingsDialog.qml:136
+#: src/widgets/SettingsDialog.qml:138
 #, kde-format
 msgid "Sorting"
 msgstr "Rendezés"
 
-#: src/widgets/SettingsDialog.qml:137
+#: src/widgets/SettingsDialog.qml:139
 #, kde-format
 msgid "Sorting order and behavior."
 msgstr "Rendezési sorrend és működés."
 
-#: src/widgets/SettingsDialog.qml:141
-#, kde-format
-msgid "Sorting by"
+#: src/widgets/SettingsDialog.qml:143
+#, fuzzy, kde-format
+#| msgid "Sorting by"
+msgid "Sort by"
 msgstr "Rendezés eszerint:"
 
-#: src/widgets/SettingsDialog.qml:142
+#: src/widgets/SettingsDialog.qml:144
 #, kde-format
 msgid "Change the sorting key."
 msgstr "A rendezési kulcs módosítása."
 
-#: src/widgets/SettingsDialog.qml:164
+#: src/widgets/SettingsDialog.qml:166
 #, kde-format
 msgid "Title"
 msgstr "Cím"
 
-#: src/widgets/SettingsDialog.qml:170
+#: src/widgets/SettingsDialog.qml:172
 #, kde-format
 msgid "Date"
 msgstr "Dátum"
 
-#: src/widgets/SettingsDialog.qml:184
-#, kde-format
-msgid "Sort order"
+#: src/widgets/SettingsDialog.qml:186
+#, fuzzy, kde-format
+#| msgid "Sort order"
+msgid "Sort Order"
 msgstr "Rendezési sorrend"
 
-#: src/widgets/SettingsDialog.qml:185
+#: src/widgets/SettingsDialog.qml:187
 #, kde-format
 msgid "Change the sorting order."
 msgstr "A rendezési sorrend módosítása."
 
-#: src/widgets/SettingsDialog.qml:206
+#: src/widgets/SettingsDialog.qml:208
 #, kde-format
 msgid "Ascending"
 msgstr "Növekvő"
 
-#: src/widgets/SettingsDialog.qml:213
+#: src/widgets/SettingsDialog.qml:215
 #, kde-format
 msgid "Descending"
 msgstr "Csökkenő"

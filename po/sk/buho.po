@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:45+0000\n"
+"POT-Creation-Date: 2023-02-27 00:59+0000\n"
 "PO-Revision-Date: 2022-04-07 18:02+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -124,7 +124,7 @@ msgstr "Vymazať"
 msgid "UnFav"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:176
+#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:178
 #, kde-format
 msgid "Fav"
 msgstr ""
@@ -230,106 +230,110 @@ msgstr "Čísla riadkov"
 msgid "Display the line numbers on the left side."
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:68
+#: src/widgets/SettingsDialog.qml:70
 #, kde-format
 msgid "Dark Mode"
 msgstr "Tmavý režim"
 
-#: src/widgets/SettingsDialog.qml:69
+#: src/widgets/SettingsDialog.qml:71
 #, kde-format
-msgid "Switch between light and dark colorscheme"
+msgid "Switch between light and dark colorscheme."
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:86
+#: src/widgets/SettingsDialog.qml:88
 #, fuzzy, kde-format
 msgid "Fonts"
 msgstr "Písma"
 
-#: src/widgets/SettingsDialog.qml:87
-#, kde-format
-msgid "Configure the global editor font family and size"
-msgstr ""
+#: src/widgets/SettingsDialog.qml:89
+#, fuzzy, kde-format
+#| msgctxt "main|"
+#| msgid "Configure the app plugins and behavior."
+msgid "Configure the global editor font family and size."
+msgstr "Nastaviť doplnky aplikácie a správanie."
 
-#: src/widgets/SettingsDialog.qml:91
+#: src/widgets/SettingsDialog.qml:93
 #, kde-format
 msgid "Family"
 msgstr "Rodina"
 
-#: src/widgets/SettingsDialog.qml:104
+#: src/widgets/SettingsDialog.qml:106
 #, fuzzy, kde-format
 msgid "Size"
 msgstr "Veľkosť"
 
-#: src/widgets/SettingsDialog.qml:117
+#: src/widgets/SettingsDialog.qml:119
 #, kde-format
 msgid "Syncing"
 msgstr "Synchronizovanie"
 
-#: src/widgets/SettingsDialog.qml:118
+#: src/widgets/SettingsDialog.qml:120
 #, fuzzy, kde-format
 #| msgctxt "main|"
 #| msgid "Configure the app plugins and behavior."
 msgid "Configure the syncing of notes and books."
 msgstr "Nastaviť doplnky aplikácie a správanie."
 
-#: src/widgets/SettingsDialog.qml:122
+#: src/widgets/SettingsDialog.qml:124
 #, kde-format
 msgid "Auto sync"
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:123
+#: src/widgets/SettingsDialog.qml:125
 #, kde-format
-msgid "Sync notes and books on start up"
+msgid "Sync notes on start up."
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:136
+#: src/widgets/SettingsDialog.qml:138
 #, kde-format
 msgid "Sorting"
 msgstr "Triedenie"
 
-#: src/widgets/SettingsDialog.qml:137
+#: src/widgets/SettingsDialog.qml:139
 #, kde-format
 msgid "Sorting order and behavior."
 msgstr "Triedenie a správanie."
 
-#: src/widgets/SettingsDialog.qml:141
-#, kde-format
-msgid "Sorting by"
+#: src/widgets/SettingsDialog.qml:143
+#, fuzzy, kde-format
+#| msgid "Sorting by"
+msgid "Sort by"
 msgstr "Triedenie podľa"
 
-#: src/widgets/SettingsDialog.qml:142
+#: src/widgets/SettingsDialog.qml:144
 #, kde-format
 msgid "Change the sorting key."
 msgstr "Zmeňte triediaci kľúč."
 
-#: src/widgets/SettingsDialog.qml:164
+#: src/widgets/SettingsDialog.qml:166
 #, fuzzy, kde-format
 #| msgctxt "LinksView|"
 #| msgid "Title"
 msgid "Title"
 msgstr "Názov"
 
-#: src/widgets/SettingsDialog.qml:170
+#: src/widgets/SettingsDialog.qml:172
 #, fuzzy, kde-format
 msgid "Date"
 msgstr "Dátum"
 
-#: src/widgets/SettingsDialog.qml:184
-#, kde-format
-msgid "Sort order"
+#: src/widgets/SettingsDialog.qml:186
+#, fuzzy, kde-format
+#| msgid "Sort order"
+msgid "Sort Order"
 msgstr "Poradie triedenia"
 
-#: src/widgets/SettingsDialog.qml:185
+#: src/widgets/SettingsDialog.qml:187
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Zmeniť poradie triedenia."
 
-#: src/widgets/SettingsDialog.qml:206
+#: src/widgets/SettingsDialog.qml:208
 #, kde-format
 msgid "Ascending"
 msgstr "Vzostupne"
 
-#: src/widgets/SettingsDialog.qml:213
+#: src/widgets/SettingsDialog.qml:215
 #, fuzzy, kde-format
 msgid "Descending"
 msgstr "Zostupne"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:45+0000\n"
+"POT-Creation-Date: 2023-02-27 00:59+0000\n"
 "PO-Revision-Date: 2023-01-04 11:19+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -110,7 +110,7 @@ msgstr "Διαγραφή"
 msgid "UnFav"
 msgstr "Όχιαγαπ"
 
-#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:176
+#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:178
 #, kde-format
 msgid "Fav"
 msgstr "Αγαπ"
@@ -209,104 +209,109 @@ msgstr "Αρίθμηση γραμμών"
 msgid "Display the line numbers on the left side."
 msgstr "Εμφανίζει τους αριθμούς γραμμών στην αριστερή πλευρά."
 
-#: src/widgets/SettingsDialog.qml:68
+#: src/widgets/SettingsDialog.qml:70
 #, kde-format
 msgid "Dark Mode"
 msgstr "Σκοτεινό περιβάλλον"
 
-#: src/widgets/SettingsDialog.qml:69
-#, kde-format
-msgid "Switch between light and dark colorscheme"
+#: src/widgets/SettingsDialog.qml:71
+#, fuzzy, kde-format
+#| msgid "Switch between light and dark colorscheme"
+msgid "Switch between light and dark colorscheme."
 msgstr "Εναλλαγή μεταξύ φωτεινού και σκοτεινού χρωματικού σχήματος"
 
-#: src/widgets/SettingsDialog.qml:86
+#: src/widgets/SettingsDialog.qml:88
 #, kde-format
 msgid "Fonts"
 msgstr "Γραμματοσειρές"
 
-#: src/widgets/SettingsDialog.qml:87
-#, kde-format
-msgid "Configure the global editor font family and size"
+#: src/widgets/SettingsDialog.qml:89
+#, fuzzy, kde-format
+#| msgid "Configure the global editor font family and size"
+msgid "Configure the global editor font family and size."
 msgstr ""
 "Διαμόρφωση του επεξεργαστή για την οικογένεια και το μέγεθος της "
 "γραμματοσειράς"
 
-#: src/widgets/SettingsDialog.qml:91
+#: src/widgets/SettingsDialog.qml:93
 #, kde-format
 msgid "Family"
 msgstr "Οικογένεια"
 
-#: src/widgets/SettingsDialog.qml:104
+#: src/widgets/SettingsDialog.qml:106
 #, kde-format
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: src/widgets/SettingsDialog.qml:117
+#: src/widgets/SettingsDialog.qml:119
 #, kde-format
 msgid "Syncing"
 msgstr "Συγχρονισμός"
 
-#: src/widgets/SettingsDialog.qml:118
+#: src/widgets/SettingsDialog.qml:120
 #, kde-format
 msgid "Configure the syncing of notes and books."
 msgstr "Διαμόρφωση του συγχρονισμού των σημειώσεων και των βιβλίων."
 
-#: src/widgets/SettingsDialog.qml:122
+#: src/widgets/SettingsDialog.qml:124
 #, kde-format
 msgid "Auto sync"
 msgstr "Αυτόματος συγχρονισμός"
 
-#: src/widgets/SettingsDialog.qml:123
-#, kde-format
-msgid "Sync notes and books on start up"
+#: src/widgets/SettingsDialog.qml:125
+#, fuzzy, kde-format
+#| msgid "Sync notes and books on start up"
+msgid "Sync notes on start up."
 msgstr "Συγχρονισμός σημειώσεων και βιβλίων στην εκκίνηση"
 
-#: src/widgets/SettingsDialog.qml:136
+#: src/widgets/SettingsDialog.qml:138
 #, kde-format
 msgid "Sorting"
 msgstr "Ταξινόμηση"
 
-#: src/widgets/SettingsDialog.qml:137
+#: src/widgets/SettingsDialog.qml:139
 #, kde-format
 msgid "Sorting order and behavior."
 msgstr "Σειρά ταξινόμησης και συμπεριφορά."
 
-#: src/widgets/SettingsDialog.qml:141
-#, kde-format
-msgid "Sorting by"
+#: src/widgets/SettingsDialog.qml:143
+#, fuzzy, kde-format
+#| msgid "Sorting by"
+msgid "Sort by"
 msgstr "Ταξινόμηση με"
 
-#: src/widgets/SettingsDialog.qml:142
+#: src/widgets/SettingsDialog.qml:144
 #, kde-format
 msgid "Change the sorting key."
 msgstr "Αλλαγή του κλειδιού ταξινόμησης."
 
-#: src/widgets/SettingsDialog.qml:164
+#: src/widgets/SettingsDialog.qml:166
 #, kde-format
 msgid "Title"
 msgstr "Τίτλος"
 
-#: src/widgets/SettingsDialog.qml:170
+#: src/widgets/SettingsDialog.qml:172
 #, kde-format
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: src/widgets/SettingsDialog.qml:184
-#, kde-format
-msgid "Sort order"
+#: src/widgets/SettingsDialog.qml:186
+#, fuzzy, kde-format
+#| msgid "Sort order"
+msgid "Sort Order"
 msgstr "Σειρά ταξινόμησης"
 
-#: src/widgets/SettingsDialog.qml:185
+#: src/widgets/SettingsDialog.qml:187
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Αλλαγή της σειράς ταξινόμησης."
 
-#: src/widgets/SettingsDialog.qml:206
+#: src/widgets/SettingsDialog.qml:208
 #, kde-format
 msgid "Ascending"
 msgstr "Αύξουσα"
 
-#: src/widgets/SettingsDialog.qml:213
+#: src/widgets/SettingsDialog.qml:215
 #, kde-format
 msgid "Descending"
 msgstr "Φθίνουσα"

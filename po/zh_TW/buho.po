@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:45+0000\n"
+"POT-Creation-Date: 2023-02-27 00:59+0000\n"
 "PO-Revision-Date: 2023-02-09 02:23+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -114,7 +114,7 @@ msgstr "刪除"
 msgid "UnFav"
 msgstr "從最愛中移除"
 
-#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:176
+#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:178
 #, kde-format
 msgid "Fav"
 msgstr "加到最愛"
@@ -213,102 +213,107 @@ msgstr "行號"
 msgid "Display the line numbers on the left side."
 msgstr "在左側顯示行號。"
 
-#: src/widgets/SettingsDialog.qml:68
+#: src/widgets/SettingsDialog.qml:70
 #, kde-format
 msgid "Dark Mode"
 msgstr "暗色模式"
 
-#: src/widgets/SettingsDialog.qml:69
-#, kde-format
-msgid "Switch between light and dark colorscheme"
+#: src/widgets/SettingsDialog.qml:71
+#, fuzzy, kde-format
+#| msgid "Switch between light and dark colorscheme"
+msgid "Switch between light and dark colorscheme."
 msgstr "在明亮和暗色配色方案間切換"
 
-#: src/widgets/SettingsDialog.qml:86
+#: src/widgets/SettingsDialog.qml:88
 #, kde-format
 msgid "Fonts"
 msgstr "字型"
 
-#: src/widgets/SettingsDialog.qml:87
-#, kde-format
-msgid "Configure the global editor font family and size"
+#: src/widgets/SettingsDialog.qml:89
+#, fuzzy, kde-format
+#| msgid "Configure the global editor font family and size"
+msgid "Configure the global editor font family and size."
 msgstr "設定全域編輯器字型家族與大小"
 
-#: src/widgets/SettingsDialog.qml:91
+#: src/widgets/SettingsDialog.qml:93
 #, kde-format
 msgid "Family"
 msgstr "字型家族"
 
-#: src/widgets/SettingsDialog.qml:104
+#: src/widgets/SettingsDialog.qml:106
 #, kde-format
 msgid "Size"
 msgstr "大小"
 
-#: src/widgets/SettingsDialog.qml:117
+#: src/widgets/SettingsDialog.qml:119
 #, kde-format
 msgid "Syncing"
 msgstr "同步"
 
-#: src/widgets/SettingsDialog.qml:118
+#: src/widgets/SettingsDialog.qml:120
 #, kde-format
 msgid "Configure the syncing of notes and books."
 msgstr "設定筆記與書本的同步。"
 
-#: src/widgets/SettingsDialog.qml:122
+#: src/widgets/SettingsDialog.qml:124
 #, kde-format
 msgid "Auto sync"
 msgstr "自動同步"
 
-#: src/widgets/SettingsDialog.qml:123
-#, kde-format
-msgid "Sync notes and books on start up"
+#: src/widgets/SettingsDialog.qml:125
+#, fuzzy, kde-format
+#| msgid "Sync notes and books on start up"
+msgid "Sync notes on start up."
 msgstr "啟動時同步筆記與書本"
 
-#: src/widgets/SettingsDialog.qml:136
+#: src/widgets/SettingsDialog.qml:138
 #, kde-format
 msgid "Sorting"
 msgstr "排序"
 
-#: src/widgets/SettingsDialog.qml:137
+#: src/widgets/SettingsDialog.qml:139
 #, kde-format
 msgid "Sorting order and behavior."
 msgstr "排序方式與行為。"
 
-#: src/widgets/SettingsDialog.qml:141
-#, kde-format
-msgid "Sorting by"
+#: src/widgets/SettingsDialog.qml:143
+#, fuzzy, kde-format
+#| msgid "Sorting by"
+msgid "Sort by"
 msgstr "排序方式"
 
-#: src/widgets/SettingsDialog.qml:142
+#: src/widgets/SettingsDialog.qml:144
 #, kde-format
 msgid "Change the sorting key."
 msgstr "變更排序依據。"
 
-#: src/widgets/SettingsDialog.qml:164
+#: src/widgets/SettingsDialog.qml:166
 #, kde-format
 msgid "Title"
 msgstr "標題"
 
-#: src/widgets/SettingsDialog.qml:170
+#: src/widgets/SettingsDialog.qml:172
 #, kde-format
 msgid "Date"
 msgstr "日期"
 
-#: src/widgets/SettingsDialog.qml:184
-#, kde-format
-msgid "Sort order"
+#: src/widgets/SettingsDialog.qml:186
+#, fuzzy, kde-format
+#| msgid "Sort order"
+msgid "Sort Order"
 msgstr "排序方向"
 
-#: src/widgets/SettingsDialog.qml:185
+#: src/widgets/SettingsDialog.qml:187
 #, kde-format
 msgid "Change the sorting order."
 msgstr "變更排序方向。"
 
-#: src/widgets/SettingsDialog.qml:206
+#: src/widgets/SettingsDialog.qml:208
 #, kde-format
 msgid "Ascending"
 msgstr "遞增"
 
-#: src/widgets/SettingsDialog.qml:213
+#: src/widgets/SettingsDialog.qml:215
 #, kde-format
 msgid "Descending"
 msgstr "遞減"

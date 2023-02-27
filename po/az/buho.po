@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:45+0000\n"
+"POT-Creation-Date: 2023-02-27 00:59+0000\n"
 "PO-Revision-Date: 2022-11-11 17:40+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -112,7 +112,7 @@ msgstr "Silmək"
 msgid "UnFav"
 msgstr "Seçilməm."
 
-#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:176
+#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:178
 #, kde-format
 msgid "Fav"
 msgstr "Seçil."
@@ -213,102 +213,107 @@ msgstr "Sətir Nömrələri"
 msgid "Display the line numbers on the left side."
 msgstr "Sətir nömrələrini sol tərəfdə göstərmək."
 
-#: src/widgets/SettingsDialog.qml:68
+#: src/widgets/SettingsDialog.qml:70
 #, kde-format
 msgid "Dark Mode"
 msgstr "Qaranlıq rejim"
 
-#: src/widgets/SettingsDialog.qml:69
-#, kde-format
-msgid "Switch between light and dark colorscheme"
+#: src/widgets/SettingsDialog.qml:71
+#, fuzzy, kde-format
+#| msgid "Switch between light and dark colorscheme"
+msgid "Switch between light and dark colorscheme."
 msgstr "İşıqlı və qaranlıq rəng sxemləri arası keçid"
 
-#: src/widgets/SettingsDialog.qml:86
+#: src/widgets/SettingsDialog.qml:88
 #, kde-format
 msgid "Fonts"
 msgstr "Şriftlər"
 
-#: src/widgets/SettingsDialog.qml:87
-#, kde-format
-msgid "Configure the global editor font family and size"
+#: src/widgets/SettingsDialog.qml:89
+#, fuzzy, kde-format
+#| msgid "Configure the global editor font family and size"
+msgid "Configure the global editor font family and size."
 msgstr "Ümumi redaktorun şriftini və şrift plçüsünü dəyişmək"
 
-#: src/widgets/SettingsDialog.qml:91
+#: src/widgets/SettingsDialog.qml:93
 #, kde-format
 msgid "Family"
 msgstr "Şrift ailəsi"
 
-#: src/widgets/SettingsDialog.qml:104
+#: src/widgets/SettingsDialog.qml:106
 #, kde-format
 msgid "Size"
 msgstr "Ölçüsü"
 
-#: src/widgets/SettingsDialog.qml:117
+#: src/widgets/SettingsDialog.qml:119
 #, kde-format
 msgid "Syncing"
 msgstr "Eyniləşdirmə"
 
-#: src/widgets/SettingsDialog.qml:118
+#: src/widgets/SettingsDialog.qml:120
 #, kde-format
 msgid "Configure the syncing of notes and books."
 msgstr "Qeydlərin və kitabların eyniləşdirmə tənzimləməsi."
 
-#: src/widgets/SettingsDialog.qml:122
+#: src/widgets/SettingsDialog.qml:124
 #, kde-format
 msgid "Auto sync"
 msgstr "Avtomatik eyniləşdirmə"
 
-#: src/widgets/SettingsDialog.qml:123
-#, kde-format
-msgid "Sync notes and books on start up"
+#: src/widgets/SettingsDialog.qml:125
+#, fuzzy, kde-format
+#| msgid "Sync notes and books on start up"
+msgid "Sync notes on start up."
 msgstr "Başlanğıcda kitabları və qeydləri eyniləşdirmək"
 
-#: src/widgets/SettingsDialog.qml:136
+#: src/widgets/SettingsDialog.qml:138
 #, kde-format
 msgid "Sorting"
 msgstr "Sıralama"
 
-#: src/widgets/SettingsDialog.qml:137
+#: src/widgets/SettingsDialog.qml:139
 #, kde-format
 msgid "Sorting order and behavior."
 msgstr "Sıralama və davranış qaydaları"
 
-#: src/widgets/SettingsDialog.qml:141
-#, kde-format
-msgid "Sorting by"
+#: src/widgets/SettingsDialog.qml:143
+#, fuzzy, kde-format
+#| msgid "Sorting by"
+msgid "Sort by"
 msgstr "Buna görə sıralamaq"
 
-#: src/widgets/SettingsDialog.qml:142
+#: src/widgets/SettingsDialog.qml:144
 #, kde-format
 msgid "Change the sorting key."
 msgstr "Sıralama açarını dəyişmək"
 
-#: src/widgets/SettingsDialog.qml:164
+#: src/widgets/SettingsDialog.qml:166
 #, kde-format
 msgid "Title"
 msgstr "Başlıq"
 
-#: src/widgets/SettingsDialog.qml:170
+#: src/widgets/SettingsDialog.qml:172
 #, kde-format
 msgid "Date"
 msgstr "Tarix"
 
-#: src/widgets/SettingsDialog.qml:184
-#, kde-format
-msgid "Sort order"
+#: src/widgets/SettingsDialog.qml:186
+#, fuzzy, kde-format
+#| msgid "Sort order"
+msgid "Sort Order"
 msgstr "Sıralama qaydası"
 
-#: src/widgets/SettingsDialog.qml:185
+#: src/widgets/SettingsDialog.qml:187
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Sıralama qaydasını dəyişmək"
 
-#: src/widgets/SettingsDialog.qml:206
+#: src/widgets/SettingsDialog.qml:208
 #, kde-format
 msgid "Ascending"
 msgstr "Artan sıra ilə"
 
-#: src/widgets/SettingsDialog.qml:213
+#: src/widgets/SettingsDialog.qml:215
 #, kde-format
 msgid "Descending"
 msgstr "Azalan sıra ilə"
