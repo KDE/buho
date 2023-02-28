@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the buho package.
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2022-09-20 20:31+0400\n"
+"PO-Revision-Date: 2023-02-27 19:27+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -218,10 +218,9 @@ msgid "Dark Mode"
 msgstr "الوضع الداكن"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "بدّل بين سمة الألوان الفاتحة والداكنة"
+msgstr "بدّل بين سمة الألوان الفاتحة والداكنة."
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -229,10 +228,9 @@ msgid "Fonts"
 msgstr "الخطوط"
 
 #: src/widgets/SettingsDialog.qml:89
-#, fuzzy, kde-format
-#| msgid "Configure the global editor font family and size"
+#, kde-format
 msgid "Configure the global editor font family and size."
-msgstr "اضبط عائلة الخط وحجمه للمحرر"
+msgstr "اضبط عائلة الخط وحجمه للمحرر."
 
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
@@ -260,10 +258,9 @@ msgid "Auto sync"
 msgstr "تزامن آلي"
 
 #: src/widgets/SettingsDialog.qml:125
-#, fuzzy, kde-format
-#| msgid "Sync notes and books on start up"
+#, kde-format
 msgid "Sync notes on start up."
-msgstr "زامن الملاحظات والدفاتر عند البدء"
+msgstr "زامن الملاحظات عند البدء."
 
 #: src/widgets/SettingsDialog.qml:138
 #, kde-format
@@ -276,10 +273,9 @@ msgid "Sorting order and behavior."
 msgstr "نوع الفرز وسلوكه."
 
 #: src/widgets/SettingsDialog.qml:143
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
-msgstr "افرز بواسطة"
+msgstr "افرز حسب"
 
 #: src/widgets/SettingsDialog.qml:144
 #, kde-format
@@ -297,8 +293,7 @@ msgid "Date"
 msgstr "التاريخ"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
 msgstr "ترتيب الفرز"
 

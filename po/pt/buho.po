@@ -215,10 +215,9 @@ msgid "Dark Mode"
 msgstr "Modo Escuro"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Alternar entre o esquema de cores claro e escuro"
+msgstr "Alternar entre o esquema de cores claro e escuro."
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -273,10 +272,9 @@ msgid "Sorting order and behavior."
 msgstr "Sentido da ordenação e comportamento."
 
 #: src/widgets/SettingsDialog.qml:143
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
-msgstr "Ordenação por"
+msgstr "Ordenar por"
 
 #: src/widgets/SettingsDialog.qml:144
 #, kde-format
@@ -294,10 +292,9 @@ msgid "Date"
 msgstr "Data"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
-msgstr "Critério de ordenação"
+msgstr "Critério de Ordenação"
 
 #: src/widgets/SettingsDialog.qml:187
 #, kde-format

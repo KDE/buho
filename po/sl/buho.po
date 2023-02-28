@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2022-08-15 06:00+0200\n"
+"PO-Revision-Date: 2023-02-27 08:09+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -218,10 +218,9 @@ msgid "Dark Mode"
 msgstr "Temni način"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Preklop med svetlo in temno barvno shemo"
+msgstr "Preklop med svetlo in temno barvno shemo."
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -229,10 +228,9 @@ msgid "Fonts"
 msgstr "Pisave"
 
 #: src/widgets/SettingsDialog.qml:89
-#, fuzzy, kde-format
-#| msgid "Configure the global editor font family and size"
+#, kde-format
 msgid "Configure the global editor font family and size."
-msgstr "Nastavi globalno družino in velikosti pisav v urejevalniku"
+msgstr "Nastavi globalno družino in velikosti pisav v urejevalniku."
 
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
@@ -260,10 +258,9 @@ msgid "Auto sync"
 msgstr "Samodejna sinhronizacija"
 
 #: src/widgets/SettingsDialog.qml:125
-#, fuzzy, kde-format
-#| msgid "Sync notes and books on start up"
+#, kde-format
 msgid "Sync notes on start up."
-msgstr "Ob začetku sinhroniziraj zapiske in knjige"
+msgstr "Ob začetku sinhroniziraj zapiske in knjige."
 
 #: src/widgets/SettingsDialog.qml:138
 #, kde-format
@@ -276,10 +273,9 @@ msgid "Sorting order and behavior."
 msgstr "Vrstni red in obnašanje."
 
 #: src/widgets/SettingsDialog.qml:143
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
-msgstr "Vrstni red"
+msgstr "Razvrsti po"
 
 #: src/widgets/SettingsDialog.qml:144
 #, kde-format
@@ -297,8 +293,7 @@ msgid "Date"
 msgstr "Datum"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
 msgstr "Vrstni red"
 

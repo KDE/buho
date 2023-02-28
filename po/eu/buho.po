@@ -4,13 +4,13 @@
 # KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020, 2021, 2022.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2022-08-14 21:35+0200\n"
+"PO-Revision-Date: 2023-02-27 22:14+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -220,10 +220,9 @@ msgid "Dark Mode"
 msgstr "Modu iluna"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Aldatu kolore-antolaera argi eta ilunaren artean"
+msgstr "Aldatu kolore-antolaera argi eta ilunaren artean."
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -231,10 +230,9 @@ msgid "Fonts"
 msgstr "Letra-tipoak"
 
 #: src/widgets/SettingsDialog.qml:89
-#, fuzzy, kde-format
-#| msgid "Configure the global editor font family and size"
+#, kde-format
 msgid "Configure the global editor font family and size."
-msgstr "Konfiguratu editorearen letra-tipo familia eta neurri globala"
+msgstr "Konfiguratu editorearen letra-tipo familia eta neurri globala."
 
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
@@ -262,10 +260,9 @@ msgid "Auto sync"
 msgstr "Sinkronizatu automatikoki"
 
 #: src/widgets/SettingsDialog.qml:125
-#, fuzzy, kde-format
-#| msgid "Sync notes and books on start up"
+#, kde-format
 msgid "Sync notes on start up."
-msgstr "Sinkronizatu oharrak eta liburuak abiaraztean"
+msgstr "Sinkronizatu oharrak abiaraztean."
 
 #: src/widgets/SettingsDialog.qml:138
 #, kde-format
@@ -278,8 +275,7 @@ msgid "Sorting order and behavior."
 msgstr "Sailkatzeko hurrenkera eta jokabidea."
 
 #: src/widgets/SettingsDialog.qml:143
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
 msgstr "Sailkatu honen arabera"
 
@@ -299,8 +295,7 @@ msgid "Date"
 msgstr "Data"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
 msgstr "Sailkatzeko hurrenkera"
 

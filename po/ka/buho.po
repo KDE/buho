@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2022-09-19 18:39+0200\n"
+"PO-Revision-Date: 2023-02-27 06:48+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -218,10 +218,9 @@ msgid "Dark Mode"
 msgstr "მუქი რეჟიმი"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "ღია და მუქ ფერებს შორის გადართვა"
+msgstr "ღია და მუქ ფერებს შორის გადართვა."
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -229,10 +228,9 @@ msgid "Fonts"
 msgstr "ფონტები"
 
 #: src/widgets/SettingsDialog.qml:89
-#, fuzzy, kde-format
-#| msgid "Configure the global editor font family and size"
+#, kde-format
 msgid "Configure the global editor font family and size."
-msgstr "გლობალური რედაქტორის ფონტის ოჯახისა და ზომის მორგება"
+msgstr "გლობალური რედაქტორის ფონტის ოჯახისა და ზომის მორგება."
 
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
@@ -260,10 +258,9 @@ msgid "Auto sync"
 msgstr "ავტო სინქრონიზაცია"
 
 #: src/widgets/SettingsDialog.qml:125
-#, fuzzy, kde-format
-#| msgid "Sync notes and books on start up"
+#, kde-format
 msgid "Sync notes on start up."
-msgstr "წიგნებისა და ჩანაწერების სინქრონიზაცია ჩართვისას"
+msgstr "გაშვებისას შენიშვნების სინქრონიზაცია."
 
 #: src/widgets/SettingsDialog.qml:138
 #, kde-format
@@ -276,10 +273,9 @@ msgid "Sorting order and behavior."
 msgstr "დალაგების მიმდევრობა და ქცევა."
 
 #: src/widgets/SettingsDialog.qml:143
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
-msgstr "დალაგება"
+msgstr "დალაგების პირობა"
 
 #: src/widgets/SettingsDialog.qml:144
 #, kde-format
@@ -297,8 +293,7 @@ msgid "Date"
 msgstr "თარიღი"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
 msgstr "დალაგების წესი"
 

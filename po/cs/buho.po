@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the buho package.
-# Vit Pelcak <vit@pelcak.org>, 2021, 2022.
+# Vit Pelcak <vit@pelcak.org>, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2022-10-10 16:51+0200\n"
+"PO-Revision-Date: 2023-02-27 14:41+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -215,10 +215,9 @@ msgid "Dark Mode"
 msgstr "Tmavý režim"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Přepínač mezi světlým a tmavým barevným schématem"
+msgstr "Přepínač mezi světlým a tmavým barevným schématem."
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -228,7 +227,7 @@ msgstr "Písma"
 #: src/widgets/SettingsDialog.qml:89
 #, kde-format
 msgid "Configure the global editor font family and size."
-msgstr ""
+msgstr "Nastavit globální rodinu a velikost písem editoru."
 
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
@@ -258,7 +257,7 @@ msgstr ""
 #: src/widgets/SettingsDialog.qml:125
 #, kde-format
 msgid "Sync notes on start up."
-msgstr ""
+msgstr "Synchronizovat poznámky při spuštění."
 
 #: src/widgets/SettingsDialog.qml:138
 #, kde-format
@@ -273,7 +272,7 @@ msgstr ""
 #: src/widgets/SettingsDialog.qml:143
 #, kde-format
 msgid "Sort by"
-msgstr ""
+msgstr "Řadit dle"
 
 #: src/widgets/SettingsDialog.qml:144
 #, kde-format
@@ -291,8 +290,7 @@ msgid "Date"
 msgstr "Datum"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
 msgstr "Pořadí řazení"
 

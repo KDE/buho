@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2022-08-14 08:31+0300\n"
+"PO-Revision-Date: 2023-02-27 16:36+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -223,10 +223,9 @@ msgid "Dark Mode"
 msgstr "Темний режим"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Перемкнутися між світлою і темною схемою кольорів"
+msgstr "Перемкнутися між світлою і темною схемою кольорів."
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -234,10 +233,9 @@ msgid "Fonts"
 msgstr "Шрифти"
 
 #: src/widgets/SettingsDialog.qml:89
-#, fuzzy, kde-format
-#| msgid "Configure the global editor font family and size"
+#, kde-format
 msgid "Configure the global editor font family and size."
-msgstr "Налаштувати гарнітуру і розмір шрифту загального редактора"
+msgstr "Налаштувати гарнітуру і розмір шрифту загального редактора."
 
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
@@ -265,10 +263,9 @@ msgid "Auto sync"
 msgstr "Автосинхронізація"
 
 #: src/widgets/SettingsDialog.qml:125
-#, fuzzy, kde-format
-#| msgid "Sync notes and books on start up"
+#, kde-format
 msgid "Sync notes on start up."
-msgstr "Синхронізувати нотатки і книги під час запуску"
+msgstr "Синхронізувати нотатки під час запуску."
 
 #: src/widgets/SettingsDialog.qml:138
 #, kde-format
@@ -281,10 +278,9 @@ msgid "Sorting order and behavior."
 msgstr "Порядок і поведінка при упорядкуванні."
 
 #: src/widgets/SettingsDialog.qml:143
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
-msgstr "Критерій упорядкування"
+msgstr "Критерій упорядковування"
 
 #: src/widgets/SettingsDialog.qml:144
 #, kde-format
@@ -302,10 +298,9 @@ msgid "Date"
 msgstr "Дата"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
-msgstr "Порядок"
+msgstr "Порядок сортування"
 
 #: src/widgets/SettingsDialog.qml:187
 #, kde-format

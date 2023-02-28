@@ -1,16 +1,16 @@
 # Translation of buho.po to Catalan
-# Copyright (C) 2020-2022 This_file_is_part_of_KDE
+# Copyright (C) 2020-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2020, 2021.
-# Josep M. Ferrer <txemaq@gmail.com>, 2020, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2022-08-14 19:02+0200\n"
+"PO-Revision-Date: 2023-02-27 09:16+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -221,10 +221,9 @@ msgid "Dark Mode"
 msgstr "Mode fosc"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Alterna entre els esquemes de color clar i fosc"
+msgstr "Alterna entre els esquemes de color clar i fosc."
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -232,11 +231,10 @@ msgid "Fonts"
 msgstr "Tipus de lletra"
 
 #: src/widgets/SettingsDialog.qml:89
-#, fuzzy, kde-format
-#| msgid "Configure the global editor font family and size"
+#, kde-format
 msgid "Configure the global editor font family and size."
 msgstr ""
-"Configura la família i la mida dels tipus de lletra globals de l'editor"
+"Configura la família i la mida dels tipus de lletra globals de l'editor."
 
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
@@ -264,10 +262,9 @@ msgid "Auto sync"
 msgstr "Sincronitza automàticament"
 
 #: src/widgets/SettingsDialog.qml:125
-#, fuzzy, kde-format
-#| msgid "Sync notes and books on start up"
+#, kde-format
 msgid "Sync notes on start up."
-msgstr "Sincronitza les notes i les llibretes a l'inici"
+msgstr "Sincronitza les notes a l'inici."
 
 #: src/widgets/SettingsDialog.qml:138
 #, kde-format
@@ -280,8 +277,7 @@ msgid "Sorting order and behavior."
 msgstr "Criteri i comportament de l'ordenació."
 
 #: src/widgets/SettingsDialog.qml:143
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
 msgstr "Ordena per"
 
@@ -301,8 +297,7 @@ msgid "Date"
 msgstr "Data"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
 msgstr "Sentit d'ordenació"
 

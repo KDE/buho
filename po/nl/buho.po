@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the buho package.
 #
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2020, 2021, 2022.
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2022-08-14 18:22+0200\n"
+"PO-Revision-Date: 2023-02-27 10:37+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -217,10 +217,9 @@ msgid "Dark Mode"
 msgstr "Donkere modus"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Tussen licht en donker kleurenschema wisselen"
+msgstr "Tussen licht en donker kleurenschema wisselen."
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -228,10 +227,9 @@ msgid "Fonts"
 msgstr "Lettertypen"
 
 #: src/widgets/SettingsDialog.qml:89
-#, fuzzy, kde-format
-#| msgid "Configure the global editor font family and size"
+#, kde-format
 msgid "Configure the global editor font family and size."
-msgstr "De globale lettertypefamilie en -grootte configureren"
+msgstr "De globale lettertypefamilie en -grootte configureren."
 
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
@@ -259,10 +257,9 @@ msgid "Auto sync"
 msgstr "Automatisch synchroniseren"
 
 #: src/widgets/SettingsDialog.qml:125
-#, fuzzy, kde-format
-#| msgid "Sync notes and books on start up"
+#, kde-format
 msgid "Sync notes on start up."
-msgstr "Notities en boeken bij opstarten synchroniseren"
+msgstr "Notities bij opstarten synchroniseren."
 
 #: src/widgets/SettingsDialog.qml:138
 #, kde-format
@@ -275,8 +272,7 @@ msgid "Sorting order and behavior."
 msgstr "Sorteervolgorde en gedrag."
 
 #: src/widgets/SettingsDialog.qml:143
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
 msgstr "Sorteren op"
 
@@ -296,8 +292,7 @@ msgid "Date"
 msgstr "Datum"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
 msgstr "Sorteervolgorde"
 
