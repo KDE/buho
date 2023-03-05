@@ -5,13 +5,13 @@
 # Víctor Rodrigo Córdoba <vrcordoba@gmail.com>, %Y.
 # Automatically generated, 2020.
 # Eloy Cuadra <ecuadra@eloihr.net>, 2020.
-# Víctor Rodrigo Córdoba <vrcordoba@gmail.com>, 2020, 2021, 2022.
+# Víctor Rodrigo Córdoba <vrcordoba@gmail.com>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2022-08-27 16:56+0200\n"
+"PO-Revision-Date: 2023-03-04 17:35+0100\n"
 "Last-Translator: Víctor Rodrigo Córdoba <vrcordoba@gmail.com>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -221,10 +221,9 @@ msgid "Dark Mode"
 msgstr "Modo oscuro"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Cambiar entre esquema de color claro y oscuro"
+msgstr "Cambiar entre esquema de color claro y oscuro."
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -232,10 +231,9 @@ msgid "Fonts"
 msgstr "Tipos de letra"
 
 #: src/widgets/SettingsDialog.qml:89
-#, fuzzy, kde-format
-#| msgid "Configure the global editor font family and size"
+#, kde-format
 msgid "Configure the global editor font family and size."
-msgstr "Configurar el tamaño y familia de la fuente del editor global"
+msgstr "Configurar el tamaño y familia de la fuente del editor global."
 
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
@@ -263,10 +261,9 @@ msgid "Auto sync"
 msgstr "Auto sincronizar"
 
 #: src/widgets/SettingsDialog.qml:125
-#, fuzzy, kde-format
-#| msgid "Sync notes and books on start up"
+#, kde-format
 msgid "Sync notes on start up."
-msgstr "Sincronizar notas y libros en el inicio"
+msgstr "Sincronizar notas en el inicio."
 
 #: src/widgets/SettingsDialog.qml:138
 #, kde-format
@@ -279,8 +276,7 @@ msgid "Sorting order and behavior."
 msgstr "Ordenación y comportamiento."
 
 #: src/widgets/SettingsDialog.qml:143
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
 msgstr "Ordenar por"
 
@@ -300,10 +296,9 @@ msgid "Date"
 msgstr "Fecha"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
-msgstr "Orden"
+msgstr "Tipo de orden"
 
 #: src/widgets/SettingsDialog.qml:187
 #, kde-format
