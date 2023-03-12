@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2023-02-24 12:43\n"
+"PO-Revision-Date: 2023-03-11 04:52\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -217,10 +217,9 @@ msgid "Dark Mode"
 msgstr "深色模式"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "切换浅色/深色模式"
+msgstr ""
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -228,10 +227,9 @@ msgid "Fonts"
 msgstr "字体"
 
 #: src/widgets/SettingsDialog.qml:89
-#, fuzzy, kde-format
-#| msgid "Configure the global editor font family and size"
+#, kde-format
 msgid "Configure the global editor font family and size."
-msgstr "配置全局编辑器字体和大小"
+msgstr ""
 
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
@@ -259,10 +257,9 @@ msgid "Auto sync"
 msgstr "自动同步"
 
 #: src/widgets/SettingsDialog.qml:125
-#, fuzzy, kde-format
-#| msgid "Sync notes and books on start up"
+#, kde-format
 msgid "Sync notes on start up."
-msgstr "启动时同步笔记和书本"
+msgstr ""
 
 #: src/widgets/SettingsDialog.qml:138
 #, kde-format
@@ -275,10 +272,9 @@ msgid "Sorting order and behavior."
 msgstr "排序顺序和行为。"
 
 #: src/widgets/SettingsDialog.qml:143
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
-msgstr "排序依据"
+msgstr ""
 
 #: src/widgets/SettingsDialog.qml:144
 #, kde-format
@@ -296,10 +292,9 @@ msgid "Date"
 msgstr "日期"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
-msgstr "排序顺序"
+msgstr ""
 
 #: src/widgets/SettingsDialog.qml:187
 #, kde-format
