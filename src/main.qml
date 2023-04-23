@@ -16,7 +16,7 @@ Maui.ApplicationWindow
     title: i18n("Buho")
     Maui.Style.styleType: Maui.Handy.isAndroid ? (settings.darkMode ? Maui.Style.Dark : Maui.Style.Light) : undefined
 
-    property font defaultFont : Qt.font({family: "Noto Sans Mono", pointSize: Maui.Style.fontSizes.huge})
+    property font defaultFont : Maui.Style.defaultFont
 
 
     /***** COMPONENTS *****/

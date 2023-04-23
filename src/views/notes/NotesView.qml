@@ -38,6 +38,19 @@ StackView
         control.currentItem.editor.body.forceActiveFocus()
     }
 
+    Action
+    {
+        id: _pasteAction
+        text: i18n("Paste")
+        icon.name: "edit-paste"
+        shortcut: "Ctrl+V"
+        onTriggered:
+        {
+            console.log("PASTE NOTE FROM CLIPBOARD")
+            newNote(Maui.Handy.getClipboardText())
+        }
+    }
+
     Component
     {
         id: _editNoteComponent
@@ -593,7 +606,6 @@ StackView
 
         }
     }
-
 
     function select(item)
     {
