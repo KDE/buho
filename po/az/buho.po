@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the buho package.
 #
-# Kheyyam Gojayev <xxmn77@gmail.com>, 2020, 2021, 2022.
+# Kheyyam Gojayev <xxmn77@gmail.com>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2022-11-11 17:40+0400\n"
+"PO-Revision-Date: 2023-04-24 17:32+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
 "Language: az\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -219,10 +219,9 @@ msgid "Dark Mode"
 msgstr "Qaranlıq rejim"
 
 #: src/widgets/SettingsDialog.qml:71
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "İşıqlı və qaranlıq rəng sxemləri arası keçid"
+msgstr "İşıqlı və qaranlıq rəng sxemləri arası keçid."
 
 #: src/widgets/SettingsDialog.qml:88
 #, kde-format
@@ -230,10 +229,9 @@ msgid "Fonts"
 msgstr "Şriftlər"
 
 #: src/widgets/SettingsDialog.qml:89
-#, fuzzy, kde-format
-#| msgid "Configure the global editor font family and size"
+#, kde-format
 msgid "Configure the global editor font family and size."
-msgstr "Ümumi redaktorun şriftini və şrift plçüsünü dəyişmək"
+msgstr "Ümumi redaktorun şriftlərini və ölçülərini dəyiş."
 
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
@@ -261,10 +259,9 @@ msgid "Auto sync"
 msgstr "Avtomatik eyniləşdirmə"
 
 #: src/widgets/SettingsDialog.qml:125
-#, fuzzy, kde-format
-#| msgid "Sync notes and books on start up"
+#, kde-format
 msgid "Sync notes on start up."
-msgstr "Başlanğıcda kitabları və qeydləri eyniləşdirmək"
+msgstr "Başladıqda qeydləri eyniləşdir."
 
 #: src/widgets/SettingsDialog.qml:138
 #, kde-format
@@ -277,10 +274,9 @@ msgid "Sorting order and behavior."
 msgstr "Sıralama və davranış qaydaları"
 
 #: src/widgets/SettingsDialog.qml:143
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
-msgstr "Buna görə sıralamaq"
+msgstr "Buna görə çeşidlə"
 
 #: src/widgets/SettingsDialog.qml:144
 #, kde-format
@@ -298,10 +294,9 @@ msgid "Date"
 msgstr "Tarix"
 
 #: src/widgets/SettingsDialog.qml:186
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
-msgstr "Sıralama qaydası"
+msgstr "Çeşidləmə sırası"
 
 #: src/widgets/SettingsDialog.qml:187
 #, kde-format
