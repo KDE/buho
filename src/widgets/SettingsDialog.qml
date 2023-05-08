@@ -149,34 +149,25 @@ Maui.SettingsDialog
                 autoExclusive: true
                 display: ToolButton.TextOnly
 
-                Binding on currentIndex
-                {
-                    value:  switch(settings.sortBy)
-                            {
-                            case  "title": return 0;
-                            case  "modified": return 1;
-                            case  "favorite": return 2;
-                            default: return -1;
-                            }
-                    restoreMode: Binding.RestoreValue
-                }
-
                 Action
                 {
                     text: i18n("Title")
                     onTriggered: settings.sortBy =  "title"
+                    checked: settings.sortBy ===  "title"
                 }
 
                 Action
                 {
                     text: i18n("Date")
                     onTriggered: settings.sortBy = "modified"
+                    checked: settings.sortBy ===  "modified"
                 }
 
                 Action
                 {
                     text: i18n("Fav")
                     onTriggered: settings.sortBy = "favorite"
+                    checked: settings.sortBy ===  "favorite"
                 }
             }
         }
@@ -192,22 +183,12 @@ Maui.SettingsDialog
                 autoExclusive: true
                 display: ToolButton.IconOnly
 
-                Binding on currentIndex
-                {
-                    value:  switch(settings.sortOrder)
-                            {
-                            case Qt.AscendingOrder: return 0;
-                            case Qt.DescendingOrder: return 1;
-                            default: return -1;
-                            }
-                    restoreMode: Binding.RestoreValue
-                }
-
                 Action
                 {
                     text: i18n("Ascending")
                     icon.name: "view-sort-ascending"
                     onTriggered: settings.sortOrder = Qt.AscendingOrder
+                    checked: settings.sortOrder === Qt.AscendingOrder
                 }
 
                 Action
@@ -215,6 +196,7 @@ Maui.SettingsDialog
                     text: i18n("Descending")
                     icon.name: "view-sort-descending"
                     onTriggered: settings.sortOrder = Qt.DescendingOrder
+                    checked: settings.sortOrder === Qt.DescendingOrder
                 }
             }
         }
