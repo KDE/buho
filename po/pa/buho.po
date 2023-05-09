@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 00:59+0000\n"
+"POT-Creation-Date: 2023-05-09 00:46+0000\n"
 "PO-Revision-Date: 2021-06-20 10:15-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -43,94 +43,99 @@ msgstr "Camilo Higuita"
 msgid "Developer"
 msgstr "ਡਿਵੈਲਪਰ"
 
-#: src/views/notes/NotesView.qml:71
+#: src/views/notes/NotesView.qml:44
+#, kde-format
+msgid "Paste"
+msgstr ""
+
+#: src/views/notes/NotesView.qml:84
 #, kde-format
 msgid "Remove notes"
 msgstr "ਨੋਟਿਸ ਹਟਾਓ"
 
-#: src/views/notes/NotesView.qml:72
+#: src/views/notes/NotesView.qml:85
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "ਕੀ ਤੁਸੀਂ ਚੁਣੇ ਨੋਟਿਸਾਂ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: src/views/notes/NotesView.qml:102
+#: src/views/notes/NotesView.qml:115
 #, kde-format
 msgid "No notes!"
 msgstr "ਕੋਈ ਨੋਟਿਸ ਨਹੀਂ!"
 
-#: src/views/notes/NotesView.qml:103
+#: src/views/notes/NotesView.qml:116
 #, fuzzy, kde-format
 #| msgid "Click here to create a new note"
 msgid "You can quickly create a new note"
 msgstr "ਨਵਾਂ ਨੋਟ ਬਣਾਉਣ ਲਈ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ"
 
-#: src/views/notes/NotesView.qml:107
+#: src/views/notes/NotesView.qml:120
 #, fuzzy, kde-format
 #| msgid "No notes!"
 msgid "New note"
 msgstr "ਕੋਈ ਨੋਟਿਸ ਨਹੀਂ!"
 
-#: src/views/notes/NotesView.qml:129
+#: src/views/notes/NotesView.qml:142
 #, kde-format
 msgid "Search "
 msgstr "ਖੋਜੋ"
 
-#: src/views/notes/NotesView.qml:129
+#: src/views/notes/NotesView.qml:142
 #, kde-format
 msgid "notes"
 msgstr "ਨੋਟਿਸ"
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:156
 #, kde-format
 msgid "Settings"
 msgstr "ਸੈਟਿੰਗਾਂ"
 
-#: src/views/notes/NotesView.qml:150
+#: src/views/notes/NotesView.qml:163
 #, kde-format
 msgid "About"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:281
+#: src/views/notes/NotesView.qml:294
 #, kde-format
 msgid "Favorite"
 msgstr "ਮਨਪਸੰਦ"
 
-#: src/views/notes/NotesView.qml:294 src/views/notes/NotesView.qml:540
+#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:553
 #, kde-format
 msgid "Share"
 msgstr "ਸਾਂਝਾ ਕਰੋ"
 
-#: src/views/notes/NotesView.qml:300 src/views/notes/NotesView.qml:520
+#: src/views/notes/NotesView.qml:313 src/views/notes/NotesView.qml:533
 #, kde-format
 msgid "Export"
 msgstr "ਐਕਸਪੋਰਟ"
 
-#: src/views/notes/NotesView.qml:306 src/widgets/NewNoteDialog.qml:144
+#: src/views/notes/NotesView.qml:319 src/widgets/NewNoteDialog.qml:144
 #, kde-format
 msgid "Delete"
 msgstr "ਹਟਾਓ"
 
-#: src/views/notes/NotesView.qml:509
+#: src/views/notes/NotesView.qml:522
 #, kde-format
 msgid "UnFav"
 msgstr "ਨਾ-ਪਸੰਦ"
 
-#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:178
+#: src/views/notes/NotesView.qml:522 src/widgets/SettingsDialog.qml:168
 #, kde-format
 msgid "Fav"
 msgstr "ਪਸੰਦ"
 
-#: src/views/notes/NotesView.qml:530
+#: src/views/notes/NotesView.qml:543
 #, kde-format
 msgid "Copy"
 msgstr "ਕਾਪੀ ਕਰੋ"
 
-#: src/views/notes/NotesView.qml:550
+#: src/views/notes/NotesView.qml:563
 #, kde-format
 msgid "Select"
 msgstr "ਚੁਣੋ"
 
-#: src/views/notes/NotesView.qml:569
+#: src/views/notes/NotesView.qml:582
 #, kde-format
 msgid "Remove"
 msgstr "ਹਟਾਓ"
@@ -284,33 +289,33 @@ msgstr "ਲੜੀਬੱਧ"
 msgid "Change the sorting key."
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:166
+#: src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Title"
 msgstr "ਟਾਈਟਲ"
 
-#: src/widgets/SettingsDialog.qml:172
+#: src/widgets/SettingsDialog.qml:161
 #, kde-format
 msgid "Date"
 msgstr "ਤਾਰੀਖ"
 
-#: src/widgets/SettingsDialog.qml:186
+#: src/widgets/SettingsDialog.qml:177
 #, fuzzy, kde-format
 #| msgid "Sort order"
 msgid "Sort Order"
 msgstr "ਲੜੀਬੱਧ ਕ੍ਰਮ"
 
-#: src/widgets/SettingsDialog.qml:187
+#: src/widgets/SettingsDialog.qml:178
 #, kde-format
 msgid "Change the sorting order."
 msgstr "ਲੜੀਬੱਧ ਕਰਨ ਦਾ ਢੰਗ ਬਦਲੋ।"
 
-#: src/widgets/SettingsDialog.qml:208
+#: src/widgets/SettingsDialog.qml:188
 #, kde-format
 msgid "Ascending"
 msgstr "ਵੱਧਦਾ-ਕ੍ਰਮ"
 
-#: src/widgets/SettingsDialog.qml:215
+#: src/widgets/SettingsDialog.qml:196
 #, kde-format
 msgid "Descending"
 msgstr "ਘੱਟਦਾ-ਕ੍ਰਮ"

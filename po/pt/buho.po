@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 00:59+0000\n"
+"POT-Creation-Date: 2023-05-09 00:46+0000\n"
 "PO-Revision-Date: 2023-03-06 14:57+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese <LL@li.org>\n"
@@ -40,92 +40,97 @@ msgstr "Camilo Higuita"
 msgid "Developer"
 msgstr "Desenvolvimento"
 
-#: src/views/notes/NotesView.qml:71
+#: src/views/notes/NotesView.qml:44
+#, kde-format
+msgid "Paste"
+msgstr ""
+
+#: src/views/notes/NotesView.qml:84
 #, kde-format
 msgid "Remove notes"
 msgstr "Remover as notas"
 
-#: src/views/notes/NotesView.qml:72
+#: src/views/notes/NotesView.qml:85
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Tem a certeza que deseja remover as notas seleccionadas?"
 
-#: src/views/notes/NotesView.qml:102
+#: src/views/notes/NotesView.qml:115
 #, kde-format
 msgid "No notes!"
 msgstr "Sem notas!"
 
-#: src/views/notes/NotesView.qml:103
+#: src/views/notes/NotesView.qml:116
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "Poderá criar uma nova nota rapidamente"
 
-#: src/views/notes/NotesView.qml:107
+#: src/views/notes/NotesView.qml:120
 #, kde-format
 msgid "New note"
 msgstr "Nova nota"
 
-#: src/views/notes/NotesView.qml:129
+#: src/views/notes/NotesView.qml:142
 #, kde-format
 msgid "Search "
 msgstr "Procurar "
 
-#: src/views/notes/NotesView.qml:129
+#: src/views/notes/NotesView.qml:142
 #, kde-format
 msgid "notes"
 msgstr "notas"
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:156
 #, kde-format
 msgid "Settings"
 msgstr "Configuração"
 
-#: src/views/notes/NotesView.qml:150
+#: src/views/notes/NotesView.qml:163
 #, kde-format
 msgid "About"
 msgstr "Acerca"
 
-#: src/views/notes/NotesView.qml:281
+#: src/views/notes/NotesView.qml:294
 #, kde-format
 msgid "Favorite"
 msgstr "Favorito"
 
-#: src/views/notes/NotesView.qml:294 src/views/notes/NotesView.qml:540
+#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:553
 #, kde-format
 msgid "Share"
 msgstr "Partilhar"
 
-#: src/views/notes/NotesView.qml:300 src/views/notes/NotesView.qml:520
+#: src/views/notes/NotesView.qml:313 src/views/notes/NotesView.qml:533
 #, kde-format
 msgid "Export"
 msgstr "Exportar"
 
-#: src/views/notes/NotesView.qml:306 src/widgets/NewNoteDialog.qml:144
+#: src/views/notes/NotesView.qml:319 src/widgets/NewNoteDialog.qml:144
 #, kde-format
 msgid "Delete"
 msgstr "Apagar"
 
-#: src/views/notes/NotesView.qml:509
+#: src/views/notes/NotesView.qml:522
 #, kde-format
 msgid "UnFav"
 msgstr "Remover o Fav"
 
-#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:178
+#: src/views/notes/NotesView.qml:522 src/widgets/SettingsDialog.qml:168
 #, kde-format
 msgid "Fav"
 msgstr "Fav"
 
-#: src/views/notes/NotesView.qml:530
+#: src/views/notes/NotesView.qml:543
 #, kde-format
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/views/notes/NotesView.qml:550
+#: src/views/notes/NotesView.qml:563
 #, kde-format
 msgid "Select"
 msgstr "Seleccionar"
 
-#: src/views/notes/NotesView.qml:569
+#: src/views/notes/NotesView.qml:582
 #, kde-format
 msgid "Remove"
 msgstr "Remover"
@@ -279,32 +284,32 @@ msgstr "Ordenar por"
 msgid "Change the sorting key."
 msgstr "Mudar o critério de ordenação."
 
-#: src/widgets/SettingsDialog.qml:166
+#: src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Title"
 msgstr "Título"
 
-#: src/widgets/SettingsDialog.qml:172
+#: src/widgets/SettingsDialog.qml:161
 #, kde-format
 msgid "Date"
 msgstr "Data"
 
-#: src/widgets/SettingsDialog.qml:186
+#: src/widgets/SettingsDialog.qml:177
 #, kde-format
 msgid "Sort Order"
 msgstr "Critério de Ordenação"
 
-#: src/widgets/SettingsDialog.qml:187
+#: src/widgets/SettingsDialog.qml:178
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Mudar o sentido da ordenação."
 
-#: src/widgets/SettingsDialog.qml:208
+#: src/widgets/SettingsDialog.qml:188
 #, kde-format
 msgid "Ascending"
 msgstr "Ascendente"
 
-#: src/widgets/SettingsDialog.qml:215
+#: src/widgets/SettingsDialog.qml:196
 #, kde-format
 msgid "Descending"
 msgstr "Descendente"

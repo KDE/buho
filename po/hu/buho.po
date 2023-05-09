@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 00:59+0000\n"
+"POT-Creation-Date: 2023-05-09 00:46+0000\n"
 "PO-Revision-Date: 2021-11-23 13:40+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -43,92 +43,97 @@ msgstr "Camilo Higuita"
 msgid "Developer"
 msgstr "Fejlesztő"
 
-#: src/views/notes/NotesView.qml:71
+#: src/views/notes/NotesView.qml:44
+#, kde-format
+msgid "Paste"
+msgstr ""
+
+#: src/views/notes/NotesView.qml:84
 #, kde-format
 msgid "Remove notes"
 msgstr "Jegyzetek törlése"
 
-#: src/views/notes/NotesView.qml:72
+#: src/views/notes/NotesView.qml:85
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Biztosan törölni szeretné a kijelölt jegyzeteket?"
 
-#: src/views/notes/NotesView.qml:102
+#: src/views/notes/NotesView.qml:115
 #, kde-format
 msgid "No notes!"
 msgstr "Nincsenek jegyzetek."
 
-#: src/views/notes/NotesView.qml:103
+#: src/views/notes/NotesView.qml:116
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "Gyorsan létrehozhat új jegyzetet"
 
-#: src/views/notes/NotesView.qml:107
+#: src/views/notes/NotesView.qml:120
 #, kde-format
 msgid "New note"
 msgstr "Új jegyzet"
 
-#: src/views/notes/NotesView.qml:129
+#: src/views/notes/NotesView.qml:142
 #, kde-format
 msgid "Search "
 msgstr "Keresés "
 
-#: src/views/notes/NotesView.qml:129
+#: src/views/notes/NotesView.qml:142
 #, kde-format
 msgid "notes"
 msgstr "jegyzetek"
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:156
 #, kde-format
 msgid "Settings"
 msgstr "Beállítások"
 
-#: src/views/notes/NotesView.qml:150
+#: src/views/notes/NotesView.qml:163
 #, kde-format
 msgid "About"
 msgstr "Névjegy"
 
-#: src/views/notes/NotesView.qml:281
+#: src/views/notes/NotesView.qml:294
 #, kde-format
 msgid "Favorite"
 msgstr "Kedvenc"
 
-#: src/views/notes/NotesView.qml:294 src/views/notes/NotesView.qml:540
+#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:553
 #, kde-format
 msgid "Share"
 msgstr "Megosztás"
 
-#: src/views/notes/NotesView.qml:300 src/views/notes/NotesView.qml:520
+#: src/views/notes/NotesView.qml:313 src/views/notes/NotesView.qml:533
 #, kde-format
 msgid "Export"
 msgstr "Exportálás"
 
-#: src/views/notes/NotesView.qml:306 src/widgets/NewNoteDialog.qml:144
+#: src/views/notes/NotesView.qml:319 src/widgets/NewNoteDialog.qml:144
 #, kde-format
 msgid "Delete"
 msgstr "Törlés"
 
-#: src/views/notes/NotesView.qml:509
+#: src/views/notes/NotesView.qml:522
 #, kde-format
 msgid "UnFav"
 msgstr "Nem kedvenc"
 
-#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:178
+#: src/views/notes/NotesView.qml:522 src/widgets/SettingsDialog.qml:168
 #, kde-format
 msgid "Fav"
 msgstr "Kedvenc"
 
-#: src/views/notes/NotesView.qml:530
+#: src/views/notes/NotesView.qml:543
 #, kde-format
 msgid "Copy"
 msgstr "Másolás"
 
-#: src/views/notes/NotesView.qml:550
+#: src/views/notes/NotesView.qml:563
 #, kde-format
 msgid "Select"
 msgstr "Kiválasztás"
 
-#: src/views/notes/NotesView.qml:569
+#: src/views/notes/NotesView.qml:582
 #, kde-format
 msgid "Remove"
 msgstr "Eltávolítás"
@@ -285,33 +290,33 @@ msgstr "Rendezés eszerint:"
 msgid "Change the sorting key."
 msgstr "A rendezési kulcs módosítása."
 
-#: src/widgets/SettingsDialog.qml:166
+#: src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Title"
 msgstr "Cím"
 
-#: src/widgets/SettingsDialog.qml:172
+#: src/widgets/SettingsDialog.qml:161
 #, kde-format
 msgid "Date"
 msgstr "Dátum"
 
-#: src/widgets/SettingsDialog.qml:186
+#: src/widgets/SettingsDialog.qml:177
 #, fuzzy, kde-format
 #| msgid "Sort order"
 msgid "Sort Order"
 msgstr "Rendezési sorrend"
 
-#: src/widgets/SettingsDialog.qml:187
+#: src/widgets/SettingsDialog.qml:178
 #, kde-format
 msgid "Change the sorting order."
 msgstr "A rendezési sorrend módosítása."
 
-#: src/widgets/SettingsDialog.qml:208
+#: src/widgets/SettingsDialog.qml:188
 #, kde-format
 msgid "Ascending"
 msgstr "Növekvő"
 
-#: src/widgets/SettingsDialog.qml:215
+#: src/widgets/SettingsDialog.qml:196
 #, kde-format
 msgid "Descending"
 msgstr "Csökkenő"

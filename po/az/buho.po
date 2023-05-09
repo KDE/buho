@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 00:59+0000\n"
+"POT-Creation-Date: 2023-05-09 00:46+0000\n"
 "PO-Revision-Date: 2023-04-24 17:32+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -42,92 +42,97 @@ msgstr "Camilo Higuita"
 msgid "Developer"
 msgstr "Tərtibatçı"
 
-#: src/views/notes/NotesView.qml:71
+#: src/views/notes/NotesView.qml:44
+#, kde-format
+msgid "Paste"
+msgstr ""
+
+#: src/views/notes/NotesView.qml:84
 #, kde-format
 msgid "Remove notes"
 msgstr "Qeydləri silin"
 
-#: src/views/notes/NotesView.qml:72
+#: src/views/notes/NotesView.qml:85
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Seçilmiş qeydləri silmək istədiyinizə əminsiniz?"
 
-#: src/views/notes/NotesView.qml:102
+#: src/views/notes/NotesView.qml:115
 #, kde-format
 msgid "No notes!"
 msgstr "Qeydlər yoxdur!"
 
-#: src/views/notes/NotesView.qml:103
+#: src/views/notes/NotesView.qml:116
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "Siz cəld bir qeyd yarada bilərsiniz"
 
-#: src/views/notes/NotesView.qml:107
+#: src/views/notes/NotesView.qml:120
 #, kde-format
 msgid "New note"
 msgstr "Yeni qeyd"
 
-#: src/views/notes/NotesView.qml:129
+#: src/views/notes/NotesView.qml:142
 #, kde-format
 msgid "Search "
 msgstr "Axtarış "
 
-#: src/views/notes/NotesView.qml:129
+#: src/views/notes/NotesView.qml:142
 #, kde-format
 msgid "notes"
 msgstr "qeydlər"
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:156
 #, kde-format
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: src/views/notes/NotesView.qml:150
+#: src/views/notes/NotesView.qml:163
 #, kde-format
 msgid "About"
 msgstr "Haqqında"
 
-#: src/views/notes/NotesView.qml:281
+#: src/views/notes/NotesView.qml:294
 #, kde-format
 msgid "Favorite"
 msgstr "Seçilmişlər"
 
-#: src/views/notes/NotesView.qml:294 src/views/notes/NotesView.qml:540
+#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:553
 #, kde-format
 msgid "Share"
 msgstr "Paylaşmaq"
 
-#: src/views/notes/NotesView.qml:300 src/views/notes/NotesView.qml:520
+#: src/views/notes/NotesView.qml:313 src/views/notes/NotesView.qml:533
 #, kde-format
 msgid "Export"
 msgstr "İxrac"
 
-#: src/views/notes/NotesView.qml:306 src/widgets/NewNoteDialog.qml:144
+#: src/views/notes/NotesView.qml:319 src/widgets/NewNoteDialog.qml:144
 #, kde-format
 msgid "Delete"
 msgstr "Silmək"
 
-#: src/views/notes/NotesView.qml:509
+#: src/views/notes/NotesView.qml:522
 #, kde-format
 msgid "UnFav"
 msgstr "Seçilməm."
 
-#: src/views/notes/NotesView.qml:509 src/widgets/SettingsDialog.qml:178
+#: src/views/notes/NotesView.qml:522 src/widgets/SettingsDialog.qml:168
 #, kde-format
 msgid "Fav"
 msgstr "Seçil."
 
-#: src/views/notes/NotesView.qml:530
+#: src/views/notes/NotesView.qml:543
 #, kde-format
 msgid "Copy"
 msgstr "Kopyalamaq"
 
-#: src/views/notes/NotesView.qml:550
+#: src/views/notes/NotesView.qml:563
 #, kde-format
 msgid "Select"
 msgstr "Seçim"
 
-#: src/views/notes/NotesView.qml:569
+#: src/views/notes/NotesView.qml:582
 #, kde-format
 msgid "Remove"
 msgstr "Silmək"
@@ -283,32 +288,32 @@ msgstr "Buna görə çeşidlə"
 msgid "Change the sorting key."
 msgstr "Sıralama açarını dəyişmək"
 
-#: src/widgets/SettingsDialog.qml:166
+#: src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Title"
 msgstr "Başlıq"
 
-#: src/widgets/SettingsDialog.qml:172
+#: src/widgets/SettingsDialog.qml:161
 #, kde-format
 msgid "Date"
 msgstr "Tarix"
 
-#: src/widgets/SettingsDialog.qml:186
+#: src/widgets/SettingsDialog.qml:177
 #, kde-format
 msgid "Sort Order"
 msgstr "Çeşidləmə sırası"
 
-#: src/widgets/SettingsDialog.qml:187
+#: src/widgets/SettingsDialog.qml:178
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Sıralama qaydasını dəyişmək"
 
-#: src/widgets/SettingsDialog.qml:208
+#: src/widgets/SettingsDialog.qml:188
 #, kde-format
 msgid "Ascending"
 msgstr "Artan sıra ilə"
 
-#: src/widgets/SettingsDialog.qml:215
+#: src/widgets/SettingsDialog.qml:196
 #, kde-format
 msgid "Descending"
 msgstr "Azalan sıra ilə"
