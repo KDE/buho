@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-09 00:46+0000\n"
-"PO-Revision-Date: 2023-02-27 10:37+0100\n"
+"PO-Revision-Date: 2023-05-09 10:30+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "Ontwikkelaar"
 #: src/views/notes/NotesView.qml:44
 #, kde-format
 msgid "Paste"
-msgstr ""
+msgstr "Plakken"
 
 #: src/views/notes/NotesView.qml:84
 #, kde-format
