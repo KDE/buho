@@ -43,7 +43,7 @@ msgstr "Desenvolvimento"
 #: src/views/notes/NotesView.qml:44
 #, kde-format
 msgid "Paste"
-msgstr ""
+msgstr "Colar"
 
 #: src/views/notes/NotesView.qml:84
 #, kde-format
