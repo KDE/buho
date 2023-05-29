@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-09 00:46+0000\n"
-"PO-Revision-Date: 2023-03-04 17:35+0100\n"
+"PO-Revision-Date: 2023-05-27 17:19+0200\n"
 "Last-Translator: Víctor Rodrigo Córdoba <vrcordoba@gmail.com>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -49,7 +49,7 @@ msgstr "Desarrollador"
 #: src/views/notes/NotesView.qml:44
 #, kde-format
 msgid "Paste"
-msgstr ""
+msgstr "Pegar"
 
 #: src/views/notes/NotesView.qml:84
 #, kde-format
