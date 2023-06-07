@@ -45,7 +45,7 @@ msgstr "Vývojář"
 #: src/views/notes/NotesView.qml:44
 #, kde-format
 msgid "Paste"
-msgstr ""
+msgstr "Vložit"
 
 #: src/views/notes/NotesView.qml:84
 #, kde-format
