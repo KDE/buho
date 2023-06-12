@@ -20,6 +20,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="eu">Buho</name>
   <name xml:lang="fi">Buho</name>
   <name xml:lang="fr">Buho</name>
+  <name xml:lang="gl">Buho</name>
   <name xml:lang="it">Buho</name>
   <name xml:lang="ka">Buho</name>
   <name xml:lang="ko">Buho</name>
@@ -49,6 +50,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="eu">Oharrak hartzeko aplikazioa</summary>
   <summary xml:lang="fi">Muistiinpanosovellus</summary>
   <summary xml:lang="fr">Application de prise de notes</summary>
+  <summary xml:lang="gl">Aplicación para tomar notas</summary>
   <summary xml:lang="it">Applicazione per prendere appunti</summary>
   <summary xml:lang="ka">ჩანაწერების გასაკეთებელი პროგრამა</summary>
   <summary xml:lang="ko">메모 프로그램</summary>
@@ -78,6 +80,7 @@ SPDX-License-Identifier: CC0-1.0
     <p xml:lang="eu">Buho, oharrak hartzeko aplikazio bat da. Buho-k ohar azkarrak hartzen, estekak gordetzen, eskolako idatzoharrak hartzeko liburuak eta orriak sortzen uzten dizu.</p>
     <p xml:lang="fi">Buho on muistiinpanosovellus, jolla voi nopeasti tehdä muistiinpanoja, tallentaa linkkejä sekä luoda muistikirjoja ja sivuja.</p>
     <p xml:lang="fr">Buho est une application de prise de notes. Buho vous permet de prendre des notes rapides, d'enregistrer des liens, de créer des livres et des pages pour prendre des notes de cours.</p>
+    <p xml:lang="gl">Buho é unha aplicación para tomar notas que lle permite ademais gardar ligazóns e crear libros e páxinas para tomar notas de clase.</p>
     <p xml:lang="it">Buho è un'applicazione per prendere appunti. Ti permette di prendere appunti veloci, di salvare collegamenti e di creare libri e pagine per prendere i classici appunti.</p>
     <p xml:lang="ka">Buho არის ჩანაწერების გასაკეთებელი აპლიკაცია. ბუჰო საშუალებას მოგცემთ მიიღოთ სწრაფი ჩანაწერები, შეინახოთ ბმულები, შექმნათ წიგნები და გვერდები სკოლაში შენიშვნების ჩასაწერად.</p>
     <p xml:lang="ko">Buho는 메모 앱입니다. Buho를 사용하여 빠른 메모, 링크 저장, 수업 필기용 책과 쪽을 만들 수 있습니다.</p>
@@ -112,6 +115,7 @@ SPDX-License-Identifier: CC0-1.0
       <caption xml:lang="eu">Buho</caption>
       <caption xml:lang="fi">Buho</caption>
       <caption xml:lang="fr">Buho</caption>
+      <caption xml:lang="gl">Buho</caption>
       <caption xml:lang="it">Buho</caption>
       <caption xml:lang="ka">Buho</caption>
       <caption xml:lang="ko">Buho</caption>
