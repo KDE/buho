@@ -16,6 +16,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="de">Buho</name>
   <name xml:lang="el">Buho</name>
   <name xml:lang="en-GB">Buho</name>
+  <name xml:lang="eo">Buho</name>
   <name xml:lang="es">Buho</name>
   <name xml:lang="eu">Buho</name>
   <name xml:lang="fi">Buho</name>
@@ -46,6 +47,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="de">Notizenanwendung</summary>
   <summary xml:lang="el">Εφαρμογή σημειωματάριο</summary>
   <summary xml:lang="en-GB">Note-taking app</summary>
+  <summary xml:lang="eo">Aplikaĵo por notprenado</summary>
   <summary xml:lang="es">Aplicación para tomar notas</summary>
   <summary xml:lang="eu">Oharrak hartzeko aplikazioa</summary>
   <summary xml:lang="fi">Muistiinpanosovellus</summary>
@@ -111,6 +113,7 @@ SPDX-License-Identifier: CC0-1.0
       <caption xml:lang="de">Buho</caption>
       <caption xml:lang="el">Buho</caption>
       <caption xml:lang="en-GB">Buho</caption>
+      <caption xml:lang="eo">Buho</caption>
       <caption xml:lang="es">Buho</caption>
       <caption xml:lang="eu">Buho</caption>
       <caption xml:lang="fi">Buho</caption>
