@@ -3,8 +3,8 @@
 #include "owl.h"
 #include <QStringRef>
 
-#include <MauiKit/FileBrowsing/fmstatic.h>
-#include <MauiKit/FileBrowsing/tagging.h>
+#include <MauiKit3/FileBrowsing/fmstatic.h>
+#include <MauiKit3/FileBrowsing/tagging.h>
 
 Q_DECLARE_METATYPE(FMH::MODEL_LIST)
 Q_DECLARE_METATYPE(FMH::MODEL)

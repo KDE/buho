@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QThread>
 
-#include <MauiKit/Core/fmh.h>
+#include <MauiKit3/Core/fmh.h>
 
 #include "owl.h"
 

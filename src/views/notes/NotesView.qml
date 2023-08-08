@@ -75,7 +75,7 @@ StackView
         }
     }
 
-    Maui.Dialog
+    Maui.InfoDialog
     {
         id: _removeNotesDialog
 
@@ -86,15 +86,12 @@ StackView
 
         template.iconSource: "view-notes"
 
-        page.margins: Maui.Style.space.big
-
         onAccepted:
         {
             console.log (notes)
         }
 
         onRejected: close()
-
     }
 
     initialItem: Maui.AltBrowser
@@ -165,7 +162,6 @@ StackView
                 onTriggered: root.about()
             }
         }
-
 
         property string typingQuery
 

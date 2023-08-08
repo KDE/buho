@@ -4,8 +4,8 @@
 #include <QObject>
 #include <functional>
 
-#include <MauiKit/FileBrowsing/downloader.h>
-#include <MauiKit/Core/fmh.h>
+#include <MauiKit3/FileBrowsing/downloader.h>
+#include <MauiKit3/Core/fmh.h>
 
 /**
  * @brief The AbstractNoteSyncer class

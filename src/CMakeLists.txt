@@ -17,8 +17,7 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/controllers
 
     ${CMAKE_CURRENT_SOURCE_DIR}/models
-    ${CMAKE_CURRENT_BINARY_DIR}/models
-    )
+    ${CMAKE_CURRENT_BINARY_DIR}/models)
 
 set(buho_SRCS
     main.cpp
@@ -28,9 +27,7 @@ set(buho_SRCS
     syncing/syncer.cpp
     syncing/notessyncer.cpp
     controllers/notes/notescontroller.cpp
-    utils/server.cpp
-    #    doodle/doodlehanlder.cpp
-    )
+    utils/server.cpp)
 
 set(buho_HDRS
     db/db.h
@@ -40,13 +37,10 @@ set(buho_HDRS
     providers/abstractnotesprovider.h
     syncing/syncer.h
     syncing/notessyncer.h
-    controllers/notes/notescontroller.h
-    #    doodle/doodlehanlder.h
-    )
+    controllers/notes/notescontroller.h)
 
 set(buho_ASSETS
-    assets/imgs.qrc
-    )
+    assets/imgs.qrc)
 
 if(QUICK_COMPILER)
     qtquick_compiler_add_resources(buho_QML_QRC qml.qrc)
@@ -65,16 +59,14 @@ if(ANDROID)
         ${buho_SRCS}
         ${buho_HDRS}
         ${buho_ASSETS}
-        ${buho_QML_QRC}
-        )
+        ${buho_QML_QRC})
 else()
     add_executable(${PROJECT_NAME}
         ${buho_SRCS}
         ${buho_HDRS}
         ${buho_ASSETS}
         ${buho_QML_QRC}
-        ${buho_dbus_SRCS}
-        )
+        ${buho_dbus_SRCS})
 endif()
 
 if (ANDROID)
@@ -84,7 +76,17 @@ elseif(UNIX)
     target_link_libraries(${PROJECT_NAME} Qt5::Widgets Qt5::DBus)
 endif()
 
-target_link_libraries(${PROJECT_NAME} MauiKit MauiKit::FileBrowsing MauiKit::Accounts #[[tesseract]] Qt5::Sql Qt5::Quick Qt5::Qml Qt5::Network KF5::CoreAddons KF5::I18n)
+target_link_libraries(${PROJECT_NAME}
+    MauiKit3
+    MauiKit3::FileBrowsing
+    MauiKit3::Accounts
+    #[[tesseract]]
+    Qt5::Sql
+    Qt5::Quick
+    Qt5::Qml
+    Qt5::Network
+    KF5::CoreAddons
+    KF5::I18n)
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(TARGETS buho ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

@@ -4,9 +4,9 @@
 
 #include <QDateTime>
 
-#include <MauiKit/FileBrowsing/fmstatic.h>
-#include <MauiKit/Accounts/mauiaccounts.h>
-#include <MauiKit/FileBrowsing/tagging.h>
+#include <MauiKit3/FileBrowsing/fmstatic.h>
+#include <MauiKit3/Accounts/mauiaccounts.h>
+#include <MauiKit3/FileBrowsing/tagging.h>
 
 NotesSyncer::NotesSyncer(QObject *parent)
     : Syncer(parent)

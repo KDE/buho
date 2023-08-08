@@ -2,8 +2,8 @@
 #include "nextnote.h"
 #include "notessyncer.h"
 #include <QDebug>
-#include <MauiKit/FileBrowsing/fm.h>
-#include <MauiKit/Accounts/mauiaccounts.h>
+#include <MauiKit3/FileBrowsing/fm.h>
+#include <MauiKit3/Accounts/mauiaccounts.h>
 
 #include <algorithm>
 

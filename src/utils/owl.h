@@ -8,7 +8,7 @@
 #include <QFile>
 #include <QDebug>
 
-#include <MauiKit/Core/fmh.h>
+#include <MauiKit3/Core/fmh.h>
 
 namespace OWL
 {
