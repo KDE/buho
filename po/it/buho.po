@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-09 00:46+0000\n"
+"POT-Creation-Date: 2023-08-15 00:44+0000\n"
 "PO-Revision-Date: 2023-05-12 23:29+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -57,82 +57,82 @@ msgstr "Rimuovi appunti"
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Sei sicuro di voler eliminare gli appunti selezionati?"
 
-#: src/views/notes/NotesView.qml:115
+#: src/views/notes/NotesView.qml:112
 #, kde-format
 msgid "No notes!"
 msgstr "Nessun appunto."
 
-#: src/views/notes/NotesView.qml:116
+#: src/views/notes/NotesView.qml:113
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "Puoi creare velocemente un nuovo appunto"
 
-#: src/views/notes/NotesView.qml:120
+#: src/views/notes/NotesView.qml:117
 #, kde-format
 msgid "New note"
 msgstr "Nuovo appunto"
 
-#: src/views/notes/NotesView.qml:142
+#: src/views/notes/NotesView.qml:139
 #, kde-format
 msgid "Search "
 msgstr "Cerca "
 
-#: src/views/notes/NotesView.qml:142
+#: src/views/notes/NotesView.qml:139
 #, kde-format
 msgid "notes"
 msgstr "appunti"
 
-#: src/views/notes/NotesView.qml:156
+#: src/views/notes/NotesView.qml:153
 #, kde-format
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: src/views/notes/NotesView.qml:163
+#: src/views/notes/NotesView.qml:160
 #, kde-format
 msgid "About"
 msgstr "Informazioni su"
 
-#: src/views/notes/NotesView.qml:294
+#: src/views/notes/NotesView.qml:290
 #, kde-format
 msgid "Favorite"
 msgstr "Preferiti"
 
-#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:553
+#: src/views/notes/NotesView.qml:303 src/views/notes/NotesView.qml:549
 #, kde-format
 msgid "Share"
 msgstr "Condividi"
 
-#: src/views/notes/NotesView.qml:313 src/views/notes/NotesView.qml:533
+#: src/views/notes/NotesView.qml:309 src/views/notes/NotesView.qml:529
 #, kde-format
 msgid "Export"
 msgstr "Esporta"
 
-#: src/views/notes/NotesView.qml:319 src/widgets/NewNoteDialog.qml:144
+#: src/views/notes/NotesView.qml:315 src/widgets/NewNoteDialog.qml:144
 #, kde-format
 msgid "Delete"
 msgstr "Elimina"
 
-#: src/views/notes/NotesView.qml:522
+#: src/views/notes/NotesView.qml:518
 #, kde-format
 msgid "UnFav"
 msgstr "Rimuovi dai preferiti"
 
-#: src/views/notes/NotesView.qml:522 src/widgets/SettingsDialog.qml:168
+#: src/views/notes/NotesView.qml:518 src/widgets/SettingsDialog.qml:168
 #, kde-format
 msgid "Fav"
 msgstr "Aggiungi ai preferiti"
 
-#: src/views/notes/NotesView.qml:543
+#: src/views/notes/NotesView.qml:539
 #, kde-format
 msgid "Copy"
 msgstr "Copia"
 
-#: src/views/notes/NotesView.qml:563
+#: src/views/notes/NotesView.qml:559
 #, kde-format
 msgid "Select"
 msgstr "Seleziona"
 
-#: src/views/notes/NotesView.qml:582
+#: src/views/notes/NotesView.qml:578
 #, kde-format
 msgid "Remove"
 msgstr "Rimuovi"
