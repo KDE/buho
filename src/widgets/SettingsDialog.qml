@@ -7,11 +7,35 @@ import QtQuick.Layouts 1.3
 import org.mauikit.controls 1.3 as Maui
 
 Maui.SettingsDialog
-{
+{    
+    id: control
+
+    Component
+    {
+        id:_fontPageComponent
+
+        Maui.SettingsPage
+        {
+            title: i18n("Font")
+
+            Maui.FontPicker
+            {
+                Layout.fillWidth: true
+
+                mfont: settings.font
+
+                onFontModified:
+                {
+                    settings.font = font
+                }
+            }
+        }
+    }
+
     Maui.SectionGroup
     {
         title: i18n("Editor")
-        description: i18n("Configure the editor behaviour.")
+//        description: i18n("Configure the editor behaviour.")
 
         Maui.SectionItem
         {
@@ -81,35 +105,17 @@ Maui.SettingsDialog
                 }
             }
         }
-    }
-
-    Maui.SectionGroup
-    {
-        title: i18n("Fonts")
-        description: i18n("Configure the global editor font family and size.")
 
         Maui.SectionItem
         {
-            label1.text:  i18n("Family")
+            label1.text: i18n("Font")
+            label2.text: i18n("Font family and size.")
 
-            Maui.FontsComboBox
+            ToolButton
             {
-                id: _fontsCombobox
-                Layout.fillWidth: true
-                Component.onCompleted: currentIndex = find(settings.font.family, Qt.MatchExactly)
-                onActivated: settings.font.family = currentText
-            }
-        }
-
-        Maui.SectionItem
-        {
-            label1.text:  i18n("Size")
-
-            SpinBox
-            {
-                from: 0; to : 500
-                value: settings.font.pointSize
-                onValueChanged: settings.font.pointSize = value
+                checkable: true
+                icon.name: "go-next"
+                onToggled: control.addPage(_fontPageComponent)
             }
         }
     }
@@ -117,7 +123,7 @@ Maui.SettingsDialog
     Maui.SectionGroup
     {
         title: i18n("Syncing")
-        description: i18n("Configure the syncing of notes and books.")
+//        description: i18n("Configure the syncing of notes and books.")
 
         Maui.SectionItem
         {
@@ -136,7 +142,7 @@ Maui.SettingsDialog
     Maui.SectionGroup
     {
         title: i18n("Sorting")
-        description: i18n("Sorting order and behavior.")
+//        description: i18n("Sorting order and behavior.")
 
         Maui.SectionItem
         {
