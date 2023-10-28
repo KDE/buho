@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-15 00:44+0000\n"
+"POT-Creation-Date: 2023-10-28 00:42+0000\n"
 "PO-Revision-Date: 2023-05-13 08:53+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -23,22 +23,23 @@ msgstr ""
 msgid "Buho"
 msgstr "Buho"
 
-#: src/main.cpp:53
+#: src/main.cpp:55
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "Twórz i porządkuj swoje zapiski."
 
-#: src/main.cpp:53
-#, kde-format
-msgid "© 2019-%1 Maui Development Team"
+#: src/main.cpp:56
+#, fuzzy, kde-format
+#| msgid "© 2019-%1 Maui Development Team"
+msgid "© 2019-2023 Maui Development Team"
 msgstr "© 2019-%1 Zespół programistów Maui"
 
-#: src/main.cpp:54
+#: src/main.cpp:59
 #, kde-format
 msgid "Camilo Higuita"
 msgstr "Camilo Higuita"
 
-#: src/main.cpp:54
+#: src/main.cpp:59
 #, kde-format
 msgid "Developer"
 msgstr "Programista"
@@ -118,7 +119,7 @@ msgstr "Usuń"
 msgid "UnFav"
 msgstr "Usuń z ulubionych"
 
-#: src/views/notes/NotesView.qml:518 src/widgets/SettingsDialog.qml:168
+#: src/views/notes/NotesView.qml:518 src/widgets/SettingsDialog.qml:174
 #, kde-format
 msgid "Fav"
 msgstr "Ulubione"
@@ -167,155 +168,149 @@ msgstr ""
 msgid "Note saved"
 msgstr "Niezapisane"
 
-#: src/widgets/SettingsDialog.qml:13
+#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
+#, fuzzy, kde-format
+#| msgid "Fonts"
+msgid "Font"
+msgstr "Czcionki"
+
+#: src/widgets/SettingsDialog.qml:37
 #, kde-format
 msgid "Editor"
 msgstr "Edytor"
 
-#: src/widgets/SettingsDialog.qml:14
-#, kde-format
-msgid "Configure the editor behaviour."
-msgstr "Ustawienia zachowania edytora."
-
-#: src/widgets/SettingsDialog.qml:18
+#: src/widgets/SettingsDialog.qml:42
 #, kde-format
 msgid "Spell Checker"
 msgstr "Sprawdzanie pisowni"
 
-#: src/widgets/SettingsDialog.qml:19
+#: src/widgets/SettingsDialog.qml:43
 #, kde-format
 msgid "Check spelling and give suggestions."
 msgstr "Sprawdza pisownię i podpowiada zmiany do niej."
 
-#: src/widgets/SettingsDialog.qml:30
+#: src/widgets/SettingsDialog.qml:54
 #, kde-format
 msgid "Auto Save"
 msgstr "Samozapisywanie"
 
-#: src/widgets/SettingsDialog.qml:31
+#: src/widgets/SettingsDialog.qml:55
 #, kde-format
 msgid "Auto saves your file every few seconds"
 msgstr "Sam zapisuj plik co każde kilka sekund"
 
-#: src/widgets/SettingsDialog.qml:42
+#: src/widgets/SettingsDialog.qml:66
 #, kde-format
 msgid "Auto Reload"
 msgstr "Sam wczytuj ponownie"
 
-#: src/widgets/SettingsDialog.qml:43
+#: src/widgets/SettingsDialog.qml:67
 #, kde-format
 msgid "Auto reload the text on external changes."
 msgstr "Sam wczytuj ponownie tekst, gdy inny program go zmieni."
 
-#: src/widgets/SettingsDialog.qml:54
+#: src/widgets/SettingsDialog.qml:78
 #, kde-format
 msgid "Line Numbers"
 msgstr "Numery wierszy"
 
-#: src/widgets/SettingsDialog.qml:55
+#: src/widgets/SettingsDialog.qml:79
 #, kde-format
 msgid "Display the line numbers on the left side."
 msgstr "Wyświetl numery wierszy po lewej stronie."
 
-#: src/widgets/SettingsDialog.qml:70
+#: src/widgets/SettingsDialog.qml:94
 #, kde-format
 msgid "Dark Mode"
 msgstr "Tryb ciemny"
 
-#: src/widgets/SettingsDialog.qml:71
+#: src/widgets/SettingsDialog.qml:95
 #, kde-format
 msgid "Switch between light and dark colorscheme."
 msgstr "Przełącz pomiędzy trybem jasnym i ciemnym."
 
-#: src/widgets/SettingsDialog.qml:88
+#: src/widgets/SettingsDialog.qml:112
 #, kde-format
-msgid "Fonts"
-msgstr "Czcionki"
+msgid "Font family and size."
+msgstr ""
 
-#: src/widgets/SettingsDialog.qml:89
-#, kde-format
-msgid "Configure the global editor font family and size."
-msgstr "Ustawienia rodzaju czcionki i jej rozmiaru globalnie dla edytora."
-
-#: src/widgets/SettingsDialog.qml:93
-#, kde-format
-msgid "Family"
-msgstr "Rodzina"
-
-#: src/widgets/SettingsDialog.qml:106
-#, kde-format
-msgid "Size"
-msgstr "Rozmiar"
-
-#: src/widgets/SettingsDialog.qml:119
+#: src/widgets/SettingsDialog.qml:125
 #, kde-format
 msgid "Syncing"
 msgstr "Synchronizowanie"
 
-#: src/widgets/SettingsDialog.qml:120
-#, kde-format
-msgid "Configure the syncing of notes and books."
-msgstr "Ustawienia synchronizacji zapisków i zeszytów."
-
-#: src/widgets/SettingsDialog.qml:124
+#: src/widgets/SettingsDialog.qml:130
 #, kde-format
 msgid "Auto sync"
 msgstr "Samosynchronizowanie"
 
-#: src/widgets/SettingsDialog.qml:125
+#: src/widgets/SettingsDialog.qml:131
 #, kde-format
 msgid "Sync notes on start up."
 msgstr "Zsynchronizuj notatki po uruchomieniu."
 
-#: src/widgets/SettingsDialog.qml:138
+#: src/widgets/SettingsDialog.qml:144
 #, kde-format
 msgid "Sorting"
 msgstr "Szeregowanie"
 
-#: src/widgets/SettingsDialog.qml:139
-#, kde-format
-msgid "Sorting order and behavior."
-msgstr "Kolejność szeregowania i zachowanie."
-
-#: src/widgets/SettingsDialog.qml:143
+#: src/widgets/SettingsDialog.qml:149
 #, kde-format
 msgid "Sort by"
 msgstr "Uszereguj wg"
 
-#: src/widgets/SettingsDialog.qml:144
+#: src/widgets/SettingsDialog.qml:150
 #, kde-format
 msgid "Change the sorting key."
 msgstr "Zmień klucz szeregowania."
 
-#: src/widgets/SettingsDialog.qml:154
+#: src/widgets/SettingsDialog.qml:160
 #, kde-format
 msgid "Title"
 msgstr "Tytuł"
 
-#: src/widgets/SettingsDialog.qml:161
+#: src/widgets/SettingsDialog.qml:167
 #, kde-format
 msgid "Date"
 msgstr "Data"
 
-#: src/widgets/SettingsDialog.qml:177
+#: src/widgets/SettingsDialog.qml:183
 #, kde-format
 msgid "Sort Order"
 msgstr "Porządek szeregowania"
 
-#: src/widgets/SettingsDialog.qml:178
+#: src/widgets/SettingsDialog.qml:184
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Zmień kolejność szeregowania."
 
-#: src/widgets/SettingsDialog.qml:188
+#: src/widgets/SettingsDialog.qml:194
 #, kde-format
 msgid "Ascending"
 msgstr "Rosnąco"
 
-#: src/widgets/SettingsDialog.qml:196
+#: src/widgets/SettingsDialog.qml:202
 #, kde-format
 msgid "Descending"
 msgstr "Malejąco"
+
+#~ msgid "Configure the editor behaviour."
+#~ msgstr "Ustawienia zachowania edytora."
+
+#~ msgid "Configure the global editor font family and size."
+#~ msgstr "Ustawienia rodzaju czcionki i jej rozmiaru globalnie dla edytora."
+
+#~ msgid "Family"
+#~ msgstr "Rodzina"
+
+#~ msgid "Size"
+#~ msgstr "Rozmiar"
+
+#~ msgid "Configure the syncing of notes and books."
+#~ msgstr "Ustawienia synchronizacji zapisków i zeszytów."
+
+#~ msgid "Sorting order and behavior."
+#~ msgstr "Kolejność szeregowania i zachowanie."
 
 #~ msgid "Tags"
 #~ msgstr "Znaczniki"

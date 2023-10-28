@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-15 00:44+0000\n"
+"POT-Creation-Date: 2023-10-28 00:42+0000\n"
 "PO-Revision-Date: 2023-05-10 05:46+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -23,22 +23,23 @@ msgstr ""
 msgid "Buho"
 msgstr "Buho"
 
-#: src/main.cpp:53
+#: src/main.cpp:55
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "შექმენით და ორგანიზება გაუწიეთ თქვენს შენიშვნებს."
 
-#: src/main.cpp:53
-#, kde-format
-msgid "© 2019-%1 Maui Development Team"
+#: src/main.cpp:56
+#, fuzzy, kde-format
+#| msgid "© 2019-%1 Maui Development Team"
+msgid "© 2019-2023 Maui Development Team"
 msgstr "© 2019- %1 Maui განვითარების გუნდი"
 
-#: src/main.cpp:54
+#: src/main.cpp:59
 #, kde-format
 msgid "Camilo Higuita"
 msgstr "კამილო ჰიგუიტა"
 
-#: src/main.cpp:54
+#: src/main.cpp:59
 #, kde-format
 msgid "Developer"
 msgstr "პროგრამისტი"
@@ -118,7 +119,7 @@ msgstr "წაშლა"
 msgid "UnFav"
 msgstr "რჩეულებიდანამოღება"
 
-#: src/views/notes/NotesView.qml:518 src/widgets/SettingsDialog.qml:168
+#: src/views/notes/NotesView.qml:518 src/widgets/SettingsDialog.qml:174
 #, kde-format
 msgid "Fav"
 msgstr "რჩეულებში"
@@ -167,152 +168,146 @@ msgstr ""
 msgid "Note saved"
 msgstr "შენიშვნა შენახულია"
 
-#: src/widgets/SettingsDialog.qml:13
+#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
+#, fuzzy, kde-format
+#| msgid "Fonts"
+msgid "Font"
+msgstr "ფონტები"
+
+#: src/widgets/SettingsDialog.qml:37
 #, kde-format
 msgid "Editor"
 msgstr "რედაქტორი"
 
-#: src/widgets/SettingsDialog.qml:14
-#, kde-format
-msgid "Configure the editor behaviour."
-msgstr "ტექსტური რედაქტორის მორგება."
-
-#: src/widgets/SettingsDialog.qml:18
+#: src/widgets/SettingsDialog.qml:42
 #, kde-format
 msgid "Spell Checker"
 msgstr "მართლწერის შემოწმება"
 
-#: src/widgets/SettingsDialog.qml:19
+#: src/widgets/SettingsDialog.qml:43
 #, kde-format
 msgid "Check spelling and give suggestions."
 msgstr "მართლწერის შემოწმება და შეთავაზებები."
 
-#: src/widgets/SettingsDialog.qml:30
+#: src/widgets/SettingsDialog.qml:54
 #, kde-format
 msgid "Auto Save"
 msgstr "ავტომატური შენახვა"
 
-#: src/widgets/SettingsDialog.qml:31
+#: src/widgets/SettingsDialog.qml:55
 #, kde-format
 msgid "Auto saves your file every few seconds"
 msgstr "თქვენი ფაილის ავტომატური შენახვა რამდენიმე წამში ერთხელ"
 
-#: src/widgets/SettingsDialog.qml:42
+#: src/widgets/SettingsDialog.qml:66
 #, kde-format
 msgid "Auto Reload"
 msgstr "ავტომატური გადატვირთვა"
 
-#: src/widgets/SettingsDialog.qml:43
+#: src/widgets/SettingsDialog.qml:67
 #, kde-format
 msgid "Auto reload the text on external changes."
 msgstr "გარე ცვლილებებისას ტექსტის ავტომატურად თავიდან ჩატვირთვა."
 
-#: src/widgets/SettingsDialog.qml:54
+#: src/widgets/SettingsDialog.qml:78
 #, kde-format
 msgid "Line Numbers"
 msgstr "ხაზის ნომრები"
 
-#: src/widgets/SettingsDialog.qml:55
+#: src/widgets/SettingsDialog.qml:79
 #, kde-format
 msgid "Display the line numbers on the left side."
 msgstr "მარცხენა მხარეს ხაზის ნომრების ჩვენება."
 
-#: src/widgets/SettingsDialog.qml:70
+#: src/widgets/SettingsDialog.qml:94
 #, kde-format
 msgid "Dark Mode"
 msgstr "მუქი რეჟიმი"
 
-#: src/widgets/SettingsDialog.qml:71
+#: src/widgets/SettingsDialog.qml:95
 #, kde-format
 msgid "Switch between light and dark colorscheme."
 msgstr "ღია და მუქ ფერებს შორის გადართვა."
 
-#: src/widgets/SettingsDialog.qml:88
+#: src/widgets/SettingsDialog.qml:112
 #, kde-format
-msgid "Fonts"
-msgstr "ფონტები"
+msgid "Font family and size."
+msgstr ""
 
-#: src/widgets/SettingsDialog.qml:89
-#, kde-format
-msgid "Configure the global editor font family and size."
-msgstr "გლობალური რედაქტორის ფონტის ოჯახისა და ზომის მორგება."
-
-#: src/widgets/SettingsDialog.qml:93
-#, kde-format
-msgid "Family"
-msgstr "ოჯახი"
-
-#: src/widgets/SettingsDialog.qml:106
-#, kde-format
-msgid "Size"
-msgstr "ზომა"
-
-#: src/widgets/SettingsDialog.qml:119
+#: src/widgets/SettingsDialog.qml:125
 #, kde-format
 msgid "Syncing"
 msgstr "სინქრონიზაცია"
 
-#: src/widgets/SettingsDialog.qml:120
-#, kde-format
-msgid "Configure the syncing of notes and books."
-msgstr "ჩანაწერებისა და წიგნების სინქრონიზაციის მორგება."
-
-#: src/widgets/SettingsDialog.qml:124
+#: src/widgets/SettingsDialog.qml:130
 #, kde-format
 msgid "Auto sync"
 msgstr "ავტო სინქრონიზაცია"
 
-#: src/widgets/SettingsDialog.qml:125
+#: src/widgets/SettingsDialog.qml:131
 #, kde-format
 msgid "Sync notes on start up."
 msgstr "გაშვებისას შენიშვნების სინქრონიზაცია."
 
-#: src/widgets/SettingsDialog.qml:138
+#: src/widgets/SettingsDialog.qml:144
 #, kde-format
 msgid "Sorting"
 msgstr "დალაგება"
 
-#: src/widgets/SettingsDialog.qml:139
-#, kde-format
-msgid "Sorting order and behavior."
-msgstr "დალაგების მიმდევრობა და ქცევა."
-
-#: src/widgets/SettingsDialog.qml:143
+#: src/widgets/SettingsDialog.qml:149
 #, kde-format
 msgid "Sort by"
 msgstr "დალაგების პირობა"
 
-#: src/widgets/SettingsDialog.qml:144
+#: src/widgets/SettingsDialog.qml:150
 #, kde-format
 msgid "Change the sorting key."
 msgstr "დახარისხების გასაღების შეცვლა."
 
-#: src/widgets/SettingsDialog.qml:154
+#: src/widgets/SettingsDialog.qml:160
 #, kde-format
 msgid "Title"
 msgstr "სათაური"
 
-#: src/widgets/SettingsDialog.qml:161
+#: src/widgets/SettingsDialog.qml:167
 #, kde-format
 msgid "Date"
 msgstr "თარიღი"
 
-#: src/widgets/SettingsDialog.qml:177
+#: src/widgets/SettingsDialog.qml:183
 #, kde-format
 msgid "Sort Order"
 msgstr "დალაგების წესი"
 
-#: src/widgets/SettingsDialog.qml:178
+#: src/widgets/SettingsDialog.qml:184
 #, kde-format
 msgid "Change the sorting order."
 msgstr "დახარისხების გასაღების შეცვლა."
 
-#: src/widgets/SettingsDialog.qml:188
+#: src/widgets/SettingsDialog.qml:194
 #, kde-format
 msgid "Ascending"
 msgstr "ზრდის მიხედვით"
 
-#: src/widgets/SettingsDialog.qml:196
+#: src/widgets/SettingsDialog.qml:202
 #, kde-format
 msgid "Descending"
 msgstr "დაღმავალი"
+
+#~ msgid "Configure the editor behaviour."
+#~ msgstr "ტექსტური რედაქტორის მორგება."
+
+#~ msgid "Configure the global editor font family and size."
+#~ msgstr "გლობალური რედაქტორის ფონტის ოჯახისა და ზომის მორგება."
+
+#~ msgid "Family"
+#~ msgstr "ოჯახი"
+
+#~ msgid "Size"
+#~ msgstr "ზომა"
+
+#~ msgid "Configure the syncing of notes and books."
+#~ msgstr "ჩანაწერებისა და წიგნების სინქრონიზაციის მორგება."
+
+#~ msgid "Sorting order and behavior."
+#~ msgstr "დალაგების მიმდევრობა და ქცევა."
