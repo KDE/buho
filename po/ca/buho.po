@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 00:42+0000\n"
-"PO-Revision-Date: 2023-05-09 09:26+0200\n"
+"PO-Revision-Date: 2023-10-28 10:17+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -32,10 +32,9 @@ msgid "Create and organize your notes."
 msgstr "Crea i organitza les vostres notes."
 
 #: src/main.cpp:56
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-%1 L'equip de desenvolupament Maui"
+msgstr "© 2019-2023 L'equip de desenvolupament Maui"
 
 #: src/main.cpp:59
 #, kde-format
@@ -172,10 +171,9 @@ msgid "Note saved"
 msgstr "Nota desada"
 
 #: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
-#, fuzzy, kde-format
-#| msgid "Fonts"
+#, kde-format
 msgid "Font"
-msgstr "Tipus de lletra"
+msgstr "Lletra"
 
 #: src/widgets/SettingsDialog.qml:37
 #, kde-format
@@ -235,7 +233,7 @@ msgstr "Alterna entre els esquemes de color clar i fosc."
 #: src/widgets/SettingsDialog.qml:112
 #, kde-format
 msgid "Font family and size."
-msgstr ""
+msgstr "Família i mida de la lletra."
 
 #: src/widgets/SettingsDialog.qml:125
 #, kde-format

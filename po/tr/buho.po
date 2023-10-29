@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the buho package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 00:42+0000\n"
-"PO-Revision-Date: 2023-05-09 11:11+0300\n"
+"PO-Revision-Date: 2023-10-28 05:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -28,10 +28,9 @@ msgid "Create and organize your notes."
 msgstr "Notlar oluşturun ve onları düzenleyin."
 
 #: src/main.cpp:56
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-%1 Maui Geliştirme Takımı"
+msgstr "© 2019-2023 Maui Geliştirme Takımı"
 
 #: src/main.cpp:59
 #, kde-format
@@ -168,10 +167,9 @@ msgid "Note saved"
 msgstr "Not kaydedildi"
 
 #: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
-#, fuzzy, kde-format
-#| msgid "Fonts"
+#, kde-format
 msgid "Font"
-msgstr "Yazıtipleri"
+msgstr "Yazıtipi"
 
 #: src/widgets/SettingsDialog.qml:37
 #, kde-format
@@ -231,7 +229,7 @@ msgstr "Açık ve koyu renk şeması arasında geçiş yapın."
 #: src/widgets/SettingsDialog.qml:112
 #, kde-format
 msgid "Font family and size."
-msgstr ""
+msgstr "Yazıtipi ailesi ve boyutu."
 
 #: src/widgets/SettingsDialog.qml:125
 #, kde-format
