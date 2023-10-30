@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 00:42+0000\n"
-"PO-Revision-Date: 2023-05-13 08:53+0200\n"
+"PO-Revision-Date: 2023-10-29 09:28+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -29,10 +29,9 @@ msgid "Create and organize your notes."
 msgstr "Twórz i porządkuj swoje zapiski."
 
 #: src/main.cpp:56
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-%1 Zespół programistów Maui"
+msgstr "© 2020-2023 Zespół programistów Maui"
 
 #: src/main.cpp:59
 #, kde-format
@@ -169,10 +168,9 @@ msgid "Note saved"
 msgstr "Niezapisane"
 
 #: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
-#, fuzzy, kde-format
-#| msgid "Fonts"
+#, kde-format
 msgid "Font"
-msgstr "Czcionki"
+msgstr "Czcionka"
 
 #: src/widgets/SettingsDialog.qml:37
 #, kde-format
@@ -232,7 +230,7 @@ msgstr "Przełącz pomiędzy trybem jasnym i ciemnym."
 #: src/widgets/SettingsDialog.qml:112
 #, kde-format
 msgid "Font family and size."
-msgstr ""
+msgstr "Rodzina czcionek i rozmiar."
 
 #: src/widgets/SettingsDialog.qml:125
 #, kde-format
