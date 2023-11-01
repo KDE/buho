@@ -28,10 +28,9 @@ msgid "Create and organize your notes."
 msgstr "Vytvářejte a organizujte své poznámky."
 
 #: src/main.cpp:56
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-%1 Vývojový tým Maui"
+msgstr ""
 
 #: src/main.cpp:59
 #, kde-format
@@ -166,10 +165,9 @@ msgid "Note saved"
 msgstr "Poznámka byla uložena"
 
 #: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
-#, fuzzy, kde-format
-#| msgid "Fonts"
+#, kde-format
 msgid "Font"
-msgstr "Písma"
+msgstr "Písmo"
 
 #: src/widgets/SettingsDialog.qml:37
 #, kde-format
@@ -290,12 +288,3 @@ msgstr "Vzestupně"
 #, kde-format
 msgid "Descending"
 msgstr "Sestupně"
-
-#~ msgid "Configure the global editor font family and size."
-#~ msgstr "Nastavit globální rodinu a velikost písem editoru."
-
-#~ msgid "Family"
-#~ msgstr "Rodina"
-
-#~ msgid "Size"
-#~ msgstr "Velikost"
