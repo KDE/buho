@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the buho package.
-# Vit Pelcak <vit@pelcak.org>, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2021, 2022, 2023 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:28+0000\n"
-"PO-Revision-Date: 2023-03-03 16:13+0100\n"
+"PO-Revision-Date: 2023-10-31 16:29+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: src/main.cpp:53 src/main.qml:16
 #, kde-format
@@ -30,7 +30,7 @@ msgstr "Vytvářejte a organizujte své poznámky."
 #: src/main.cpp:56
 #, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr ""
+msgstr "© 2019-2023 Vývojový tým Maui"
 
 #: src/main.cpp:59
 #, kde-format
@@ -227,7 +227,7 @@ msgstr "Přepínač mezi světlým a tmavým barevným schématem."
 #: src/widgets/SettingsDialog.qml:112
 #, kde-format
 msgid "Font family and size."
-msgstr ""
+msgstr "Rodina písma a velikost."
 
 #: src/widgets/SettingsDialog.qml:125
 #, kde-format
