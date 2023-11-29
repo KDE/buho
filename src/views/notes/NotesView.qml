@@ -58,7 +58,7 @@ StackView
         NewNoteDialog
         {
             note: control.currentNote
-            onNoteSaved:
+            onNoteSaved: (note, noteIndex) =>
             {
                 console.log("updating note <<" , note , control.currentIndex , noteIndex, notesModel.mappedToSource(noteIndex))
                 control.list.update(note, notesModel.mappedToSource(noteIndex))
@@ -71,7 +71,7 @@ StackView
         id: _newNoteComponent
         NewNoteDialog
         {
-            onNoteSaved: control.list.insert(note)
+            onNoteSaved: (note, noteIndex) => control.list.insert(note)
         }
     }
 
@@ -124,6 +124,7 @@ StackView
             icon.name: "list-add"
             onClicked: control.newNote()
         }
+
         headBar.forceCenterMiddleContent: root.isWide
         headBar.middleContent: Loader
         {
@@ -332,7 +333,7 @@ StackView
             checked: _selectionbar.contains(model.path)
             isCurrentItem: ListView.isCurrentItem
 
-            onClicked:
+            onClicked: (mouse) =>
             {
                 currentIndex = index
 
@@ -421,7 +422,7 @@ StackView
                 checked: _selectionbar.contains(model.path)
                 isCurrentItem: parent.isCurrentItem
 
-                onClicked:
+                onClicked: (mouse) =>
                 {
                     currentIndex = index
                     console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model.url))

@@ -32,7 +32,7 @@ Notes::Notes(QObject *parent)
                 note.insert(FMStatic::getFileInfoModel(note[FMH::MODEL_KEY::URL]));
                 qDebug() << note[FMH::MODEL_KEY::MODIFIED];
                 this->notes[index] = note;
-                emit this->updateModel(index, {});
+                Q_EMIT this->updateModel(index, {});
             }
         }
     });
@@ -48,10 +48,10 @@ void Notes::appendNote(FMH::MODEL note)
         return lines.isEmpty() ? QString() : lines.first().trimmed();
     }();
     note.insert(FMStatic::getFileInfoModel(note[FMH::MODEL_KEY::URL]));
-    emit this->preItemAppended();
+    Q_EMIT this->preItemAppended();
     this->notes << note;
-    emit this->postItemAppended();
-    emit this->countChanged();
+    Q_EMIT this->postItemAppended();
+    Q_EMIT this->countChanged();
 }
 
 const FMH::MODEL_LIST &Notes::items() const
@@ -92,10 +92,10 @@ bool Notes::remove(const int &index)
     if (index < 0 || index >= this->notes.size())
         return false;
 
-    emit this->preItemRemoved(index);
+    Q_EMIT this->preItemRemoved(index);
     this->syncer->removeNote(this->notes.takeAt(index).value(FMH::MODEL_KEY::ID));
-    emit this->postItemRemoved();
-    emit this->countChanged();
+    Q_EMIT this->postItemRemoved();
+    Q_EMIT this->countChanged();
 
     return true;
 }

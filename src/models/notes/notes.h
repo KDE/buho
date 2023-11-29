@@ -1,6 +1,3 @@
-#ifndef NOTES_H
-#define NOTES_H
-
 #include <QObject>
 
 #include <MauiKit3/Core/mauilist.h>
@@ -26,7 +23,7 @@ private:
 
     void appendNote(FMH::MODEL note);
 
-public slots:
+public Q_SLOTS:
     bool insert(const QVariantMap &note);
     bool update(const QVariantMap &data, const int &index);
     bool remove(const int &index);
@@ -35,5 +32,3 @@ public slots:
     int indexOfName(const QString &query);
 
 };
-
-#endif // NOTES_H

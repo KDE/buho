@@ -97,7 +97,7 @@ bool NotesController::removeNote(const QString &id)
 
 void NotesController::getNotes()
 {
-    emit this->fetchNotes(this->m_db->getDBData("select * from notes"));
+    Q_EMIT this->fetchNotes(this->m_db->getDBData("select * from notes"));
 }
 
 void NotesLoader::fetchNotes(FMH::MODEL_LIST notes)
@@ -106,9 +106,9 @@ void NotesLoader::fetchNotes(FMH::MODEL_LIST notes)
         const auto url = QUrl(note[FMH::MODEL_KEY::URL]);
         const auto contentPreview = OWL::fileContentPreview(url);
         note[FMH::MODEL_KEY::CONTENT] = contentPreview;
-        emit this->noteReady(note);
+        Q_EMIT this->noteReady(note);
     }
 
     qDebug() << "FINISHED FETCHING URLS";
-    emit this->notesReady(notes);
+    Q_EMIT this->notesReady(notes);
 }

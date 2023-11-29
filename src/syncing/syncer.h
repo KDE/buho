@@ -1,5 +1,4 @@
-#ifndef SYNCER_H
-#define SYNCER_H
+#pragma once
 
 #include <QObject>
 
@@ -73,5 +72,3 @@ private:
     AbstractNotesProvider *m_provider;
     virtual void setConections() = 0;
 };
-
-#endif // SYNCER_H

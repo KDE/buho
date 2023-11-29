@@ -1,5 +1,4 @@
-#ifndef NOTESCONTROLLER_H
-#define NOTESCONTROLLER_H
+#pragma once
 
 #include <QObject>
 #include <QThread>
@@ -15,7 +14,7 @@ class NotesLoader : public QObject
 public:
     void fetchNotes(FMH::MODEL_LIST notes);
 
-signals:
+Q_SIGNALS:
     void noteReady(FMH::MODEL note);
     void notesReady(FMH::MODEL_LIST notes);
 };
@@ -27,7 +26,7 @@ public:
     explicit NotesController(QObject *parent = nullptr);
     ~NotesController();
 
-public slots:
+public Q_SLOTS:
     /**
      * @brief insertNote
      * performs the insertion of a new note in the local storage
@@ -48,12 +47,10 @@ private:
     QThread m_worker;
     DB *m_db;
 
-signals:
+Q_SIGNALS:
     void noteReady(FMH::MODEL note);
     void notesReady(FMH::MODEL_LIST notes);
     void noteInserted(FMH::MODEL note);
     void noteUpdated(FMH::MODEL note);
     void fetchNotes(FMH::MODEL_LIST notes);
 };
-
-#endif // NOTESCONTROLLER_H

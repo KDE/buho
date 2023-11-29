@@ -1,5 +1,4 @@
-#ifndef NEXTNOTE_H
-#define NEXTNOTE_H
+#pragma once
 
 #include "abstractnotesprovider.h"
 #include <QObject>
@@ -40,10 +39,6 @@ private:
     //    void request(const QString &url, const QMap<QString, QString> &header, T cb);
     //    void request(const QString &url, const QMap<QString, QString> &header,  std::function<void (QByteArray)>cb);
 
-signals:
-
-public slots:
+public Q_SLOTS:
     void sendNotes(QByteArray array);
 };
-
-#endif // NEXTNOTE_H

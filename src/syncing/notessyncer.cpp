@@ -29,7 +29,7 @@ void NotesSyncer::insertNote(FMH::MODEL &note)
     if (this->validProvider())
         this->getProvider().insertNote(note);
 
-    emit this->noteInserted(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note saved locally"});
+    Q_EMIT this->noteInserted(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note saved locally"});
 }
 
 void NotesSyncer::updateNote(QString id, FMH::MODEL &note)
@@ -49,7 +49,7 @@ void NotesSyncer::updateNote(QString id, FMH::MODEL &note)
             this->getProvider().updateNote(stamp, note);
     }
 
-    emit this->noteUpdated(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note updated on the DB locally"});
+    Q_EMIT this->noteUpdated(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note updated on the DB locally"});
 }
 
 void NotesSyncer::removeNote(const QString &id)
@@ -70,7 +70,7 @@ void NotesSyncer::removeNote(const QString &id)
             this->getProvider().removeNote(stamp);
     }
 
-    emit this->noteRemoved(FMH::MODEL(), {STATE::TYPE::LOCAL, STATE::STATUS::OK, "The note has been removed from the local DB"});
+    Q_EMIT this->noteRemoved(FMH::MODEL(), {STATE::TYPE::LOCAL, STATE::STATUS::OK, "The note has been removed from the local DB"});
 }
 
 void NotesSyncer::getNotes()
@@ -113,7 +113,7 @@ void NotesSyncer::setConections()
     connect(&this->getProvider(), &AbstractNotesProvider::noteInserted, [&](FMH::MODEL note) {
         qDebug() << "STAMP ID OF THE NEWLY INSERTED NOTE" << note[FMH::MODEL_KEY::STAMP] << note;
         this->db->insert(OWL::TABLEMAP[OWL::TABLE::NOTES_SYNC], FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::ID, FMH::MODEL_KEY::STAMP, FMH::MODEL_KEY::USER, FMH::MODEL_KEY::SERVER})));
-        emit this->noteInserted(note, {STATE::TYPE::REMOTE, STATE::STATUS::OK, "Note inserted on the server provider"});
+        Q_EMIT this->noteInserted(note, {STATE::TYPE::REMOTE, STATE::STATUS::OK, "Note inserted on the server provider"});
     });
 
     connect(&this->getProvider(), &AbstractNotesProvider::notesReady, [&](FMH::MODEL_LIST notes) {
@@ -138,7 +138,7 @@ void NotesSyncer::setConections()
                     continue;
 
                 this->db->insert(OWL::TABLEMAP[OWL::TABLE::NOTES_SYNC], FMH::toMap(FMH::filterModel(note, {FMH::MODEL_KEY::ID, FMH::MODEL_KEY::STAMP, FMH::MODEL_KEY::USER, FMH::MODEL_KEY::SERVER})));
-                emit this->noteInserted(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note inserted on local db, from the server provider"});
+                Q_EMIT this->noteInserted(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note inserted on local db, from the server provider"});
 
             } else {
                 // the note does exists locally, so update it
@@ -158,7 +158,7 @@ void NotesSyncer::setConections()
                 if (!this->m_notesController->updateNote(note, id))
                     continue;
 
-                emit this->noteUpdated(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note updated on local db, from the server provider"});
+                Q_EMIT this->noteUpdated(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note updated on local db, from the server provider"});
             }
         }
     });
@@ -169,10 +169,10 @@ void NotesSyncer::setConections()
 
         if (!note.isEmpty())
             this->m_notesController->updateNote(note, id);
-        emit this->noteUpdated(note, {STATE::TYPE::REMOTE, STATE::STATUS::OK, "Note updated on server provider"});
+        Q_EMIT this->noteUpdated(note, {STATE::TYPE::REMOTE, STATE::STATUS::OK, "Note updated on server provider"});
     });
 
     connect(&this->getProvider(), &AbstractNotesProvider::noteRemoved, [&]() {
-        emit this->noteRemoved(FMH::MODEL(), {STATE::TYPE::REMOTE, STATE::STATUS::OK, "The note has been removed from the remove server provider"});
+        Q_EMIT this->noteRemoved(FMH::MODEL(), {STATE::TYPE::REMOTE, STATE::STATUS::OK, "The note has been removed from the remove server provider"});
     });
 }

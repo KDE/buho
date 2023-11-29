@@ -7,6 +7,7 @@
 #include <KI18n/KLocalizedString>
 
 #include <MauiKit3/Core/mauiapp.h>
+#include <MauiKit3/TextEditor/moduleinfo.h>
 
 #ifdef Q_OS_ANDROID
 #include <QGuiApplication>
@@ -63,6 +64,9 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     about.setOrganizationDomain(BUHO_URI);
     about.setProgramLogo(app.windowIcon());
 
+    const auto FBData = MauiKitTextEditor::aboutData();
+    about.addComponent(FBData.name(), MauiKitTextEditor::buildVersion(), FBData.version(), FBData.webAddress());
+
     KAboutData::setApplicationData(about);
     MauiApp::instance()->setIconName("qrc:/buho.svg");
 
@@ -78,8 +82,6 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     parser.process(app);
 
     about.processCommandLine(&parser);
-
-
 
     bool newNote = parser.isSet(newNoteOption);
     QString noteContent;

@@ -80,6 +80,7 @@ target_link_libraries(${PROJECT_NAME}
     MauiKit3
     MauiKit3::FileBrowsing
     MauiKit3::Accounts
+    MauiKit3::TextEditor
     #[[tesseract]]
     Qt5::Sql
     Qt5::Quick

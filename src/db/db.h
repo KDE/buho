@@ -18,8 +18,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ***/
 
-#ifndef DB_H
-#define DB_H
+#pragma once
 
 #include <QDebug>
 #include <QDir>
@@ -75,10 +74,4 @@ public:
 protected:
     void openDB(const QString &name);
     void prepareCollectionDB() const;
-
-signals:
-
-public slots:
 };
-
-#endif // DB_H

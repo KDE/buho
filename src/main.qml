@@ -16,8 +16,7 @@ Maui.ApplicationWindow
     title: i18n("Buho")
     Maui.Style.styleType: Maui.Handy.isAndroid ? (settings.darkMode ? Maui.Style.Dark : Maui.Style.Light) : undefined
 
-    property font defaultFont : Maui.Style.defaultFont
-
+    readonly property font defaultFont : Maui.Style.defaultFont
 
     /***** COMPONENTS *****/
     Settings

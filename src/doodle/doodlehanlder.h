@@ -1,5 +1,4 @@
-#ifndef DOODLEHANLDER_H
-#define DOODLEHANLDER_H
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -11,10 +10,7 @@ class DoodleHanlder : public QObject
 public:
     explicit DoodleHanlder(QObject *parent = nullptr);
 
-public slots:
+public Q_SLOTS:
     QString getText(const QString &imagePath);
 
-signals:
 };
-
-#endif // DOODLEHANLDER_H

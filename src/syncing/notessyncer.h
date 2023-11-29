@@ -1,5 +1,4 @@
-#ifndef NOTESSYNCER_H
-#define NOTESSYNCER_H
+#pragma once
 
 #include <QObject>
 #include <syncer.h>
@@ -105,7 +104,8 @@ private:
     static const QString noteStampFromId(const QString &id);
 
     void setConections() override final;
-signals:
+
+Q_SIGNALS:
     // FOR NOTES
     void noteInserted(FMH::MODEL note, STATE state);
     void noteUpdated(FMH::MODEL note, STATE state);
@@ -113,7 +113,4 @@ signals:
     void noteReady(FMH::MODEL note);
     void notesReady(FMH::MODEL_LIST notes);
 
-public slots:
 };
-
-#endif // NOTESSYNCER_H

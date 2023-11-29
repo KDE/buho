@@ -56,7 +56,7 @@ void NextNote::getNote(const QString &id)
     auto downloader = new FMH::Downloader;
     connect(downloader, &FMH::Downloader::dataReady, [=](QByteArray array) {
         const auto notes = this->parseNotes(array);
-        emit this->noteReady(notes.isEmpty() ? FMH::MODEL() : notes.first());
+        Q_EMIT this->noteReady(notes.isEmpty() ? FMH::MODEL() : notes.first());
         downloader->deleteLater();
     });
 
@@ -71,7 +71,7 @@ void NextNote::getBooklet(const QString &id)
 void NextNote::sendNotes(QByteArray array)
 {
     Q_UNUSED(array)
-    //    emit this->notesReady(notes);
+    //    Q_EMIT this->notesReady(notes);
 }
 
 void NextNote::getNotes()
@@ -101,7 +101,7 @@ void NextNote::getNotes()
                 notes << item;
         }
 
-        emit this->notesReady(notes);
+        Q_EMIT this->notesReady(notes);
         downloader->deleteLater();
     });
 
@@ -135,7 +135,7 @@ void NextNote::getBooklets()
                 booklets << item;
         }
 
-        emit this->bookletsReady(booklets);
+        Q_EMIT this->bookletsReady(booklets);
         downloader->deleteLater();
     });
 
@@ -158,7 +158,7 @@ void NextNote::insertNote(const FMH::MODEL &note)
     connect(reply, &QNetworkReply::finished, [=, __note = note]() {
         qDebug() << "Note insertyion finished?";
         const auto notes = this->parseNotes(reply->readAll());
-        emit this->noteInserted([&]() -> FMH::MODEL {
+        Q_EMIT this->noteInserted([&]() -> FMH::MODEL {
             FMH::MODEL note;
             if (!notes.isEmpty()) {
                 note = notes.first();
@@ -191,7 +191,7 @@ void NextNote::insertBooklet(const FMH::MODEL &booklet)
     connect(reply, &QNetworkReply::finished, [=, __booklet = booklet]() {
         qDebug() << "Note insertyion finished?";
         const auto booklets = this->parseNotes(reply->readAll());
-        emit this->bookletInserted([&]() -> FMH::MODEL {
+        Q_EMIT this->bookletInserted([&]() -> FMH::MODEL {
             FMH::MODEL p_booklet;
             if (!booklets.isEmpty()) {
                 p_booklet = booklets.first();
@@ -230,7 +230,7 @@ void NextNote::updateNote(const QString &id, const FMH::MODEL &note)
     connect(reply, &QNetworkReply::finished, [=, __note = note]() {
         qDebug() << "Note update finished?" << reply->errorString();
         const auto notes = this->parseNotes(reply->readAll());
-        emit this->noteUpdated([&]() -> FMH::MODEL {
+        Q_EMIT this->noteUpdated([&]() -> FMH::MODEL {
             FMH::MODEL note;
             if (notes.isEmpty())
                 return note;
@@ -271,7 +271,7 @@ void NextNote::updateBooklet(const QString &id, const FMH::MODEL &booklet)
     connect(reply, &QNetworkReply::finished, [=, __booklet = booklet]() {
         qDebug() << "Note update finished?" << reply->errorString();
         const auto booklets = this->parseNotes(reply->readAll());
-        emit this->bookletUpdated([&]() -> FMH::MODEL {
+        Q_EMIT this->bookletUpdated([&]() -> FMH::MODEL {
             FMH::MODEL booklet;
 
             if (booklets.isEmpty())
@@ -308,7 +308,7 @@ void NextNote::removeNote(const QString &id)
     QNetworkReply *reply = restclient->deleteResource(request);
     connect(reply, &QNetworkReply::finished, [=]() {
         qDebug() << "Note remove finished?" << reply->errorString();
-        emit this->noteRemoved();
+        Q_EMIT this->noteRemoved();
         restclient->deleteLater();
         reply->deleteLater();
     });
