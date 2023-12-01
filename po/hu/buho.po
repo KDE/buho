@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:28+0000\n"
+"POT-Creation-Date: 2023-12-01 00:40+0000\n"
 "PO-Revision-Date: 2021-11-23 13:40+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -18,28 +18,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 21.08.3\n"
 
-#: src/main.cpp:53 src/main.qml:16
+#: src/main.cpp:54 src/main.qml:16
 #, kde-format
 msgid "Buho"
 msgstr "Buho"
 
-#: src/main.cpp:55
+#: src/main.cpp:56
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "Jegyzetek létrehozása és rendezése."
 
-#: src/main.cpp:56
+#: src/main.cpp:57
 #, fuzzy, kde-format
 #| msgid "© 2019-%1 Maui Development Team"
 msgid "© 2019-2023 Maui Development Team"
 msgstr "© A Maui fejlesztői, 2019-%1."
 
-#: src/main.cpp:59
+#: src/main.cpp:60
 #, kde-format
 msgid "Camilo Higuita"
 msgstr "Camilo Higuita"
 
-#: src/main.cpp:59
+#: src/main.cpp:60
 #, kde-format
 msgid "Developer"
 msgstr "Fejlesztő"
@@ -74,67 +74,67 @@ msgstr "Gyorsan létrehozhat új jegyzetet"
 msgid "New note"
 msgstr "Új jegyzet"
 
-#: src/views/notes/NotesView.qml:139
+#: src/views/notes/NotesView.qml:140
 #, kde-format
 msgid "Search "
 msgstr "Keresés "
 
-#: src/views/notes/NotesView.qml:139
+#: src/views/notes/NotesView.qml:140
 #, kde-format
 msgid "notes"
 msgstr "jegyzetek"
 
-#: src/views/notes/NotesView.qml:153
+#: src/views/notes/NotesView.qml:154
 #, kde-format
 msgid "Settings"
 msgstr "Beállítások"
 
-#: src/views/notes/NotesView.qml:160
+#: src/views/notes/NotesView.qml:161
 #, kde-format
 msgid "About"
 msgstr "Névjegy"
 
-#: src/views/notes/NotesView.qml:290
+#: src/views/notes/NotesView.qml:291
 #, kde-format
 msgid "Favorite"
 msgstr "Kedvenc"
 
-#: src/views/notes/NotesView.qml:303 src/views/notes/NotesView.qml:549
+#: src/views/notes/NotesView.qml:304 src/views/notes/NotesView.qml:550
 #, kde-format
 msgid "Share"
 msgstr "Megosztás"
 
-#: src/views/notes/NotesView.qml:309 src/views/notes/NotesView.qml:529
+#: src/views/notes/NotesView.qml:310 src/views/notes/NotesView.qml:530
 #, kde-format
 msgid "Export"
 msgstr "Exportálás"
 
-#: src/views/notes/NotesView.qml:315 src/widgets/NewNoteDialog.qml:144
+#: src/views/notes/NotesView.qml:316 src/widgets/NewNoteDialog.qml:144
 #, kde-format
 msgid "Delete"
 msgstr "Törlés"
 
-#: src/views/notes/NotesView.qml:518
+#: src/views/notes/NotesView.qml:519
 #, kde-format
 msgid "UnFav"
 msgstr "Nem kedvenc"
 
-#: src/views/notes/NotesView.qml:518 src/widgets/SettingsDialog.qml:174
+#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:174
 #, kde-format
 msgid "Fav"
 msgstr "Kedvenc"
 
-#: src/views/notes/NotesView.qml:539
+#: src/views/notes/NotesView.qml:540
 #, kde-format
 msgid "Copy"
 msgstr "Másolás"
 
-#: src/views/notes/NotesView.qml:559
+#: src/views/notes/NotesView.qml:560
 #, kde-format
 msgid "Select"
 msgstr "Kiválasztás"
 
-#: src/views/notes/NotesView.qml:578
+#: src/views/notes/NotesView.qml:579
 #, kde-format
 msgid "Remove"
 msgstr "Eltávolítás"

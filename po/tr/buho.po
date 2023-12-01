@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:28+0000\n"
+"POT-Creation-Date: 2023-12-01 00:40+0000\n"
 "PO-Revision-Date: 2023-10-28 05:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 23.08.2\n"
 
-#: src/main.cpp:53 src/main.qml:16
+#: src/main.cpp:54 src/main.qml:16
 #, kde-format
 msgid "Buho"
 msgstr "Buho"
 
-#: src/main.cpp:55
+#: src/main.cpp:56
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "Notlar oluşturun ve onları düzenleyin."
 
-#: src/main.cpp:56
+#: src/main.cpp:57
 #, kde-format
 msgid "© 2019-2023 Maui Development Team"
 msgstr "© 2019-2023 Maui Geliştirme Takımı"
 
-#: src/main.cpp:59
+#: src/main.cpp:60
 #, kde-format
 msgid "Camilo Higuita"
 msgstr "Camilo Higuita"
 
-#: src/main.cpp:59
+#: src/main.cpp:60
 #, kde-format
 msgid "Developer"
 msgstr "Geliştirici"
@@ -72,67 +72,67 @@ msgstr "Tez yeni bir not oluşturabilirsiniz"
 msgid "New note"
 msgstr "Yeni not"
 
-#: src/views/notes/NotesView.qml:139
+#: src/views/notes/NotesView.qml:140
 #, kde-format
 msgid "Search "
 msgstr "Ara "
 
-#: src/views/notes/NotesView.qml:139
+#: src/views/notes/NotesView.qml:140
 #, kde-format
 msgid "notes"
 msgstr "notlar"
 
-#: src/views/notes/NotesView.qml:153
+#: src/views/notes/NotesView.qml:154
 #, kde-format
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: src/views/notes/NotesView.qml:160
+#: src/views/notes/NotesView.qml:161
 #, kde-format
 msgid "About"
 msgstr "Hakkında"
 
-#: src/views/notes/NotesView.qml:290
+#: src/views/notes/NotesView.qml:291
 #, kde-format
 msgid "Favorite"
 msgstr "Sık Kullanılanlara Ekle"
 
-#: src/views/notes/NotesView.qml:303 src/views/notes/NotesView.qml:549
+#: src/views/notes/NotesView.qml:304 src/views/notes/NotesView.qml:550
 #, kde-format
 msgid "Share"
 msgstr "Paylaş"
 
-#: src/views/notes/NotesView.qml:309 src/views/notes/NotesView.qml:529
+#: src/views/notes/NotesView.qml:310 src/views/notes/NotesView.qml:530
 #, kde-format
 msgid "Export"
 msgstr "Dışa Aktar"
 
-#: src/views/notes/NotesView.qml:315 src/widgets/NewNoteDialog.qml:144
+#: src/views/notes/NotesView.qml:316 src/widgets/NewNoteDialog.qml:144
 #, kde-format
 msgid "Delete"
 msgstr "Sil"
 
-#: src/views/notes/NotesView.qml:518
+#: src/views/notes/NotesView.qml:519
 #, kde-format
 msgid "UnFav"
 msgstr "Sık Kullanılanlardan Kaldır"
 
-#: src/views/notes/NotesView.qml:518 src/widgets/SettingsDialog.qml:174
+#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:174
 #, kde-format
 msgid "Fav"
 msgstr "Sık Kullanılanlara Ekle"
 
-#: src/views/notes/NotesView.qml:539
+#: src/views/notes/NotesView.qml:540
 #, kde-format
 msgid "Copy"
 msgstr "Kopyala"
 
-#: src/views/notes/NotesView.qml:559
+#: src/views/notes/NotesView.qml:560
 #, kde-format
 msgid "Select"
 msgstr "Seç"
 
-#: src/views/notes/NotesView.qml:578
+#: src/views/notes/NotesView.qml:579
 #, kde-format
 msgid "Remove"
 msgstr "Kaldır"
