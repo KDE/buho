@@ -3,21 +3,21 @@
 # Copyright (C) 2022 This file is copyright:
 # This file is distributed under the same license as the buho package.
 #
-# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-01 00:40+0000\n"
-"PO-Revision-Date: 2023-02-09 02:23+0900\n"
+"PO-Revision-Date: 2023-12-13 17:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
-"Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: src/main.cpp:54 src/main.qml:16
 #, kde-format
@@ -30,10 +30,9 @@ msgid "Create and organize your notes."
 msgstr "建立並整理您的筆記。"
 
 #: src/main.cpp:57
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-%1 Maui 開發團隊"
+msgstr "© 2019-2023 Maui 開發團隊"
 
 #: src/main.cpp:60
 #, kde-format
@@ -48,7 +47,7 @@ msgstr "開發者"
 #: src/views/notes/NotesView.qml:44
 #, kde-format
 msgid "Paste"
-msgstr ""
+msgstr "貼上"
 
 #: src/views/notes/NotesView.qml:84
 #, kde-format
@@ -170,8 +169,7 @@ msgid "Note saved"
 msgstr "已儲存筆記"
 
 #: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
-#, fuzzy, kde-format
-#| msgid "Fonts"
+#, kde-format
 msgid "Font"
 msgstr "字型"
 
@@ -226,15 +224,14 @@ msgid "Dark Mode"
 msgstr "暗色模式"
 
 #: src/widgets/SettingsDialog.qml:95
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "在明亮和暗色配色方案間切換"
+msgstr "在明亮和暗色配色方案間切換。"
 
 #: src/widgets/SettingsDialog.qml:112
 #, kde-format
 msgid "Font family and size."
-msgstr ""
+msgstr "字型家族與大小。"
 
 #: src/widgets/SettingsDialog.qml:125
 #, kde-format
@@ -247,10 +244,9 @@ msgid "Auto sync"
 msgstr "自動同步"
 
 #: src/widgets/SettingsDialog.qml:131
-#, fuzzy, kde-format
-#| msgid "Sync notes and books on start up"
+#, kde-format
 msgid "Sync notes on start up."
-msgstr "啟動時同步筆記與書本"
+msgstr "啟動時同步筆記。"
 
 #: src/widgets/SettingsDialog.qml:144
 #, kde-format
@@ -258,10 +254,9 @@ msgid "Sorting"
 msgstr "排序"
 
 #: src/widgets/SettingsDialog.qml:149
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
-msgstr "排序方式"
+msgstr "排序依據"
 
 #: src/widgets/SettingsDialog.qml:150
 #, kde-format
@@ -279,8 +274,7 @@ msgid "Date"
 msgstr "日期"
 
 #: src/widgets/SettingsDialog.qml:183
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
 msgstr "排序方向"
 
