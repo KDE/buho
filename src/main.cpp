@@ -51,13 +51,14 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
 
     KLocalizedString::setApplicationDomain("buho");
     KAboutData about(QStringLiteral("buho"),
-                     i18n("Buho"),
+                     QStringLiteral("Buho"),
                      BUHO_VERSION_STRING,
                      i18n("Create and organize your notes."),
-                     KAboutLicense::LGPL_V3, i18n("© 2019-2023 Maui Development Team"),
+                     KAboutLicense::LGPL_V3,
+                     APP_COPYRIGHT_NOTICE,
                      QString(GIT_BRANCH) + "/" + QString(GIT_COMMIT_HASH));
 
-    about.addAuthor(i18n("Camilo Higuita"), i18n("Developer"), QStringLiteral("milo.h@aol.com"));
+    about.addAuthor(QStringLiteral("Camilo Higuita"), i18n("Developer"), QStringLiteral("milo.h@aol.com"));
     about.setHomepage("https://mauikit.org");
     about.setProductName("maui/buho");
     about.setBugAddress("https://invent.kde.org/maui/buho/-/issues");

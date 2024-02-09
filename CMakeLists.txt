@@ -6,6 +6,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 set(BUHO_VERSION 3.1.0)
+add_compile_definitions(APP_COPYRIGHT_NOTICE="© 2019-2024 Maui Development Team")
+
 project(buho VERSION ${BUHO_VERSION})
 
 set(CMAKE_CXX_STANDARD 17)
