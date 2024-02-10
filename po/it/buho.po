@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-01 00:40+0000\n"
+"POT-Creation-Date: 2024-02-10 01:51+0000\n"
 "PO-Revision-Date: 2023-11-08 16:30+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -17,30 +17,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.08.2\n"
 
-#: src/main.cpp:54 src/main.qml:16
-#, kde-format
-msgid "Buho"
-msgstr "Buho"
-
 #: src/main.cpp:56
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "Crea e organizza i tuoi appunti."
 
-#: src/main.cpp:57
-#, kde-format
-msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-2023 La squadra di sviluppo di Maui"
-
-#: src/main.cpp:60
-#, kde-format
-msgid "Camilo Higuita"
-msgstr "Camilo Higuita"
-
-#: src/main.cpp:60
+#: src/main.cpp:61
 #, kde-format
 msgid "Developer"
 msgstr "Sviluppatore"
+
+#: src/main.qml:16
+#, kde-format
+msgid "Buho"
+msgstr "Buho"
 
 #: src/views/notes/NotesView.qml:44
 #, kde-format
@@ -290,6 +280,12 @@ msgstr "Crescente"
 #, kde-format
 msgid "Descending"
 msgstr "Decrescente"
+
+#~ msgid "© 2019-2023 Maui Development Team"
+#~ msgstr "© 2019-2023 La squadra di sviluppo di Maui"
+
+#~ msgid "Camilo Higuita"
+#~ msgstr "Camilo Higuita"
 
 #~ msgid "Configure the editor behaviour."
 #~ msgstr "Configura il comportamento dell'editor."
