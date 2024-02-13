@@ -14,7 +14,6 @@ Maui.ApplicationWindow
 {
     id: root
     title: i18n("Buho")
-    Maui.Style.styleType: Maui.Handy.isAndroid ? (settings.darkMode ? Maui.Style.Dark : Maui.Style.Light) : undefined
 
     readonly property font defaultFont : Maui.Style.defaultFont
 
@@ -30,7 +29,6 @@ Maui.ApplicationWindow
 
         property string sortBy:  "modified"
         property int sortOrder : Qt.DescendingOrder
-        property bool darkMode : true
 
         property font font : defaultFont
 
@@ -47,20 +45,6 @@ Maui.ApplicationWindow
         id: notesView
         anchors.fill: parent
         cardsView.showCSDControls: true
-    }
-
-    Component.onCompleted:
-    {
-        setAndroidStatusBarColor()
-    }
-
-    function setAndroidStatusBarColor()
-    {
-        if(Maui.Handy.isAndroid)
-        {
-            Maui.Android.statusbarColor( Maui.Theme.backgroundColor, !settings.darkMode)
-            Maui.Android.navBarColor(Maui.Theme.backgroundColor, !settings.darkMode)
-        }
     }
 
     function newNote(content : string)
