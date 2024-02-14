@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-10 01:51+0000\n"
+"POT-Creation-Date: 2024-02-14 01:39+0000\n"
 "PO-Revision-Date: 2023-06-12 16:47+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -107,7 +107,7 @@ msgstr "Silmək"
 msgid "UnFav"
 msgstr "Seçilməm."
 
-#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:174
+#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:155
 #, kde-format
 msgid "Fav"
 msgstr "Seçil."
@@ -156,7 +156,7 @@ msgstr ""
 msgid "Note saved"
 msgstr "Qeyd saxlanıldı"
 
-#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
+#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:92
 #, fuzzy, kde-format
 #| msgid "Fonts"
 msgid "Font"
@@ -209,80 +209,76 @@ msgstr "Sətir Nömrələri"
 msgid "Display the line numbers on the left side."
 msgstr "Sətir nömrələrini sol tərəfdə göstərmək."
 
-#: src/widgets/SettingsDialog.qml:94
-#, kde-format
-msgid "Dark Mode"
-msgstr "Qaranlıq rejim"
-
-#: src/widgets/SettingsDialog.qml:95
-#, kde-format
-msgid "Switch between light and dark colorscheme."
-msgstr "İşıqlı və qaranlıq rəng sxemləri arası keçid."
-
-#: src/widgets/SettingsDialog.qml:112
+#: src/widgets/SettingsDialog.qml:93
 #, kde-format
 msgid "Font family and size."
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:125
+#: src/widgets/SettingsDialog.qml:106
 #, kde-format
 msgid "Syncing"
 msgstr "Eyniləşdirmə"
 
-#: src/widgets/SettingsDialog.qml:130
+#: src/widgets/SettingsDialog.qml:111
 #, kde-format
 msgid "Auto sync"
 msgstr "Avtomatik eyniləşdirmə"
 
-#: src/widgets/SettingsDialog.qml:131
+#: src/widgets/SettingsDialog.qml:112
 #, kde-format
 msgid "Sync notes on start up."
 msgstr "Başladıqda qeydləri eyniləşdir."
 
-#: src/widgets/SettingsDialog.qml:144
+#: src/widgets/SettingsDialog.qml:125
 #, kde-format
 msgid "Sorting"
 msgstr "Sıralama"
 
-#: src/widgets/SettingsDialog.qml:149
+#: src/widgets/SettingsDialog.qml:130
 #, kde-format
 msgid "Sort by"
 msgstr "Buna görə çeşidlə"
 
-#: src/widgets/SettingsDialog.qml:150
+#: src/widgets/SettingsDialog.qml:131
 #, kde-format
 msgid "Change the sorting key."
 msgstr "Sıralama açarını dəyişmək"
 
-#: src/widgets/SettingsDialog.qml:160
+#: src/widgets/SettingsDialog.qml:141
 #, kde-format
 msgid "Title"
 msgstr "Başlıq"
 
-#: src/widgets/SettingsDialog.qml:167
+#: src/widgets/SettingsDialog.qml:148
 #, kde-format
 msgid "Date"
 msgstr "Tarix"
 
-#: src/widgets/SettingsDialog.qml:183
+#: src/widgets/SettingsDialog.qml:164
 #, kde-format
 msgid "Sort Order"
 msgstr "Çeşidləmə sırası"
 
-#: src/widgets/SettingsDialog.qml:184
+#: src/widgets/SettingsDialog.qml:165
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Sıralama qaydasını dəyişmək"
 
-#: src/widgets/SettingsDialog.qml:194
+#: src/widgets/SettingsDialog.qml:175
 #, kde-format
 msgid "Ascending"
 msgstr "Artan sıra ilə"
 
-#: src/widgets/SettingsDialog.qml:202
+#: src/widgets/SettingsDialog.qml:183
 #, kde-format
 msgid "Descending"
 msgstr "Azalan sıra ilə"
+
+#~ msgid "Dark Mode"
+#~ msgstr "Qaranlıq rejim"
+
+#~ msgid "Switch between light and dark colorscheme."
+#~ msgstr "İşıqlı və qaranlıq rəng sxemləri arası keçid."
 
 #, fuzzy
 #~| msgid "© 2019-%1 Maui Development Team"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-10 01:51+0000\n"
+"POT-Creation-Date: 2024-02-14 01:39+0000\n"
 "PO-Revision-Date: 2022-04-07 18:02+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -118,7 +118,7 @@ msgstr "Vymazať"
 msgid "UnFav"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:174
+#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:155
 #, kde-format
 msgid "Fav"
 msgstr ""
@@ -172,7 +172,7 @@ msgstr "Názov"
 msgid "Note saved"
 msgstr "Poznámky"
 
-#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
+#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:92
 #, fuzzy, kde-format
 msgid "Font"
 msgstr "Písma"
@@ -222,84 +222,77 @@ msgstr "Čísla riadkov"
 msgid "Display the line numbers on the left side."
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:94
-#, kde-format
-msgid "Dark Mode"
-msgstr "Tmavý režim"
-
-#: src/widgets/SettingsDialog.qml:95
-#, kde-format
-msgid "Switch between light and dark colorscheme."
-msgstr ""
-
-#: src/widgets/SettingsDialog.qml:112
+#: src/widgets/SettingsDialog.qml:93
 #, kde-format
 msgid "Font family and size."
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:125
+#: src/widgets/SettingsDialog.qml:106
 #, kde-format
 msgid "Syncing"
 msgstr "Synchronizovanie"
 
-#: src/widgets/SettingsDialog.qml:130
+#: src/widgets/SettingsDialog.qml:111
 #, kde-format
 msgid "Auto sync"
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:131
+#: src/widgets/SettingsDialog.qml:112
 #, kde-format
 msgid "Sync notes on start up."
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:144
+#: src/widgets/SettingsDialog.qml:125
 #, kde-format
 msgid "Sorting"
 msgstr "Triedenie"
 
-#: src/widgets/SettingsDialog.qml:149
+#: src/widgets/SettingsDialog.qml:130
 #, fuzzy, kde-format
 #| msgid "Sorting by"
 msgid "Sort by"
 msgstr "Triedenie podľa"
 
-#: src/widgets/SettingsDialog.qml:150
+#: src/widgets/SettingsDialog.qml:131
 #, kde-format
 msgid "Change the sorting key."
 msgstr "Zmeňte triediaci kľúč."
 
-#: src/widgets/SettingsDialog.qml:160
+#: src/widgets/SettingsDialog.qml:141
 #, fuzzy, kde-format
 #| msgctxt "LinksView|"
 #| msgid "Title"
 msgid "Title"
 msgstr "Názov"
 
-#: src/widgets/SettingsDialog.qml:167
+#: src/widgets/SettingsDialog.qml:148
 #, fuzzy, kde-format
 msgid "Date"
 msgstr "Dátum"
 
-#: src/widgets/SettingsDialog.qml:183
+#: src/widgets/SettingsDialog.qml:164
 #, fuzzy, kde-format
 #| msgid "Sort order"
 msgid "Sort Order"
 msgstr "Poradie triedenia"
 
-#: src/widgets/SettingsDialog.qml:184
+#: src/widgets/SettingsDialog.qml:165
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Zmeniť poradie triedenia."
 
-#: src/widgets/SettingsDialog.qml:194
+#: src/widgets/SettingsDialog.qml:175
 #, kde-format
 msgid "Ascending"
 msgstr "Vzostupne"
 
-#: src/widgets/SettingsDialog.qml:202
+#: src/widgets/SettingsDialog.qml:183
 #, fuzzy, kde-format
 msgid "Descending"
 msgstr "Zostupne"
+
+#~ msgid "Dark Mode"
+#~ msgstr "Tmavý režim"
 
 #, fuzzy
 #~| msgid "© 2019-%1 Nitrux Development Team"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-10 01:51+0000\n"
+"POT-Creation-Date: 2024-02-14 01:39+0000\n"
 "PO-Revision-Date: 2023-10-28 10:17+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -111,7 +111,7 @@ msgstr "Suprimeix"
 msgid "UnFav"
 msgstr "Desmarca com a preferit"
 
-#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:174
+#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:155
 #, kde-format
 msgid "Fav"
 msgstr "Preferit"
@@ -160,7 +160,7 @@ msgstr ""
 msgid "Note saved"
 msgstr "Nota desada"
 
-#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
+#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:92
 #, kde-format
 msgid "Font"
 msgstr "Lletra"
@@ -210,80 +210,76 @@ msgstr "Números de les línies"
 msgid "Display the line numbers on the left side."
 msgstr "Mostra els números de línia a la part esquerra."
 
-#: src/widgets/SettingsDialog.qml:94
-#, kde-format
-msgid "Dark Mode"
-msgstr "Mode fosc"
-
-#: src/widgets/SettingsDialog.qml:95
-#, kde-format
-msgid "Switch between light and dark colorscheme."
-msgstr "Alterna entre els esquemes de color clar i fosc."
-
-#: src/widgets/SettingsDialog.qml:112
+#: src/widgets/SettingsDialog.qml:93
 #, kde-format
 msgid "Font family and size."
 msgstr "Família i mida de la lletra."
 
-#: src/widgets/SettingsDialog.qml:125
+#: src/widgets/SettingsDialog.qml:106
 #, kde-format
 msgid "Syncing"
 msgstr "Sincronitza"
 
-#: src/widgets/SettingsDialog.qml:130
+#: src/widgets/SettingsDialog.qml:111
 #, kde-format
 msgid "Auto sync"
 msgstr "Sincronitza automàticament"
 
-#: src/widgets/SettingsDialog.qml:131
+#: src/widgets/SettingsDialog.qml:112
 #, kde-format
 msgid "Sync notes on start up."
 msgstr "Sincronitza les notes a l'inici."
 
-#: src/widgets/SettingsDialog.qml:144
+#: src/widgets/SettingsDialog.qml:125
 #, kde-format
 msgid "Sorting"
 msgstr "Ordenació"
 
-#: src/widgets/SettingsDialog.qml:149
+#: src/widgets/SettingsDialog.qml:130
 #, kde-format
 msgid "Sort by"
 msgstr "Ordena per"
 
-#: src/widgets/SettingsDialog.qml:150
+#: src/widgets/SettingsDialog.qml:131
 #, kde-format
 msgid "Change the sorting key."
 msgstr "Canvia la clau d'ordenació."
 
-#: src/widgets/SettingsDialog.qml:160
+#: src/widgets/SettingsDialog.qml:141
 #, kde-format
 msgid "Title"
 msgstr "Títol"
 
-#: src/widgets/SettingsDialog.qml:167
+#: src/widgets/SettingsDialog.qml:148
 #, kde-format
 msgid "Date"
 msgstr "Data"
 
-#: src/widgets/SettingsDialog.qml:183
+#: src/widgets/SettingsDialog.qml:164
 #, kde-format
 msgid "Sort Order"
 msgstr "Sentit d'ordenació"
 
-#: src/widgets/SettingsDialog.qml:184
+#: src/widgets/SettingsDialog.qml:165
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Canvia el sentit d'ordenació."
 
-#: src/widgets/SettingsDialog.qml:194
+#: src/widgets/SettingsDialog.qml:175
 #, kde-format
 msgid "Ascending"
 msgstr "Ascendent"
 
-#: src/widgets/SettingsDialog.qml:202
+#: src/widgets/SettingsDialog.qml:183
 #, kde-format
 msgid "Descending"
 msgstr "Descendent"
+
+#~ msgid "Dark Mode"
+#~ msgstr "Mode fosc"
+
+#~ msgid "Switch between light and dark colorscheme."
+#~ msgstr "Alterna entre els esquemes de color clar i fosc."
 
 #~ msgid "© 2019-2023 Maui Development Team"
 #~ msgstr "© 2019-2023 L'equip de desenvolupament Maui"

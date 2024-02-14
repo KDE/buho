@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-10 01:51+0000\n"
+"POT-Creation-Date: 2024-02-14 01:39+0000\n"
 "PO-Revision-Date: 2023-07-25 00:26+0300\n"
 "Last-Translator: George Stefanakis <george.stefanakis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -106,7 +106,7 @@ msgstr "Διαγραφή"
 msgid "UnFav"
 msgstr "Όχιαγαπ"
 
-#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:174
+#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:155
 #, kde-format
 msgid "Fav"
 msgstr "Αγαπ"
@@ -155,7 +155,7 @@ msgstr ""
 msgid "Note saved"
 msgstr "Η σημείωση αποθηκεύτηκε"
 
-#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
+#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:92
 #, fuzzy, kde-format
 #| msgid "Fonts"
 msgid "Font"
@@ -206,80 +206,76 @@ msgstr "Αρίθμηση γραμμών"
 msgid "Display the line numbers on the left side."
 msgstr "Εμφανίζει τους αριθμούς γραμμών στην αριστερή πλευρά."
 
-#: src/widgets/SettingsDialog.qml:94
-#, kde-format
-msgid "Dark Mode"
-msgstr "Σκοτεινό περιβάλλον"
-
-#: src/widgets/SettingsDialog.qml:95
-#, kde-format
-msgid "Switch between light and dark colorscheme."
-msgstr "Εναλλαγή μεταξύ φωτεινού και σκοτεινού χρωματικού θέματος."
-
-#: src/widgets/SettingsDialog.qml:112
+#: src/widgets/SettingsDialog.qml:93
 #, kde-format
 msgid "Font family and size."
 msgstr ""
 
-#: src/widgets/SettingsDialog.qml:125
+#: src/widgets/SettingsDialog.qml:106
 #, kde-format
 msgid "Syncing"
 msgstr "Συγχρονισμός"
 
-#: src/widgets/SettingsDialog.qml:130
+#: src/widgets/SettingsDialog.qml:111
 #, kde-format
 msgid "Auto sync"
 msgstr "Αυτόματος συγχρονισμός"
 
-#: src/widgets/SettingsDialog.qml:131
+#: src/widgets/SettingsDialog.qml:112
 #, kde-format
 msgid "Sync notes on start up."
 msgstr "Συγχρονισμός σημειώσεων κατά την εκκίνηση."
 
-#: src/widgets/SettingsDialog.qml:144
+#: src/widgets/SettingsDialog.qml:125
 #, kde-format
 msgid "Sorting"
 msgstr "Ταξινόμηση"
 
-#: src/widgets/SettingsDialog.qml:149
+#: src/widgets/SettingsDialog.qml:130
 #, kde-format
 msgid "Sort by"
 msgstr "Ταξινόμηση κατά"
 
-#: src/widgets/SettingsDialog.qml:150
+#: src/widgets/SettingsDialog.qml:131
 #, kde-format
 msgid "Change the sorting key."
 msgstr "Αλλαγή του κλειδιού ταξινόμησης."
 
-#: src/widgets/SettingsDialog.qml:160
+#: src/widgets/SettingsDialog.qml:141
 #, kde-format
 msgid "Title"
 msgstr "Τίτλος"
 
-#: src/widgets/SettingsDialog.qml:167
+#: src/widgets/SettingsDialog.qml:148
 #, kde-format
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: src/widgets/SettingsDialog.qml:183
+#: src/widgets/SettingsDialog.qml:164
 #, kde-format
 msgid "Sort Order"
 msgstr "Σειρά ταξινόμησης"
 
-#: src/widgets/SettingsDialog.qml:184
+#: src/widgets/SettingsDialog.qml:165
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Αλλαγή της σειράς ταξινόμησης."
 
-#: src/widgets/SettingsDialog.qml:194
+#: src/widgets/SettingsDialog.qml:175
 #, kde-format
 msgid "Ascending"
 msgstr "Αύξουσα"
 
-#: src/widgets/SettingsDialog.qml:202
+#: src/widgets/SettingsDialog.qml:183
 #, kde-format
 msgid "Descending"
 msgstr "Φθίνουσα"
+
+#~ msgid "Dark Mode"
+#~ msgstr "Σκοτεινό περιβάλλον"
+
+#~ msgid "Switch between light and dark colorscheme."
+#~ msgstr "Εναλλαγή μεταξύ φωτεινού και σκοτεινού χρωματικού θέματος."
 
 #, fuzzy
 #~| msgid "© 2019-%1 Maui Development Team"

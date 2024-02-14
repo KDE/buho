@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-10 01:51+0000\n"
+"POT-Creation-Date: 2024-02-14 01:39+0000\n"
 "PO-Revision-Date: 2023-11-08 16:30+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -107,7 +107,7 @@ msgstr "Elimina"
 msgid "UnFav"
 msgstr "Rimuovi dai preferiti"
 
-#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:174
+#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:155
 #, kde-format
 msgid "Fav"
 msgstr "Aggiungi ai preferiti"
@@ -156,7 +156,7 @@ msgstr ""
 msgid "Note saved"
 msgstr "Appunti salvati"
 
-#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:111
+#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:92
 #, kde-format
 msgid "Font"
 msgstr "Carattere"
@@ -206,80 +206,76 @@ msgstr "Numeri di riga"
 msgid "Display the line numbers on the left side."
 msgstr "Mostra i numeri di riga sul lato sinistro."
 
-#: src/widgets/SettingsDialog.qml:94
-#, kde-format
-msgid "Dark Mode"
-msgstr "Modalità scura"
-
-#: src/widgets/SettingsDialog.qml:95
-#, kde-format
-msgid "Switch between light and dark colorscheme."
-msgstr "Passa dallo schema di colori chiaro allo scuro e viceversa."
-
-#: src/widgets/SettingsDialog.qml:112
+#: src/widgets/SettingsDialog.qml:93
 #, kde-format
 msgid "Font family and size."
 msgstr "Famiglia e dimensioni del carattere."
 
-#: src/widgets/SettingsDialog.qml:125
+#: src/widgets/SettingsDialog.qml:106
 #, kde-format
 msgid "Syncing"
 msgstr "Sincronizzazione"
 
-#: src/widgets/SettingsDialog.qml:130
+#: src/widgets/SettingsDialog.qml:111
 #, kde-format
 msgid "Auto sync"
 msgstr "Sincronizza automaticamente"
 
-#: src/widgets/SettingsDialog.qml:131
+#: src/widgets/SettingsDialog.qml:112
 #, kde-format
 msgid "Sync notes on start up."
 msgstr "Sincronizza gli appunti all'avvio."
 
-#: src/widgets/SettingsDialog.qml:144
+#: src/widgets/SettingsDialog.qml:125
 #, kde-format
 msgid "Sorting"
 msgstr "Ordinamento"
 
-#: src/widgets/SettingsDialog.qml:149
+#: src/widgets/SettingsDialog.qml:130
 #, kde-format
 msgid "Sort by"
 msgstr "Ordina per"
 
-#: src/widgets/SettingsDialog.qml:150
+#: src/widgets/SettingsDialog.qml:131
 #, kde-format
 msgid "Change the sorting key."
 msgstr "Modifica la chiave di ordinamento."
 
-#: src/widgets/SettingsDialog.qml:160
+#: src/widgets/SettingsDialog.qml:141
 #, kde-format
 msgid "Title"
 msgstr "Titolo"
 
-#: src/widgets/SettingsDialog.qml:167
+#: src/widgets/SettingsDialog.qml:148
 #, kde-format
 msgid "Date"
 msgstr "Data"
 
-#: src/widgets/SettingsDialog.qml:183
+#: src/widgets/SettingsDialog.qml:164
 #, kde-format
 msgid "Sort Order"
 msgstr "Ordinamento"
 
-#: src/widgets/SettingsDialog.qml:184
+#: src/widgets/SettingsDialog.qml:165
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Modifica l'ordinamento."
 
-#: src/widgets/SettingsDialog.qml:194
+#: src/widgets/SettingsDialog.qml:175
 #, kde-format
 msgid "Ascending"
 msgstr "Crescente"
 
-#: src/widgets/SettingsDialog.qml:202
+#: src/widgets/SettingsDialog.qml:183
 #, kde-format
 msgid "Descending"
 msgstr "Decrescente"
+
+#~ msgid "Dark Mode"
+#~ msgstr "Modalità scura"
+
+#~ msgid "Switch between light and dark colorscheme."
+#~ msgstr "Passa dallo schema di colori chiaro allo scuro e viceversa."
 
 #~ msgid "© 2019-2023 Maui Development Team"
 #~ msgstr "© 2019-2023 La squadra di sviluppo di Maui"
