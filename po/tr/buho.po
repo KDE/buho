@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the buho package.
 #
-# SPDX-FileCopyrightText: 2022, 2023 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-14 01:39+0000\n"
-"PO-Revision-Date: 2023-10-28 05:40+0300\n"
+"PO-Revision-Date: 2024-03-22 16:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 24.02.1\n"
 
 #: src/main.cpp:56
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "Notları kaldır"
 #: src/views/notes/NotesView.qml:85
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
-msgstr "Seçili notları silmek istediğinize emin misiniz?"
+msgstr "Seçili notları silmek istediğinizden emin misiniz?"
 
 #: src/views/notes/NotesView.qml:112
 #, kde-format
