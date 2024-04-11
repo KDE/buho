@@ -2,7 +2,7 @@
 
 #include <QObject>
 
-#include <MauiKit3/Core/fmh.h>
+#include <MauiKit4/Core/fmh.h>
 
 #include "abstractnotesprovider.h"
 

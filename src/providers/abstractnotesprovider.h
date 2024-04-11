@@ -4,8 +4,8 @@
 #include <QObject>
 #include <functional>
 
-#include <MauiKit3/FileBrowsing/downloader.h>
-#include <MauiKit3/Core/fmh.h>
+#include <MauiKit4/FileBrowsing/downloader.h>
+#include <MauiKit4/Core/fmh.h>
 
 /**
  * @brief The AbstractNoteSyncer class
@@ -131,10 +131,10 @@ protected:
             downloader->deleteLater();
         });
 
-        downloader->getArray(url, header);
+        downloader->getArray(QUrl(url), header);
     }
 
-signals:
+Q_SIGNALS:
     void noteReady(FMH::MODEL note);
     void bookletReady(FMH::MODEL booklet);
 

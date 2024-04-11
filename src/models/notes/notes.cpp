@@ -1,9 +1,11 @@
 #include "notes.h"
 #include "nextnote.h"
 #include "notessyncer.h"
+
 #include <QDebug>
-#include <MauiKit3/FileBrowsing/fm.h>
-#include <MauiKit3/Accounts/mauiaccounts.h>
+
+#include <MauiKit4/FileBrowsing/fm.h>
+#include <MauiKit4/Accounts/mauiaccounts.h>
 
 #include <algorithm>
 
@@ -29,7 +31,7 @@ Notes::Notes(QObject *parent)
             const auto index = this->indexOf(FMH::MODEL_KEY::ID, note[FMH::MODEL_KEY::ID]);
             if (index >= 0) {
                 qDebug() << note[FMH::MODEL_KEY::MODIFIED] << index;
-                note.insert(FMStatic::getFileInfoModel(note[FMH::MODEL_KEY::URL]));
+                note.insert(FMStatic::getFileInfoModel(QUrl(note[FMH::MODEL_KEY::URL])));
                 qDebug() << note[FMH::MODEL_KEY::MODIFIED];
                 this->notes[index] = note;
                 Q_EMIT this->updateModel(index, {});
@@ -47,7 +49,7 @@ void Notes::appendNote(FMH::MODEL note)
         const auto lines = note[FMH::MODEL_KEY::CONTENT].split("\n");
         return lines.isEmpty() ? QString() : lines.first().trimmed();
     }();
-    note.insert(FMStatic::getFileInfoModel(note[FMH::MODEL_KEY::URL]));
+    note.insert(FMStatic::getFileInfoModel(QUrl(note[FMH::MODEL_KEY::URL])));
     Q_EMIT this->preItemAppended();
     this->notes << note;
     Q_EMIT this->postItemAppended();
