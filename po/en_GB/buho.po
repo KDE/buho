@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the buho package.
 #
-# Steve Allewell <steve.allewell@gmail.com>, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023, 2024 Steve Allewell <steve.allewell@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-14 01:39+0000\n"
-"PO-Revision-Date: 2023-05-21 14:53+0100\n"
+"PO-Revision-Date: 2024-05-24 19:08+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: src/main.cpp:56
 #, kde-format
@@ -157,10 +157,9 @@ msgid "Note saved"
 msgstr "Note saved"
 
 #: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:92
-#, fuzzy, kde-format
-#| msgid "Fonts"
+#, kde-format
 msgid "Font"
-msgstr "Fonts"
+msgstr "Font"
 
 #: src/widgets/SettingsDialog.qml:37
 #, kde-format
@@ -210,7 +209,7 @@ msgstr "Display the line numbers on the left side."
 #: src/widgets/SettingsDialog.qml:93
 #, kde-format
 msgid "Font family and size."
-msgstr ""
+msgstr "Font family and size."
 
 #: src/widgets/SettingsDialog.qml:106
 #, kde-format
