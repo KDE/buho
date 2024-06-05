@@ -3,7 +3,7 @@
 #include <QObject>
 #include <syncer.h>
 
-#include <MauiKit3/Core/fmh.h>
+#include <MauiKit4/Core/fmh.h>
 
 /**
  * @brief The Syncer class

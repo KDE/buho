@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <QVariantMap>
 #include <QNetworkReply>
+#include <QByteArrayView>
 
 const QString NextNote::API = QStringLiteral("/index.php/apps/notes/api/v0.2/");
 
@@ -15,7 +16,7 @@ static const inline QNetworkRequest formRequest(const QUrl &url, const QString &
 
     const QString concatenated = user + ":" + password;
     const QByteArray data = concatenated.toLocal8Bit().toBase64();
-    const QString headerData = "Basic " + data;
+    const auto headerData = QByteArrayLiteral("Basic ") + QByteArrayView(data);
 
     //    QVariantMap headers
     //    {
@@ -26,7 +27,7 @@ static const inline QNetworkRequest formRequest(const QUrl &url, const QString &
     QNetworkRequest request;
     request.setUrl(QUrl(url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
+    request.setRawHeader(QByteArrayLiteral("Authorization"), headerData);
 
     return request;
 }
@@ -49,9 +50,9 @@ void NextNote::getNote(const QString &id)
 //    const auto request = formRequest(url, this->m_user, this->m_password);
     QString concatenated = this->m_user + ":" + this->m_password;
     QByteArray data = concatenated.toLocal8Bit().toBase64();
-    QString headerData = "Basic " + data;
+    const auto headerData = QStringLiteral("Basic ") + QByteArrayView(data);
 
-    QMap<QString, QString> header{{"Authorization", headerData.toLocal8Bit()}};
+    QMap<QString, QString> header{{"Authorization", headerData}};
 
     auto downloader = new FMH::Downloader;
     connect(downloader, &FMH::Downloader::dataReady, [=](QByteArray array) {
@@ -82,9 +83,9 @@ void NextNote::getNotes()
 
     QString concatenated = this->m_user + ":" + this->m_password;
     QByteArray data = concatenated.toLocal8Bit().toBase64();
-    QString headerData = "Basic " + data;
+    QString headerData = QStringLiteral("Basic ") + QByteArrayView(data);
 
-    QMap<QString, QString> header{{"Authorization", headerData.toLocal8Bit()}};
+    QMap<QString, QString> header{{"Authorization", headerData}};
 
     const auto downloader = new FMH::Downloader;
     connect(downloader, &FMH::Downloader::dataReady, [=](QByteArray array) {
@@ -116,9 +117,9 @@ void NextNote::getBooklets()
 
     QString concatenated = this->m_user + ":" + this->m_password;
     QByteArray data = concatenated.toLocal8Bit().toBase64();
-    QString headerData = "Basic " + data;
+    QString headerData = QStringLiteral("Basic ") + QByteArrayView(data);
 
-    QMap<QString, QString> header{{"Authorization", headerData.toLocal8Bit()}};
+    QMap<QString, QString> header{{"Authorization", headerData}};
 
     const auto downloader = new FMH::Downloader;
     connect(downloader, &FMH::Downloader::dataReady, [=](QByteArray array) {

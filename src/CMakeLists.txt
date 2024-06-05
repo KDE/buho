@@ -3,21 +3,18 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_URL_CAST_FROM_STRING)
+
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/utils
-    ${CMAKE_CURRENT_BINARY_DIR}/utils
 
     ${CMAKE_CURRENT_SOURCE_DIR}/syncing
-    ${CMAKE_CURRENT_BINARY_DIR}/syncing
 
     ${CMAKE_CURRENT_SOURCE_DIR}/providers
-    ${CMAKE_CURRENT_BINARY_DIR}/providers
 
     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
-    ${CMAKE_CURRENT_BINARY_DIR}/controllers
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/models
-    ${CMAKE_CURRENT_BINARY_DIR}/models)
+    ${CMAKE_CURRENT_SOURCE_DIR}/models)
 
 set(buho_SRCS
     main.cpp
@@ -27,7 +24,8 @@ set(buho_SRCS
     syncing/syncer.cpp
     syncing/notessyncer.cpp
     controllers/notes/notescontroller.cpp
-    utils/server.cpp)
+    utils/server.cpp
+    qml.qrc)
 
 set(buho_HDRS
     db/db.h
@@ -41,12 +39,6 @@ set(buho_HDRS
 
 set(buho_ASSETS
     assets/imgs.qrc)
-
-if(QUICK_COMPILER)
-    qtquick_compiler_add_resources(buho_QML_QRC qml.qrc)
-else()
-    qt5_add_resources(buho_QML_QRC qml.qrc)
-endif()
 
 if(UNIX AND NOT ANDROID)
     qt_generate_dbus_interface(${CMAKE_CURRENT_SOURCE_DIR}/utils/server.h org.kde.Buho.xml)
@@ -71,27 +63,27 @@ endif()
 
 if (ANDROID)
     find_package(OpenSSL REQUIRED)
-    target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras OpenSSL::SSL Qt5::QuickControls2)
+    target_link_libraries(${PROJECT_NAME} Qt6::AndroidExtras OpenSSL::SSL Qt6::QuickControls2)
 elseif(UNIX)
-    target_link_libraries(${PROJECT_NAME} Qt5::Widgets Qt5::DBus)
+    target_link_libraries(${PROJECT_NAME} Qt6::Widgets Qt6::DBus)
 endif()
 
 target_link_libraries(${PROJECT_NAME}
-    MauiKit3
-    MauiKit3::FileBrowsing
-    MauiKit3::Accounts
-    MauiKit3::TextEditor
+    MauiKit4
+    MauiKit4::FileBrowsing
+    MauiKit4::Accounts
+    MauiKit4::TextEditor
     #[[tesseract]]
-    Qt5::Sql
-    Qt5::Quick
-    Qt5::Qml
-    Qt5::Network
-    KF5::CoreAddons
-    KF5::I18n)
+    Qt6::Sql
+    Qt6::Quick
+    Qt6::Qml
+    Qt6::Network
+    KF6::CoreAddons
+    KF6::I18n)
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(TARGETS buho ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-    install(FILES org.kde.buho.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+    install(FILES org.kde.buho.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 
     #TODO: port to ecm_install_icons()
     install(FILES assets/buho.svg DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps)

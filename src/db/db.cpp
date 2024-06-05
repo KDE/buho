@@ -33,7 +33,7 @@ DB::DB()
         collectionDBPath_dir.mkpath(".");
 
     this->name = QUuid::createUuid().toString();
-    if (!FMH::fileExists(OWL::CollectionDBPath.toString() + OWL::DBName)) {
+    if (!FMH::fileExists(QUrl(OWL::CollectionDBPath.toString() + OWL::DBName))) {
         this->openDB(this->name);
         qDebug() << "Collection doesn't exists, trying to create it" << OWL::CollectionDBPath.toString() + OWL::DBName;
         this->prepareCollectionDB();
@@ -187,7 +187,7 @@ bool DB::insert(const QString &tableName, const QVariantMap &insertData)
     query.prepare(sqlQueryString);
 
     int k = 0;
-    foreach (const QVariant &value, values)
+    for(const QVariant &value : values)
         query.bindValue(k++, value);
 
     return query.exec();
@@ -222,7 +222,7 @@ bool DB::update(const QString &tableName, const QVariantMap &updateData, const Q
 
     QVariantList values = updateData.values();
     int k = 0;
-    foreach (const QVariant &value, values)
+    for(const QVariant &value : values)
     {
         query.bindValue(k++, value);
     }
@@ -264,7 +264,7 @@ bool DB::remove(const QString &tableName, const QVariantMap &removeData)
     QVariantList values = removeData.values();
 
     int k = 0;
-    foreach (const QVariant &value, values)
+    for(const QVariant &value : values)
         query.bindValue(k++, value);
 
     return query.exec();

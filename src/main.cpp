@@ -4,14 +4,14 @@
 #include <QQmlContext>
 #include <QDir>
 
-#include <KI18n/KLocalizedString>
+#include <KLocalizedString>
 
-#include <MauiKit3/Core/mauiapp.h>
-#include <MauiKit3/TextEditor/moduleinfo.h>
+#include <MauiKit4/Core/mauiapp.h>
+#include <MauiKit4/TextEditor/moduleinfo.h>
 
 #ifdef Q_OS_ANDROID
 #include <QGuiApplication>
-#include <MauiKit3/Core/mauiandroid.h>
+#include <MauiKit4/Core/mauiandroid.h>
 #else
 #include <QApplication>
 #endif
@@ -33,9 +33,6 @@ static void setFolders()
 
 int Q_DECL_EXPORT main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-
 #ifdef Q_OS_ANDROID
     QGuiApplication app(argc, argv);
     if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))

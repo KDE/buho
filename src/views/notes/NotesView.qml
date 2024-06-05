@@ -1,11 +1,11 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.mauikit.controls 1.3 as Maui
-import org.mauikit.accounts 1.0 as MA
+import org.mauikit.controls as Maui
+import org.mauikit.accounts as MA
 
-import org.maui.buho 1.0
+import org.maui.buho
 
 import "../../widgets"
 
@@ -97,6 +97,9 @@ StackView
     initialItem: Maui.AltBrowser
     {
         id: cardsView
+
+        Maui.Controls.showCSD: true
+
         gridView.itemSize: Math.min(300, control.width* 0.4)
         gridView.cellHeight: 180
 
