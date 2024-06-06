@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 01:39+0000\n"
+"POT-Creation-Date: 2024-06-06 01:47+0000\n"
 "PO-Revision-Date: 2023-11-04 21:35+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 23.08.1\n"
 
-#: src/main.cpp:56
+#: src/main.cpp:53
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "메모를 만들고 관리합니다."
 
-#: src/main.cpp:61
+#: src/main.cpp:58
 #, kde-format
 msgid "Developer"
 msgstr "개발자"
@@ -47,82 +47,82 @@ msgstr "메모 삭제"
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "선택한 메모를 삭제하시겠습니까?"
 
-#: src/views/notes/NotesView.qml:112
+#: src/views/notes/NotesView.qml:115
 #, kde-format
 msgid "No notes!"
 msgstr "메모가 없습니다!"
 
-#: src/views/notes/NotesView.qml:113
+#: src/views/notes/NotesView.qml:116
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "새 메모를 빠르게 만들 수 있습니다"
 
-#: src/views/notes/NotesView.qml:117
+#: src/views/notes/NotesView.qml:120
 #, kde-format
 msgid "New note"
 msgstr "새 메모"
 
-#: src/views/notes/NotesView.qml:140
+#: src/views/notes/NotesView.qml:143
 #, kde-format
 msgid "Search "
 msgstr "찾기"
 
-#: src/views/notes/NotesView.qml:140
+#: src/views/notes/NotesView.qml:143
 #, kde-format
 msgid "notes"
 msgstr "메모"
 
-#: src/views/notes/NotesView.qml:154
+#: src/views/notes/NotesView.qml:157
 #, kde-format
 msgid "Settings"
 msgstr "설정"
 
-#: src/views/notes/NotesView.qml:161
+#: src/views/notes/NotesView.qml:164
 #, kde-format
 msgid "About"
 msgstr "정보"
 
-#: src/views/notes/NotesView.qml:291
+#: src/views/notes/NotesView.qml:294
 #, kde-format
 msgid "Favorite"
 msgstr "책갈피"
 
-#: src/views/notes/NotesView.qml:304 src/views/notes/NotesView.qml:550
+#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:553
 #, kde-format
 msgid "Share"
 msgstr "공유"
 
-#: src/views/notes/NotesView.qml:310 src/views/notes/NotesView.qml:530
+#: src/views/notes/NotesView.qml:313 src/views/notes/NotesView.qml:533
 #, kde-format
 msgid "Export"
 msgstr "내보내기"
 
-#: src/views/notes/NotesView.qml:316 src/widgets/NewNoteDialog.qml:144
+#: src/views/notes/NotesView.qml:319 src/widgets/NewNoteDialog.qml:143
 #, kde-format
 msgid "Delete"
 msgstr "삭제"
 
-#: src/views/notes/NotesView.qml:519
+#: src/views/notes/NotesView.qml:522
 #, kde-format
 msgid "UnFav"
 msgstr "책갈피 해제"
 
-#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:155
+#: src/views/notes/NotesView.qml:522 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "책갈피"
 
-#: src/views/notes/NotesView.qml:540
+#: src/views/notes/NotesView.qml:543
 #, kde-format
 msgid "Copy"
 msgstr "복사"
 
-#: src/views/notes/NotesView.qml:560
+#: src/views/notes/NotesView.qml:563
 #, kde-format
 msgid "Select"
 msgstr "선택"
 
-#: src/views/notes/NotesView.qml:579
+#: src/views/notes/NotesView.qml:582
 #, kde-format
 msgid "Remove"
 msgstr "삭제"
@@ -137,12 +137,12 @@ msgstr "비어 있음"
 msgid "Edit this note"
 msgstr "이 메모 편집"
 
-#: src/widgets/NewNoteDialog.qml:134
+#: src/widgets/NewNoteDialog.qml:133
 #, kde-format
 msgid "Find and Replace"
 msgstr "찾기 및 바꾸기"
 
-#: src/widgets/NewNoteDialog.qml:185
+#: src/widgets/NewNoteDialog.qml:184
 #, kde-format
 msgid ""
 "Title\n"
@@ -151,122 +151,122 @@ msgstr ""
 "제목\n"
 "본문"
 
-#: src/widgets/NewNoteDialog.qml:209
+#: src/widgets/NewNoteDialog.qml:208
 #, kde-format
 msgid "Note saved"
 msgstr "메모 저장됨"
 
-#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:92
+#: src/widgets/SettingsDialog.qml:18 src/widgets/SettingsDialog.qml:91
 #, kde-format
 msgid "Font"
 msgstr "글꼴"
 
-#: src/widgets/SettingsDialog.qml:37
+#: src/widgets/SettingsDialog.qml:36
 #, kde-format
 msgid "Editor"
 msgstr "편집기"
 
-#: src/widgets/SettingsDialog.qml:42
+#: src/widgets/SettingsDialog.qml:41
 #, kde-format
 msgid "Spell Checker"
 msgstr "맞춤법 검사"
 
-#: src/widgets/SettingsDialog.qml:43
+#: src/widgets/SettingsDialog.qml:42
 #, kde-format
 msgid "Check spelling and give suggestions."
 msgstr "맞춤법을 검사하고 수정 사항을 제안합니다."
 
-#: src/widgets/SettingsDialog.qml:54
+#: src/widgets/SettingsDialog.qml:53
 #, kde-format
 msgid "Auto Save"
 msgstr "자동 저장"
 
-#: src/widgets/SettingsDialog.qml:55
+#: src/widgets/SettingsDialog.qml:54
 #, kde-format
 msgid "Auto saves your file every few seconds"
 msgstr "일정 시간마다 파일 자동 저장"
 
-#: src/widgets/SettingsDialog.qml:66
+#: src/widgets/SettingsDialog.qml:65
 #, kde-format
 msgid "Auto Reload"
 msgstr "자동 새로 고침"
 
-#: src/widgets/SettingsDialog.qml:67
+#: src/widgets/SettingsDialog.qml:66
 #, kde-format
 msgid "Auto reload the text on external changes."
 msgstr "외부에서 텍스트가 변경되었을 때 자동으로 새로 고칩니다."
 
-#: src/widgets/SettingsDialog.qml:78
+#: src/widgets/SettingsDialog.qml:77
 #, kde-format
 msgid "Line Numbers"
 msgstr "줄 번호"
 
-#: src/widgets/SettingsDialog.qml:79
+#: src/widgets/SettingsDialog.qml:78
 #, kde-format
 msgid "Display the line numbers on the left side."
 msgstr "왼쪽에 줄 번호를 표시합니다."
 
-#: src/widgets/SettingsDialog.qml:93
+#: src/widgets/SettingsDialog.qml:92
 #, kde-format
 msgid "Font family and size."
 msgstr "글꼴 종류와 크기입니다."
 
-#: src/widgets/SettingsDialog.qml:106
+#: src/widgets/SettingsDialog.qml:105
 #, kde-format
 msgid "Syncing"
 msgstr "동기화"
 
-#: src/widgets/SettingsDialog.qml:111
+#: src/widgets/SettingsDialog.qml:110
 #, kde-format
 msgid "Auto sync"
 msgstr "자동 동기화"
 
-#: src/widgets/SettingsDialog.qml:112
+#: src/widgets/SettingsDialog.qml:111
 #, kde-format
 msgid "Sync notes on start up."
 msgstr "시작할 때 메모를 동기화합니다."
 
-#: src/widgets/SettingsDialog.qml:125
+#: src/widgets/SettingsDialog.qml:124
 #, kde-format
 msgid "Sorting"
 msgstr "정렬"
 
-#: src/widgets/SettingsDialog.qml:130
+#: src/widgets/SettingsDialog.qml:129
 #, kde-format
 msgid "Sort by"
 msgstr "정렬 기준"
 
-#: src/widgets/SettingsDialog.qml:131
+#: src/widgets/SettingsDialog.qml:130
 #, kde-format
 msgid "Change the sorting key."
 msgstr "정렬 키를 변경합니다."
 
-#: src/widgets/SettingsDialog.qml:141
+#: src/widgets/SettingsDialog.qml:140
 #, kde-format
 msgid "Title"
 msgstr "제목"
 
-#: src/widgets/SettingsDialog.qml:148
+#: src/widgets/SettingsDialog.qml:147
 #, kde-format
 msgid "Date"
 msgstr "날짜"
 
-#: src/widgets/SettingsDialog.qml:164
+#: src/widgets/SettingsDialog.qml:163
 #, kde-format
 msgid "Sort Order"
 msgstr "정렬 순서"
 
-#: src/widgets/SettingsDialog.qml:165
+#: src/widgets/SettingsDialog.qml:164
 #, kde-format
 msgid "Change the sorting order."
 msgstr "정렬 순서를 변경합니다."
 
-#: src/widgets/SettingsDialog.qml:175
+#: src/widgets/SettingsDialog.qml:174
 #, kde-format
 msgid "Ascending"
 msgstr "오름차순"
 
-#: src/widgets/SettingsDialog.qml:183
+#: src/widgets/SettingsDialog.qml:182
 #, kde-format
 msgid "Descending"
 msgstr "내림차순"

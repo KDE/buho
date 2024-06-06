@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 01:39+0000\n"
+"POT-Creation-Date: 2024-06-06 01:47+0000\n"
 "PO-Revision-Date: 2023-12-13 17:49+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 23.08.4\n"
 
-#: src/main.cpp:56
+#: src/main.cpp:53
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "建立並整理您的筆記。"
 
-#: src/main.cpp:61
+#: src/main.cpp:58
 #, kde-format
 msgid "Developer"
 msgstr "開發者"
@@ -49,82 +49,82 @@ msgstr "移除筆記"
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "您確定要刪除選取的筆記嗎？"
 
-#: src/views/notes/NotesView.qml:112
+#: src/views/notes/NotesView.qml:115
 #, kde-format
 msgid "No notes!"
 msgstr "沒有筆記！"
 
-#: src/views/notes/NotesView.qml:113
+#: src/views/notes/NotesView.qml:116
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "您可以快速建立新筆記"
 
-#: src/views/notes/NotesView.qml:117
+#: src/views/notes/NotesView.qml:120
 #, kde-format
 msgid "New note"
 msgstr "新筆記"
 
-#: src/views/notes/NotesView.qml:140
+#: src/views/notes/NotesView.qml:143
 #, kde-format
 msgid "Search "
 msgstr "搜尋"
 
-#: src/views/notes/NotesView.qml:140
+#: src/views/notes/NotesView.qml:143
 #, kde-format
 msgid "notes"
 msgstr "筆記"
 
-#: src/views/notes/NotesView.qml:154
+#: src/views/notes/NotesView.qml:157
 #, kde-format
 msgid "Settings"
 msgstr "設定"
 
-#: src/views/notes/NotesView.qml:161
+#: src/views/notes/NotesView.qml:164
 #, kde-format
 msgid "About"
 msgstr "關於"
 
-#: src/views/notes/NotesView.qml:291
+#: src/views/notes/NotesView.qml:294
 #, kde-format
 msgid "Favorite"
 msgstr "最愛"
 
-#: src/views/notes/NotesView.qml:304 src/views/notes/NotesView.qml:550
+#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:553
 #, kde-format
 msgid "Share"
 msgstr "分享"
 
-#: src/views/notes/NotesView.qml:310 src/views/notes/NotesView.qml:530
+#: src/views/notes/NotesView.qml:313 src/views/notes/NotesView.qml:533
 #, kde-format
 msgid "Export"
 msgstr "匯出"
 
-#: src/views/notes/NotesView.qml:316 src/widgets/NewNoteDialog.qml:144
+#: src/views/notes/NotesView.qml:319 src/widgets/NewNoteDialog.qml:143
 #, kde-format
 msgid "Delete"
 msgstr "刪除"
 
-#: src/views/notes/NotesView.qml:519
+#: src/views/notes/NotesView.qml:522
 #, kde-format
 msgid "UnFav"
 msgstr "從最愛中移除"
 
-#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:155
+#: src/views/notes/NotesView.qml:522 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "加到最愛"
 
-#: src/views/notes/NotesView.qml:540
+#: src/views/notes/NotesView.qml:543
 #, kde-format
 msgid "Copy"
 msgstr "複製"
 
-#: src/views/notes/NotesView.qml:560
+#: src/views/notes/NotesView.qml:563
 #, kde-format
 msgid "Select"
 msgstr "選取"
 
-#: src/views/notes/NotesView.qml:579
+#: src/views/notes/NotesView.qml:582
 #, kde-format
 msgid "Remove"
 msgstr "移除"
@@ -139,12 +139,12 @@ msgstr "空白"
 msgid "Edit this note"
 msgstr "編輯此筆記"
 
-#: src/widgets/NewNoteDialog.qml:134
+#: src/widgets/NewNoteDialog.qml:133
 #, kde-format
 msgid "Find and Replace"
 msgstr "搜尋與取代"
 
-#: src/widgets/NewNoteDialog.qml:185
+#: src/widgets/NewNoteDialog.qml:184
 #, kde-format
 msgid ""
 "Title\n"
@@ -153,122 +153,122 @@ msgstr ""
 "標題\n"
 "內文"
 
-#: src/widgets/NewNoteDialog.qml:209
+#: src/widgets/NewNoteDialog.qml:208
 #, kde-format
 msgid "Note saved"
 msgstr "已儲存筆記"
 
-#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:92
+#: src/widgets/SettingsDialog.qml:18 src/widgets/SettingsDialog.qml:91
 #, kde-format
 msgid "Font"
 msgstr "字型"
 
-#: src/widgets/SettingsDialog.qml:37
+#: src/widgets/SettingsDialog.qml:36
 #, kde-format
 msgid "Editor"
 msgstr "編輯器"
 
-#: src/widgets/SettingsDialog.qml:42
+#: src/widgets/SettingsDialog.qml:41
 #, kde-format
 msgid "Spell Checker"
 msgstr "拼字檢查"
 
-#: src/widgets/SettingsDialog.qml:43
+#: src/widgets/SettingsDialog.qml:42
 #, kde-format
 msgid "Check spelling and give suggestions."
 msgstr "檢查拼字並提供建議。"
 
-#: src/widgets/SettingsDialog.qml:54
+#: src/widgets/SettingsDialog.qml:53
 #, kde-format
 msgid "Auto Save"
 msgstr "自動儲存"
 
-#: src/widgets/SettingsDialog.qml:55
+#: src/widgets/SettingsDialog.qml:54
 #, kde-format
 msgid "Auto saves your file every few seconds"
 msgstr "每隔幾秒自動儲存您的檔案"
 
-#: src/widgets/SettingsDialog.qml:66
+#: src/widgets/SettingsDialog.qml:65
 #, kde-format
 msgid "Auto Reload"
 msgstr "自動重新載入"
 
-#: src/widgets/SettingsDialog.qml:67
+#: src/widgets/SettingsDialog.qml:66
 #, kde-format
 msgid "Auto reload the text on external changes."
 msgstr "外部對文本進行變更時自動重新載入。"
 
-#: src/widgets/SettingsDialog.qml:78
+#: src/widgets/SettingsDialog.qml:77
 #, kde-format
 msgid "Line Numbers"
 msgstr "行號"
 
-#: src/widgets/SettingsDialog.qml:79
+#: src/widgets/SettingsDialog.qml:78
 #, kde-format
 msgid "Display the line numbers on the left side."
 msgstr "在左側顯示行號。"
 
-#: src/widgets/SettingsDialog.qml:93
+#: src/widgets/SettingsDialog.qml:92
 #, kde-format
 msgid "Font family and size."
 msgstr "字型家族與大小。"
 
-#: src/widgets/SettingsDialog.qml:106
+#: src/widgets/SettingsDialog.qml:105
 #, kde-format
 msgid "Syncing"
 msgstr "同步"
 
-#: src/widgets/SettingsDialog.qml:111
+#: src/widgets/SettingsDialog.qml:110
 #, kde-format
 msgid "Auto sync"
 msgstr "自動同步"
 
-#: src/widgets/SettingsDialog.qml:112
+#: src/widgets/SettingsDialog.qml:111
 #, kde-format
 msgid "Sync notes on start up."
 msgstr "啟動時同步筆記。"
 
-#: src/widgets/SettingsDialog.qml:125
+#: src/widgets/SettingsDialog.qml:124
 #, kde-format
 msgid "Sorting"
 msgstr "排序"
 
-#: src/widgets/SettingsDialog.qml:130
+#: src/widgets/SettingsDialog.qml:129
 #, kde-format
 msgid "Sort by"
 msgstr "排序依據"
 
-#: src/widgets/SettingsDialog.qml:131
+#: src/widgets/SettingsDialog.qml:130
 #, kde-format
 msgid "Change the sorting key."
 msgstr "變更排序依據。"
 
-#: src/widgets/SettingsDialog.qml:141
+#: src/widgets/SettingsDialog.qml:140
 #, kde-format
 msgid "Title"
 msgstr "標題"
 
-#: src/widgets/SettingsDialog.qml:148
+#: src/widgets/SettingsDialog.qml:147
 #, kde-format
 msgid "Date"
 msgstr "日期"
 
-#: src/widgets/SettingsDialog.qml:164
+#: src/widgets/SettingsDialog.qml:163
 #, kde-format
 msgid "Sort Order"
 msgstr "排序方向"
 
-#: src/widgets/SettingsDialog.qml:165
+#: src/widgets/SettingsDialog.qml:164
 #, kde-format
 msgid "Change the sorting order."
 msgstr "變更排序方向。"
 
-#: src/widgets/SettingsDialog.qml:175
+#: src/widgets/SettingsDialog.qml:174
 #, kde-format
 msgid "Ascending"
 msgstr "遞增"
 
-#: src/widgets/SettingsDialog.qml:183
+#: src/widgets/SettingsDialog.qml:182
 #, kde-format
 msgid "Descending"
 msgstr "遞減"

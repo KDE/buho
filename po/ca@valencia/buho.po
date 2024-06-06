@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 01:39+0000\n"
+"POT-Creation-Date: 2024-06-06 01:47+0000\n"
 "PO-Revision-Date: 2023-10-28 10:17+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -21,12 +21,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: src/main.cpp:56
+#: src/main.cpp:53
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "Crea i organitza les vostres notes."
 
-#: src/main.cpp:61
+#: src/main.cpp:58
 #, kde-format
 msgid "Developer"
 msgstr "Desenvolupador"
@@ -51,82 +51,82 @@ msgstr "Elimina les notes"
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Segur que voleu suprimir les notes seleccionades?"
 
-#: src/views/notes/NotesView.qml:112
+#: src/views/notes/NotesView.qml:115
 #, kde-format
 msgid "No notes!"
 msgstr "Sense notes!"
 
-#: src/views/notes/NotesView.qml:113
+#: src/views/notes/NotesView.qml:116
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "Podeu crear ràpidament una nota nova"
 
-#: src/views/notes/NotesView.qml:117
+#: src/views/notes/NotesView.qml:120
 #, kde-format
 msgid "New note"
 msgstr "Nota nova"
 
-#: src/views/notes/NotesView.qml:140
+#: src/views/notes/NotesView.qml:143
 #, kde-format
 msgid "Search "
 msgstr "Busca "
 
-#: src/views/notes/NotesView.qml:140
+#: src/views/notes/NotesView.qml:143
 #, kde-format
 msgid "notes"
 msgstr "Notes"
 
-#: src/views/notes/NotesView.qml:154
+#: src/views/notes/NotesView.qml:157
 #, kde-format
 msgid "Settings"
 msgstr "Configuració"
 
-#: src/views/notes/NotesView.qml:161
+#: src/views/notes/NotesView.qml:164
 #, kde-format
 msgid "About"
 msgstr "Quant a"
 
-#: src/views/notes/NotesView.qml:291
+#: src/views/notes/NotesView.qml:294
 #, kde-format
 msgid "Favorite"
 msgstr "Preferit"
 
-#: src/views/notes/NotesView.qml:304 src/views/notes/NotesView.qml:550
+#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:553
 #, kde-format
 msgid "Share"
 msgstr "Compartix"
 
-#: src/views/notes/NotesView.qml:310 src/views/notes/NotesView.qml:530
+#: src/views/notes/NotesView.qml:313 src/views/notes/NotesView.qml:533
 #, kde-format
 msgid "Export"
 msgstr "Exporta"
 
-#: src/views/notes/NotesView.qml:316 src/widgets/NewNoteDialog.qml:144
+#: src/views/notes/NotesView.qml:319 src/widgets/NewNoteDialog.qml:143
 #, kde-format
 msgid "Delete"
 msgstr "Suprimix"
 
-#: src/views/notes/NotesView.qml:519
+#: src/views/notes/NotesView.qml:522
 #, kde-format
 msgid "UnFav"
 msgstr "Desmarca com a preferit"
 
-#: src/views/notes/NotesView.qml:519 src/widgets/SettingsDialog.qml:155
+#: src/views/notes/NotesView.qml:522 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "Preferit"
 
-#: src/views/notes/NotesView.qml:540
+#: src/views/notes/NotesView.qml:543
 #, kde-format
 msgid "Copy"
 msgstr "Copia"
 
-#: src/views/notes/NotesView.qml:560
+#: src/views/notes/NotesView.qml:563
 #, kde-format
 msgid "Select"
 msgstr "Selecciona"
 
-#: src/views/notes/NotesView.qml:579
+#: src/views/notes/NotesView.qml:582
 #, kde-format
 msgid "Remove"
 msgstr "Elimina"
@@ -141,12 +141,12 @@ msgstr "Buit"
 msgid "Edit this note"
 msgstr "Edita esta nota"
 
-#: src/widgets/NewNoteDialog.qml:134
+#: src/widgets/NewNoteDialog.qml:133
 #, kde-format
 msgid "Find and Replace"
 msgstr "Busca i substituïx"
 
-#: src/widgets/NewNoteDialog.qml:185
+#: src/widgets/NewNoteDialog.qml:184
 #, kde-format
 msgid ""
 "Title\n"
@@ -155,122 +155,122 @@ msgstr ""
 "Títol\n"
 "Cos"
 
-#: src/widgets/NewNoteDialog.qml:209
+#: src/widgets/NewNoteDialog.qml:208
 #, kde-format
 msgid "Note saved"
 msgstr "Nota guardada"
 
-#: src/widgets/SettingsDialog.qml:19 src/widgets/SettingsDialog.qml:92
+#: src/widgets/SettingsDialog.qml:18 src/widgets/SettingsDialog.qml:91
 #, kde-format
 msgid "Font"
 msgstr "Lletra"
 
-#: src/widgets/SettingsDialog.qml:37
+#: src/widgets/SettingsDialog.qml:36
 #, kde-format
 msgid "Editor"
 msgstr "Editor"
 
-#: src/widgets/SettingsDialog.qml:42
+#: src/widgets/SettingsDialog.qml:41
 #, kde-format
 msgid "Spell Checker"
 msgstr "Corrector ortogràfic"
 
-#: src/widgets/SettingsDialog.qml:43
+#: src/widgets/SettingsDialog.qml:42
 #, kde-format
 msgid "Check spelling and give suggestions."
 msgstr "Verifica l'ortografia i dona suggeriments."
 
-#: src/widgets/SettingsDialog.qml:54
+#: src/widgets/SettingsDialog.qml:53
 #, kde-format
 msgid "Auto Save"
 msgstr "Guarda automàticament"
 
-#: src/widgets/SettingsDialog.qml:55
+#: src/widgets/SettingsDialog.qml:54
 #, kde-format
 msgid "Auto saves your file every few seconds"
 msgstr "Guarda automàticament el fitxer cada pocs segons"
 
-#: src/widgets/SettingsDialog.qml:66
+#: src/widgets/SettingsDialog.qml:65
 #, kde-format
 msgid "Auto Reload"
 msgstr "Recàrrega automàtica"
 
-#: src/widgets/SettingsDialog.qml:67
+#: src/widgets/SettingsDialog.qml:66
 #, kde-format
 msgid "Auto reload the text on external changes."
 msgstr "Torna a carregar automàticament el text en els canvis externs."
 
-#: src/widgets/SettingsDialog.qml:78
+#: src/widgets/SettingsDialog.qml:77
 #, kde-format
 msgid "Line Numbers"
 msgstr "Números de les línies"
 
-#: src/widgets/SettingsDialog.qml:79
+#: src/widgets/SettingsDialog.qml:78
 #, kde-format
 msgid "Display the line numbers on the left side."
 msgstr "Mostra els números de línia en la part esquerra."
 
-#: src/widgets/SettingsDialog.qml:93
+#: src/widgets/SettingsDialog.qml:92
 #, kde-format
 msgid "Font family and size."
 msgstr "Família i mida de la lletra."
 
-#: src/widgets/SettingsDialog.qml:106
+#: src/widgets/SettingsDialog.qml:105
 #, kde-format
 msgid "Syncing"
 msgstr "Sincronitza"
 
-#: src/widgets/SettingsDialog.qml:111
+#: src/widgets/SettingsDialog.qml:110
 #, kde-format
 msgid "Auto sync"
 msgstr "Sincronitza automàticament"
 
-#: src/widgets/SettingsDialog.qml:112
+#: src/widgets/SettingsDialog.qml:111
 #, kde-format
 msgid "Sync notes on start up."
 msgstr "Sincronitza les notes a l'inici."
 
-#: src/widgets/SettingsDialog.qml:125
+#: src/widgets/SettingsDialog.qml:124
 #, kde-format
 msgid "Sorting"
 msgstr "Ordenació"
 
-#: src/widgets/SettingsDialog.qml:130
+#: src/widgets/SettingsDialog.qml:129
 #, kde-format
 msgid "Sort by"
 msgstr "Ordena per"
 
-#: src/widgets/SettingsDialog.qml:131
+#: src/widgets/SettingsDialog.qml:130
 #, kde-format
 msgid "Change the sorting key."
 msgstr "Canvia la clau d'ordenació."
 
-#: src/widgets/SettingsDialog.qml:141
+#: src/widgets/SettingsDialog.qml:140
 #, kde-format
 msgid "Title"
 msgstr "Títol"
 
-#: src/widgets/SettingsDialog.qml:148
+#: src/widgets/SettingsDialog.qml:147
 #, kde-format
 msgid "Date"
 msgstr "Data"
 
-#: src/widgets/SettingsDialog.qml:164
+#: src/widgets/SettingsDialog.qml:163
 #, kde-format
 msgid "Sort Order"
 msgstr "Sentit d'ordenació"
 
-#: src/widgets/SettingsDialog.qml:165
+#: src/widgets/SettingsDialog.qml:164
 #, kde-format
 msgid "Change the sorting order."
 msgstr "Canvia el sentit d'ordenació."
 
-#: src/widgets/SettingsDialog.qml:175
+#: src/widgets/SettingsDialog.qml:174
 #, kde-format
 msgid "Ascending"
 msgstr "Ascendent"
 
-#: src/widgets/SettingsDialog.qml:183
+#: src/widgets/SettingsDialog.qml:182
 #, kde-format
 msgid "Descending"
 msgstr "Descendent"
