@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the buho package.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-06 01:47+0000\n"
-"PO-Revision-Date: 2023-05-11 10:05+0400\n"
+"PO-Revision-Date: 2024-06-08 11:46+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: src/main.cpp:53
 #, kde-format
@@ -157,10 +158,9 @@ msgid "Note saved"
 msgstr "حفظت الملاحظة"
 
 #: src/widgets/SettingsDialog.qml:18 src/widgets/SettingsDialog.qml:91
-#, fuzzy, kde-format
-#| msgid "Fonts"
+#, kde-format
 msgid "Font"
-msgstr "الخطوط"
+msgstr "الخط"
 
 #: src/widgets/SettingsDialog.qml:36
 #, kde-format
@@ -210,7 +210,7 @@ msgstr "أظهر أرقام الأسطر على الجانب اليمين."
 #: src/widgets/SettingsDialog.qml:92
 #, kde-format
 msgid "Font family and size."
-msgstr ""
+msgstr "عائلة الخط وحجمه."
 
 #: src/widgets/SettingsDialog.qml:105
 #, kde-format
