@@ -1,12 +1,11 @@
 # Translation of buho to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-06 01:47+0000\n"
-"PO-Revision-Date: 2023-07-29 12:37+0200\n"
+"PO-Revision-Date: 2024-07-21 14:19+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 24.05.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -161,7 +160,7 @@ msgstr "Notat lagra"
 #: src/widgets/SettingsDialog.qml:18 src/widgets/SettingsDialog.qml:91
 #, kde-format
 msgid "Font"
-msgstr ""
+msgstr "Skrifttype"
 
 #: src/widgets/SettingsDialog.qml:36
 #, kde-format
@@ -211,7 +210,7 @@ msgstr "Vis linjenummer på venstre side."
 #: src/widgets/SettingsDialog.qml:92
 #, kde-format
 msgid "Font family and size."
-msgstr ""
+msgstr "Skriftfamile og skriftstorleik."
 
 #: src/widgets/SettingsDialog.qml:105
 #, kde-format
