@@ -36,7 +36,7 @@ Maui.SettingsDialog
         title: i18n("Editor")
 //        description: i18n("Configure the editor behaviour.")
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text:  i18n("Spell Checker")
             label2.text: i18n("Check spelling and give suggestions.")
@@ -48,7 +48,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text:  i18n("Auto Save")
             label2.text: i18n("Auto saves your file every few seconds")
@@ -60,7 +60,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text:  i18n("Auto Reload")
             label2.text: i18n("Auto reload the text on external changes.")
@@ -72,7 +72,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Line Numbers")
             label2.text: i18n("Display the line numbers on the left side.")
@@ -86,7 +86,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Font")
             label2.text: i18n("Font family and size.")
@@ -105,7 +105,7 @@ Maui.SettingsDialog
         title: i18n("Syncing")
 //        description: i18n("Configure the syncing of notes and books.")
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Auto sync")
             label2.text: i18n("Sync notes on start up.")
@@ -124,7 +124,7 @@ Maui.SettingsDialog
         title: i18n("Sorting")
 //        description: i18n("Sorting order and behavior.")
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Sort by")
             label2.text: i18n("Change the sorting key.")
@@ -158,7 +158,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Sort Order")
             label2.text: i18n("Change the sorting order.")

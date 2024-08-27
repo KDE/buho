@@ -304,12 +304,6 @@ StackView
 
             Action
             {
-                text: i18n("Share")
-                icon.name: "document-share"
-            }
-
-            Action
-            {
                 text: i18n("Export")
                 icon.name: "document-export"
             }
@@ -552,6 +546,7 @@ StackView
                 {
                     text: i18n("Share")
                     icon.name: "document-share"
+                    onTriggered: Maui.Platform.shareText(currentNote.content)
                     //                    onTriggered: shareClicked()
                 }
             }

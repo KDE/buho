@@ -25,7 +25,7 @@ set(buho_SRCS
     syncing/notessyncer.cpp
     controllers/notes/notescontroller.cpp
     utils/server.cpp
-    qml.qrc)
+    assets.qrc)
 
 set(buho_HDRS
     db/db.h
@@ -38,7 +38,8 @@ set(buho_HDRS
     controllers/notes/notescontroller.h)
 
 set(buho_ASSETS
-    assets/imgs.qrc)
+    assets/imgs.qrc
+    assets.qrc)
 
 if(UNIX AND NOT ANDROID)
     qt_generate_dbus_interface(${CMAKE_CURRENT_SOURCE_DIR}/utils/server.h org.kde.Buho.xml)
@@ -47,33 +48,54 @@ if(UNIX AND NOT ANDROID)
 endif()
 
 if(ANDROID)
-    add_library(${PROJECT_NAME} SHARED
+    qt_add_executable(${PROJECT_NAME}
+        MANUAL_FINALIZATION
         ${buho_SRCS}
         ${buho_HDRS}
-        ${buho_ASSETS}
-        ${buho_QML_QRC})
+        ${buho_ASSETS})
+
+    set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android_files)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/android_files/version.gradle.in ${CMAKE_BINARY_DIR}/src/version.gradle)
+
 else()
     add_executable(${PROJECT_NAME}
         ${buho_SRCS}
         ${buho_HDRS}
-        ${buho_ASSETS}
-        ${buho_QML_QRC}
-        ${buho_dbus_SRCS})
+        ${buho_ASSETS})
 endif()
+
+qt_add_qml_module(${PROJECT_NAME} URI app.maui.buho
+    NO_PLUGIN
+    QML_FILES
+    main.qml
+    widgets/NewNoteDialog.qml
+    views/notes/NotesView.qml
+    widgets/CardDelegate.qml
+    widgets/ColorsBar.qml
+    widgets/SettingsDialog.qml)
+
 
 if (ANDROID)
     find_package(OpenSSL REQUIRED)
-    target_link_libraries(${PROJECT_NAME} Qt6::AndroidExtras OpenSSL::SSL Qt6::QuickControls2)
+    target_link_libraries(${PROJECT_NAME}
+        PRIVATE
+        OpenSSL::SSL
+        Qt6::QuickControls2)
 elseif(UNIX)
-    target_link_libraries(${PROJECT_NAME} Qt6::Widgets Qt6::DBus)
+    target_link_libraries(${PROJECT_NAME}
+        PRIVATE
+        Qt6::Widgets
+        Qt6::DBus)
 endif()
 
 target_link_libraries(${PROJECT_NAME}
+    PRIVATE
     MauiKit4
     MauiKit4::FileBrowsing
     MauiKit4::Accounts
     MauiKit4::TextEditor
     #[[tesseract]]
+    Qt6::Multimedia
     Qt6::Sql
     Qt6::Quick
     Qt6::Qml
@@ -89,3 +111,6 @@ if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(FILES assets/buho.svg DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps)
     install(FILES org.kde.buho.metainfo.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 endif()
+
+qt_finalize_target(${PROJECT_NAME})
+

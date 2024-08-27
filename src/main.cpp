@@ -106,7 +106,7 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     auto server = std::make_unique<Server>();
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    const QUrl url(QStringLiteral("qrc:/app/maui/buho/main.qml"));
     QObject::connect(
                 &engine,
                 &QQmlApplicationEngine::objectCreated,
