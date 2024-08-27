@@ -7,13 +7,9 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FR
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/utils
-
     ${CMAKE_CURRENT_SOURCE_DIR}/syncing
-
     ${CMAKE_CURRENT_SOURCE_DIR}/providers
-
     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
-
     ${CMAKE_CURRENT_SOURCE_DIR}/models)
 
 set(buho_SRCS
@@ -37,7 +33,7 @@ set(buho_HDRS
     syncing/notessyncer.h
     controllers/notes/notescontroller.h)
 
-set(buho_ASSETS
+qt_add_resources(buho_ASSETS
     assets/imgs.qrc
     assets.qrc)
 
@@ -79,6 +75,7 @@ if (ANDROID)
     find_package(OpenSSL REQUIRED)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE
+        Qt6::Multimedia
         OpenSSL::SSL
         Qt6::QuickControls2)
 elseif(UNIX)
@@ -95,7 +92,6 @@ target_link_libraries(${PROJECT_NAME}
     MauiKit4::Accounts
     MauiKit4::TextEditor
     #[[tesseract]]
-    Qt6::Multimedia
     Qt6::Sql
     Qt6::Quick
     Qt6::Qml
