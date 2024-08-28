@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-06 01:47+0000\n"
+"POT-Creation-Date: 2024-08-28 01:56+0000\n"
 "PO-Revision-Date: 2023-06-12 16:47+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -87,42 +87,42 @@ msgstr "Haqqında"
 msgid "Favorite"
 msgstr "Seçilmişlər"
 
-#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:553
-#, kde-format
-msgid "Share"
-msgstr "Paylaşmaq"
-
-#: src/views/notes/NotesView.qml:313 src/views/notes/NotesView.qml:533
+#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:527
 #, kde-format
 msgid "Export"
 msgstr "İxrac"
 
-#: src/views/notes/NotesView.qml:319 src/widgets/NewNoteDialog.qml:143
+#: src/views/notes/NotesView.qml:313 src/widgets/NewNoteDialog.qml:143
 #, kde-format
 msgid "Delete"
 msgstr "Silmək"
 
-#: src/views/notes/NotesView.qml:522
+#: src/views/notes/NotesView.qml:516
 #, kde-format
 msgid "UnFav"
 msgstr "Seçilməm."
 
-#: src/views/notes/NotesView.qml:522 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:516 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "Seçil."
 
-#: src/views/notes/NotesView.qml:543
+#: src/views/notes/NotesView.qml:537
 #, kde-format
 msgid "Copy"
 msgstr "Kopyalamaq"
 
-#: src/views/notes/NotesView.qml:563
+#: src/views/notes/NotesView.qml:547
+#, kde-format
+msgid "Share"
+msgstr "Paylaşmaq"
+
+#: src/views/notes/NotesView.qml:558
 #, kde-format
 msgid "Select"
 msgstr "Seçim"
 
-#: src/views/notes/NotesView.qml:582
+#: src/views/notes/NotesView.qml:577
 #, kde-format
 msgid "Remove"
 msgstr "Silmək"

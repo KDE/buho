@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-06 01:47+0000\n"
+"POT-Creation-Date: 2024-08-28 01:56+0000\n"
 "PO-Revision-Date: 2021-06-20 10:15-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -89,42 +89,42 @@ msgstr ""
 msgid "Favorite"
 msgstr "ਮਨਪਸੰਦ"
 
-#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:553
-#, kde-format
-msgid "Share"
-msgstr "ਸਾਂਝਾ ਕਰੋ"
-
-#: src/views/notes/NotesView.qml:313 src/views/notes/NotesView.qml:533
+#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:527
 #, kde-format
 msgid "Export"
 msgstr "ਐਕਸਪੋਰਟ"
 
-#: src/views/notes/NotesView.qml:319 src/widgets/NewNoteDialog.qml:143
+#: src/views/notes/NotesView.qml:313 src/widgets/NewNoteDialog.qml:143
 #, kde-format
 msgid "Delete"
 msgstr "ਹਟਾਓ"
 
-#: src/views/notes/NotesView.qml:522
+#: src/views/notes/NotesView.qml:516
 #, kde-format
 msgid "UnFav"
 msgstr "ਨਾ-ਪਸੰਦ"
 
-#: src/views/notes/NotesView.qml:522 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:516 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "ਪਸੰਦ"
 
-#: src/views/notes/NotesView.qml:543
+#: src/views/notes/NotesView.qml:537
 #, kde-format
 msgid "Copy"
 msgstr "ਕਾਪੀ ਕਰੋ"
 
-#: src/views/notes/NotesView.qml:563
+#: src/views/notes/NotesView.qml:547
+#, kde-format
+msgid "Share"
+msgstr "ਸਾਂਝਾ ਕਰੋ"
+
+#: src/views/notes/NotesView.qml:558
 #, kde-format
 msgid "Select"
 msgstr "ਚੁਣੋ"
 
-#: src/views/notes/NotesView.qml:582
+#: src/views/notes/NotesView.qml:577
 #, kde-format
 msgid "Remove"
 msgstr "ਹਟਾਓ"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-06 01:47+0000\n"
+"POT-Creation-Date: 2024-08-28 01:56+0000\n"
 "PO-Revision-Date: 2023-07-25 00:26+0300\n"
 "Last-Translator: George Stefanakis <george.stefanakis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -86,42 +86,42 @@ msgstr "Περίγραμμα"
 msgid "Favorite"
 msgstr "Αγαπημένο"
 
-#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:553
-#, kde-format
-msgid "Share"
-msgstr "Κοινή χρήση"
-
-#: src/views/notes/NotesView.qml:313 src/views/notes/NotesView.qml:533
+#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:527
 #, kde-format
 msgid "Export"
 msgstr "Εξαγωγή"
 
-#: src/views/notes/NotesView.qml:319 src/widgets/NewNoteDialog.qml:143
+#: src/views/notes/NotesView.qml:313 src/widgets/NewNoteDialog.qml:143
 #, kde-format
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: src/views/notes/NotesView.qml:522
+#: src/views/notes/NotesView.qml:516
 #, kde-format
 msgid "UnFav"
 msgstr "Όχιαγαπ"
 
-#: src/views/notes/NotesView.qml:522 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:516 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "Αγαπ"
 
-#: src/views/notes/NotesView.qml:543
+#: src/views/notes/NotesView.qml:537
 #, kde-format
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: src/views/notes/NotesView.qml:563
+#: src/views/notes/NotesView.qml:547
+#, kde-format
+msgid "Share"
+msgstr "Κοινή χρήση"
+
+#: src/views/notes/NotesView.qml:558
 #, kde-format
 msgid "Select"
 msgstr "Επιλογή"
 
-#: src/views/notes/NotesView.qml:582
+#: src/views/notes/NotesView.qml:577
 #, kde-format
 msgid "Remove"
 msgstr "Διαγραφή"
