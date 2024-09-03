@@ -57,6 +57,7 @@ else()
     add_executable(${PROJECT_NAME}
         ${buho_SRCS}
         ${buho_HDRS}
+        ${buho_dbus_SRCS}
         ${buho_ASSETS})
 endif()
 
