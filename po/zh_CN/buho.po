@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-28 01:56+0000\n"
+"POT-Creation-Date: 2024-09-17 01:52+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,12 +17,12 @@ msgstr ""
 "X-Crowdin-File: /kf5-trunk/messages/buho/buho.pot\n"
 "X-Crowdin-File-ID: 25040\n"
 
-#: src/main.cpp:53
+#: src/main.cpp:51
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "创建和整理您的笔记。"
 
-#: src/main.cpp:58
+#: src/main.cpp:56
 #, kde-format
 msgid "Developer"
 msgstr "开发人员"
