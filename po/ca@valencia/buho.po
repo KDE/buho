@@ -274,15 +274,3 @@ msgstr "Ascendent"
 #, kde-format
 msgid "Descending"
 msgstr "Descendent"
-
-#~ msgid "Dark Mode"
-#~ msgstr "Mode fosc"
-
-#~ msgid "Switch between light and dark colorscheme."
-#~ msgstr "Alterna entre els esquemes de color clar i fosc."
-
-#~ msgid "© 2019-2023 Maui Development Team"
-#~ msgstr "© 2019-2023 L'equip de desenvolupament Maui"
-
-#~ msgid "Camilo Higuita"
-#~ msgstr "Camilo Higuita"
