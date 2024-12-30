@@ -22,6 +22,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="fi">Buho</name>
   <name xml:lang="fr">Buho</name>
   <name xml:lang="gl">Buho</name>
+  <name xml:lang="he">Buho</name>
   <name xml:lang="it">Buho</name>
   <name xml:lang="ka">Buho</name>
   <name xml:lang="ko">Buho</name>
@@ -31,6 +32,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="pl">Buho</name>
   <name xml:lang="pt">Buho</name>
   <name xml:lang="pt-BR">Buho</name>
+  <name xml:lang="sa">बुहो</name>
   <name xml:lang="sk">Buho</name>
   <name xml:lang="sl">Buho</name>
   <name xml:lang="sv">Buho</name>
@@ -54,6 +56,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="fi">Muistiinpanosovellus</summary>
   <summary xml:lang="fr">Application de prise de notes</summary>
   <summary xml:lang="gl">Aplicación para tomar notas.</summary>
+  <summary xml:lang="he">יישום לכתיבת פתקיות</summary>
   <summary xml:lang="it">Applicazione per prendere appunti</summary>
   <summary xml:lang="ka">ჩანაწერების გასაკეთებელი პროგრამა</summary>
   <summary xml:lang="ko">메모 앱</summary>
@@ -63,6 +66,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="pl">Program do robienia zapisków</summary>
   <summary xml:lang="pt">Aplicação de bloco de notas</summary>
   <summary xml:lang="pt-BR">Aplicativo para anotações</summary>
+  <summary xml:lang="sa">नोट-ग्रहण एप्लिकेशन</summary>
   <summary xml:lang="sk">Aplikácia na poznámky</summary>
   <summary xml:lang="sl">Aplikacija beležnice</summary>
   <summary xml:lang="sv">Anteckningsprogram</summary>
@@ -86,6 +90,7 @@ SPDX-License-Identifier: CC0-1.0
     <p xml:lang="fi">Buho on muistiinpanosovellus, jolla voi nopeasti tehdä muistiinpanoja, tallentaa linkkejä sekä luoda muistikirjoja ja sivuja.</p>
     <p xml:lang="fr">Buho est une application de prise de notes. Buho vous permet de prendre des notes rapides, d'enregistrer des liens, de créer des livres et des pages pour prendre des notes de cours.</p>
     <p xml:lang="gl">Buho é unha aplicación para tomar notas que lle permite ademais gardar ligazóns e crear libros e páxinas para tomar notas de clase.</p>
+    <p xml:lang="he">Buho הוא יישום לכתיבת פתקיות. הוא יאפשר לך לשמור פתקיות בזריזות, לשמור קישורים, ליצור ספרים ועמודים לכתיבת הערות תוך כדי שיעור.</p>
     <p xml:lang="it">Buho è un'applicazione per prendere appunti. Ti permette di prendere appunti veloci, di salvare collegamenti e di creare libri e pagine per prendere i classici appunti.</p>
     <p xml:lang="ka">Buho არის ჩანაწერების გასაკეთებელი აპლიკაცია. ბუჰო საშუალებას მოგცემთ მიიღოთ სწრაფი ჩანაწერები, შეინახოთ ბმულები, შექმნათ წიგნები და გვერდები სკოლაში შენიშვნების ჩასაწერად.</p>
     <p xml:lang="ko">Buho는 메모 앱입니다. Buho를 사용하여 빠른 메모, 링크 저장, 수업 필기용 책과 쪽을 만들 수 있습니다.</p>
@@ -95,6 +100,7 @@ SPDX-License-Identifier: CC0-1.0
     <p xml:lang="pl">Buho jest programem do zapisków. Buho umożliwia wykonywanie szybkich zapisków, zapisywyanie odnośników, tworzenie zeszytów oraz wykonywanie notatek.</p>
     <p xml:lang="pt">O Buho é uma aplicação para tirar notas. O Buho permitir-lhe-á tirar notas rápidas, gravar ligações, criar livros e páginas para apontar notas das aulas.</p>
     <p xml:lang="pt-BR">Buho é um aplicativo de anotações. Buho permitirá que você faça anotações rápidas, salve links, crie livros e páginas para fazer anotações de aulas.</p>
+    <p xml:lang="sa">बुहो इति टिप्पणी-ग्रहण-अनुप्रयोगः अस्ति । बुहो भवन्तं द्रुतटिप्पणीं ग्रहीतुं, लिङ्कानि रक्षितुं, कक्षायाः टिप्पणीं ग्रहीतुं पुस्तकानि पृष्ठानि च निर्मातुम् अनुमन्यते।</p>
     <p xml:lang="sl">Buho je aplikacija beležnice. Buho vam omogoča hitre zabeležke, shranjuje povezave, ustvarja knjige in strani za beleženje zapiskov predavanj.</p>
     <p xml:lang="sv">Buho är ett anteckningsprogram. Buho låter dig göra snabbanteckningar, spara länkar, skapa böcker och sidor för att göra föreläsningsanteckningar.</p>
     <p xml:lang="tr">Buho, bir not alma uygulamasıdır. Buho; hızlı notlar almanızı, bağlantıları kaydetmenizi, sınıf notları alırken kitaplar ve sayfalar oluşturmanızı sağlar.</p>
@@ -123,6 +129,7 @@ SPDX-License-Identifier: CC0-1.0
       <caption xml:lang="fi">Buho</caption>
       <caption xml:lang="fr">Buho</caption>
       <caption xml:lang="gl">Buho</caption>
+      <caption xml:lang="he">Buho</caption>
       <caption xml:lang="it">Buho</caption>
       <caption xml:lang="ka">Buho</caption>
       <caption xml:lang="ko">Buho</caption>
@@ -132,6 +139,7 @@ SPDX-License-Identifier: CC0-1.0
       <caption xml:lang="pl">Buho</caption>
       <caption xml:lang="pt">Buho</caption>
       <caption xml:lang="pt-BR">Buho</caption>
+      <caption xml:lang="sa">बुहो</caption>
       <caption xml:lang="sk">Buho</caption>
       <caption xml:lang="sl">Buho</caption>
       <caption xml:lang="sv">Buho</caption>
