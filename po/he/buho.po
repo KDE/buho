@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-17 01:52+0000\n"
-"PO-Revision-Date: 2024-12-29 18:10+0200\n"
+"PO-Revision-Date: 2025-01-24 09:25+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -190,12 +190,12 @@ msgstr "שמירת הקובץ שלך אוטומטית כל כמה שניות"
 #: src/widgets/SettingsDialog.qml:65
 #, kde-format
 msgid "Auto Reload"
-msgstr "רענון אוטומטי"
+msgstr "ריענון אוטומטי"
 
 #: src/widgets/SettingsDialog.qml:66
 #, kde-format
 msgid "Auto reload the text on external changes."
-msgstr "רענון הטקסט אוטומטית כשהוא נערך חיצונית."
+msgstr "ריענון הטקסט אוטומטית כשהוא נערך חיצונית."
 
 #: src/widgets/SettingsDialog.qml:77
 #, kde-format
