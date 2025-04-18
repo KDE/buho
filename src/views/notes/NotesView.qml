@@ -4,6 +4,7 @@ import QtQuick.Layouts
 
 import org.mauikit.controls as Maui
 import org.mauikit.accounts as MA
+import org.mauikit.filebrowsing as FB
 
 import org.maui.buho
 
@@ -23,10 +24,17 @@ StackView
 
     readonly property Flickable flickable : currentItem.flickable
 
-    readonly property bool editing : control.depth > 1
-
     function setNote(note)
     {
+        if(Maui.Handy.isLinux && !Maui.Handy.isMobile)
+        {
+            console.log("Creating new noite in a new window")
+            var window = _editNoteWindowComponent.createObject(root, {'note': note})
+            window.forceActiveFocus()
+            return
+        }
+
+
         control.push(_editNoteComponent)
         control.currentItem.editor.body.forceActiveFocus()
         control.currentItem.noteIndex = control.currentIndex
@@ -34,6 +42,14 @@ StackView
 
     function newNote(contents)
     {
+        if(Maui.Handy.isLinux && !Maui.Handy.isMobile)
+        {
+            console.log("Creating new noite in a new window")
+            var window = _newNoteWindowComponent.createObject(root, {'text': contents})
+            window.forceActiveFocus()
+            return
+        }
+
         control.push(_newNoteComponent, {'text': contents})
         control.currentItem.editor.body.forceActiveFocus()
     }
@@ -53,25 +69,167 @@ StackView
 
     Component
     {
-        id: _editNoteComponent
-
-        NewNoteDialog
+        id: _newNoteComponent
+        NewNote
         {
-            note: control.currentNote
-            onNoteSaved: (note, noteIndex) =>
-            {
-                console.log("updating note <<" , note , control.currentIndex , noteIndex, notesModel.mappedToSource(noteIndex))
-                control.list.update(note, notesModel.mappedToSource(noteIndex))
-            }
+            headBar.farLeftContent: NoteBackButton {}
         }
     }
 
     Component
     {
-        id: _newNoteComponent
-        NewNoteDialog
+        id: _newNoteWindowComponent
+        Maui.ApplicationWindow
         {
-            onNoteSaved: (note, noteIndex) => control.list.insert(note)
+            id: _window
+            property alias text : _note.text
+            title: _note.title
+            width: control.width
+            height: control.height
+            NewNote
+            {
+                id: _note
+                anchors.fill: parent
+                Maui.Controls.showCSD: true
+                showTitle: true
+            }
+
+            Maui.PopupPage
+            {
+                id: _closeDialog
+                property bool preventClosing : true
+                headBar.visible: false
+
+                Maui.ListItemTemplate
+                {
+                    Layout.fillWidth: true
+                    label2.text: i18n("The note changes have not been saved. Are you sure you want to close the note?")
+                    iconSource: "dialog-warning"
+                    label2.wrapMode: TextEdit.WordWrap
+
+                    iconSizeHint: Maui.Style.iconSizes.large
+                    spacing: Maui.Style.space.big
+
+                    // template.iconVisible: true
+                    // standardButtons: Dialog.Save | Dialog.Discard
+                }
+
+                actions: [
+                    Action
+                    {
+                        text: i18n("Save")
+                        onTriggered:
+                        {
+                            _note.noteSaved(_note.packNote(), _note.noteIndex)
+                            _closeDialog.preventClosing = false
+                            _window.close()
+                        }
+                    },
+
+                    Action
+                    {
+                        Maui.Controls.status: Maui.Controls.Negative
+                        text: "Discard"
+                        onTriggered:
+                        {
+                            _closeDialog.preventClosing = false
+                            _window.close()
+                        }
+                    }]
+            }
+
+            onClosing: (close) =>
+                       {
+                           if(!_closeDialog.preventClosing)
+                           {
+                               close.accepted = true
+                               return
+                           }
+
+                           if(_note.document.modified)
+                           {
+                               _closeDialog.open()
+                               close.accepted = false
+                               return
+                           }
+
+                           close.accepted = true
+                       }
+
+            function forceActiveFocus()
+            {
+                _note.editor.body.forceActiveFocus()
+            }
+        }
+    }
+
+    component NoteBackButton : ToolButton
+    {
+        icon.name: "go-previous"
+        onClicked:
+        {
+            if(FB.FM.fileExists(document.fileUrl) && document.modified)
+            {
+                document.saveAs(document.fileUrl)
+            }
+
+            noteSaved(packNote(), noteIndex)
+            clear()
+            control.pop()
+        }
+    }
+
+    component NewNote : NewNoteDialog
+    {
+        onNoteSaved: (note, noteIndex) => control.list.insert(note)
+    }
+
+    component EditNote : NewNoteDialog
+    {
+        onNoteSaved: (note, noteIndex) =>
+                     {
+                         console.log("updating note <<" , note , control.currentIndex , noteIndex, notesModel.mappedToSource(noteIndex))
+                         control.list.update(note, notesModel.mappedToSource(noteIndex))
+                     }
+    }
+
+    Component
+    {
+        id: _editNoteComponent
+        EditNote
+        {
+            headBar.farLeftContent: NoteBackButton {}
+        }
+    }
+
+    Component
+    {
+        id: _editNoteWindowComponent
+
+        Maui.DialogWindow
+        {
+            property alias note : _note.note
+
+            page.headBar.visible: false
+            width: control.width
+            height: control.height
+
+            EditNote
+            {
+                id: _note
+                anchors.fill: parent
+                Maui.Controls.showCSD: true
+            }
+
+            onClosing: (close) =>
+                       {
+
+                       }
+
+            function forceActiveFocus()
+            {
+                _note.editor.body.forceActiveFocus()
+            }
         }
     }
 
@@ -81,10 +239,11 @@ StackView
 
         property var notes
 
-        title: i18n("Remove notes")
         message: i18n("Are you sure you want to delete the selected notes?")
 
-        template.iconSource: "view-notes"
+        template.iconSource: "dialog-warning"
+
+        standardButtons: Dialog.Cancel | Dialog.Yes
 
         onAccepted:
         {
@@ -229,7 +388,7 @@ StackView
                 if(event.key === Qt.Key_Return)
                 {
                     currentNote = item
-                    setNote()
+                    setNote(currentNote)
                 }
             }
         }
@@ -331,18 +490,18 @@ StackView
             isCurrentItem: ListView.isCurrentItem
 
             onClicked: (mouse) =>
-            {
-                currentIndex = index
+                       {
+                           currentIndex = index
 
-                if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
-                {
-                    cardsView.currentView.itemsSelected([index])
-                }else if(Maui.Handy.singleClick)
-                {
-                    currentNote = notesModel.get(index)
-                    setNote()
-                }
-            }
+                           if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
+                           {
+                               cardsView.currentView.itemsSelected([index])
+                           }else if(Maui.Handy.singleClick)
+                           {
+                               currentNote = notesModel.get(index)
+                               setNote(currentNote)
+                           }
+                       }
 
             onDoubleClicked:
             {
@@ -350,7 +509,7 @@ StackView
                 if(!Maui.Handy.singleClick && !cardsView.selectionMode)
                 {
                     currentNote = notesModel.get(index)
-                    setNote()
+                    setNote(currentNote)
                 }
             }
 
@@ -420,19 +579,19 @@ StackView
                 isCurrentItem: parent.isCurrentItem
 
                 onClicked: (mouse) =>
-                {
-                    currentIndex = index
-                    console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model.url))
+                           {
+                               currentIndex = index
+                               console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model.url))
 
-                    if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
-                    {
-                        cardsView.currentView.itemsSelected([index])
-                    }else if(Maui.Handy.singleClick)
-                    {
-                        currentNote = notesModel.get(index)
-                        setNote()
-                    }
-                }
+                               if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
+                               {
+                                   cardsView.currentView.itemsSelected([index])
+                               }else if(Maui.Handy.singleClick)
+                               {
+                                   currentNote = notesModel.get(index)
+                                   setNote(currentNote)
+                               }
+                           }
 
                 onDoubleClicked:
                 {
@@ -440,7 +599,7 @@ StackView
                     if(!Maui.Handy.singleClick && !cardsView.selectionMode)
                     {
                         currentNote = notesModel.get(index)
-                        setNote()
+                        setNote(currentNote)
                     }
                 }
 

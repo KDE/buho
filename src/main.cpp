@@ -24,6 +24,9 @@
 
 #define BUHO_URI "org.maui.buho"
 
+/**
+ * @brief setFolders Creates the directory where to save the note as text files
+ */
 static void setFolders()
 {
     QDir notes_path(OWL::NotesPath.toLocalFile());
@@ -82,8 +85,7 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     bool newNote = parser.isSet(newNoteOption);
     QString noteContent;
 
-#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
-
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID    
     if(newNote)
     {
         if(parser.isSet(newNoteContent))
@@ -106,20 +108,20 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/app/maui/buho/main.qml"));
     QObject::connect(
-                &engine,
-                &QQmlApplicationEngine::objectCreated,
-                &app,
-                [url, newNote, noteContent, &server](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
+        &engine,
+        &QQmlApplicationEngine::objectCreated,
+        &app,
+        [url, newNote, noteContent, &server](QObject *obj, const QUrl &objUrl) {
+            if (!obj && url == objUrl)
+                QCoreApplication::exit(-1);
 
-        server->setQmlObject(obj);
-        if(newNote)
-        {
-        server->newNote(noteContent);
-        }
-    },
-    Qt::QueuedConnection);
+            server->setQmlObject(obj);
+            if(newNote)
+            {
+                server->newNote(noteContent);
+            }
+        },
+        Qt::QueuedConnection);
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 

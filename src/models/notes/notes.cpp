@@ -21,7 +21,7 @@ Notes::Notes(QObject *parent)
 
     connect(syncer, &NotesSyncer::noteInserted, [&](FMH::MODEL note, STATE state) {
 
-      qDebug() << "Insertint new note" << note;
+        qDebug() << "Insertint new note" << note;
         if (state.type == STATE::TYPE::LOCAL)
             this->appendNote(note);
     });
@@ -77,10 +77,10 @@ bool Notes::update(const QVariantMap &data, const int &index)
 
 
     auto note = this->notes[index];
-//    if(note[FMH::MODEL_KEY::CONTENT] == data.value("content").toString())
-//    {
-//        return false;
-//    }
+    //    if(note[FMH::MODEL_KEY::CONTENT] == data.value("content").toString())
+    //    {
+    //        return false;
+    //    }
 
     qDebug() << "UDPATE MODEL ITEM AT "<< index << note[FMH::MODEL_KEY::TITLE];
 
@@ -110,13 +110,13 @@ int Notes::indexOfNote(const QUrl &url)
 int Notes::indexOfName(const QString &query)
 {
     const auto it = std::find_if(this->items().constBegin(), this->items().constEnd(), [&](const FMH::MODEL &item) -> bool {
-            return item[FMH::MODEL_KEY::TITLE].startsWith(query, Qt::CaseInsensitive);
-        });
+        return item[FMH::MODEL_KEY::TITLE].startsWith(query, Qt::CaseInsensitive);
+    });
 
-        if (it != this->items().constEnd())
-            return std::distance(this->items().constBegin(), it);
-        else
-            return -1;
+    if (it != this->items().constEnd())
+        return std::distance(this->items().constBegin(), it);
+    else
+        return -1;
 }
 
 void Notes::componentComplete()

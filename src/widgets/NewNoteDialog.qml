@@ -6,7 +6,6 @@ import org.mauikit.controls as Maui
 import org.mauikit.filebrowsing as FB
 import org.mauikit.texteditor as TE
 
-
 Maui.Page
 {
     id: control
@@ -18,29 +17,11 @@ Maui.Page
     property bool showEditActions : false
     property var note : ({})
     property int noteIndex : -1
+    title : text.split("\n")[0]
 
     property alias text: _editor.text
 
     signal noteSaved(var note, int noteIndex)
-
-    headBar.farLeftContent: ToolButton
-    {
-        icon.name: "go-previous"
-        onClicked:
-        {
-            console.log(control.document.fileUrl, "File Url")
-
-
-            if(FB.FM.fileExists(control.document.fileUrl) && control.document.modified)
-            {
-                control.document.saveAs(control.document.fileUrl)
-            }
-
-            control.noteSaved(packNote(), control.noteIndex)
-            control.clear()
-            control.parent.pop()
-        }
-    }
 
     headBar.visible: !editor.body.readOnly
     headBar.leftContent: [
@@ -169,8 +150,8 @@ Maui.Page
 
     TE.TextEditor
     {
-      id: _editor
-      anchors.fill: parent
+        id: _editor
+        anchors.fill: parent
 
         fileUrl: control.note.url
         showLineNumbers: false
