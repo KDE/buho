@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 01:52+0000\n"
+"POT-Creation-Date: 2025-04-19 00:40+0000\n"
 "PO-Revision-Date: 2023-11-22 18:46+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/main.cpp:51
+#: src/main.cpp:54
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "Luo ja hallitse muistiinpanojasi."
 
-#: src/main.cpp:56
+#: src/main.cpp:59
 #, kde-format
 msgid "Developer"
 msgstr "Kehittäjä"
@@ -31,97 +31,104 @@ msgstr "Kehittäjä"
 msgid "Buho"
 msgstr "Buho"
 
-#: src/views/notes/NotesView.qml:44
+#: src/views/notes/NotesView.qml:60
 #, kde-format
 msgid "Paste"
 msgstr "Liitä"
 
-#: src/views/notes/NotesView.qml:84
+#: src/views/notes/NotesView.qml:106
 #, kde-format
-msgid "Remove notes"
-msgstr "Poista muistiinpanot"
+msgid ""
+"The note changes have not been saved. Are you sure you want to close the "
+"note?"
+msgstr ""
 
-#: src/views/notes/NotesView.qml:85
+#: src/views/notes/NotesView.qml:120
+#, kde-format
+msgid "Save"
+msgstr "Tallenna"
+
+#: src/views/notes/NotesView.qml:242
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Haluatko varmasti poistaa valitut muistiinpanot?"
 
-#: src/views/notes/NotesView.qml:115
+#: src/views/notes/NotesView.qml:274
 #, kde-format
 msgid "No notes!"
 msgstr "Ei muistiinpanoja!"
 
-#: src/views/notes/NotesView.qml:116
+#: src/views/notes/NotesView.qml:275
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "Uuden muistiinpanon voi luoda nopeasti"
 
-#: src/views/notes/NotesView.qml:120
+#: src/views/notes/NotesView.qml:279
 #, kde-format
 msgid "New note"
 msgstr "Uusi muistiinpano"
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:302
 #, kde-format
 msgid "Search "
 msgstr "Etsi"
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:302
 #, kde-format
 msgid "notes"
 msgstr "muistilaput"
 
-#: src/views/notes/NotesView.qml:157
+#: src/views/notes/NotesView.qml:316
 #, kde-format
 msgid "Settings"
 msgstr "Asetukset"
 
-#: src/views/notes/NotesView.qml:164
+#: src/views/notes/NotesView.qml:323
 #, kde-format
 msgid "About"
 msgstr "Tietoa"
 
-#: src/views/notes/NotesView.qml:294
+#: src/views/notes/NotesView.qml:453
 #, kde-format
 msgid "Favorite"
 msgstr "Suosikki"
 
-#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:527
+#: src/views/notes/NotesView.qml:466 src/views/notes/NotesView.qml:686
 #, kde-format
 msgid "Export"
 msgstr "Vie"
 
-#: src/views/notes/NotesView.qml:313 src/widgets/NewNoteDialog.qml:143
+#: src/views/notes/NotesView.qml:472 src/widgets/NewNoteDialog.qml:124
 #, kde-format
 msgid "Delete"
 msgstr "Poista"
 
-#: src/views/notes/NotesView.qml:516
+#: src/views/notes/NotesView.qml:675
 #, kde-format
 msgid "UnFav"
 msgstr "Poista suosikeista"
 
-#: src/views/notes/NotesView.qml:516 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:675 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "Merkitse suosikiksi"
 
-#: src/views/notes/NotesView.qml:537
+#: src/views/notes/NotesView.qml:696
 #, kde-format
 msgid "Copy"
 msgstr "Kopioi"
 
-#: src/views/notes/NotesView.qml:547
+#: src/views/notes/NotesView.qml:706
 #, kde-format
 msgid "Share"
 msgstr "Jaa"
 
-#: src/views/notes/NotesView.qml:558
+#: src/views/notes/NotesView.qml:717
 #, kde-format
 msgid "Select"
 msgstr "Valitse"
 
-#: src/views/notes/NotesView.qml:577
+#: src/views/notes/NotesView.qml:736
 #, kde-format
 msgid "Remove"
 msgstr "Poista"
@@ -136,12 +143,12 @@ msgstr "Tyhjä"
 msgid "Edit this note"
 msgstr "Muokkaa tätä muistiinpanoa"
 
-#: src/widgets/NewNoteDialog.qml:133
+#: src/widgets/NewNoteDialog.qml:114
 #, kde-format
 msgid "Find and Replace"
 msgstr "Etsi ja korvaa"
 
-#: src/widgets/NewNoteDialog.qml:184
+#: src/widgets/NewNoteDialog.qml:165
 #, kde-format
 msgid ""
 "Title\n"
@@ -150,7 +157,7 @@ msgstr ""
 "Otsikko\n"
 "Runko"
 
-#: src/widgets/NewNoteDialog.qml:208
+#: src/widgets/NewNoteDialog.qml:189
 #, kde-format
 msgid "Note saved"
 msgstr "Muistiinpano tallennettu"
@@ -270,6 +277,9 @@ msgstr "Nouseva"
 msgid "Descending"
 msgstr "Laskeva"
 
+#~ msgid "Remove notes"
+#~ msgstr "Poista muistiinpanot"
+
 #~ msgid "Dark Mode"
 #~ msgstr "Tumma tila"
 
@@ -314,9 +324,6 @@ msgstr "Laskeva"
 
 #~ msgid "Notes in this book: "
 #~ msgstr "Tämän muistikirjan muistiinpanot:"
-
-#~ msgid "Save"
-#~ msgstr "Tallenna"
 
 #~ msgid "Nothing to edit!"
 #~ msgstr "Ei muokattavaa!"

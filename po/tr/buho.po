@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 01:52+0000\n"
+"POT-Creation-Date: 2025-04-19 00:40+0000\n"
 "PO-Revision-Date: 2024-03-22 16:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 24.02.1\n"
 
-#: src/main.cpp:51
+#: src/main.cpp:54
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "Notlar oluşturun ve onları düzenleyin."
 
-#: src/main.cpp:56
+#: src/main.cpp:59
 #, kde-format
 msgid "Developer"
 msgstr "Geliştirici"
@@ -32,97 +32,105 @@ msgstr "Geliştirici"
 msgid "Buho"
 msgstr "Buho"
 
-#: src/views/notes/NotesView.qml:44
+#: src/views/notes/NotesView.qml:60
 #, kde-format
 msgid "Paste"
 msgstr "Yapıştır"
 
-#: src/views/notes/NotesView.qml:84
+#: src/views/notes/NotesView.qml:106
 #, kde-format
-msgid "Remove notes"
-msgstr "Notları kaldır"
+msgid ""
+"The note changes have not been saved. Are you sure you want to close the "
+"note?"
+msgstr ""
 
-#: src/views/notes/NotesView.qml:85
+#: src/views/notes/NotesView.qml:120
+#, fuzzy, kde-format
+#| msgid "Auto Save"
+msgid "Save"
+msgstr "Otomatik Kaydet"
+
+#: src/views/notes/NotesView.qml:242
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Seçili notları silmek istediğinizden emin misiniz?"
 
-#: src/views/notes/NotesView.qml:115
+#: src/views/notes/NotesView.qml:274
 #, kde-format
 msgid "No notes!"
 msgstr "Not yok!"
 
-#: src/views/notes/NotesView.qml:116
+#: src/views/notes/NotesView.qml:275
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "Tez yeni bir not oluşturabilirsiniz"
 
-#: src/views/notes/NotesView.qml:120
+#: src/views/notes/NotesView.qml:279
 #, kde-format
 msgid "New note"
 msgstr "Yeni not"
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:302
 #, kde-format
 msgid "Search "
 msgstr "Ara "
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:302
 #, kde-format
 msgid "notes"
 msgstr "notlar"
 
-#: src/views/notes/NotesView.qml:157
+#: src/views/notes/NotesView.qml:316
 #, kde-format
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: src/views/notes/NotesView.qml:164
+#: src/views/notes/NotesView.qml:323
 #, kde-format
 msgid "About"
 msgstr "Hakkında"
 
-#: src/views/notes/NotesView.qml:294
+#: src/views/notes/NotesView.qml:453
 #, kde-format
 msgid "Favorite"
 msgstr "Sık Kullanılanlara Ekle"
 
-#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:527
+#: src/views/notes/NotesView.qml:466 src/views/notes/NotesView.qml:686
 #, kde-format
 msgid "Export"
 msgstr "Dışa Aktar"
 
-#: src/views/notes/NotesView.qml:313 src/widgets/NewNoteDialog.qml:143
+#: src/views/notes/NotesView.qml:472 src/widgets/NewNoteDialog.qml:124
 #, kde-format
 msgid "Delete"
 msgstr "Sil"
 
-#: src/views/notes/NotesView.qml:516
+#: src/views/notes/NotesView.qml:675
 #, kde-format
 msgid "UnFav"
 msgstr "Sık Kullanılanlardan Kaldır"
 
-#: src/views/notes/NotesView.qml:516 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:675 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "Sık Kullanılanlara Ekle"
 
-#: src/views/notes/NotesView.qml:537
+#: src/views/notes/NotesView.qml:696
 #, kde-format
 msgid "Copy"
 msgstr "Kopyala"
 
-#: src/views/notes/NotesView.qml:547
+#: src/views/notes/NotesView.qml:706
 #, kde-format
 msgid "Share"
 msgstr "Paylaş"
 
-#: src/views/notes/NotesView.qml:558
+#: src/views/notes/NotesView.qml:717
 #, kde-format
 msgid "Select"
 msgstr "Seç"
 
-#: src/views/notes/NotesView.qml:577
+#: src/views/notes/NotesView.qml:736
 #, kde-format
 msgid "Remove"
 msgstr "Kaldır"
@@ -137,12 +145,12 @@ msgstr "Boş"
 msgid "Edit this note"
 msgstr "Bu notu düzenle"
 
-#: src/widgets/NewNoteDialog.qml:133
+#: src/widgets/NewNoteDialog.qml:114
 #, kde-format
 msgid "Find and Replace"
 msgstr "Bul ve Değiştir"
 
-#: src/widgets/NewNoteDialog.qml:184
+#: src/widgets/NewNoteDialog.qml:165
 #, kde-format
 msgid ""
 "Title\n"
@@ -151,7 +159,7 @@ msgstr ""
 "Başlık\n"
 "Gövde"
 
-#: src/widgets/NewNoteDialog.qml:208
+#: src/widgets/NewNoteDialog.qml:189
 #, kde-format
 msgid "Note saved"
 msgstr "Not kaydedildi"
@@ -270,6 +278,9 @@ msgstr "Artan"
 #, kde-format
 msgid "Descending"
 msgstr "Azalan"
+
+#~ msgid "Remove notes"
+#~ msgstr "Notları kaldır"
 
 #~ msgid "Dark Mode"
 #~ msgstr "Koyu Kip"
