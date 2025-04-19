@@ -61,13 +61,13 @@ const FMH::MODEL_LIST &Notes::items() const
     return this->notes;
 }
 
-bool Notes::insert(const QVariantMap &note)
+QVariantMap Notes::insert(const QVariantMap &note)
 {
     qDebug() << "Inserting new note" << note;
     auto __note = FMH::toModel(note);
     this->syncer->insertNote(__note);
 
-    return true;
+    return FMH::toMap(__note);
 }
 
 bool Notes::update(const QVariantMap &data, const int &index)
@@ -83,8 +83,12 @@ bool Notes::update(const QVariantMap &data, const int &index)
     //    }
 
     qDebug() << "UDPATE MODEL ITEM AT "<< index << note[FMH::MODEL_KEY::TITLE];
-
     note.insert(FMH::toModel(data));
+
+    note[FMH::MODEL_KEY::TITLE] = [&]() {
+        const auto lines = note[FMH::MODEL_KEY::CONTENT].split("\n");
+        return lines.isEmpty() ? QString() : lines.first().trimmed();
+    }();
     this->syncer->updateNote(note[FMH::MODEL_KEY::ID], note);
     return true;
 }

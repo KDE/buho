@@ -24,34 +24,46 @@ StackView
 
     readonly property Flickable flickable : currentItem.flickable
 
+    property var noteWindowsMap : (new Map())
+    property bool notePerWindow : Maui.Handy.isLinux && !Maui.Handy.isMobile
+
     function setNote(note)
     {
-        if(Maui.Handy.isLinux && !Maui.Handy.isMobile)
+        if(notePerWindow)
         {
-            console.log("Creating new noite in a new window")
-            var window = _editNoteWindowComponent.createObject(root, {'note': note})
+            var window
+            if(noteWindowsMap.has(note.url))
+            {
+                window = noteWindowsMap.get(note.url)
+                window.requestActivate()
+
+            }else
+            {
+                console.log("Creating new noite in a new window")
+                window = _editNoteWindowComponent.createObject(root, {'note': note, 'noteIndex': control.currentIndex})
+                noteWindowsMap.set(note.url, window)
+            }
+
             window.forceActiveFocus()
-            return
+        }else
+        {
+            control.push(_editNoteComponent, {'note': note,'noteIndex': control.currentIndex})
+            control.currentItem.editor.body.forceActiveFocus()
         }
-
-
-        control.push(_editNoteComponent)
-        control.currentItem.editor.body.forceActiveFocus()
-        control.currentItem.noteIndex = control.currentIndex
     }
 
     function newNote(contents)
     {
-        if(Maui.Handy.isLinux && !Maui.Handy.isMobile)
+        if(notePerWindow)
         {
             console.log("Creating new noite in a new window")
             var window = _newNoteWindowComponent.createObject(root, {'text': contents})
             window.forceActiveFocus()
-            return
+        }else
+        {
+            control.push(_newNoteComponent, {'text': contents})
+            control.currentItem.editor.body.forceActiveFocus()
         }
-
-        control.push(_newNoteComponent, {'text': contents})
-        control.currentItem.editor.body.forceActiveFocus()
     }
 
     Action
@@ -70,9 +82,18 @@ StackView
     Component
     {
         id: _newNoteComponent
-        NewNote
+        NewNoteDialog
         {
-            headBar.farLeftContent: NoteBackButton {}
+            id: _note
+            headBar.farLeftContent: ToolButton
+            {
+                icon.name: "go-previous"
+                onClicked:
+                {
+                    _note.note = _note.saveNote()
+                    control.pop()
+                }
+            }
         }
     }
 
@@ -83,15 +104,34 @@ StackView
         {
             id: _window
             property alias text : _note.text
+
+            transientParent: null
+
             title: _note.title
             width: control.width
             height: control.height
-            NewNote
+
+            NewNoteDialog
             {
                 id: _note
                 anchors.fill: parent
                 Maui.Controls.showCSD: true
                 showTitle: true
+
+                headBar.farLeftContent: Button
+                {
+                    text: i18n("Save")
+                    visible: _note.document.modified || String(_note.document.fileUrl).length === 0
+                    onClicked:
+                    {
+                        _note.note = _note.saveNote()
+                        // _note.update()
+
+                        console.log("The new note has been saved as", _note.note.url)
+                        if(!noteWindowsMap.has(_note.note.url))
+                            noteWindowsMap.set(_note.note.url, _window)
+                    }
+                }
             }
 
             Maui.PopupPage
@@ -120,7 +160,7 @@ StackView
                         text: i18n("Save")
                         onTriggered:
                         {
-                            _note.noteSaved(_note.packNote(), _note.noteIndex)
+                            _note.saveNote()
                             _closeDialog.preventClosing = false
                             _window.close()
                         }
@@ -146,12 +186,17 @@ StackView
                                return
                            }
 
-                           if(_note.document.modified)
+                           if(_note.document.modified || !FB.FM.fileExists(_note.document.fileUrl))
                            {
                                _closeDialog.open()
                                close.accepted = false
                                return
                            }
+
+                           console.log("Notes opened still", noteWindowsMap.keys(),_note.note.url )
+
+                           noteWindowsMap.delete(_note.note.url)
+                           console.log("Notes opened still", noteWindowsMap.keys(),_note.note.url )
 
                            close.accepted = true
                        }
@@ -163,42 +208,21 @@ StackView
         }
     }
 
-    component NoteBackButton : ToolButton
-    {
-        icon.name: "go-previous"
-        onClicked:
-        {
-            if(FB.FM.fileExists(document.fileUrl) && document.modified)
-            {
-                document.saveAs(document.fileUrl)
-            }
-
-            noteSaved(packNote(), noteIndex)
-            clear()
-            control.pop()
-        }
-    }
-
-    component NewNote : NewNoteDialog
-    {
-        onNoteSaved: (note, noteIndex) => control.list.insert(note)
-    }
-
-    component EditNote : NewNoteDialog
-    {
-        onNoteSaved: (note, noteIndex) =>
-                     {
-                         console.log("updating note <<" , note , control.currentIndex , noteIndex, notesModel.mappedToSource(noteIndex))
-                         control.list.update(note, notesModel.mappedToSource(noteIndex))
-                     }
-    }
-
     Component
     {
         id: _editNoteComponent
-        EditNote
+        NewNoteDialog
         {
-            headBar.farLeftContent: NoteBackButton {}
+            id: _note
+            headBar.farLeftContent: ToolButton
+            {
+                icon.name: "go-previous"
+                onClicked:
+                {
+                    _note.saveNote()
+                    control.pop()
+                }
+            }
         }
     }
 
@@ -206,15 +230,16 @@ StackView
     {
         id: _editNoteWindowComponent
 
-        Maui.DialogWindow
+        Maui.ApplicationWindow
         {
             property alias note : _note.note
+            property alias noteIndex : _note.noteIndex
 
-            page.headBar.visible: false
             width: control.width
             height: control.height
+            transientParent: null
 
-            EditNote
+            NewNoteDialog
             {
                 id: _note
                 anchors.fill: parent
@@ -223,7 +248,9 @@ StackView
 
             onClosing: (close) =>
                        {
-
+                           _note.saveNote()
+                           noteWindowsMap.delete(_note.note.url)
+                           close.accepted = true
                        }
 
             function forceActiveFocus()

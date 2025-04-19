@@ -33,6 +33,8 @@ Maui.ApplicationWindow
         property font font : defaultFont
 
         property bool spellcheckEnabled: true
+
+        property bool notePerWindow : Maui.Handy.isLinux && !Maui.Handy.isMobile
     }
 
     SettingsDialog

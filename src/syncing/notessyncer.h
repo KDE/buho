@@ -34,7 +34,7 @@ public:
      * @param note
      * the note to be stored represented by FMH::MODEL
      */
-    void insertNote(FMH::MODEL &note);
+    FMH::MODEL insertNote(FMH::MODEL &note);
 
     /**
      * @brief updateNote

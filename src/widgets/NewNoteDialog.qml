@@ -198,9 +198,13 @@ Maui.Page
             {
                 console.log("NOTE SAVED")
                 _notifyTimer.start()
-                //                control.noteSaved(packNote())
             }
         }
+    }
+
+    function update()
+    {
+        _editor.fileUrl =  Qt.binding(()=> {return control.note.url})
     }
 
     function clear()
@@ -229,5 +233,24 @@ Maui.Page
         }
 
         return note
+    }
+
+    function saveNote()
+    {
+        if(FB.FM.fileExists(document.fileUrl))
+        {
+            if(document.modified)
+            {
+                console.log("Saving a new note but existing file", document.fileUrl)
+                document.saveAs(document.fileUrl)
+            }
+
+            console.log("trying to update note in the main model", noteIndex,notesModel.mappedToSource(noteIndex) )
+            list.update(packNote(), notesModel.mappedToSource(noteIndex))
+            return packNote()
+        }else
+        {
+            return list.insert(packNote())
+        }
     }
 }
