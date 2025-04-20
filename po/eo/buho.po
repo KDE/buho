@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-19 00:40+0000\n"
+"POT-Creation-Date: 2025-04-20 00:40+0000\n"
 "PO-Revision-Date: 2024-05-29 23:46+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -33,105 +33,105 @@ msgstr "Ellaboranto"
 msgid "Buho"
 msgstr "Buho"
 
-#: src/views/notes/NotesView.qml:60
+#: src/views/notes/NotesView.qml:72
 #, kde-format
 msgid "Paste"
 msgstr "Alglui"
 
-#: src/views/notes/NotesView.qml:106
+#: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
+#, fuzzy, kde-format
+#| msgid "Auto Save"
+msgid "Save"
+msgstr "Aŭtokonservado"
+
+#: src/views/notes/NotesView.qml:146
 #, kde-format
 msgid ""
 "The note changes have not been saved. Are you sure you want to close the "
 "note?"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:120
-#, fuzzy, kde-format
-#| msgid "Auto Save"
-msgid "Save"
-msgstr "Aŭtokonservado"
-
-#: src/views/notes/NotesView.qml:242
+#: src/views/notes/NotesView.qml:269
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Ĉu vi certas, ke vi volas forigi la elektitajn notojn?"
 
-#: src/views/notes/NotesView.qml:274
+#: src/views/notes/NotesView.qml:301
 #, kde-format
 msgid "No notes!"
 msgstr "Neniuj notoj!"
 
-#: src/views/notes/NotesView.qml:275
+#: src/views/notes/NotesView.qml:302
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "Vi povas rapide krei novan noton"
 
-#: src/views/notes/NotesView.qml:279
+#: src/views/notes/NotesView.qml:306
 #, kde-format
 msgid "New note"
 msgstr "Nova noto"
 
-#: src/views/notes/NotesView.qml:302
+#: src/views/notes/NotesView.qml:329
 #, kde-format
 msgid "Search "
 msgstr "Serĉi"
 
-#: src/views/notes/NotesView.qml:302
+#: src/views/notes/NotesView.qml:329
 #, kde-format
 msgid "notes"
 msgstr "notoj"
 
-#: src/views/notes/NotesView.qml:316
+#: src/views/notes/NotesView.qml:343
 #, kde-format
 msgid "Settings"
 msgstr "Agordoj"
 
-#: src/views/notes/NotesView.qml:323
+#: src/views/notes/NotesView.qml:350
 #, kde-format
 msgid "About"
 msgstr "Pri"
 
-#: src/views/notes/NotesView.qml:453
+#: src/views/notes/NotesView.qml:480
 #, kde-format
 msgid "Favorite"
 msgstr "Ŝatata"
 
-#: src/views/notes/NotesView.qml:466 src/views/notes/NotesView.qml:686
+#: src/views/notes/NotesView.qml:493 src/views/notes/NotesView.qml:713
 #, kde-format
 msgid "Export"
 msgstr "Eksporti"
 
-#: src/views/notes/NotesView.qml:472 src/widgets/NewNoteDialog.qml:124
+#: src/views/notes/NotesView.qml:499 src/widgets/NewNoteDialog.qml:124
 #, kde-format
 msgid "Delete"
 msgstr "Forigi"
 
-#: src/views/notes/NotesView.qml:675
+#: src/views/notes/NotesView.qml:702
 #, kde-format
 msgid "UnFav"
 msgstr "UnFav"
 
-#: src/views/notes/NotesView.qml:675 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:702 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "Fav"
 
-#: src/views/notes/NotesView.qml:696
+#: src/views/notes/NotesView.qml:723
 #, kde-format
 msgid "Copy"
 msgstr "Kopii"
 
-#: src/views/notes/NotesView.qml:706
+#: src/views/notes/NotesView.qml:733
 #, kde-format
 msgid "Share"
 msgstr "Kunhavigi"
 
-#: src/views/notes/NotesView.qml:717
+#: src/views/notes/NotesView.qml:744
 #, kde-format
 msgid "Select"
 msgstr "Elekti"
 
-#: src/views/notes/NotesView.qml:736
+#: src/views/notes/NotesView.qml:763
 #, kde-format
 msgid "Remove"
 msgstr "Forigi"

@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the buho package.
 #
-# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-19 00:40+0000\n"
-"PO-Revision-Date: 2023-10-28 11:13+0200\n"
+"POT-Creation-Date: 2025-04-20 00:40+0000\n"
+"PO-Revision-Date: 2025-04-19 15:41+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: src/main.cpp:54
 #, kde-format
@@ -32,104 +32,106 @@ msgstr "Ontwikkelaar"
 msgid "Buho"
 msgstr "Buho"
 
-#: src/views/notes/NotesView.qml:60
+#: src/views/notes/NotesView.qml:72
 #, kde-format
 msgid "Paste"
 msgstr "Plakken"
 
-#: src/views/notes/NotesView.qml:106
+#: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
+#, kde-format
+msgid "Save"
+msgstr "Opslaan"
+
+#: src/views/notes/NotesView.qml:146
 #, kde-format
 msgid ""
 "The note changes have not been saved. Are you sure you want to close the "
 "note?"
 msgstr ""
+"De wijzigingen in de notitie zijn nog niet opgeslagen. Wilt u de notitie "
+"sluiten?"
 
-#: src/views/notes/NotesView.qml:120
-#, kde-format
-msgid "Save"
-msgstr "Opslaan"
-
-#: src/views/notes/NotesView.qml:242
+#: src/views/notes/NotesView.qml:269
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Wilt u de geselecteerde notities verwijderen?"
 
-#: src/views/notes/NotesView.qml:274
+#: src/views/notes/NotesView.qml:301
 #, kde-format
 msgid "No notes!"
 msgstr "Geen notities!"
 
-#: src/views/notes/NotesView.qml:275
+#: src/views/notes/NotesView.qml:302
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "U kunt snel een nieuwe notitie aanmaken"
 
-#: src/views/notes/NotesView.qml:279
+#: src/views/notes/NotesView.qml:306
 #, kde-format
 msgid "New note"
 msgstr "Nieuwe notitie"
 
-#: src/views/notes/NotesView.qml:302
+#: src/views/notes/NotesView.qml:329
 #, kde-format
 msgid "Search "
 msgstr "Zoeken "
 
-#: src/views/notes/NotesView.qml:302
+#: src/views/notes/NotesView.qml:329
 #, kde-format
 msgid "notes"
 msgstr "notities"
 
-#: src/views/notes/NotesView.qml:316
+#: src/views/notes/NotesView.qml:343
 #, kde-format
 msgid "Settings"
 msgstr "Instellingen"
 
-#: src/views/notes/NotesView.qml:323
+#: src/views/notes/NotesView.qml:350
 #, kde-format
 msgid "About"
 msgstr "Info over"
 
-#: src/views/notes/NotesView.qml:453
+#: src/views/notes/NotesView.qml:480
 #, kde-format
 msgid "Favorite"
 msgstr "Favoriet"
 
-#: src/views/notes/NotesView.qml:466 src/views/notes/NotesView.qml:686
+#: src/views/notes/NotesView.qml:493 src/views/notes/NotesView.qml:713
 #, kde-format
 msgid "Export"
 msgstr "Exporteren"
 
-#: src/views/notes/NotesView.qml:472 src/widgets/NewNoteDialog.qml:124
+#: src/views/notes/NotesView.qml:499 src/widgets/NewNoteDialog.qml:124
 #, kde-format
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: src/views/notes/NotesView.qml:675
+#: src/views/notes/NotesView.qml:702
 #, kde-format
 msgid "UnFav"
 msgstr "Fav. opheffen"
 
-#: src/views/notes/NotesView.qml:675 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:702 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "Fav"
 
-#: src/views/notes/NotesView.qml:696
+#: src/views/notes/NotesView.qml:723
 #, kde-format
 msgid "Copy"
 msgstr "Kopiëren"
 
-#: src/views/notes/NotesView.qml:706
+#: src/views/notes/NotesView.qml:733
 #, kde-format
 msgid "Share"
 msgstr "Delen"
 
-#: src/views/notes/NotesView.qml:717
+#: src/views/notes/NotesView.qml:744
 #, kde-format
 msgid "Select"
 msgstr "Selecteren"
 
-#: src/views/notes/NotesView.qml:736
+#: src/views/notes/NotesView.qml:763
 #, kde-format
 msgid "Remove"
 msgstr "Verwijderen"

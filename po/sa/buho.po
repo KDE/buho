@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-19 00:40+0000\n"
+"POT-Creation-Date: 2025-04-20 00:40+0000\n"
 "PO-Revision-Date: 2024-12-29 16:06+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -32,105 +32,105 @@ msgstr "विकासकः"
 msgid "Buho"
 msgstr "बुहो"
 
-#: src/views/notes/NotesView.qml:60
+#: src/views/notes/NotesView.qml:72
 #, kde-format
 msgid "Paste"
 msgstr "चिनोतु"
 
-#: src/views/notes/NotesView.qml:106
+#: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
+#, fuzzy, kde-format
+#| msgid "Auto Save"
+msgid "Save"
+msgstr "स्वतः रक्षतु"
+
+#: src/views/notes/NotesView.qml:146
 #, kde-format
 msgid ""
 "The note changes have not been saved. Are you sure you want to close the "
 "note?"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:120
-#, fuzzy, kde-format
-#| msgid "Auto Save"
-msgid "Save"
-msgstr "स्वतः रक्षतु"
-
-#: src/views/notes/NotesView.qml:242
+#: src/views/notes/NotesView.qml:269
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "किं भवन्तः निश्चिताः सन्ति यत् भवन्तः चयनितानि टिप्पण्यानि विलोपयितुम् इच्छन्ति?"
 
-#: src/views/notes/NotesView.qml:274
+#: src/views/notes/NotesView.qml:301
 #, kde-format
 msgid "No notes!"
 msgstr "न टिप्पणीः !"
 
-#: src/views/notes/NotesView.qml:275
+#: src/views/notes/NotesView.qml:302
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "भवन्तः शीघ्रं नूतनं टिप्पणं निर्मातुम् अर्हन्ति"
 
-#: src/views/notes/NotesView.qml:279
+#: src/views/notes/NotesView.qml:306
 #, kde-format
 msgid "New note"
 msgstr "नवीन टिप्पणी"
 
-#: src/views/notes/NotesView.qml:302
+#: src/views/notes/NotesView.qml:329
 #, kde-format
 msgid "Search "
 msgstr "अन्वेषण"
 
-#: src/views/notes/NotesView.qml:302
+#: src/views/notes/NotesView.qml:329
 #, kde-format
 msgid "notes"
 msgstr "टिप्पणियाँ"
 
-#: src/views/notes/NotesView.qml:316
+#: src/views/notes/NotesView.qml:343
 #, kde-format
 msgid "Settings"
 msgstr "सेटिंग्स्"
 
-#: src/views/notes/NotesView.qml:323
+#: src/views/notes/NotesView.qml:350
 #, kde-format
 msgid "About"
 msgstr "विषये"
 
-#: src/views/notes/NotesView.qml:453
+#: src/views/notes/NotesView.qml:480
 #, kde-format
 msgid "Favorite"
 msgstr "प्रिय"
 
-#: src/views/notes/NotesView.qml:466 src/views/notes/NotesView.qml:686
+#: src/views/notes/NotesView.qml:493 src/views/notes/NotesView.qml:713
 #, kde-format
 msgid "Export"
 msgstr "निर्यात"
 
-#: src/views/notes/NotesView.qml:472 src/widgets/NewNoteDialog.qml:124
+#: src/views/notes/NotesView.qml:499 src/widgets/NewNoteDialog.qml:124
 #, kde-format
 msgid "Delete"
 msgstr "लुप्"
 
-#: src/views/notes/NotesView.qml:675
+#: src/views/notes/NotesView.qml:702
 #, kde-format
 msgid "UnFav"
 msgstr "UnFav"
 
-#: src/views/notes/NotesView.qml:675 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:702 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "Fav"
 
-#: src/views/notes/NotesView.qml:696
+#: src/views/notes/NotesView.qml:723
 #, kde-format
 msgid "Copy"
 msgstr "प्रतिलिपि"
 
-#: src/views/notes/NotesView.qml:706
+#: src/views/notes/NotesView.qml:733
 #, kde-format
 msgid "Share"
 msgstr "संविभागः"
 
-#: src/views/notes/NotesView.qml:717
+#: src/views/notes/NotesView.qml:744
 #, kde-format
 msgid "Select"
 msgstr "विचि"
 
-#: src/views/notes/NotesView.qml:736
+#: src/views/notes/NotesView.qml:763
 #, kde-format
 msgid "Remove"
 msgstr "अपाकरोति"
