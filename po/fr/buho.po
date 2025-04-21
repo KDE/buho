@@ -36,8 +36,7 @@ msgid "Paste"
 msgstr "Coller"
 
 #: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
-#, fuzzy, kde-format
-#| msgid "Save"
+#, kde-format
 msgid "Save"
 msgstr "Enregistrer"
 
