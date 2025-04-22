@@ -1,19 +1,19 @@
-# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023, 2025 Xavier Besnard <xavier.besnard@kde.org>
 # Xavier Besnard <xavier.besnard@kde.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-20 00:40+0000\n"
-"PO-Revision-Date: 2023-10-30 15:17+0100\n"
+"PO-Revision-Date: 2025-04-20 08:47+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: src/main.cpp:54
 #, kde-format
@@ -46,6 +46,8 @@ msgid ""
 "The note changes have not been saved. Are you sure you want to close the "
 "note?"
 msgstr ""
+"Les modifications de la note n'ont pas été enregistrées. Voulez-vous "
+"vraiment fermer la note ?"
 
 #: src/views/notes/NotesView.qml:269
 #, kde-format
