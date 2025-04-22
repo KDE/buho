@@ -157,8 +157,7 @@ Maui.Page
         showLineNumbers: false
         document.autoReload: settings.autoReload
         document.autoSave: settings.autoSave
-        spellcheckEnabled: settings.spellcheckEnabled
-
+        // spellcheckEnabled: settings.spellcheckEnabled
         body.font: settings.font
 
         document.enableSyntaxHighlighting: false

@@ -121,7 +121,7 @@ StackView
                 headBar.farLeftContent: Button
                 {
                     text: i18n("Save")
-                    visible: _note.document.modified || String(_note.document.fileUrl).length === 0
+                    visible: (_note.document.modified || String(_note.document.fileUrl).length === 0) && _note.text.length>0
                     onClicked:
                     {
                         _note.note = _note.saveNote()
@@ -186,7 +186,7 @@ StackView
                                return
                            }
 
-                           if(_note.document.modified || !FB.FM.fileExists(_note.document.fileUrl))
+                           if((_note.document.modified || !FB.FM.fileExists(_note.document.fileUrl)) && _note.text.length>0)
                            {
                                _closeDialog.open()
                                close.accepted = false
