@@ -39,10 +39,9 @@ msgid "Paste"
 msgstr "Lim inn"
 
 #: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
-#, fuzzy, kde-format
-#| msgid "Auto Save"
+#, kde-format
 msgid "Save"
-msgstr "Automatisk lagring"
+msgstr "Lagra"
 
 #: src/views/notes/NotesView.qml:146
 #, kde-format
@@ -279,6 +278,3 @@ msgstr "Stigande"
 #, kde-format
 msgid "Descending"
 msgstr "Synkande"
-
-#~ msgid "Remove notes"
-#~ msgstr "Fjern notat"
