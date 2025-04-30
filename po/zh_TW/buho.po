@@ -3,13 +3,13 @@
 # Copyright (C) 2022 This file is copyright:
 # This file is distributed under the same license as the buho package.
 #
-# SPDX-FileCopyrightText: 2022, 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-20 00:40+0000\n"
-"PO-Revision-Date: 2023-12-13 17:49+0900\n"
+"PO-Revision-Date: 2025-04-30 02:02+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #: src/main.cpp:54
 #, kde-format
@@ -40,17 +40,16 @@ msgid "Paste"
 msgstr "貼上"
 
 #: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
-#, fuzzy, kde-format
-#| msgid "Auto Save"
+#, kde-format
 msgid "Save"
-msgstr "自動儲存"
+msgstr "儲存"
 
 #: src/views/notes/NotesView.qml:146
 #, kde-format
 msgid ""
 "The note changes have not been saved. Are you sure you want to close the "
 "note?"
-msgstr ""
+msgstr "筆記的變更尚未儲存。您確定要關閉筆記嗎？"
 
 #: src/views/notes/NotesView.qml:269
 #, kde-format
