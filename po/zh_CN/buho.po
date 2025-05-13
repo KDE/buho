@@ -38,17 +38,16 @@ msgid "Paste"
 msgstr ""
 
 #: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
-#, fuzzy, kde-format
-#| msgid "Auto Save"
+#, kde-format
 msgid "Save"
-msgstr "自动保存"
+msgstr "保存"
 
 #: src/views/notes/NotesView.qml:146
 #, kde-format
 msgid ""
 "The note changes have not been saved. Are you sure you want to close the "
 "note?"
-msgstr ""
+msgstr "笔记尚未保存。您确定要关闭笔记吗？"
 
 #: src/views/notes/NotesView.qml:269
 #, kde-format
@@ -278,6 +277,3 @@ msgstr "升序"
 #, kde-format
 msgid "Descending"
 msgstr "降序"
-
-#~ msgid "Remove notes"
-#~ msgstr "移除笔记"
