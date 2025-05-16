@@ -37,7 +37,8 @@ msgid "Paste"
 msgstr "Liitä"
 
 #: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save"
 msgid "Save"
 msgstr "Tallenna"
 
