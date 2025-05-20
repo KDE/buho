@@ -85,7 +85,7 @@ int Q_DECL_EXPORT main(int argc, char *argv[])
     bool newNote = parser.isSet(newNoteOption);
     QString noteContent;
 
-#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID    
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
     if(newNote)
     {
         if(parser.isSet(newNoteContent))

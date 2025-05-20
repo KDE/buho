@@ -199,6 +199,7 @@ StackView
                            console.log("Notes opened still", noteWindowsMap.keys(),_note.note.url )
 
                            close.accepted = true
+                           destroy()
                        }
 
             function forceActiveFocus()
@@ -251,6 +252,7 @@ StackView
                            _note.saveNote()
                            noteWindowsMap.delete(_note.note.url)
                            close.accepted = true
+                           destroy()
                        }
 
             function forceActiveFocus()
@@ -295,7 +297,7 @@ StackView
 
         floatingFooter: true
         altHeader: Maui.Handy.isMobile
-
+        headerMargins: Maui.Style.defaultPadding
         holder.visible: notesList.count === 0 || cardsView.count === 0
         holder.emoji: "qrc:/view-notes.svg"
         holder.title :i18n("No notes!")

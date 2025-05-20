@@ -22,6 +22,7 @@ Maui.Page
     property alias text: _editor.text
 
     signal noteSaved(var note, int noteIndex)
+    headerMargins: Maui.Style.defaultPadding
 
     headBar.visible: !editor.body.readOnly
     headBar.leftContent: [

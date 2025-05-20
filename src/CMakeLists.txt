@@ -44,6 +44,8 @@ if(UNIX AND NOT ANDROID)
 endif()
 
 if(ANDROID)
+    include(/home/camilo/Android/Sdk/android_openssl/android_openssl.cmake)
+
     qt_add_executable(${PROJECT_NAME}
         MANUAL_FINALIZATION
         ${buho_SRCS}
@@ -53,6 +55,7 @@ if(ANDROID)
     set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android_files)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/android_files/version.gradle.in ${CMAKE_BINARY_DIR}/src/version.gradle)
 
+    add_android_openssl_libraries(${PROJECT_NAME})
 else()
     add_executable(${PROJECT_NAME}
         ${buho_SRCS}
@@ -73,11 +76,10 @@ qt_add_qml_module(${PROJECT_NAME} URI app.maui.buho
 
 
 if (ANDROID)
-    find_package(OpenSSL REQUIRED)
+    # find_package(OpenSSL REQUIRED)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE
         Qt6::Multimedia
-        OpenSSL::SSL
         Qt6::QuickControls2)
 elseif(UNIX)
     target_link_libraries(${PROJECT_NAME}
@@ -92,7 +94,6 @@ target_link_libraries(${PROJECT_NAME}
     MauiKit4::FileBrowsing
     MauiKit4::Accounts
     MauiKit4::TextEditor
-    #[[tesseract]]
     Qt6::Sql
     Qt6::Quick
     Qt6::Qml

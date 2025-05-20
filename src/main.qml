@@ -34,7 +34,7 @@ Maui.ApplicationWindow
 
         property bool spellcheckEnabled: true
 
-        property bool notePerWindow : Maui.Handy.isLinux && !Maui.Handy.isMobile
+        // property bool notePerWindow : Maui.Handy.isLinux && !Maui.Handy.isMobile
     }
 
     SettingsDialog

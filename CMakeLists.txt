@@ -24,7 +24,7 @@ set(REQUIRED_QT_VERSION 6.5.2)
 set(REQUIRED_KF_VERSION 5.240.0)
 
 if(ANDROID)
-    set(ANDROID_ABIS "armeabi-v7a")
+    set(ANDROID_ABIS "arm64-v8a")
 endif()
 
 option(QUICK_COMPILER "Use QtQuick compiler to improve performance" TRUE)
