@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-20 00:40+0000\n"
+"POT-Creation-Date: 2025-05-21 00:41+0000\n"
 "PO-Revision-Date: 2022-04-07 18:02+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -50,99 +50,99 @@ msgid ""
 "note?"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:269
+#: src/views/notes/NotesView.qml:271
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:301
+#: src/views/notes/NotesView.qml:303
 #, fuzzy, kde-format
 #| msgctxt "NotesView|"
 #| msgid "No notes!"
 msgid "No notes!"
 msgstr "Žiadne poznámky"
 
-#: src/views/notes/NotesView.qml:302
+#: src/views/notes/NotesView.qml:304
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:306
+#: src/views/notes/NotesView.qml:308
 #, fuzzy, kde-format
 #| msgctxt "NotesView|"
 #| msgid "No notes!"
 msgid "New note"
 msgstr "Nová poznámka"
 
-#: src/views/notes/NotesView.qml:329
+#: src/views/notes/NotesView.qml:331
 #, fuzzy, kde-format
 #| msgctxt "LinksView|"
 #| msgid "Search "
 msgid "Search "
 msgstr "Hľadať"
 
-#: src/views/notes/NotesView.qml:329
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "notes"
 msgstr "poznámky"
 
-#: src/views/notes/NotesView.qml:343
+#: src/views/notes/NotesView.qml:345
 #, fuzzy, kde-format
 #| msgctxt "main|"
 #| msgid "Settings"
 msgid "Settings"
 msgstr "Nastavenia"
 
-#: src/views/notes/NotesView.qml:350
+#: src/views/notes/NotesView.qml:352
 #, fuzzy, kde-format
 msgid "About"
 msgstr "O aplikácii"
 
-#: src/views/notes/NotesView.qml:480
+#: src/views/notes/NotesView.qml:482
 #, kde-format
 msgid "Favorite"
 msgstr "Obľúbené"
 
-#: src/views/notes/NotesView.qml:493 src/views/notes/NotesView.qml:713
+#: src/views/notes/NotesView.qml:495 src/views/notes/NotesView.qml:715
 #, fuzzy, kde-format
 #| msgctxt "NotesView|"
 #| msgid "Export"
 msgid "Export"
 msgstr "Exportovať"
 
-#: src/views/notes/NotesView.qml:499 src/widgets/NewNoteDialog.qml:124
+#: src/views/notes/NotesView.qml:501 src/widgets/NewNoteDialog.qml:125
 #, fuzzy, kde-format
 msgid "Delete"
 msgstr "Vymazať"
 
-#: src/views/notes/NotesView.qml:702
+#: src/views/notes/NotesView.qml:704
 #, kde-format
 msgid "UnFav"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:702 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:704 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:723
+#: src/views/notes/NotesView.qml:725
 #, fuzzy, kde-format
 #| msgctxt "LinksView|"
 #| msgid "Copy"
 msgid "Copy"
 msgstr "Kopírovať"
 
-#: src/views/notes/NotesView.qml:733
+#: src/views/notes/NotesView.qml:735
 #, kde-format
 msgid "Share"
 msgstr "Zdieľať"
 
-#: src/views/notes/NotesView.qml:744
+#: src/views/notes/NotesView.qml:746
 #, kde-format
 msgid "Select"
 msgstr "Vybrať"
 
-#: src/views/notes/NotesView.qml:763
+#: src/views/notes/NotesView.qml:765
 #, kde-format
 msgid "Remove"
 msgstr "Odstrániť"
@@ -159,7 +159,7 @@ msgstr "Prázdne"
 msgid "Edit this note"
 msgstr ""
 
-#: src/widgets/NewNoteDialog.qml:114
+#: src/widgets/NewNoteDialog.qml:115
 #, kde-format
 msgid "Find and Replace"
 msgstr "Nájsť a Nahradiť"

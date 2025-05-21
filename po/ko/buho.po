@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-20 00:40+0000\n"
+"POT-Creation-Date: 2025-05-21 00:41+0000\n"
 "PO-Revision-Date: 2025-04-22 01:20+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -49,87 +49,87 @@ msgid ""
 "note?"
 msgstr "메모 변경 사항이 저장되지 않았습니다. 메모를 닫으시겠습니까?"
 
-#: src/views/notes/NotesView.qml:269
+#: src/views/notes/NotesView.qml:271
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "선택한 메모를 삭제하시겠습니까?"
 
-#: src/views/notes/NotesView.qml:301
+#: src/views/notes/NotesView.qml:303
 #, kde-format
 msgid "No notes!"
 msgstr "메모가 없습니다!"
 
-#: src/views/notes/NotesView.qml:302
+#: src/views/notes/NotesView.qml:304
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "새 메모를 빠르게 만들 수 있습니다"
 
-#: src/views/notes/NotesView.qml:306
+#: src/views/notes/NotesView.qml:308
 #, kde-format
 msgid "New note"
 msgstr "새 메모"
 
-#: src/views/notes/NotesView.qml:329
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "Search "
 msgstr "찾기"
 
-#: src/views/notes/NotesView.qml:329
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "notes"
 msgstr "메모"
 
-#: src/views/notes/NotesView.qml:343
+#: src/views/notes/NotesView.qml:345
 #, kde-format
 msgid "Settings"
 msgstr "설정"
 
-#: src/views/notes/NotesView.qml:350
+#: src/views/notes/NotesView.qml:352
 #, kde-format
 msgid "About"
 msgstr "정보"
 
-#: src/views/notes/NotesView.qml:480
+#: src/views/notes/NotesView.qml:482
 #, kde-format
 msgid "Favorite"
 msgstr "책갈피"
 
-#: src/views/notes/NotesView.qml:493 src/views/notes/NotesView.qml:713
+#: src/views/notes/NotesView.qml:495 src/views/notes/NotesView.qml:715
 #, kde-format
 msgid "Export"
 msgstr "내보내기"
 
-#: src/views/notes/NotesView.qml:499 src/widgets/NewNoteDialog.qml:124
+#: src/views/notes/NotesView.qml:501 src/widgets/NewNoteDialog.qml:125
 #, kde-format
 msgid "Delete"
 msgstr "삭제"
 
-#: src/views/notes/NotesView.qml:702
+#: src/views/notes/NotesView.qml:704
 #, kde-format
 msgid "UnFav"
 msgstr "책갈피 해제"
 
-#: src/views/notes/NotesView.qml:702 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:704 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "책갈피"
 
-#: src/views/notes/NotesView.qml:723
+#: src/views/notes/NotesView.qml:725
 #, kde-format
 msgid "Copy"
 msgstr "복사"
 
-#: src/views/notes/NotesView.qml:733
+#: src/views/notes/NotesView.qml:735
 #, kde-format
 msgid "Share"
 msgstr "공유"
 
-#: src/views/notes/NotesView.qml:744
+#: src/views/notes/NotesView.qml:746
 #, kde-format
 msgid "Select"
 msgstr "선택"
 
-#: src/views/notes/NotesView.qml:763
+#: src/views/notes/NotesView.qml:765
 #, kde-format
 msgid "Remove"
 msgstr "삭제"
@@ -144,7 +144,7 @@ msgstr "비어 있음"
 msgid "Edit this note"
 msgstr "이 메모 편집"
 
-#: src/widgets/NewNoteDialog.qml:114
+#: src/widgets/NewNoteDialog.qml:115
 #, kde-format
 msgid "Find and Replace"
 msgstr "찾기 및 바꾸기"

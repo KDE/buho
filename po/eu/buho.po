@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-20 00:40+0000\n"
+"POT-Creation-Date: 2025-05-21 00:41+0000\n"
 "PO-Revision-Date: 2025-04-22 11:15+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -52,87 +52,87 @@ msgid ""
 "note?"
 msgstr "Oharraren aldaketak ez dira gorde. Ziur zaude oharra itxi nahi duzula?"
 
-#: src/views/notes/NotesView.qml:269
+#: src/views/notes/NotesView.qml:271
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Ziur zaude hautatutako oharrak ezabatu nahi dituzula?"
 
-#: src/views/notes/NotesView.qml:301
+#: src/views/notes/NotesView.qml:303
 #, kde-format
 msgid "No notes!"
 msgstr "Oharrik ez!"
 
-#: src/views/notes/NotesView.qml:302
+#: src/views/notes/NotesView.qml:304
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "Ohar berri bat azkar sor dezakezu"
 
-#: src/views/notes/NotesView.qml:306
+#: src/views/notes/NotesView.qml:308
 #, kde-format
 msgid "New note"
 msgstr "Ohar berria"
 
-#: src/views/notes/NotesView.qml:329
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "Search "
 msgstr "Bilatu "
 
-#: src/views/notes/NotesView.qml:329
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "notes"
 msgstr "oharrak"
 
-#: src/views/notes/NotesView.qml:343
+#: src/views/notes/NotesView.qml:345
 #, kde-format
 msgid "Settings"
 msgstr "Ezarpenak"
 
-#: src/views/notes/NotesView.qml:350
+#: src/views/notes/NotesView.qml:352
 #, kde-format
 msgid "About"
 msgstr "Honi buruz"
 
-#: src/views/notes/NotesView.qml:480
+#: src/views/notes/NotesView.qml:482
 #, kde-format
 msgid "Favorite"
 msgstr "Gogokoa"
 
-#: src/views/notes/NotesView.qml:493 src/views/notes/NotesView.qml:713
+#: src/views/notes/NotesView.qml:495 src/views/notes/NotesView.qml:715
 #, kde-format
 msgid "Export"
 msgstr "Esportatu"
 
-#: src/views/notes/NotesView.qml:499 src/widgets/NewNoteDialog.qml:124
+#: src/views/notes/NotesView.qml:501 src/widgets/NewNoteDialog.qml:125
 #, kde-format
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: src/views/notes/NotesView.qml:702
+#: src/views/notes/NotesView.qml:704
 #, kde-format
 msgid "UnFav"
 msgstr "Gogokotik kendu"
 
-#: src/views/notes/NotesView.qml:702 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:704 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "Gogoko"
 
-#: src/views/notes/NotesView.qml:723
+#: src/views/notes/NotesView.qml:725
 #, kde-format
 msgid "Copy"
 msgstr "Kopiatu"
 
-#: src/views/notes/NotesView.qml:733
+#: src/views/notes/NotesView.qml:735
 #, kde-format
 msgid "Share"
 msgstr "Partekatu"
 
-#: src/views/notes/NotesView.qml:744
+#: src/views/notes/NotesView.qml:746
 #, kde-format
 msgid "Select"
 msgstr "Hautatu"
 
-#: src/views/notes/NotesView.qml:763
+#: src/views/notes/NotesView.qml:765
 #, kde-format
 msgid "Remove"
 msgstr "Kendu"
@@ -147,7 +147,7 @@ msgstr "Hutsik"
 msgid "Edit this note"
 msgstr "Editatu ohar hau"
 
-#: src/widgets/NewNoteDialog.qml:114
+#: src/widgets/NewNoteDialog.qml:115
 #, kde-format
 msgid "Find and Replace"
 msgstr "Bilatu eta Ordeztu"

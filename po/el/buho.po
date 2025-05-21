@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-20 00:40+0000\n"
+"POT-Creation-Date: 2025-05-21 00:41+0000\n"
 "PO-Revision-Date: 2023-07-25 00:26+0300\n"
 "Last-Translator: George Stefanakis <george.stefanakis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -48,87 +48,87 @@ msgid ""
 "note?"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:269
+#: src/views/notes/NotesView.qml:271
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε τις επιλεγμένες σημειώσεις;"
 
-#: src/views/notes/NotesView.qml:301
+#: src/views/notes/NotesView.qml:303
 #, kde-format
 msgid "No notes!"
 msgstr "Δεν υπάρχουν σημειώσεις!"
 
-#: src/views/notes/NotesView.qml:302
+#: src/views/notes/NotesView.qml:304
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "Μπορείτε γρήγορα να δημιουργήσετε μια νέα σημείωση"
 
-#: src/views/notes/NotesView.qml:306
+#: src/views/notes/NotesView.qml:308
 #, kde-format
 msgid "New note"
 msgstr "Νέα σημείωση"
 
-#: src/views/notes/NotesView.qml:329
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "Search "
 msgstr "Αναζήτηση "
 
-#: src/views/notes/NotesView.qml:329
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "notes"
 msgstr "σημειώσεις"
 
-#: src/views/notes/NotesView.qml:343
+#: src/views/notes/NotesView.qml:345
 #, kde-format
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: src/views/notes/NotesView.qml:350
+#: src/views/notes/NotesView.qml:352
 #, kde-format
 msgid "About"
 msgstr "Περίγραμμα"
 
-#: src/views/notes/NotesView.qml:480
+#: src/views/notes/NotesView.qml:482
 #, kde-format
 msgid "Favorite"
 msgstr "Αγαπημένο"
 
-#: src/views/notes/NotesView.qml:493 src/views/notes/NotesView.qml:713
+#: src/views/notes/NotesView.qml:495 src/views/notes/NotesView.qml:715
 #, kde-format
 msgid "Export"
 msgstr "Εξαγωγή"
 
-#: src/views/notes/NotesView.qml:499 src/widgets/NewNoteDialog.qml:124
+#: src/views/notes/NotesView.qml:501 src/widgets/NewNoteDialog.qml:125
 #, kde-format
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: src/views/notes/NotesView.qml:702
+#: src/views/notes/NotesView.qml:704
 #, kde-format
 msgid "UnFav"
 msgstr "Όχιαγαπ"
 
-#: src/views/notes/NotesView.qml:702 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:704 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "Αγαπ"
 
-#: src/views/notes/NotesView.qml:723
+#: src/views/notes/NotesView.qml:725
 #, kde-format
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: src/views/notes/NotesView.qml:733
+#: src/views/notes/NotesView.qml:735
 #, kde-format
 msgid "Share"
 msgstr "Κοινή χρήση"
 
-#: src/views/notes/NotesView.qml:744
+#: src/views/notes/NotesView.qml:746
 #, kde-format
 msgid "Select"
 msgstr "Επιλογή"
 
-#: src/views/notes/NotesView.qml:763
+#: src/views/notes/NotesView.qml:765
 #, kde-format
 msgid "Remove"
 msgstr "Διαγραφή"
@@ -143,7 +143,7 @@ msgstr "Κενό"
 msgid "Edit this note"
 msgstr "Επεξεργασία αυτής της σημείωσης"
 
-#: src/widgets/NewNoteDialog.qml:114
+#: src/widgets/NewNoteDialog.qml:115
 #, kde-format
 msgid "Find and Replace"
 msgstr "Εύρεση και αντικατάσταση"
