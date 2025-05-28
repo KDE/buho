@@ -24,11 +24,10 @@ private:
     void appendNote(FMH::MODEL note);
 
 public Q_SLOTS:
-    bool insert(const QVariantMap &note);
+    QVariantMap insert(const QVariantMap &note);
     bool update(const QVariantMap &data, const int &index);
     bool remove(const int &index);
     int indexOfNote(const QUrl &url);
 
     int indexOfName(const QString &query);
-
 };

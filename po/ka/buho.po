@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 01:52+0000\n"
-"PO-Revision-Date: 2023-10-30 05:19+0100\n"
+"POT-Creation-Date: 2025-05-21 00:41+0000\n"
+"PO-Revision-Date: 2025-04-19 04:32+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,14 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.5\n"
 
-#: src/main.cpp:51
+#: src/main.cpp:54
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "შექმენით და ორგანიზება გაუწიეთ თქვენს შენიშვნებს."
 
-#: src/main.cpp:56
+#: src/main.cpp:59
 #, kde-format
 msgid "Developer"
 msgstr "პროგრამისტი"
@@ -33,97 +33,105 @@ msgstr "პროგრამისტი"
 msgid "Buho"
 msgstr "Buho"
 
-#: src/views/notes/NotesView.qml:44
+#: src/views/notes/NotesView.qml:72
 #, kde-format
 msgid "Paste"
 msgstr "ჩასმა"
 
-#: src/views/notes/NotesView.qml:84
+#: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
 #, kde-format
-msgid "Remove notes"
-msgstr "შენიშვნების წაშლა"
+msgid "Save"
+msgstr "შენახვა"
 
-#: src/views/notes/NotesView.qml:85
+#: src/views/notes/NotesView.qml:146
+#, kde-format
+msgid ""
+"The note changes have not been saved. Are you sure you want to close the "
+"note?"
+msgstr ""
+"შენიშვნის ცვლილებები ჯერ შენახული არაა. მართლა გნებავთ შენიშვნის დახურვა?"
+
+#: src/views/notes/NotesView.qml:271
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "დარწმუნებული ბრძანდებით, რომ გნებავთ მონიშნული შენიშვნების წაშლა?"
 
-#: src/views/notes/NotesView.qml:115
+#: src/views/notes/NotesView.qml:303
 #, kde-format
 msgid "No notes!"
 msgstr "შენიშვნების გარეშე!"
 
-#: src/views/notes/NotesView.qml:116
+#: src/views/notes/NotesView.qml:304
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "თქვენ შეგიძლიათ სწრაფად შექმნათ ახალი შენიშვნა"
 
-#: src/views/notes/NotesView.qml:120
+#: src/views/notes/NotesView.qml:308
 #, kde-format
 msgid "New note"
 msgstr "ახალი შენიშვნა"
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "Search "
 msgstr "ძებნა "
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "notes"
 msgstr "შენიშვნები"
 
-#: src/views/notes/NotesView.qml:157
+#: src/views/notes/NotesView.qml:345
 #, kde-format
 msgid "Settings"
 msgstr "&მორგება"
 
-#: src/views/notes/NotesView.qml:164
+#: src/views/notes/NotesView.qml:352
 #, kde-format
 msgid "About"
 msgstr "შესახებ"
 
-#: src/views/notes/NotesView.qml:294
+#: src/views/notes/NotesView.qml:482
 #, kde-format
 msgid "Favorite"
 msgstr "რჩეული"
 
-#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:527
+#: src/views/notes/NotesView.qml:495 src/views/notes/NotesView.qml:715
 #, kde-format
 msgid "Export"
 msgstr "გატანა"
 
-#: src/views/notes/NotesView.qml:313 src/widgets/NewNoteDialog.qml:143
+#: src/views/notes/NotesView.qml:501 src/widgets/NewNoteDialog.qml:125
 #, kde-format
 msgid "Delete"
 msgstr "წაშლა"
 
-#: src/views/notes/NotesView.qml:516
+#: src/views/notes/NotesView.qml:704
 #, kde-format
 msgid "UnFav"
 msgstr "რჩეულებიდანამოღება"
 
-#: src/views/notes/NotesView.qml:516 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:704 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "რჩეულებში"
 
-#: src/views/notes/NotesView.qml:537
+#: src/views/notes/NotesView.qml:725
 #, kde-format
 msgid "Copy"
 msgstr "კოპირება"
 
-#: src/views/notes/NotesView.qml:547
+#: src/views/notes/NotesView.qml:735
 #, kde-format
 msgid "Share"
 msgstr "გაზიარება"
 
-#: src/views/notes/NotesView.qml:558
+#: src/views/notes/NotesView.qml:746
 #, kde-format
 msgid "Select"
 msgstr "არჩევა"
 
-#: src/views/notes/NotesView.qml:577
+#: src/views/notes/NotesView.qml:765
 #, kde-format
 msgid "Remove"
 msgstr "წაშლა"
@@ -138,12 +146,12 @@ msgstr "ცარიელი"
 msgid "Edit this note"
 msgstr "ამ შენიშვნის ჩასწორება"
 
-#: src/widgets/NewNoteDialog.qml:133
+#: src/widgets/NewNoteDialog.qml:115
 #, kde-format
 msgid "Find and Replace"
 msgstr "ძებნა და ჩანაცვლება"
 
-#: src/widgets/NewNoteDialog.qml:184
+#: src/widgets/NewNoteDialog.qml:165
 #, kde-format
 msgid ""
 "Title\n"
@@ -152,7 +160,7 @@ msgstr ""
 "სათაური\n"
 "სხეული"
 
-#: src/widgets/NewNoteDialog.qml:208
+#: src/widgets/NewNoteDialog.qml:189
 #, kde-format
 msgid "Note saved"
 msgstr "შენიშვნა შენახულია"
@@ -271,6 +279,9 @@ msgstr "ზრდის მიხედვით"
 #, kde-format
 msgid "Descending"
 msgstr "დაღმავალი"
+
+#~ msgid "Remove notes"
+#~ msgstr "შენიშვნების წაშლა"
 
 #~ msgid "Dark Mode"
 #~ msgstr "მუქი რეჟიმი"

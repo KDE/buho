@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 01:52+0000\n"
+"POT-Creation-Date: 2025-05-21 00:41+0000\n"
 "PO-Revision-Date: 2024-03-27 19:29+0100\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 24.02.1\n"
 
-#: src/main.cpp:51
+#: src/main.cpp:54
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "Erstellen und organisieren Sie Ihre Notizen."
 
-#: src/main.cpp:56
+#: src/main.cpp:59
 #, kde-format
 msgid "Developer"
 msgstr "Entwickler"
@@ -34,97 +34,105 @@ msgstr "Entwickler"
 msgid "Buho"
 msgstr "Buho"
 
-#: src/views/notes/NotesView.qml:44
+#: src/views/notes/NotesView.qml:72
 #, kde-format
 msgid "Paste"
 msgstr "Einfügen"
 
-#: src/views/notes/NotesView.qml:84
-#, kde-format
-msgid "Remove notes"
-msgstr "Notizen entfernen"
+#: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
+#, fuzzy, kde-format
+#| msgid "Save"
+msgid "Save"
+msgstr "Speichern"
 
-#: src/views/notes/NotesView.qml:85
+#: src/views/notes/NotesView.qml:146
+#, kde-format
+msgid ""
+"The note changes have not been saved. Are you sure you want to close the "
+"note?"
+msgstr ""
+
+#: src/views/notes/NotesView.qml:271
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "Sind Sie sicher, dass Sie die ausgewählten Notizen löschen möchten?"
 
-#: src/views/notes/NotesView.qml:115
+#: src/views/notes/NotesView.qml:303
 #, kde-format
 msgid "No notes!"
 msgstr "Keine Notizen"
 
-#: src/views/notes/NotesView.qml:116
+#: src/views/notes/NotesView.qml:304
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "Sie können schnell eine neue Notiz erstellen"
 
-#: src/views/notes/NotesView.qml:120
+#: src/views/notes/NotesView.qml:308
 #, kde-format
 msgid "New note"
 msgstr "Neue Notiz"
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "Search "
 msgstr "Suchen "
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "notes"
 msgstr "Notizen"
 
-#: src/views/notes/NotesView.qml:157
+#: src/views/notes/NotesView.qml:345
 #, kde-format
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: src/views/notes/NotesView.qml:164
+#: src/views/notes/NotesView.qml:352
 #, kde-format
 msgid "About"
 msgstr "Über"
 
-#: src/views/notes/NotesView.qml:294
+#: src/views/notes/NotesView.qml:482
 #, kde-format
 msgid "Favorite"
 msgstr "Favoriten"
 
-#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:527
+#: src/views/notes/NotesView.qml:495 src/views/notes/NotesView.qml:715
 #, kde-format
 msgid "Export"
 msgstr "Exportieren"
 
-#: src/views/notes/NotesView.qml:313 src/widgets/NewNoteDialog.qml:143
+#: src/views/notes/NotesView.qml:501 src/widgets/NewNoteDialog.qml:125
 #, kde-format
 msgid "Delete"
 msgstr "Löschen"
 
-#: src/views/notes/NotesView.qml:516
+#: src/views/notes/NotesView.qml:704
 #, kde-format
 msgid "UnFav"
 msgstr "Aus Favoriten entfernen"
 
-#: src/views/notes/NotesView.qml:516 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:704 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "Zu Favoriten hinzufügen"
 
-#: src/views/notes/NotesView.qml:537
+#: src/views/notes/NotesView.qml:725
 #, kde-format
 msgid "Copy"
 msgstr "Kopieren"
 
-#: src/views/notes/NotesView.qml:547
+#: src/views/notes/NotesView.qml:735
 #, kde-format
 msgid "Share"
 msgstr "Teilen"
 
-#: src/views/notes/NotesView.qml:558
+#: src/views/notes/NotesView.qml:746
 #, kde-format
 msgid "Select"
 msgstr "Auswählen"
 
-#: src/views/notes/NotesView.qml:577
+#: src/views/notes/NotesView.qml:765
 #, kde-format
 msgid "Remove"
 msgstr "Entfernen"
@@ -139,12 +147,12 @@ msgstr "Leer"
 msgid "Edit this note"
 msgstr "Diese Notiz bearbeiten"
 
-#: src/widgets/NewNoteDialog.qml:133
+#: src/widgets/NewNoteDialog.qml:115
 #, kde-format
 msgid "Find and Replace"
 msgstr "Suchen und Ersetzen"
 
-#: src/widgets/NewNoteDialog.qml:184
+#: src/widgets/NewNoteDialog.qml:165
 #, kde-format
 msgid ""
 "Title\n"
@@ -153,7 +161,7 @@ msgstr ""
 "Titel\n"
 "Text"
 
-#: src/widgets/NewNoteDialog.qml:208
+#: src/widgets/NewNoteDialog.qml:189
 #, kde-format
 msgid "Note saved"
 msgstr "Notiz gespeichert"
@@ -273,6 +281,9 @@ msgstr "Aufsteigend"
 msgid "Descending"
 msgstr "Absteigend"
 
+#~ msgid "Remove notes"
+#~ msgstr "Notizen entfernen"
+
 #~ msgid "Dark Mode"
 #~ msgstr "Dunkler Modus"
 
@@ -322,9 +333,6 @@ msgstr "Absteigend"
 
 #~ msgid "Notes in this book: "
 #~ msgstr "Notizen in diesem Buch:"
-
-#~ msgid "Save"
-#~ msgstr "Speichern"
 
 #~ msgid "Nothing to edit!"
 #~ msgstr "Nichts zum Bearbeiten"

@@ -1,154 +1,154 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the buho package.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
+# SPDX-FileCopyrightText: 2024, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-21 00:41+0000\n"
-"PO-Revision-Date: 2025-04-19 13:18+0400\n"
-"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
-"Language-Team: ar\n"
-"Language: ar\n"
+"PO-Revision-Date: 2025-04-19 18:17+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: src/main.cpp:54
 #, kde-format
 msgid "Create and organize your notes."
-msgstr "أنشئ ونظم ملاحظاتك."
+msgstr "יצירה וארגון הפתקיות שלך."
 
 #: src/main.cpp:59
 #, kde-format
 msgid "Developer"
-msgstr "مطوّر"
+msgstr "מפתח"
 
 #: src/main.qml:16
 #, kde-format
 msgid "Buho"
-msgstr "بوهو"
+msgstr "Buho"
 
 #: src/views/notes/NotesView.qml:72
 #, kde-format
 msgid "Paste"
-msgstr "ألصق"
+msgstr "הדבקה"
 
 #: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
 #, kde-format
 msgid "Save"
-msgstr "احفظ"
+msgstr "שמירה"
 
 #: src/views/notes/NotesView.qml:146
 #, kde-format
 msgid ""
 "The note changes have not been saved. Are you sure you want to close the "
 "note?"
-msgstr "لم تُحفظ تغييرات الملاحظة. هل أنت متأكد من رغبتك في إغلاق الملاحظة؟"
+msgstr "השינויים לפתקית לא נשמרו. לסגור את הפתקית?"
 
 #: src/views/notes/NotesView.qml:271
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
-msgstr "أمتأكد من حذف الملاحظات المحددة؟"
+msgstr "להסיר את הפתקיות הנבחרות?"
 
 #: src/views/notes/NotesView.qml:303
 #, kde-format
 msgid "No notes!"
-msgstr "لا يوجد ملاحظات"
+msgstr "אין פתקיות!"
 
 #: src/views/notes/NotesView.qml:304
 #, kde-format
 msgid "You can quickly create a new note"
-msgstr "بإمكانك إنشاء ملاحظة جديدة بسرعة"
+msgstr "אפשר ליצור פתקית חדשה בקלות"
 
 #: src/views/notes/NotesView.qml:308
 #, kde-format
 msgid "New note"
-msgstr "ملاحظة جديدة"
+msgstr "פתקית חדשה"
 
 #: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "Search "
-msgstr "ابحث "
+msgstr "חיפוש "
 
 #: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "notes"
-msgstr "ملاحظات"
+msgstr "הערות"
 
 #: src/views/notes/NotesView.qml:345
 #, kde-format
 msgid "Settings"
-msgstr "إعدادات"
+msgstr "הגדרות"
 
 #: src/views/notes/NotesView.qml:352
 #, kde-format
 msgid "About"
-msgstr "عن"
+msgstr "על אודות"
 
 #: src/views/notes/NotesView.qml:482
 #, kde-format
 msgid "Favorite"
-msgstr "المفضّلة"
+msgstr "הוספה למועדפים"
 
 #: src/views/notes/NotesView.qml:495 src/views/notes/NotesView.qml:715
 #, kde-format
 msgid "Export"
-msgstr "صدّر"
+msgstr "ייצוא"
 
 #: src/views/notes/NotesView.qml:501 src/widgets/NewNoteDialog.qml:125
 #, kde-format
 msgid "Delete"
-msgstr "احذف"
+msgstr "מחיקה"
 
 #: src/views/notes/NotesView.qml:704
 #, kde-format
 msgid "UnFav"
-msgstr "أزل التفضيل"
+msgstr "הוצאה מהמועדפים"
 
 #: src/views/notes/NotesView.qml:704 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
-msgstr "فضل"
+msgstr "מועדפים"
 
 #: src/views/notes/NotesView.qml:725
 #, kde-format
 msgid "Copy"
-msgstr "انسخ"
+msgstr "העתקה"
 
 #: src/views/notes/NotesView.qml:735
 #, kde-format
 msgid "Share"
-msgstr "شارك"
+msgstr "שיתוף"
 
 #: src/views/notes/NotesView.qml:746
 #, kde-format
 msgid "Select"
-msgstr "حدد"
+msgstr "בחירה"
 
 #: src/views/notes/NotesView.qml:765
 #, kde-format
 msgid "Remove"
-msgstr "أزل"
+msgstr "הסרה"
 
 #: src/widgets/CardDelegate.qml:79
 #, kde-format
 msgid "Empty"
-msgstr "فارغ"
+msgstr "ריק"
 
 #: src/widgets/CardDelegate.qml:80
 #, kde-format
 msgid "Edit this note"
-msgstr "حرر هذه الملاحظة"
+msgstr "עריכת הפתקית הזאת"
 
 #: src/widgets/NewNoteDialog.qml:115
 #, kde-format
 msgid "Find and Replace"
-msgstr "اعثر واستبدل"
+msgstr "איתור והחלפה"
 
 #: src/widgets/NewNoteDialog.qml:165
 #, kde-format
@@ -156,160 +156,128 @@ msgid ""
 "Title\n"
 "Body"
 msgstr ""
-"العنوان\n"
-"المحتوى"
+"כותרת\n"
+"תוכן"
 
 #: src/widgets/NewNoteDialog.qml:189
 #, kde-format
 msgid "Note saved"
-msgstr "حفظت الملاحظة"
+msgstr "הפתקיות נשמרה"
 
 #: src/widgets/SettingsDialog.qml:18 src/widgets/SettingsDialog.qml:91
 #, kde-format
 msgid "Font"
-msgstr "الخط"
+msgstr "גופן"
 
 #: src/widgets/SettingsDialog.qml:36
 #, kde-format
 msgid "Editor"
-msgstr "المحرّر"
+msgstr "עורך"
 
 #: src/widgets/SettingsDialog.qml:41
 #, kde-format
 msgid "Spell Checker"
-msgstr "المدقق الإملائي"
+msgstr "בודק איות"
 
 #: src/widgets/SettingsDialog.qml:42
 #, kde-format
 msgid "Check spelling and give suggestions."
-msgstr "التدقيق الإملائي و إعطاء المقترحات"
+msgstr "בדיקת איות ואספקת הצעות."
 
 #: src/widgets/SettingsDialog.qml:53
 #, kde-format
 msgid "Auto Save"
-msgstr "حفظ تلقائي"
+msgstr "שמירה אוטומטית"
 
 #: src/widgets/SettingsDialog.qml:54
 #, kde-format
 msgid "Auto saves your file every few seconds"
-msgstr "حفظ تلقائي كلّ عدة ثواني"
+msgstr "שמירת הקובץ שלך אוטומטית כל כמה שניות"
 
 #: src/widgets/SettingsDialog.qml:65
 #, kde-format
 msgid "Auto Reload"
-msgstr "إعادة التحميل الآلي"
+msgstr "ריענון אוטומטי"
 
 #: src/widgets/SettingsDialog.qml:66
 #, kde-format
 msgid "Auto reload the text on external changes."
-msgstr "أعد التحميل آلياً عند التغيرات الخارجية."
+msgstr "ריענון הטקסט אוטומטית כשהוא נערך חיצונית."
 
 #: src/widgets/SettingsDialog.qml:77
 #, kde-format
 msgid "Line Numbers"
-msgstr "أرقام الأسطر"
+msgstr "מספרי שורות"
 
 #: src/widgets/SettingsDialog.qml:78
 #, kde-format
 msgid "Display the line numbers on the left side."
-msgstr "أظهر أرقام الأسطر على الجانب اليمين."
+msgstr "הצגת מספרי השורות מימין (או משמאל בקובץ בשפות המתאימות)."
 
 #: src/widgets/SettingsDialog.qml:92
 #, kde-format
 msgid "Font family and size."
-msgstr "عائلة الخط وحجمه."
+msgstr "משפחת וגודל גופן."
 
 #: src/widgets/SettingsDialog.qml:105
 #, kde-format
 msgid "Syncing"
-msgstr "التزامن"
+msgstr "סנכרון"
 
 #: src/widgets/SettingsDialog.qml:110
 #, kde-format
 msgid "Auto sync"
-msgstr "تزامن آلي"
+msgstr "סכנרון אוטומטי"
 
 #: src/widgets/SettingsDialog.qml:111
 #, kde-format
 msgid "Sync notes on start up."
-msgstr "زامن الملاحظات عند البدء."
+msgstr "סנכרון פתקיות עם העלייה."
 
 #: src/widgets/SettingsDialog.qml:124
 #, kde-format
 msgid "Sorting"
-msgstr "الفرز"
+msgstr "מיון"
 
 #: src/widgets/SettingsDialog.qml:129
 #, kde-format
 msgid "Sort by"
-msgstr "افرز حسب"
+msgstr "מיון לפי"
 
 #: src/widgets/SettingsDialog.qml:130
 #, kde-format
 msgid "Change the sorting key."
-msgstr "غيّر مفتاح الفرز."
+msgstr "החלפת מפתח המיון."
 
 #: src/widgets/SettingsDialog.qml:140
 #, kde-format
 msgid "Title"
-msgstr "العنوان"
+msgstr "כותרת"
 
 #: src/widgets/SettingsDialog.qml:147
 #, kde-format
 msgid "Date"
-msgstr "التاريخ"
+msgstr "תאריך"
 
 #: src/widgets/SettingsDialog.qml:163
 #, kde-format
 msgid "Sort Order"
-msgstr "ترتيب الفرز"
+msgstr "אופן מיון"
 
 #: src/widgets/SettingsDialog.qml:164
 #, kde-format
 msgid "Change the sorting order."
-msgstr "غيّر نوع الفرز."
+msgstr "החלפת אופן המיון."
 
 #: src/widgets/SettingsDialog.qml:174
 #, kde-format
 msgid "Ascending"
-msgstr "تصاعديًّا"
+msgstr "עולה"
 
 #: src/widgets/SettingsDialog.qml:182
 #, kde-format
 msgid "Descending"
-msgstr "تنازليًّا"
+msgstr "יורד"
 
 #~ msgid "Remove notes"
-#~ msgstr "أزل الملاحظات"
-
-#~ msgid "Dark Mode"
-#~ msgstr "الوضع الداكن"
-
-#~ msgid "Switch between light and dark colorscheme."
-#~ msgstr "بدّل بين سمة الألوان الفاتحة والداكنة."
-
-#, fuzzy
-#~| msgid "© 2019-%1 Maui Development Team"
-#~ msgid "© 2019-2023 Maui Development Team"
-#~ msgstr "© 2019-%1 فريق تطوير ماوي"
-
-#~ msgid "Camilo Higuita"
-#~ msgstr "كاميلو هيجويتا"
-
-#~ msgid "Configure the editor behaviour."
-#~ msgstr "اضبط سلوك المحرر."
-
-#~ msgid "Configure the global editor font family and size."
-#~ msgstr "اضبط عائلة الخط وحجمه للمحرر."
-
-#~ msgid "Family"
-#~ msgstr "العائلة"
-
-#~ msgid "Size"
-#~ msgstr "الحجم"
-
-#~ msgid "Configure the syncing of notes and books."
-#~ msgstr "يضبط مزامنة الملاحظات والدفاتر."
-
-#~ msgid "Sorting order and behavior."
-#~ msgstr "نوع الفرز وسلوكه."
+#~ msgstr "הסרת פתקיות"

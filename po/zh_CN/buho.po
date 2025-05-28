@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 01:52+0000\n"
+"POT-Creation-Date: 2025-05-21 00:41+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -14,15 +14,15 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/buho/buho.pot\n"
-"X-Crowdin-File-ID: 25040\n"
+"X-Crowdin-File: /kf6-trunk/messages/buho/buho.pot\n"
+"X-Crowdin-File-ID: 56976\n"
 
-#: src/main.cpp:51
+#: src/main.cpp:54
 #, kde-format
 msgid "Create and organize your notes."
 msgstr "创建和整理您的笔记。"
 
-#: src/main.cpp:56
+#: src/main.cpp:59
 #, kde-format
 msgid "Developer"
 msgstr "开发人员"
@@ -32,97 +32,104 @@ msgstr "开发人员"
 msgid "Buho"
 msgstr "Buho"
 
-#: src/views/notes/NotesView.qml:44
+#: src/views/notes/NotesView.qml:72
 #, kde-format
 msgid "Paste"
 msgstr ""
 
-#: src/views/notes/NotesView.qml:84
+#: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
 #, kde-format
-msgid "Remove notes"
-msgstr "移除笔记"
+msgid "Save"
+msgstr "保存"
 
-#: src/views/notes/NotesView.qml:85
+#: src/views/notes/NotesView.qml:146
+#, kde-format
+msgid ""
+"The note changes have not been saved. Are you sure you want to close the "
+"note?"
+msgstr "笔记尚未保存。您确定要关闭笔记吗？"
+
+#: src/views/notes/NotesView.qml:271
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
 msgstr "您确定要删除选定的笔记吗？"
 
-#: src/views/notes/NotesView.qml:115
+#: src/views/notes/NotesView.qml:303
 #, kde-format
 msgid "No notes!"
 msgstr "没有笔记"
 
-#: src/views/notes/NotesView.qml:116
+#: src/views/notes/NotesView.qml:304
 #, kde-format
 msgid "You can quickly create a new note"
 msgstr "您可以快速新建一个笔记"
 
-#: src/views/notes/NotesView.qml:120
+#: src/views/notes/NotesView.qml:308
 #, kde-format
 msgid "New note"
 msgstr "新建笔记"
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "Search "
 msgstr "搜索 "
 
-#: src/views/notes/NotesView.qml:143
+#: src/views/notes/NotesView.qml:331
 #, kde-format
 msgid "notes"
 msgstr "笔记"
 
-#: src/views/notes/NotesView.qml:157
+#: src/views/notes/NotesView.qml:345
 #, kde-format
 msgid "Settings"
 msgstr "设置"
 
-#: src/views/notes/NotesView.qml:164
+#: src/views/notes/NotesView.qml:352
 #, kde-format
 msgid "About"
 msgstr "关于"
 
-#: src/views/notes/NotesView.qml:294
+#: src/views/notes/NotesView.qml:482
 #, kde-format
 msgid "Favorite"
 msgstr "收藏"
 
-#: src/views/notes/NotesView.qml:307 src/views/notes/NotesView.qml:527
+#: src/views/notes/NotesView.qml:495 src/views/notes/NotesView.qml:715
 #, kde-format
 msgid "Export"
 msgstr "导出"
 
-#: src/views/notes/NotesView.qml:313 src/widgets/NewNoteDialog.qml:143
+#: src/views/notes/NotesView.qml:501 src/widgets/NewNoteDialog.qml:125
 #, kde-format
 msgid "Delete"
 msgstr "删除"
 
-#: src/views/notes/NotesView.qml:516
+#: src/views/notes/NotesView.qml:704
 #, kde-format
 msgid "UnFav"
 msgstr "取消收藏"
 
-#: src/views/notes/NotesView.qml:516 src/widgets/SettingsDialog.qml:154
+#: src/views/notes/NotesView.qml:704 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
 msgstr "收藏"
 
-#: src/views/notes/NotesView.qml:537
+#: src/views/notes/NotesView.qml:725
 #, kde-format
 msgid "Copy"
 msgstr "复制"
 
-#: src/views/notes/NotesView.qml:547
+#: src/views/notes/NotesView.qml:735
 #, kde-format
 msgid "Share"
 msgstr "分享"
 
-#: src/views/notes/NotesView.qml:558
+#: src/views/notes/NotesView.qml:746
 #, kde-format
 msgid "Select"
 msgstr "选择"
 
-#: src/views/notes/NotesView.qml:577
+#: src/views/notes/NotesView.qml:765
 #, kde-format
 msgid "Remove"
 msgstr "删除"
@@ -137,12 +144,12 @@ msgstr "空白"
 msgid "Edit this note"
 msgstr "编辑此笔记"
 
-#: src/widgets/NewNoteDialog.qml:133
+#: src/widgets/NewNoteDialog.qml:115
 #, kde-format
 msgid "Find and Replace"
 msgstr "查找与替换"
 
-#: src/widgets/NewNoteDialog.qml:184
+#: src/widgets/NewNoteDialog.qml:165
 #, kde-format
 msgid ""
 "Title\n"
@@ -151,7 +158,7 @@ msgstr ""
 "标题\n"
 "正文"
 
-#: src/widgets/NewNoteDialog.qml:208
+#: src/widgets/NewNoteDialog.qml:189
 #, kde-format
 msgid "Note saved"
 msgstr "笔记已保存"

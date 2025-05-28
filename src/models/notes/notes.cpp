@@ -21,7 +21,7 @@ Notes::Notes(QObject *parent)
 
     connect(syncer, &NotesSyncer::noteInserted, [&](FMH::MODEL note, STATE state) {
 
-      qDebug() << "Insertint new note" << note;
+        qDebug() << "Insertint new note" << note;
         if (state.type == STATE::TYPE::LOCAL)
             this->appendNote(note);
     });
@@ -61,13 +61,13 @@ const FMH::MODEL_LIST &Notes::items() const
     return this->notes;
 }
 
-bool Notes::insert(const QVariantMap &note)
+QVariantMap Notes::insert(const QVariantMap &note)
 {
     qDebug() << "Inserting new note" << note;
     auto __note = FMH::toModel(note);
     this->syncer->insertNote(__note);
 
-    return true;
+    return FMH::toMap(__note);
 }
 
 bool Notes::update(const QVariantMap &data, const int &index)
@@ -77,14 +77,18 @@ bool Notes::update(const QVariantMap &data, const int &index)
 
 
     auto note = this->notes[index];
-//    if(note[FMH::MODEL_KEY::CONTENT] == data.value("content").toString())
-//    {
-//        return false;
-//    }
+    //    if(note[FMH::MODEL_KEY::CONTENT] == data.value("content").toString())
+    //    {
+    //        return false;
+    //    }
 
     qDebug() << "UDPATE MODEL ITEM AT "<< index << note[FMH::MODEL_KEY::TITLE];
-
     note.insert(FMH::toModel(data));
+
+    note[FMH::MODEL_KEY::TITLE] = [&]() {
+        const auto lines = note[FMH::MODEL_KEY::CONTENT].split("\n");
+        return lines.isEmpty() ? QString() : lines.first().trimmed();
+    }();
     this->syncer->updateNote(note[FMH::MODEL_KEY::ID], note);
     return true;
 }
@@ -110,13 +114,13 @@ int Notes::indexOfNote(const QUrl &url)
 int Notes::indexOfName(const QString &query)
 {
     const auto it = std::find_if(this->items().constBegin(), this->items().constEnd(), [&](const FMH::MODEL &item) -> bool {
-            return item[FMH::MODEL_KEY::TITLE].startsWith(query, Qt::CaseInsensitive);
-        });
+        return item[FMH::MODEL_KEY::TITLE].startsWith(query, Qt::CaseInsensitive);
+    });
 
-        if (it != this->items().constEnd())
-            return std::distance(this->items().constBegin(), it);
-        else
-            return -1;
+    if (it != this->items().constEnd())
+        return std::distance(this->items().constBegin(), it);
+    else
+        return -1;
 }
 
 void Notes::componentComplete()

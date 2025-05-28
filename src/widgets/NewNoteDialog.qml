@@ -6,7 +6,6 @@ import org.mauikit.controls as Maui
 import org.mauikit.filebrowsing as FB
 import org.mauikit.texteditor as TE
 
-
 Maui.Page
 {
     id: control
@@ -18,29 +17,12 @@ Maui.Page
     property bool showEditActions : false
     property var note : ({})
     property int noteIndex : -1
+    title : text.split("\n")[0]
 
     property alias text: _editor.text
 
     signal noteSaved(var note, int noteIndex)
-
-    headBar.farLeftContent: ToolButton
-    {
-        icon.name: "go-previous"
-        onClicked:
-        {
-            console.log(control.document.fileUrl, "File Url")
-
-
-            if(FB.FM.fileExists(control.document.fileUrl) && control.document.modified)
-            {
-                control.document.saveAs(control.document.fileUrl)
-            }
-
-            control.noteSaved(packNote(), control.noteIndex)
-            control.clear()
-            control.parent.pop()
-        }
-    }
+    headerMargins: Maui.Style.defaultPadding
 
     headBar.visible: !editor.body.readOnly
     headBar.leftContent: [
@@ -169,15 +151,14 @@ Maui.Page
 
     TE.TextEditor
     {
-      id: _editor
-      anchors.fill: parent
+        id: _editor
+        anchors.fill: parent
 
         fileUrl: control.note.url
         showLineNumbers: false
         document.autoReload: settings.autoReload
         document.autoSave: settings.autoSave
-        spellcheckEnabled: settings.spellcheckEnabled
-
+        // spellcheckEnabled: settings.spellcheckEnabled
         body.font: settings.font
 
         document.enableSyntaxHighlighting: false
@@ -217,9 +198,13 @@ Maui.Page
             {
                 console.log("NOTE SAVED")
                 _notifyTimer.start()
-                //                control.noteSaved(packNote())
             }
         }
+    }
+
+    function update()
+    {
+        _editor.fileUrl =  Qt.binding(()=> {return control.note.url})
     }
 
     function clear()
@@ -248,5 +233,24 @@ Maui.Page
         }
 
         return note
+    }
+
+    function saveNote()
+    {
+        if(FB.FM.fileExists(document.fileUrl))
+        {
+            if(document.modified)
+            {
+                console.log("Saving a new note but existing file", document.fileUrl)
+                document.saveAs(document.fileUrl)
+            }
+
+            console.log("trying to update note in the main model", noteIndex,notesModel.mappedToSource(noteIndex) )
+            list.update(packNote(), notesModel.mappedToSource(noteIndex))
+            return packNote()
+        }else
+        {
+            return list.insert(packNote())
+        }
     }
 }

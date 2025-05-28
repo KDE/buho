@@ -4,6 +4,7 @@ import QtQuick.Layouts
 
 import org.mauikit.controls as Maui
 import org.mauikit.accounts as MA
+import org.mauikit.filebrowsing as FB
 
 import org.maui.buho
 
@@ -23,19 +24,46 @@ StackView
 
     readonly property Flickable flickable : currentItem.flickable
 
-    readonly property bool editing : control.depth > 1
+    property var noteWindowsMap : (new Map())
+    property bool notePerWindow : Maui.Handy.isLinux && !Maui.Handy.isMobile
 
     function setNote(note)
     {
-        control.push(_editNoteComponent)
-        control.currentItem.editor.body.forceActiveFocus()
-        control.currentItem.noteIndex = control.currentIndex
+        if(notePerWindow)
+        {
+            var window
+            if(noteWindowsMap.has(note.url))
+            {
+                window = noteWindowsMap.get(note.url)
+                window.requestActivate()
+
+            }else
+            {
+                console.log("Creating new noite in a new window")
+                window = _editNoteWindowComponent.createObject(root, {'note': note, 'noteIndex': control.currentIndex})
+                noteWindowsMap.set(note.url, window)
+            }
+
+            window.forceActiveFocus()
+        }else
+        {
+            control.push(_editNoteComponent, {'note': note,'noteIndex': control.currentIndex})
+            control.currentItem.editor.body.forceActiveFocus()
+        }
     }
 
     function newNote(contents)
     {
-        control.push(_newNoteComponent, {'text': contents})
-        control.currentItem.editor.body.forceActiveFocus()
+        if(notePerWindow)
+        {
+            console.log("Creating new noite in a new window")
+            var window = _newNoteWindowComponent.createObject(root, {'text': contents})
+            window.forceActiveFocus()
+        }else
+        {
+            control.push(_newNoteComponent, {'text': contents})
+            control.currentItem.editor.body.forceActiveFocus()
+        }
     }
 
     Action
@@ -53,25 +81,184 @@ StackView
 
     Component
     {
-        id: _editNoteComponent
-
+        id: _newNoteComponent
         NewNoteDialog
         {
-            note: control.currentNote
-            onNoteSaved: (note, noteIndex) =>
+            id: _note
+            headBar.farLeftContent: ToolButton
             {
-                console.log("updating note <<" , note , control.currentIndex , noteIndex, notesModel.mappedToSource(noteIndex))
-                control.list.update(note, notesModel.mappedToSource(noteIndex))
+                icon.name: "go-previous"
+                onClicked:
+                {
+                    _note.note = _note.saveNote()
+                    control.pop()
+                }
             }
         }
     }
 
     Component
     {
-        id: _newNoteComponent
+        id: _newNoteWindowComponent
+        Maui.ApplicationWindow
+        {
+            id: _window
+            property alias text : _note.text
+
+            transientParent: null
+
+            title: _note.title
+            width: control.width
+            height: control.height
+
+            NewNoteDialog
+            {
+                id: _note
+                anchors.fill: parent
+                Maui.Controls.showCSD: true
+                showTitle: true
+
+                headBar.farLeftContent: Button
+                {
+                    text: i18n("Save")
+                    visible: (_note.document.modified || String(_note.document.fileUrl).length === 0) && _note.text.length>0
+                    onClicked:
+                    {
+                        _note.note = _note.saveNote()
+                        // _note.update()
+
+                        console.log("The new note has been saved as", _note.note.url)
+                        if(!noteWindowsMap.has(_note.note.url))
+                            noteWindowsMap.set(_note.note.url, _window)
+                    }
+                }
+            }
+
+            Maui.PopupPage
+            {
+                id: _closeDialog
+                property bool preventClosing : true
+                headBar.visible: false
+
+                Maui.ListItemTemplate
+                {
+                    Layout.fillWidth: true
+                    label2.text: i18n("The note changes have not been saved. Are you sure you want to close the note?")
+                    iconSource: "dialog-warning"
+                    label2.wrapMode: TextEdit.WordWrap
+
+                    iconSizeHint: Maui.Style.iconSizes.large
+                    spacing: Maui.Style.space.big
+
+                    // template.iconVisible: true
+                    // standardButtons: Dialog.Save | Dialog.Discard
+                }
+
+                actions: [
+                    Action
+                    {
+                        text: i18n("Save")
+                        onTriggered:
+                        {
+                            _note.saveNote()
+                            _closeDialog.preventClosing = false
+                            _window.close()
+                        }
+                    },
+
+                    Action
+                    {
+                        Maui.Controls.status: Maui.Controls.Negative
+                        text: "Discard"
+                        onTriggered:
+                        {
+                            _closeDialog.preventClosing = false
+                            _window.close()
+                        }
+                    }]
+            }
+
+            onClosing: (close) =>
+                       {
+                           if(!_closeDialog.preventClosing)
+                           {
+                               close.accepted = true
+                               return
+                           }
+
+                           if((_note.document.modified || !FB.FM.fileExists(_note.document.fileUrl)) && _note.text.length>0)
+                           {
+                               _closeDialog.open()
+                               close.accepted = false
+                               return
+                           }
+
+                           console.log("Notes opened still", noteWindowsMap.keys(),_note.note.url )
+
+                           noteWindowsMap.delete(_note.note.url)
+                           console.log("Notes opened still", noteWindowsMap.keys(),_note.note.url )
+
+                           close.accepted = true
+                           destroy()
+                       }
+
+            function forceActiveFocus()
+            {
+                _note.editor.body.forceActiveFocus()
+            }
+        }
+    }
+
+    Component
+    {
+        id: _editNoteComponent
         NewNoteDialog
         {
-            onNoteSaved: (note, noteIndex) => control.list.insert(note)
+            id: _note
+            headBar.farLeftContent: ToolButton
+            {
+                icon.name: "go-previous"
+                onClicked:
+                {
+                    _note.saveNote()
+                    control.pop()
+                }
+            }
+        }
+    }
+
+    Component
+    {
+        id: _editNoteWindowComponent
+
+        Maui.ApplicationWindow
+        {
+            property alias note : _note.note
+            property alias noteIndex : _note.noteIndex
+
+            width: control.width
+            height: control.height
+            transientParent: null
+
+            NewNoteDialog
+            {
+                id: _note
+                anchors.fill: parent
+                Maui.Controls.showCSD: true
+            }
+
+            onClosing: (close) =>
+                       {
+                           _note.saveNote()
+                           noteWindowsMap.delete(_note.note.url)
+                           close.accepted = true
+                           destroy()
+                       }
+
+            function forceActiveFocus()
+            {
+                _note.editor.body.forceActiveFocus()
+            }
         }
     }
 
@@ -81,10 +268,11 @@ StackView
 
         property var notes
 
-        title: i18n("Remove notes")
         message: i18n("Are you sure you want to delete the selected notes?")
 
-        template.iconSource: "view-notes"
+        template.iconSource: "dialog-warning"
+
+        standardButtons: Dialog.Cancel | Dialog.Yes
 
         onAccepted:
         {
@@ -109,7 +297,7 @@ StackView
 
         floatingFooter: true
         altHeader: Maui.Handy.isMobile
-
+        headerMargins: Maui.Style.defaultPadding
         holder.visible: notesList.count === 0 || cardsView.count === 0
         holder.emoji: "qrc:/view-notes.svg"
         holder.title :i18n("No notes!")
@@ -229,7 +417,7 @@ StackView
                 if(event.key === Qt.Key_Return)
                 {
                     currentNote = item
-                    setNote()
+                    setNote(currentNote)
                 }
             }
         }
@@ -331,18 +519,18 @@ StackView
             isCurrentItem: ListView.isCurrentItem
 
             onClicked: (mouse) =>
-            {
-                currentIndex = index
+                       {
+                           currentIndex = index
 
-                if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
-                {
-                    cardsView.currentView.itemsSelected([index])
-                }else if(Maui.Handy.singleClick)
-                {
-                    currentNote = notesModel.get(index)
-                    setNote()
-                }
-            }
+                           if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
+                           {
+                               cardsView.currentView.itemsSelected([index])
+                           }else if(Maui.Handy.singleClick)
+                           {
+                               currentNote = notesModel.get(index)
+                               setNote(currentNote)
+                           }
+                       }
 
             onDoubleClicked:
             {
@@ -350,7 +538,7 @@ StackView
                 if(!Maui.Handy.singleClick && !cardsView.selectionMode)
                 {
                     currentNote = notesModel.get(index)
-                    setNote()
+                    setNote(currentNote)
                 }
             }
 
@@ -420,19 +608,19 @@ StackView
                 isCurrentItem: parent.isCurrentItem
 
                 onClicked: (mouse) =>
-                {
-                    currentIndex = index
-                    console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model.url))
+                           {
+                               currentIndex = index
+                               console.log(index, notesModel.mappedToSource(index), notesList.indexOfNote(model.url))
 
-                    if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
-                    {
-                        cardsView.currentView.itemsSelected([index])
-                    }else if(Maui.Handy.singleClick)
-                    {
-                        currentNote = notesModel.get(index)
-                        setNote()
-                    }
-                }
+                               if(cardsView.selectionMode || (mouse.button == Qt.LeftButton && (mouse.modifiers & Qt.ControlModifier)))
+                               {
+                                   cardsView.currentView.itemsSelected([index])
+                               }else if(Maui.Handy.singleClick)
+                               {
+                                   currentNote = notesModel.get(index)
+                                   setNote(currentNote)
+                               }
+                           }
 
                 onDoubleClicked:
                 {
@@ -440,7 +628,7 @@ StackView
                     if(!Maui.Handy.singleClick && !cardsView.selectionMode)
                     {
                         currentNote = notesModel.get(index)
-                        setNote()
+                        setNote(currentNote)
                     }
                 }
 

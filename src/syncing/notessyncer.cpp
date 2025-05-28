@@ -21,15 +21,16 @@ NotesSyncer::NotesSyncer(QObject *parent)
     connect(this->m_notesController, &NotesController::noteReady, this, &NotesSyncer::noteReady);
 }
 
-void NotesSyncer::insertNote(FMH::MODEL &note)
+FMH::MODEL NotesSyncer::insertNote(FMH::MODEL &note)
 {
     if (!this->m_notesController->insertNote(note))
-        return;
+        return {};
 
     if (this->validProvider())
         this->getProvider().insertNote(note);
 
     Q_EMIT this->noteInserted(note, {STATE::TYPE::LOCAL, STATE::STATUS::OK, "Note saved locally"});
+    return note;
 }
 
 void NotesSyncer::updateNote(QString id, FMH::MODEL &note)

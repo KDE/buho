@@ -5,8 +5,8 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-set(BUHO_VERSION 4.0.1)
-add_compile_definitions(APP_COPYRIGHT_NOTICE="© 2019-2024 Maui Development Team")
+set(BUHO_VERSION 4.0.2)
+add_compile_definitions(APP_COPYRIGHT_NOTICE="© 2019-2025 Maui Development Team")
 
 project(buho VERSION ${BUHO_VERSION})
 
@@ -24,7 +24,7 @@ set(REQUIRED_QT_VERSION 6.5.2)
 set(REQUIRED_KF_VERSION 5.240.0)
 
 if(ANDROID)
-    set(ANDROID_ABIS "armeabi-v7a")
+    set(ANDROID_ABIS "arm64-v8a")
 endif()
 
 option(QUICK_COMPILER "Use QtQuick compiler to improve performance" TRUE)
@@ -84,6 +84,9 @@ endif()
 ecm_setup_version(${BUHO_VERSION}
     VARIABLE_PREFIX BUHO
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/buho_version.h")
+
+qt_policy(SET QTP0001 OLD)
+qt_policy(SET QTP0004 NEW)
 
 add_subdirectory(src)
 
