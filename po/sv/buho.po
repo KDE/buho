@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the buho package.
 #
-# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023, 2025 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-21 00:41+0000\n"
-"PO-Revision-Date: 2023-11-01 07:22+0100\n"
+"PO-Revision-Date: 2025-05-30 21:03+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: src/main.cpp:54
 #, kde-format
@@ -48,6 +48,8 @@ msgid ""
 "The note changes have not been saved. Are you sure you want to close the "
 "note?"
 msgstr ""
+"Anteckningens ändringar har inte sparats. Är du säker på att du vill stänga "
+"anteckningen?"
 
 #: src/views/notes/NotesView.qml:271
 #, kde-format
