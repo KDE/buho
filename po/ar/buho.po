@@ -187,22 +187,22 @@ msgstr "التدقيق الإملائي و إعطاء المقترحات"
 #: src/widgets/SettingsDialog.qml:53
 #, kde-format
 msgid "Auto Save"
-msgstr "حفظ تلقائي"
+msgstr "حفظ آليّ"
 
 #: src/widgets/SettingsDialog.qml:54
 #, kde-format
 msgid "Auto saves your file every few seconds"
-msgstr "حفظ تلقائي كلّ عدة ثواني"
+msgstr "حفظ آليّ كلّ عدة ثواني"
 
 #: src/widgets/SettingsDialog.qml:65
 #, kde-format
 msgid "Auto Reload"
-msgstr "إعادة التحميل الآلي"
+msgstr "إعادة التحميل الآليّ"
 
 #: src/widgets/SettingsDialog.qml:66
 #, kde-format
 msgid "Auto reload the text on external changes."
-msgstr "أعد التحميل آلياً عند التغيرات الخارجية."
+msgstr "أعد التحميل آليّاً عند التغيرات الخارجية."
 
 #: src/widgets/SettingsDialog.qml:77
 #, kde-format
@@ -227,7 +227,7 @@ msgstr "التزامن"
 #: src/widgets/SettingsDialog.qml:110
 #, kde-format
 msgid "Auto sync"
-msgstr "تزامن آلي"
+msgstr "تزامن آليّ"
 
 #: src/widgets/SettingsDialog.qml:111
 #, kde-format
