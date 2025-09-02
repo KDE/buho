@@ -131,7 +131,7 @@ msgstr "Compartix"
 #: src/views/notes/NotesView.qml:746
 #, kde-format
 msgid "Select"
-msgstr "Selecciona"
+msgstr "Tria"
 
 #: src/views/notes/NotesView.qml:765
 #, kde-format
