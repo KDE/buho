@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: buho\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-21 00:41+0000\n"
-"PO-Revision-Date: 2024-05-29 23:46+0200\n"
+"PO-Revision-Date: 2025-09-07 23:34+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -39,10 +39,9 @@ msgid "Paste"
 msgstr "Alglui"
 
 #: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
-#, fuzzy, kde-format
-#| msgid "Auto Save"
+#, kde-format
 msgid "Save"
-msgstr "Aŭtokonservado"
+msgstr "Konservi"
 
 #: src/views/notes/NotesView.qml:146
 #, kde-format
@@ -50,6 +49,7 @@ msgid ""
 "The note changes have not been saved. Are you sure you want to close the "
 "note?"
 msgstr ""
+"La notoŝanĝoj ne estis konservitaj. Ĉu vi certas, ke vi volas fermi la noton?"
 
 #: src/views/notes/NotesView.qml:271
 #, kde-format
