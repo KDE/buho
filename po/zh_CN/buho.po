@@ -35,7 +35,7 @@ msgstr "Buho"
 #: src/views/notes/NotesView.qml:72
 #, kde-format
 msgid "Paste"
-msgstr ""
+msgstr "粘贴"
 
 #: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
 #, kde-format
@@ -166,7 +166,7 @@ msgstr "笔记已保存"
 #: src/widgets/SettingsDialog.qml:18 src/widgets/SettingsDialog.qml:91
 #, kde-format
 msgid "Font"
-msgstr ""
+msgstr "字体"
 
 #: src/widgets/SettingsDialog.qml:36
 #, kde-format
@@ -176,7 +176,7 @@ msgstr "编辑器"
 #: src/widgets/SettingsDialog.qml:41
 #, kde-format
 msgid "Spell Checker"
-msgstr ""
+msgstr "拼写检查"
 
 #: src/widgets/SettingsDialog.qml:42
 #, kde-format
