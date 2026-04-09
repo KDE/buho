@@ -12,14 +12,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Qt-Contexts: true\n"
-"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
+"X-Qt-Contexts: true\n"
 
 #: src/main.cpp:54
 #, kde-format
 msgid "Create and organize your notes."
-msgstr ""
+msgstr "Vytvárajte a organizujte si poznámky."
 
 #: src/main.cpp:59
 #, kde-format
@@ -34,12 +34,10 @@ msgstr "Buho"
 #: src/views/notes/NotesView.qml:72
 #, kde-format
 msgid "Paste"
-msgstr ""
+msgstr "Vložiť"
 
 #: src/views/notes/NotesView.qml:123 src/views/notes/NotesView.qml:160
-#, fuzzy, kde-format
-#| msgctxt "BookletPage|"
-#| msgid "Save"
+#, kde-format
 msgid "Save"
 msgstr "Uložiť"
 
@@ -48,36 +46,30 @@ msgstr "Uložiť"
 msgid ""
 "The note changes have not been saved. Are you sure you want to close the "
 "note?"
-msgstr ""
+msgstr "Zmeny v poznámke neboli uložené. Naozaj chcete zatvoriť poznámku?"
 
 #: src/views/notes/NotesView.qml:271
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
-msgstr ""
+msgstr "Ste si istý, you want to delete the selected notes?"
 
 #: src/views/notes/NotesView.qml:303
-#, fuzzy, kde-format
-#| msgctxt "NotesView|"
-#| msgid "No notes!"
+#, kde-format
 msgid "No notes!"
 msgstr "Žiadne poznámky"
 
 #: src/views/notes/NotesView.qml:304
 #, kde-format
 msgid "You can quickly create a new note"
-msgstr ""
+msgstr "Môžete rýchlo vytvoriť novú poznámku"
 
 #: src/views/notes/NotesView.qml:308
-#, fuzzy, kde-format
-#| msgctxt "NotesView|"
-#| msgid "No notes!"
+#, kde-format
 msgid "New note"
 msgstr "Nová poznámka"
 
 #: src/views/notes/NotesView.qml:331
-#, fuzzy, kde-format
-#| msgctxt "LinksView|"
-#| msgid "Search "
+#, kde-format
 msgid "Search "
 msgstr "Hľadať"
 
@@ -87,14 +79,12 @@ msgid "notes"
 msgstr "poznámky"
 
 #: src/views/notes/NotesView.qml:345
-#, fuzzy, kde-format
-#| msgctxt "main|"
-#| msgid "Settings"
+#, kde-format
 msgid "Settings"
 msgstr "Nastavenia"
 
 #: src/views/notes/NotesView.qml:352
-#, fuzzy, kde-format
+#, kde-format
 msgid "About"
 msgstr "O aplikácii"
 
@@ -104,31 +94,27 @@ msgid "Favorite"
 msgstr "Obľúbené"
 
 #: src/views/notes/NotesView.qml:495 src/views/notes/NotesView.qml:715
-#, fuzzy, kde-format
-#| msgctxt "NotesView|"
-#| msgid "Export"
+#, kde-format
 msgid "Export"
 msgstr "Exportovať"
 
 #: src/views/notes/NotesView.qml:501 src/widgets/NewNoteDialog.qml:125
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delete"
-msgstr "Vymazať"
+msgstr "Vymazať zoznam"
 
 #: src/views/notes/NotesView.qml:704
 #, kde-format
 msgid "UnFav"
-msgstr ""
+msgstr "UnFav"
 
 #: src/views/notes/NotesView.qml:704 src/widgets/SettingsDialog.qml:154
 #, kde-format
 msgid "Fav"
-msgstr ""
+msgstr "Obľúbené"
 
 #: src/views/notes/NotesView.qml:725
-#, fuzzy, kde-format
-#| msgctxt "LinksView|"
-#| msgid "Copy"
+#, kde-format
 msgid "Copy"
 msgstr "Kopírovať"
 
@@ -148,16 +134,14 @@ msgid "Remove"
 msgstr "Odstrániť"
 
 #: src/widgets/CardDelegate.qml:79
-#, fuzzy, kde-format
-#| msgctxt "CardDelegate|"
-#| msgid "Empty"
+#, kde-format
 msgid "Empty"
 msgstr "Prázdne"
 
 #: src/widgets/CardDelegate.qml:80
 #, kde-format
 msgid "Edit this note"
-msgstr ""
+msgstr "Upraviť túto poznámku"
 
 #: src/widgets/NewNoteDialog.qml:115
 #, kde-format
@@ -165,24 +149,21 @@ msgid "Find and Replace"
 msgstr "Nájsť a Nahradiť"
 
 #: src/widgets/NewNoteDialog.qml:165
-#, fuzzy, kde-format
-#| msgctxt "LinksView|"
-#| msgid "Title"
+#, kde-format
 msgid ""
 "Title\n"
 "Body"
 msgstr "Názov"
 
 #: src/widgets/NewNoteDialog.qml:189
-#, fuzzy, kde-format
-#| msgid "Notes"
+#, kde-format
 msgid "Note saved"
 msgstr "Poznámky"
 
 #: src/widgets/SettingsDialog.qml:18 src/widgets/SettingsDialog.qml:91
-#, fuzzy, kde-format
+#, kde-format
 msgid "Font"
-msgstr "Písma"
+msgstr "Písmo"
 
 #: src/widgets/SettingsDialog.qml:36
 #, kde-format
@@ -192,12 +173,12 @@ msgstr "Editor"
 #: src/widgets/SettingsDialog.qml:41
 #, kde-format
 msgid "Spell Checker"
-msgstr ""
+msgstr "Kontrola pravopisu"
 
 #: src/widgets/SettingsDialog.qml:42
 #, kde-format
 msgid "Check spelling and give suggestions."
-msgstr ""
+msgstr "Kontrolovať pravopis a navrhovať opravy."
 
 #: src/widgets/SettingsDialog.qml:53
 #, kde-format
@@ -207,17 +188,17 @@ msgstr "Automatické ukladanie"
 #: src/widgets/SettingsDialog.qml:54
 #, kde-format
 msgid "Auto saves your file every few seconds"
-msgstr ""
+msgstr "Automaticky uloží váš súbor každých pár sekúnd"
 
 #: src/widgets/SettingsDialog.qml:65
 #, kde-format
 msgid "Auto Reload"
-msgstr ""
+msgstr "Auto Reload"
 
 #: src/widgets/SettingsDialog.qml:66
 #, kde-format
 msgid "Auto reload the text on external changes."
-msgstr ""
+msgstr "Automaticky znovu načítať text pri externých zmenách."
 
 #: src/widgets/SettingsDialog.qml:77
 #, kde-format
@@ -227,12 +208,12 @@ msgstr "Čísla riadkov"
 #: src/widgets/SettingsDialog.qml:78
 #, kde-format
 msgid "Display the line numbers on the left side."
-msgstr ""
+msgstr "Zobrazovať čísla riadkov na ľavej strane."
 
 #: src/widgets/SettingsDialog.qml:92
 #, kde-format
 msgid "Font family and size."
-msgstr ""
+msgstr "Rodina a veľkosť písma."
 
 #: src/widgets/SettingsDialog.qml:105
 #, kde-format
@@ -242,12 +223,12 @@ msgstr "Synchronizovanie"
 #: src/widgets/SettingsDialog.qml:110
 #, kde-format
 msgid "Auto sync"
-msgstr ""
+msgstr "Automatická synchronizácia"
 
 #: src/widgets/SettingsDialog.qml:111
 #, kde-format
 msgid "Sync notes on start up."
-msgstr ""
+msgstr "Synchronizovať poznámky pri spustení."
 
 #: src/widgets/SettingsDialog.qml:124
 #, kde-format
@@ -255,10 +236,9 @@ msgid "Sorting"
 msgstr "Triedenie"
 
 #: src/widgets/SettingsDialog.qml:129
-#, fuzzy, kde-format
-#| msgid "Sorting by"
+#, kde-format
 msgid "Sort by"
-msgstr "Triedenie podľa"
+msgstr "Triediť podľa"
 
 #: src/widgets/SettingsDialog.qml:130
 #, kde-format
@@ -266,20 +246,17 @@ msgid "Change the sorting key."
 msgstr "Zmeňte triediaci kľúč."
 
 #: src/widgets/SettingsDialog.qml:140
-#, fuzzy, kde-format
-#| msgctxt "LinksView|"
-#| msgid "Title"
+#, kde-format
 msgid "Title"
 msgstr "Názov"
 
 #: src/widgets/SettingsDialog.qml:147
-#, fuzzy, kde-format
+#, kde-format
 msgid "Date"
 msgstr "Dátum"
 
 #: src/widgets/SettingsDialog.qml:163
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgid "Sort Order"
 msgstr "Poradie triedenia"
 
@@ -294,13 +271,11 @@ msgid "Ascending"
 msgstr "Vzostupne"
 
 #: src/widgets/SettingsDialog.qml:182
-#, fuzzy, kde-format
+#, kde-format
 msgid "Descending"
 msgstr "Zostupne"
 
 #, fuzzy
-#~| msgctxt "NotesView|"
-#~| msgid "No notes!"
 #~ msgid "Remove notes"
 #~ msgstr "Žiadne poznámky!"
 
@@ -308,7 +283,6 @@ msgstr "Zostupne"
 #~ msgstr "Tmavý režim"
 
 #, fuzzy
-#~| msgid "© 2019-%1 Nitrux Development Team"
 #~ msgid "© 2019-2023 Maui Development Team"
 #~ msgstr "© 2019-%1 Vývojársky tím Nitrux"
 
@@ -316,14 +290,10 @@ msgstr "Zostupne"
 #~ msgstr "Camilo Higuita"
 
 #, fuzzy
-#~| msgctxt "main|"
-#~| msgid "Configure the app plugins and behavior."
 #~ msgid "Configure the editor behaviour."
 #~ msgstr "Nastaviť doplnky aplikácie a správanie."
 
 #, fuzzy
-#~| msgctxt "main|"
-#~| msgid "Configure the app plugins and behavior."
 #~ msgid "Configure the global editor font family and size."
 #~ msgstr "Nastaviť doplnky aplikácie a správanie."
 
@@ -335,8 +305,6 @@ msgstr "Zostupne"
 #~ msgstr "Veľkosť"
 
 #, fuzzy
-#~| msgctxt "main|"
-#~| msgid "Configure the app plugins and behavior."
 #~ msgid "Configure the syncing of notes and books."
 #~ msgstr "Nastaviť doplnky aplikácie a správanie."
 
@@ -348,8 +316,6 @@ msgstr "Zostupne"
 #~ msgstr "Filter"
 
 #, fuzzy
-#~| msgctxt "BookletPage|"
-#~| msgid "Chapters"
 #~ msgid "New Chapter"
 #~ msgstr "Kapitoly"
 
@@ -357,14 +323,10 @@ msgstr "Zostupne"
 #~ msgstr "Knihy"
 
 #, fuzzy
-#~| msgctxt "main|"
-#~| msgid "Books"
 #~ msgid "books"
 #~ msgstr "Knihy"
 
 #, fuzzy
-#~| msgctxt "main|"
-#~| msgid "Books"
 #~ msgid "New Book"
 #~ msgstr "Knihy"
 
