@@ -51,7 +51,7 @@ msgstr "Zmeny v poznámke neboli uložené. Naozaj chcete zatvoriť poznámku?"
 #: src/views/notes/NotesView.qml:271
 #, kde-format
 msgid "Are you sure you want to delete the selected notes?"
-msgstr "Ste si istý, you want to delete the selected notes?"
+msgstr "Ste si istý, že chcete odstrániť vybrané poznámky?"
 
 #: src/views/notes/NotesView.qml:303
 #, kde-format
