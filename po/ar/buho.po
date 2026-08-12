@@ -202,7 +202,7 @@ msgstr "إعادة التحميل الآليّ"
 #: src/widgets/SettingsDialog.qml:66
 #, kde-format
 msgid "Auto reload the text on external changes."
-msgstr "أعد التحميل آليّاً عند التغيرات الخارجية."
+msgstr "أعد التحميل آليًّا عند التغيرات الخارجية."
 
 #: src/widgets/SettingsDialog.qml:77
 #, kde-format
