@@ -34,6 +34,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="pl">Buho</name>
   <name xml:lang="pt">Buho</name>
   <name xml:lang="pt-BR">Buho</name>
+  <name xml:lang="ru">Buho</name>
   <name xml:lang="sa">बुहो</name>
   <name xml:lang="sk">Buho</name>
   <name xml:lang="sl">Buho</name>
@@ -69,6 +70,7 @@ SPDX-License-Identifier: CC0-1.0
   <summary xml:lang="pl">Program do robienia zapisków</summary>
   <summary xml:lang="pt">Aplicação de bloco de notas</summary>
   <summary xml:lang="pt-BR">Aplicativo para anotações</summary>
+  <summary xml:lang="ru">Приложение для заметок</summary>
   <summary xml:lang="sa">नोट-ग्रहण एप्लिकेशन</summary>
   <summary xml:lang="sk">Aplikácia na poznámky</summary>
   <summary xml:lang="sl">Aplikacija beležnice</summary>
@@ -106,6 +108,7 @@ SPDX-License-Identifier: CC0-1.0
     <p xml:lang="pl">Buho jest programem do zapisków. Buho umożliwia wykonywanie szybkich zapisków, zapisywyanie odnośników, tworzenie zeszytów oraz wykonywanie notatek.</p>
     <p xml:lang="pt">O Buho é uma aplicação para tirar notas. O Buho permitir-lhe-á tirar notas rápidas, gravar ligações, criar livros e páginas para apontar notas das aulas.</p>
     <p xml:lang="pt-BR">Buho é um aplicativo de anotações. Buho permitirá que você faça anotações rápidas, salve links, crie livros e páginas para fazer anotações de aulas.</p>
+    <p xml:lang="ru">Buho — приложение для заметок. Buho позволяет создавать быстрые заметки, сохранять ссылки, а также книги и страницы для конспектов занятий.</p>
     <p xml:lang="sa">बुहो इति टिप्पणी-ग्रहण-अनुप्रयोगः अस्ति । बुहो भवन्तं द्रुतटिप्पणीं ग्रहीतुं, लिङ्कानि रक्षितुं, कक्षायाः टिप्पणीं ग्रहीतुं पुस्तकानि पृष्ठानि च निर्मातुम् अनुमन्यते।</p>
     <p xml:lang="sk">Buho je aplikácia na zapisovanie poznámok. Buho vám umožní rýchlo zaznamenávať poznámky, ukladať odkazy, vytvárať knihy a stránky pre poznámky z vyučovania.</p>
     <p xml:lang="sl">Buho je aplikacija beležnice. Buho vam omogoča hitre zabeležke, shranjuje povezave, ustvarja knjige in strani za beleženje zapiskov predavanj.</p>
@@ -147,6 +150,7 @@ SPDX-License-Identifier: CC0-1.0
       <caption xml:lang="pl">Buho</caption>
       <caption xml:lang="pt">Buho</caption>
       <caption xml:lang="pt-BR">Buho</caption>
+      <caption xml:lang="ru">Buho</caption>
       <caption xml:lang="sa">बुहो</caption>
       <caption xml:lang="sk">Buho</caption>
       <caption xml:lang="sl">Buho</caption>
